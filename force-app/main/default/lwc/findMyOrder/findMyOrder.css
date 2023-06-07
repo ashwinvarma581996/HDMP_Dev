@@ -1,0 +1,20 @@
+.head {
+    color: rgb(15, 15, 15);
+    font-style: bold;
+    position: static;
+    font-size: 26px;
+    /*  text-shadow: 2px 1px gray; */
+
+}
+
+.tableResponsive {
+    overflow-x: auto;
+}
+.finalAmount{
+    text-align:right!important;
+}
+@media (max-width:768px) {
+    .head {
+    margin-top: 100px;
+    }
+}

@@ -1,0 +1,40 @@
+.container{
+    background-color: white;
+}
+.breadcrumb {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    line-height: 22px;
+    letter-spacing: 0.02em;
+}
+.breadcrumb-text-color {
+    color: #E42525 !important;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 14px;
+    line-height: 22px;
+    margin-left: 12px;
+
+}
+.breadcrumb-item-back::before {
+    content: "<" !important;
+    position: absolute;
+    left: -2px;
+    color: #E42525;
+    font-size: 19px;
+}
+.image-container{
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+.img{
+    border: 1px ridge lightgray;
+    padding: 30px;
+}
+@media only screen and (min-width: 905px) {
+    .breadcrumb-large{
+        margin-left: 84px;
+    }
+}

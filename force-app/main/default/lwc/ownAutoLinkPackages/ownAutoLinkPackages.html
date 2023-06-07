@@ -1,0 +1,219 @@
+<template>
+    <!-- popup -->
+    <template if:true={showPopup}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+            class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                    onclick={closePopup}>
+                    <lightning-icon icon-name="utility:close" alternative-text="Close" title="Cancel and close"
+                        class="popup-icon">
+                    </lightning-icon>
+                    <span class="slds-assistive-text">Cancel and close</span>
+                </button>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <lightning-layout multiple-rows>
+                        <lightning-layout-item size="12" class="slds-text-align_center">
+                            <b>{popupText}</b>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="6" class="slds-text-align_right">
+                            <img class="slds-p-around_small popup-button" data-url={appStoreURL} src={popupAppStoreIcon}
+                                onclick={handleAppNavigations} />
+                        </lightning-layout-item>
+                        <lightning-layout-item size="6" class="slds-text-align_left">
+                            <img class="slds-p-around_small popup-button" data-url={playStoreURL}
+                                src={popupPlayStoreIcon} onclick={handleAppNavigations} />
+                        </lightning-layout-item>
+                    </lightning-layout>
+                </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+    </template>
+    <lightning-layout multiple-rows class="slds-m-vertical_large">
+        <lightning-layout-item size="12" class="slds-text-heading_medium slds-text-align_center">
+            <div class="section-main-title">{heading1}</div>
+        </lightning-layout-item>
+        <lightning-layout-item size="12">
+            <div class="slds-align_absolute-center slds-m-top_x-small marketing-app-icons">
+                <lightning-formatted-rich-text value={appStoreIcon}></lightning-formatted-rich-text>
+                <lightning-formatted-rich-text value={playStoreIcon}></lightning-formatted-rich-text>
+            </div>
+        </lightning-layout-item>
+        <lightning-layout-item size="12" class="slds-text-heading_large slds-m-top_xx-large slds-text-align_center">
+            <div class="new-section-title">
+                <h3>{heading2}</h3>
+                <p>{heading3}</p>
+                <span class="slds-button check-vehicle-compatibility" data-url={compatibilityCheckUrl}
+                    onclick={handleCheckVehicle}>{heading4}</span>
+            </div>
+        </lightning-layout-item>
+        <lightning-layout-item size="12">
+            <lightning-layout multiple-rows class="text-style desktop-packages">
+                <template iterator:pack={packs}>
+                    <lightning-layout-item data-id={pack.value.id} key={pack.value.title} class="slds-m-vertical_large"
+                        size="12" small-device-size="12" medium-device-size="12" large-device-size="12">
+                        <div class="package-section custom-layout slds-m-vertical_x-large">
+                            <lightning-layout style={pack.value.background} multiple-rows
+                                class="section-header-layout slds-p-left_large slds-p-bottom_large">
+
+                                <div class="section-icon-title">
+                                    <lightning-layout-item size="1" small-device-size="1" medium-device-size="1"
+                                        large-device-size="1" class="section-icon-container slds-p-around_small">
+                                        <img class="package-icon" src={pack.value.packageSectionIcon} />
+                                    </lightning-layout-item>
+                                    <lightning-layout-item class="slds-m-left_large" size="4" small-device-size="4"
+                                        medium-device-size="4" large-device-size="4">
+                                        <div class="section-title">
+                                            {pack.value.title}
+                                        </div>
+                                    </lightning-layout-item>
+                                </div>
+                                <lightning-layout-item if:true={pack.value.subTitle} size="9"
+                                    class="slds-p-vertical_medium">
+                                    <div class="package-section-content1">{pack.value.subTitle}</div>
+                                </lightning-layout-item>
+                                <lightning-layout-item if:true={pack.value.body} size="8" small-device-size="8"
+                                    medium-device-size="6" large-device-size="6"
+                                    class="slds-m-vertical_medium slds-p-top_medium">
+                                    <lightning-formatted-rich-text class="package-section-content1"
+                                        value={pack.value.body}></lightning-formatted-rich-text>
+                                </lightning-layout-item>
+                                <lightning-layout-item if:true={pack.value.buttonText} size="8" small-device-size="8"
+                                    medium-device-size="6" large-device-size="6"
+                                    class="slds-m-vertical_medium slds-p-top_large">
+                                    <button class="package-button slds-p-around_small" data-url={pack.value.buttonLink}
+                                        data-name={pack.value.buttonText} data-pack={pack.value.title}
+                                        onclick={handleFreeTrial}>{pack.value.buttonText}</button>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="12" class="slds-p-vertical_medium">
+                                    <div class="section-subtitle">{pack.value.descriptionLabel}</div>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="8" small-device-size="8" medium-device-size="6"
+                                    large-device-size="6" class="slds-p-bottom_small">
+                                    <div class="package-section-content2">
+                                        <lightning-formatted-rich-text value={pack.value.descriptionContent}>
+                                        </lightning-formatted-rich-text>
+                                    </div>
+                                </lightning-layout-item>
+
+                                <!-- <lightning-layout-item size="8" class="slds-p-bottom_small custom-height">
+                                    <lightning-formatted-rich-text value={pack.value.features}></lightning-formatted-rich-text>
+                                </lightning-layout-item> -->
+                            </lightning-layout>
+                            <div class="right-sub-section">
+                                <lightning-layout multiple-rows class="feature-section">
+                                    <lightning-layout-item size="12">
+                                        <div class="key-features-title">{pack.value.sectionTitle}</div>
+                                        <hr class="hr">
+                                    </lightning-layout-item>
+                                    <lightning-layout-item if:true={pack.value.featureTitle} size="12">
+                                        <lightning-formatted-rich-text class="key-features-title"
+                                            value={pack.value.featureTitle}></lightning-formatted-rich-text>
+                                    </lightning-layout-item>
+                                    <lightning-layout-item class="slds-m-top_medium feature-section-list" size="12">
+                                        <lightning-formatted-rich-text value={pack.value.features}>
+                                        </lightning-formatted-rich-text>
+                                    </lightning-layout-item>
+                                </lightning-layout>
+                            </div>
+                        </div>
+                    </lightning-layout-item>
+                </template>
+            </lightning-layout>
+
+            <!-- SMALL SCREEN LAYOUT -->
+            <lightning-layout multiple-rows class="text-style mobile-packages">
+                <template iterator:pack={packs}>
+                    <lightning-layout-item data-id={pack.value.mobileId} key={pack.value.title}
+                        class="slds-m-vertical_medium" size="12" small-device-size="12" medium-device-size="12"
+                        large-device-size="12">
+                        <div class="package-section custom-layout slds-m-vertical_x-large">
+                            <lightning-layout style={pack.value.mobileBackground} multiple-rows
+                                class="section-header-layout slds-p-left_large slds-p-bottom_large">
+
+                                <div class="section-icon-title">
+                                    <lightning-layout-item size="1" small-device-size="1" medium-device-size="1"
+                                        large-device-size="1" class="section-icon-container slds-p-around_small">
+                                        <img class="package-icon" src={pack.value.packageSectionIcon} />
+                                    </lightning-layout-item>
+                                    <lightning-layout-item class="slds-m-left_medium" size="4" small-device-size="4"
+                                        medium-device-size="4" large-device-size="4">
+                                        <div class="section-title">
+                                            {pack.value.title}
+                                        </div>
+                                    </lightning-layout-item>
+                                </div>
+                                <lightning-layout-item if:true={pack.value.subTitle} size="9"
+                                    class="slds-p-vertical_large">
+                                    <div class="package-section-content1">{pack.value.subTitle}</div>
+                                </lightning-layout-item>
+                                <lightning-layout-item if:true={pack.value.body} size="8" small-device-size="8"
+                                    medium-device-size="6" large-device-size="6"
+                                    class="slds-m-vertical_medium slds-p-top_small">
+                                    <lightning-formatted-rich-text class="package-section-content1"
+                                        value={pack.value.body}></lightning-formatted-rich-text>
+                                </lightning-layout-item>
+                                <lightning-layout-item if:true={pack.value.buttonText} size="8" small-device-size="8"
+                                    medium-device-size="6" large-device-size="6"
+                                    class="slds-m-vertical_medium slds-p-top_large">
+                                    <button class="package-button slds-p-around_small" data-url={pack.value.buttonLink}
+                                        data-name={pack.value.buttonText} data-pack={pack.value.title}
+                                        onclick={handleFreeTrial}>{pack.value.buttonText}</button>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="12" class="slds-p-vertical_medium">
+                                    <div class="section-subtitle">{pack.value.descriptionLabel}</div>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="8" small-device-size="8" medium-device-size="6"
+                                    large-device-size="6" class="slds-p-bottom_small">
+                                    <div class="package-section-content2">
+                                        <lightning-formatted-rich-text value={pack.value.descriptionContent}>
+                                        </lightning-formatted-rich-text>
+                                    </div>
+                                </lightning-layout-item>
+
+                                <!-- <lightning-layout-item size="8" class="slds-p-bottom_small custom-height">
+                                    <lightning-formatted-rich-text value={pack.value.features}></lightning-formatted-rich-text>
+                                </lightning-layout-item> -->
+                            </lightning-layout>
+                            <div class="right-sub-section">
+                                <lightning-layout multiple-rows class="slds-p-around_large">
+                                    <lightning-layout-item size="12">
+                                        <div class="key-features-title">{pack.value.sectionTitle}</div>
+                                        <hr class="hr">
+                                    </lightning-layout-item>
+                                    <lightning-layout-item if:true={pack.value.featureTitle} size="12">
+                                        <lightning-formatted-rich-text class="key-features-title"
+                                            value={pack.value.featureTitle}></lightning-formatted-rich-text>
+                                    </lightning-layout-item>
+                                    <lightning-layout-item class="slds-m-top_medium feature-section-list" size="12">
+                                        <lightning-formatted-rich-text value={pack.value.features}>
+                                        </lightning-formatted-rich-text>
+                                    </lightning-layout-item>
+                                </lightning-layout>
+                            </div>
+                        </div>
+                    </lightning-layout-item>
+                </template>
+            </lightning-layout>
+        </lightning-layout-item>
+        <lightning-layout-item size="12"
+            class="slds-text-heading_medium custom-font-weight slds-m-top_xx-large slds-text-align_center">
+            {heading5}
+        </lightning-layout-item>
+        <lightning-layout-item size="12" class="slds-text-heading_medium slds-text-align_center">
+            <lightning-layout multiple-rows horizontal-align="center" class="vehicle-buttons">
+                <lightning-layout-item>
+                    <button class="slds-button custom-btn check-vehicle" data-url={compatibilityCheckUrl}
+                        onclick={handleCheckVehicle}>{btnLabel1}</button>
+                </lightning-layout-item>
+                <lightning-layout-item if:true={isGuest}>
+                    <button class="slds-button custom-btn">
+                        <lightning-formatted-rich-text value={btnLabel2} data-url={compatibilityResultUrl}
+                            onclick={handleNavigations}></lightning-formatted-rich-text>
+                    </button>
+                </lightning-layout-item>
+            </lightning-layout>
+        </lightning-layout-item>
+    </lightning-layout>
+</template>

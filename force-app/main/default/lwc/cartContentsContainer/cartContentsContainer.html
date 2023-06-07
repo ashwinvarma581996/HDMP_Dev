@@ -1,0 +1,118 @@
+<template>
+    <div class="slds-container_center containerWrapper slds-p-vertical_xx-large cartPage">
+        <h1 class="slds-p-bottom_medium slds-p-right_xx-large cartHeading">Shopping Cart</h1>
+        <div class="slds-grid slds-grid_align-spread slds-p-vertical_large cartParent slds-wrap">
+            <c-cart-contents cartid={cartId} cart-empty={displayCartEmpty} accountid={accountId}
+                class="cartPage slds-col slds-size_12-of-12 slds-medium-size_9-of-12" onqtyvalidation={handleVaidation}
+                oncartchanged={handleCartCount} onupdatedcartitems={handleUpdatedCartItems} cart-items-clone={cartItems}
+                currency-code={currencyCode} cart-status={cartStatus} cart-item-count={cartCount}>
+            </c-cart-contents>
+            <c-cart-summary cartid={cartId} is-dealer-selected={isDealerSelected}
+                class="cartPage slds-col slds-size_12-of-12 slds-medium-size_3-of-12">
+            </c-cart-summary>
+        </div>
+        <div class="slds-m-around_medium slds-p-top_small slds-p-bottom_small slds-grid slds-gutters"
+            style="text-align: end;">
+            <span class="font-h6 slds-col">{cartItemsLength}:</span>
+            <lightning-formatted-number format-style="currency" class=" font-h6" currency-display-as="symbol"
+                value={subTotal}></lightning-formatted-number>
+        </div>
+        <!--Added by shalini soni HDMP-5428 R2 Story-->
+        <template if:true={showDearlerInstallation}>
+            <c-cart-dealer-installation if:true={cartItems} cart-items={cartItems} cart-id={cartId}
+                oninstalltionchange={hanldeDealerInstalltionChange}>
+            </c-cart-dealer-installation>
+        </template>
+        <!--End-->
+
+
+        <!-- Added by Faraz for HDMP-5428 Start here R2 Story -->
+        <div if:true={dealerInstallation}
+            class=" slds-m-left_medium slds-m-top_medium slds-grid slds-gutters priceLabel"
+            style="text-align: end; margin-right:0;">
+            <span class="font-h6 slds-col">Installation Charges: </span>
+            <span if:true={totalDealerInstallationPrice}><lightning-formatted-number format-style="currency"
+                    class="font-h6" currency-display-as="symbol"
+                    value={totalDealerInstallationPrice}></lightning-formatted-number></span>
+            <span if:false={totalDealerInstallationPrice} class="font-h6">Calculating...</span>
+        </div>
+        <!-- End here -By Faraz HDMP-5428 R2 Story -->
+        <!--SaiLakshman - HDMP-5409 - Starts -->
+        <c-cart-shipping-summary cartid={cartId} cart-items={udpatedCartItems}
+            installation-charges={totalDealerInstallationPrice} ontotalestimatedpricechange={estimatedPriceChanged}
+            sub-total={subTotal}></c-cart-shipping-summary>
+        <!--SaiLakshman - HDMP-5409 - Ends-->
+
+        <!-- Saravanan LTIM Added this HDMP-18901-->
+        <div>
+            <template if:true={buttonDisabled}>
+                <template if:false={isDealerSelected}>
+                    <div if:true={shippingTypeDealer} class="dealerNote">
+                        <b>{label.DealerNote}{shippingDealerNote}</b>
+                    </div>
+                </template>
+
+
+                <div class="checkoutButton">
+                    <lightning-button variant="destructive" label="Proceed To Checkout" title="Proceed To Checkout"
+                        class="slds-m-vertical_large slds-float_right">
+                    </lightning-button>
+                </div>
+
+            </template>
+            <template if:false={buttonDisabled}>
+                <div class="checkoutButton">
+                    <lightning-button variant="brand" label="Proceed To Checkout" title="Proceed To Checkout"
+                        onclick={handleCheckOut} class="slds-m-vertical_large slds-float_right proceedToCheckout">
+                    </lightning-button>
+                </div>
+            </template>
+        </div>
+        <!-- Saravanan LTIM Ended Div this HDMP-18901-->
+
+        <!-- Added by Faraz on 01/08/2022 for HDMP-11659 -->
+        <!-- <div if:true={isDealerSelected} class="slds-size_12-of-12 slds-m-bottom_medium slds-float_right slds-text-align_right">
+            <b style="font-size: 18px;">Return Policy</b><br/>
+            <span style="font-size: 14px;">{dealerReturnPolicy}</span>
+        </div> -->
+        <!-- End 11659 -->
+    </div>
+
+
+
+    <!-- OPEN MODAL -->
+
+    <template if:true={showModalBox}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+            aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <div class="modal-header" style="padding-bottom:0">
+                    <header class="slds-modal__header" style='border: none;padding-bottom:0'>
+                        <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                            title="Close" onclick={closeModaBox}>
+                            <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse"
+                                size="small"></lightning-icon>
+                            <!-- <span class="slds-assistive-text">Close</span> -->
+                        </button>
+                        <!-- <h1 class="slds-text-align_center slds-p-bottom_small font-h5">  </h1> -->
+                    </header>
+                </div>
+                <div class="slds-modal__content slds-p-around_large" id="modal-content-id-1" style="padding-top:0;">
+                    <h5 class="slds-text-align_center slds-p-horizontal_large font-h5">In order to complete your
+                        purchase you will need to either continue as a one time guest or login/register.</h5>
+                    <div
+                        class="slds-grid slds-wrap slds-m-vertical_x-large slds-grid_align-space btnSeparator slds-is-relative">
+                        <button class="slds-button slds-button_brand" title="Continue as Guest"
+                            onclick={handleCheckOut}>Continue as Guest</button>
+                        <button class="slds-button primaryGrayBtn themeBtn" title="Login / Register"
+                            onclick={redirectToLoginPage}>Login/Register</button>
+                    </div>
+
+                </div>
+            </div>
+
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+
+    </template>
+</template>

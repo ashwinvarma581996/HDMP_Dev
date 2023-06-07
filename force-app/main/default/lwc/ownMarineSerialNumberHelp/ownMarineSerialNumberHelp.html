@@ -1,0 +1,17 @@
+<template>
+    <div class="body">
+        <lightning-layout horizontal-align="space" multiple-rows>
+
+            <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="10">
+                <lightning-formatted-rich-text value={body}></lightning-formatted-rich-text>
+            </lightning-layout-item>
+
+            <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="10"
+                class="slds-p-bottom_x-large">
+                <p>If you can't find the model name or frame serial number, contact a <a style="color:#e42525;"
+                        onclick={handleFindDealer}>Honda Marine dealer</a> for help.
+                </p>
+            </lightning-layout-item>
+        </lightning-layout>
+    </div>
+</template>

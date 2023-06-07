@@ -1,0 +1,259 @@
+<template>
+    <div class="b-c-large">
+        <c-own-breadcrumb label={breadCrumbLabel} url={breadCrumbUrl} onnavigate={handleOnNavigate} custom-event="true"></c-own-breadcrumb>
+    </div>
+    <template if:false={hideSpinner} >
+        <div class="slds-spinner_container">
+            <lightning-spinner alternative-text="Loading" size="large" variant="base"></lightning-spinner>
+        </div>
+    </template>
+    <div class="c">
+        <div class="b-c-small">
+            <c-own-breadcrumb label={breadCrumbLabel} url={breadCrumbUrl} onnavigate={handleOnNavigate} custom-event="true"></c-own-breadcrumb>
+        </div>
+        <template if:true={hideSpinner} >
+            <div class="main-container">
+                <div class="c-container">
+                    <div class="cc-rows cc-row-1">
+                        Case #{caseRecord.CaseNumber__c}
+                    </div>
+                    <div class="cc-rows cc-row-2">
+                        {caseRecord.Subject__c}
+                    </div>
+                    <div class="cc-rows cc-row-3">
+                        <div class="cc-row-3-c">
+                            <div class="cc-row-3-c-c1">
+                                <div class="cc-row-3-c-c1-d cc-row-3-c-c1-d1">
+                                    Opened
+                                </div>
+                                <div class="cc-row-3-c-c1-d cc-row-3-c-c1-d2">
+                                    {caseRecord.CreatedDate__c}
+                                </div>
+                            </div>
+                            <div class="cc-row-3-c-c2">
+                                <div class="cc-row-3-c-c2-d cc-row-3-c-c2-d1">
+                                    Status
+                                </div>
+                                <div class="cc-row-3-c-c2-d cc-row-3-c-c2-d2">
+                                    {caseRecord.Status__c}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cc-rows cc-row-4">
+                        <lightning-tabset class="custom-tab" active-tab-value="Details">
+                            <lightning-tab label="Details" value="Details">
+                                <div class="details-div">
+                                    <table class="d-table">
+                                        <tr class="d-tr">
+                                            <td class="d-td d-td" colspan="2">
+                                                <div class="d-td-h">
+                                                    Description
+                                                </div>
+                                                <div class="d-td-v" if:true={isPEOrMarine}>
+                                                    {caseRecord.WebToCase_How_can_we_help_you_c__c}
+                                                </div>
+                                                <div class="d-td-v" if:false={isPEOrMarine}>
+                                                    {caseRecord.Description__c}
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr class="d-tr">
+                                            <td class="d-td d-td">
+                                                <div class="d-td-h">
+                                                    Product
+                                                </div>
+                                                <div class="d-td-v">
+                                                    {caseRecord.VIN_Text_c__c}
+                                                </div>
+                                            </td>
+                                            <td class="d-td d-td">
+                                                <div class="d-td-h">
+                                                    Make
+                                                </div>
+                                                <div class="d-td-v">
+                                                    {caseRecord.WebtoCase_Make_c__c}
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr class="d-tr">
+                                            <td class="d-td d-td">
+                                                <div class="d-td-h">
+                                                    Model
+                                                </div>
+                                                <div class="d-td-v">
+                                                    {caseRecord.Model_Manual_c__c}
+                                                </div>
+                                            </td>
+                                            <td class="d-td d-td">
+                                                <div class="d-td-h">
+                                                    Model Year
+                                                </div>
+                                                <div class="d-td-v">
+                                                    {caseRecord.Year_manual_c__c}
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr class="d-tr">
+                                            <td class="d-td d-td">
+                                                <div class="d-td-h">
+                                                    Topic
+                                                </div>
+                                                <div class="d-td-v">
+                                                    {caseRecord.Topic_c__c}
+                                                </div>
+                                            </td>
+                                            <td class="d-td d-td">
+                                                <div class="d-td-h">
+                                                    Sub Topic
+                                                </div>
+                                                <div class="d-td-v">
+                                                    {caseRecord.Sub_topic_c__c}
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr class="d-tr" if:true={isPEOrMarine}>
+                                            <td class="d-td d-td">
+                                                <div class="d-td-h">
+                                                    Created On
+                                                </div>
+                                                <div class="d-td-v">
+                                                    {caseRecord.CreatedOn}
+                                                </div>
+                                            </td>
+                                            <td class="d-td d-td">
+                                                <div class="d-td-h">
+                                                </div>
+                                                <div class="d-td-v">
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr class="d-tr" if:false={isPEOrMarine}>
+                                            <td class="d-td d-td">
+                                                <div class="d-td-h">
+                                                    Mileage
+                                                </div>
+                                                <div class="d-td-v">
+                                                    {caseRecord.Miles_c__c}
+                                                </div>
+                                            </td>
+                                            <td class="d-td d-td">
+                                                <div class="d-td-h">
+                                                    Created On
+                                                </div>
+                                                <div class="d-td-v">
+                                                    {caseRecord.CreatedOn}
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </lightning-tab>
+                            <!--<lightning-tab label="Activity" value="Activity">-->
+
+                                <!-- Commenting Comments Section - START-->
+                                <!-- <div class="activity-div">
+                                    <span class="comm-heading">Comments</span>
+                                    <div class="activity-div-messages">
+                                        <div class="spinner-container" if:true={showCommentSaveSpinner}>
+                                            <div class="spinner-wrapper">
+                                                <lightning-spinner variant="base" size="medium" class="lightning-spinner"></lightning-spinner>
+                                            </div>
+                                        </div>
+                                        <template if:true={caseComments} for:each={caseComments} for:item="comm">
+                                           <div class="activity-div-message" key={comm.recordId}>
+                                            <div class="activity-div-message-d1">
+                                                <img src={comm.SmallPhotoUrl} class={comm.class}/>
+                                            </div>
+                                            <div class="activity-div-message-d2">
+                                                <div class="commenter-name">
+                                                    {comm.UserName}
+                                                </div>
+                                                <div class="comment-date">
+                                                    {comm.CreatedDate}
+                                                </div>
+                                                <div class="comment-value">
+                                                    <lightning-formatted-rich-text value={comm.Body}>
+                                                    </lightning-formatted-rich-text>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        </template>
+                                        <div class="load-more-div" if:true={caseComments_show_load_more}>
+                                            <button class="btn-load-more" onclick={handleLoadMore}>{loadMoreCommentsLabel}</button>
+                                        </div>
+                                        <div class="text-area-div" if:true={showCommentBox}>
+                                            <lightning-textarea
+                                                placeholder="Add your comment here..."
+                                                value={commentValue}
+                                                onchange={handleCommentValue}
+                                                >
+                                            </lightning-textarea>
+                                        </div>
+                                        <div class="add-a-comment-div">
+                                            <button class="comment-btn btn-add-comment" onclick={addComment}>{addCommentButtonLabel}</button>
+                                            <button class="comment-btn btn-cancel-comment" onclick={cancelComment} if:true={showCancelButton}>Cancel</button>
+                                        </div>
+                                    </div>
+                                </div> -->
+                                <!-- Commenting Comments Section - END-->
+                            <!--</lightning-tab>-->
+                        </lightning-tabset>
+                    </div>
+                    <div class="cc-rows cc-row-5">
+                        Attachments <span if:false={fetchingAttachment}>({attLength})</span>
+                        <div class="error-div loading-acc-div" if:true={showAttachmentErrorBox}>
+                            <lightning-icon icon-name='utility:error' alternative-text='error' size='small' title='error' class="custom-icon"></lightning-icon>
+                            <span class="err-text">Sorry! There is some problem in showing your file. Please try again later.</span>
+                        </div>
+                        <div class="loading-acc-div" if:true={fetchingAttachment}>
+                            <!-- Spinner Code Start -->
+                            <div style="position: sticky;margin-bottom: 20px;">
+                                <div class="demo-only demo-only_viewport" style="height:6rem;position:relative;z-index:-1">
+                                    <div role="status" class="slds-spinner slds-spinner_medium">
+                                    <span class="slds-assistive-text">Loading</span>
+                                    <div class="slds-spinner__dot-a"></div>
+                                    <div class="slds-spinner__dot-b"></div>
+                                    </div>
+                                </div>
+                                <div class="loading-text" style="font-family: Roboto; font-style: normal; font-weight: 900; font-size: 16px; line-height: 20px; letter-spacing: 1px; text-transform: uppercase; color: #767676; text-align: center;">
+                                    Loading Attachments...
+                                </div>
+                            </div>
+                            <!-- Spinner Code END -->
+                        </div>
+                        <div class="att-c" if:false={fetchingAttachment}>
+                            <template if:true={caseAttachments} for:each={caseAttachments} for:item="att">
+                                <div class="att-c-div" key={att.Id}>
+                                    <div class="att-inner-c">
+                                        <div class="att-img">
+                                            <img src={att.icon} class="att-avatar"/>
+                                        </div>
+                                        <div class="att-text">
+                                            <div class="att-name" onclick={onAttachmentClick} data-c_ext_id={att.ExternalId} data-c_doc_id={att.ContentDocumentId__c} data-c_title={att.Title__c} data-c_size={att.ContentSize__c}>
+                                                {att.Title__c}
+                                            </div>
+                                            <div class="att-date">
+                                                {att.CreatedDate__c}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                        <!-- Commenting The Add More Attachment Functionality - START-->
+                        <!-- <div class="att-add-div" if:false={fetchingAttachment}>
+                            <c-own-send-an-email-form-file class="new-att" onfileupload={handleOnfileupload} label="Add more"></c-own-send-an-email-form-file>
+                        </div> -->
+                        <!-- Commenting The Add More Attachment Functionality - END-->
+                    </div>
+                </div>
+            </div>
+        </template>
+    </div>
+    <template if:true={isFileDownloading} >
+        <div class="slds-spinner_container">
+            <lightning-spinner alternative-text="Loading" size="large" variant="base"></lightning-spinner>
+        </div>
+    </template>
+</template>

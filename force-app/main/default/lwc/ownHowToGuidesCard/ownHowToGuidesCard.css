@@ -1,0 +1,38 @@
+.find-dealers-button {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 14px;
+    line-height: 22px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: #E42525;
+    background: #FFFFFF;
+    border: 2px solid #E42525;
+    box-sizing: border-box;
+    border-radius: 2px;
+     /*width: 185px; */
+    height: 34px;
+}
+
+.custom-icon {
+    --sds-c-icon-color-foreground-default: #e42525;
+    --sds-c-icon-color-background: white;
+    height: 23;
+    width: 23px;
+    left: 16px;
+    top: 14.970703125px;
+    border-radius: 0px;
+
+}
+
+.card-body-content {
+    background-color: #f5f5f5;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 16px;
+}

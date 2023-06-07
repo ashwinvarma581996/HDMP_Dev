@@ -1,0 +1,23 @@
+.clickableLink {
+    color: rgb(228, 37, 37);
+    height: 46px !important;
+    font-size: 19px;
+    text-align: center;
+    display: block;
+}
+
+.requiredProductList p {
+    cursor: pointer;
+    height: 46px !important;
+    font-size: 19px;
+}
+
+.requiredProductList .slds-col {
+    padding: 0 4px;
+}
+
+.requiredProductList img {
+    max-height: 213px;
+    width: 100%;
+    object-fit: contain;
+}

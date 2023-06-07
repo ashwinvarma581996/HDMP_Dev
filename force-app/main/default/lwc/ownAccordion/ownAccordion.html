@@ -1,0 +1,51 @@
+<template>
+    <template if:true={heading}>
+        <div class="headline-3">{heading}</div>
+    </template>
+    <template if:true={contentForLargeScreen}>
+        <ul class="slds-accordion body-text slds-m-top_medium accordion-large">
+            <template  for:each={contentForLargeScreen} for:item="sectionData">
+                <li key={sectionData.key} class="slds-accordion__list-item">
+                    <section class="slds-accordion__section" data-id={sectionData.key}>
+                        <div class="slds-accordion__summary  custom-li">
+                            <h2 class="slds-accordion__summary-heading">
+                                <button value="planDetails" onclick={toggleAccordionSection} data-target-id={sectionData.key} aria-controls="referenceId-51" class="slds-button slds-button_reset slds-accordion__summary-action accordion-section-title" aria-expanded="true" title={sectionData.title.value}>
+                                    <lightning-icon size="xx-small" icon-name="utility:right" alternative-text="down" title="down" class="custom-icon"></lightning-icon>
+                                    <span class="slds-accordion__summary-content slds-m-left_small custom-span">{sectionData.title.value}</span>
+                                </button>
+                            </h2>
+                        </div>
+                        <div class="slds-accordion__content">
+                            <lightning-layout-item if:true={sectionData.body.value}  size="12" small-device-size="12" medium-device-size="12" large-device-size="12" >
+                                <lightning-formatted-rich-text class="section-content" value={sectionData.body.value}></lightning-formatted-rich-text>
+                            </lightning-layout-item>
+                        </div>
+                    </section>
+                </li>
+            </template>
+        </ul>
+    </template>
+    <template if:true={contentForSmallScreen}>
+        <ul class="slds-accordion body-text slds-m-top_medium accordion-small">
+            <template  for:each={contentForSmallScreen} for:item="sectionData">
+                <li key={sectionData.key} class="slds-accordion__list-item">
+                    <section class="slds-accordion__section" data-id={sectionData.key}>
+                        <div class="slds-accordion__summary  custom-li">
+                            <h2 class="slds-accordion__summary-heading">
+                                <button value="planDetails" onclick={toggleAccordionSection} data-target-id={sectionData.key} aria-controls="referenceId-51" class="slds-button slds-button_reset slds-accordion__summary-action accordion-section-title" aria-expanded="true" title={sectionData.title.value}>
+                                    <lightning-icon size="xx-small" icon-name="utility:right" alternative-text="down" title="down" class="custom-icon"></lightning-icon>
+                                    <span class="slds-accordion__summary-content slds-m-left_small custom-span">{sectionData.title.value}</span>
+                                </button>
+                            </h2>
+                        </div>
+                        <div class="slds-accordion__content">
+                            <lightning-layout-item if:true={sectionData.body.value}  size="12" small-device-size="12" medium-device-size="12" large-device-size="12" >
+                                <lightning-formatted-rich-text  class="section-content" value={sectionData.body.value}></lightning-formatted-rich-text>
+                            </lightning-layout-item>
+                        </div>
+                    </section>
+                </li>
+            </template>
+        </ul>
+    </template>
+</template>

@@ -1,0 +1,40 @@
+.orderDetail {
+    .slds-card {
+        border: 0;
+        .orderInfo__group {
+            .labelname {
+                font-size: 14px;
+                width: 42%;
+            }
+            .labelinput {
+                width: calc(100% - 56%);
+            }
+        }
+        @media (max-width:768px) {
+            .slds-border_top.slds-border_bottom {
+                border: 0;
+            }
+        }
+        .tableResponsive {
+            overflow-x: auto;
+            .slds-table {
+                th {
+                    border-top: 1px solid #979797;
+                    border-bottom: 1px solid #979797;
+                }
+                th,
+                td {
+                    padding: 12px 20px !important;
+                }
+            }
+        }
+    }
+    .ordersummary .slds-card__body {
+        border: 1px solid #979797;
+        padding: 20px 0;
+        max-width: 70%;
+        @media (max-width: 1024px) {
+            max-width: 100%;
+        }
+    }
+}

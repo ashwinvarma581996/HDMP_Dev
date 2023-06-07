@@ -1,0 +1,32 @@
+<template>   
+    <lightning-layout horizontal-align="spaced" class="categoryWrapper" multiple-rows>
+        <template if:true={isMainCategory}>
+            <template if:true={categories}>
+                <template if:true={categories.Sections} for:each={categories.Sections} for:item="category" for:index="index">
+                    <lightning-layout-item key={category.ID} size="12" padding="around-small" medium-device-size="4" small-device-size="6">
+                        <!-- Added by Bhawesh R2 story 5492 fast moving item  -->
+                        <div class="custom-box categoryDiv" data-index={index} data-name={category.Description} onclick={openSubCategories}>
+                            <!-- end -->
+                            <div class="cardImage">
+                                <img src={category.SectionURL}/>
+                            </div>
+                            <div class="cardDescription slds-text-align_center slds-align_absolute-center">
+                                {category.Description}
+                            </div>
+                        </div>
+                    </lightning-layout-item>    
+                </template> 
+            </template>
+        </template>  
+        <template if:true={isSubCategory}>
+            <template if:true={subCategories} for:each={subCategories.IllustrationGroups} for:item="category" for:index="index">
+                <lightning-layout-item key={category.ID} size="12" padding="around-small" medium-device-size="4" small-device-size="6">
+                    <div class="custom-box slds-card slds-text-align_center subCategoryDiv slds-p-around_small" data-index={index} onclick={openPLPComponent}>
+                        <div class="slds-col slds-size_1-of-1 slds-border_top slds-border_right slds-border_bottom slds-border_left"><img src={category.ThumbnailURL}/> </div>
+                        <div class="slds-col slds-size_1-of-1">{category.Description} </div>
+                    </div>
+                </lightning-layout-item>    
+            </template>   
+        </template>
+    </lightning-layout>   
+</template>

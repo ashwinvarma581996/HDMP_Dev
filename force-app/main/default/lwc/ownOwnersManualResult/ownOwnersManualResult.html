@@ -1,0 +1,371 @@
+<template>
+    <template if:true={showData}>
+        <div class="c-container header-column">
+            <lightning-layout class="slds-p-bottom_xx-large" multiple-rows>
+                <lightning-layout-item class="manual-brand-large" size="12">
+                    <lightning-layout>
+                        <template if:true={displayHonda}>
+                            <template if:true={showTrimList}>
+                                <lightning-layout-item size="2" class="tab-wrapper">
+                                    <c-own-owners-manuals-trim-list categories={trims} brand={divisionId}
+                                        ontrimselect={trimSelectHandler}></c-own-owners-manuals-trim-list>
+                                </lightning-layout-item>
+                            </template>
+                            <template if:false={showTrimList}>
+                                <lightning-layout-item size="2" class="tab-wrapper">
+                                </lightning-layout-item>
+                            </template>
+                            <lightning-layout-item size="12" small-device-size="12" mediusm-device-size="10"
+                                large-device-size="10">
+                                <div class="slds-p-left_large">
+                                    <template if:false={showMessage}>
+                                        <div class="overview">
+                                            <lightning-formatted-rich-text value={adobeBody}>
+                                            </lightning-formatted-rich-text>
+                                        </div>
+                                        <!--div class="headertitle slds-p-bottom_medium">{subTitle}</div-->
+                                        <div class="slds-p-top_xx-large ">
+                                            <template if:true={showmanuals}>
+                                                <div class="slds-grid slds-wrap">
+
+                                                    <template for:each={resultData} for:item="result">
+                                                        <div class="slds-col slds-size_1-of-3 slds-max-medium-size_3-of-3 slds-p-bottom_small slds-p-right_small"
+                                                            key={result.path}>
+                                                            <c-own-manual-card showdownlaodicon="true"
+                                                                title={result.title} headerlink={result.url}
+                                                                titlecolor="Honda Red" body={result.description}
+                                                                icon="black-booklet.svg">
+                                                            </c-own-manual-card>
+                                                        </div>
+                                                    </template>
+
+                                                </div>
+                                            </template>
+                                            <template if:false={showmanuals}>
+                                                <c-own-data-loading-spinner></c-own-data-loading-spinner>
+                                            </template>
+
+                                        </div>
+                                        <div class="printcopy slds-p-top_xx-large slds-p-bottom_medium">{printedCopy}
+                                        </div>
+                                        <div class="textline">
+                                            <template if:true={orderNow}>
+                                                <div class="textline">A printed Navigation Manual is complimentary to
+                                                    the first registered owner, up to six months after vehicle purchase.
+                                                    These manuals require a valid VIN and mailing address. <a
+                                                        class="redtext" onclick={handleOrderNow}>Order now</a></div>
+                                            </template>
+                                            <template if:true={selectHere}>
+                                                <br>
+                                                <div class="textline">To request a complimentary Rear Entertainment System Booklet in 
+                                                    Braille for your 2019-2022 Pilot or 2019-2024 Odyssey <a
+                                                        class="redtext" onclick={handleSelectHere}>select here</a></div>
+                                            </template>
+                                            <br>
+                                            <lightning-formatted-rich-text value={footerData}>
+                                            </lightning-formatted-rich-text>
+                                            <div class="textline">To save paper and time, you can <a class="redtext"
+                                                    onclick={handleDownload}>download the
+                                                    latest manuals now.</a></div>
+                                        </div>
+                                    </template>
+                                    <template if:true={showMessage}>
+                                        <div class="warning-message slds-p-top_large slds-text-align_center">
+                                            <!--<img src={warningImage} class="slds-m-right_small" />
+                                            DATA UNAVAILABLE-->
+                                            Sorry! we cannot show owner's manual for your model this time.
+                                        </div>
+                                    </template>
+                                </div>
+                            </lightning-layout-item>
+                        </template>
+                        <template if:true={displayPowerSports}>
+                            <lightning-layout-item size="2">
+                            </lightning-layout-item>
+                            <lightning-layout-item size="12" small-device-size="12" medium-device-size="10"
+                                large-device-size="10">
+                                <template if:false={showMessage}>
+                                    <div class="headertitle slds-p-bottom_medium">{subTitle}</div>
+                                    <div class="cardheader">OWNER'S MANUAL</div>
+                                    <div>
+                                        <div class="slds-grid slds-wrap">
+                                            <template for:each={resultData} for:item="result">
+                                                <div class="slds-col slds-size_1-of-3 slds-max-medium-size_3-of-3 slds-p-bottom_small slds-p-right_small"
+                                                    key={result.path}>
+                                                    <c-own-manual-card showdownlaodicon="true" title={result.name}
+                                                        headerlink={result.path} titlecolor="Honda Red"
+                                                        body={result.description} icon="black-booklet.svg">
+                                                    </c-own-manual-card>
+                                                </div>
+                                            </template>
+                                        </div>
+                                    </div>
+                                </template>
+                                <template if:true={showMessage}>
+                                    <div class="warning-message slds-p-top_large slds-text-align_center">
+                                        <!--<img src={warningImage} class="slds-m-right_small" />
+                                        DATA <UNAVAILABLE-->
+                                        Sorry! we cannot show owner's manual for your model this time.
+                                    </div>
+                                </template>
+                            </lightning-layout-item>
+                        </template>
+                        <template if:true={displayMarine}>
+                            <lightning-layout-item size="2">
+                            </lightning-layout-item>
+                            <lightning-layout-item size="12" small-device-size="12" medium-device-size="10"
+                                large-device-size="10">
+                                <template if:false={showMessage}>
+                                    <div class="headertitle slds-p-bottom_medium">{subTitle}</div>
+                                            <div class="slds-grid slds-wrap">
+                                                <template for:each={resultData} for:item="result">
+                                                    <div class="slds-col slds-size_1-of-3 slds-max-medium-size_3-of-3 slds-p-bottom_small slds-p-right_small"
+                                                        key={result.url}>
+                                                        <c-own-manual-card showdownlaodicon="true" title={result.title}
+                                                            headerlink={result.url} titlecolor="Honda Red"
+                                                            body={result.description} icon="black-booklet.svg">
+                                                        </c-own-manual-card>
+                                                    </div>
+                                                </template>
+                                            </div>
+                                    <div class="printcopy slds-p-top_xx-large"></div>
+                                    <lightning-layout>
+                                        <lightning-layout-item size="12" small-device-size="12" medium-device-size="10"
+                                            large-device-size="10">
+                                            <div class="textline slds-p-bottom_medium">
+                                                <lightning-formatted-rich-text value={footerData}>
+                                                </lightning-formatted-rich-text>
+                                            </div>
+                                        </lightning-layout-item>
+                                        <lightning-layout-item size="12" small-device-size="12" medium-device-size="2"
+                                            large-device-size="2">
+                                        </lightning-layout-item>
+                                    </lightning-layout>
+                                </template>
+                                <template if:true={showMessage}>
+                                    <div class="warning-message slds-p-top_large slds-text-align_center">
+                                        <!--<img src={warningImage} class="slds-m-right_small" />
+                                        DATA <UNAVAILABLE-->
+                                        Sorry! we cannot show owner's manual for your model this time. Please <a class="redtext" href="https://marine.honda.com/support/manuals" target="_blank">click here</a> to find your manual.
+                                    </div>
+                                </template>
+                            </lightning-layout-item>
+                        </template>
+                        <template if:true={displayPowerEquipment}>
+                            <lightning-layout-item size="1">
+                            </lightning-layout-item>
+                            <lightning-layout-item size="11">
+                                <template if:false={showMessage}>
+                                    <div class="headertitle slds-p-bottom_medium">{subTitle}</div>
+                                    <div class="cardheader"></div>
+                                    <div>
+                                        <lightning-layout>
+                                            <div class="slds-grid slds-wrap">
+                                                <template for:each={resultData} for:item="result">
+                                                    <div class="slds-col slds-size_1-of-3 slds-max-medium-size_3-of-3 slds-p-bottom_small slds-p-right_small"
+                                                        key={result.url}>
+                                                        <c-own-manual-card showdownlaodicon="true" title={result.title}
+                                                            headerlink={result.url} titlecolor="Honda Red"
+                                                            body={result.description} icon="black-booklet.svg">
+                                                        </c-own-manual-card>
+                                                    </div>
+                                                </template>
+                                            </div>
+                                        </lightning-layout>
+                                    </div>
+                                </template>
+                                <template if:true={showMessage}>
+                                    <div class="warning-message slds-p-top_large slds-text-align_center">
+                                        <!--<img src={warningImage} class="slds-m-right_small" />
+                                        DATA <UNAVAILABLE-->
+                                        Sorry! we cannot show owner's manual for your model this time. Please <a class="redtext" href="https://powerequipment.honda.com/support/owners-manuals" target="_blank">click here</a> to find your manual.                                            
+                                    </div>
+                                </template>
+                            </lightning-layout-item>
+                        </template>
+                    </lightning-layout>
+                </lightning-layout-item>
+                <lightning-layout-item class="manual-brand-small" size="12">
+                    <lightning-layout>
+                        <template if:true={displayHonda}>
+                            <template if:true={showTrimList}>
+                                <lightning-layout-item size="12">
+                                    <c-own-owners-manuals-trim-list categories={trims} brand={divisionId}
+                                        ontrimselect={trimSelectHandler}></c-own-owners-manuals-trim-list>
+                                </lightning-layout-item>
+                            </template>
+                            <template if:false={showTrimList}>
+                                <lightning-layout-item size="12" small-device-size="12" mediusm-device-size="10"
+                                    large-device-size="10">
+                                    <template if:true={isTrimsPresent}>
+                                        <a class="backdrop" onclick={handlebackdrop}></a>
+                                    </template>
+                                    <div class="slds-p-left_large">
+                                        <template if:false={showMessage}>
+                                            <div class="overview">
+                                                <lightning-formatted-rich-text value={adobeBody}>
+                                                </lightning-formatted-rich-text>
+                                            </div>
+                                            <!--div class="headertitle slds-p-bottom_medium">{subTitle}</div-->
+                                            <div class="slds-p-top_xx-large ">
+                                                <template if:true={showmanuals}>
+                                                    <div class="slds-grid slds-wrap">
+
+                                                        <template for:each={resultData} for:item="result">
+                                                            <div class="slds-col slds-size_1-of-3 slds-max-medium-size_3-of-3 slds-p-bottom_small slds-p-right_small"
+                                                                key={result.path}>
+                                                                <c-own-manual-card showdownlaodicon="true"
+                                                                    title={result.title} headerlink={result.url}
+                                                                    titlecolor="Honda Red" body={result.description}
+                                                                    icon="black-booklet.svg">
+                                                                </c-own-manual-card>
+                                                            </div>
+                                                        </template>
+
+                                                    </div>
+                                                </template>
+                                                <template if:false={showmanuals}>
+                                                    <c-own-data-loading-spinner></c-own-data-loading-spinner>
+                                                </template>
+                                            </div>
+                                            <div class="printcopy slds-p-top_xx-large slds-p-bottom_medium">
+                                                {printedCopy}
+                                            </div>
+                                            <div class="textline">
+
+
+                                                <template if:true={orderNow}>
+                                                    <div class="textline">A printed Navigation Manual is complimentary
+                                                        to the first registered owner, up to six months after vehicle
+                                                        purchase. These manuals require a valid VIN and mailing address.
+                                                        <a class="redtext" onclick={handleOrderNow}>Order now</a></div>
+                                                </template>
+                                                <br>
+
+
+
+
+                                                <lightning-formatted-rich-text value={footerData}>
+                                                </lightning-formatted-rich-text>
+                                                <div class="textline">To save paper and time, you can <a class="redtext"
+                                                        onclick={handleDownload}>download the
+                                                        latest manuals now.</a></div>
+                                            </div>
+                                        </template>
+                                        <template if:true={showMessage}>
+                                            <div class="warning-message slds-p-top_large slds-text-align_center">
+                                                <!--<img src={warningImage} class="slds-m-right_small" />
+                                                DATA <UNAVAILABLE-->
+                                                Sorry! we cannot show owner's manual for your model this time.
+                                            </div>
+                                        </template>
+                                    </div>
+                                </lightning-layout-item>
+                            </template>
+
+                        </template>
+                        <template if:true={displayPowerSports}>
+                            <template if:false={showMessage}>
+                                <lightning-layout-item size="12" small-device-size="12" medium-device-size="10"
+                                    large-device-size="10" class="slds-p-around_small">
+                                    <div class="headertitle slds-p-bottom_medium">{subTitle}</div>
+                                    <div class="cardheader">OWNER'S MANUAL</div>
+                                    <div>
+                                        <div class="slds-grid slds-wrap">
+                                            <template for:each={resultData} for:item="result">
+                                                <div class="slds-col slds-size_1-of-3 slds-max-medium-size_3-of-3 slds-p-bottom_small slds-p-right_small"
+                                                    key={result.path}>
+                                                    <c-own-manual-card showdownlaodicon="true" title={result.name}
+                                                        headerlink={result.path} titlecolor="Honda Red"
+                                                        body={result.description} icon="black-booklet.svg">
+                                                    </c-own-manual-card>
+                                                </div>
+                                            </template>
+                                        </div>
+                                    </div>
+                                </lightning-layout-item>
+                            </template>
+                            <template if:true={showMessage}>
+                                <div class="warning-message slds-p-top_large slds-text-align_center">
+                                    <!--<img src={warningImage} class="slds-m-right_small" />
+                                    DATA <UNAVAILABLE-->
+                                    Sorry! we cannot show owner's manual for your model this time.
+                                </div>
+                            </template>
+                        </template>
+                        <template if:true={displayMarine}>
+                            <lightning-layout-item size="12" small-device-size="12" medium-device-size="10" class="slds-p-around_small"
+                              >
+                                <template if:false={showMessage}>
+                                    <div class="headertitle slds-p-bottom_medium">{subTitle}</div>
+                                            <div class="slds-grid slds-wrap">
+                                                <template for:each={resultData} for:item="result">
+                                                    <div class="slds-col slds-size_1-of-3 slds-max-medium-size_3-of-3 slds-p-bottom_small slds-p-right_small"
+                                                        key={result.url}>
+                                                        <c-own-manual-card showdownlaodicon="true" title={result.title}
+                                                            headerlink={result.url} titlecolor="Honda Red"
+                                                            body={result.description} icon="black-booklet.svg">
+                                                        </c-own-manual-card>
+                                                    </div>
+                                                </template>
+                                            </div>
+                                    <div class="printcopy slds-p-top_xx-large"></div>
+                        
+                                        <lightning-layout-item size="12" small-device-size="12" medium-device-size="10"
+                                            large-device-size="10">
+                                            <div class="textline slds-p-bottom_medium">
+                                                <lightning-formatted-rich-text value={footerData}>
+                                                </lightning-formatted-rich-text>
+                                            </div>
+                                        </lightning-layout-item>
+                                </template>
+                                <template if:true={showMessage}>
+                                    <div class="warning-message slds-p-top_large slds-text-align_center">
+                                        <!--<img src={warningImage} class="slds-m-right_small" />
+                                        DATA <UNAVAILABLE-->
+                                        Sorry! we cannot show owner's manual for your model this time. Please <a class="redtext" href="https://marine.honda.com/support/manuals" target="_blank">click here</a> to find your manual.
+                                    </div>
+                                </template>
+                            </lightning-layout-item>
+                        </template>
+                        <template if:true={displayPowerEquipment}>
+
+                            <template if:false={showMessage}>
+                                <lightning-layout-item size="12" class="slds-p-around_small">
+                                    <div class="headertitle slds-p-bottom_medium">{subTitle}</div>
+                                    <div class="cardheader"></div>
+                                    <div>
+                                        <lightning-layout>
+                                            <div class="slds-grid slds-wrap">
+                                                <template for:each={resultData} for:item="result">
+                                                    <div class="slds-col slds-size_1-of-3 slds-max-medium-size_3-of-3 slds-p-bottom_small slds-p-right_small"
+                                                        key={result.url}>
+                                                        <c-own-manual-card showdownlaodicon="true" title={result.title}
+                                                            headerlink={result.url} titlecolor="Honda Red"
+                                                            body={result.description} icon="black-booklet.svg">
+                                                        </c-own-manual-card>
+                                                    </div>
+                                                </template>
+                                            </div>
+                                        </lightning-layout>
+                                    </div>
+                                </lightning-layout-item>
+                            </template>
+                            <template if:true={showMessage}>
+                                <div class="warning-message slds-p-top_large slds-text-align_center">
+                                    <!--<img src={warningImage} class="slds-m-right_small" />
+                                    DATA <UNAVAILABLE-->
+                                    Sorry! we cannot show owner's manual for your model this time. Please <a class="redtext" href="https://powerequipment.honda.com/support/owners-manuals" target="_blank">click here</a> to find your manual. 
+                                </div>
+                            </template>
+                        </template>
+                    </lightning-layout>
+                </lightning-layout-item>
+            </lightning-layout>
+        </div>
+        <div class="slds-p-bottom_xx-large"></div>
+    </template>
+    <template if:false={showData}>
+        <c-own-data-loading-spinner></c-own-data-loading-spinner>
+    </template>
+</template>

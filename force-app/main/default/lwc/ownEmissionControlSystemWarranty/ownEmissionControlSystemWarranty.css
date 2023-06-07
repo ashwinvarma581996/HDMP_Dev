@@ -1,0 +1,75 @@
+.own-combobox-label{
+    font-style: normal;
+    font-weight: 500;
+    font-size: 13px !important;
+    line-height: 15px;
+    letter-spacing: 0.02em;
+    color: #000000 !important;
+}
+.find-brand-combobox {
+    background: #FFFFFF;
+    box-sizing: border-box;
+    border-radius: 2px;
+}
+
+
+.slds-button{
+    border-radius: 2px;
+    font-weight: 900;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color:#FFFFFF;
+    padding: 0 48px;
+    justify-content: center;
+}
+.slds-brand-button-active{
+    border-color: var(--HondaRed);
+    background: var(--HondaRed);
+}
+.slds-brand-button-disabled{
+    border-color: #ACACAC;
+    background: #ACACAC;
+
+}
+
+.system-warranty h3{
+    font-weight: 300;
+    font-size: 32px;
+    line-height: 37px;
+    color: #080707;
+    margin: 0px 0px 24px;
+}
+
+.system-warranty p{
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 26px;
+    color: var(--HondaRed);
+}
+
+.slds-brand-button-active{
+    border-color: var(--HondaRed);
+    background: var(--HondaRed);
+}
+.slds-brand-button-inactive{
+    border-color: #ACACAC;
+    background: #ACACAC;
+}
+.custom-icon {
+    --sds-c-icon-color-foreground-default: #e42525;
+    --sds-c-icon-color-background: white;
+    cursor: pointer;
+}
+.link-text{
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 26px;
+    color: var(--HondaRed);
+}
+
+@media only screen and (max-width: 550px) {
+    .slds-button{
+        width: 100%;
+        margin-top: 20px;
+    }
+}

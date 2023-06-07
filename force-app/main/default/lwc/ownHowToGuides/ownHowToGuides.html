@@ -1,0 +1,38 @@
+<template>
+    <lightning-layout multiple-rows horizontal-align="space">
+        <lightning-layout-item size="11" class="categories-wrapper"  if:true={isLoading}>
+            <div class="slds-m-top_xx-large" style="position: sticky;">
+                <c-own-data-loading-spinner></c-own-data-loading-spinner>
+            </div>
+        </lightning-layout-item>
+        <lightning-layout-item size="11" class="categories-wrapper" if:false={isLoading}>
+            <template if:true={isError}>
+                <div class="slds-text-align_center">
+                    <lightning-formatted-rich-text class="error slds-p-bottom_medium " value="Data Unavailable"></lightning-formatted-rich-text>
+                </div>
+            </template>
+            <template if:true={categoriesData} for:each={categoriesData} for:item="feature">
+                <lightning-layout multiple-rows key={feature.title} class="slds-grid_vertical-align-center slds-p-around_small">
+                    <lightning-layout-item size="12" small-device-size="12" medium-device-size="8" large-device-size="8">
+                        <lightning-formatted-rich-text class="title slds-p-bottom_medium" value={feature.title}></lightning-formatted-rich-text>
+                    </lightning-layout-item>
+                    <lightning-layout-item class="view-all-desktop" size="12" small-device-size="12" medium-device-size="4" large-device-size="4">
+                        <div class="view-all" onclick={handleClickAll} data-title={feature.title}>ALL <lightning-formatted-rich-text value={feature.title}></lightning-formatted-rich-text></div>
+                    </lightning-layout-item>
+                </lightning-layout>
+                <lightning-layout multiple-rows key={feature.title} class="slds-p-bottom_xx-large">
+                        <template for:each={feature.features} for:item="view">
+                            <lightning-layout-item key={view.title} size="12" padding="around-small" small-device-size="12" medium-device-size="6" large-device-size="4" >
+                                <c-own-how-to-guides-sub-category feature-data={view}></c-own-how-to-guides-sub-category>
+                            </lightning-layout-item>
+                        </template>
+                        <lightning-layout class="view-all-mobile slds-p-around_small" multiple-rows>
+                            <lightning-layout-item size="12" small-device-size="12" medium-device-size="4" large-device-size="4">
+                                <div class="view-all" onclick={handleClickAll} data-title={feature.title}>ALL <lightning-formatted-rich-text value={feature.title}></lightning-formatted-rich-text></div>
+                            </lightning-layout-item>
+                        </lightning-layout>
+                </lightning-layout>
+            </template>
+        </lightning-layout-item>
+    </lightning-layout>
+</template>

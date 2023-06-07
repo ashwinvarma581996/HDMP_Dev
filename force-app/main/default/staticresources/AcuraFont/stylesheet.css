@@ -1,0 +1,48 @@
+@font-face {
+    font-family: 'Acura Bespoke';
+    src: url('AcuraBespoke-Bold.eot');
+    src: url('AcuraBespoke-Bold.eot?#iefix') format('embedded-opentype'),
+        url('AcuraBespoke-Bold.woff2') format('woff2'),
+        url('AcuraBespoke-Bold.woff') format('woff'),
+        url('AcuraBespoke-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Acura Bespoke';
+    src: url('AcuraBespoke-Regular.eot');
+    src: url('AcuraBespoke-Regular.eot?#iefix') format('embedded-opentype'),
+        url('AcuraBespoke-Regular.woff2') format('woff2'),
+        url('AcuraBespoke-Regular.woff') format('woff'),
+        url('AcuraBespoke-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Acura Bespoke';
+    src: url('AcuraBespoke-Book.eot');
+    src: url('AcuraBespoke-Book.eot?#iefix') format('embedded-opentype'),
+        url('AcuraBespoke-Book.woff2') format('woff2'),
+        url('AcuraBespoke-Book.woff') format('woff'),
+        url('AcuraBespoke-Book.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Acura Bespoke';
+    src: url('AcuraBespoke-Light.eot');
+    src: url('AcuraBespoke-Light.eot?#iefix') format('embedded-opentype'),
+        url('AcuraBespoke-Light.woff2') format('woff2'),
+        url('AcuraBespoke-Light.woff') format('woff'),
+        url('AcuraBespoke-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+

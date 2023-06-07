@@ -1,0 +1,825 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap");
+
+body {
+  font-family: "Roboto", sans-serif;
+  background-color: #ffffff;
+}
+
+.article-questions
+  .slds-form-element__control
+  .slds-form-element__static.slds-rich-text-editor__output
+  span,
+.article-questions
+  .slds-form-element__control
+  .slds-form-element__static.slds-rich-text-editor__output
+  span
+  p,
+.article-questions
+  .slds-form-element__control
+  .slds-form-element__static.slds-rich-text-editor__output
+  span
+  ul
+  li,
+.article-questions
+  .slds-form-element__control
+  .slds-form-element__static.slds-rich-text-editor__output
+  span
+  ul
+  li
+  a {
+  font-size: 16px;
+  display: block;
+}
+
+.article-questions
+  .slds-form-element__control
+  .slds-form-element__static.slds-rich-text-editor__output
+  span
+  iframe {
+  width: 100%;
+}
+
+.custom-layout .section-header-layout .slds-slot {
+  display: flex;
+  flex-direction: column;
+}
+
+.garage-tab-style .slds-combobox__input {
+  border: 1px solid #444444;
+  border-radius: 2px;
+  height: 50px;
+  display: flex;
+  font-weight: 900;
+  font-size: 14px;
+  line-height: 22px;
+  align-items: center;
+  letter-spacing: 0.36px;
+  text-transform: uppercase;
+}
+.card-styles .slds-card__header {
+  padding: 18px 15px;
+  margin: 0px;
+  border-bottom: 1px solid #dddbda;
+  min-height: 71px;
+}
+.card-styles .slds-card__header img {
+  height: 30px;
+}
+.card-styles .slds-card__header span.title {
+  font-weight: 900;
+  font-size: 16px;
+  line-height: 20px;
+  color: #080707;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.card-styles.card-styles-red .slds-card__header span.title {
+  color: #e42525;
+}
+.card-styles.card-styles-red .slds-card__header h3 {
+  cursor: pointer;
+}
+
+.card-styles .slds-card__header button.btn {
+  font-weight: 900;
+  font-size: 14px;
+  line-height: 22px;
+  color: #e42525;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  height: auto;
+  border: 1px solid #e42525;
+  transition: 0.5s all;
+}
+
+.card-styles .slds-card__header button.btn:hover {
+  background: #e42525;
+  color: #ffffff;
+}
+
+.card-styles .slds-card__header button.slds-button {
+  font-weight: 900;
+  font-size: 14px;
+  line-height: 22px;
+  color: #e42525;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  height: auto;
+  border: 1px solid #e42525;
+  margin-left: 8px;
+  transition: 0.5s all;
+}
+
+.card-styles .slds-card__header button.slds-button:hover {
+  background: #e42525;
+  color: #ffffff;
+}
+
+.card-styles .slds-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.card-styles .slds-card .slds-card__body {
+  margin: 0;
+  display: flex;
+  align-items: stretch;
+  flex: 1;
+}
+
+.card-styles .slds-card .slds-card__body .slds-card__body_inner {
+  margin: 0px;
+  flex: 1;
+  padding: 15px;
+  width: 100%;
+}
+.card-styles .slds-card__footer {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 13px 15px;
+  border-top: 1px solid #dddbda;
+}
+
+.card-styles .slds-card__footer .footer {
+  padding: 0;
+  margin: 0px;
+}
+
+.card-styles .slds-card__footer .footer a.footer-link {
+  font-weight: 900;
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: 2.8px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-styles .slds-card__footer .footer a.footer-link:hover {
+  text-decoration: none;
+  color: #c42121;
+}
+
+.card-styles .slds-card__footer .footer a.footer-link .slds-icon_container {
+  margin-left: 5px;
+}
+
+.card-styles .slds-card .slds-card__body .slds-card__body_inner > div {
+  margin: 5px 0;
+}
+
+.card-layouts {
+  display: flex;
+  align-items: stretch;
+}
+.card.card-styles-wrapper {
+  height: 100%;
+}
+
+@media only screen and (max-width: 600px) {
+  .card-layouts {
+    margin-bottom: 10px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .cOwnOverviewTabTheme .content_class {
+    padding: 0 8px !important;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .acura-about-title {
+    margin: 20px 16px 20px 16px;
+  }
+  .acura-title {
+    margin: 0px 16px 10px 16px;
+  }
+}
+.marketing-app-icons lightning-formatted-rich-text img {
+  width: 126px;
+  margin-bottom: 5px;
+}
+.feature-section-list span {
+  display: flex;
+  flex-direction: column;
+}
+.feature-section-list span p img {
+  margin: 0 10px 0 0;
+}
+
+.feature-section-list span p {
+  font-size: 16px;
+  line-height: 26px;
+  margin-bottom: 5px;
+}
+.card-styles.video-card-styles
+  .slds-card
+  .slds-card__body
+  .slds-card__body_inner {
+  padding: 0;
+}
+
+.assistance-link {
+  text-align: center;
+  font-weight: 300;
+  font-size: 32px;
+  line-height: 37px;
+  letter-spacing: 0.02em;
+  margin-top: 60px;
+  margin-bottom: 30px;
+}
+
+@media only screen and (max-width: 600px) {
+  .assistance-link {
+    font-size: 22px;
+    line-height: 27px;
+    margin: 10px 0 10px 0;
+  }
+}
+.slds-radio [type="radio"]:checked + .slds-radio__label .slds-radio_faux:after {
+  background-color: #e42525;
+}
+.promotional-hero .desktop-image img {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+}
+.promotional-hero .mobile-image img {
+  margin: 0;
+}
+.image-container.desktop-image p {
+  height: 406px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.comm-page-custom-hondalink-marketing
+  .promotional-hero.custom-img-size
+  .desktop-image
+  img,
+.comm-page-custom-acuralink-marketing
+  .promotional-hero.custom-img-size
+  .desktop-image
+  img {
+  max-width: inherit;
+  width: 100%;
+  height: auto;
+}
+@media only screen and (max-width: 1440px) {
+  .comm-page-custom-hondalink-marketing
+    .promotional-hero.custom-img-size
+    .desktop-image
+    img,
+  .comm-page-custom-acuralink-marketing
+    .promotional-hero.custom-img-size
+    .desktop-image
+    img {
+    height: 100%;
+    width: 100%;
+  }
+}
+@media only screen and (max-width: 930px) {
+  .comm-page-custom-hondalink-marketing .hero-wrapper,
+  .comm-page-custom-acuralink-marketing .hero-wrapper {
+    display: flex;
+    align-items: stretch;
+  }
+  .comm-page-custom-hondalink-marketing .desktop-image,
+  .comm-page-custom-acuralink-marketing .desktop-image {
+    height: 100%;
+  }
+  .comm-page-custom-hondalink-marketing .image-container.desktop-image p,
+  .comm-page-custom-acuralink-marketing .image-container.desktop-image p {
+    height: 100%;
+  }
+  .comm-page-custom-hondalink-marketing
+    .promotional-hero.custom-img-size
+    .desktop-image
+    img,
+  .comm-page-custom-acuralink-marketing
+    .promotional-hero.custom-img-size
+    .desktop-image
+    img {
+    height: 100%;
+    width: auto;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .comm-page-custom-hondalink-marketing
+    .promotional-hero.custom-img-size
+    .mobile-image
+    img,
+  .comm-page-custom-acuralink-marketing
+    .promotional-hero.custom-img-size
+    .mobile-image
+    img {
+    height: auto;
+    margin: 0;
+  }
+}
+
+.comm-page-custom-honda-product-compatibility-result
+  .promotional-hero.custom-img-size
+  .desktop-image
+  img,
+.comm-page-custom-acura-product-compatibility-result
+  .promotional-hero.custom-img-size
+  .desktop-image
+  img {
+  height: 100%;
+  max-width: inherit;
+  width: auto;
+}
+@media only screen and (min-width: 1441px) {
+  .comm-page-custom-honda-product-compatibility-result
+    .promotional-hero.custom-img-size
+    .desktop-image
+    img,
+  .comm-page-custom-acura-product-compatibility-result
+    .promotional-hero.custom-img-size
+    .desktop-image
+    img {
+    height: auto;
+    max-width: inherit;
+    width: 100%;
+    min-height: 100%;
+  }
+}
+@media only screen and (max-width: 930px) {
+  .comm-page-custom-honda-product-compatibility-result .hero-wrapper,
+  .comm-page-custom-acura-product-compatibility-result .hero-wrapper {
+    display: flex;
+    align-items: stretch;
+  }
+  .comm-page-custom-honda-product-compatibility-result .desktop-image,
+  .comm-page-custom-acura-product-compatibility-result .desktop-image {
+    height: 100%;
+  }
+  .comm-page-custom-honda-product-compatibility-result
+    .image-container.desktop-image
+    p,
+  .comm-page-custom-acura-product-compatibility-result
+    .image-container.desktop-image
+    p {
+    height: 100%;
+  }
+}
+
+.comm-page-custom-honda-product-connected-features
+  .promotional-hero.custom-img-size
+  .desktop-image
+  img,
+.comm-page-custom-acura-product-connect-features
+  .promotional-hero.custom-img-size
+  .desktop-image
+  img {
+  height: 100%;
+  max-width: inherit;
+  width: auto;
+}
+@media only screen and (max-width: 821px) {
+  .comm-page-custom-honda-product-connected-features
+    .hero-wrapper
+    .content-section,
+  .comm-page-custom-acura-product-connect-features
+    .hero-wrapper
+    .content-section,
+  .comm-page-custom-honda-product-connected-features
+    .hero-wrapper
+    .image-section,
+  .comm-page-custom-acura-product-connect-features
+    .hero-wrapper
+    .image-section {
+    width: 100%;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .comm-page-custom-honda-product-connected-features
+    .promotional-hero.custom-img-size
+    .desktop-image
+    img,
+  .comm-page-custom-acura-product-connect-features
+    .promotional-hero.custom-img-size
+    .desktop-image
+    img {
+    height: auto;
+    margin: 0;
+  }
+}
+
+.comm-page-custom-garage-honda
+  .promotional-hero.custom-img-size
+  .desktop-image
+  img,
+.comm-page-custom-garage-acura
+  .promotional-hero.custom-img-size
+  .desktop-image
+  img {
+  height: 100%;
+  max-width: inherit;
+  width: auto;
+  min-height: 100%;
+}
+@media only screen and (min-width: 1441px) {
+  .comm-page-custom-garage-honda
+    .promotional-hero.custom-img-size
+    .desktop-image
+    img {
+    width: 100%;
+  }
+}
+@media only screen and (max-width: 830px) {
+  .comm-page-custom-garage-honda
+    .promotional-hero.custom-img-size
+    .desktop-image
+    img {
+    width: 100%;
+  }
+}
+@media only screen and (max-width: 1400px) {
+  .comm-page-custom-garage-honda .hero-wrapper,
+  .comm-page-custom-garage-acura .hero-wrapper {
+    display: flex;
+    align-items: stretch;
+  }
+  .comm-page-custom-garage-honda .desktop-image,
+  .comm-page-custom-garage-acura .desktop-image {
+    height: 100%;
+  }
+  .comm-page-custom-garage-honda .image-container.desktop-image p,
+  .comm-page-custom-garage-acura .image-container.desktop-image p {
+    height: 100%;
+  }
+}
+@media only screen and (max-width: 821px) {
+  .comm-page-custom-garage-honda .hero-wrapper .content-section,
+  .comm-page-custom-garage-acura .hero-wrapper .content-section,
+  .comm-page-custom-garage-honda .hero-wrapper .image-section,
+  .comm-page-custom-garage-acura .hero-wrapper .image-section {
+    width: 100%;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .comm-page-custom-garage-honda
+    .promotional-hero.custom-img-size
+    .mobile-image
+    img,
+  .comm-page-custom-garage-acura
+    .promotional-hero.custom-img-size
+    .mobile-image
+    img {
+    height: auto;
+    margin: 0;
+  }
+}
+
+.driver-feedback .common-text.slds-p-bottom_large {
+  padding-bottom: 0;
+}
+
+.form-styles .custom-input-label {
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 15px;
+  letter-spacing: 0.02em;
+}
+.form-styles .slds-combobox__input {
+  height: 48px;
+  background: #ffffff;
+  border: 1px solid #d2d2d2;
+  border-radius: 2px;
+  align-items: center;
+}
+.form-styles .slds-combobox__input.slds-is-disabled {
+  background: #f1f1f1;
+}
+.form-styles .slds-combobox__input:focus {
+  border-color: #e42525;
+  box-shadow: 0px 0px 3px 0px rgba(228, 37, 37, 0.5);
+}
+.form-styles .slds-input {
+  height: 48px;
+}
+.form-styles .slds-input:focus {
+  border-color: #e42525;
+  box-shadow: 0px 0px 3px 0px rgba(228, 37, 37, 0.5);
+}
+.form-styles button.slds-button.slds-button_brand {
+  height: 48px;
+  border-radius: 2px;
+  background: #e42525;
+  border: 1px solid #e42525;
+  color: #ffffff;
+  cursor: pointer;
+  font-weight: 900;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  width: 192px;
+  transition: 0.5s all;
+}
+.form-styles button.slds-button.slds-button_brand:hover {
+  color: #ffffff;
+  border: 1px solid #e42525;
+  background: #c42121;
+}
+.form-styles button.custom-button-find {
+  height: 48px;
+  border-radius: 2px;
+  background: #e42525;
+  border: 1px solid #e42525;
+  color: #ffffff;
+  cursor: pointer;
+  font-weight: 900;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  width: 192px;
+  transition: 0.5s all;
+}
+.form-styles button.custom-button-find:hover {
+  color: #ffffff;
+  border: 1px solid #e42525;
+  background: #c42121;
+}
+.form-styles button.custom-button-find.disable {
+  background: #acacac;
+  border-color: #acacac;
+  cursor: not-allowed;
+}
+.form-styles button.custom-button-find.disable:hover {
+  color: #ffffff;
+}
+.form-styles .find-brand-button-disabled button.slds-button.slds-button_brand {
+  cursor: not-allowed;
+}
+.form-styles
+  .find-brand-button-disabled
+  button.slds-button.slds-button_brand:hover {
+  border-color: #acacac;
+  background: #acacac;
+  color: #ffffff;
+}
+.form-styles input:disabled {
+  background-color: #f3f3f3;
+  border: 1px solid #000000;
+  color: #000000;
+  opacity: 1;
+  -webkit-text-fill-color: #000000;
+  -webkit-opacity: 1;
+}
+
+.alexa-title {
+  font-weight: bold;
+  font-size: 22px;
+  line-height: 30px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #000000;
+  text-align: center;
+  margin: 70px 0;
+}
+@media only screen and (max-width: 600px) {
+  .alexa-title {
+    font-size: 16px;
+    line-height: 24px;
+    margin: 40px 0;
+  }
+  .comm-page-custom-find-acura
+    .diff-cms-card.card.card-size.card-styles-wrapper {
+    margin: 20px 0px -30px;
+  }
+}
+.vin-sections .find-brand-button-disabled label {
+  display: none;
+}
+
+.comm-page-home .own-hero-wrapper .slds-grid {
+  width: 100%;
+}
+.comm-page-home .banner-wrapper img {
+  width: auto;
+  height: 400px;
+  object-position: center;
+  min-width: 100%;
+}
+@media only screen and (max-width: 830px) {
+  .comm-page-home .banner-wrapper {
+    height: auto !important;
+  }
+  .comm-page-home .banner-wrapper img {
+    height: auto !important;
+  }
+}
+.promotional-body b u {
+  color: #e42525;
+}
+
+.comm-page-custom-garage-acura .cb-section.forceCommunitySection,
+.comm-page-custom-garage-honda .cb-section.forceCommunitySection,
+.comm-page-custom-acura-product-connect-features
+  .cb-section.forceCommunitySection,
+.comm-page-custom-honda-product-connected-features
+  .cb-section.forceCommunitySection {
+  margin-bottom: 10px;
+}
+
+/*.comm-page-custom-acura-product-connect-features .footer-large,
+.comm-page-custom-honda-product-connected-features .footer-large {
+  margin-top: 70px;
+}*/
+
+.footer-large {
+  margin-top: 70px;
+}
+
+.comm-page-custom-honda-product-compatibility-result
+  .slds-page-header.custom-header-box.slds-border_bottom.slds-p-horizontal_none,
+.comm-page-custom-acura-product-compatibility-result
+  .slds-page-header.custom-header-box.slds-border_bottom.slds-p-horizontal_none {
+  border-bottom: 0px;
+}
+
+.text-design a {
+  color: #c42121;
+}
+
+@media only screen and (min-width: 1024px) {
+  .comm-page-custom-find-acura .own-hero-content.own-hero-content2,
+  .comm-page-custom-find-honda .own-hero-content.own-hero-content2,
+  .comm-page-custom-find-powersports .own-hero-content.own-hero-content2,
+  .comm-page-custom-find-powerequipment .own-hero-content.own-hero-content2,
+  .comm-page-custom-find-marine .own-hero-content.own-hero-content2 {
+    width: 35% !important;
+  }
+}
+@media only screen and (min-width: 1024px) {
+  .comm-page-custom-find-acura
+    .own-hero-image-container.own-hero-image-container2,
+  .comm-page-custom-find-honda
+    .own-hero-image-container.own-hero-image-container2,
+  .comm-page-custom-find-powersports
+    .own-hero-image-container.own-hero-image-container2,
+  .comm-page-custom-find-powerequipment
+    .own-hero-image-container.own-hero-image-container2,
+  .comm-page-custom-find-marine
+    .own-hero-image-container.own-hero-image-container2 {
+    width: 65% !important;
+  }
+}
+.find-brand-combobox .slds-dropdown-trigger_click.slds-is-open .slds-dropdown,
+.find-brand-combobox .slds-dropdown-trigger--click.slds-is-open .slds-dropdown {
+  min-width: fit-content !important;
+}
+.model-desc-btn {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+.model-desc-btn button {
+  background: transparent;
+  border: 2px solid #c42121;
+  border-radius: 2px;
+  font-weight: 900;
+  font-size: 14px;
+  line-height: 22px;
+  display: flex;
+  padding: 4px 12px;
+  color: #c42121;
+}
+.model-desc-btn button lightning-primitive-icon {
+  order: 2;
+  margin-left: 10px;
+  margin-top: -2px;
+}
+.model-desc-btn button lightning-primitive-icon svg {
+  margin: 0;
+}
+.serial_number_wrapper h2 {
+  font-weight: 300;
+  font-size: 40px;
+  line-height: 42px;
+  color: #080707;
+  letter-spacing: 1.2px;
+  margin: 40px 0 20px 0;
+}
+.serial_number_wrapper > p {
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 26px;
+  color: #000000;
+  margin-bottom: 20px;
+}
+.serial_number_wrapper .slds-accordion__section.slds-is-open {
+  background: #f5f5f5;
+}
+.serial_number_wrapper .section-control.slds-button {
+  padding: 20px;
+}
+.serial_number_wrapper .section-control.slds-button lightning-primitive-icon {
+  position: relative;
+  width: 14px;
+  height: 14px;
+  margin-right: 6px;
+}
+.serial_number_wrapper
+  .section-control.slds-button
+  lightning-primitive-icon:before {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border: 6px solid transparent;
+  border-left: 8px solid #e42525;
+}
+.serial_number_wrapper
+  .section-control.slds-button
+  lightning-primitive-icon
+  svg {
+  display: none;
+}
+.serial_number_wrapper .slds-accordion__summary-content {
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 26px;
+}
+.serial_number_wrapper
+  .section-control.slds-button:hover
+  .slds-accordion__summary-content {
+  color: #e42525;
+}
+.serial_number_wrapper .slds-accordion__content {
+  padding: 0px 10px;
+}
+.serial_number_wrapper .slds-accordion__content p {
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 26px;
+  margin-bottom: 10px;
+}
+
+.serial_number_wrapper
+  .slds-accordion__section.slds-is-open
+  .slds-accordion__summary-content {
+  font-weight: 900;
+}
+.serial_number_wrapper
+  .slds-accordion__section.slds-is-open
+  .section-control.slds-button
+  lightning-primitive-icon:before {
+  border-left: 6px solid transparent;
+  border-top: 8px solid #e42525;
+  margin-top: 3px;
+}
+.card-image-wrapper img {
+  width: 100% !important;
+  width: -moz-available !important;
+  width: -webkit-fill-available !important;
+  width: fill-available !important;
+}
+.finance-banner-img-wrapper img{
+    height: 350px !important;
+}
+
+
+@media only screen and (min-width: 1025px){
+  .comm-page-custom-garage-acura .diff-cms-card,
+  .comm-page-custom-garage-honda .diff-cms-card
+  {
+    margin-left: 16px;
+    margin-right: 8px;
+    margin-top: 38px;
+  }
+  
+  
+}
+
+@media only screen and (max-width: 1024px){
+  .comm-page-custom-garage-acura .diff-cms-card,
+  .comm-page-custom-garage-honda .diff-cms-card
+  {
+    margin-left: 16px;
+    margin-right: 16px;
+    margin-top: 38px;
+  }
+  .comm-page-custom-honda-resources-downloads .slds-media,
+  .comm-page-custom-acura-resources-downloads .slds-media,
+  .comm-page-custom-powersports-resources-downloads .slds-media,
+  .comm-page-custom-powerequipment-resources-downloads .slds-media,
+  .comm-page-custom-marine-resources-downloads .slds-media
+   {
+    display:block;
+    align-self: center;
+
+  }
+   
+}

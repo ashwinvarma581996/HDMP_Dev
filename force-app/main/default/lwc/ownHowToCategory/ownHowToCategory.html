@@ -1,0 +1,22 @@
+<template>
+    <lightning-layout multiple-rows horizontal-align="space">
+        <lightning-layout-item size="11" padding="around-small" if:true={features}>
+                <template for:each={features} for:item="feature">
+                    <lightning-layout key={feature.title} class="slds-wrap slds-p-vertical_large">
+                            <lightning-layout-item size="12" padding="around-small" small-device-size="12" medium-device-size="12" large-device-size="4" >
+                                <lightning-formatted-rich-text class="title" value={feature.title}></lightning-formatted-rich-text>
+                                <lightning-formatted-rich-text if:true={feature.content} class="content slds-p-top_medium" value={feature.content}></lightning-formatted-rich-text>
+                            </lightning-layout-item>
+                            <template for:each={feature.items} for:item="item">
+                                <lightning-layout-item key={item.title} size="12" class="feature-card" padding="around-small" small-device-size="12" medium-device-size="12" large-device-size="4">
+                                    <c-own-how-to-guides-sub-category feature-data={item}></c-own-how-to-guides-sub-category>
+                                </lightning-layout-item>
+                            </template>
+                            <!-- <lightning-layout-item size="12" padding="around-small" small-device-size="12" medium-device-size="6" large-device-size="4">
+                                <c-own-how-to-guides-sub-category type={feature.type} title={feature.title} content={feature.content} key-data={feature.data}></c-own-how-to-guides-sub-category>
+                            </lightning-layout-item> -->
+                    </lightning-layout>
+                </template>
+        </lightning-layout-item>
+    </lightning-layout>
+</template>

@@ -1,0 +1,71 @@
+<!-- //============================================================================
+// Title:    Honda MyGarage Experience - Promotional Hero
+//
+// Summary:  This is the For More Infromation Card html seen at the page of the Honda MyGarage Community 
+//
+// Details:  For More Infromation Card for pages
+//
+// History:
+// December 18, 2021 Ravindar Ravindra (Wipro) Original Author 
+//=========================================================================== -->
+<template>
+    <div class="card card-size">
+        <lightning-card>
+            <div slot="title" class="slds-truncate" onclick={handleClickHeader}>
+                <img src={icon} class="slds-p-right_small custom-icon">
+                <span class={titleClass}>{title}</span>
+                <template if:true={showforwardicon}>
+                    <lightning-icon class={iconClass} icon-name="utility:forward" size="x-small"></lightning-icon>
+                </template>
+            </div>
+            <div slot="actions" onclick={handleClickAction}>
+                <slot name="action"></slot>
+            </div>
+            <div class={bodyClass}>
+                <lightning-formatted-rich-text value={body}></lightning-formatted-rich-text>
+                <!-- Imtiyaz - RECALLS Start -->
+                <!-- <br/> -->
+                <!-- <a class="button-a" onclick={handleFindADealer}>Find a Dealer</a> -->
+                <!-- <br/> -->
+                <br/>
+                <template for:each={phoneFields} for:item="phoneField">
+                    <div key={phoneField.label}>
+                        <template if:true={phoneField.label}>
+                            <span class="slds-float_left">{phoneField.label} : </span>
+                        </template>
+                        <br/>
+                        <template if:true={phoneField.available}>
+                            <span class="slds-float_left">{phoneField.available}</span>
+                            <br/>
+                        </template>
+                        <lightning-formatted-text class="show-desktop-format" value={phoneField.value}></lightning-formatted-text>
+                        <template if:false={phoneField.readonly}>
+                            <lightning-formatted-phone class="show-mobile-format" value={phoneField.value}></lightning-formatted-phone>
+                        </template>
+                        <template if:true={phoneField.nextLine}>
+                            <br/>
+                            <a class="button-a" onclick={handleFindADealer} tabindex="0" role="link">Find a Dealer</a>
+                            <br/>
+                        </template>
+                        <!--<template if:false={phoneField.readonly}>
+                            <lightning-formatted-phone class="show-mobile-format" value={phoneField.value}></lightning-formatted-phone>
+                        </template>
+                        <template if:true={phoneField.nextLine}>
+                            <br/>
+                        </template>-->
+                        <template if:true={phoneField.link}>
+                            <br/>
+                            <a class="red" href={phoneField.url} target="_blank" tabindex="0" role="link">{phoneField.link}</a>
+                        </template>
+                    </div>
+                </template>
+                <!-- Imtiyaz - RECALLS End -->
+            </div>
+            <template if:true={showfooter}>
+                <div slot="footer">
+                    <slot class="footer" name="footer" onclick={handleClickFooter}></slot>
+                </div>
+            </template>
+        </lightning-card>
+    </div>
+</template>

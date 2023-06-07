@@ -1,0 +1,160 @@
+<template>
+    <div class="large-div">
+        <div class="heading"> Manage Linked Accounts & Connected Features </div>
+        <!-- <lightning-layout multiple-rows="true" class="section-line-container">
+            <lightning-layout-item class="sec-1">
+                <lightning-layout>
+                    <lightning-layout-item class="left-line-text-container"><div class="line-text">MY VEHICLES</div></lightning-layout-item>
+                    <lightning-layout-item class="left-line-container"><div class="left-line"></div></lightning-layout-item>
+                    <lightning-layout-item class="left-sub-line-container"><div class="left-sub-line"></div></lightning-layout-item>
+                </lightning-layout>
+            </lightning-layout-item>
+
+            <lightning-layout-item class="sec-2">
+                <lightning-layout>
+                    <lightning-layout-item class="right-line-text-container"><div class="line-text"> AVAILABLE FEATURES</div></lightning-layout-item>
+                    <lightning-layout-item class="right-line-container"><div class="right-line"></div></lightning-layout-item>
+                    <lightning-layout-item class="right-sub-line-container"><div class="right-sub-line"></div></lightning-layout-item>
+                </lightning-layout>
+            </lightning-layout-item>
+        </lightning-layout> -->
+        <div class="table-container">
+            <table class="table">
+                <thead class="thead">
+                    <tr class="tr-head"> 
+                        <th class=""><lightning-layout class="tr-head-item">
+                            <lightning-layout-item class="left-line-text-container"><div class="line-text">MY VEHICLES</div></lightning-layout-item>
+                            <lightning-layout-item class="left-line-container"><div class="left-line"></div></lightning-layout-item>
+                            <lightning-layout-item class="left-sub-line-container"><div class="left-sub-line"></div></lightning-layout-item>
+                        </lightning-layout></th>
+                        <th colspan="2"> <lightning-layout class="tr-head-item">
+                            <lightning-layout-item class="right-line-text-container"><div class="line-text"> AVAILABLE FEATURES</div></lightning-layout-item>
+                            <lightning-layout-item class="right-line-container"><div class="right-line"></div></lightning-layout-item>
+                            <lightning-layout-item class="right-sub-line-container"><div class="right-sub-line"></div></lightning-layout-item>
+                        </lightning-layout></th>
+                    </tr>
+                    <tr class="tr-head"> 
+                        <th class="th-product"></th>
+                        <template if:true={prodcutList.availableFeatures} for:each={prodcutList.availableFeatures} for:item="feature">
+                            <th class="th" key={feature}> {feature}</th>
+                         </template>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template if:true={prodcutList.products} for:each={prodcutList.products} for:item="prod">
+                        <tr class="tr-row" key={prod.nickname}>
+                            <td class="td-product">
+                                <lightning-layout>
+                                    <lightning-layout-item size="12" class="product-container">
+                                        <lightning-layout>
+                                            <lightning-layout-item size="3" class="img-container">
+                                                <div class="image-container">
+                                                    <img src={prod.image} class="img"/>
+                                                    <!-- <c-own-product-image product-image={prod.image} brand={prod.division}></c-own-product-image> -->
+                                                </div>
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="9" class="img-title-container">
+                                                {prod.nickname}
+                                            </lightning-layout-item>
+                                        </lightning-layout>
+                                    </lightning-layout-item>
+                                </lightning-layout>
+                            </td>
+                            <template if:true={prod.features} for:each={prod.features} for:item="feature" >
+                                <td class="td" key={feature.featureDisplayName}>
+                                    <div class="status-1" >
+                                        <template if:true={feature.hasCurrentFeature}>
+                                            <template if:true={feature.icon}>
+                                                <div class="icon">
+                                                    <lightning-icon icon-name={feature.icon}  variant={feature.variant} size='small' title='success' class={feature.statusiconclass}></lightning-icon>
+                                                </div>
+                                            </template>
+                                            <div class="status">
+                                                {feature.status}
+                                            </div>
+                                            <template if:true={feature.linkLabel}>
+                                                <button class="button" onclick={handleLinkClick} data-division={prod.division} data-featurename={feature.featureDisplayName} data-linklabel={feature.linkLabel} data-isnewuser={feature.isNewUser}>
+                                                    {feature.linkLabel} 
+                                                    <template if:true={feature.includesAmazon}>
+                                                        <template if:false={feature.isNewUser}>
+                                                            &nbsp;<lightning-icon icon-name='utility:forward' alternative-text='forward' size='x-small' title='forward' class="custom-icon"></lightning-icon>
+                                                        </template>
+                                                    </template>
+                                                </button>
+                                            </template>
+                                            <!-- <button class="button">
+                                                Learn More
+                                            </button> -->
+                                        </template>
+                                    </div>
+                                </td>
+                            </template>
+                        </tr>
+                        <tr class="tr-blank" key={prod.nickname}>
+                            
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="small-div">
+        <div class="heading-m">
+            Manage Linked Accounts & Connected Features
+        </div>
+        <lightning-layout multiple-rows="true">
+            <template if:true={prodcutList.products} for:each={prodcutList.products} for:item="prod">
+                <lightning-layout-item size="12" class="product-container" key={prod.nickname}>
+                    <lightning-layout>
+                        <lightning-layout-item size="4" class="img-container">
+                            <div class="image-container">
+                                <img src={prod.image} class="img"/>
+                                <!-- <c-own-product-image product-image={prod.image} brand={prod.division}></c-own-product-image> -->
+                            </div>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="8" class="img-title-container">
+                            {prod.nickname}
+                        </lightning-layout-item>
+                    </lightning-layout>
+                </lightning-layout-item>
+                <template if:true={prod.features} for:each={prod.features} for:item="feature" >
+                    <lightning-layout-item size="12" class="items-container" key={feature.featureDisplayName} if:true={feature.hasCurrentFeature}>
+                        <lightning-layout multiple-rows="true">
+                            <lightning-layout-item  size="6" class="item-1-l">
+                                {feature.featureDisplayName}
+                            </lightning-layout-item>
+                            <lightning-layout-item  size="6" class="item-1-r">
+                                <lightning-layout>
+                                    <lightning-layout-item class="status-1-m" size="12">
+                                        <template if:true={feature.icon}>
+                                            <div class="icon">
+                                                <lightning-icon icon-name={feature.icon}  variant={feature.variant} size='small' title='success' class={feature.statusiconclass}></lightning-icon>
+                                            </div>
+                                        </template>
+                                        <div class="status">
+                                            {feature.status}
+                                        </div>
+                                        <template if:true={feature.linkLabel}>
+                                            <button class="button" onclick={handleLinkClick} data-division={prod.division} data-featurename={feature.featureDisplayName} data-linklabel={feature.linkLabel} data-isnewuser={feature.isNewUser}>
+                                                {feature.linkLabel} 
+                                                <template if:true={feature.includesAmazon}>
+                                                    <template if:false={feature.isNewUser}>
+                                                        &nbsp;<lightning-icon icon-name='utility:forward' alternative-text='forward' size='x-small' title='forward' class="custom-icon"></lightning-icon>
+                                                    </template>
+                                                </template>
+                                            </button>
+                                        </template>
+                                        <!-- <button class="button">
+                                            Learn More
+                                        </button> -->
+                                    </lightning-layout-item>
+                                </lightning-layout>
+                            </lightning-layout-item>
+                        </lightning-layout>
+                    </lightning-layout-item>
+                </template>
+            </template>
+        </lightning-layout>
+    </div>
+</template>

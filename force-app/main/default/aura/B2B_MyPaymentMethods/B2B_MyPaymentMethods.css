@@ -1,0 +1,179 @@
+.THIS {
+    font-family: 'Roboto';
+}
+
+.THIS .default-color {
+    color: black !important;
+}
+
+.THIS .primaryGrayBtn {
+    background: gray !important;
+    background-color: gray !important;
+    border: 1px solid grey !important;
+}
+
+.THIS b {
+    font-weight: 500 !important;
+}
+
+.THIS .primaryRedBtn {
+    background: red !important;
+    background-color: red !important;
+    border: 1px solid red !important;
+}
+
+.THIS .hondabutton {
+    height: 30px;
+    font-size: 12px;
+    font-weight: normal !important;
+    line-height: normal;
+    margin: 0;
+    width: 200px;
+    border-radius: 0 !important;
+}
+
+.THIS .address-book-wrapper {
+    margin-bottom: 30px;
+    border-bottom: #ccc 1px solid !important;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.THIS .addressBookActions {
+    float: right;
+    margin-top: 15px;
+}
+
+.THIS .slds-text-heading_medium .textRed {
+    font-size: 13px;
+    font-weight: normal;
+}
+
+.THIS .edit-payment-modal .billing-body:nth-child(2) .slds-p-around_small.slds-large-size_4-of-12>.custom-box {
+    min-height: 6rem !important;
+}
+
+@media screen and (min-width: 768px) {
+    .THIS .address-book-wrapper {
+        margin-left: 100px !important;
+        margin-right: 100px !important;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .THIS .addressBookActions {
+        float: none;
+        padding-top: 16px;
+    }
+    .THIS .addressBookActions .hondabutton {
+        margin: auto;
+    }
+}
+
+.THIS .warning-text {
+    color: black;
+    line-height: 30px;
+    font-family: 'Roboto';
+}
+
+.THIS .cursor-pointer {
+    cursor: pointer;
+}
+
+.THIS .payment-rows {
+    line-height: 25px;
+}
+
+.THIS .billing-title {
+    color: black;
+    font-size: 17px;
+    font-weight: 500;
+    border-top: 1px solid;
+    padding-top: 10px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.THIS .billing-body {
+    padding-right: 10px;
+    padding-left: 10px;
+    align-items: center;
+}
+
+.THIS .heading-title {
+    color: black;
+    font-size: 14px;
+}
+
+.THIS .replace-title {
+    color: black;
+    font-size: 14px;
+    font-weight: 500;
+    padding-top: 25px;
+}
+
+.THIS .preferred {
+    padding: 15px 0 10px;
+}
+
+.THIS .edit-payment-modal {
+    width: auto !important;
+    max-width: 50rem !important;
+}
+
+.THIS .address-body {
+    color: black;
+}
+
+.THIS .addresses-box {
+    padding-bottom: 20px;
+    align-items: stretch;
+}
+
+.THIS .billing-body lightning-input,
+.THIS .billing-body lightning-combobox,
+.THIS .billing-body .card-number {
+    color: black;
+}
+
+.THIS .cards-we-accept .cards-we-accept__inner {
+    float: right;
+    text-align: right;
+}
+
+@media screen and (max-width: 767px) {
+    .THIS .cards-we-accept .cards-we-accept__inner {
+        float: none;
+        display: flex;
+        align-items: center;
+    }
+    .THIS .cards-we-accept {
+        order: -1;
+    }
+    .THIS .cards-we-accept .slds-text-heading_small {
+        padding-right: 10px;
+        font-size: 14px;
+    }
+    .THIS .billing-body {
+        padding-right: 0px;
+        padding-left: 0px;
+    }
+}
+
+@media screen and (max-width: 380px) {
+    .THIS .billing-title {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .THIS .cards-we-accept__inner img {
+        max-width: 25px;
+    }
+}
+
+.THIS .textBlue {
+    font-size: 13px;
+    color: #18a0fb;
+}

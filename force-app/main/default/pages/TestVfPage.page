@@ -1,0 +1,140 @@
+<apex:page showHeader="false" sidebar="false" controller="VFC_DomainsController"> 
+    <html>
+        <head>
+            <title></title>
+            <meta charset="utf-8" />
+            <!--  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"/> -->
+            <script type='text/javascript'>
+            var lexOrigin = '{!lexOrigin}';
+            var bluePinUrl = '{!getMapPinURL}';
+            console.log('lexOrigin ',lexOrigin); 
+            console.log('bluePinUrl ',bluePinUrl); 
+            
+            var locationList = [];
+            
+            window.addEventListener("message", function (event) {
+                console.log('lexOrigin ',lexOrigin);
+                console.log('event.origin ',event.origin);
+                console.log('event.data ',JSON.parse(event.data.message));
+                
+                locationList = JSON.parse(event.data.message);
+                console.log('event.locationList ',locationList);
+                if (event.origin === lexOrigin) {
+                    var receivedfromLWC = event.data;
+                    
+                    let outputLWC = document.getElementById('text-area-sfdc-lwc');
+                    outputLWC.innerHTML = JSON.stringify(receivedfromLWC);
+                }
+                if(locationList){ 
+                    GetMap();
+                }
+            }, false );
+            
+            
+            function GetMap() {
+                try{
+                    console.log('called GetMap',locationList);
+                    if(locationList.length == 0 || locationList == undefined){
+                        console.log('In IF');
+                        var map = new Microsoft.Maps.Map(document.getElementById('myMap'), {});
+                        var pushpin = new Microsoft.Maps.Pushpin(map.getCenter(), { text: '', title: '', subTitle: '    ' });
+                        map.entities.push(pushpin);
+                         return;
+                    }
+                    var map = new Microsoft.Maps.Map('#myMap', {});
+                    //Create an infobox at the center of the map but don't show it.
+                    infobox = new Microsoft.Maps.Infobox(map.getCenter(), {
+                        visible: false
+                    });
+                    
+                    //Assign the infobox to a map instance.
+                    infobox.setMap(map);
+                    
+                    //Create random locations in the map bounds.
+                    // let temp = '[{"Longitude":"75.78","Latitude":"26.91"},{"Longitude":"74.639915","Latitude":"26.449896"}]';
+                    //  locationList = JSON.parse(temp); 
+                    
+                    console.log('locationList',locationList);
+                    
+                    var pinLayer = new Microsoft.Maps.EntityCollection();
+                    var locs = [];
+                    
+                    for (var i = 0; i < locationList.length; i++) {
+                        locs[i]  = new Microsoft.Maps.Location(locationList[i].Latitude, locationList[i].Longitude);
+                        //var icon = 'http://icons.iconarchive.com/icons/icons-land/vista-map-markers/24/Map-Marker-Marker-Outside-Chartreuse-icon.png';
+                        // var icon = 'https://www.seekpng.com/png/detail/25-251768_small-google-map-red-pin.png';
+                        let icon = lexOrigin + bluePinUrl;
+                        var j = i +1;
+                        var pin = new Microsoft.Maps.Pushpin(locs[i], {icon: icon, width:'20px', height:'20px',title: locationList[i].POIName, subTitle: '', text:'' +j});
+
+                        //Store some metadata with the pushpin.
+                        pin.metadata = {
+                            title: 'Pin ' + i,
+                            description: 'Discription for pin' + i
+                        };
+                        
+                        //Add a click event handler to the pushpin.
+                        Microsoft.Maps.Events.addHandler(pin, 'click', pushpinClicked);
+                        pinLayer.push(pin);
+                    }
+                    console.log('locs ',locs);
+
+                    //Add pushpin to the map.
+                    map.entities.push(pinLayer); 
+                    //  map.entities.push(infoboxLayer);
+                    var bestview = Microsoft.Maps.LocationRect.fromLocations(locs);
+                    map.setView({ center: bestview.center, zoom: 3 });
+                    //Center the map on the user's location.
+                    
+                }catch(error){
+                    console.error(error.message);
+                }
+                
+            }
+            let clickedPinTitlte = '';
+            function pushpinClicked(e) {
+                console.log('pushpinClicked',e.target.metadata.title);
+                //Make sure the infobox has metadata to display.
+                if (e.target.metadata) {
+                    //Set the infobox options with the metadata of the pushpin.
+                    infobox.setOptions({
+                        location: e.target.getLocation(),
+                        title: e.target.metadata.title,
+                        description: e.target.metadata.description,
+                        visible: true,
+                        offset: new Microsoft.Maps.Point(0, 25),
+                        enableHoverStyle: true,
+                        enableClickedStyle: true 
+                    });
+                    clickedPinTitlte = e.target.metadata.title;
+                    sendToLigntningWC();
+                    //infobox.setOptions({ title: e.target.metadata.Title, description: e.target.Description, visible: true, offset: new Microsoft.Maps.Point(0, 25) });
+
+                }
+            }
+            
+            function sendToLigntningWC(){
+                
+                let lightningOrigin = '{!lexOrigin}';
+                console.log('clickedPinTitlte',clickedPinTitlte);
+                let messgaeToLWC = {
+                    message : clickedPinTitlte,
+                    source  : 'VisualForce Page'
+                }
+                window.parent.postMessage( messgaeToLWC, 'https://dev.dreamshop.honda.com');
+            }
+            
+            </script>
+            <script src="/soap/ajax/32.0/connection.js" type="text/javascript"/>
+            <script src="/soap/ajax/32.0/apex.js" type="text/javascript"/>
+            <script type='text/javascript' src='http://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=AkrgwwabKDz8SYy-MFkQ2iLEjV9digeka4VUqqWbsfuB9YDWkdEfVbFHMqMP7wYf'></script>
+            </head>
+            <body>
+                <div id="text-area-sfdc-lwc" class="slds-box" />
+                     
+                    <div id="myMap" style="position:relative;width: 100vw; height: 100vh;"></div>
+                    
+                    </body>
+                    </html>
+                    
+                    </apex:page>

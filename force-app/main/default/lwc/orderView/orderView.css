@@ -1,0 +1,28 @@
+.ordersummary .slds-card {
+    padding: 0 15px;
+}
+
+.finalAmount {
+    text-align: right!important;
+}
+
+.flexColumn .finalAmount {
+    max-width: 180px;
+    min-width: 65px;
+}
+
+.disc-popup{
+    font-size: 16px;
+}
+
+@media all and (max-width: 767px) {
+    .customerNotes {
+        margin-top: 20px;
+    }
+}
+/* Start Aditya - Core charges popur Added as a part of HDMP-16550 */
+.corechargepopup {
+    padding: 0 34px;
+    font-size: 16px;
+}
+/* End Aditya - Core charges popur Added as a part of HDMP-16550 */

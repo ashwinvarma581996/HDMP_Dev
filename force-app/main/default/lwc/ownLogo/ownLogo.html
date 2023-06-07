@@ -1,0 +1,38 @@
+<!-- //============================================================================
+// Title:    Honda Owners Experience - Logo
+//
+// Summary:  This is the html seen at the top of the Honda Owner Community
+//
+// Details:  Extend the LightningElement with this Base Element to gain access to the Messaging Channel and other logic herein and this is the logo component for all community pages.
+//
+//
+// History:
+// June 18, 2021 Arunprasad N (Wipro) Original Author
+//=========================================================================== -->
+<template>
+    <div class="c-container">
+        <div class="logo-large">
+            <lightning-layout>
+                <lightning-layout-item>
+                    <div role="link" aria-label="MyGarage Link">
+                        <a href=""><img class="img-cursor" src={logo} onclick={handleClick} alt="MyGarage Link" title="MyGarage Link"></a>
+                    </div>
+                </lightning-layout-item>
+            </lightning-layout>
+        </div>
+        <div class="logo-small">
+            <lightning-layout>
+                <lightning-layout-item>
+                    <div onclick={handleMenuClick} role="link" aria-label="MyGarage link" tabindex="0">
+                        <img class="img-cursor" src={menuSmall} alt="MyGarage link">
+                    </div>
+                </lightning-layout-item>
+                <lightning-layout-item class="slds-p-left_small">
+                    <div role="link" aria-label="MyGarage link" tabindex="0">
+                        <a href=""><img class="img-cursor" src={logo} onclick={handleClick} alt="MyGarage link"></a>
+                    </div>
+                </lightning-layout-item>
+            </lightning-layout>
+        </div>
+    </div>
+</template>

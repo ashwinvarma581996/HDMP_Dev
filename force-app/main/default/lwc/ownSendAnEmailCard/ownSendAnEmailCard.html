@@ -1,0 +1,35 @@
+<!-- //============================================================================
+// Title:    Honda MyGarage Experience - Promotional Hero
+//
+// Summary:  This is the CMS Card html seen at the page of the Honda MyGarage Community
+//
+// Details:  CMS Card for pages
+//
+// History:
+// October 18, 2021 Arunprasad N (Wipro) Original Author 
+//=========================================================================== -->
+<template>
+    <div class="card card-size card-styles-wrapper">
+        <lightning-card class="card-styles">
+            <div slot="title" class="slds-truncate" onclick={handleClickHeader}>
+                <img src={icon} class="slds-p-right_small custom-icon">
+                <span class={titleClass}>{title}</span>
+                <template if:true={showforwardicon}>
+                    <lightning-icon class={iconClass} icon-name="utility:forward" size="x-small"></lightning-icon>
+                </template>
+            </div>
+            <div slot="actions" onclick={handleClickAction}>
+                <slot name="action"></slot>
+            </div>
+            <div class={bodyClass}>
+                <lightning-formatted-rich-text value={body}></lightning-formatted-rich-text>
+                <a class="linkClass" onclick={handleSubmitRequest} tabindex="0" role="link">Send an Email</a>
+            </div>
+            <template if:true={showfooter}>
+                <div slot="footer">
+                    <slot class="footer" name="footer" onclick={handleClickFooter}></slot>
+                </div>
+            </template>
+        </lightning-card>
+    </div>
+</template>

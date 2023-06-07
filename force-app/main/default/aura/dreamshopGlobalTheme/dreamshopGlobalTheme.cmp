@@ -1,0 +1,49 @@
+<aura:component implements="forceCommunity:themeLayout" access="global">
+
+    <!-- Layout config properties -->
+    <aura:attribute name="width" type="integer" default="1170"/>  
+    <aura:attribute name="showHeader" type="Boolean" default="true"/>
+    <aura:attribute name="showHero" type="Boolean" default="false"/>
+    <aura:attribute name="showFooter" type="Boolean" default="true"/>
+    <aura:attribute name="showSelector" type="Boolean" default="false"/>
+    
+    <div class="container dreamshopGlobalTheme">
+        <aura:if isTrue="{!v.showHeader}">
+            <header class="header-container" id="header-container" style="{!'max-width:' + v.width + 'px'}">
+                <div class="slds-grid slds-wrap">
+                    <div class="slds-col slds-size_12-of-12">
+                        <c:headerComponent></c:headerComponent>
+                        <c:mainHeader></c:mainHeader>
+                        <aura:if isTrue="{!v.showSelector}">
+                            <c:dealerVehicleBtn></c:dealerVehicleBtn>
+                        </aura:if>
+                    </div>
+                </div>
+            </header>
+        </aura:if>
+
+        <aura:if isTrue="{!v.showHero}">
+            <div class="themeHero">
+                
+            </div>
+        </aura:if>
+
+        <div class="{!v.showSelector? 'body content': 'margin-offset body content'}" style="{!'max-width:' + v.width + 'px'}">
+            <div class="slds-grid slds-wrap">
+                <div class="slds-col slds-size_12-of-12">
+                    {!v.body}
+                </div>
+            </div>
+        </div>
+        
+        <!--<aura:if isTrue="{!v.showFooter}">
+            <div class="footer">
+                <div class="slds-grid slds-wrap">
+                    <div class="slds-col slds-size_12-of-12">
+                        <c:footer></c:footer>
+                    </div>
+                </div>
+            </div>
+        </aura:if> -->
+    </div>
+</aura:component>

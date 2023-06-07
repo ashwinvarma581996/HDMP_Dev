@@ -1,0 +1,247 @@
+/* Footer_desktop */
+@media only screen and (max-width: 600px) {
+    .footer-large {
+        display: none;
+    }
+    .footer-small {
+        display: block;
+    }
+}
+
+
+@media only screen and (min-width: 601px) and (max-width: 1024px ){
+    .footer-small {
+        display: none;
+    }
+    .footer-large {
+        display: block;
+    }
+   .social-icon{
+    color: #4E4E4E !important;
+    }
+    .exploremorefromhonda-page-title-first-row {
+        font-size: 12px;
+    }
+    .exploremorefromhonda-page-title {
+       font-size: 12px;
+    }
+    .followus-icon-wrapper{
+        padding : 0px 6px !important;
+    }
+}
+@media only screen and (min-width: 1025px) {
+    .footer-small {
+        display: none;
+    }
+    .footer-large {
+        display: block;
+    }
+   .social-icon{
+    color: #4E4E4E !important;
+    }
+
+}
+.followus-icon-wrapper{
+    padding : 0px 12px;
+}
+.c-container {
+    position: relative;
+    background: #f6f6f6;
+}
+.header-column {
+    padding: 0 72px;
+}
+.field-title {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    color: #000000;
+    letter-spacing: 1px;
+    font-size: 13px;
+    line-height: 18px;
+}
+.footer-links {
+    border-left: 2px solid #000000;
+    padding-left: 18px;
+}
+.page-title {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 21px;
+    color: #000000;
+    margin-top: 18px;
+}
+.vector-icon-left {
+    margin-left: 12px;
+}
+.arrow-icon-size {
+    height: 16px;
+}
+.register-your-product-title {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 700;
+    /*font-size: 28px;*/
+    line-height: 131.19%;
+    /* or 37px */
+
+    letter-spacing: 0.02em;
+
+    color:#e42525;
+
+    margin-bottom: 10px;
+}
+.register-your-product-content {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    /*font-size: 18px;*/
+    line-height: 131.19%;
+    /* or 24px */
+
+
+    color: #000000;
+}
+.registeryourproduct-icon-left {
+    margin-left: 42px;
+}
+.register-your-product-layout-margin {
+    margin: 20px 0 0px 0;
+}
+.exploremorefromhonda-field-title {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 40px;
+    letter-spacing: 0.1px;
+    color: #000000;
+}
+.exploremorefromhonda-field-title-border-bottom {
+    margin-bottom: 10px;
+}
+.exploremorefromhonda-page-title-first-row {
+    /*height: 24px;*/
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 700;
+    /*font-size: 18px;*/
+    line-height: 131.19%;
+    /* identical to box height, or 24px */
+
+    letter-spacing: 0.02em;
+
+    color:#e42525;
+}
+.exploremorefromhonda-page-title {
+    /*height: 24px;*/
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 700;
+    /*font-size: 18px;*/
+    line-height: 131.19%;
+    /* identical to box height, or 24px */
+
+    letter-spacing: 0.02em;
+
+    color:#e42525;
+
+    margin-top: 19px;
+}
+.followus-field-title {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 40px;
+    letter-spacing: 0.1px;
+    color: #000000;
+}
+.followus-page-title {
+    background: #4E4E4E;
+}
+.rectangle {
+    background: #4E4E4E;
+}
+.footer-header-column {
+    padding: 30px 72px;
+}
+.footer-margins {
+    margin: 2px 0;
+}
+.abcd{
+    width: 80%;
+}
+.link-class{
+    color: #FFFFFF;
+    font-weight: bold;
+    text-decoration: underline;
+}
+lightning-button.footer-white-link {
+    --slds-c-button-text-color: #f4f7f9;
+    --slds-c-button-text-color-hover: #f4f7f9;
+}
+
+.footer-content {
+font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+/*font-size: 14px;*/
+line-height: 20px;
+/* identical to box height, or 24px */
+
+
+color: #FFFFFF;
+}
+.accordion-section-border-bottom {
+    border-bottom: 1px solid #000000;
+}
+.footer .slds-accordion__summary-action-icon {
+    fill:#e42525;
+}
+.footer-margin {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.text-color-red {
+    color:#e42525;
+}
+.social-icon{
+    color: #4E4E4E !important;
+}
+@media only screen and (max-width: 900px) {
+    .header-column {
+        padding: 0px 10px;
+    }
+    .footer-logos img {
+        min-height: 90px;
+    }
+    .footer-links {
+        padding-left: 8px;
+    }
+    .footer-header-column {
+        padding: 30px 10px;
+    }
+    .vector-icon-left {
+        margin-left: 6px;
+    }
+    .link-field-title {
+        font-weight: 700;
+        line-height: 131.19%;
+        padding-right: 4px;
+        color: #FFFFFF;
+    }
+}
+@media only screen and (min-width: 600px) {
+    .register-your-product-layout-margin {
+        margin: 20px 0 40px 0;
+    }
+    .link-field-title {
+        font-weight: 700;
+        line-height: 131.19%;
+        padding-right: 12px;
+        color: #FFFFFF;
+    }
+}

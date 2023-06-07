@@ -1,0 +1,44 @@
+<!-- //============================================================================
+// Title:    Honda MyGarage Experience - Help FAQ Article
+//
+// Summary:  This is the Help FAQ Article html seen at the page of the Honda MyGarage Community
+//
+// Details:  Help FAQ Article for pages
+//
+// History:
+// October 18, 2021 Arunprasad N (Wipro) Original Author 
+//=========================================================================== -->
+<template>
+    <template if:true={showCard}>
+        <div class={mainCardClass}>
+            <div class="card card-styles-wrapper">
+                <lightning-card class="card-styles">
+                    <div slot="title" class="slds-truncate">
+                        <img src={icon} class="slds-p-right_small custom-icon">
+                        <span class={titleClass}>{title}</span>
+                    </div>
+                    <div slot="actions">
+                        <slot name="action">
+                            <template if:true={actionbuttonlabel}>
+                                <button class="slds-button slds-button_outline-brand action-button" onclick={handleClickAction} role="button" tabindex="0">{actionbuttonlabel}</button>
+                            </template>
+                            <template if:false={actionbuttonlabel}>
+                                <div class="custom-header-height" ></div>
+                            </template>
+                        </slot>
+                    </div>
+                    <div class={cardBodyClass}>
+                        <div class="external-link red">{description}</div>
+                        <template if:true={results}>
+                            <div class="external-link slds-p-top_small red">
+                                <template for:each={results} for:item="result">
+                                    <a class="article-title cursor-pointer" key={result.id} data-id={result.id} data-urlname={result.urlName} data-value={result.title} onclick={handleArticleClick} role="link" tabindex="0">{result.title} <br></a>
+                                </template>
+                            </div>
+                        </template>
+                    </div>
+                </lightning-card>
+            </div>
+        </div>
+    </template>
+</template>

@@ -1,0 +1,175 @@
+.breadcrumb {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    line-height: 22px;
+    letter-spacing: 0.02em;
+}
+.breadcrumb-text-color {
+    color: #E42525 !important;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 14px;
+    line-height: 22px;
+    margin-left: 12px;
+
+}
+.breadcrumb-item-back::before {
+    content: "<" !important;
+    position: absolute;
+    left: 0;
+    color: #E42525;
+}
+
+
+.header-box-wrapper{
+    margin: 0px 68px;
+}
+
+.custom-header-box {
+    background-color: white;
+}
+
+.logo-image {
+    height: 3rem;
+}
+
+
+/* .circle-image {
+    border: 1px solid #D9D9D9;
+    border-radius: 25px;
+    width: 50px;
+} */
+.circle-image{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 1px solid lightgray;
+}
+.title{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 16px;
+    line-height: 24px;
+}
+.sub-title{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 40px;
+    line-height: 42px;
+}
+
+.simple-image-span {
+    padding-top: 25%;
+}
+.vin-label{
+    font-weight: 900;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: 1px;
+    text-transform: capitalize;
+    color: #000000;
+    margin-right: 8px;
+}
+.vin-data{
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: 1px;
+    text-transform: capitalize;
+    color: #000000;
+    /* margin-right: 20px; */
+}
+.header-body a{
+    font-style: normal;
+    font-weight: 900;
+    font-size: 14px;
+    line-height: 22px;
+    text-align: center;
+    letter-spacing: 0.02em;
+    color: #E42525;
+
+}
+.circle-image-span{
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #d9d9d9;
+    background:#FFFFFF;
+}
+/* small */
+@media only screen and (max-width: 600px) {
+   
+    .sub-title{
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: 300;
+        font-size: 26px;
+        line-height: 30px;
+    }
+
+    .header-box-wrapper{
+        margin: 0px 20px;
+    }
+
+    .simple-image-span {
+        padding-top: 63%;
+    }
+    .simple-image-padding{
+        padding-top: 25% !important;
+    }
+    .container{
+        display: grid;
+        grid-template-columns: auto;
+        grid-gap: 4px 0px;
+    }
+
+}
+@media only screen and (min-width: 600px) {
+    .container{
+        display: grid;
+        grid-template-columns: auto auto auto;
+    }
+    .edit-vin{
+        margin-left: 4px;
+    }
+
+}
+
+.back-link{
+    margin-left: 6.5px;
+    height: 22px;
+    font-weight: 900;
+    font-size: 14px;
+    letter-spacing: 0.02em;
+    color: #E42525;
+    padding-top: 5px;
+    line-height: 22px;
+}
+.bread-crumb-container{
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+.chevronleft {
+    --sds-c-icon-color-foreground-default: #E42525;
+    --sds-c-icon-color-background: white;
+}
+.acura-link-image{
+    width: 116px;
+    height: 26px;
+}
+.edit-vin{
+    font-style: normal;
+    font-weight: 900;
+    font-size: 14px;
+    line-height: 22px;
+    text-align: center;
+    letter-spacing: 0.02em;
+    color: #E42525;
+}

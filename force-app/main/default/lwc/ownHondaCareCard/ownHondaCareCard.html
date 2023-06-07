@@ -1,0 +1,62 @@
+<!-- //============================================================================
+// Title:    Honda Owners Experience - Honda Care Card
+//
+// Summary:  This Card links to the Honda Care
+//
+//
+// History:
+// May 17, 2021 Arunprasad N (Wipro) Original Author
+// July 15, 2021 Jim Kohs (Wipro) refactored to ownBaseCard2
+// Aug 11, 2021 Jim Kohs (Wipro) added verbiage for Honda/Acura Autos
+//=========================================================================== -->
+<template>
+    <c-own-card title={title} titlecolor={titlecolor} icon={icon} brand={brand} showfooter={showFooter} onheader={handleHeader} onfooter={handleFooter} onaction={handleAction}>    
+        <div slot="default">
+            <!-- ============================= -->
+            <!-- ====== Default HTML ========= -->
+            <!-- ============================= -->
+            <div>Err: Please chose a brand</div>
+        </div>
+
+        <div slot="acura">
+            <!-- ============================= -->
+            <!-- ====== Acura HTML   ========= -->
+            <!-- ============================= -->
+            <div>Even though Honda is known for its long-term reliability, 
+            it's good to know that you have an extra measure of protection for your investment. 
+            With Honda Care, your vehicle is protected in such critical areas as engine, 
+            transmission, suspension, air conditioning/heating and fuel system.</div>
+        </div>
+
+        <div slot="honda">
+            <!-- ============================= -->
+            <!-- ====== Honda HTML   ========= -->
+            <!-- ============================= -->
+            <div>Even though Honda is known for its long-term reliability, 
+            it's good to know that you have an extra measure of protection for your investment. 
+            With Honda Care, your vehicle is protected in such critical areas as engine, 
+            transmission, suspension, air conditioning/heating and fuel system.</div>
+        </div>
+
+        <div slot="powersports">
+            <!-- ============================= -->
+            <!-- ====== PS HTML      ========= -->
+            <!-- ============================= -->
+            <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</div>
+        </div>
+
+        <div slot="powerequipment">
+            <!-- ============================= -->
+            <!-- ====== PE HTML      ========= -->
+            <!-- ============================= -->
+            <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</div>
+        </div>
+
+        <!-- ============================= -->
+        <!-- ====== Marine HTML   ========= -->
+        <!-- ============================= -->
+        <div slot="marine">
+            <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</div>
+        </div>
+    </c-own-card>
+</template>

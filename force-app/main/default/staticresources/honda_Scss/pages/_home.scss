@@ -1,0 +1,120 @@
+.comm-page-home {
+    .siteforceContentArea {
+        margin-top: 0px!important;
+        @media (max-width: 767px) {
+            margin-top: 0;
+        }
+    }
+}
+
+@media (min-width: 768px) {
+    .mainHeader .slds-spinner_container .slds-spinner {
+        position: fixed !important;
+        top: 50% !important;
+        left: 50% !important;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+      }
+}
+.dealerVehicle {
+    @media (max-width: 768px) {
+        .slds-button_brand {
+            min-width: 200px !important;
+        }
+    }
+    @media (max-width: 480px) {
+        .slds-button_brand {
+            min-width: 130px !important;
+        }
+    }
+}
+.dealer-install,
+.myAddressBookModal,
+.payment-edit-model,
+.addressModal {
+    .slds-radio input:checked {
+        & + label {
+            .slds-radio_faux {
+                height: 16px !important;
+                width: 16px !important;
+                border: 1px solid #666 !important;
+                border-radius: 50%;
+                &:after {
+                    content: '';
+                    width: 10px !important;
+                    height: 10px !important;
+                    border-radius: 50% !important;
+                    background: #E42525 !important;
+                    top: 7px !important;
+                    left: 7px !important;
+                }
+            }
+        }
+    }
+    .slds-radio_faux {
+        height: 16px !important;
+        width: 16px !important;
+        border: 1px solid #666 !important;
+    }
+    .slds-checkbox input:checked {
+     & + label {
+        .slds-checkbox_faux {
+            height: 15px;
+            width: 15px;
+            background-color: #fff;
+            border: 1px solid #E42525 !important;
+            
+            &:after {
+                content: ""  !important;
+                border-bottom: 2px solid #E42525  !important;
+                border-right: 2px solid #E42525  !important;
+                border-top: none !important;
+                border-left: none !important;
+                -webkit-transform: rotate(45deg)  !important;
+                transform: rotate(45deg)  !important;
+                border-radius: 0  !important;
+                background: transparent  !important;
+                top: -5px  !important;
+                left: 6px  !important;
+                width: 8px  !important;
+                height: 16px  !important;
+            }
+        }     
+     }
+    }
+    .slds-checkbox_faux {
+        height: 15px  !important;
+        width: 15px  !important;
+        background-color: #fff;
+        border: 1px solid #666 !important;
+        border-radius: 0 !important;
+    }
+
+}
+.orderHistorySearchWrap {
+    input.slds-input {
+        padding-right: 35px !important;
+    }
+    .searchIcon button:focus {
+        box-shadow: none;
+    }
+}
+
+.wishlist-item {
+    .product-quantity .slds-form-element__help {
+        position: absolute;
+        top: 100%;
+        white-space: nowrap;
+        margin-left: 54px;
+    }
+    .remove-item-wishlist {
+        .slds-button {
+            color: #e42525;
+        }
+        svg {
+            height: 20px;
+            width: 20px;
+            fill: #696969;
+        }
+    }
+}

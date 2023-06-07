@@ -1,0 +1,228 @@
+<template>
+    <div class="slds-container_medium slds-container_center slds-p-around_medium main-wrapper">
+        <template if:true={isresult}>
+            <p>You can retrieve your codes using this website by providing identity verification and vehicle information
+                in
+                a few simple steps.
+                <br><br>Please provide your current phone number and zip code. By providing an email address, we will
+                send a
+                confirmation email with the code that can be printed or archived for your records.
+            </p>
+
+            <div class="slds-form-element form-styles slds-m-top_large">
+                <div class="input-wrapper slds-m-top_large">
+                    <div class="slds-grid slds-grid_align-spread">
+                        <div>
+                            <label class="slds-form-element__label"
+                                for="vin-input-desktop own-combobox-label">VIN</label>
+                            <span class="required-field">*</span>
+                        </div>
+                        <a class="product-edit-helptext-desktop" onclick={handleVINHelp}>Where's my VIN?</a>
+                    </div>
+                    <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon_right"
+                        onkeyup={handleVINChange}>
+                        <template if:true={isVinEditable}>
+                            <input type="text" name="vin-input" id="vin-input-desktop"
+                                class="slds-input find-brand-input slds-m-top_xx-small" value={Vin} minlength="17"
+                                maxlength="17" autocomplete="off" />
+                        </template>
+                        <template if:false={isVinEditable}>
+                            <input type="text" name="vin-input" id="vin-iput-desktop"
+                                class="slds-input find-brand-input slds-m-top_xx-small" value={Vin} minlength="17"
+                                maxlength="17" disabled />
+                        </template>
+                    </div>
+                    <a class="product-edit-helptext-mobile" onclick={handleVINHelp}>Where's my VIN?</a>
+                </div>
+                <div class="input-wrapper slds-m-top_large">
+                    <div class="slds-grid slds-grid_align-spread">
+                        <div>
+                            <label class="slds-form-element__label" for="vin-input-desktop own-combobox-label">ZIP
+                                Code</label>
+                            <span class="required-field">*</span>
+                        </div>
+
+                    </div>
+                    <template if:true={isZipCodeEditable}>
+                        <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon_right"
+                            onkeyup={handleZipCodeChange}>
+                            <input type="text" name="vin-input" class="slds-input find-brand-input slds-m-top_xx-small"
+                                placeholder="" value={ZipCode} maxlength="10" pattern="[0-9]{5}(?:[- ]?[0-9]{4})?$"/>
+                        </div>
+                    </template>
+                    <template if:false={isZipCodeEditable}>
+                        <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon_right"
+                            onkeyup={handleZipCodeChange}>
+                            <input type="text" name="vin-input" class="slds-input find-brand-input slds-m-top_xx-small"
+                                placeholder="" value={ZipCode} disabled />
+                        </div>
+                    </template>
+
+
+                </div>
+                <div class="input-wrapper slds-m-top_large">
+                    <div class="slds-grid slds-grid_align-spread">
+                        <div>
+                            <label class="slds-form-element__label" for="vin-input-desktop own-combobox-label">Phone
+                                Number</label>
+                            <span class="required-field">*</span>
+                        </div>
+
+                    </div>
+                    <template if:true={isPhoneEditable}>
+                        <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon_right"
+                            onkeyup={handlePhoneNumberChange}>
+                            <input type="text" name="vin-input" class="slds-input find-brand-input slds-m-top_xx-small"
+                                placeholder="" value={phone} />
+                        </div>
+                    </template>
+                    <template if:false={isPhoneEditable}>
+                        <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon_right"
+                            onkeyup={handlePhoneNumberChange}>
+                            <input type="text" name="vin-input" class="slds-input find-brand-input slds-m-top_xx-small"
+                                placeholder="" value={phone} disabled />
+                        </div>
+                    </template>
+
+
+                </div>
+                <div class="input-wrapper slds-m-top_large">
+                    <div class="slds-grid slds-grid_align-spread">
+                        <div>
+                            <label class="slds-form-element__label"
+                                for="vin-input-desktop own-combobox-label">Email</label>
+                            <span class="required-field">*</span>
+                        </div>
+
+                    </div>
+                    <template if:true={isEmailEditable}>
+                        <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon_right"
+                            onkeyup={handleEmailChange}>
+                            <input type="text" name="vin-input" class="slds-input find-brand-input slds-m-top_xx-small"
+                                placeholder="" value={email} />
+                        </div>
+                    </template>
+                    <template if:false={isEmailEditable}>
+                        <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon_right"
+                            onkeyup={handleEmailChange}>
+                            <input type="text" name="vin-input" class="slds-input find-brand-input slds-m-top_xx-small"
+                                placeholder="" value={email} disabled />
+                        </div>
+                    </template>
+                </div>
+                <div class="input-wrapper slds-m-top_large">
+                    <div>
+                        <label class="slds-form-element__label" for="vin-input-desktop own-combobox-label">I need to
+                            retrieve the following code:</label>
+                        <span class="required-field">*</span>
+                    </div>
+                    <div class="slds-grid slds-wrap slds-form-element__control">
+                        <span onclick={handleNavigationCode}
+                            class="slds-col slds-size_1-of-1 slds-medium-size_3-of-12 slds-large-size_3-of-12 slds-m-vertical_medium slds-radio">
+                            <input type="radio" id="radio-43" value="radio-43" name="default" checked={isNavigationRadio} />
+                            <label class="slds-radio__label" for="radio-43">
+                                <span class="slds-radio_faux"></span>
+                                <span class="slds-radio-label">Navigation Code</span>
+                            </label>
+                        </span>
+                        <span onclick={handleRadioCode}
+                            class="slds-col slds-size_1-of-1 slds-medium-size_3-of-12 slds-large-size_3-of-12 slds-m-vertical_medium slds-radio">
+                            <input type="radio" id="radio-44" value="radio-44" name="default" checked={isRadioRadio} />
+                            <label class="slds-radio__label" for="radio-44">
+                                <span class="slds-radio_faux"></span>
+                                <span class="slds-radio-label">Radio Code </span>
+                            </label>
+                        </span>
+                        <span onclick={handleBoth}
+                            class="slds-col slds-size_1-of-1 slds-medium-size_3-of-12 slds-large-size_3-of-12 slds-m-vertical_medium slds-radio">
+                            <input type="radio" id="radio-45" value="radio-45" name="default" checked={isBothRadio}/>
+                            <label class="slds-radio__label" for="radio-45">
+                                <span class="slds-radio_faux"></span>
+                                <span class="slds-radio-label">Both</span>
+                            </label>
+                        </span>
+                    </div>
+                </div>
+                <template if:true={isRadio}>
+                    <div class="input-wrapper slds-m-top_large">
+                        <div class="slds-grid slds-grid_align-spread">
+                            <div>
+                                <label class="slds-form-element__label" for="vin-input-desktop own-combobox-label">Radio
+                                    Code Serial
+                                    Number</label>
+                                <span class="required-field">*</span>
+                            </div>
+                            <a class="product-edit-helptext-desktop" onclick={handleSerialNumberHelp}>Where’s my Serial
+                                Number?</a>
+                        </div>
+                        <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon_right"
+                            onkeyup={handleRadioSerialChange}>
+                            <input type="text" name="vin-input" class="slds-input find-brand-input slds-m-top_xx-small"
+                                placeholder="" autocomplete="off" value={radioSerialNumber}/>
+                        </div>
+                        <a class="product-edit-helptext-mobile" onclick={handleSerialNumberHelp}>Where’s my Serial
+                            Number?</a>
+                    </div>
+                </template>
+
+                <template if:true={isNavigation}>
+                    <div class="input-wrapper slds-m-top_large">
+                        <div class="slds-grid slds-grid_align-spread">
+                            <div>
+                                <label class="slds-form-element__label"
+                                    for="vin-input-desktop own-combobox-label">Navigation Code Serial
+                                    Number</label>
+                                <span class="required-field">*</span>
+                            </div>
+                            <a class="product-edit-helptext-desktop" onclick={handleSerialNumberHelp}>Where’s my Serial
+                                Number?</a>
+                        </div>
+                        <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon_right"
+                            onkeyup={handleNavigationSerialChange}>
+                            <input type="text" name="vin-input" class="slds-input find-brand-input slds-m-top_xx-small"
+                                placeholder="" autocomplete="off" value={navigationSerialNumber}/>
+                        </div>
+                        <a class="product-edit-helptext-mobile" onclick={handleSerialNumberHelp}>Where’s my Serial
+                            Number?</a>
+                    </div>
+                </template>
+
+                <p class="slds-m-vertical_medium">
+                    <span class="required-field">*</span>Required Fields
+                </p>
+
+                <template if:true={showerror}>
+                    <p class="slds-m-vertical_medium">
+                        <span class="find-radionav-error">{errorMessage}</span>
+                    </p>
+                </template>
+
+                <div class="slds-grid slds-wrap slds-grid_align-spread">
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_4-of-12 slds-large-size_4-of-12 btn-wrapper">
+                        <div class=product-button-1>
+                            <button name="SUBMIT" onclick={handleSave}
+                                class="slds-button slds-button_outline-brand slds-combobox_container product-button-large"
+                                disabled={saveButtonDisabled}>
+                                <span class="product-button-1-text">SUBMIT</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_4-of-12 slds-large-size_4-of-12 btn-wrapper">
+                        <div class="product-button-2">
+                            <button name="CANCEL" onclick={handleCancel}
+                                class="slds-button slds-button_outline-brand slds-combobox_container product-button-large">
+                                <span class="product-button-2-text">CANCEL</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_4-of-12 slds-large-size_4-of-12 btn-wrapper">
+                        &nbsp;
+                    </div>
+                </div>
+            </div>
+        </template>
+        <template if:false={isresult}>
+            <c-own-data-loading-spinner></c-own-data-loading-spinner>
+        </template>
+    </div>
+</template>

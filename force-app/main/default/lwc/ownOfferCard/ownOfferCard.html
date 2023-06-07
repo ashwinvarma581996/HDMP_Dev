@@ -1,0 +1,105 @@
+<template>
+    <div class="offer-cards_wrapper">
+        <div class="brand-card-sub-title">
+            <h3>Current Offers for Owners</h3>
+            <br>
+            <template if:true={offers} for:each={offers} for:item="offer">
+                <div key={offer.logo}>
+                    <div class="brand-card-title">
+                        <p class="brand-title"> <img src={offer.logo} style="height: 2cm; width: 3.2cm" alt={offer.brand}>
+                        </p>
+                        <div class="divider-line"></div>
+                    </div>
+                    <lightning-layout class="offer-cards slds-wrap">
+                        <template for:each={offer.offers} for:item="standard">
+                            <lightning-layout-item size="12" small-device-size="12" medium-device-size="6"
+                                large-device-size="6" key={standard.ModelID} padding="around-small">
+                                <div class="c-container">
+                                    <lightning-layout vertical-align="left">
+                                        <lightning-layout-item class="custom-box">
+                                            <div class="model-grp-name">{standard.ModelGroupName}</div>
+                                            <img class="theimage" src={standard.ModelStockPhotoLarge} alt={standard.ModelGroupName}>
+                                        </lightning-layout-item>
+                                        <lightning-layout-item class="custom-box1 slds-text-align_left">
+                                            <div class="model-desc">
+                                                <!-- <h4><span>{standard.ModelYear}</span>&nbsp; {standard.ModelGroupName}
+                                                    Special APR</h4> -->
+                                                <div class="head-container">
+                                                    <div class={standard.subHeadClass}>
+                                                        <h4>{standard.SalesProgramName}</h4>
+                                                    </div>
+                                                </div>
+                                                <div class="hr-container">
+                                                    <!-- <hr class={standard.hrClass}> -->
+                                                </div>
+                                                <template if:true={standard.hasFinanceTerm}>
+                                                    <div class="card-content">
+                                                        <!-- <template if:true={standard.financeTerm1}>
+                                                            <p>
+                                                                <lightning-formatted-rich-text
+                                                                    value={standard.financeTerm1}>
+                                                                </lightning-formatted-rich-text>
+                                                            </p>
+                                                        </template>
+                                                        <template if:true={standard.financeTerm2}>
+                                                            <p>
+                                                                or <lightning-formatted-rich-text
+                                                                    value={standard.financeTerm2}>
+                                                                </lightning-formatted-rich-text>
+                                                            </p>
+                                                        </template>
+                                                        <template if:true={standard.financeTerm3}>
+                                                            <p>
+                                                                or <lightning-formatted-rich-text
+                                                                    value={standard.financeTerm3}>
+                                                                </lightning-formatted-rich-text>
+                                                            </p>
+                                                        </template> -->
+                                                        <template for:each={standard.financeTerm}
+                                                            for:item="financeTerm">
+                                                            <p key={financeTerm}>
+                                                                <lightning-formatted-rich-text value={financeTerm}>
+                                                                </lightning-formatted-rich-text>
+                                                            </p>
+                                                        </template>
+                                                        <p>Expires {standard.EndDates} </p>
+                                                    </div>
+                                                </template>
+                                                <template if:false={standard.hasFinanceTerm}>
+                                                    <div class="card-content">
+                                                        <p>
+                                                            <lightning-formatted-rich-text value="Not Specified">
+                                                            </lightning-formatted-rich-text>
+                                                        </p>
+                                                        <p>
+                                                            <lightning-formatted-rich-text value="Not Specified">
+                                                            </lightning-formatted-rich-text>
+                                                        </p>
+                                                        <p>
+                                                            <lightning-formatted-rich-text value="Not Specified">
+                                                            </lightning-formatted-rich-text>
+                                                        </p>
+                                                        <p>Expires {standard.EndDates} </p>
+                                                    </div>
+                                                </template>
+                                                <div class="model-desc-btn">
+                                                    <lightning-button variant="destructive-text" title="GET THIS OFFER"
+                                                        label="GET THIS OFFER" icon-name="utility:forward"
+                                                        onclick={handleclick} data-offerlink={offer.allofferslink}>
+                                                    </lightning-button>
+                                                    <a class="model-desc-link" onclick={handleclick}
+                                                        data-offerlink={standard.offerlink}> {standard.allOffer} </a>
+                                                </div>
+                                            </div>
+                                        </lightning-layout-item>
+                                    </lightning-layout>
+                                </div>
+                            </lightning-layout-item>
+                        </template>
+                    </lightning-layout>
+                    <br>
+                </div>
+            </template>
+        </div>
+    </div>
+</template>

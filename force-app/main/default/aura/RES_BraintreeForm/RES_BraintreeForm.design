@@ -1,0 +1,7 @@
+<design:component>
+    <design:attribute name="dealerId" Label="Dealer ID"/>
+    <design:attribute name="cartId" Label="Cart ID"/>
+    <design:attribute name="orderId" Label="Order ID"/>
+    <design:attribute name="authCode" Label="Authorization Code"/>
+    <design:attribute name="error" default="false" />
+</design:component>

@@ -1,0 +1,51 @@
+<template>
+    <template if:false={noBanner}>
+        <template if:false={atPageHeader}>
+            <template if:false={hideBanner}>
+                <div class={paddingclass}>
+                    <div class="quick-actions">
+                        <div class="quick-actions_save">
+                            <lightning-formatted-rich-text class="desktop-title" value={titleSectonDesktop}>
+                            </lightning-formatted-rich-text>
+                            <lightning-formatted-rich-text class="mobile-title" value={titleSectonMobile}>
+                            </lightning-formatted-rich-text>
+                        </div>
+                        <div class="quick-actions_add">
+                            <lightning-layout multiple-rows vertical-align="center">
+                                <lightning-layout-item size="12" small-device-size="12" medium-device-size="12"
+                                    large-device-size={bodyColumn}>
+                                    <div>
+                                        <lightning-formatted-rich-text class="body-content" value={body}>
+                                        </lightning-formatted-rich-text>
+                                    </div>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="12" small-device-size="12" medium-device-size="12"
+                                    large-device-size={buttonColumn}>
+                                    <div class={buttonCss}>
+                                        <button class="quick-actions-btn" onclick={handleAddProduct} role="button" tabindex="0" aria-labelledby="Add to my garage">Add to my garage</button>
+                                    </div>
+                                </lightning-layout-item>
+                            </lightning-layout>
+                        </div>
+                    </div>
+                </div>
+            </template>
+        </template>
+        <template if:true={atPageHeader}>
+            <template if:false={hideBanner}>
+                <div>
+                    <span style="font-size: 14px;" class="show-vertical">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+                    <span class="header-body">
+                        <a onclick={handleAddProduct} role="button" tabindex="0" aria-labelledby="Save & Add to my Garage">Save & Add to My Garage</a>
+                    </span>
+                </div>
+            </template>
+        </template>
+    </template>
+    <template if:true={noBanner}>
+        <template if:false={hideBanner}>
+            <!-- <div class="save-to-my-products">SAVE TO MY PRODUCTS</div> -->
+            <p class="p">{body} and other helpful resources. <a class="add-link" onclick={handleAddProduct}  role="button" tabindex="0" aria-labelledby="Add to my Products">Add to My Products</a></p>
+        </template>
+    </template>
+</template>

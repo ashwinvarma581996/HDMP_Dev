@@ -1,0 +1,68 @@
+<!-- //============================================================================
+// Title:    Honda Owners Experience - Help Center
+//
+// Summary:  This is the category list and result html seen at the help center of the Honda Owner Community
+//
+// Details:  Extend the LightningElement with this Base Element to gain access to the Messaging Channel and other logic herein and this is the parent component for category list and result.
+//
+//
+// History:
+// June 16, 2021 Arunprasad N (Wipro) Original Author
+//=========================================================================== -->
+<template>
+    <div class="c-container header-column">
+        <template if:true={brand}>
+            <lightning-layout multiple-rows>
+                <lightning-layout-item padding="around-small" size="12">
+                    <c-own-help-center-breadcrumb brand={brand}></c-own-help-center-breadcrumb>
+                </lightning-layout-item>
+                <lightning-layout-item class="helpcenter-brand-large" padding="around-small" size="12">
+                    <c-own-help-center-search-bar brand={brand}></c-own-help-center-search-bar>
+                </lightning-layout-item>
+                <lightning-layout-item if:false={showResult} class="helpcenter-brand-small" padding="around-small" size="12">
+                    <c-own-help-center-search-bar brand={brand}></c-own-help-center-search-bar>
+                </lightning-layout-item>
+                <template if:false={showSearchResult}>
+                    <lightning-layout-item class="helpcenter-brand-large" padding="around-small" size="12">
+                        <lightning-layout horizontal-align="spread">
+                            <lightning-layout-item size="2">
+                                <c-own-help-center-category-list brand={brand} categories={categories}></c-own-help-center-category-list>
+                            </lightning-layout-item>
+                            <template if:true={subcategory}>
+                                <lightning-layout-item size="10">
+                                    <c-own-help-center-category-results brand={brand} subcategory={subcategory}></c-own-help-center-category-results>
+                                </lightning-layout-item>
+                            </template>
+                        </lightning-layout>
+                    </lightning-layout-item>
+                    <lightning-layout-item class="helpcenter-brand-small" padding="around-small" size="12">
+                        <lightning-layout horizontal-align="spread">
+                            <template if:false={showResult}>
+                                <lightning-layout-item size="12">
+                                    <c-own-help-center-category-list brand={brand} categories={categories}></c-own-help-center-category-list>
+                                </lightning-layout-item>
+                            </template>
+                            <template if:true={showResult}>
+                                <lightning-layout-item size="12">
+                                    <c-own-help-center-category-results brand={brand} subcategory={subcategory}></c-own-help-center-category-results>
+                                </lightning-layout-item>
+                            </template>
+                        </lightning-layout>
+                    </lightning-layout-item>
+                </template>
+                <template if:true={showSearchResult}>
+                    <lightning-layout-item class="helpcenter-brand-large" padding="around-small" size="12">
+                        <lightning-layout horizontal-align="center">
+                            <lightning-layout-item size="8">
+                                <c-own-help-center-search-results brand={brand} category={category}></c-own-help-center-search-results>
+                            </lightning-layout-item>
+                        </lightning-layout>
+                    </lightning-layout-item>
+                    <lightning-layout-item class="helpcenter-brand-small" padding="around-small" size="12">
+                        <c-own-help-center-search-results brand={brand} category={category}></c-own-help-center-search-results>
+                    </lightning-layout-item>
+                </template>
+            </lightning-layout>
+        </template>
+    </div>
+</template>

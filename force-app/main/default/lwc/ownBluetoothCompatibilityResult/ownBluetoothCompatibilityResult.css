@@ -1,0 +1,64 @@
+.section-title{
+    font-family: Roboto;
+font-style: normal;
+font-weight: 300;
+font-size: 32px;
+line-height: 37px;
+display: flex;
+align-items: center;
+letter-spacing: 0.02em;
+color :#000000;
+}
+.error-message {
+    font-family: Roboto;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 900;
+    line-height: 20px;
+    letter-spacing: 1px;
+    text-align: center;
+    color: #767676;
+}
+
+
+.section-content{
+    font-family: Roboto;
+    font-style: normal;
+    font-size: 16px;
+line-height: 20px;
+letter-spacing: 1px;
+color :#000000;
+
+}
+
+.section-subtitle{
+    color :#000000;
+    font-family: Roboto;
+font-style: normal;
+font-weight: 900;
+font-size: 16px;
+line-height: 20px;
+letter-spacing: 1px;
+}
+
+@media only screen and (min-width: 601px) {
+    .article-small {
+        display: none;
+    }
+    .article-large {
+        display: block;
+    }
+
+}
+@media only screen and (max-width: 600px) {
+    .article-large {
+        display: none;
+    }
+    .article-small {
+        display: block;
+    }
+    .section-title{
+        font-size: 22px !important;
+    }
+   
+}

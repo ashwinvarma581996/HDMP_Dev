@@ -1,0 +1,108 @@
+<template>
+	<!-- spinner start  Added by saikiran as part of HDMP 16433-->
+	<template if:true={isLoader}>
+		<lightning-spinner alternative-text="Loading"
+			class="slds-is-relative slds-align_absolute-center slds-m-around_large" variant="brand">
+		</lightning-spinner>
+		<div class="slds-backdrop slds-backdrop_open"></div>
+	</template>
+	<!-- spinner end -->
+	<template if:true={showCartUpdatesSummary}>
+		<div class="shippingCalculation">
+			<template if:false={isDealerSelected}>
+				<div class="cartShippingNote">{warningMessage}</div>
+			</template>
+			<lightning-layout horizontal-align="left" vertical-align="end" class="shippingField">
+				<lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="12"
+					class="slds-grid slds-grid_align-center">
+					<label>{label.ZipCodeLabel}</label>
+					<div>
+						<!--added by Yashika for 7996: starts-->
+						<lightning-input if:false={isDealerAndCart} placeholder="Enter 5 Digit Zipcode" maxlength="5"
+							type="text" read-only onkeypress={handleKeyPressLocation} onchange={handlePostalCodeChange}
+							value={postalCode}></lightning-input>
+						<lightning-input if:true={isDealerAndCart} placeholder="Enter 5 Digit Zipcode" maxlength="5"
+							type="text" onkeypress={handleKeyPressLocation} onchange={handlePostalCodeChange}
+							value={postalCode}></lightning-input>
+						<!--ends-->
+						<template if:false={isDealerSelected}><lightning-button variant="destructive" label="GO"
+								title="GO"></lightning-button></template>
+						<template if:true={isDealerSelected}><lightning-button variant="brand" label="GO" title="GO"
+								onclick={getShippingTaxData} class="go-button"></lightning-button></template>
+					</div>
+				</lightning-layout-item>
+			</lightning-layout>
+		</div>
+		<template if:true={showSummary}>
+			<div class="estimateShippingCalculation">
+				<template if:true={showspinner}>{label.Verifying_Zipcode}</template>
+				<template if:true={TaxDetails}>
+					<div class="priceLabel">
+						<span>{label.Estimated_Shipping}:&nbsp;</span><!--<span>${shippingCost}</span>--><lightning-formatted-number
+							format-style="currency" value={shippingCost}></lightning-formatted-number>
+					</div>
+				</template>
+				<template if:true={TaxDetails}>
+					<div class="priceLabel"><span>{label.Estimated_Tax}:&nbsp;</span><!--<span>${taxAmount}</span>-->
+						<lightning-formatted-number format-style="currency"
+							value={taxAmount}></lightning-formatted-number>
+					</div>
+				</template>
+				<template if:true={TaxDetails}>
+					<div class="priceLabel">
+						<b><span>{label.Estimated_Cart_Subtotal}:&nbsp;</span><!--<span>${totalSubTotal}</span>--><lightning-formatted-number
+								format-style="currency" value={totalSubTotal}></lightning-formatted-number></b>
+					</div>
+				</template>
+				<template if:true={showError}>{errorMessage}</template>
+			</div>
+		</template>
+	</template>
+	<template if:true={onInstallAtDealer}>
+		<div class="estimateTaxCalculation">
+			<template if:true={showTaxCalculationSpinner}><br />
+				<div class="priceLabel">Calculating Tax...</div>
+			</template>
+			<template if:true={TaxDetails}>
+				<div class="priceLabel"><span>{label.Estimated_Tax}:&nbsp;</span><!--<span>${taxAmount}</span>-->
+					<lightning-formatted-number format-style="currency" value={taxAmount}></lightning-formatted-number>
+				</div>
+			</template>
+			<template if:true={isEstimatedTax}><br />
+				<div class="priceLabel">{errorMessage}</div>
+			</template><!-- updated by saikiran as part of HDMP-16058-->
+			<template if:true={TaxDetails}>
+				<div class="priceLabel">
+					<b><span>{label.Estimated_Cart_Subtotal}:&nbsp;</span><!--<span>${totalSubTotal}</span>--><lightning-formatted-number
+							format-style="currency" value={totalSubTotal}></lightning-formatted-number></b>
+				</div>
+			</template>
+		</div>
+	</template>
+	<template if:true={onPickUp}>
+		<div class="estimateTaxCalculation">
+			<template if:true={showTaxCalculationSpinner}><br />
+				<div class="priceLabel">Calculating Tax...</div>
+			</template>
+			<template if:true={TaxDetails}>
+				<div class="priceLabel"><span>{label.Estimated_Tax}:&nbsp;</span><!--<span>${taxAmount}</span>-->
+					<lightning-formatted-number format-style="currency" value={taxAmount}></lightning-formatted-number>
+				</div>
+			</template>
+			<template if:true={TaxDetails}>
+				<div class="priceLabel">
+					<b><span>{label.Estimated_Cart_Subtotal}:&nbsp;</span><!--<span>${totalSubTotal}</span>--><lightning-formatted-number
+							format-style="currency" value={totalSubTotal}></lightning-formatted-number></b>
+				</div>
+			</template>
+			<template if:true={showError}>{errorMessage}</template><!-- updated by saikiran as part of HDMP-16058-->
+		</div>
+	</template>
+	<!-- Pratik Added for Sprint 4 tax Jurisdificatioins-->
+
+	<template if:true={showDealerModal}>
+		<c-disclaimer-popup modaltype={disclaimerType} dealer-return-policy-markup={dealerReturnPolicyMarkup}
+			onclose={handleShowHide}></c-disclaimer-popup>
+	</template>
+	<!-- Pratik Added for Sprint 4 tax Jurisdificatioins-->
+</template>

@@ -1,0 +1,55 @@
+.card{
+    box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.1);
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+.title {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 16px;
+    line-height: 20px;
+    text-transform: uppercase;
+    vertical-align: middle;
+    white-space: initial;
+}
+.heading-link{
+    cursor: pointer;
+}
+.red {
+    color: var(--HondaRed);
+}
+.black {
+    color: var(--HondaBlack);
+    cursor : pointer;
+}
+.card-body {
+    /* border-top: 1px solid #000000; */
+    background-color: #f5f5f5;
+    padding: 0.75rem;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-bottom: 1px solid #f5f5f5;
+    margin-bottom: -.75rem;
+}
+.card-body-footer {
+    border-bottom: 1px solid #DDDBDA;
+    border-top: 1px solid #000000;
+    background-color: #f5f5f5;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    margin-bottom: -.75rem;
+}
+.footer {
+    text-align: center;
+}
+.custom-icon {
+    --sds-c-icon-color-foreground-default: #e42525;
+    --sds-c-icon-color-background: white;
+}
+.custom-item{
+    align-self: center;
+}
+.icon-image{
+    height: 30px;
+}

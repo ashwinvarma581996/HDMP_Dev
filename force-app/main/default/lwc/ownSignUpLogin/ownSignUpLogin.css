@@ -1,0 +1,33 @@
+.sign-up-button {
+    background-color: #E42525;
+    border-color: #E42525;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    border-radius: 2px;
+    letter-spacing: 2px;
+
+}
+.login-button {
+    border-color: #E42525;
+    color: #E42525;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    border-radius: 2px;
+    letter-spacing: 2px;
+}
+@media only screen and (min-width: 905px) {
+    .signup-login-small {
+        display: none;
+    }
+    .signup-login-large {
+        display: block;
+    }
+}
+@media only screen and (max-width: 904px) {
+    .signup-login-large {
+        display: none;
+    }
+    .signup-login-small {
+        display: block;
+    }
+}

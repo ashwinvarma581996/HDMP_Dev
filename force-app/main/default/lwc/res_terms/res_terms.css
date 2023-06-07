@@ -1,0 +1,88 @@
+.terms-and-conditions {
+    width: 100%;
+    max-width: 924px;
+    margin: 0 auto;
+    font-family: "Avenir";
+    font-weight: 300;
+}
+
+.terms-and-conditions h1 {
+    max-width: 728px;
+    font-size: 50px;
+    text-align: center;
+    margin: 0 auto;
+    margin-bottom: 30px;
+    margin-top: 80px;
+    font-family: "Acura";
+    font-weight: 300;
+    color: #000000 !important;
+}
+
+.terms-and-conditions h2 {
+    font-size: 16px;
+    font-family: "Avenir";
+    font-weight: bold;
+    color: #5D6061;
+}
+
+.terms-and-conditions h3 {
+    font-family: "Avenir";
+    font-weight: 300;
+    font-style: italic;
+    font-size: 16px;
+    color: #5D6061;
+}
+.terms-and-conditions p{
+    font-size: 16px;
+    line-height: 28px;
+    margin-bottom: 40px;
+    color: #5D6061;
+}
+
+.terms-and-conditions p a,
+.terms-and-conditions p a:visited,
+.terms-and-conditions p a:hover,
+.terms-and-conditions p a:focus{
+    color: #5D6061;
+    text-decoration: underline;
+}
+
+.terms-and-conditions b{
+    font-family: "Avenir";
+    font-weight: bold;
+    color: #5D6061;
+}
+
+.terms-and-conditions__actions{
+    width: 100%;
+    text-align: center;
+    margin-top: 120px;
+    margin-bottom: 60px;
+}
+
+.terms-and-conditions__close-btn{
+    background-color: #E82C2A;
+    color: white;
+    padding: 12px;
+    min-width: 155px;
+    text-align: center;
+    text-transform: uppercase;
+    border: none;
+    font-weight:bold;
+    font-family: "Avenir";
+}
+
+@media(max-width: 767px){
+    .terms-and-conditions__actions{
+        margin-top: 50px;
+    }
+    .terms-and-conditions h1{
+        font-size: 24px;
+        line-height: 28px;
+        margin-top: 40px;
+        margin-bottom: 26px;
+    }
+    .terms-and-conditions p{
+        margin-bottom: 30px;
+    }
+}

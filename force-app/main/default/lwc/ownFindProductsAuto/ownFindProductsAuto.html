@@ -1,0 +1,272 @@
+<template><!--NOTE: footer is currently set up for Acura, rest of the component is set up to depend on which division code is chosen-->
+    <div class="section-row">
+        <lightning-layout multiple-rows>
+            <lightning-layout-item size="12" small-device-size="12" medium-device-size="4" large-device-size="4">
+                <lightning-layout multiple-rows>
+                    <lightning-layout-item size="12" padding="around-small">
+                        <h2 class="slds-text-align_left find-brand-body-heading">ACCESS YOUR INFO</h2>
+                        <div class="slds-text-align_left find-brand-body-title">Let’s Find Your {divisionName}</div>
+                        <div class="slds-text-align_left find-brand-body-desc">Access manuals, warranty and service information, view recalls, and more.</div>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" small-device-size="12" medium-device-size="8" large-device-size="8">
+                <lightning-layout multiple-rows>
+                    <lightning-layout-item size="12" padding="around-small">
+                        <!--Combobox & VIN section-->
+                        <lightning-layout class="find-brand-large" multiple-rows="true">
+                            <lightning-layout-item size="12" padding="around-small">
+                                <lightning-layout multiple-rows>
+                                    <lightning-layout-item size="12">
+                                        <div class="slds-text-align_left find-brand-heading">Get information about your {divisionName} based on its
+                                            year, model, and trim</div>
+                                    </lightning-layout-item>
+                                </lightning-layout>
+                            </lightning-layout-item>
+                            <lightning-layout-item size="12" padding="around-small">
+                                <lightning-layout multiple-rows>
+                                    <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="8">
+                                        <lightning-layout multiple-rows>
+                                            <lightning-layout-item size="12" small-device-size="12" medium-device-size="4" large-device-size="4">
+                                                <div>
+                                                    <span class=own-combobox-label>Year</span>
+                                                    <lightning-combobox class="find-brand-combobox slds-m-top_xx-small" name="year"
+                                                        label="Year" variant="label-hidden" value={year} placeholder="Select Year"
+                                                        options={years} onchange={handleYearChange}></lightning-combobox>
+                                                </div>
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="12" small-device-size="12" medium-device-size="4"
+                                                large-device-size="4" class="slds-p-left_small slds-p-right_small slds-p-bottom_small">
+                                                <span class=own-combobox-label>Model</span>
+                                                <lightning-combobox class="find-brand-combobox slds-m-top_xx-small " name="model"
+                                                    label="Model" variant="label-hidden" value={model} placeholder="Select Model"
+                                                    options={models} onchange={handleModelChange} disabled={modelSelectionDisabled}></lightning-combobox>
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="12" small-device-size="12" medium-device-size="4"
+                                                large-device-size="4" class="slds-p-left_small slds-p-right_small slds-p-bottom_small">
+                                                <span class=own-combobox-label>Trim</span>
+                                                <lightning-combobox class="find-brand-combobox slds-m-top_xx-small trimBox" name="trim"
+                                                label="Trim" variant="label-hidden" value={modelId} placeholder="Select Trim"
+                                                options={trims} onchange={handleTrimChange} disabled={trimSelectionDisabled}>
+                                                 </lightning-combobox>
+                                        </lightning-layout-item>
+                                        </lightning-layout>
+                                    </lightning-layout-item>
+                                    <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="4">
+                                        <lightning-layout multiple-rows>
+                                            <lightning-layout-item size="12"
+                                                class="slds-p-left_small slds-p-right_small slds-p-bottom_small">
+                                                <div class={modelFindButtonClass}>
+                                                    <label class="slds-form-element__label">&nbsp;</label>
+                                                    <button class="slds-button slds-button_brand slds-combobox_container"
+                                                        onclick={handleFindByYearModel}>Find</button>
+                                                </div>
+                                            </lightning-layout-item>
+                                        </lightning-layout>
+                                    </lightning-layout-item>
+                                </lightning-layout>
+                            </lightning-layout-item>
+                            <lightning-layout-item size="12" padding="around-small">
+                                <lightning-layout multiple-rows>
+                                    <lightning-layout-item size="9">
+                                        <lightning-layout vertical-align="center" class="find-brand-align-item-center">
+                                            <lightning-layout-item size="5" class="slds-p-right_small">
+                                                <div class="find-brand-horizontal-line"></div>
+                                            </lightning-layout-item>
+                                            <div class="text-2">
+                                                <lightning-layout-item class="slds-text-align_center ">
+                                                    <span class="find-brand-or-span"> OR </span>
+                                                </lightning-layout-item>
+                                            </div>
+                                            <lightning-layout-item size="5" class="slds-p-left_small">
+                                                <div class="find-brand-horizontal-line"></div>
+                                            </lightning-layout-item>
+                                        </lightning-layout>
+                                    </lightning-layout-item>
+                                </lightning-layout>
+                            </lightning-layout-item>
+                            <lightning-layout-item size="12" padding="around-small">
+                                <lightning-layout multiple-rows>
+                                    <lightning-layout-item size="12">
+                                        <div class="slds-text-align_left find-brand-heading">Enter your VIN number for details personalized
+                                            to your vehicle</div>
+                                    </lightning-layout-item>
+                                </lightning-layout>
+                            </lightning-layout-item>
+                            <lightning-layout-item size="12" padding="around-small">
+                                <lightning-layout multiple-rows>
+                                    <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="6">
+                                        <lightning-layout multiple-rows>
+                                            <lightning-layout-item size="12" class="slds-p-right_small">
+                                                <div>
+                                                    <div class="slds-form-element">
+                                                        <label class="slds-form-element__label" for="vin-input-desktop own-combobox-label">VIN Number</label>
+                                                        <span style="position:relative;top:2px;left:2px;"><button class="slds-button" onclick={handleVINHelp}><img src={vinHelpIcon}/></button></span>
+                                                        <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon_right" onkeyup={handleVINChange}>
+                                                            <template if:true={correctVINLength}>
+                                                                <lightning-icon icon-name="utility:check" size="x-small" class="icon-green slds-icon slds-input__icon slds-input__icon_right slds-icon-text-default"></lightning-icon>
+                                                            </template>
+                                                            <template if:true={incorrectVINLength}>
+                                                                <lightning-icon icon-name="utility:close" size="x-small" class="icon-red slds-icon slds-input__icon slds-input__icon_right slds-icon-text-default"></lightning-icon>
+                                                            </template>
+                                                            <input  type="text" name="vin-input" id="vin-input-desktop" class="slds-input find-brand-input slds-m-top_xx-small"
+                                                                    value={vinInputVal} placeholder="Enter VIN" minlength="17" maxlength="17"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </lightning-layout-item>
+                                        </lightning-layout>
+                                    </lightning-layout-item>
+                                    <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="6">
+                                        <lightning-layout multiple-rows>
+                                            <lightning-layout-item size="12"
+                                                class="slds-p-left_small slds-p-right_small slds-p-bottom_small">
+                                                <div class={vinFindButtonClass}>
+                                                    <label class="slds-form-element__label">&nbsp;</label>
+                                                    <button class="slds-button slds-button_brand slds-combobox_container"
+                                                        onclick={handleFindByVIN}>Find</button>
+                                                </div>
+                                            </lightning-layout-item>
+                                        </lightning-layout>
+                                    </lightning-layout-item>
+                                    <lightning-layout-item size="12">
+                                        <template if:true={displayVINError}>
+                                            <span class="find-brand-error">{vinErrorText}</span>
+                                        </template>
+                                    </lightning-layout-item>
+                                </lightning-layout>
+                            </lightning-layout-item>
+                        </lightning-layout>
+                        <lightning-layout class="find-brand-small" multiple-rows="true">
+                            <lightning-layout-item size="12" padding="around-small">
+                                <div class={modelSectionButtonClass}>
+                                    <button class="slds-button slds-button_outline-brand slds-button_stretch" data-section="model"
+                                        onclick={handleSectionClick}>FIND BY YEAR, MODEL, AND TRIM</button>
+                                </div>
+                            </lightning-layout-item>
+                            <lightning-layout-item size="12" padding="around-small">
+                                <div class={vinSectionButtonClass}>
+                                    <button class="slds-button slds-button_outline-brand slds-button_stretch" data-section="vin"
+                                        onclick={handleSectionClick}>FIND BY VIN</button>
+                                </div>
+                            </lightning-layout-item>
+                            <template if:true={showModelSection}>
+                                <lightning-layout-item size="12" padding="around-small">
+                                    <div>
+                                        <span class=own-combobox-label>Year</span>
+                                        <lightning-combobox class="find-brand-combobox slds-m-top_xx-small" name="year" label="Year"
+                                            variant="label-hidden" value={year} placeholder="Select Year" options={years}
+                                            onchange={handleYearChange}></lightning-combobox>
+                                    </div>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="12" padding="around-small">
+                                    <div>
+                                        <span class=own-combobox-label>Model</span>
+                                        <lightning-combobox class="find-brand-combobox slds-m-top_xx-small" name="model" label="Model"
+                                            variant="label-hidden" value={model} placeholder="Select Model" options={models}
+                                            onchange={handleModelChange} disabled={modelSelectionDisabled}></lightning-combobox>
+                                    </div>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="12" small-device-size="12" medium-device-size="6"
+                                large-device-size="6" class="slds-p-left_small slds-p-right_small slds-p-bottom_small">
+                                    <div>
+                                        <span class=own-combobox-label>Trim</span>
+                                        <lightning-combobox class="find-brand-combobox slds-m-top_xx-small" name="trim"
+                                            label="Trim" variant="label-hidden" value={modelId} placeholder="Select Trim"
+                                            options={trims} onchange={handleTrimChange} disabled={trimSelectionDisabled}></lightning-combobox>
+                                    </div>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="12" padding="around-small">
+                                    <div class={modelFindButtonClass}>
+                                        <label>&nbsp;</label>
+                                        <button class="slds-button slds-button_brand slds-combobox_container"
+                                            onclick={handleFindByYearModel}>Find</button>
+                                    </div>
+                                </lightning-layout-item>
+                            </template>
+                            <template if:true={showVinSection}>
+                                <lightning-layout-item size="12" padding="around-small">
+                                    <div class="slds-form-element">
+                                        <label class="slds-form-element__label" for="vin-input-mobile own-combobox-label">VIN Number</label>
+                                        <span style="position:relative;top:2px;left:2px;"><button class="slds-button" onclick={handleVINHelp}><img src={vinHelpIcon}/></button></span>
+                                        <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon_right" onkeyup={handleVINChange}>
+                                            <template if:true={correctVINLength}>
+                                                <lightning-icon icon-name="utility:check" size="x-small" class="icon-green slds-icon slds-input__icon slds-input__icon_right slds-icon-text-default"></lightning-icon>
+                                            </template>
+                                            <template if:true={incorrectVINLength}>
+                                                <lightning-icon icon-name="utility:close" size="x-small" class="icon-red slds-icon slds-input__icon slds-input__icon_right slds-icon-text-default"></lightning-icon>
+                                            </template>
+                                            <input  type="text" id="vin-input-mobile" class="slds-input find-brand-input slds-m-top_xx-small"
+                                                    placeholder="Enter VIN" minlength="17" maxlength="17"/>
+                                        </div>
+                                    </div>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="12">
+                                    <template if:true={displayVINError}>
+                                        <span class="find-brand-error">{vinErrorText}</span>
+                                    </template>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="12" padding="around-small">
+                                    <div class={vinFindButtonClass}>
+                                        <label>&nbsp;</label>
+                                        <button class="slds-button slds-button_brand slds-combobox_container"
+                                            onclick={handleFindByVIN}>Find</button>
+                                    </div>
+                                </lightning-layout-item>
+                            </template>
+                        </lightning-layout>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </lightning-layout-item>
+        </lightning-layout>
+        
+        <!-- 
+        <lightning-layout multiple-rows>
+            <lightning-layout-item class="slds-p-top_large" size="12" small-device-size="12" medium-device-size="4" large-device-size="4">
+                <lightning-layout multiple-rows>
+                    <lightning-layout-item size="12" padding="around-small">
+                        <h2 class="slds-text-align_left find-brand-body-heading">GET SUPPORT</h2>
+                        <div class="slds-text-align_left find-brand-body-title">Let’s Answer Your Questions</div>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </lightning-layout-item>
+            <lightning-layout-item class="slds-p-top_large" size="12" small-device-size="12" medium-device-size="8" large-device-size="8">
+                <lightning-layout multiple-rows>
+                    <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="6" padding="around-small">
+                        <c-own-explore-help-center-card brand="acura"></c-own-explore-help-center-card>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="6" padding="around-small">
+                    </lightning-layout-item>
+                </lightning-layout>
+            </lightning-layout-item>
+        </lightning-layout>
+        <lightning-layout multiple-rows>
+            <lightning-layout-item class="slds-p-top_large" size="12" small-device-size="12" medium-device-size="4" large-device-size="4">
+                <lightning-layout multiple-rows>
+                    <lightning-layout-item size="12" padding="around-small">
+                        <div class="slds-text-align_left find-brand-body-heading">EXPLORE RESOURCES</div>
+                        <div class="slds-text-align_left find-brand-body-title">Let’s Make the Most of Your {divisionName}</div>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </lightning-layout-item>
+            <lightning-layout-item class="slds-p-top_large" size="12" small-device-size="12" medium-device-size="8" large-device-size="8">
+                <lightning-layout multiple-rows>
+                    <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="6" padding="around-small">
+                        <c-own-download-link-app-card brand="acura" title="ACURALINK"></c-own-download-link-app-card>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="6" padding="around-small">
+                        <c-own-collision-facilities-card brand="acura"></c-own-collision-facilities-card>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="6" padding="around-small">
+                        <c-own-finance-card brand="acura"  title="ACURA FINANCE"></c-own-finance-card>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="6" padding="around-small">
+                        <c-own-parts-and-accessories-card brand="acura"></c-own-parts-and-accessories-card>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </lightning-layout-item>
+        </lightning-layout>
+        -->
+
+    </div>
+</template>

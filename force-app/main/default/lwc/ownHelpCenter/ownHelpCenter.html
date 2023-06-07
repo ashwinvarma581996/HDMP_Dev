@@ -1,0 +1,42 @@
+<!-- //============================================================================
+// Title:    Honda Owners Experience - Help Center
+//
+// Summary:  This is the html seen at the help center of the Honda Owner Community
+//
+// Details:  Extend the LightningElement with this Base Element to gain access to the Messaging Channel and other logic herein and this is the parent component for all help center pages.
+//
+//
+// History:
+// May 17, 2021 Arunprasad N (Wipro) Original Author
+//=========================================================================== -->
+<template>
+    <div class="header-column">
+        <lightning-layout multiple-rows>
+            <lightning-layout-item padding="around-small" size="12">
+                <c-own-help-center-breadcrumb></c-own-help-center-breadcrumb>
+            </lightning-layout-item>
+            <lightning-layout-item padding="around-small" size="12">
+                <c-own-help-center-search-bar></c-own-help-center-search-bar>
+            </lightning-layout-item>
+            <template if:false={showSearchResult}>
+                <template if:true={categories}>
+                    <lightning-layout-item padding="around-small" size="12"> <!--recommended changes made-->
+                        <c-own-help-center-popular-tab categories={categories} oncategoryselect={handleSearchCategory}></c-own-help-center-popular-tab>
+                    </lightning-layout-item>
+                </template>
+                <lightning-layout-item size="12">
+                    <c-own-help-center-connect-brand categories={categories}></c-own-help-center-connect-brand>
+                </lightning-layout-item>
+                <lightning-layout-item padding="around-small" size="12">
+                    <c-own-help-center-popular-help-video></c-own-help-center-popular-help-video>
+                </lightning-layout-item>
+            </template>
+            <template if:true={showSearchResult}>
+                <lightning-layout-item padding="around-small" size="12"> <!--recommended changes made-->
+                    <c-own-help-center-search-tab categories={categories} category={searchCategory}></c-own-help-center-search-tab>
+                </lightning-layout-item>
+            </template>
+        </lightning-layout>
+        <!--<c-avatar-upload></c-avatar-upload>-->
+    </div>
+</template>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>55.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>B2B Category Layout</masterLabel>
+    <description>Category landing page grid for when no vehcile is selected.</description>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property label="Category Grid - Grid Max Columns Displayed" name="gridMaxColumnsDisplayed" type="String" default="3" datasource="3,4,5,6"/>
+            <property name="fontColor" label="Category Grid - Category Title Color" type="Color" description="Category Tile Font Color" default="#000000"/>
+            <property name="fontSize" label="Category Grid - Category Title Size" type="String" description="Category Tile Font Size" default="Medium" datasource="Small,Medium,Large"/>
+            <property name="noResultMessage" label="Product Listing - No Products Message" type="String" description="Message for when no products are associated to mega category" default="Please select a vehicle to see product results"/>
+            <property name="ctaNoVehicle" label="Product Listing - CTA Text NO Vehicle Selected" type="String" description="CTA text for when no vehicle is selected and user needs to select year, make, trim" default="Select Vehicle"/>
+            <property name="ctaVehicleSelected" label="Product Listing - CTA Text WITH Vehicle Selected" type="String" description="CTA text for when a vehicle is selected and user can view the PDP page" default="View Product"/>
+            <property name="ctaFontSize" label="Product Listing - CTA Font Size" type="String" description="Product Listing - CTA Font Size" default="Medium" datasource="Small,Medium,Large"/>
+            <property name="recordId" type="String" label="Record Id" description="Automatically bind the page's record id to the component variable" default="{!recordId}"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

@@ -1,0 +1,66 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes,force:hasRecordId,flexipage:availableForAllPageTypes" access="global" controller="B2B_PayPalCheckoutController">
+
+
+
+
+    <ltng:require scripts="https://js.braintreegateway.com/web/3.81.0/js/client.min.js,                         
+                           /resource/paypalCheckout,
+                           /resource/PaypalClient,
+                           /resource/dataCollector,
+                           http://code.jquery.com/jquery-3.2.1.min.js" afterScriptsLoaded="{!c.jsLoaded}" />
+
+
+
+    <!-- Configurable Variables from the Flow default="{!CurrentUser.effectiveAccountId}"-->
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="this" type="Object" />
+    <!-- <aura:attribute name="cartId" type="String" default="{!recordId}"/> -->
+    <aura:attribute name="accountId" type="String" />
+    <aura:attribute name="dealerId" type="String" />
+    <aura:attribute name="clientToken" type="String" />
+    <aura:attribute name="buttonDisabled" type="Boolean" />
+    <aura:attribute name="isJSLoaded" type="Boolean" default="false" />
+    <aura:attribute name="isApexCalled" type="Boolean" default="false" />
+    <aura:attribute name="isPayPalActivated" type="Boolean" default="true" />
+    <aura:attribute name="orderType" type="String" />
+    <aura:attribute name="dealerName" type="String" />
+    <aura:attribute name="total" type="String" />
+    <aura:attribute name="dealerReturnPolicy" type="String" />
+    <aura:attribute name="showSpinner" type="Boolean" default="false" />
+
+    <aura:if isTrue="{!v.showSpinner}">
+        <lightning:spinner alternativeText="Loading" size="medium" />
+    </aura:if>
+
+    <lightning:layout multipleRows="true">
+        <lightning:layoutItem size="12" largeDeviceSize="12">
+            <c:cartContentsContainer aura:id="cartCmp" ontotalpricechange="{!c.validateTotalPrice}" onordertypechange="{!c.validateOrderType}" oncartdetailschange="{!c.validatePayPal}" cartId="{!v.recordId}" accountId="{!v.accountId}"></c:cartContentsContainer>
+        </lightning:layoutItem>
+    </lightning:layout>
+    <lightning:layout multipleRows="true" class="slds-grid slds-grid_align-end paypalbtn">
+        <lightning:layoutItem size="12" mediumDeviceSize="4" class="slds-text-align_center">
+            <aura:if isTrue="{!and((v.buttonDisabled != true), (v.isPayPalActivated == true))}">
+                <div class="slds-p-bottom_medium" style="font-size:18px;padding-left: 24px;"><b>OR</b></div>
+            </aura:if>
+        </lightning:layoutItem>
+        <lightning:layoutItem size="12" largeDeviceSize="12">
+            <aura:if isTrue="{!v.buttonDisabled != true}">
+                <div class="bootstrap-basic slds-text-align_right">
+                    <form class="needs-validation" novalidate="">
+                        <div id="paypal-button" style="padding-bottom:20px; width: 248px;float: right;"></div>
+                    </form>
+                </div>
+            </aura:if>
+        </lightning:layoutItem>
+        <!-- Aditya - Removed as a part of Disclaimer changes -->
+        <!--<lightning:layoutItem size="12" largeDeviceSize="12">
+            <aura:if isTrue="{!v.dealerId}">
+                <div style="margin-top: 2rem;" class="slds-size_12-of-12 slds-m-bottom_medium slds-float_right slds-text-align_right">
+                    <b style="font-size: 18px;">Return Policy</b><br/>
+                    <span style="font-size: 14px;">{!v.dealerReturnPolicy}</span>
+                </div>
+            </aura:if>
+        </lightning:layoutItem> -->
+    </lightning:layout>
+
+</aura:component>

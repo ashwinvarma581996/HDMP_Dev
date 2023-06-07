@@ -1,0 +1,36 @@
+.breadcrumb {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    line-height: 22px;
+    letter-spacing: 0.02em;
+}
+.breadcrumb-text-color {
+    color: #E42525 !important;
+}
+/* Breadcrumb_desktop */
+@media only screen and (max-width: 7200px) {
+    .breadcrumb-small {
+        display: none;
+    }
+    .breadcrumb-large {
+        display: block;
+    }
+}
+/* Breadcrumb_mobile */
+@media only screen and (max-width: 600px) {
+    .breadcrumb-large {
+        display: none;
+    }
+    .breadcrumb-small {
+        display: block;
+    }
+}
+.c-container {
+    position: relative;
+}
+.breadcrumb-item-back::before {
+    content: "<" !important;
+    position: absolute;
+    left: -.75rem;
+}

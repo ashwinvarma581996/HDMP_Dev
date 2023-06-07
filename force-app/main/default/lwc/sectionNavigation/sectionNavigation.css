@@ -1,0 +1,8 @@
+.slds-dropdown {
+    border-color: #979797 !important;
+    border-radius: 0 !important;
+    padding: 6px 15px !important;
+    box-shadow: none;
+    margin-top: -1px;
+    border-top: none;
+}

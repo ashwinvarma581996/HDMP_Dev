@@ -1,0 +1,101 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 02-20-2023
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<apex:component access="global" controller="B2B_DealerDetails" >
+  <apex:attribute name="dealerId" type="String" assignTo="{!dealerRecId}" description="dealer Id" />
+  <apex:attribute name="customerName" type="String" assignTo="{!customer_Name}" description="Customer Name" />
+  <apex:attribute name="orderNumber" type="String" assignTo="{!order_Number}" description="Order Number" />
+  <apex:attribute name="orderDate" type="Date" assignTo="{!order_Date}" description="Order Date" />
+  <apex:attribute name="delType" type="String" assignTo="{!order_deliveryType}" description="Order Delivery Type" />
+  <apex:attribute name="compPosition" type="Integer" assignTo="{!compPos}" description="Component Position to show hide details" />
+    <apex:attribute name="dealerNo" type="String" assignTo="{!dealer_No}" description="Dealer Number" />
+    <!-- Added by ashwin for 18855 -->
+    <apex:attribute name="recName" type="String" description="Name of Recipient" />
+     <apex:attribute name="custName" type="String" description="Name of customer if customer is guest" />
+     
+    <apex:outputPanel rendered="{!IF(compPos == 1,true,false)}">
+        <p style="margin: 15px 0 0;">{!dealerRec.Name}</p>
+        <p style="margin: 2px 0 0;">{!dealerRec.shippingStreet}</p>
+        <p style="margin: 2px 0 0;">{!dealerRec.shippingCity }, {!dealerRec.shippingState}, {!dealerRec.ShippingPostalCode}</p>  
+        <p style="margin: 2px 0 0;">
+            ({! LEFT(dealerRec.Phone, 3) }) {! LEFT(RIGHT(dealerRec.Phone, 7), 3) }-{! RIGHT(dealerRec.Phone, 4) } 
+        </p>
+        
+        <p style="margin: 2px 0 0;">{!dealerRec.Email__c}</p>                 
+        
+        
+        <apex:outputText rendered="{!IF(contains(recName,'Guest') == false,true,false)}">
+            <h1  style="font-size: 20px; padding: 20px 0; font-weight:normal;">Hello {!recName},</h1>
+        </apex:outputText>
+        <apex:outputText rendered="{!IF(contains(recName,'Guest') == true,true,false)}">
+            <h1 style="font-size: 20px; padding: 20px 0; font-weight:normal;">Hello {!custName},</h1>
+        </apex:outputText>
+
+        <p style="padding:10px 0;">Thank you for shopping with us. Your order {!order_Number} has been placed with us on {!order_formatedDate}.</p>
+        <p style="padding:10px 0;width:600px;">
+            We’re processing  your order now and we’ll email you with updates on the status of your order.  A summary of your order is shown below. To view the status of your order, click  <apex:outputLink value="{!$Label.Community_Base_URL& 'findmyorder'}" > here</apex:outputLink>​​.
+        </p>
+        {!IF(order_deliveryType="Install At Dealer","You chose to have your accessories installed.  Please include your order number when you schedule your appointment.","")}
+        <br/><br/>
+        {!IF(order_deliveryType="Install At Dealer","Note:  You will be billed for your products and their installation charges at the time of purchase.","")}
+        <br/>
+        <apex:outputPanel rendered="{!order_deliveryType == 'Install At Dealer'}">
+            <!--newly added by Sayalee as a part of HDMP-5328 Start -->
+            <apex:outputPanel rendered="{!IF(dealerRec.Service_Scheduling_URL__c != null,true,'Contact the Dealer to Schedule your appointment')}"> 
+                <br/><br/>
+            <a style="text-decoration:none" href="{!dealerRec.Service_Scheduling_URL__c}"><button style="margin-top: 10px; color: #fff;border-radius: 2px;font-size: 14px;padding: 6px 30px ;text-align: center;border-color: #E42525 !important;text-transform: uppercase;background: #E42525;">{!$Label.schedule_installation}</button></a>
+            </apex:outputPanel>
+            <apex:outputPanel rendered="{!IF(dealerRec.Service_Scheduling_URL__c == null,true,false)}"> 
+                <br/><br/>
+            <p> Contact the Dealer to Schedule your appointment </p>
+            </apex:outputPanel>
+            <!--end-->
+        </apex:outputPanel>
+    </apex:outputPanel>
+    
+    <apex:outputPanel rendered="{!IF(compPos == 2,true,false)}">
+        <p style="margin: 2px 0 0;">{!dealerRec.Name}</p>             
+        <p style="margin: 2px 0 0;">{!dealerRec.shippingStreet}</p>  
+        <p style="margin: 2px 0 0;">{!dealerRec.shippingCity}, {!dealerRec.shippingState}, {!dealerRec.ShippingPostalCode}</p>                                         
+        <p style="margin: 2px 0 0;">{!dealerRec.Operation_Hour__c}</p>                   
+    </apex:outputPanel>
+   
+    <apex:outputPanel rendered="{!IF(compPos == 3,true,false)}">
+        <div style="text-align:center;width:600px">
+                <p style="margin: 2px 0 0;">{!dealerRec.shippingStreet}</p>  
+                <p style="margin: 2px 0 0;">{!dealerRec.shippingCity}, {!dealerRec.shippingState}, {!dealerRec.ShippingPostalCode}</p>                             
+                 <p style="margin: 2px 0 0;">
+                       ({! LEFT(dealerRec.Phone, 3) }) {! LEFT(RIGHT(dealerRec.Phone, 7), 3) }-{! RIGHT(dealerRec.Phone, 4) }                   
+                  </p> 
+                <p style="margin: 2px 0 0;">{!dealerRec.Email__c}</p>
+            </div>
+             <div style="margin-top: 24px;"> 
+                <!-- HDMP-17219 -->
+             <!--<p style="margin: 2px 0 0;">​{!IF(dealerRec.Return_Policy__c != null,dealerRec.Return_Policy__c,"Returns and Exchange policies are at the dealer’s discretion, please contact your dealer for more details." )}</p>-->
+                <!-- {!YEAR(TODAY())} Added by ashwin as fix of 18145 -->
+                <p style="margin: 2px 0 0;">@{!YEAR(TODAY())} {!dealerRec.Name}. All information contained herein applies to U.S. vehicles only.​</p>
+                <p style="margin: 2px 0 0;">​See our <apex:outputLink value="{!dealerRec.Privacy_Policy_URL__c}"> Privacy Policy</apex:outputLink>, &nbsp;
+            <!--<apex:outputLink value="https://litdev-dreamshop1.cs214.force.com/resource/1667226151000/Term_and_Condition_of_sale_PDF"> Terms and condition of Sale</apex:outputLink>, and &nbsp;
+            <apex:outputLink value="https://litdev-dreamshop1.cs214.force.com/s/returnpolicy?dealer={!dealer_No}"> Return Policy</apex:outputLink>.</p>-->
+            <!--<apex:outputLink value="{!$Label.RE_Site_Base_URL}/resource/Term_and_Condition_of_sale_PDF"> Terms and Conditions of Sale</apex:outputLink>, and &nbsp;-->
+                    
+           <apex:outputLink value="{!$Label.RE_Site_Base_URL}{!MID(URLFOR($Resource.Term_and_Condition_of_sale_PDF),FIND('/resource/', URLFOR($Resource.Term_and_Condition_of_sale_PDF)),LEN(URLFOR($Resource.Term_and_Condition_of_sale_PDF)))}"> Terms and Conditions of Sale</apex:outputLink>, and &nbsp;
+                    
+            <apex:outputLink value="{!$Label.RE_Site_Base_URL}/s/returnpolicy?dealer={!dealer_No}"> Return Policy</apex:outputLink>
+        </p>
+           
+            </div>
+    </apex:outputPanel>
+    <!-- Start Aditya - Core charges popup Added as a part of HDMP-16462 -->
+    <apex:outputPanel rendered="{!IF(compPos == 4 && CoreChrageItemExist,true,false)}"> <!-- CoreChrageItemExist is added by Ashwin for 16546 -->
+        <div style="margin-top: 8px; margin-left:4px;"> 
+            <!-- removed space between charge and question mark.by ashwin for 19521 -->
+            <apex:outputLink value="{!$Label.RE_Site_Base_URL}/s/core-charge?corecharge=true">What is a core charge?</apex:outputLink>
+        </div>
+    </apex:outputPanel>
+    <!-- End Aditya - Core charges popup Added as a part of HDMP-16462 -->
+</apex:component>

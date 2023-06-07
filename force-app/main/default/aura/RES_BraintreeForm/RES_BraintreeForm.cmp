@@ -1,0 +1,216 @@
+<!--
+  @description       :
+  @author            : mbunch@gorillagroup.com
+  @group             :
+  @last modified on  : 03-29-2022
+  @last modified by  : mbunch@gorillagroup.com
+-->
+<aura:component implements="forceCommunity:availableForAllPageTypes,lightning:availableForFlowScreens,lightning:availableForFlowActions" access="global" controller="RES_CreditCardController">
+    <!-- Holds the Braintree Hosted Fields instance -->
+    <aura:attribute name="hostedFieldsInstance" type="Object" />
+
+    <!-- Configurable Variables from the Flow -->
+    <aura:attribute name="cartId" type="String" />
+    <aura:attribute name="orderId" type="String" />
+    <aura:attribute name="dealerId" type="String" />
+    <aura:attribute name="authCode" type="String" />
+    <aura:attribute name="error" type="String" />
+
+    <!-- User Input Fields -->
+
+    <aura:attribute name="name" type="String" />
+    <aura:attribute name="cardholderName" type="String" />
+    <aura:attribute name="address1" type="String" />
+    <aura:attribute name="address2" type="String" />
+    <aura:attribute name="city" type="String" />
+    <aura:attribute name="state" type="String" />
+    <aura:attribute name="country" type="String" default="United States" />
+    <aura:attribute name="zipCode" type="String" />
+    <aura:attribute name="phoneNumber" type="String" />
+    <aura:attribute name="email" type="String" />
+
+    <!-- UI Variables -->
+    <aura:attribute name="showSpinner" type="Boolean" default="false" />
+    <aura:attribute name="selectedPaymentType" type="String" default="CC" />
+    <aura:attribute name="paymentTypes" type="List" />
+    <aura:attribute name="stateCodes" type="List" />
+    <aura:attribute name="errorMessage" type="String" />
+    <aura:attribute name="errorHeaderMessage" type="String" default="Error Processing Payment" />
+    <aura:attribute name="dealerPickup" type="Boolean" default="true" />
+    <aura:attribute name="isModalOpen" type="boolean" default="false"/>
+    <aura:attribute name="backToPersonalInfo" type="String" />
+    <lightning:navigation aura:id="navService"/>
+    <aura:attribute name="pageReference" type="Object"/>
+    <aura:attribute name="modelName" type="String"/>
+    <aura:attribute name="modelYear" type="String"/>
+    <aura:attribute name="bodyStyle" type="String"/>
+    <aura:attribute name="atmScript" type="String"/>
+    <aura:attribute name="depositAmount" type="Decimal"/>
+    <aura:attribute name="vehicleModelSeries" type="String"/>
+
+
+    <lightning:messageChannel type="Tag_Parameter_Update__c" aura:id="tagParameterUpdate" />
+
+
+    <ltng:require styles="/resource/braintree/braintree/css/bootstrap.min.css"
+                  scripts="/resource/braintree/braintree/js/client.min.js,/resource/braintree/braintree/js/hosted-fields.min.js,/resource/braintree/braintree/js/jquery.min.js,/resource/AdobeLaunch"
+                  afterScriptsLoaded="{!c.doInit}" />
+
+    <aura:if isTrue="{!v.showSpinner}">
+        <lightning:spinner alternativeText="Loading" size="medium" />
+    </aura:if>
+
+    <div class="checkoutPage slds-m-top_large">
+
+        <lightning:layout class="" multipleRows="true">
+
+            <!-- End Error Message -->
+            <div class="checkout-breadcrumb">
+                <div class="breadcrumb-link">
+                  <a href="{!v.backToPersonalInfo}"><span class="back-arrow"></span> BACK TO PERSONAL INFORMATION</a>
+                </div>
+              </div>
+            <!-- Credit Card Information Section -->
+
+
+                <div class="checkout-heading">
+                    <div class="checkout-heading__title">
+                        Payment Details
+                    </div>
+                    <div class="checkout-heading__sub-title">
+                        Enter your payment information, and your selected Acura dealer will contact you to finalize payment of your refundable ${!v.depositAmount} Reservation Fee for your {!v.vehicleModelSeries} reservation request. Required fields(<span class="slds-required">*</span>).
+                    </div>
+                </div>
+
+            <div class="form-container">
+            <!-- Cardholder Name Input -->
+
+                <span class="form-grid-element input-cardholdername" onkeypress="{!c.handleToAllowName}">
+                    <lightning:input required="true" name="Cardholder Name" type="text" label="Cardholder Name" aura:id="inputField" value="{!v.cardholderName}" onchange="{!c.removeCustomMessage}" />
+                </span>
+
+                <div class="slds-form-element form-grid-element input-cardnumber">
+                    <label class="slds-form-element__label">
+                        Card Number<abbr class="slds-required">*</abbr>
+                    </label>
+                    <div class="slds-form-element__control">
+                        <div id="cc-number" class="form-control slds-input" ></div>
+                    </div>
+                </div>
+
+            <!-- End Credit Card Number Input -->
+
+            <!-- Expiration Input -->
+
+
+                <div class="slds-form-element form-grid-element input-cardexp">
+                    <label class="slds-form-element__label">
+                        Expiration Date<abbr class="slds-required">*</abbr>
+                    </label>
+                        <div class="slds-form-element__control">
+                            <div id="cc-expiration" class="form-control slds-input" ></div>
+                        </div>
+                </div>
+
+            <!-- CVV Input -->
+
+                <div class="slds-form-element form-grid-element input-cardcvv">
+                    <label class="slds-form-element__label">
+                        CVC<abbr class="slds-required">*</abbr>
+                    </label>
+                    <div class="slds-form-element__control">
+                        <div id="cc-cvv" class="form-control slds-input" ></div>
+                        <span class="cvv-helper"><i>The last 3 or 4 digits displayed on the back of your card</i></span>
+                    </div>
+                </div>
+
+            <!-- End CVV Input -->
+
+                        <!-- End Name Input -->
+
+
+                            <!-- Address 1 Input -->
+
+                                <div class="slds-form-element form-grid-element input-address1">
+                                    <lightning:input name="Address 1" type="text" label="Billing Address 1" required="true" aura:id="inputField" value="{!v.address1}" onchange="{!c.removeCustomMessage}" />
+                                </div>
+
+
+                            <!-- Address 1 Input -->
+
+                            <!-- Address 2 Input -->
+                            <div class="slds-form-element form-grid-element input-address2">
+                                <lightning:input name="Address 2" type="text" label="Billing Address 2" aura:id="inputField" value="{!v.address2}" />
+                            </div>
+
+                            <!-- End Address 2 Input -->
+
+                            <!-- City Input -->
+
+                                <span class="form-grid-element input-city" onkeypress="{!c.handleToAllowName}">
+                                    <lightning:input name="City" type="text" label="City" required="true" aura:id="inputField" value="{!v.city}" onchange="{!c.removeCustomMessage}" />
+                                </span>
+
+
+                            <!-- End City Input -->
+
+                            <!-- State Input -->
+
+                            <div class="slds-form-element form-grid-element input-state">
+                                <lightning:select name="State" label="State" required="true" aura:id="inputField" value="{!v.state}">
+                                    <option text="Select an Option" value="" />
+                                    <aura:iteration items="{!v.stateCodes}" var="code">
+                                        <option text="{!code.label}" value="{!code.value}"/>
+                                    </aura:iteration>
+                                </lightning:select>
+                            </div>
+
+
+                            <!-- End State Input -->
+
+                            <!-- Zip Code Input -->
+
+                                <span class="form-grid-element input-zip" onkeypress="{!c.handleToAllowZipcode}">
+                                    <lightning:input name="Zipcode" type="text" label="Billing ZIP Code" required="true" aura:id="inputField"
+                                                    maxlength="10" value="{!v.zipCode}" onchange="{!c.removeCustomMessage}" />
+                                </span>
+
+
+                            <!-- End Zip Code Input -->
+
+                        <!-- End of Billing Information Section -->
+                    </div>
+
+                        <div class="form-actions">
+                            <lightning:button variant="brand"  label="Complete Payment" title="Submit Order" onclick="{!c.handleSumbitOrder}" class="slds-p-top_medium"></lightning:button>
+                        </div>
+                        <div class="slds-align_absolute-center">
+                            <a class="payment-info-terms-link" href="https://www.acura.com/tools/reserve-online/terms-and-conditions" target="_blank"><u>View Full Reserve Terms and Conditions</u></a>
+                            <!-- <a class="payment-info-terms-link" onclick="{!c.showTermsAndConditions}">View Full <u>Reserve Terms and Conditions</u></a> -->
+                        </div>
+        </lightning:layout>
+    </div>
+
+    <aura:if isTrue="{!v.isModalOpen}">
+
+        <!-- Modal/Popup Box starts here-->
+
+        <div class="checkout-error">
+            <div class="checkout-error__overlay"></div>
+            <div class="checkout-error__modal">
+                <div onclick="{! c.closeModal }" class="checkout-error__btn-close"><span class="checkout-error__x"></span></div>
+                <div class="checkout-error__title">
+                    {!v.errorHeaderMessage}
+                </div>
+                <div class="checkout-error__msg">
+                    {!v.errorMessage}
+                </div>
+                <div onclick="{!c.closeModal}" class="checkout-error__btn-ok">OK</div>
+            </div>
+        </div>
+    </aura:if>
+
+
+
+
+</aura:component>

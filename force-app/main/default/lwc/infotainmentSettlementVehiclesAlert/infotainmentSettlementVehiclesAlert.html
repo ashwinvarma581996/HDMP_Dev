@@ -1,0 +1,19 @@
+<template>
+    <template if:true={hasIsorAlert}>
+        <template if:true={isPdpPage}>
+            <div class="isor-row-container">
+                <lightning-layout class="isor-notification">
+                    <lightning-layout-item size="11" class="isor-text-container">
+                        <lightning-icon icon-name='utility:warning' alternative-text='warning' size='x-small' title='warning' class="custom-icon"></lightning-icon>
+                        <template if:true={isPdpPage}>
+                            <span class="isor-text"><a class="isor-view-link" onclick={handleViewAlert}>{alert}</a></span>
+                        </template>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="1" class="isor-close-container">
+                        <lightning-icon icon-name='utility:close' alternative-text='close' size='x-small' class="custom-icon close-icon" onclick={handleCloseRecall}></lightning-icon>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </div>
+        </template>
+    </template>
+</template>

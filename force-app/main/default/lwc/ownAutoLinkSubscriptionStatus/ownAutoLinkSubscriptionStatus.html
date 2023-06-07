@@ -1,0 +1,173 @@
+<template>
+    <template if:false={isGuest}>
+        <c-own-base-spinner></c-own-base-spinner>
+        <lightning-layout multiple-rows class="slds-align_absolute-center slds-p-vertical_medium slds-p-right_xx-large">
+            <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="12">
+                <div class="table-title text-style">HondaLink & AcuraLink Subscription Status</div>
+                <p class="subs-sub-text">To enroll,subscribe,renew or cancel, click the 'Manage' button for your vehicle and package.</p>
+            </lightning-layout-item>
+        </lightning-layout>
+        <lightning-layout multiple-rows class=" slds-p-vertical_medium ">
+            <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="12" >
+                <div class="table-large table-container">
+                    <table class="table  ">
+                        <thead  class="thead">
+                            <tr class="tr-head"> 
+                                <th class=""><lightning-layout class="tr-head-item">
+                                    <lightning-layout-item class="left-line-text-container"><div class="line-text">MY VEHICLES</div></lightning-layout-item>
+                                    <lightning-layout-item class="left-line-container"><div class="left-line"></div></lightning-layout-item>
+                                    <lightning-layout-item class="left-sub-line-container"><div class="left-sub-line"></div></lightning-layout-item>
+                                </lightning-layout></th>
+                                <th colspan={collength}> <lightning-layout class="tr-head-item">
+                                    <lightning-layout-item class="right-line-text-container"><div class="line-text"> AVAILABLE PACKAGES</div></lightning-layout-item>
+                                    <lightning-layout-item class="right-line-container"><div class="right-line"></div></lightning-layout-item>
+                                    <lightning-layout-item class="right-sub-line-container"><div class="right-sub-line"></div></lightning-layout-item>
+                                </lightning-layout></th>
+                            </tr>
+                            <tr class="tr-head">
+                                <th class="th-product"></th>
+                                <template for:each={packages} for:item="packageItem">
+                                    <th scope="col" key={packageItem} class="th">
+                                        <div class="slds-truncate" title={packageItem}>{packageItem}</div>
+                                    </th>
+                                </template>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template iterator:item={subscriptions} >
+                                <tr class="slds-hint-parent " key={item.value.productName}>
+                                    <td scope="row" class="product-td">
+                                        <lightning-layout class="slds-has-flexi-truncate">
+                                            <lightning-layout-item size="4" class="slds-p-vertical_medium">
+                                                <span class="slds-icon_container circle-image-span">
+                                                    <!-- <img class="circle-image" src={item.value.productImage} /> -->
+                                                    <c-own-product-image product-image={item.value.productImage} brand={item.value.productDivision}></c-own-product-image>
+                                                </span>
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="8" class="slds-p-vertical_medium">
+                                                <div class="custom-truncate text-style product-title" title={item.value.productName}>{item.value.productName}</div>
+                                                <div if:false={item.value.isError} class="slds-truncate slds-text-align_left">
+                                                    <template if:true={item.value.isEditPin}>
+                                                        <a class="column-sub-text" data-id={item.value.productIdentifier} onclick={handleEditPin}>Edit PIN</a>
+                                                    </template>
+                                                </div>
+                                            </lightning-layout-item>
+                                        </lightning-layout>
+                                    </td>
+                                    <template if:false={item.value.isError}>
+                                        <template iterator:pack={item.value.packages}>
+                                            <td key={pack.value.packageName}>
+                                                <template if:true={pack.value.icon}>
+                                                    <lightning-icon icon-name={pack.value.icon} variant={pack.value.variant} size="small"></lightning-icon>
+                                                </template>
+                                                <div class="slds-truncate simple-text">
+                                                    <span class={pack.value.textVariant}>{pack.value.status}</span>
+                                                </div>
+                                                <div class="slds-truncate">
+                                                    <a class="column-sub-text" data-value={pack.value.link} data-id={item.value.productIdentifier} data-pack={pack.value.packageName} onclick={handleLink}>{pack.value.link}</a>
+                                                </div>                                    
+                                            </td>
+                                        </template>
+                                    </template>
+                                    <template if:true={item.value.isError}>
+                                       <td colspan={item.value.colspan}><img src={warningicon} class="warning-icon"/> {item.value.packages.status}</td> 
+                                    </template>    
+                                </tr>
+                                <br  key={item.value.productName}>
+                            </template>
+                        </tbody>
+                    </table>
+                </div>
+               
+                <div class="table-small">
+                    <table class="slds-table ">
+                        <tbody>
+                            <template iterator:item={subscriptions} >
+                                <tr class="slds-hint-parent slds-p-bottom_medium " key={item.value.productName}>
+                                    <td scope="row" colspan="2" class="slds-p-top_medium">
+                                        <lightning-layout class="slds-has-flexi-truncate slds-grid_vertical-align-center">
+                                            <lightning-layout-item  size="4" class="slds-p-vertical_medium">
+                                                <span class="slds-icon_container circle-image-span">
+                                                    <!-- <img class="circle-image" src={item.value.productImage} /> -->
+                                                    <c-own-product-image product-image={item.value.productImage} brand={item.value.productDivision}></c-own-product-image>
+                                                </span>
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="8" class="slds-p-vertical_medium slds-p-left_small">
+                                                <div class="slds-text-align_left text-style product-title small-table-product-title" title={item.value.productName}>{item.value.productName}</div>
+                                                <div if:false={item.value.isError} class="slds-text-align_left">
+                                                    <template if:true={item.value.isEditPin}>
+                                                        <a class="column-sub-text" data-id={item.value.productIdentifier} onclick={handleEditPin}>Edit PIN</a>
+                                                    </template>
+                                                </div>
+                                            </lightning-layout-item>
+                                        </lightning-layout>
+                                    </td>
+                                </tr>
+                                <template if:false={item.value.isError}>
+                                    <template iterator:pack={item.value.packages}>
+                                        <tr key={pack.value.packageName}>
+                                            <th scope="col">
+                                                <div class="slds-truncate slds-p-around_large" title={pack.value.packageDisplayName}>{pack.value.packageDisplayName}</div>
+                                            </th>
+                                            <td key={pack.value.packageName} class="slds-p-top_medium">
+                                                <template if:true={pack.value.icon}>
+                                                    <lightning-icon icon-name={pack.value.icon} variant={pack.value.variant} size="small"></lightning-icon>
+                                                </template>
+                                                <div class="slds-truncate simple-text">
+                                                    <span class={pack.value.textVariant}>{pack.value.status}</span>
+                                                </div>
+                                                <div class="slds-truncate">
+                                                    <a class="column-sub-text" data-value={pack.value.link} data-id={item.value.productIdentifier} data-pack={pack.value.packageName} onclick={handleLink}>{pack.value.link}</a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </template>
+                                </template>
+                                <template if:true={item.value.isError}>
+                                    <tr class="slds-p-bottom_xx-large" key={item.value.productId}>
+                                        <td colspan="2">
+                                            <img src={warningicon} class="warning-icon"/> {item.value.packages.status}
+                                        </td>
+                                    </tr>                                    
+                                </template>  
+                            </template>
+                        </tbody>
+                    </table>
+                </div>
+            </lightning-layout-item>
+            <!-- <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="12" class="slds-p-vertical_medium explore-section">
+                <div class="simple-text text-style slds-p-around_medium">Need help choosing the right package? 
+                    <a class="column-sub-text slds-p-around_medium slds-p-top_medium" onclick={handleExplore}>EXPLORE YOUR OPTIONS</a>
+                </div>
+            </lightning-layout-item> -->
+        </lightning-layout>
+        <div lwc:dom="manual" data-id="sso"></div>
+        <!-- popup -->
+        <template if:true={showPopup}>
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+                class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" onclick={closePopup}>
+                        <lightning-icon icon-name="utility:close" alternative-text="Close" title="Cancel and close" class="popup-icon">
+                        </lightning-icon>
+                        <span class="slds-assistive-text">Cancel and close</span>
+                    </button>
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                        <lightning-layout multiple-rows>
+                            <lightning-layout-item size="12" class="slds-text-align_center">
+                                <b>{popupText}</b>
+                            </lightning-layout-item>
+                            <lightning-layout-item size="6" class="slds-text-align_right"> 
+                                <img class="slds-p-around_small popup-button" data-hondaurl={appStoreURL} data-acuraurl={acuraAppStoreURL} src={popupAppStoreIcon} onclick={handleNavigations}/>
+                            </lightning-layout-item>
+                            <lightning-layout-item size="6" class="slds-text-align_left"> 
+                                <img class="slds-p-around_small popup-button" data-hondaurl={playStoreURL} data-acuraurl={acuraPlayStoreURL} src={popupPlayStoreIcon} onclick={handleNavigations}/>
+                            </lightning-layout-item>
+                        </lightning-layout>
+                    </div>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+        </template>
+    </template>
+</template>

@@ -1,0 +1,257 @@
+.text-style{
+    font-family: Roboto;
+    font-style: normal;
+}
+.section1{
+    border: 1px solid #D9D9D9;
+    padding: 10px;
+}
+.title{
+    font-weight: bold;
+    font-size: 22px;
+    line-height: 30px;
+    letter-spacing: 0.04em;
+    /* text-transform: uppercase; */
+    margin-bottom: 60px;
+    margin-top: 20px;
+    position: relative;
+}
+.section3 .title:before {
+    content: '';
+    position: absolute;
+    width: 80px;
+    height: 2px;
+    background: #E42525;
+    left: 50%;
+    margin-left: -40px;
+    bottom: -26px;
+}
+.mobile-wrapper {
+    align-items: center !important;
+}
+.mobile-sections {
+    text-align: center;
+}
+.sub-title{
+    font-weight: 900;
+    font-size: 16px;
+}
+.section2-text{
+    font-weight: 300;
+    font-size: 24px;
+}
+.section2-text-sub-title{
+    font-size: 14px;
+    font-weight: bold;
+    color:#E42525;
+}
+.section3{
+    background: #F5F5F5;
+    padding-bottom: 50px;
+    margin-bottom: 50px;
+}
+.hr{
+    width: 80px;
+    height: 2px;   
+    border-top: 2px solid #E42525;
+    margin: 10px 0;
+}
+.section4-title{
+    font-weight: 300;
+    font-size: 32px;
+}
+.section4-sub-title{
+    font-weight: 900;
+    font-size: 16px;
+}
+.common-text{
+    font-weight: 300;
+    font-size: 16px;
+}
+.section5-title{
+    font-weight: 900;
+    font-size: 18px;
+    /* text-transform: uppercase; */
+}
+.custom-button {
+    border-color: #ACACAC;
+    border-radius: 2px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: white;
+    width: 145px;
+    margin-top: 3px;
+}
+.disable{
+    background: #ACACAC;
+}
+.active{
+    background:#E42525;
+}
+.bottom-text{
+    font-weight: normal;
+    font-size: 14px;
+}
+.section5{
+    border-top:2px solid #D9D9D9;
+    border-bottom:2px solid #D9D9D9;
+    margin-top: 60px;
+    margin-bottom: 30px;
+}
+.section5-center {
+    align-items: center !important;
+}
+.heading{
+    font-weight: bold;
+    font-size: 22px;
+    line-height: 30px;
+    margin-top: -25px;
+    margin-bottom: 40px;
+    letter-spacing: 0.04em;
+    /* text-transform: uppercase; */
+    display: flex;
+    position: relative;
+}
+.heading:before {
+    content: '';
+    position: absolute;
+    left: -10px;
+    right: -10px;
+    height: 1px;
+    background: #d9d9d9;
+    z-index: -1;
+}
+.heading span {
+    background: #ffffff;
+    padding: 0 10px;
+}
+.appstore, .playstore{
+    cursor: pointer;
+}
+.large-screen-container{
+    padding-top: 70px;
+}
+ul{
+    list-style-type:disc;
+}
+@media only screen and (min-width: 601px) {
+    .large-screen{
+        display: block;
+    }
+    .small-screen{
+        display: none;
+    }
+    .insaurance-logo{
+        max-width: 40%;
+    }
+    .video-player{
+        width: 100%;
+        height: 230px;
+    }
+}
+@media only screen and (max-width: 600px) {
+    .large-screen{
+        display: none;
+    }
+    .small-screen{
+        display: block;
+    }
+    .custom-button {
+        border-color: #ACACAC;
+        border-radius: 2px;
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: 900;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        /* background: #ACACAC; */
+        color: white;
+        width: 343px;
+        margin-top: 0px;
+    }
+    .form-styles button.slds-button {
+        width: 100%;
+    }
+    .section1{
+        border:none;
+    }
+    .title{
+        font-weight: 900;
+        font-size: 16px;
+    }
+    .sub-title{
+        font-weight: 900;
+        font-size: 14px;
+    }
+    .section2-text{
+        font-weight: 300;
+        font-size: 20px;
+    }
+    .section5-title{
+        font-weight: 900;
+        font-size: 16px;
+        line-height: 24px;
+        text-align: center;
+        margin: 20px 0 0 0;
+    }
+    .section4-title{
+        font-weight: 300;
+        font-size: 22px;
+        text-align: center;
+    }
+    .section4-sub-title {
+        text-align: center;
+    }
+    .insaurance-logo{
+        max-width: 50%;
+    }
+    .video-player{
+        width: 343px;
+        height: 210.03px;
+    }
+    .hr {
+        margin: 20px 0 40px 0;
+    }
+}
+
+.custom-result-box{
+    background: #F5F5F5;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 20px;  
+}
+.section2-container{
+    padding-top: 80px;
+    padding-bottom: 80px;
+}
+.feedback-insurance {
+    margin: -10px auto 20px;
+    padding: 0;
+    border-top: 2px solid #d9d9d9;
+    border-bottom: 2px solid #d9d9d9;
+    width: 90%;
+}
+.feedback-insurance lightning-layout-item {
+    padding: 10px 0;
+}
+
+.asked-questions{
+    font-size: 18px;
+    font-weight: bold;
+    color:#E42525;
+    text-align: center;
+}
+.asked-questions-anchor:hover{
+    text-decoration: none;
+}
+@media only screen and (max-width: 820px) {
+    .section5 {
+        width: 90%;
+        margin: -40px 0 20px 0;
+    }
+}

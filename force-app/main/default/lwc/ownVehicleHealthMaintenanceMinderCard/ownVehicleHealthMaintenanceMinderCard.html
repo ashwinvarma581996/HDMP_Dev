@@ -1,0 +1,80 @@
+<template>
+    <template if:true={showCard}>
+        <div class={cardDivClass}>
+            <c-own-card title={title} titlecolor={titlecolor} icon-image={icon} brand={brand} showfooter={showFooter}
+                onheader={handleHeader} onfooter={handleFooter} onaction={handleAction} class="wrap-text-test">
+
+                <div slot="action" class="action">
+                    <button class="btn slds-button slds-button_outline-brand action-button"
+                        onclick={handleViewHealthReport}>{actiontitle}
+                    </button>
+                </div>
+                <div slot="default">
+                    <template if:true={isDataLoading}>
+                        <div style="position: sticky;" >
+                             <c-own-data-loading-spinner></c-own-data-loading-spinner>
+                        </div>
+                   </template>
+                   <template if:false={isDataLoading}>
+                       <lightning-layout class="slds-size_12-of-12 slds slds-p-left_medium slds-p-right_medium" multiple-rows>
+   
+                           <lightning-layout-item size="12" large-device-size="4" medium-device-size="4"
+                               small-device-size="12">
+                               <div class="label date-label">Report Summary as of {date}</div></br>
+                               <div><label class="label">Oil Life:</label>
+                                   <span class="content slds-p-left_xxx-small">{vehicleHealthReport.oilLife}</span>
+                               </div>
+                               <div><label class="label">Odometer:</label>
+                                   <span class="content slds-p-left_xxx-small">{vehicleHealthReport.mileage}</span>
+                               </div>
+                               <div><label class="label">Recalls:</label>
+                                   <span class="content slds-p-left_xxx-small">{recallsCount}</span>
+                               </div>
+                           </lightning-layout-item>
+                           <lightning-layout-item size="12" large-device-size="4" medium-device-size="4"
+                               small-device-size="12">
+   
+                           </lightning-layout-item>
+                           <lightning-layout-item size="12" large-device-size="4" medium-device-size="4"
+                               small-device-size="12">
+                               <div class="label">Recommended Services</div></br>
+                               <template if:true={hasMaintenanceMinders}>
+                                   <div class="label">Maintenance Minder {vehicleHealthReport.maintenanceMinderCode}</div>
+                               </template>
+                               <!-- <template if:true={hasMaintenanceMinders}>
+                                   <div class="label">{vehicleHealthReport.maintenanceMinderCode}</div>
+                                </template> -->
+                                <template if:false={hasMaintenanceMinders}>
+                                   <div class="label">{vehicleHealthReport.maintenanceMinderCode}</div></br>
+                               </template>
+                               <template if:true={hasMaintenanceMinders}>
+                                   <div class="content hasMM">{vehicleHealthReport.legalDecription}</div></br>
+                               </template>
+                               <template if:false={hasMaintenanceMinders}>
+                                    <div class="content">{vehicleHealthReport.legalDecription}</div></br>
+                               </template>
+                               <br>
+                               <template if:true={hasMaintenanceMinders}>
+                                   <a class="content" onclick={handleViewAllMaintenanceMinders} style="color:#e42525">
+                                       View All Maintenance Minders
+                                   </a>
+                               </template>
+                           </lightning-layout-item>
+                       </lightning-layout>
+                   </template>
+                </div>
+                <div slot="footer">
+                    <a class="footer" onclick={handleScheduleService}>Schedule Service</a>
+                    <lightning-icon class="footer-icon" icon-name="utility:forward" variant="error" size="x-small"
+                        title="Download">
+                    </lightning-icon>
+                </div>
+            </c-own-card>
+        </div>
+    </template>
+    <template if:false={showCard}>
+        <div class={paddingClass}>
+            <c-own-view-maintenance-minders-card maintenance-minders-honda-key={maintenanceMindersHondaKey} maintenance-minders-acura-key={maintenanceMindersAcuraKey}></c-own-view-maintenance-minders-card>
+        </div>
+    </template>
+</template>

@@ -1,0 +1,43 @@
+<template>
+    <div class="c-container">
+        <div class="trim-header">TRIM</div>
+        <div class="category-list-large">
+            <lightning-layout>
+                <lightning-layout-item size="12">
+                    <div class="slds-vertical-tabs tabs">
+                        <ul class="slds-vertical-tabs__nav category-tab slds-m-bottom_xx-large" aria-orientation="vertical" role="tablist">
+                            <template for:each={tabs} for:item="tab">
+                                <li key={tab.value} data-value={tab.value} data-tab="true" class={tab.itemclass} data-id={tab.label} title={tab.label} role="presentation" onclick={handleActive}>
+                                    <a data-tab-value={tab.control} class="slds-vertical-tabs__link" role="tab" tabindex="-1" aria-selected="false" aria-controls={tab.control} id={tab.id}>{tab.label}</a>
+                                </li>
+                            </template>
+                        </ul>
+                        <div class="slds-hide">
+                            <template for:each={tabs} for:item="tab">
+                                <div key={tab.value} id={tab.control} data-id={tab.label}   class="slds-vertical-tabs__content slds-hide" role="tabpanel" aria-labelledby={tab.id}>{tab.content}</div>
+                            </template>
+                        </div>
+                    </div>
+                </lightning-layout-item>
+            </lightning-layout>
+        </div>
+        <div class="category-list-small">
+            <lightning-layout>
+                <lightning-layout-item size="12">
+                    <div class="slds-tabs-mobile__container">
+                        <ul class="slds-tabs-mobile">
+                            <template for:each={tabs} for:item="tab">
+                                <li key={tab.value} class="slds-tabs-mobile__item category-tab-small">
+                                    <button data-value={tab.value} title={tab.label}  data-id={tab.label} data-tab="false" class="slds-button slds-button_full-width" onclick={handleActive}>
+                                      <span class="slds-truncate" title={tab.label}>{tab.label}</span>
+                                      <img src={rightArrow}>
+                                    </button>
+                                  </li> 
+                            </template>
+                        </ul>
+                    </div>
+                </lightning-layout-item>
+            </lightning-layout>
+        </div>
+    </div>
+</template>

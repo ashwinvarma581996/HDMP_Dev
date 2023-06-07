@@ -1,0 +1,34 @@
+<!--template>
+    <lightning-card title="Frequently Asked Questions" >
+        <template if:true={FAQ__c.data}>
+            <div class="slds-m-around_medium">
+                <p>{Question__c}</p>
+                <p>{Answer__c}</p>
+                
+            </div>
+        </template>
+        
+    </lightning-card>
+</template-->
+<template>
+  <div class="slds-p-vertical_medium slds-m-top_xx-large slds-p-around_medium">
+  <div class="slds-container_center containerWrapper faqPage">
+    <p class="head">Frequently Asked Questions</p>
+    <br>
+
+
+      <div>
+        <template for:each={mylists} for:item="faq">
+         <div key={faq.Sr_No__c} class="slds-p-vertical_large questionContainer">
+          <p class="question" key={faq.Sr_No__c}><b>Question : {faq.Question__c} </b><br></p>
+          <p class="answer slds-m-top_small" key={faq.Sr_No__c}>Answer : <lightning-formatted-rich-text  value={faq.Answer__c}>
+          </lightning-formatted-rich-text> <br> </p>
+          
+        </div>
+        </template>
+      </div>
+    
+
+  </div>
+</div>
+</template>

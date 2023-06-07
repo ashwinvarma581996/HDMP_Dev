@@ -1,0 +1,16 @@
+:root {
+  --HondaRed: #e42525;
+  --HondaBlack: #000000;
+  --HondaWhite: #ffffff;
+  --GrayBackground1: #f5f5f5;
+  --GrayBackground2: #f6f6f6;
+  --GrayBorder: #d9d9d9;
+  --garageAdd: url(/resource/Owners/Icons/garage_add.png);
+  --garageEdit: url(/resource/Owners/Icons/garage_edit.png);
+  --garageClose: url(/resource/Owners/Icons/close.svg);
+  --garageQuestionMark: url(/resource/Owners/Icons/garage_questionmark.png);
+  --garageHondaDefault: url(/resource/Owners/images/garage_hondadefault.svg);
+  --garageCamera: url(/resource/Owners/Icons/garage_camera.svg);
+  --searchwhite: url(/resource/Owners/Icons/searchwhite.svg);
+  --garageGuestCarLogo: url(/resource/Owners/Icons/garage_guestcarlogo.svg);
+}

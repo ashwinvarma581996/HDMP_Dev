@@ -1,0 +1,48 @@
+<!-- //============================================================================
+// Title:    Honda Owners Experience - Footer
+//
+// Summary:  This is the html seen at the Owners Garage Find - Honda Auto of the Honda Owner Community
+//
+// Details:  Extend the LightningElement with this Base Element to gain access to the Messaging Channel and other logic herein and this is the own garage find honda component for all community pages.
+//
+//
+// History:
+// May 17, 2021 Arunprasad N (Wipro) Original Author
+//=========================================================================== -->
+<template>
+    <div class="c-container header-column">
+        <template if:true={viewMode}>
+            <lightning-layout multiple-rows>
+                <template if:true={context}>
+                    <lightning-layout-item size="12" padding="around-small">
+                        <c-own-product-carousel context={context} isguest={isGuest} onmode={handleMode}>
+                        </c-own-product-carousel>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="12" padding="around-small">
+                        <!-- <c-own-garage-product-details-marine context={context} isguest={isGuest} onmode={handleMode}>
+                        </c-own-garage-product-details-marine> -->
+                        <c-own-product-details context={context} isguest={isGuest} onmode={handleMode}>
+                        </c-own-product-details>
+                    </lightning-layout-item>
+                </template>
+                <lightning-layout-item size="12" padding="around-small">
+                    <c-own-garage-tabset-marine></c-own-garage-tabset-marine>
+                </lightning-layout-item>
+            </lightning-layout>
+        </template>
+        <template if:true={editMode}>
+            <lightning-layout multiple-rows>
+                <template if:true={context}>
+                    <lightning-layout-item size="12" padding="around-small">
+                        <c-own-garage-product-edit-header context={context} isguest={isGuest} onmode={handleMode}>
+                        </c-own-garage-product-edit-header>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="12" padding="around-small">
+                        <c-own-garage-product-edit context={context} isguest={isGuest} onmode={handleMode}>
+                        </c-own-garage-product-edit>
+                    </lightning-layout-item>
+                </template>
+            </lightning-layout>
+        </template>
+    </div>
+</template>

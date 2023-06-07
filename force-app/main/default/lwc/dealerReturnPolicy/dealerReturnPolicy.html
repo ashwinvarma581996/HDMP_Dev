@@ -1,0 +1,116 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 02-20-2023
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+    <template if:true={showspinner}>
+        <div class="exampleHolder">
+            <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+        </div>
+    </template>
+
+    <template if:true={showDefaultPolicy}>
+
+        <div class="slds-align_absolute-center">
+            <div class="returnPolicy" style="padding:14% 20% 4% 20%">
+                <!-- **********RETURN POLICY MARKUP START********** -->
+
+
+
+                <div class="slds-modal__content">
+
+
+                    <!-- begin Bug fix by ashwin as HDMP-17771 -->
+                    <h2 style="font-size: 20px;padding-bottom:20px;" class="slds-align_absolute-center">
+                        <strong><u>Dealer Return Policy</u></strong>
+                    </h2>
+                    <!-- ended Bug fix by ashwin as HDMP-17771 -->
+
+
+
+
+                    <div class="body-border">
+                         <!-- Added by Ashwin for Bug HDMP-17771 fix (Added Padding-bottom to css) -->
+                        <p style="font-size: 25px; padding-bottom: 8px;"><b>Returns/Exchange</b></p>
+                        <p>We will only accept authorized returns or exchanges within (30) calendar days of the date
+                            the product was received by the buyer or original recipient unless otherwise specified at
+                            the
+                            time
+                            of purchase.
+                        </p>
+                        <br />
+                        <p>Restocking fee may be applicable. Check with your selling dealer.</p>
+                        <br />
+                        <p>Items are <b>NOT</b> Eligible for replacement or refund if they are :</p>
+
+                        <!-- ~~~~~START Bullet (Add Bullet Points here)~~~~~ -->
+                        <div class="slds-p-left_x-large">
+
+                            <!-- added inline style in li tag as Bug fix by ashwin as HDMP-17771 -->
+                            <ul>
+                                <li style="margin-left:24px">An electrical/electronic component, HAZMAT, Chemical, or
+                                    non-rented tool.</li>
+                                <li style="margin-left:24px">Are Not in brand new, undamaged, clean, uninstalled, and
+                                    resalable condition.</li>
+                                <li style="margin-left:24px">Are missing any components, attaching hardware, and/or
+                                    documentation.</li>
+                                <li style="margin-left:24px">Are not in their original packaging</li>
+                            </ul>
+                        </div>
+                        <!-- ~~~~~END Bullet~~~~~ -->
+                        <br />
+
+                        <p>INELIGIBLE items may not be returned for credit or replacement because we cannot guarantee to
+                            the
+                            next
+                            buyer that they have not been used. They will however, be replaced if they have
+                            manufacturing
+                            defect.
+                        </p>
+                        <br />
+                        <p>Contact Your dealer for more information on policy.</p>
+                    </div>
+
+                </div>
+
+                <!-- **********RETURN POLICY MARKUP END********** -->
+
+            </div>
+
+        </div>
+    </template>
+
+    <template if:true={showDealerPolicy}>
+
+        <!-- added modal slds classes for Bug fix by ashwin as HDMP-17771 -->
+        <div class="slds-align_absolute-center">
+            <div class="returnPolicy" style="padding:14% 20% 4% 20%">
+                <div class="slds-modal__content">
+                    <h2 style="font-size: 20px;padding-bottom:20px;" class="slds-align_absolute-center">
+                        <strong><u>Dealer Return Policy</u></strong>
+                    </h2>
+                    <div class="body-border">
+                        <p style="font-size: 25px; padding-bottom: 8px"><b>Returns/Exchange</b></p>
+                        <lightning-formatted-rich-text value={dealerPolicy}>
+                        </lightning-formatted-rich-text>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+
+    <template if:true={showCorechargePolicy}>
+                <div class="pad-top slds-m-around_medium">
+                    <lightning-formatted-rich-text value={disclaimerMarkup}>
+                    </lightning-formatted-rich-text>
+                </div>
+    </template>
+
+
+
+
+</template>

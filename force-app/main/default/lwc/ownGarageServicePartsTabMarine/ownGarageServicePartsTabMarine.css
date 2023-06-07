@@ -1,0 +1,44 @@
+.garage-overview-tab-title {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 32px;
+    line-height: 37px;
+    letter-spacing: 0.02em;
+    color: #000000;
+}
+.garage-overview-tab-title-cta {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 14px;
+    line-height: 28px;
+    letter-spacing: 2.8px;
+    text-transform: uppercase;
+    color: #E42525;
+}
+.garage-overview-tab-title-small {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 22px;
+    line-height: 27px;
+    letter-spacing: 0.02em;
+    color: #000000;
+}
+@media only screen and (min-width: 601px) {
+    .garage-overview-tab-small {
+        display: none;
+    }
+    .garage-overview-tab-large {
+        display: block;
+    }
+}
+@media only screen and (max-width: 600px) {
+    .garage-overview-tab-large {
+        display: none;
+    }
+    .garage-overview-tab-small {
+        display: block;
+    }
+}

@@ -1,0 +1,39 @@
+<!-- //============================================================================
+// Title:    Honda MyGarage Experience - Promotional Hero
+//
+// Summary:  This is the Promotional Hero html seen at the page of the Honda MyGarage Community
+//
+// Details:  Promotional Hero for pages
+//
+// History:
+// October 18, 2021 Arunprasad N (Wipro) Original Author 
+//=========================================================================== -->
+<template>
+    <div class={mainCardClass}>
+        <lightning-layout multiple-rows="true" class="hero-wrapper">
+            <lightning-layout-item class={contentSection} size="12" small-device-size="12" medium-device-size="6" large-device-size="6">
+                <div class={titleClass}>
+                    {title}
+                </div>
+                <div class="slds-m-top_medium content banner-inner-div">
+                    <lightning-formatted-rich-text class="promotional-body" value={body}></lightning-formatted-rich-text>
+                </div>
+                <template if:true={buttonLabel}>
+                    <div class="slds-m-top_medium banner-inner-div">
+                        <button class="btn" data-key={buttonLabel} onclick={handleEnrollNow} role="button" tabindex="0">{buttonLabel} 
+                            <lightning-icon class="custom-icon slds-m-left_small" icon-name="utility:forward" size="x-small"></lightning-icon></button>  
+                       
+                    </div>
+                </template>
+            </lightning-layout-item>
+            <lightning-layout-item class="image-section promotional-hero custom-img-size" size="12" small-device-size="12" medium-device-size="6" large-device-size="6"> 
+                <div class="image-container desktop-image">
+                    <lightning-formatted-rich-text class="image" value={desktopImage}></lightning-formatted-rich-text>
+                </div>
+                <div class="image-container mobile-image">
+                    <lightning-formatted-rich-text class="image" value={mobileImage}></lightning-formatted-rich-text>
+                </div>
+            </lightning-layout-item>
+        </lightning-layout>
+    </div>
+</template>

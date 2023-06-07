@@ -1,0 +1,51 @@
+<!-- //============================================================================
+// Title:    Honda MyGarage Experience - Call Us Card
+//
+// Summary:  This is the Call Us Card html seen at the page of the Honda MyGarage Community
+//
+// Details:  Call Us Card for pages
+//
+// History:
+// December 22, 2021 Ravindra Ravindra (Wipro) Original Author
+//=========================================================================== -->
+<template>
+    <div class={cardDivClass}>
+    <div class="card card-size card-styles-wrapper">
+        <lightning-card class={headerClass}>
+            <div slot="title" class="slds-truncate" onclick={handleClickHeader}>
+                <img src={icon} class="slds-p-right_small custom-icon">
+                <span class={titleClass}>{title}</span>
+                <template if:true={showforwardicon}>
+                    <lightning-icon class={iconClass} icon-name="utility:forward" size="x-small"></lightning-icon>
+                </template>
+            </div>
+            <div slot="actions" onclick={handleClickAction}>
+                <slot name="action"></slot>
+            </div>
+            <div class={bodyClass}>
+                <lightning-formatted-rich-text value={body}></lightning-formatted-rich-text>
+                <template for:each={phoneFields} for:item="phoneField">
+                    <div key={phoneField.label}>
+                        <template if:true={phoneField.label}>
+                            <div class="slds-float_left">{phoneField.label} &nbsp;</div>
+                        </template>
+                        <lightning-formatted-text class="show-desktop-format" value={phoneField.value}></lightning-formatted-text>
+                        <template if:true={phoneField.readonly}>
+                            <lightning-formatted-text class="show-mobile-format" value={phoneField.value}></lightning-formatted-text>
+                        </template>
+                        <template if:false={phoneField.readonly}>
+                            <lightning-formatted-phone class="show-mobile-format" value={phoneField.value}></lightning-formatted-phone>
+                        </template>
+                        </br>
+                    </div>
+                </template>
+            </div>
+            <template if:true={showfooter}>
+                <div slot="footer">
+                    <slot class="footer" name="footer" onclick={handleClickFooter}></slot>
+                </div>
+            </template>
+        </lightning-card>
+    </div>
+</div>
+</template>

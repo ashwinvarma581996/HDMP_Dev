@@ -1,0 +1,25 @@
+.slds-accordion__section {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+p.left-title {
+    font-size: 14px;
+    letter-spacing: 2px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.nItem-name {
+    font-size: inherit;
+    color: inherit;
+    text-decoration: inherit;
+    text-transform: uppercase;
+}
+
+.nItem-name-parent {
+    color: var(--lwc-brandTextLink,rgb(228, 37, 37)) !important;
+    text-transform: uppercase;
+}

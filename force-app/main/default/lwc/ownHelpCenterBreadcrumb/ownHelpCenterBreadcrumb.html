@@ -1,0 +1,51 @@
+<!-- //============================================================================
+// Title:    Honda Owners Experience - Help Center
+//
+// Summary:  This is the breadcrumb html seen at the help center of the Honda Owner Community
+//
+// Details:  Extend the LightningElement with this Base Element to gain access to the Messaging Channel and other logic herein and this is the breadcrumb component for all help center pages.
+//
+//
+// History:
+// May 17, 2021 Arunprasad N (Wipro) Original Author
+//=========================================================================== -->
+<template>
+    <!--<lightning-breadcrumbs class="breadcrumb">
+        <template for:each={breadcrumbs} for:item="crumbs">
+            <lightning-breadcrumb
+                key={crumbs.id}
+                label={crumbs.label}
+                name={crumbs.name}
+                onclick={handleNavigateTo}>
+            </lightning-breadcrumb>
+        </template>
+    </lightning-breadcrumbs>-->
+    <div class="c-container">
+        <div class="breadcrumb-large slds-m-bottom_large">
+            <div class="breadcrumb" aria-label="Breadcrumbs" role="navigation">
+                <div role="list" class="slds-breadcrumb slds-list_horizontal slds-wrap">
+                    <slot>
+                        <template for:each={breadcrumbs} for:item="crumb">
+                            <div key={crumb.value} class="slds-breadcrumb__item" role="listitem">
+                                <a data-label={crumb.label} data-value={crumb.value} data-type={crumb.type} data-url={crumb.url} class="breadcrumb-text-color" onclick={handleClick}>{crumb.label}</a>
+                            </div>
+                        </template>
+                    </slot>
+                </div>
+            </div>
+        </div>
+        <div class="breadcrumb-small slds-m-horizontal_medium">
+            <div class="breadcrumb" aria-label="Breadcrumbs" role="navigation">
+                <div role="list" class="slds-breadcrumb slds-list_horizontal slds-wrap">
+                    <slot>
+                        <template for:each={breadcrumbsSmall} for:item="crumb">
+                            <div key={crumb.value} class="slds-breadcrumb__item breadcrumb-item-back" role="listitem">
+                                <a data-label={crumb.label} data-value={crumb.value} data-type={crumb.type} data-url={crumb.url} class="breadcrumb-text-color" onclick={handleClick}>{crumb.label}</a>
+                            </div>
+                        </template>
+                    </slot>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

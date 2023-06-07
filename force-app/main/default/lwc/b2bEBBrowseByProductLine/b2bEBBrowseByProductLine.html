@@ -1,0 +1,70 @@
+<template>
+    <template if:true={displayComponent}>
+        <div class="c-container brand-card-container header-column">
+            <div class="brand-card-large">
+                <lightning-layout multiple-rows="true">
+                    <lightning-layout-item class="slds-p-left_small slds-p-vertical_large" size="12">
+                        <div class="brand-card-title">
+                            <h3>{subTitle}</h3>
+                        </div>
+                        <div class="brand-card-sub-title">
+                            <h3>{title}</h3>
+                        </div>
+                    </lightning-layout-item>
+                </lightning-layout>
+                <lightning-layout multiple-rows="true" horizontal-align="center">
+                    <template for:each={brands} for:item="brand">
+                        <lightning-layout-item key={brand.value} padding="around-small">
+                            <a title={brand.name} href={brand.url}>
+                                <div data-name={brand.value} data-url={brand.url} onclick={handleNavigation}>
+                                    <article class="slds-card brand-card img-cursor">
+                                        <div class="slds-card__body slds-card__body_inner">
+                                            <div class="slds-illustration slds-illustration_small">
+                                                <img src={brand.img} class={brand.url} alt={brand.imgAltText} title={brand.imgTitle}>
+                                            </div>
+                                        </div>
+                                        <div slot="footer" class="slds-text-longform" if:true={displayLabels}>
+                                            <h3 class="slds-text-heading_medium brand-card-text">{brand.name}</h3>
+                                        </div>
+                                    </article>
+                                </div>
+                            </a>
+                        </lightning-layout-item>
+                    </template>
+                </lightning-layout>
+            </div>
+            <div class="brand-card-small">
+                <lightning-layout multiple-rows="true">
+                    <lightning-layout-item class="slds-p-left_small slds-p-vertical_large" size="12">
+                        <div class="brand-card-title-small">
+                            <h3>{subTitle}</h3>
+                        </div>
+                        <div class="brand-card-sub-title-small">
+                            <h3>{title}</h3>
+                        </div>
+                    </lightning-layout-item>
+                </lightning-layout>
+                <lightning-layout multiple-rows="true" horizontal-align="spread">
+                    <lightning-layout-item size="12">
+                        <div class="slds-tabs-mobile__container ">
+                            <ul class="slds-tabs-mobile">
+                                <template for:each={brands} for:item="brand">
+                                    <div key={brand.value}>
+                                        <a title={brand.name} href={brand.url}>
+                                            <li key={brand.value} class="slds-tabs-mobile__item brand-card-li-small img-cursor slds-p-vertical_large">
+                                                <button data-value={brand.value} data-name={brand.value} data-url={brand.url} onclick={handleNavigation} class="slds-button slds-button_full-width">
+                                                    <img src={brand.img} class={brand.url} alt={brand.imgAltText} title={brand.imgTitle}/>
+                                                    <span class="slds-m-left_x-large slds-truncate" title={brand.name}>{brand.name}</span>
+                                                </button>
+                                            </li>
+                                        </a>
+                                    </div>
+                                </template>
+                            </ul>
+                        </div>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </div>
+        </div>
+    </template>
+</template>

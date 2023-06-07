@@ -1,0 +1,19 @@
+.img-cursor {
+    cursor: pointer;
+}
+@media only screen and (min-width: 905px) {
+    .logo-small {
+        display: none;
+    }
+    .logo-large {
+        display: block;
+    }
+}
+@media only screen and (max-width: 904px) {
+    .logo-large {
+        display: none;
+    }
+    .logo-small {
+        display: block;
+    }
+}

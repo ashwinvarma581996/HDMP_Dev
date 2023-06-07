@@ -1,0 +1,273 @@
+<template>
+    <div class="main-container">
+        <div class="c-container">
+            <div class="cc-rows cc-row-1">
+                Case #{caseRecord.CaseNumber__c}
+            </div>
+            <div class="cc-rows cc-row-2">
+                {caseRecord.Subject__c}
+            </div>
+            <div class="cc-rows cc-row-3">
+                <div class="cc-row-3-c">
+                    <div class="cc-row-3-c-c1">
+                        <div class="cc-row-3-c-c1-d cc-row-3-c-c1-d1">
+                            Opened
+                        </div>
+                        <div class="cc-row-3-c-c1-d cc-row-3-c-c1-d2">
+                            {caseRecord.CreatedDate__c}
+                        </div>
+                    </div>
+                    <div class="cc-row-3-c-c2">
+                        <div class="cc-row-3-c-c2-d cc-row-3-c-c2-d1">
+                            Status
+                        </div>
+                        <div class="cc-row-3-c-c2-d cc-row-3-c-c2-d2">
+                            {caseRecord.Status__c}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="cc-rows cc-row-4">
+                <lightning-tabset class="custom-tab" active-tab-value="Details">
+                    <lightning-tab label="Details" value="Details">
+                        <div class="details-div">
+                            <table class="d-table">
+                                <tr class="d-tr">
+                                    <td class="d-td d-td" colspan="2">
+                                        <div class="d-td-h">
+                                            Description
+                                        </div>
+                                        <div class="d-td-v">
+                                            {caseRecord.Description__c}
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="d-tr">
+                                    <td class="d-td d-td">
+                                        <div class="d-td-h">
+                                            Product
+                                        </div>
+                                        <div class="d-td-v">
+                                            {caseRecord.VIN_Text_c__c}
+                                        </div>
+                                    </td>
+                                    <td class="d-td d-td">
+                                        <div class="d-td-h">
+                                            Make
+                                        </div>
+                                        <div class="d-td-v">
+                                            {caseRecord.WebtoCase_Make_c__c}
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="d-tr">
+                                    <td class="d-td d-td">
+                                        <div class="d-td-h">
+                                            Model
+                                        </div>
+                                        <div class="d-td-v">
+                                            {caseRecord.Model_Manual_c__c}
+                                        </div>
+                                    </td>
+                                    <td class="d-td d-td">
+                                        <div class="d-td-h">
+                                            Model Year
+                                        </div>
+                                        <div class="d-td-v">
+                                            {caseRecord.Year_manual_c__c}
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="d-tr">
+                                    <td class="d-td d-td">
+                                        <div class="d-td-h">
+                                            Topic
+                                        </div>
+                                        <div class="d-td-v">
+                                            {caseRecord.Topic_c__c}
+                                        </div>
+                                    </td>
+                                    <td class="d-td d-td">
+                                        <div class="d-td-h">
+                                            Sub Topic
+                                        </div>
+                                        <div class="d-td-v">
+                                            {caseRecord.Sub_topic_c__c}
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="d-tr">
+                                    <td class="d-td d-td">
+                                        <div class="d-td-h">
+                                            Mileage
+                                        </div>
+                                        <div class="d-td-v">
+                                            {caseRecord.Miles_c__c}
+                                        </div>
+                                    </td>
+                                    <td class="d-td d-td">
+                                        <div class="d-td-h">
+                                            Created On
+                                        </div>
+                                        <div class="d-td-v">
+                                            {caseRecord.CreatedOn}
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </lightning-tab>
+                    <lightning-tab label="Activity" value="Activity">
+                        <div class="activity-div">
+                            <div class="activity-div-messages">
+                                <div class="activity-div-message">
+                                    <div class="activity-div-message-d1">
+                                        <lightning-icon class="comment-avatar" icon-name='standard:avatar_loading' alternative-text='avatar_loading' title='avatar_loading'></lightning-icon>
+                                    </div>
+                                    <div class="activity-div-message-d2">
+                                        <div class="commenter-name">
+                                            Alex
+                                        </div>
+                                        <div class="comment-date">
+                                            January 24, 2023 at 10:33 AM
+                                        </div>
+                                        <div class="comment-value">
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed aliquam, magna eu consectetur tristique, libero ex vehicula leo, vitae iaculis augue mauris vel ante. Donec ut elit sed libero lacinia varius eu at mauris. Sed sodales suscipit tellus in vestibulum. Sed ac urna nibh. Vestibulum ut ligula dolor.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="activity-div-message">
+                                    <div class="activity-div-message-d1">
+                                        <lightning-icon class="comment-avatar" icon-name='standard:avatar_loading' alternative-text='avatar_loading' title='avatar_loading'></lightning-icon>
+                                    </div>
+                                    <div class="activity-div-message-d2">
+                                        <div class="commenter-name">
+                                            Customer Relations
+                                        </div>
+                                        <div class="comment-date">
+                                            January 23, 2023 at 10:33 AM
+                                        </div>
+                                        <div class="comment-value">
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed aliquam, magna eu consectetur tristique, libero ex vehicula leo, vitae iaculis augue mauris vel ante. Donec ut elit sed libero lacinia varius eu at mauris. Sed sodales suscipit tellus in vestibulum. Sed ac urna nibh. Vestibulum ut ligula dolor.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-area-div" if:true={showCommentBox}>
+                                    <lightning-input-rich-text 
+                                        placeholder="Type..."
+                                        >
+                                    </lightning-input-rich-text>
+                                </div>
+                                <div class="add-a-comment-div">
+                                    <button class="comment-btn btn-add-comment" onclick={addComment}>{addCommentButtonLabel}</button>
+                                    <button class="comment-btn btn-cancel-comment" onclick={cancelComment}>Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                    </lightning-tab>
+                </lightning-tabset>
+            </div>
+            <div class="cc-rows cc-row-5">
+                Attachments
+                <div class="att-c">
+                    <div class="att-c-div">
+                        <div class="att-inner-c">
+                            <div class="att-img">
+                                <!-- <lightning-icon class="att-avatar" icon-name='doctype:word' alternative-text='word' title='word'></lightning-icon> -->
+                                <img src={icons.png} class="att-avatar"/>
+                            </div>
+                            <div class="att-text">
+                                <div class="att-name">
+                                    Sample Png Image0001.png
+                                </div>
+                                <div class="att-date">
+                                    Jan 17,2023
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="att-c-div">
+                        <div class="att-inner-c">
+                            <div class="att-img">
+                                <!-- <lightning-icon class="att-avatar" icon-name='doctype:word' alternative-text='word' title='word'></lightning-icon> -->
+                                <img src={icons.doc} class="att-avatar"/>
+                            </div>
+                            <div class="att-text">
+                                <div class="att-name">
+                                    Docfile_879_192Data.doc
+                                </div>
+                                <div class="att-date">
+                                    Jan 16,2023
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="att-c-div">
+                        <div class="att-inner-c">
+                            <div class="att-img">
+                                <!-- <lightning-icon class="att-avatar" icon-name='doctype:word' alternative-text='word' title='word'></lightning-icon> -->
+                                <img src={icons.jpg} class="att-avatar"/>
+                            </div>
+                            <div class="att-text">
+                                <div class="att-name">
+                                    Sample-Jpg-Image.jpg
+                                </div>
+                                <div class="att-date">
+                                    Jan 13,2023
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="att-c-div">
+                        <div class="att-inner-c">
+                            <div class="att-img">
+                                <!-- <lightning-icon class="att-avatar" icon-name='doctype:word' alternative-text='word' title='word'></lightning-icon> -->
+                                <img src={icons.pdf} class="att-avatar"/>
+                            </div>
+                            <div class="att-text">
+                                <div class="att-name">
+                                    Sample-Pdf-003.pdf
+                                </div>
+                                <div class="att-date">
+                                    Jan 14,2023
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="att-c-div">
+                        <div class="att-inner-c">
+                            <div class="att-img">
+                                <!-- <lightning-icon class="att-avatar" icon-name='doctype:word' alternative-text='word' title='word'></lightning-icon> -->
+                                <img src={icons.docx} class="att-avatar"/>
+                            </div>
+                            <div class="att-text">
+                                <div class="att-name">
+                                    Sample-docxfile-13.docx
+                                </div>
+                                <div class="att-date">
+                                    Jan 15,2023
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="att-c-div">
+                        <div class="att-inner-c">
+                            <div class="att-img">
+                                <!-- <lightning-icon class="att-avatar" icon-name='doctype:word' alternative-text='word' title='word'></lightning-icon> -->
+                                <img src={icons.jpeg} class="att-avatar"/>
+                            </div>
+                            <div class="att-text">
+                                <div class="att-name">
+                                    Sample-JPEG image-65.jpeg
+                                </div>
+                                <div class="att-date">
+                                    Jan 12,2023
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

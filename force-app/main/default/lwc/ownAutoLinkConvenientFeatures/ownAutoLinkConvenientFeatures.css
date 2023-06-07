@@ -1,0 +1,139 @@
+.card-layout{
+    border: 1px solid #D9D9D9;
+    box-sizing: border-box;
+    box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.1);
+    background: #FFFFFF;
+    border-radius: 2px;
+}
+.title{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 22px;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.04em;
+    /* text-transform: uppercase; */
+    color: #000000;
+    margin-top: 10px;
+    /* padding-top: 30px; */
+}
+.body{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 26px;
+    text-align: center;
+    color: #000000;
+    padding: 10px 16px;
+    height: 85px;
+}
+.feature-footer{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 18px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #000000;
+    padding-top:15px;
+     overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical; 
+}
+.feature-footer-static{
+    text-align: left !important;
+}
+.btn{
+    color: #E42525;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 16px;
+    border: 2px solid #E42525;
+    box-sizing: border-box;
+    border-radius: 2px;
+    width: 192px;
+    height: 48px;
+}
+.slds-button{
+    color: #E42525;
+    transition: 0.5s all;
+}
+.slds-button:hover {
+    background-color: #E42525;
+    color: #ffffff;
+}
+
+.footer-red{
+    color: #E42525;
+}
+lightning-formatted-rich-text img{
+    width: 100% !important;
+}
+@media only screen and (min-width: 601px) {
+    .convenient-features{
+        padding-left: 560px;
+        padding-right: 560px;
+    }
+    .feature-section-sub-title{
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: 300;
+        font-size: 32px;
+        line-height: 37px;
+        text-align: center;
+    }
+    .desktop-image {
+        display: block;
+    }
+
+    .mobile-image {
+        display: none;
+    }
+
+    .feature-footer-desktop{
+        display: block;
+    }
+    .feature-footer-mobile{
+        display: none;
+    }
+}
+@media only screen and (max-width: 600px) {
+    .feature-section-sub-title{
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: 300;
+        font-size: 22px;
+        line-height: 27px;
+        text-align: center;
+        letter-spacing: 0.02em;
+        color: #080707;
+        margin-bottom: -20px;
+    }
+    .btn-wrapper{
+        padding-top: 2px !important;
+    }
+    .desktop-image {
+        display: none;
+    }
+
+    .mobile-image {
+        display: block;
+    }
+
+    .feature-footer-desktop{
+        display: none;
+    }
+    .feature-footer-mobile{
+        display: block;
+    }
+}
+.package-style{
+    color: #E42525
+}

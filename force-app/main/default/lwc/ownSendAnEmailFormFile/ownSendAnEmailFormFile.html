@@ -1,0 +1,23 @@
+<template>
+    <div class="container">
+        <div class="inp-file-label">
+            <abbr class="slds-required" title="required" if:true={required}>* </abbr>
+            {label}
+        </div>
+        <div class="file-c">
+            <div class="file-div">
+                <lightning-file-upload
+                    name="UploadFile"
+                    onuploadfinished={handleUploadFinished}
+                    >
+                </lightning-file-upload>
+            </div>
+            <div class="file-name-div">
+                <span class="file-name">{slected_file}</span>
+            </div>
+        </div>
+        <div class="required-file" if:true={showRequiredLabel}>
+            {requiredLabel}
+        </div>
+    </div>
+</template>

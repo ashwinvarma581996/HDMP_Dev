@@ -1,0 +1,135 @@
+<template>
+    
+    <!-- For Desktop view -->
+    <lightning-layout if:true={isDesktop} horizontal-align="spread">
+        <lightning-layout-item size="1">
+
+            <div if:true={mName}>
+                <div class="slds-var-p-horizontal_small">
+                    <span class="slds-avatar slds-avatar_circle slds-avatar_large apiRecord">
+                        <img alt='Icon' src={brandLogo} title="User avatar" />
+                    </span>
+                    <!-- <img src={brandLogo}> -->
+                </div>
+            </div>
+            <div if:false={mName}>
+                <div class="slds-var-p-horizontal_small">
+                    <span class="slds-avatar slds-avatar_circle slds-avatar_large userRecord">
+                        <img alt='Icon' src={brandLogo} title="User avatar" />
+                    </span>
+                    <!-- <img src={brandLogo}> -->
+                </div>
+            </div>
+
+        </lightning-layout-item>
+        <lightning-layout-item size="1">
+            <div class="slds-var-p-horizontal_small">
+                <p>{mServiceDate}</p>
+            </div>
+        </lightning-layout-item>
+
+        <template if:false={hideRepairOrder}>
+        
+            <lightning-layout-item size="1">
+                <div class="slds-var-p-horizontal_small">
+                    <p>
+                        <lightning-formatted-number value={mMiles}>
+                        </lightning-formatted-number>
+                    </p>
+                </div>
+            </lightning-layout-item>
+            <lightning-layout-item size="2">
+                <div class="slds-var-p-horizontal_small">
+                    <p>
+                        <template if:true={apiServiceRecord}>
+                            <p class="link-class" title="Service Facility Link" data-dealername={mServiceFacility} onclick={handleFindDealerRedirect}>
+                                {mServiceFacility}
+                            </p>
+                        </template>
+                        <template if:false={apiServiceRecord}>
+                            {mServiceFacility}
+                        </template>
+                    </p>
+                </div>
+            </lightning-layout-item>
+            <lightning-layout-item size="3">
+                <div class="slds-var-p-horizontal_small">
+                    <p>{mServices}</p>
+                </div>
+            </lightning-layout-item>
+            <lightning-layout-item size="1">
+                <div class="slds-var-p-horizontal_small">
+                    <p>{mName}</p>
+                </div>
+            </lightning-layout-item>
+        
+        </template>
+
+        <template if:true={hideRepairOrder}>
+        
+            <lightning-layout-item size="1">
+                <div class="slds-var-p-horizontal_small">
+                    <p>
+                        <lightning-formatted-number value={mMiles}>
+                        </lightning-formatted-number>
+                    </p>
+                </div>
+            </lightning-layout-item>
+            <lightning-layout-item size="2">
+                <div class="slds-var-p-horizontal_small">
+                    <p>
+                        <template if:true={apiServiceRecord}>
+                            <p class="link-class" title="Service Facility Link">
+                                {mServiceFacility}
+                            </p>
+                        </template>
+                        <template if:false={apiServiceRecord}>
+                            {mServiceFacility}
+                        </template>
+                    </p>
+                </div>
+            </lightning-layout-item>
+            <lightning-layout-item size="3">
+                <div class="slds-var-p-horizontal_small">
+                    <p>{mServices}</p>
+                </div>
+            </lightning-layout-item>
+        
+        </template>
+
+
+        <lightning-layout-item size="1">
+            <button onclick={handleViewRecord} class="table-btn" key={record.Id}>VIEW</button>
+        </lightning-layout-item>
+    </lightning-layout>
+
+
+    <!-- For Mobile view -->
+    <lightning-layout if:false={isDesktop}>
+        <lightning-layout-item size="3">
+            <div if:true={mName}>
+                <!-- Api Record -->
+                <span class="slds-avatar slds-avatar_circle slds-avatar_large apiRecord">
+                    <img alt='Icon' src={brandLogo} title="User avatar" />
+                </span>
+                <!-- <img src={brandLogo}> -->
+            </div>
+            <div if:false={mName}>
+                <!-- this is for userRecord -->
+                <span class="slds-avatar slds-avatar_circle slds-avatar_large userRecord">
+                    <img alt='Icon' src={brandLogo} title="User avatar" />
+                </span>
+                <!-- <img src={brandLogo}> -->
+            </div>
+
+        </lightning-layout-item>
+        <lightning-layout-item size="8" class="date-col">
+            <div class="slds-var-p-horizontal_small">
+                <p>{mServiceDate}</p>
+            </div>
+        </lightning-layout-item>
+        <lightning-layout-item size="1" class="arrow-col">
+            <p onclick={handleViewRecord} key={record.Id} class="arrow"></p>
+        </lightning-layout-item>
+    </lightning-layout>
+</template>

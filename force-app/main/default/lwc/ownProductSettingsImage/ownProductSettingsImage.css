@@ -1,0 +1,108 @@
+.ownProductImage{
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    background: #F0F0F0;
+    border: 1px solid #D9D9D9;
+}
+.ownAddPhoto{
+    width:56px;
+    height:56px;
+    border-radius: 50%;
+    background: #FFFFFF;
+    border: 1px dashed #E42525;
+}
+.ownAddPhotoHead{
+    font-size: 14px;
+    line-height: 18px;
+    text-align: center;
+    color: #E42525;
+}
+.custom-image-name{
+    
+    text-align: center;
+    margin-top: 8px;
+}
+
+.ownAddPhotoContainer{
+    margin-top: -28px;
+}
+.vehicle-image-round{
+    
+    width: 90%;
+}
+
+.img-contain{
+    object-fit: contain;
+}
+.img-cover{
+    object-fit: cover;
+}
+.product-icon{
+    height: 250px;
+    width: 250px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 1px solid #D9D9D9;
+    position: relative;
+    display: flex;
+    overflow: hidden;
+}
+.product-icon path{
+    fill: grey;
+}
+.err-container{
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    margin-top: 13px;
+    margin-left: 10%;
+    margin-right: 10%;
+    text-align: center;
+    padding: 5px;
+}
+.err-layout-item{
+    margin-bottom: 5px;
+}
+.error-img-div{
+    text-align: center;
+}
+.close-icon-div{
+    float: right;
+}
+.warning-icon{
+    height: 23px;
+}
+.err-container{
+    animation: popup 0.7s;
+}
+
+.error-msg {
+    font-style: normal;
+    font-weight: 300;
+    font-size: 11px;
+    line-height: 18px;
+    color: #444444;
+}
+@keyframes popup {
+    0%{
+      transform: scale(1);
+    }
+    50%{
+      transform: scale(1.4);
+    }
+    60%{
+      transform: scale(1.1);
+    }
+    70%{
+      transform: scale(1.2);
+    }
+    80%{
+      transform: scale(1);
+    }
+    90%{
+      transform: scale(1.1);
+    }
+    100%{
+      transform: scale(1);
+    }
+  }

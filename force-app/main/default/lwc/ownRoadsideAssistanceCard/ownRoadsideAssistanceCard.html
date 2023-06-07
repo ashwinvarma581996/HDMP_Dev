@@ -1,0 +1,51 @@
+<!-- //============================================================================
+// Title:    Honda Owners Experience - Roadside Assistance Card
+//
+// Summary:  This Card links to the Roadside Assistance
+//
+//
+// History:
+// October 1, 2021 Ravindra (Wipro) Original Author
+//=========================================================================== -->
+<template>
+    <template if:true={contentData.icon}>
+        <c-own-card title={contentData.title} titlecolor={contentData.titlecolor} icon={contentData.icon}
+            brand={slotBrand} showfooter={showFooter} onheader={handleHeader} onfooter={handleFooter} header-clickable
+            onaction={handleAction}>
+            <div slot="default">
+                <div>
+                    <lightning-formatted-rich-text value={contentData.mainContent}></lightning-formatted-rich-text>
+                    <template if:true={contentData.contactNumbers} for:each={contentData.contactNumbers}
+                        for:item="number">
+                        <div key={number} class="slds-m-top_small">
+                            <div>{number.phoneHeading}</div>
+                            <lightning-formatted-text class="show-desktop-format" value={number.phoneNumber}></lightning-formatted-text>
+                            <lightning-formatted-phone class="show-mobile-format" value={number.phoneNumber}>
+                            </lightning-formatted-phone>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </c-own-card>
+    </template>
+    <template if:true={contentData.iconImage}>
+        <c-own-card title={contentData.title} titlecolor={contentData.titlecolor} icon-image={contentData.iconImage}
+            brand={slotBrand} showfooter={showFooter} onheader={handleHeader} onfooter={handleFooter} header-clickable
+            onaction={handleAction}>
+            <div slot="default">
+                <div>
+                    <lightning-formatted-rich-text value={contentData.mainContent}></lightning-formatted-rich-text>
+                    <template if:true={contentData.contactNumbers} for:each={contentData.contactNumbers}
+                        for:item="number">
+                        <div key={number} class="slds-m-top_small">
+                            <div>{number.phoneHeading}</div>
+                            <lightning-formatted-text class="show-desktop-format" value={number.phoneNumber}></lightning-formatted-text>
+                            <lightning-formatted-phone class="show-mobile-format" value={number.phoneNumber}>
+                            </lightning-formatted-phone>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </c-own-card>
+    </template>
+</template>

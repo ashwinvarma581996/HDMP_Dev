@@ -1,0 +1,91 @@
+<template>
+    <!-- calling boilerpate -->
+
+    <template if:true={show_page}>
+        <div class="slds-card">
+            <div class="slds-p-around_medium lgc-bg">
+                <div class="slds-page-header">
+                    <b>Terms and Conditions</b>
+                </div>
+                <!--this is to refresh page when we click on save-->
+                <template if:true={isLoading}>
+                    <div class="slds-is-relative" style="min-height: 10vh;">
+                        <lightning-spinner alternative-text="Loading..." size="medium">
+                        </lightning-spinner>
+                    </div>
+                </template>
+
+            <template if:false={isLoading}>
+                <lightning-record-view-form object-api-name="Offers__c" record-id={recordId} columns="2">
+                    <div class="slds-grid">
+
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-output-field field-name="Boilerplate__c" class="slds-border_bottom"> </lightning-output-field>
+                            <lightning-output-field field-name="Offer_Title__c" class="slds-border_bottom"> </lightning-output-field>
+                            <template if:false={hidePowerSportsFields}><lightning-output-field field-name="Short_Description__c" class="slds-border_bottom"> </lightning-output-field></template>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <template if:false={hidePowerSportsFields}><lightning-output-field field-name="Detailed_Description__c" class="slds-border_bottom" > </lightning-output-field></template>
+                            <lightning-output-field field-name="Terms_and_Conditions__c" class="slds-border_bottom"> </lightning-output-field>
+                            <template if:false={hidePowerSportsFields}><lightning-output-field field-name="Legal_Desclaimer__c" class="slds-border_bottom" > </lightning-output-field></template>
+                        </div>
+                    </div>
+                </lightning-record-view-form>
+            </template >
+                <br>
+                <template if:false={hideEditBoilerPlateButton}>
+                <div class="slds-align_absolute-center" style="height:5rem">
+                    <lightning-button label="Edit Boilerplate " onclick={handleedit} variant="brand"></lightning-button>
+                    &nbsp;
+                    <!-- <lightning-button label="Cancel" onclick={handleCancel} variant="brand"></lightning-button> -->
+                </div>
+            </template>
+            </div>
+            <template if:true={isModalOpen}>
+
+                <!-- Modal/Popup Box LWC starts here -->
+                <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+                    aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                    <div class="slds-modal__container">
+                        <!-- Modal/Popup Box LWC header here -->
+                        <header class="slds-modal__header">
+                            <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                                title="Close" onclick={closeModal}>
+                                <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse"
+                                    size="small"></lightning-icon>
+                                <span class="slds-assistive-text">Close</span>
+                            </button>
+                            <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Boilerplate
+                                Details</h2>
+                        </header>
+                        <!-- Modal/Popup Box LWC body starts here -->
+                        <div class="slds-modal__content" id="modal-content-id-2">
+                            <c-defaultboilerpate boilerplateid={results.boilerplateid} offerid={recordId}>
+                            </c-defaultboilerpate>
+                        </div>
+                        
+
+                        <!-- Modal/Popup Box LWC footer starts here -->
+                        <footer class="slds-modal__footer">
+
+                            <button class="slds-button slds-button_brand" onclick={hadlelistofvariable} title="OK">List
+                                of Variables</button>
+                                <button class="slds-button slds-button_brand" onclick={resetboilerplate} title="Reset">Reset
+                                        Boilerplate</button>
+                            <button class="slds-button slds-button_brand" onclick={submitDetails}
+                                title="OK">Save</button>
+                            
+                            <button class="slds-button slds-button_neutral" onclick={closeModal}
+                                title="Cancel">Cancel</button>
+
+                        </footer>
+                    </div>
+                </section>
+
+                <div class="slds-backdrop slds-backdrop_open"></div>
+            </template>
+        </div>
+
+    </template>
+
+</template>

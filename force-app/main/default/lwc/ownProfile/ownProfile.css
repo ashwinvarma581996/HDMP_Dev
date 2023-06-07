@@ -1,0 +1,43 @@
+.profile-name {
+    font-weight: 500;
+    font-size: 1rem;
+    line-height: 19px;
+    color: #000000;
+}
+.profile-label {
+    font-weight: 700;
+    font-size: 0.875rem;
+    line-height: 16px;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.02em;
+    color: #000000;
+}
+.profile-label-logout {
+    font-weight: 700;
+    font-size: 0.875rem;
+    line-height: 18px;
+    display: flex;
+    align-items: center;
+    color: #E42525;
+}
+
+.profile-dropdown-container{
+    border: 1px solid #DDDBDA;
+    filter: drop-shadow(0px 2px 3px rgba(0, 0, 0, 0.16));
+    right: -10px;
+    margin-top: 15px;
+
+}
+.profile-dropdown li:not(:last-child){
+    border-bottom: 1px solid #DDDBDA ;
+}
+.slds-dropdown__item{
+    padding-right: 60px !important;
+}
+.slds-dropdown__item:hover{
+    background: #dddbda38;
+}
+.slds-dropdown__item a:hover{
+    background: rgba(252, 252, 252, 0) !important;
+}

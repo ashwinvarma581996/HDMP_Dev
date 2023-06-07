@@ -1,0 +1,61 @@
+<template>
+    <div class="message-large">
+        <li class="slds-grid slds-grid_align-spread slds-grid_vertical-align-center message-list-item unread">
+            <h3>{message.title}</h3>
+            <p>{message.date}</p>
+            <!-- <span class="message-dot"></span> -->
+        </li>
+        <div class="message-detail">
+            <div class="more-info-text" if:true={isRecallMessage}>
+                This website provides information about safety recalls announced in the past 15 calendar years; older recalls are not included.
+            </div>
+            <div class="more-info-text" if:true={isRecallMessage}>
+                Last Updated : ({getDate})
+            </div>
+            <!-- <div><label class="label">NHTSA Recall Number: </label>
+            <span>{message.recallNo}</span>
+        </div>
+        <br>
+        <div><label class="label">MFR Campaign ID: </label>
+            <span>{message.campaignID}</span>
+        </div><br>
+        <div><label class="label">Campaign Description: </label>
+            <span>{message.campaignDescription}</span>
+        </div><br>
+        <div><label class="label">Recall Date: </label> <span>{message.date}</span>
+        </div><br>
+        <div><label class="label">Recall Status: </label>
+            <span>{message.recallStatus}</span>
+        </div><br>
+        <div><label class="label">Summary: </label>
+            <div class="fullWidth">{message.summary}</div>
+        </div><br>
+        <div><label class="label">Safety Risk: </label>
+            <div class="fullWidth">{message.safetyRisk}</div>
+        </div><br>
+        <div><label class="label">Remedy: </label>
+            <div class="fullWidth">{message.remedy}</div>
+        </div> -->
+            <lightning-formatted-rich-text class="message-detail-text" value={message.body}>
+            </lightning-formatted-rich-text>
+            <!-- Imtiyaz - CRRS Start -->
+            <div class="form-div" if:true={isRecallMessage}>
+                <c-own-case-form-link brand={brand}></c-own-case-form-link>
+            </div>
+            <!-- Imtiyaz - CRRS End -->
+        </div>
+        <c-own-for-more-information-section if:true={isRecallMessage}  no-recalls={noRecalls} content-key={contentKey} division-id={divisionId} brand={brand}></c-own-for-more-information-section>
+    </div>
+    <div class="message-small">
+        <li class="slds-grid slds-grid_align-spread slds-grid_vertical-align-center message-list-item unread">
+            <h3>{message.title}</h3>
+            <p>{message.date}</p>
+            <!-- <span class="message-dot"></span> -->
+        </li>
+        <div style="padding-left: 18px;padding-right:17px;background : #F5F5F5;">
+            <lightning-formatted-rich-text class="message-detail-text" value={message.body}>
+            </lightning-formatted-rich-text>
+        </div>
+    </div>
+
+</template>

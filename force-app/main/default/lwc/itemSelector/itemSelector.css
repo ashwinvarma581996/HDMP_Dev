@@ -1,0 +1,26 @@
+.button23 {
+    padding: 25px 35px;
+    font-size: 30px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    color: #706c72d2;
+    background-color: #706c72d2;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #706c72d2;
+  }
+
+  .my-css {
+    font-size: 30px;
+    --sds-c-button-brand-color-background: #706c72d2;
+    --sds-c-button-brand-color-background-hover:  #706c72d2;
+        --sds-c-button-brand-color-border:  #706c72d2;
+             --sds-c-button-brand-color-border-hover: #706c72d2;
+                      --sds-c-button-line-height: 10rem
+                      
+  }
+  .head{
+    font-size: 15px;
+
+  }

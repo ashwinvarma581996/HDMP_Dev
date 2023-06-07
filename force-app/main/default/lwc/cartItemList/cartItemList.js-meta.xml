@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>54.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>Item List Screen</masterLabel>
+    <description>This is to show the number of items in cart with details.</description>
+    <targets>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="cartId" type="String"/>
+            <property name="selectedAddressType" type="String"/>
+            <property name="address" type="String"/>
+            <property name="name" type="String"/>
+            <property name="phone" type="String"/>
+            <property name="email" type="String"/>
+            <property name="shippingMethod" type="String"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

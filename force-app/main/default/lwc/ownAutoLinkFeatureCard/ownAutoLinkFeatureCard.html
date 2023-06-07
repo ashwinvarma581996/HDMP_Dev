@@ -1,0 +1,79 @@
+<!-- //============================================================================
+// Title:    Honda MyGarage Experience - Auto Link Feature
+//
+// Summary:  This is the Auto Link Feature html seen at the page of the Honda MyGarage Community
+//
+// Details:  Auto Link Feature for pages
+//
+// History:
+// October 18, 2021 Arunprasad N (Wipro) Original Author 
+//=========================================================================== -->
+<template>
+    <template if:true={showMessage}>
+        <template if:false={hideErrorOnOverviewTab}>
+            <div class={mainCardClass}>
+                <div class="err error-msg">
+                    <img src={warningicon} class="warning-icon"/>DATA UNAVAILABLE
+                </div>
+            </div>
+        </template>
+    </template>
+    <template if:false={showMessage}>
+        <div class={mainCardClass}>
+        <lightning-layout multiple-rows="true" class="card-layouts">
+            <template if:true={features} for:each={features} for:item="feature">
+                <lightning-layout-item class="single-card-container" key={feature.featureDisplayName}>
+                    <div class="card card-styles-wrapper">
+                        <lightning-card class="card-styles">
+                            <h3 slot="title" class="slds-truncate" onclick={handleClickHeader}>
+                                <img src={feature.featureIcon} class="slds-p-right_small custom-icon">
+                                <span class={titleClass}>{feature.featureDisplayName}</span>
+                            </h3>
+                            <div slot="actions" onclick={handleClickAction}>
+                                <slot name="action">
+                                    <button class="btn" onclick={handleClick} value={feature.featureDisplayName}>{buttonLabel}</button>
+                                </slot>
+                            </div>
+                            <div class="body-container slds-card__body_inner card-body body-container">
+                                <template if:true={feature.isError}>
+                                    <div class="errDiv">{feature.status}</div>
+                                </template>
+                                <template if:false={feature.isError}>
+                                    <div>{feature.featureDescription}</div>
+                                    <br/>
+                                    <div class="status-div">
+                                        <template if:true={isGuest}>
+                                            <a class="description-bottom-link" onclick={handleViewVehicleCompatibilityClick}>View Vehicle Compatibility</a>
+                                        </template>
+                                        <template if:false={isGuest}>
+                                            <template if:true={feature.status}>
+                                                Status: <span class="status-text">{feature.status} <lightning-icon icon-name={feature.icon} alternative-text='success' variant={feature.variant} size='x-small' title='success' class={feature.statusiconclass}></lightning-icon></span>
+                                            </template>
+                                        </template>
+                                    </div>
+                                    <br/>
+                                </template>
+                            </div>
+                            <template if:true={feature.showFooter}>
+                                <div slot="footer" class="footer">
+                                    <slot name="footer">
+                                        <a class="footer-link" onclick={handleFooterLinkClick}>
+                                            <template if:true={feature.isNewUser}>
+                                                Sign-up
+                                            </template>
+                                            <template if:false={feature.isNewUser}>
+                                                Edit on Amazon
+                                            </template>
+                                            <lightning-icon icon-name='utility:forward' alternative-text='forward' size='x-small' title='forward' class="custom-icon"></lightning-icon>
+                                        </a>
+                                    </slot>
+                                </div>
+                            </template>
+                        </lightning-card>
+                    </div>
+                </lightning-layout-item>
+            </template>
+        </lightning-layout>
+    </div>
+    </template>
+</template>

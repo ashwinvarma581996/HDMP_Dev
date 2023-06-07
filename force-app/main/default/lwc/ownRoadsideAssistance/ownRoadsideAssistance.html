@@ -1,0 +1,96 @@
+<!-- //============================================================================
+// Title:    Honda Owners Experience - Roadside Assistance
+//
+// Summary:  This is main component placed on Roadside Assistance Page
+//
+// Details:  This page is accessible from two pages - My Garage (Parts & Services tab) & Help Center (Acura and Honda)
+//
+// History:
+// October 5, 2021 Behlool & Imtiyaz (wipro) Initial Coding//
+//=========================================================================== -->
+<template>
+    <template if:true={contents}>
+        <c-own-page-header isproductbadge={isproductbadge} subtitle="Roadside Assistance" brand={brand}></c-own-page-header>
+        <div class="slds-container" style="margin-top: 45px;">
+            <lightning-layout horizontal-align="space" multiple-rows="true">
+                <lightning-layout-item if:true={contents.subtitle} size="12">
+                    <p class="title">
+                        {contents.subtitle}
+                    </p>
+                </lightning-layout-item>
+                <lightning-layout-item if:true={contents.body} class="slds-m-vertical_large" size="12">
+                    <p class="description">
+                        <lightning-formatted-rich-text value={contents.body}></lightning-formatted-rich-text>
+                    </p>
+                </lightning-layout-item>
+                <template if:true={contents.hasAuto}>
+                    <template if:true={hasStandard}>
+                        <lightning-layout-item if:true={contents.phone_number} class="slds-m-vertical_large" size="12">
+                            <p class="phone">
+                                {contents.phoneLabel} <a href={contents.phone_number_href.value}
+                                    class="ph-1 show-desktop-format">{contents.phone_number.value}</a>
+                            </p>
+                            <p class="phone-description">
+                                {contents.phoneSupportedText}
+                            </p>
+                        </lightning-layout-item>
+                    </template>
+                </template>
+                <template if:true={contents.hasAuto}>
+                    <template if:true={contx}>
+                        <template if:true={hasTelematics}>
+                            <lightning-layout-item if:true={contents.description_content} class="slds-m-vertical_large"
+                                size="12">
+                                <p class="phone">
+                                    {contents.phoneLabel} <a href={contents.phone_telematics_number_href.value}
+                                    class="ph-1 show-desktop-format">{contents.telematicsNumber}</a>
+    
+                                </p>
+                                <p class="phone-description">
+                                    Telematics
+                                </p>
+                            </lightning-layout-item>
+                        </template>
+                    </template>
+                </template>
+                <template if:true={hasClarity}>
+                    <lightning-layout-item if:true={contents.phone2_heading} class="slds-m-top_large" size="12">
+                        <p class="clarity-heading">
+                            <b>{contents.phone2_heading}</b>
+                        </p>
+                    </lightning-layout-item>
+                    <lightning-layout-item if:true={contents.phone2_number} class="slds-m-top_small" size="12">
+                        <p class="phone">
+                            {contents.phoneLabel} <a href={contents.phone2_number_href.value}
+                                class="ph-2 show-desktop-format">{contents.phone2_number.value}</a>
+                        </p>
+                        <p class="phone-description">
+                            {contents.phoneSupportedText}
+                        </p>
+                    </lightning-layout-item>
+                </template>
+                <lightning-layout-item if:true={contents.phoneDescription} data-id="phone-information"
+                    class="slds-m-vertical_large" size="12">
+                    <p class="description">
+                        <lightning-formatted-rich-text value={contents.phoneDescription}>
+                        </lightning-formatted-rich-text>
+                    </p>
+                </lightning-layout-item>
+                <lightning-layout-item size="12" class="slds-m-top_medium">
+                    <c-own-accordion heading={contents.accordianHeading} content-for-small-screen={accordianSections}
+                        content-for-large-screen={accordianSections}></c-own-accordion>
+                </lightning-layout-item>
+                <lightning-layout-item class="slds-m-top_large" size="12" if:true={contents.video}>
+                    <button class="download-pdf-button"
+                        onclick={handlePdfDownload}>{contents.downloadButtonLabel}</button>
+                </lightning-layout-item>
+                <lightning-layout-item if:true={contents.termsAndConditions} class="slds-m-vertical_large" size="12">
+                    <p class="additional-info slds-m-top_medium">
+                        <lightning-formatted-rich-text value={contents.termsAndConditions}>
+                        </lightning-formatted-rich-text>
+                    </p>
+                </lightning-layout-item>
+            </lightning-layout>
+        </div>
+    </template>
+</template>

@@ -1,0 +1,19 @@
+<apex:page doctype="xhtml-1.0-transitional" showHeader="false" sidebar="false">
+    <html>
+        <head>
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+            
+            <script type="text/javascript" src="https://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0&s=1"></script>
+            
+            <script type="text/javascript">
+                function GetMap(){
+                var map = new Microsoft.Maps.Map(document.getElementById("mapDiv"), {credentials:"AkrgwwabKDz8SYy-MFkQ2iLEjV9digeka4VUqqWbsfuB9YDWkdEfVbFHMqMP7wYf"});
+            }
+            window.onload = function() {
+                GetMap();
+            };        
+            </script>        
+        </head>
+        <div id='mapDiv' style="position:relative; width:900px; height:400px;"></div>
+    </html>
+</apex:page>

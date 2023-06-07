@@ -1,0 +1,55 @@
+<template>
+    <div class="header-large slds-m-around_small">
+        <lightning-layout>
+            <lightning-layout-item>
+                <template if:true={breadcrumbs}>
+                    <div class="breadcrumb-large slds-m-bottom_large">
+                        <div class="breadcrumb" aria-label="Breadcrumbs" role="navigation">
+                            <div role="list" class="slds-breadcrumb slds-list_horizontal slds-wrap">
+                                <slot>
+                                    <template for:each={breadcrumbs} for:item="crumb">
+                                        <div key={crumb.value} class="slds-breadcrumb__item breadcrumb-item-back" role="listitem">
+                                            <a data-label={crumb.label} data-value={crumb.value} data-url={crumb.url} class="breadcrumb-text-color" onclick={handleClick}>  
+                                                {crumb.label}
+                                            </a>
+                                        </div>
+                                    </template>
+                                </slot> 
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </lightning-layout-item>
+        </lightning-layout>
+        <lightning-layout  if:false={isGenericHeader} class="slds-has-flexi-truncate">
+            <lightning-layout-item  class="product-image-container">
+                <!-- Alexander Dzhitenov (Wipro) DOE-4825 - Added error handling for broken image links -->
+                <div class="product-image">
+                    <c-own-product-image product-image={imageUrl} brand={brand}></c-own-product-image>
+                </div>
+                <!-- <img src="https://www.hondamarysville.com/static/dealer-16759/2017-honda-accord-white.jpg" class="product-image" /> -->
+                <!-- <img src={imageUrl} class="product-image" /> -->
+            </lightning-layout-item>
+            <lightning-layout-item>
+                <div class="prod-sub-title">
+                        {productSubTitle}
+                </div>
+                <div class="prod-title" >
+                    {productTitle}
+                </div>
+            </lightning-layout-item>
+        </lightning-layout>
+        <lightning-layout  if:true={isGenericHeader} class="slds-m-vertical_large" horizontal-align="space">
+            <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="9" padding="around-small">
+                <div class="generic-prod-title" >
+                    {productTitle}
+                </div>
+            </lightning-layout-item>
+        </lightning-layout>
+        <lightning-layout if:false={isGenericHeader}>
+            <lightning-layout-item style="width:100%" >
+                <hr/>
+            </lightning-layout-item>
+        </lightning-layout>
+    </div>
+</template>

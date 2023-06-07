@@ -1,0 +1,78 @@
+<template>
+    <lightning-layout multiple-rows horizontal-align="left">
+        <div class="header-column">
+            <template if:true={results}>
+                <template if:true={showBreadcrumb}>
+                <lightning-layout-item padding="around-small" size="12">
+                    <div class="slds-breadcrumb__item breadcrumb">
+                        <a  data-label={breadcrumb.LABEL}
+                            data-url={breadcrumb.URL}
+                            class="breadcrumb-text-color"
+                            onclick={handleBreadcrumbClick}>&lt; {breadcrumb.LABEL}</a>
+                    </div>
+                </lightning-layout-item>
+                </template>
+            </template>
+            <!-- <template if:true={hasContext}> -->
+            <c-own-product-header-2 product-title={title}
+                                    year={year}
+                                    model={modelName}
+                                    trim={trim}
+                                    product-image={image}
+                                    division={brandName}>
+            </c-own-product-header-2>
+            <!-- </template> -->
+        </div>
+    </lightning-layout>
+
+    <div class="slds-container_medium slds-container_center slds-p-around_large">
+        <template if:true={metadataArticleId}>
+            <template if:true={displayArticleTitle}>
+                <lightning-layout multiple-rows>
+                    <lightning-layout-item padding="around-small" size="12">
+                        <div class="article-title slds-align_absolute-center">{results.title}</div>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </template>
+        </template>
+
+        <lightning-layout multiple-rows horizontal-align="center">
+
+
+            <template if:true={metadataArticleId}>
+                <lightning-layout-item size="12" padding="around-small" class="content-text">
+                    <!-- <lightning-record-view-form
+                        object-api-name="Knowledge__kav"
+                        record-id={metadataArticleId}>
+                        <lightning-output-field
+                            field-name="Article_Content__c" 
+                            variant="label-hidden" 
+                        ></lightning-output-field>
+                    </lightning-record-view-form> -->
+                    <lightning-formatted-rich-text value={results.content}></lightning-formatted-rich-text>
+                </lightning-layout-item>
+            </template>
+
+            <br />
+            <br />
+
+            <template if:true={hasResults}>
+                <lightning-layout-item padding="around-small" size="12">
+                    <div class="related-article-label">
+                        <span>Related Articles</span>
+                    </div>
+                </lightning-layout-item>
+                <lightning-layout-item class="slds-p-around_xx-small" size="12">
+                    <ul class="slds-has-inline-block-links_space related-article-list">
+                        <template for:each={relatedResults} for:item="relatedResult">
+                            <li key={relatedResult.id} data-id={relatedResult.id} data-urlname={relatedResult.urlName} onclick={handleClick}>
+                                <a>{relatedResult.title}</a>
+                            </li>
+                        </template>
+                    </ul>
+                </lightning-layout-item>
+            </template>
+
+        </lightning-layout>
+    </div>
+</template>

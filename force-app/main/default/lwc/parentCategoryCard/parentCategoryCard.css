@@ -1,0 +1,14 @@
+.categoryDiv {
+    min-height: 10rem;
+    font-size:16px;
+    cursor:pointer;
+} 
+.categoryWrapper {
+    align-items:stretch;
+}
+.subCategoryDiv {
+    min-height: 5rem;
+    font-size:13px;
+    cursor:pointer;
+    height: 100%;
+}

@@ -1,0 +1,555 @@
+<template>
+    <template if:true={isLoading}>
+        <lightning-spinner alternative-text="Loading"
+            class="slds-is-relative slds-align_absolute-center slds-m-around_large" variant="brand">
+        </lightning-spinner>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+
+    <template if:false={showDBProduct}>
+        <div class="">
+
+            <!-- <template if:false={_categoryPath}>
+                        The requested product is not available, please contact your dealer.
+            
+                    </template> -->
+            <nav role="navigation" aria-label="Breadcrumbs" class="slds-p-bottom_medium slds-p-top_medium">
+                <ol class="slds-breadcrumb slds-list_horizontal slds-wrap">
+                    <template for:each={breadcrumbs} for:item="breadcrumb">
+                        <li key={breadcrumb.label} class="slds-breadcrumb__item">
+                            <template if:true={breadcrumb.isCurrentPage}>
+                                <a href="javascript:void(0);" class="breadcrumb-not-active">{breadcrumb.label}</a>
+                            </template>
+                            <template if:false={breadcrumb.isCurrentPage}>
+                                <a href={breadcrumb.href} onclick={handleBreadcrumbClick}>{breadcrumb.label}</a>
+                            </template>
+                        </li>
+                    </template>
+                </ol>
+            </nav>
+<!-- Added By Imtiyaz- Start -->
+            <template if:false={hideBackToResults}>
+                <a href={plpURL} onclick={handleBreadcrumbClick} class="slds-truncate"> &lt; Back to results</a>
+            </template>
+<!-- Added By Imtiyaz- End -->
+            <div class="slds-grid slds-p-vertical_large product-information">
+    <!-- Added by Bhawesh R2 story 5492 fast moving item  -->
+                <template if:false={isMaintenancePart}>
+                    <div if:true={EnableImage} class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12">
+                        <figure
+                            class="slds-p-around_xx-small slds-border_top slds-border_right slds-border_bottom slds-border_left productImageContainer">
+                            <canvas data-id="myCanvas" class="CanvasDiv"></canvas>
+                            <!--Added By Pradeep for HDMP-7253-->
+                            <img src={image} alt="Product Image" onload={canvasLoad}>
+                            <!--ends here-->
+                        </figure>
+                        <div class="customTxt">This is part <span>#{productNumber}</span> in the diagram</div>
+                    </div>
+                </template>
+                <template if:true={isMaintenancePart}>
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12">
+                        <figure
+                            class="slds-p-around_xx-small slds-border_top slds-border_right slds-border_bottom slds-border_left productImageContainer">
+                            <img height="1000px" width="1000px" src={maintenanceImagePLP} />
+                        </figure>
+                    </div>
+                </template>
+                <!-- End -->
+                <div if:true={DisableImage} class="image slds-m-right_small">
+
+                </div>
+                <div
+                    class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-grid slds-grid_vertical slds-p-left_large details-area">
+                    <div class="heading">
+                        <h2 class="slds-m-bottom_small productName">{partName} <span style="font-size: 28px;" if:true={isReman}> {label.RemanText}</span></h2> <!-- Aditya HDMP16502-->
+                        <div class="slds-m-bottom_small productNumber">Part Number: {sku}</div>
+                        <div class="slds-m-bottom_small slds-p-top_large productDescription">{description}</div>
+                        <div>
+                            <template for:each={_displayableFields} for:item="field">
+                                <div key={field.id} if:true={field.value} class="slds-grid slds-p-top_x-small">
+
+                                    <p class="slds-m-right_xx-small">{field.name}:</p>
+                                    <lightning-formatted-rich-text value={field.value}></lightning-formatted-rich-text>
+                                </div>
+                            </template>
+                        </div>
+                        <!--<div if:true={inStock} class="slds-p-bottom_small">
+                                <lightning-icon
+                                    icon-name="utility:check"
+                                    variant="success"
+                                ></lightning-icon>
+                                <span class="slds-p-horizontal_small">In stock</span>
+                            </div>
+                            <div if:false={inStock} class="slds-p-bottom_small">
+                                <lightning-icon
+                                    icon-name="utility:ban"
+                                    variant="error"
+                                ></lightning-icon>
+                                <span class="slds-p-horizontal_small">Out of stock</span>
+                            </div>
+                            <div if:false={compatible} class="slds-p-bottom_small">
+                                <lightning-icon
+                                    icon-name="utility:ban"
+                                    variant="error"
+                                ></lightning-icon>
+                                <span class="slds-p-horizontal_small">You can't have Honda Products with Acura Products in the same cart</span>
+                            </div>
+                             -->
+                    </div>
+                    <div class="slds-grid slds-wrap">
+                        <div if:true={showAddToCart}
+                            class="slds-m-bottom_small price slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_6-of-12">
+                            <span if:false={price} class="slds-text-heading_small">Contact Dealer For
+                                Price/Availability</span>
+                            <div if:false={price}>
+                                <div if:true={isDealerSelected}>
+                                    <span class="callTxt" if:true={dealerPhoneNumber}>
+                                        <lightning-formatted-phone value={dealerPhoneNumber}>
+                                        </lightning-formatted-phone>
+                                    </span><br />
+                                    <span class="dealer-email" if:true={dealerEmailAddress}>{dealerEmailAddress}</span>
+                                </div>
+                            </div>
+                            <span if:true={price}>{pricetype} : </span>
+                            <lightning-formatted-number if:true={price} currency-code={price.currency}
+                                format-style="currency" value={price}>
+                            </lightning-formatted-number>
+                            <br>
+                            <!-- Ashwin LTIM made the condition for 7811 , updated by Vivek showPricingAndCCDisclaimer-->
+                            <div style="padding: 10px 0px 0px 0px;" if:true={showPricingAndCCDisclaimer}>
+                                <span style="font-size: 20px;">Core Charge : </span>
+                                <lightning-formatted-number style="font-size: 20px;" currency-code={price.currency}
+                                    format-style="currency" value={coreCharge}>
+                                </lightning-formatted-number>
+                                <br>
+                                <!-- LTIM 7811 , 7812-->
+                                <a href="#" data-id="Core_Charge_Disclaimer" onclick={handleDisclamerPopup} style="padding-left: 47px; font-size:14px;"><u>What is a core
+                                        charge?</u></a>
+
+                            </div>
+                        </div>
+                        <div if:false={showAddToCart}
+                            class="slds-m-bottom_small price slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_6-of-12">
+                            <span class="slds-text-heading_small">Contact Dealer For Price/Availability</span>
+                            <div if:true={isDealerSelected}>
+                                <span class="callTxt" if:true={dealerPhoneNumber}>
+                                    <lightning-formatted-phone value={dealerPhoneNumber}></lightning-formatted-phone>
+                                </span><br />
+                                <span class="dealer-email" if:true={dealerEmailAddress}>{dealerEmailAddress}</span>
+                            </div>
+                        </div>
+
+                        <template if:true={showDealerIcon}>
+                            <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_6-of-12">
+                                <img class="dealerLocationIcon" src={selectDealerIcon} alt="Select Dealer" />
+                                Select My Dealer to see dealer pricing
+                            </div>
+                        </template>
+                    </div>
+
+                    <div>
+                        </br>
+                        <c-product-fit-check pdpproducttype={typeofproduct} pdppartnumber={partnumber}
+                            onvinfitfromchild={hanldevinfittoparent} vin-value={firstAddCartVIN}>
+                        </c-product-fit-check>
+
+                    </div>
+
+                    <lightning-layout-item class="slds-p-top_large">
+                        <!--  <a href="https://automobiles.honda.com/images/downloads/prop-65-consumer-website-statement.pdf" target="_blank"> California Proposition 65 Warning</a>  -->
+                        <p class="slds-text-color_destructive prop-wd" style="cursor:pointer"
+                            onclick={openWarningPopup}>California
+                            Proposition 65 Warning</p>
+
+                    </lightning-layout-item>
+                    
+                        <template if:true={isPickupDealer}>
+                            <div class="slds-grid slds-grid_vertical-align-center slds-m-bottom_large">
+                                <lightning-layout-item size="12">
+                                  <p class=" slds-m-right_large">Note : This item is only available for pick up at a
+                                        dealer</p>
+                                </lightning-layout-item>
+                            </div>
+                        </template>
+                    <div class="slds-p-vertical_small pdpQtyInput" id="divquantity">
+                        Recommended Quantity: {requiredQuantity}
+                        <div class="slds-grid slds-grid_vertical-align-center slds-m-bottom_large">
+                            <p class="quantityWrapper slds-m-right_large">Quantity</p>
+                            <lightning-layout-item size="7">
+                                <lightning-input class="quantity" type="number" name="quantity" value= "1" min="1"
+                                    max="25" step="1" message-when-step-mismatch="Enter a whole number."
+                                    message-when-bad-input="enter correct value"
+                                    message-when-range-underflow="Quantity should be greater than 0 and no more than 25"
+                                    maxlength="2" message-when-range-overflow="Quantity cannot exceed 25"
+                                    onchange={handleQuantityChange}>
+                                </lightning-input>
+
+                            </lightning-layout-item>
+                        </div>
+                        <!--lightning-layout-item>
+                                    <lightning-button
+                                        label="Add to Cart"
+                                        variant="brand"
+                                        class="slds-m-left_x-small"
+                                        disabled={_isAddToCartDisabled}
+                                        onclick={notifyAddToCart}
+                                    >
+                                    </lightning-button>
+                                </lightning-layout-item-->
+
+
+                        <lightning-layout-item>
+                            <template if:true={showAddToCart}>
+                                <template if:true={disableAddToCart}>
+                                    <lightning-button label="Add to Cart" disabled variant="destructive"
+                                        onclick={handleAddToCart1} class="productButton" title="Add to Cart">
+                                    </lightning-button>
+                                </template>
+
+                                <template if:false={disableAddToCart}>
+                                    <lightning-button label="Add to Cart" variant="brand" data-partnumber={sku}
+                                        onclick={handleAddToCart1} class="productButton" title="Add to Cart">
+                                    </lightning-button>
+                                </template>
+                                <template if:true={showWishlist}>
+                                    <lightning-button  label="Save to Wishlist" data-partnumber={sku}
+                                        onclick={handleAddToWishlist} class="productButton slds-m-left_small">
+                                    </lightning-button>
+                        <lightning-button label="Go to Wishlist" onclick={handleGoToWishlist} class="productButton slds-m-left_small">
+                                    </lightning-button>
+                                </template>
+                            </template>
+
+
+                            <template if:false={showAddToCart}>
+
+                                <template if:true={disableAddToCart}>
+                                    <lightning-button label="Add to Cart" disabled variant="destructive"
+                                        onclick={handleAddToCart1} class="productButton" title="Add to Cart">
+                                    </lightning-button>
+                                </template>
+
+                                <template if:false={disableAddToCart}>
+                                    <lightning-button label="Add to Cart" disabled variant="destructive"
+                                        class="productButton" title="Add to Cart"> </lightning-button>
+                                </template>
+                                <template if:true={showWishlist}>
+                                    <lightning-button  label="Save to Wishlist" data-partnumber={sku}
+                                        onclick={handleAddToWishlist} class="productButton slds-m-left_small">
+                                    </lightning-button>
+                        <lightning-button label="Go to Wishlist" onclick={handleGoToWishlist} class="productButton slds-m-left_small">
+                                    </lightning-button>
+                                </template>
+                            </template>
+
+
+
+
+                        </lightning-layout-item>
+
+                        <!--<lightning-layout-item>
+                                    <lightning-button
+                                        label="Add to List"
+                                        variant="brand"
+                                        class="slds-m-left_x-small"
+                                        onclick={notifyCreateAndAddToList}
+                                    >
+                                    </lightning-button>
+                                </lightning-layout-item>-->
+
+                    </div>
+
+                    <!-- <lightning-accordion active-section-name="description" allow-multiple-sections-open>
+                                <lightning-accordion-section name="description" label="Description">
+                                    <lightning-formatted-rich-text value={description}></lightning-formatted-rich-text>
+                                </lightning-accordion-section>
+                            </lightning-accordion> -->
+                </div>
+            </div>
+            <template if:true={itemAddedToWishlist}>
+                <section role="dialog" tabindex="-1"  class="slds-modal slds-fade-in-open cartMar1">
+                    <div class="slds-modal__container">
+                        <!-- Modal/Popup Box LWC header here -->
+                        <header class="slds-modal__header">
+                            <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                                title="Close" onclick={closeModalWishlist}>
+                                <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse"
+                                    size="small"></lightning-icon>
+                                <span class="slds-assistive-text">Close</span>
+                            </button>
+                            <h2 class="slds-text-heading_large slds-hyphenate slds-m-bottom_xx-large">Item Saved to Wishlist</h2>
+                            <div class="slds-m-bottom_medium font-h6" style="display: inline-block; vertical-align:middle;margin: 0px 10px 30px;"><a href={myWishlistUrl} class="slds-button_neutral slds-button">Go to wishlist</a></div>
+                            <div class="slds-m-bottom_medium" style="display: inline-block; vertical-align:middle;margin: 0px 10px 30px;">
+                                <lightning-button label="OK" variant="brand"
+                                onclick={closeModalWishlist} class="productButton" title="OK">
+                                </lightning-button>
+                            </div>
+
+                        </header>
+
+                    </div>
+                </section>
+                <div class="slds-backdrop slds-backdrop_open"></div>
+            </template>
+            <template if:true={isItemExist}>
+                <section role="dialog" tabindex="-1"  class="slds-modal slds-fade-in-open cartMar1">
+                    <div class="slds-modal__container">
+                        <!-- Modal/Popup Box LWC header here -->
+                        <header class="slds-modal__header">
+                            <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                                title="Close" onclick={closeModalError}>
+                                <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse"
+                                    size="small"></lightning-icon>
+                                <span class="slds-assistive-text">Close</span>
+                            </button>
+                            <h2 class="slds-text-heading_large slds-m-bottom_xx-large slds-hyphenate slds-p-bottom_xx-medium">That item is already in<br />your Wishlist</h2>
+                            <div class="slds-m-bottom_xx-large slds-p-top_xx-large">
+                                <lightning-button label="OK" variant="brand"
+                                onclick={closeModalError} class="productButton" title="OK">
+                                </lightning-button>
+                            </div>
+                        </header>
+
+                    </div>
+                </section>
+                <div class="slds-backdrop slds-backdrop_open"></div>
+            </template>
+            <!-- Modal/Popup Box LWC starts here -->
+            <template if:true={isModalOpen}>
+                <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+                    aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open cartMar0">
+                    <div class="slds-modal__container">
+                        <!-- Modal/Popup Box LWC header here -->
+                        <header class="slds-modal__header">
+                            <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                                title="Close" onclick={closeModal}>
+                                <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse"
+                                    size="small"></lightning-icon>
+                                <span class="slds-assistive-text">Close</span>
+                            </button>
+                            <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Sorry, Honda and
+                                Acura
+                                Items Must Be In Separate Carts</h2>
+                        </header>
+                        <!-- Modal/Popup Box LWC body starts here -->
+                        <div class="slds-modal__content slds-p-around_medium errortxt" id="modal-content-id-1">
+                            <p><b>We’re working on this, but right now, Honda and Acura items must be in separate
+                                    shopping
+                                    carts. Please complete your current order and start a new order for this item.</b>
+                            </p>
+                        </div>
+                        <!-- Modal/Popup Box LWC footer starts here -->
+                        <footer class="slds-modal__footer">
+                            <button class="slds-button slds-button_neutral" onclick={closeModal}
+                                title="Cancel">Cancel</button>
+                            <button class="slds-button slds-button_brand" onclick={submitDetails} title="OK">OK</button>
+                        </footer>
+                    </div>
+                </section>
+                <div class="slds-backdrop slds-backdrop_open"></div>
+            </template>
+            <template if:true={partValue}>
+                <c-products-detail select-part-data={partValue}></c-products-detail>
+            </template>
+        </div>
+
+
+        <!--Warning Modal/Popup Box LWC starts here -->
+        <template if:true={warningPopup}>
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-02" aria-modal="true"
+                aria-describedby="modal-content-id-2" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <!-- Modal/Popup Box LWC header here -->
+                    <header class="slds-modal__header">
+                        <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                            title="Close" onclick={closeWarningPopup}>
+                            <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse"
+                                size="small"></lightning-icon>
+                            <span class="slds-assistive-text">Close</span>
+                        </button>
+                        <h3 id="modal-heading-02"
+                            class="slds-text-heading_large slds-p-top_x-large lds-hyphenate font-h5">California Prop 65
+                            Information</h3>
+                        <br></br>
+                    </header>
+                    <!-- Modal/Popup Box LWC body starts here -->
+
+                    <div class="slds-modal__content slds-p-horizontal_medium slds-p-bottom_xx-large slds-p-left_xx-large slds-text-align--center"
+                        id="modal-content-id-2">
+                        <p class="slds-text-heading_small">
+                            <lightning-icon icon-name="utility:warning"></lightning-icon> WARNING:Cancer and
+                            Reproductive Harm
+                        </p>
+                        <p><a href="https://automobiles.honda.com/images/downloads/prop-65-consumer-website-statement.pdf"
+                                target="_blank" class="slds-text-heading_small">Prop 65 Info</a></p>
+                    </div>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </template>
+    </template>
+
+    <template if:true={showDBProduct}>
+        <div class="slds-grid slds-p-vertical_large product-information">
+            <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12">
+                    <figure class="slds-p-around_xx-small slds-border_top slds-border_right slds-border_bottom slds-border_left productImageContainer">
+                    <template if:true={productDataFromDB.ImageURL__c}>
+                            <img if:false={imageURLError} height="1000px" width="1000px" src={productDataFromDB.ImageURL__c} onerror={handleShowDefaultImage}/>
+                    </template>
+                    <template if:true={imageURLError}>
+                        <img height="1000px" width="1000px" src={dreamshopDefaultImage} />
+                        <!-- <img height="1000px" width="1000px" src="https://akamai-staging.dreamshop.honda.com/custom/1200px-No_image_available.png" /> -->
+                    </template>
+                </figure>
+            </div>
+            <div if:true={DisableImage} class="image slds-m-right_small">
+
+            </div>
+<div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-grid slds-grid_vertical slds-p-left_large details-area">
+                <div class="heading">
+                    <h2 class="slds-m-bottom_small productName">{productDataFromDB.Name}</h2>
+                    <div class="slds-m-bottom_small productNumber">Part Number: {productDataFromDB.StockKeepingUnit}</div>
+                    <div class="slds-m-bottom_small slds-p-top_large productDescription">{productDataFromDB.Description}</div>
+                    <!-- <div>
+                        <template for:each={_displayableFields} for:item="field">
+                            <div key={field.id} if:true={field.value} class="slds-grid slds-p-top_x-small">
+
+                                <p class="slds-m-right_xx-small">{field.name}:</p>
+                                <lightning-formatted-rich-text value={field.value}></lightning-formatted-rich-text>
+                    </div>
+                        </template>
+                    </div> -->
+                </div>
+                <div class="slds-grid slds-wrap">
+                    <div if:false={showAddToCart}
+                        class="slds-m-bottom_small price slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_6-of-12">
+                        <span if:false={productDataFromDB.Price__c} class="slds-text-heading_small">Contact Dealer For
+                            Price/Availability</span>
+                        <div if:false={price}>
+                            <div if:true={isDealerSelected}>
+                                <span class="callTxt" if:true={dealerPhoneNumber}>
+                                    <lightning-formatted-phone value={dealerPhoneNumber}>
+                                    </lightning-formatted-phone>
+                                </span><br />
+                                <span class="dealer-email" if:true={dealerEmailAddress}>{dealerEmailAddress}</span>
+                            </div>
+                        </div>
+                        <span if:true={productDataFromDB.Price__c}>{pricetype} : </span>
+                        <lightning-formatted-number if:true={productDataFromDB.Price__c} format-style="currency" value={productDataFromDB.Price__c}>
+                        </lightning-formatted-number>
+                    </div>
+                    <!-- <div if:false={showAddToCart}
+                        class="slds-m-bottom_small price slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_6-of-12">
+                        <span class="slds-text-heading_small">Contact Dealer For Price/Availability</span>
+                        <div if:true={isDealerSelected}>
+                            <span class="callTxt" if:true={dealerPhoneNumber}>
+                                <lightning-formatted-phone value={dealerPhoneNumber}></lightning-formatted-phone>
+                            </span><br />
+                            <span class="dealer-email" if:true={dealerEmailAddress}>{dealerEmailAddress}</span>
+                        </div>
+                    </div> -->
+
+                    <template if:true={showDealerIcon}>
+                        <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_6-of-12">
+                            <img class="dealerLocationIcon" src={selectDealerIcon} alt="Select Dealer" />
+                            Select My Dealer to see dealer pricing
+                        </div>
+                    </template>
+                </div>
+
+                <!-- <div>
+                    </br>
+                    <c-product-fit-check pdpproducttype={typeofproduct} pdppartnumber={partnumber}
+                        onvinfitfromchild={hanldevinfittoparent}>
+                    </c-product-fit-check>
+
+                </div> -->
+
+                <lightning-layout-item class="slds-p-top_large">
+                    <!--  <a href="https://automobiles.honda.com/images/downloads/prop-65-consumer-website-statement.pdf" target="_blank"> California Proposition 65 Warning</a>  -->
+                    <p class="slds-text-color_destructive prop-wd" style="cursor:pointer"
+                        onclick={openWarningPopup}>California
+                        Proposition 65 Warning</p>
+
+                </lightning-layout-item>
+
+                <template if:true={isPickupDealer}>
+                    <div class="slds-grid slds-grid_vertical-align-center slds-m-bottom_large">
+                        <lightning-layout-item size="12">
+                            <p class=" slds-m-right_large">Note : This item is only available for pick up at a
+                                dealer</p>
+                        </lightning-layout-item>
+                    </div>
+                </template>
+                <div class="slds-p-vertical_small pdpQtyInput" id="divquantity1">
+                    Recommended Quantity: {requiredQuantity}
+                    <div class="slds-grid slds-grid_vertical-align-center slds-m-bottom_large">
+                        <p class="quantityWrapper slds-m-right_large">Quantity</p>
+                        <lightning-layout-item size="7">
+                            <lightning-input class="quantity" type="number" name="quantity" value="1" min="1"
+                                max="25" step="1" message-when-step-mismatch="Enter a whole number."
+                                message-when-bad-input="enter correct value"
+                                message-when-range-underflow="Quantity should be greater than 0 and no more than 25"
+                                maxlength="2" message-when-range-overflow="Quantity cannot exceed 25"
+                                onchange={handleQuantityChange}>
+                            </lightning-input>
+
+                        </lightning-layout-item>
+                    </div>
+
+                    <lightning-layout-item>
+                        <template if:true={showAddToCart}>
+                            <template if:true={disableAddToCart}>
+                                <lightning-button label="Add to Cart" disabled variant="destructive"
+                                    onclick={handleAddToCart1} class="productButton" title="Add to Cart">
+                                </lightning-button>
+                            </template>
+
+                            <template if:false={disableAddToCart}>
+                                <lightning-button label="Add to Cart" variant="brand" data-partnumber={sku}
+                                    onclick={handleAddToCart1} class="productButton" title="Add to Cart">
+                                </lightning-button>
+                            </template>
+                            <template if:true={showWishlist}>
+                                    <lightning-button  label="Save to Wishlist" data-partnumber={sku}
+                                    onclick={handleAddToWishlist} class="productButton slds-m-left_small">
+                                </lightning-button>
+                    <lightning-button label="Go to Wishlist" onclick={handleGoToWishlist} class="productButton slds-m-left_small">
+                                </lightning-button>
+                            </template>
+                        </template>
+
+                        <template if:false={showAddToCart}>
+                            <template if:true={disableAddToCart}>
+                                <lightning-button label="Add to Cart" disabled variant="destructive"
+                                    onclick={handleAddToCart1} class="productButton" title="Add to Cart">
+                                </lightning-button>
+                            </template>
+
+                            <template if:false={disableAddToCart}>
+                                <lightning-button label="Add to Cart" disabled variant="destructive"
+                                    class="productButton" title="Add to Cart"> </lightning-button>
+                            </template>
+                            <template if:true={showWishlist}>
+                                <lightning-button label="Save to Wishlist" data-partnumber={sku}
+                                    onclick={handleAddToWishlist} class="productButton slds-m-left_small">
+                                </lightning-button>
+                    <lightning-button label="Go to Wishlist" onclick={handleGoToWishlist} class="productButton slds-m-left_small">
+                                </lightning-button>
+                            </template>
+                        </template>
+
+                    </lightning-layout-item>
+                </div>
+            </div>
+        </div>
+        <template if:true={productDataFromDB}>
+            <c-products-detail select-part-data={productDataFromDB}></c-products-detail>
+        </template>
+    </template>
+    <!-- LTIM 7811 & 7812 -->
+    <template if:true={showDealerModal}>
+        <c-disclaimer-popup modaltype={disclaimerType} dealer-return-policy-markup={dealerReturnPolicyMarkup}
+            onclose={handleShowHide}></c-disclaimer-popup>
+    </template>
+</template>

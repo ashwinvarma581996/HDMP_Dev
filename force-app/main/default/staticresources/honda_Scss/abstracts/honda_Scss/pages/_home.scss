@@ -1,0 +1,21 @@
+.comm-page-home {
+    .siteforceContentArea {
+        margin-top: 120px;
+        @media (max-width: 767px) {
+            margin-top: 0;
+        }
+    }
+}
+
+@media (min-width: 768px) {
+    .mainHeader .slds-spinner_container .slds-spinner {
+        top: 50% !important;
+        left: 130px !important;
+    }
+    // .mainHeader .slds-spinner_container {
+    //     position: fixed !important;
+    //     top: 50% !important;
+    //     background-color: transparent !important;
+    //     transform: translateY(-50%);
+    // }
+}

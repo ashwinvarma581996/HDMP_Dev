@@ -1,0 +1,39 @@
+.find-brand-body-heading {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: #000000;
+}
+.find-brand-body-title {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 32px;
+    line-height: 37px;
+    letter-spacing: 0.02em;
+    color: #000000;
+    padding-top: 7px;
+}
+.find-brand-body-desc {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 26px;
+    color: #000000;
+    padding-top: 16px;
+}
+@media only screen and (max-width: 7200px) {
+    .header-column {
+        padding: 0 72px;
+    }
+}
+@media only screen and (max-width: 600px) {
+    .header-column {
+        padding: 0;
+    }
+}

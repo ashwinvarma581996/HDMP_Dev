@@ -1,0 +1,55 @@
+<template>
+    <div class="slds-container_medium slds-container_center slds-p-around_medium">
+        <div>
+            <h3>{title}</h3>
+        </div>
+        <ul>
+            <template for:each={maintenanceMinders} for:item="maintenanceMinder">
+                <div key={maintenanceMinder.Id} class="test">
+                    <p class="mm_head slds-m-vertical_medium">Maintenance Minder {maintenanceMinder.Maintenance_Code__c}
+                    </p>
+
+                    <!-- <ul class="slds-list_dotted">
+                        <template if:true={maintenanceMinder.Service_Pre_Text__c}>
+                            <li class="mm_line">{maintenanceMinder.Service_Pre_Text__c}</li>
+                        </template>
+                        <template if:true={maintenanceMinder.Service_Item_Description__c}>
+                            <li class="mm_line">{maintenanceMinder.Service_Item_Description__c}</li>
+                        </template>
+                        <template if:true={maintenanceMinder.Service_Post_Text__c}>
+                            <li class="mm_line">{maintenanceMinder.Service_Post_Text__c}</li>
+                        </template>
+                        <template if:true={maintenanceMinder.Legal_Description__c}>
+                            <li class="mm_line legal-escription">{maintenanceMinder.Legal_Description__c}</li>
+                        </template>
+                    </ul> -->
+
+                    <ul>
+                        <template if:true={maintenanceMinder.Service_Pre_Text__c}>
+                            <li class="mm_line">{maintenanceMinder.Service_Pre_Text__c}</li>
+                        </template>
+                    </ul>
+                    <ul class="slds-list_dotted">
+                        <template if:true={maintenanceMinder.Service_Item_Description__c}>
+                            <li class="mm_line">{maintenanceMinder.Service_Item_Description__c}</li>
+                        </template>
+                        <template if:true={maintenanceMinder.Service_Post_Text__c}>
+                            <li class="mm_line">{maintenanceMinder.Service_Post_Text__c}</li>
+                        </template>
+                    </ul>
+                    <ul>
+                        <template if:true={maintenanceMinder.Legal_Description__c}>
+                            <li class="mm_line legal-escription">{maintenanceMinder.Legal_Description__c}</li>
+                        </template>
+                    </ul>
+                </div>
+            </template>
+        </ul>
+        <div class="learn-more-div">
+            <a href={naviagtetomaintenanceurl} class="learn-more"> LEARN MORE ABOUT MAINTENANCE MINDERS </a>
+        </div>
+        <div class="dealer-card">
+            <c-own-find-dealer brand={division}></c-own-find-dealer>
+        </div>
+    </div>
+</template>

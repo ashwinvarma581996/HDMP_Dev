@@ -1,0 +1,681 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 03-17-2023
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+  <lightning-card >
+   <!-- <lightning-input  type="text" label="Offer" name="offer" value={offerId} read-only="true"></lightning-input>-->
+   
+   <lightning-layout multiple-rows="false">
+    <lightning-layout-item  size = "12">
+    <template if:true={isCFO}>
+      <template if:false={openVehicle}>
+        <div class="slds-box">
+    
+        <div class="slds-grid slds-gutters">
+          <div class="slds-col slds-size_1-of-1">
+          <template if:false={editMode}>
+            <lightning-dual-listbox
+        id="selectYearOptions"
+        name="Select Options"
+        label="Year"
+        source-label="Available Options"
+        selected-label="Selected Options"
+        options={selectYearOptions}
+        value={selectYearOptions}
+        required-options={selectYearOptions}
+        onchange={handleModalYrChange}
+        size = "3"
+        required="true">
+    </lightning-dual-listbox>
+      
+          </template>
+          
+
+          <template if:false={editMode}>
+            <lightning-combobox class="slds-m-right_x-small" name="ModelName" label="Model Name" placeholder="Choose Model Name" value={value} onchange={handleModalNameChange} 
+            options={modelOption} required="true">
+            </lightning-combobox>
+            </template>
+            
+
+          <template if:false={editMode}>
+        
+
+            <lightning-dual-listbox
+            id="selectTrimOptions"
+            name="Select Options"
+            label="Trim"
+            source-label="Available Options"
+            selected-label="Selected Options"
+            options={selectTrimOptions}
+            value={selectTrimOptions}
+            required-options={selectTrimOptions}
+            onchange={handleTrimChange}
+            size = "3"
+            required="true"></lightning-dual-listbox>
+
+            </template>
+            
+            <template if:true={editMode}>
+              <div class="slds-page-header">  
+                <div class="slds-page-header__row" style="width:100%;">
+              <div class="slds-grid slds-gutters" style="width:100%;">
+                <div class="slds-col slds-size_4-of-12 slds-text-title_bold">
+                  
+                    <lightning-input  type="text" label="Model Year" value={selectedModalYear} read-only="true"></lightning-input>
+                  
+                  </div>
+                  <div class="slds-col slds-size_4-of-12 slds-text-title_bold">
+                    
+                      <lightning-input  type="text" label="Model Name" value={selectedModalName} read-only="true"></lightning-input>
+                    
+                  </div>
+                  <div class="slds-col slds-size_4-of-12 slds-text-title_bold">
+                    
+                      <lightning-input  type="text" label="Trim" value={selectedModalTrim} read-only="true" style="width:100%"></lightning-input>
+                      
+                    
+                  </div>
+                  </div>
+                  </div>
+                  </div>
+                  <template if:true={AllCheck}>
+                   
+                    <div class="slds-grid" style="margin:15px 0px 15px 0px;">
+                      <div class="slds-col">
+                        Model ID   <template if:true={displayMgs}>
+                          {modelMgs}  
+                          </template> 
+                          <template if:false={displayMgs}>
+                            {modelId}
+                            </template>
+                      </div>
+                     
+                        <template if:true={hasShowSamplePayment}>
+                          <div class="slds-col">
+                          <lightning-input  type="checkbox" label="Include Sample Payment" onchange={onPaymentClick} value={hasSamplePayment} checked={hasSamplePayment} disabled={makeSamplePaymentReadOnly}></lightning-input>
+                    
+                        </div>    
+                      </template>
+                     
+                      <div class="slds-col">
+                        <lightning-input  type="checkbox" name="featuredOffer" value={featuredOffer} label="Featured Offer" onchange={handleChange} checked={featuredOffer}></lightning-input>
+                       
+                      </div>
+
+                    </div>
+                  
+                    <!--   <lightning-layout multiple-rows="false">
+                         <lightning-layout-item class="slds-p-around_medium" size = "12">
+                           <div class="slds-grid slds-gutters">
+                             <div class="slds-col slds-size_1-of-1">   
+                       
+                       Model Id :  <template if:true={displayMgs}>
+                                 {modelMgs}  
+                                 </template> 
+                                 <template if:false={displayMgs}>
+                                   {modelId}
+                                   </template>
+                                 
+                           <template if:true={hasShowSamplePayment}>
+                               <lightning-input  type="checkbox" label="Include Sample Payment" onchange={onPaymentClick} value={hasSamplePayment} checked={hasSamplePayment}></lightning-input>
+                          </template>
+                           <lightning-input  type="checkbox" name="featuredOffer" value={featuredOffer} label="Featured Offer" onchange={handleChange} checked={featuredOffer}></lightning-input>
+                       
+                         -->
+                     </template>
+                  
+                </template>
+                
+        </div>
+        
+        </div>
+<!--     <lightning-layout-item class="slds-p-around_xx-small" size="12">
+        <div style="width: 90%" class="slds-m-around_small">
+          
+        </div>
+      </lightning-layout-item>
+        <lightning-layout-item class="slds-p-around_xx-small" size="12">
+          <div style="width: 50%" class="slds-m-around_small">
+            
+          </div>
+          </lightning-layout-item>  --> 
+    
+
+</div>
+  </template>
+  </template>
+
+
+  
+  
+  <template if:true={hasSamplePayment}>
+    <template if:true={hasShowSamplePayment}>
+    <div class="slds-box" style="margin-top:15px;">
+      <template if:false={openVehicle}>
+      <div class="slds-grid slds-gutters">
+        <div class="slds-col slds-size_3-of-5" style="padding-top: 15px">
+        <lightning-input 
+                type="text" 
+                label="Model Image :"
+                value={imageUrl}
+                readonly = "true"
+                variant="label-inline">
+            </lightning-input>
+        </div>
+        <div class="slds-col slds-size_1-of-5" style="padding-top: 15px; padding-left: 5 px">
+            <lightning-button style="padding-right:20px" label="Select" onclick={handleSelect} variant="base"></lightning-button>
+            <template if:true={showRemove}>
+            <lightning-button label="Remove" onclick={removeImageData} variant="base"></lightning-button>
+            </template>
+        </div>
+        <div class="slds-col slds-size_1-of-5" >
+            <img src={imageUrl} alt={altText} class="image"/>
+        </div>
+    </div>
+    
+      <template if:true={modelError}>
+  
+        <div class="slds-scoped-notification slds-media slds-media_center slds-theme_error" role="status">
+          <div class="slds-media__figure">
+            <span class="slds-icon_container slds-icon-utility-error" title="error">
+                <lightning-icon icon-name="utility:error" alternative-text="Error" title="Error" variant="inverse"></lightning-icon>
+             </span>
+          </div>
+          <div class="slds-media__body">
+             <p>{modelErrorMessage} </p>
+          </div>
+       </div>
+      </template>
+  
+  </template>
+    <template if:true={openVehicle}>
+  <div class="slds-m-left_x-small">
+      <c-image-datatable
+          key-field="id"
+          data={dataImage}
+          columns={column}
+          max-row-selection="1"
+          onrowselection={handleRowSelection}>
+      </c-image-datatable>
+  </div>
+  </template>
+  </div>
+
+
+    <template if:false={openVehicle}>
+      
+      
+    <lightning-card>
+      <div class="slds-box">
+        <div class="slds-page-header">  
+          <div class="slds-page-header__row">
+            <h2> Sample Payment</h2>
+          </div>
+        </div>  
+    
+        <div >
+    
+        <div>
+          <template if:true={termsmonthValues.data}>
+            <label>Lease Terms (Months)</label>
+            <abbr title="required" class="slds-required">*</abbr>
+            <lightning-combobox name="termsInmonths" label="Lease Terms (Months)" value={termsInmonths}
+              style="width:fit-content;" options={termsmonthValues.data.values} onchange={handleChange}
+              variant="label-hidden" read-only={makeFieldsReadonly}>
+            </lightning-combobox>
+          </template>
+        </div>
+    
+    
+        <label>Invoice Price with D&H ($)</label>
+        <abbr title="required" class="slds-required">*</abbr>
+        <lightning-input value={invPriceWithDH} type="number" name="invPriceWithDH" label="Invoice Price with D&H ($)"
+          variant="label-hidden" aria-required="true" step=".01" onchange={handleChange} read-only="true">
+        </lightning-input>
+    
+        <label>Gross Margin ($)</label>
+        <abbr title="required" class="slds-required">*</abbr>
+        <lightning-input value={grossMargin} type="number" name="grossMargin" label="Gross margin ($)"
+          variant="label-hidden" aria-required="true" step=".01" onchange={handleChange} read-only={makeFieldsReadonly}>
+        </lightning-input>
+    
+        <label>Acquisition Fee ($)</label>
+        <abbr title="required" class="slds-required">*</abbr>
+        <lightning-input value={acquisitionFee} type="number" name="acquisitionFee" label="Acquisition Fee ($)"
+          variant="label-hidden" aria-required="true" step=".01" onchange={handleChange} read-only={makeFieldsReadonly}>
+        </lightning-input>
+    
+        <label>Dealer Contribution ($)</label>
+        <abbr title="required" class="slds-required">*</abbr>
+        <lightning-input value={dealerContribution} type="number" name="dealerContribution" label="Dealer Contribution ($)"
+          variant="label-hidden" aria-required="true" step=".01" onchange={handleChange} read-only={makeFieldsReadonly}>
+        </lightning-input>
+    
+        <label>Capitalized Cost Reduction ($)</label>
+        <abbr title="required" class="slds-required">*</abbr>
+        <lightning-input value={capitalizeCostReduction} type="number" name="capitalizeCostReduction"
+          label="Capitalized Cost Reduction ($)" variant="label-hidden" aria-required="true" step=".01"
+          onchange={handleChange} read-only={makeFieldsReadonly}>
+        </lightning-input>
+    
+        <label>Net Capitalized Cost ($)</label>
+        <abbr title="required" class="slds-required">*</abbr>
+        <lightning-input type="number" name="netCapitalCost" label="Net Capital Cost ($)" variant="label-hidden"
+          aria-required="true" value={netCapitalCost} step=".01" onchange={handleChange} read-only={makeFieldsReadonly}>
+        </lightning-input>
+    
+        <label>MSRP</label>
+        <lightning-input type="number" name="adjustedMSRBWithDH" label="MSRP" variant="label-hidden" aria-required="true"
+          value={editMSRP} step=".01" onchange={handleChange} read-only="true">
+        </lightning-input>
+    
+        <label>Adjusted MSRP with D&H ($)</label>
+        <abbr title="required" class="slds-required">*</abbr>
+        <lightning-input type="number" name="adjustedMSRBWithDH" label="Adjusted MSRB with D&H ($)" variant="label-hidden"
+          aria-required="true" value={adjustedMSRBWithDH} step=".01" onchange={handleChange} read-only={makeFieldsReadonly}>
+        </lightning-input>
+    
+        <label>Annual Miles</label>
+        <abbr title="required" class="slds-required">*</abbr>
+        <template if:true={annualMilesValues.data}>
+          <lightning-combobox name="annualMiles" label="Annual Miles" variant="label-hidden" aria-required="true"
+            value={annualMiles} style="width:fit-content;" options={annualMilesValues.data.values} onchange={handleChange}
+            read-only={makeFieldsReadonly}>
+          </lightning-combobox>
+        </template>
+    
+        <label>Residual Factor</label>
+        <abbr title="required" class="slds-required">*</abbr>
+        <lightning-input type="percent" name="residualFactor" step="0.01" min="0" max="100" label="Residual Factor ($)"
+          variant="label-hidden" aria-required="true" value={residualFactor} onchange={handleChange}
+          read-only={makeFieldsReadonly}>
+        </lightning-input>
+    
+        <label>Money Factor</label>
+    
+        <lightning-input type="percent" name="moneyFactor" step="0.01" min="0" max="100" label="Money Factor ($)"
+          variant="label-hidden" aria-required="true" value={moneyFactor} onchange={handleChange}
+          read-only={makeFieldsReadonly}>
+        </lightning-input>
+    
+    
+        <lightning-input type="number" name="conquestCash" label="Conquest Cash ($) " value={conquestCash} step=".01"
+          onchange={handleChange} read-only={makeFieldsReadonly}>
+        </lightning-input>
+    
+        <lightning-input type="number" name="loyaltyCash" label="Loyalty Cash ($) " value={loyaltyCash} step=".01"
+          onchange={handleChange} read-only={makeFieldsReadonly}>
+        </lightning-input>
+    
+        <lightning-input type="number" name="captiveCashamt" label="Captive Lease Cash ($)" value={captiveCashamt} step=".01"
+          onchange={handleChange} read-only={makeFieldsReadonly}>
+        </lightning-input>
+    
+        <lightning-input type="number" name="otherCaptiveAmt" label="Other Cash ($)" value={otherCaptiveAmt} step=".01"
+          onchange={handleChange} read-only={makeFieldsReadonly}>
+        </lightning-input>
+        <template if:true={showCPO}>
+          <lightning-input type="number" name="cpoCash" label="CPO Cash ($)" value={cpoCash} step=".01"
+            onchange={handleChange} read-only={makeFieldsReadonly}>
+          </lightning-input>
+        </template>
+    
+        <lightning-input type="number" name="additionalCash" label="Additional Cash ($)" value={additionalCash} step=".01"
+          onchange={handleChange} read-only={makeFieldsReadonly}>
+        </lightning-input>
+    
+    
+        <label>Base Monthly Payment ($)</label>
+        <abbr title="required" class="slds-required">*</abbr>
+        <lightning-input type="number" name="baseMonthlyPayment" label="" value={baseMonthlyPayment} variant="label-hidden"
+          aria-required="true" step=".01" onchange={handleChange} read-only={makeFieldsReadonly}>
+        </lightning-input>
+    
+    
+        <div style="width: 98%" class="slds-m-around_small">
+          <template if:true={showErrorMgs}>
+            
+
+            <div class="slds-scoped-notification slds-media slds-media_center slds-theme_error" role="status">
+              <div class="slds-media__figure">
+                <span class="slds-icon_container slds-icon-utility-error" title="error">
+                    <lightning-icon icon-name="utility:error" alternative-text="Error" title="Error" variant="inverse"></lightning-icon>
+                 </span>
+              </div>
+              <div class="slds-media__body">
+                <p></p> 
+                <template for:each={ValidationErrorMessage} for:item="error" for:index="index">
+                  <template if:true={error}>
+                    <li key={error}>{error}</li>
+                  </template>
+                </template>
+              </div>
+           </div>
+
+    
+            
+          </template>
+        </div>
+      </div>
+    
+      <div style="margin:15px 0px 15px 0px;">
+        <lightning-button size="medium" variant="brand" label="Calculate" class="slds-align_absolute-center"
+          onclick={onCalculate}>
+          title="Calculate"></lightning-button>
+      </div>
+      <!-- section layout-->
+      <!--   <lightning-layout multiple-rows="true">
+                  <lightning-layout-item class="slds-p-around_xx-small" size="12">
+                    <lightning-layout>
+                      
+                        <lightning-layout-item class="slds-p-around_xx-small" size=6>
+                          <div style="display: inline-flex; width: 51%" class="slds-m-around_small">
+                             <lightning-input  type="number"  label="Total due At signing" value={totalDueAtsigning} formatter="currency"  step=".01" read-only="true">
+                              </lightning-input>
+                              
+                          </div>
+                          <div style="display: inline-flex; width: 51%;" class="slds-m-around_small">
+                              <lightning-input  type="number"  label="Total Monthly Payments" value={totalMonthlyPayments} formatter="currency"  step=".01" read-only="true">
+                              </lightning-input>
+                          </div>
+                        </lightning-layout-item>
+                      
+                        <lightning-layout-item class="slds-p-around_xx-small" size=6>
+                          <div style="display: inline-flex; width: 51%;" class="slds-m-around_small">
+                              <lightning-input  type="number"  label="Residual Value" value={residualValue} formatter="currency"  step=".01" read-only="true">
+                              </lightning-input>
+                          </div>
+                          <div style="display: inline-flex; width: 51%;" class="slds-m-around_small">
+                              <div></div>
+                          </div>
+                        </lightning-layout-item>
+                    </lightning-layout>
+                  </lightning-layout-item>
+                </lightning-layout>   -->
+    
+      <div class="slds-box">
+        <div class="slds-grid slds-gutters slds-page-header">
+    
+          <div class="slds-page-header__row" style="width:100%;">
+    
+    
+            <div class="slds-col slds-size_4-of-12 slds-text-title_bold">
+              <lightning-input type="number" label="Total due at signing ($)" value={totalDueAtsigning} formatter="currency"
+                step=".01" read-only="true">
+              </lightning-input>
+    
+            </div>
+    
+            <div class="slds-col slds-size_4-of-12 slds-text-title_bold">
+    
+              <lightning-input type="number" label="Total Monthly Payments ($)" value={totalMonthlyPayments}
+                formatter="currency" step=".01" read-only="true">
+              </lightning-input>
+    
+            </div>
+            <div class="slds-col slds-size_4-of-12 slds-text-title_bold">
+    
+              <lightning-input type="number" label="Residual Value ($)" value={residualValue} formatter="currency"
+                step=".01" read-only="true">
+              </lightning-input>
+    
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    </lightning-card>
+  
+    </template>
+  </template>
+</template>
+
+
+  <template if:true={isCFO}>
+  <template if:true={featuredOffer}>
+    <template if:true={editMode}>
+      <template if:false={hasShowSamplePayment}>
+      <div class="slds-box" style="margin-top:15px;">
+    <template if:false={openVehicle}>
+    <div class="slds-grid slds-gutters">
+      <div class="slds-col slds-size_3-of-5" style="padding-top: 15px">
+      <lightning-input 
+              type="text" 
+              label="Model Image :"
+              value={imageUrl}
+              readonly = "true"
+              variant="label-inline">
+          </lightning-input>
+      </div>
+      <div class="slds-col slds-size_1-of-5" style="padding-top: 15px; padding-left: 5 px">
+          <lightning-button style="padding-right:20px" label="Select" onclick={handleSelect} variant="base"></lightning-button>
+          <template if:true={showRemove}>
+          <lightning-button label="Remove" onclick={removeImageData} variant="base"></lightning-button>
+          </template>
+      </div>
+      <div class="slds-col slds-size_1-of-5" >
+          <img src={imageUrl} alt={altText} class="image"/>
+      </div>
+  </div>
+  
+    <template if:true={modelError}>
+
+      <div class="slds-scoped-notification slds-media slds-media_center slds-theme_error" role="status">
+        <div class="slds-media__figure">
+          <span class="slds-icon_container slds-icon-utility-error" title="error">
+              <lightning-icon icon-name="utility:error" alternative-text="Error" title="Error" variant="inverse"></lightning-icon>
+           </span>
+        </div>
+        <div class="slds-media__body">
+           <p>{modelErrorMessage} </p>
+        </div>
+     </div>
+    </template>
+
+</template>
+  <template if:true={openVehicle}>
+<div class="slds-m-left_x-small">
+    <c-image-datatable
+        key-field="id"
+        data={dataImage}
+        columns={column}
+        max-row-selection="1"
+        onrowselection={handleRowSelection}>
+    </c-image-datatable>
+</div>
+</template>
+</div>
+</template>
+  </template>
+</template>
+</template>
+
+
+
+   
+    <template if:false={isCFO}>
+      <template if:false={openVehicle}>
+        <template if:false={editMode}>
+          <div class="slds-page-header">  
+            <div class="slds-page-header__row slds-text-title_bold">
+       <h1>Model Details</h1>
+       </div>
+       <div class="slds-box">
+      <lightning-radio-group
+          label=""
+          options={options}
+          value={value}
+          onchange={handleSelection}>
+      </lightning-radio-group>
+      </div>
+      </div>
+    </template>
+    
+      <template if:true={section1}>
+        <template if:false={editMode}>
+          <div class="slds-box">
+          <div style="margin-left:10px;">
+            <lightning-dual-listbox
+            id="selectYearOptionsPS"
+            name="Select Options"
+            label="Year"
+            source-label="Available Years"
+            selected-label="Selected Years"
+            options={selectYearOptions}
+            value={selectYearOptions}
+            required-options={selectYearOptions}
+            onchange={handlePsSec1YrChange}
+            size = "3"
+            required="true"></lightning-dual-listbox>
+
+            <lightning-combobox name="Segment" label="Segment" placeholder="Choose Segment" value={value} onchange={handlePsSec1SegmentChange} 
+            options={SelectSegmentSec1Options} required="true">
+            </lightning-combobox>
+
+            <lightning-combobox name="Category" label="Category" placeholder="Choose Category" value={value} onchange={handlePsSec1CategoryChange} 
+            options={SelectCategorySec1Options} required="true">
+            </lightning-combobox>
+            <lightning-combobox name="Family" label="Family" placeholder="Choose Family" value={value} onchange={handlePsSec1FamilyChange} 
+            options={SelectFamilySec1Options} required="true">
+            </lightning-combobox>
+            <lightning-dual-listbox
+            id="selectedFamilyOption"
+            name="Select Models"
+            label="Models"
+            source-label="Models"
+            selected-label="Selected Models"
+            options={SelectModalSec1Options}
+            value={SelectModalSec1Options}
+            required-options={SelectModalSec1Options}
+            onchange={handlePsSec1ModalChange}
+            size = "3"
+            required="true"></lightning-dual-listbox>
+          </div> 
+         </div>
+        </template>
+      </template>
+
+      
+       <template if:true={editMode}>
+        <div class="slds-box">
+     <!--      <div style="margin-left: 10%; margin-bottom:20px" class="slds-m-around_small">
+            <lightning-input  type="text" name="year" value={editYear} label="Year" onchange={handleChangePS} readonly = "true" ></lightning-input>
+
+          <lightning-input  type="text" name="Segment" value={editSegment} label="Segment" onchange={handleChangePS} readonly = "true"></lightning-input>
+
+        <lightning-input  type="text" name="Category" value={editCategory} label="Category" onchange={handleChangePS} readonly = "true"></lightning-input>
+      <lightning-input type="text" name="Family" value={editFamily} label="Family" onchange={handleChangePS} readonly = "true"></lightning-input>
+    <lightning-input  type="text" name="Model" value={editModel} label="Model" variant="in-line" onchange={handleChangePS} readonly = "true"></lightning-input>
+    <lightning-input  type="checkbox" name="Featured" checked={editFeatured} label="Featured" onchange={handleChangePS}></lightning-input>
+      <lightning-input type="number" name="MSRP" value={editMSRP} label="MSRP" onchange={handleChangePS}></lightning-input>
+    <lightning-input  type="number" name="FreightCharge" value={editFreight} label="Freight Charge" variant="in-line" onchange={handleChangePS}></lightning-input>
+  </div>   -->
+  <div class="slds-page-header">  
+    <div class="slds-page-header__row slds-text-title_bold">
+  <div class="slds-grid slds-gutters">
+    <div class="slds-col slds-size_2-of-12">
+      
+      <lightning-input  type="text" name="year" value={editYear} label="Year" onchange={handleChangePS} readonly = "true" ></lightning-input>
+      
+      </div>
+      <div class="slds-col slds-size_3-of-12">
+        
+        <lightning-input  type="text" name="Segment" value={editSegment} label="Segment" onchange={handleChangePS} readonly = "true"></lightning-input>
+        
+      </div>
+      <div class="slds-col slds-size_3-of-12">
+        
+        <lightning-input  type="text" name="Category" value={editCategory} label="Category" onchange={handleChangePS} readonly = "true"></lightning-input>
+        
+      </div>
+      <div class="slds-col slds-size_2-of-12">
+        
+        <lightning-input type="text" name="Family" value={editFamily} label="Family" onchange={handleChangePS} readonly = "true"></lightning-input>
+        
+      </div>
+      <div class="slds-col slds-size_2-of-12">
+        
+        <lightning-input  type="text" name="Model" value={editModel} label="Model" variant="in-line" onchange={handleChangePS} readonly = "true"></lightning-input>
+        </div>
+        </div>
+      </div>
+      </div>
+      <div>
+        <lightning-input  type="checkbox" name="Featured" checked={editFeatured} label="Featured" onchange={handleChangePS}></lightning-input>
+        <template if:false={isPrism}>
+      <lightning-input type="number" name="MSRP" value={editMSRP} label="MSRP" onchange={handleChangePS} read-only="true"></lightning-input>
+    <lightning-input  type="number" name="FreightCharge" value={editFreight} label="Freight Charge" variant="in-line" onchange={handleChangePS}></lightning-input>
+  </template>
+      </div>
+
+      </div>
+          
+        </template>
+
+      <template if:true={section2}>
+        <template if:false={editMode}>
+          <div class="slds-box">
+
+          <lightning-combobox name="Segment" label="Segment" placeholder="Choose Segment" value={value} onchange={handleSegmentChangeSec2} 
+          options={segmentOptionsSeg2} required="true">
+          </lightning-combobox>
+
+          <lightning-combobox name="Category" label="Category" placeholder="Choose Category" value={value} onchange={handleCategoryChangeSec2} 
+            options={categoryOptionssec2} required="true">
+            </lightning-combobox>
+
+            <lightning-combobox name="Family" label="Family" placeholder="Choose Family" value={value} onchange={handlefamilyChangeSec2} 
+            options={familyOptionSec2} required="true">
+            </lightning-combobox>
+
+            <lightning-dual-listbox
+            id="selectYearOptionsP"
+            name="Select Options"
+            label="Year"
+            source-label="Available Years"
+            selected-label="Selected Years"
+            options={yearOptionSec2}
+            value={yearOptionSec2}
+            required-options={yearOptionSec2}
+            onchange={handleYearChangeSec2}
+            size = "3"
+            required="true">
+          </lightning-dual-listbox>
+
+
+            <lightning-dual-listbox
+            id="selectedFamilyOptio"
+            name="Select Models"
+            label="Models"
+            source-label="Models"
+            selected-label="Selected Models"
+            options={modelOptionSec2}
+            value={modelOptionSec2}
+            required-options={modelOptionSec2}
+            onchange={handleModelChangeSec2}
+            size = "3"
+            required="true">
+          </lightning-dual-listbox>
+
+        </div>
+      </template>
+      </template>
+
+  </template>
+  </template>
+
+  <!--end of power sports-->
+  <template if:true={showSpinner}>
+    <lightning-spinner alternative-text="Loading"></lightning-spinner>
+</template>
+</lightning-layout-item>
+
+</lightning-layout>
+</lightning-card>
+</template>

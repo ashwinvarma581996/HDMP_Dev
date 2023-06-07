@@ -1,0 +1,168 @@
+.absoluteCenter {
+    display: grid;
+    justify-content: center;
+    align-content: center;
+}
+
+.cartDealerInstall .slds-box {
+    border: 1px solid rgb(151, 151, 151);
+    height: 100px;
+    border-radius: 0;
+}
+
+.inlineBlock {
+    width: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.centerElement {
+    display: flex;
+    align-items: center;
+}
+
+.disc-popup{
+    font-size: 16px;
+}
+.greyColor {
+    color: #D4D4D4;
+}
+
+.allBorders {
+    border: 1px solid #D4D4D4;
+}
+
+.tabHeight {
+    height: 40px;
+}
+
+.addressModal .custom-box .typedcls,
+.addressModal .suggestedCls {
+    display: inline-block;
+    width: 30px;
+    vertical-align: top;
+}
+
+.addressModal .custom-box .slds-grid {
+    width: calc(100% - 40px);
+    display: inline-block;
+}
+
+.d-block {
+    display: block;
+}
+
+@media (min-width: 48em) {
+    .addressModal .slds-modal__container {
+        width: 58%;
+        max-width: 68rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .addressModal .slds-modal__container .custom-box {
+        margin: 10px 0;
+    }
+}
+
+.selectState {
+    border-radius: 0px;
+    border: 1px solid #8f8c8c;
+    height: 45px;
+}
+
+.error-province {
+    border: 1.5px solid #ea3156;
+}
+
+.addRadioWrap {
+    position: relative;
+    min-height: 15px;
+    min-width: 15px;
+}
+
+input[type='radio'] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    top: 0px;
+    left: 0px;
+    z-index: 9;
+}
+
+.shipAddText {
+    font-size: 16px;
+    font-weight: normal;
+}
+
+.checkmark {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 15px;
+    width: 15px;
+    background-color: #fff;
+    border: 1px solid #666;
+    border-radius: 50%;
+}
+
+input[type='radio']:checked~.checkmark {
+    background-color: transparent;
+    border: 1px solid #666;
+}
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+input[type='radio']:checked~.checkmark:after {
+    display: block;
+}
+
+.checkmark:after {
+    top: 2px;
+    left: 2px;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #E42525;
+}
+
+.add-new-address-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.displayAddress {
+    justify-content: space-around;
+    align-items: stretch;
+}
+
+.displayAddress>.slds-col.slds-large-size_4-of-12 {
+    border: 1px solid #ddd;
+    margin: 5px;
+    width: 32%;
+}
+
+@media (max-width: 767px) {
+    .displayAddress>.slds-col.slds-large-size_4-of-12 {
+        width: 45%;
+    }
+}
+
+@media (max-width: 480px) {
+    .displayAddress>.slds-col.slds-large-size_4-of-12 {
+        width: 100%;
+    }
+}
+.disclaimer-model-header{
+    border-bottom: 0 !important;
+    padding-bottom: 0!important;
+}

@@ -1,0 +1,84 @@
+<template>
+    <div class="slds-p-around_large">
+            <lightning-layout multiple-rows
+                class="slds-align_absolute-center slds-p-vertical_medium slds-p-right_xx-large myGarageHeading">
+                <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="12">
+                    <h3 class="table-title text-style">Add/Edit Home Address</h3>
+                </lightning-layout-item>
+            </lightning-layout>
+            <div class="slds-grid slds-gutters slds-wrap">
+                <div class="slds-col slds-size_1-of-1">
+                    <div class="slds-grid slds-gutters slds-wrap">
+                        <div class="slds-col slds-size_2-of-2 product-form-body">
+                            <label class="own-combobox-label" for="Street Address"> Street Address<abbr title="required" class="slds-required">*</abbr></label>
+                            <!--Label-->
+                            <lightning-textarea value={account.PersonMailingStreet} class="validate"
+                                onchange={handleAddressChange} required variant="label-hidden" role="textbox" aria-placeholder="Street Address"
+                                aria-labelledby="Street Address">
+                            </lightning-textarea>
+                        </div>
+                        <!-- <div class="slds-col slds-size_1-of-2 product-form-body">
+                            <span class="own-combobox-label">Address Line 2</span>
+                            <lightning-input variant="label-hidden" max-length="25">
+                            </lightning-input>
+                            </div> -->
+                    </div>
+                </div>
+                <div class="slds-col slds-size_1-of-1">
+                    <div class="slds-grid slds-gutters slds-wrap">
+                        <div class="slds-col slds-size_1-of-2 product-form-body">
+                            <label class="own-combobox-label" for="City">City<abbr title="required" class="slds-required">*</abbr></label>
+                            <!--Label-->
+                            <lightning-input value={account.PersonMailingCity} required class="validate"
+                                onchange={handleCityChange} variant="label-hidden" max-length="25" role="textbox" aria-placeholder="City"
+                                aria-labelledby="City">
+                            </lightning-input>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2 product-form-body">
+                            <label class="own-combobox-label" for="State/Province">State/Province<abbr title="required" class="slds-required">*</abbr></label>
+                            <!--Label-->
+                            <lightning-combobox value={account.PersonMailingState} class="validate" required options={states}
+                                onchange={handleStateChange} variant="label-hidden" role="textbox" aria-placeholder="State/Province"
+                                aria-labelledby="State/Province"></lightning-combobox>
+                        </div>
+                    </div>
+                </div>
+                <div class="slds-col slds-size_1-of-1">
+                    <div class="slds-grid slds-gutters slds-wrap">
+                        <div class="slds-col slds-size_1-of-2 product-form-body">
+                            <label class="own-combobox-label" for="Zip Code">Zip Code<abbr title="required" class="slds-required">*</abbr></label>
+                            <!--Label-->
+                            <lightning-input required value={account.PersonMailingPostalCode} class="validate"
+                                onchange={handleZipCodeChange} variant="label-hidden" max-length="10" pattern="[0-9]{5}(?:[-]?[0-9]{4})?$"  role="textbox" aria-placeholder="Zip Code"
+                                aria-labelledby="Zip Code" message-when-pattern-mismatch="Valid Zip Code samples: 12345 or 12345-6789">
+                            </lightning-input>
+                        </div>
+                    </div>
+                </div>
+                <div class="slds-col slds-size_1-of-1">
+                    <div class="slds-grid slds-gutters slds-wrap">
+                        <div class="slds-col slds-size_1-of-2 product-form-body">
+                            <label class="own-label" for="Required Fields"><abbr title="required" class="slds-required">*</abbr>Required Fields</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="slds-col slds-size_2-of-3">
+                    <div class="slds-grid slds-gutters slds-wrap">
+                        <div class="slds-col slds-size_1-of-3 product-button-1">
+                            <button name="SAVE" onclick={handleSave}
+                                class="slds-button slds-button_outline-brand slds-combobox_container product-button-large"
+                                disabled={saveButtonDisabled}>
+                            <label class="product-button-1-text">Save</label>
+                            </button>
+                        </div>
+                        <div class="slds-col slds-size_1-of-3 product-button-2" style="padding-right: 20px">
+                            <button name="CANCEL" onclick={handleCancel}
+                                class="slds-button slds-button_outline-brand slds-combobox_container product-button-large">
+                            <label class="product-button-2-text">Cancel</label>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+</template>

@@ -1,0 +1,158 @@
+.main-wrapper{
+    height: calc(100vh - 150px);
+}
+
+
+.breadcrumb {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    line-height: 22px;
+    letter-spacing: 0.02em;
+}
+
+.breadcrumb-text-color {
+    color: #E42525 !important;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 14px;
+    line-height: 22px;
+}
+
+.breadcrumb-item-back::before {
+    content: "<" !important;
+    position: absolute;
+    left: -.75rem;
+    color: #E42525;
+}
+
+.breadcrumb-div-width {
+    min-width: 200px;
+}
+
+.send-email-heading{
+    width:fit-content;
+    margin: 4px auto 16px auto;
+    font-size: 40px;
+    line-height: 42px;
+    letter-spacing: 1.2px;
+    color: #000000;
+}
+
+
+.breadcrumb {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    line-height: 22px;
+    letter-spacing: 0.02em;
+}
+
+.breadcrumb-text-color {
+    color: #E42525 !important;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 14px;
+    line-height: 22px;
+}
+
+.breadcrumb-item-back::before {
+    content: "<" !important;
+    position: absolute;
+    left: -.75rem;
+    color: #E42525;
+}
+
+.breadcrumb-div-width {
+    min-width: 200px;
+}
+
+
+.submit-brand-button .slds-button {
+    border-color: var(--HondaRed);
+    border-radius: 2px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 16px;
+    width: 200px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    background: #E42525;
+}
+
+.find-brand-combobox {
+    background: #FFFFFF;
+    box-sizing: border-box;
+    border-radius: 2px;
+}
+
+.own-combobox-label {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 15px;
+    letter-spacing: 0.02em;
+}
+
+.send-email-message{
+    margin: auto;
+    height: 83px;
+    margin-top: 30px;
+}
+
+.submitted-field-label{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 16px;
+    line-height: 40px;
+}
+
+.submitted-field-value{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 40px;
+}
+.send-email-message-desktop{
+    width: 40%;
+}
+
+.send-email-message-mobile{
+    width: fit-content;
+}
+
+.fontCSS{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+}
+
+@media only screen and (max-width: 600px) {
+    .send-an-email-header-small {
+        display: block;
+        margin-bottom: 5%;
+    }
+
+    .send-an-email-header-large {
+        display: none;
+    }
+}
+
+@media only screen and (min-width: 601px) {
+    .send-an-email-header-small {
+        display: none;
+    }
+
+    .send-an-email-header-large {
+        display: block;
+        margin-bottom: 5%;
+    }
+}

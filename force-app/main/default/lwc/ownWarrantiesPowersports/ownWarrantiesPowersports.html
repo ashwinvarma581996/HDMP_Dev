@@ -1,0 +1,38 @@
+<!-- //============================================================================
+// Title:    Warranties Powersports
+//
+// History:
+// Dec 10, 2021 Rounak Bajoria (Wipro) Original Author UI Development Done
+//=========================================================================== -->
+<template>
+    <div class="slds_content_wrapper">
+        <c-own-product-header image-url={headerImage} is-generic-header={isGeneric} product-sub-title='2020 XR650L'
+            product-title='Warranties' brand={brand}></c-own-product-header>
+
+        <div class="slds-container_medium slds-container_center">
+            <div class="slds-m-around_small">
+                <div class="slds_card_wrapper">
+                    <h3>2020 XR650L Warranty Booklet</h3>
+
+                    <c-own-c-m-s-card title={title} titlecolor={titlecolor} icon={icon} brand={brand}
+                        showforwardicon={showForwardIcon} showfooter={showFooter} onheader={handleHeader}
+                        onfooter={handleFooter} onaction={handleAction} body={body}>
+                    </c-own-c-m-s-card>
+
+                </div>
+
+                <div class="slds-quick-actions">
+                    <div class="slds-quick-actions_save">
+                        <img src={saveicon} />
+                        <h4>Save to my garage</h4>
+                    </div>
+                    <div class="slds-quick-actions_add">
+                        <p>Create a Honda Owners account to easily save your product’s information and access recall and
+                            warranty information.</p>
+                        <button class="quick-actions-btn">Add to my garage</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

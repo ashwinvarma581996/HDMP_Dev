@@ -1,0 +1,34 @@
+<!-- //============================================================================
+// Title:    Honda Owners Experience - Warranty Booklet Card
+//
+// Summary:  This Card links to the Warranty Booklet
+//
+//
+// History:
+//=========================================================================== -->
+
+<template>
+    <div class="card card-size card-styles-wrapper">
+        <c-own-card  title={productTitle} brand="default" icon-image={icon} titlecolor={titlecolor} hide-body-section="" onheader={handleHeaderClick} header-clickable="true">
+            <div slot="action">
+                <lightning-icon class={iconClass} icon-name="utility:download" size="x-small" slot="actions" onclick={handleHeaderClick}></lightning-icon>
+            </div>
+            <div slot="default" class="card-body">
+                <lightning-formatted-rich-text value={body}></lightning-formatted-rich-text>
+            </div>
+        </c-own-card>
+        <!-- <lightning-card class="card-styles">
+            <h3 slot="title" class="slds-truncate" onclick={handleHeader}>
+                <img src={icon} class="slds-p-right_small custom-icon">
+                <span class={titleClass} onclick={handleHeader}>{productTitle}</span>
+                <span slot="action">
+                    <lightning-icon class="slds-float_right" icon-name="utility:download" alternative-text="Download"
+                        variant="error" size="x-small" title="Download"></lightning-icon>
+                </span>
+            </h3>
+            <div class="slds-card__body_inner card-body">
+                <lightning-formatted-rich-text value={body}></lightning-formatted-rich-text>
+            </div>
+        </lightning-card> -->
+    </div>
+</template>

@@ -1,0 +1,52 @@
+<template>
+
+    <!-- <ul class="message-list">
+        <template for:each={messages} for:item="message" if:false={messagedetail}>
+            <li key={message.Id} data-read-status={message.Is_Read__c} data-body={message.Message__r.Body__c}
+                data-title={message.Message__r.Subject__c} data-date={message.Message__r.CreatedDate}
+                data-id={message.Id} class={readClass} onclick={handleClick}>
+                <h3>{message.Message__r.Subject__c}</h3>
+                <p data-date={message.Message__r.CreatedDate}>{handleDate}</p>
+                <span class="message-dot"></span>
+            </li>
+        </template>
+        <template if:true={messagedetail}>
+            <c-own-message-detail message={selectedMessage}></c-own-message-detail>
+        </template>
+
+    </ul> -->
+
+    <div class="inbox-large">
+        <ul class="message-list">
+            <template for:each={messages} for:item="message" if:false={messagedetail}>
+                <li key={message.id} data-id={message.id} data-read-status={message.readStatus} data-body={message.body}
+                    data-title={message.title} data-date={message.date} data-msg-type={message.msgType}
+                    class={message.class} onclick={handleClick}>
+                    <h3>{message.title}</h3>
+                    <p>{message.date}</p>
+                    <span class="message-dot"></span>
+                </li>
+            </template>
+            <template if:true={messagedetail}>
+                <c-own-message-detail message={selectedMessage}></c-own-message-detail>
+            </template>
+        </ul>
+    </div>
+    <div class="inbox-small">
+        <ul class="message-list">
+            <template for:each={messages} for:item="message" if:false={messagedetail}>
+                <li key={message.id} data-id={message.id} data-read-status={message.readStatus} data-body={message.body}
+                    data-title={message.title} data-date={message.date} data-msg-type={message.msgType}
+                    class={message.class} onclick={handleClick}>
+                    <span class="message-dot"></span>
+                    <h3>{message.title}</h3>
+                    <p>{message.date}</p>
+                </li>
+            </template>
+            <template if:true={messagedetail}>
+                <c-own-message-detail message={selectedMessage}></c-own-message-detail>
+            </template>
+        </ul>
+    </div>
+
+</template>

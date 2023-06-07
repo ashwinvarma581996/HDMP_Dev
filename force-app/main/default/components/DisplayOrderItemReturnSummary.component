@@ -1,0 +1,139 @@
+<apex:component access="global" controller="DisplayCartItemsCtrl" >
+    <apex:attribute name="relatedOrderId" type="String" assignTo="{!orderId}" description="test" />
+    <apex:outputPanel rendered="{! IF(ISBLANK(OrderReturnList), false, true) }">
+        <!-- IsContainCore Condition added by ashwin SP4-16461 -->
+        <apex:outputPanel rendered="{!IF(IsContainCore == false, true, false) }">
+            <apex:repeat var="oi" value="{!OrderReturnList}" > 
+                <apex:outputPanel >
+                    <div style="display: flex;">
+                        <!--<div style="width: 380px;"></div>-->
+                        <div style="width: 220px;">
+                            <div style="text-align:center;font-size: 18px;padding: 10px 24px;"> Order Refund</div> 
+                            <apex:outputPanel rendered="{!oi.Total_Product_Price__c != 0}">
+                                <div style="display: flex;margin-bottom: 6px;"> 
+                                    <div style="padding: 7px;min-width: 115px;">Item Subtotal </div>
+                                    <div style="padding: 7px;min-width: 70px;text-align: right;">
+                                        $-<apex:outputText value="{0,number,#,##0.00}">
+                                            <!-- added TotalReturnedCoreCharges by ashwin for 19400 -->
+                                        <apex:param value="{!oi.Total_Product_Price__c - TotalReturnedCoreCharges}" />
+                                        </apex:outputText> 
+                                    </div>                 
+                                </div> 
+                            </apex:outputPanel>
+                            <apex:outputPanel rendered="{!IF(NonZeroCoreChrageItemExist,true,false)}"> <!-- Added NonZeroCoreChrageItemExist by Aditya to fix 19430 -->
+                                <div style="display: flex;margin-bottom: 6px;"> 
+                                    <div style="padding: 7px;min-width: 115px;">Core Charges </div>
+                                    <div style="padding: 7px;min-width: 70px;text-align: right;">
+                                        $-<apex:outputText value="{0,number,#,##0.00}">
+                                        <apex:param value="{!TotalReturnedCoreCharges}" />
+                                        </apex:outputText> 
+                                    </div>                 
+                                </div> 
+                            </apex:outputPanel>
+                            <apex:outputPanel rendered="{!oi.Total_Restocking_Fee__c != 0}">
+                                <div style="display: flex;margin-bottom: 6px;"> 
+                                    <div style="padding: 7px;min-width: 115px;">Restocking Fees </div>
+                                    <div style="padding: 7px;min-width: 70px;text-align: right;">
+                                        $-<apex:outputText value="{0,number,#,##0.00}">
+                                        <apex:param value="{!oi.Total_Restocking_Fee__c}" />
+                                        </apex:outputText> 
+                                    </div>                 
+                                </div>
+                            </apex:outputPanel>
+                            <apex:outputPanel rendered="{!oi.Order__r.Delivery_Type__c == 'Install At Dealer'}">
+                                <div style="display: flex;margin-bottom: 6px;"> 
+                                    <div style="padding: 7px;min-width: 115px;">Installation Charges </div>
+                                    <div style="padding: 7px;min-width: 70px;text-align: right;">
+                                        $-<apex:outputText value="{0,number,#,##0.00}">
+                                        <apex:param value="{!oi.Total_Installation_Charge__c}" />
+                                        </apex:outputText> 
+                                    </div>                 
+                                </div>
+                            </apex:outputPanel>
+                            <apex:outputPanel rendered="{!oi.Total_Shipping_Amount__c != 0}">
+                                <div style="display: flex;margin-bottom: 6px;"> 
+                                    <div style="padding: 7px;min-width: 115px;">Shipping Charges </div>
+                                    <div style="padding: 7px;min-width: 70px;text-align: right;">
+                                        $-<apex:outputText value="{0,number,#,##0.00}">
+                                        <apex:param value="{!oi.Total_Shipping_Amount__c}" />
+                                        </apex:outputText> 
+                                    </div>                 
+                                </div>
+                            </apex:outputPanel>
+                            <div style="display: flex;margin-bottom: 6px;"> 
+                                <div style="padding: 7px;min-width: 115px;">Taxes </div>
+                                <div style="padding: 7px;min-width: 70px;text-align: right;">
+                                    $-<apex:outputText value="{0,number,#,##0.00}">
+                                    <apex:param value="{!oi.Total_Invoice_Tax__c}" />
+                                    </apex:outputText>
+                                </div>                 
+                            </div>
+                            <div style="display: flex;margin-bottom: 6px;"> 
+                                <div style="padding: 7px;min-width: 115px;">Refund Total </div>
+                                <div style="padding: 7px;min-width: 70px;text-align: right;">
+                                    $-<apex:outputText value="{0,number,#,##0.00}">
+                                    <!-- + oi.Total_Core_Charge_Amount__c added by ashwin for 19423 -->
+                                    <apex:param value="{!oi.Total_Invoice_Price__c}" />
+                                    </apex:outputText>
+                                </div>                 
+                            </div>
+                        </div>
+                    </div>          
+               </apex:outputPanel> 
+            </apex:repeat>
+        </apex:outputPanel>
+         <!--Started IsContainCore by ashwin SP4-16461 -->
+        <apex:outputPanel rendered="{! IF(IsContainCore, true, false) }">
+            <apex:repeat var="oi" value="{!OrderReturnList}" > 
+                <apex:outputPanel >
+                    <div style="display: flex;">
+                        <div style="width: 380px;"></div>
+                        <div style="width: 220px;">
+                            <div style="text-align:center;font-size: 18px;padding: 10px 24px;"> Order Refund</div> 
+                            <apex:outputPanel rendered="{!IF(oi.Order__r.Total_Core_Charge_Current_Amount__c != 0 && oi.Order__r.Total_Core_Charge_Current_Amount__c != null,true,false)}">
+                                <div style="display: flex;margin-bottom: 6px;"> 
+                                    <div style="padding: 7px;min-width: 115px;">Core Charges </div>
+                                    <div style="padding: 7px;min-width: 70px;text-align: right;">
+                                        $<apex:outputText value="{0,number,#,##0.00}">
+                                        <apex:param value="{!TotalReturnedCoreCharges}" />
+                                        </apex:outputText> 
+                                    </div>                 
+                                </div> 
+                            </apex:outputPanel>
+                            <apex:outputPanel rendered="{!oi.Total_Restocking_Fee__c != 0 && oi.Total_Restocking_Fee__c != null}">
+                                <div style="display: flex;margin-bottom: 6px;"> 
+                                    <div style="padding: 7px;min-width: 115px;">Restocking Fees </div>
+                                    <div style="padding: 7px;min-width: 70px;text-align: right;">
+                                        -$<apex:outputText value="{0,number,#,##0.00}">
+                                        <apex:param value="{!oi.Total_Restocking_Fee__c}" />
+                                        </apex:outputText> 
+                                    </div>                 
+                                </div>
+                            </apex:outputPanel>
+                            <div style="display: flex;margin-bottom: 6px;"> 
+                                <div style="padding: 7px;min-width: 115px;">Taxes </div>
+                                <div style="padding: 7px;min-width: 70px;text-align: right;">
+                                    $<apex:outputText value="{0,number,#,##0.00}">
+                                    <apex:param value="{!oi.Total_Invoice_Tax__c}" />
+                                    </apex:outputText>
+                                </div>                 
+                            </div>
+                            <div style="display: flex;margin-bottom: 6px;"> 
+                                <div style="padding: 7px;min-width: 115px;">Refund Total </div>
+                                <div style="padding: 7px;min-width: 70px;text-align: right;">
+                                    $<apex:outputText value="{0,number,#,##0.00}">
+                                    <apex:param value="{!oi.Total_Invoice_Price__c}" />
+                                    </apex:outputText>
+                                </div>                 
+                            </div>
+                        </div>
+                    </div>          
+                </apex:outputPanel> 
+            </apex:repeat>
+        </apex:outputPanel>
+    </apex:outputPanel>
+     <!-- Ended IsContainCore by ashwin SP4-16461 -->
+    
+    
+    
+</apex:component>

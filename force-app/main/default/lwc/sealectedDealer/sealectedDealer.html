@@ -1,0 +1,77 @@
+<template>
+    <!--Added By Shalini Soni 06-10-2021 -->
+			<div class="searchResult">
+				<lightning-layout multiple-rows="true">
+					<div>
+						<template if:false={DealerList}>
+							<div class="slds-size_1-of-1 dealerList" data-label="">
+								<article class="slds-card appendedCard">
+									<div class="slds-grid slds-wrap">
+										<div class="slds-max-small-size_1-of-1 slds-small-size_1-of-3">
+											<p>
+												{selectedDealer.Name}
+											</p>
+											<span class="textDark">
+												<lightning-formatted-phone value={selectedDealer.Phone}>
+												</lightning-formatted-phone>
+											</span>
+											<div class="dealer-address slds-m-top_x-small slds-m-bottom_x-small ">
+												<img src={mapIcon} alt="lampIcon" class="customIcon">
+												<a onclick={goToMap} data-title={selectedDealer.Name}
+													data-dealerno={selectedDealer.PoIId__c}
+													data-street={selectedDealer.Street}
+													data-city={selectedDealer.City}
+													data-province={selectedDealer.State}
+													data-postalcode={selectedDealer.BillingPostalCode}>
+
+													<div class="textRed">
+														<div class="searchLocation textRed">
+															{selectedDealer.Street}<br />
+															{selectedDealer.City},&nbsp;{selectedDealer.State}&nbsp;{selectedDealer.zipCode}
+														</div>
+													</div>
+												</a>
+											</div>
+
+
+											<!-- <div class="phoneNumber">
+												<lightning-formatted-phone value={selectedDealer.Phone}>
+												</lightning-formatted-phone>
+											</div> -->
+											<!-- <span class="textRed slds-text_small">{selectedDealer.Email}</span> -->
+
+										</div>
+										<div
+											class="slds-max-small-size_1-of-1 slds-small-size_2-of-3 slds-grid slds-grid_vertical-align-end flexColumn">
+
+											<b> Contact</b>
+
+
+											{selectedDealer.firstName} {selectedDealer.lastName}
+											<div> {selectedDealer.Email} </div>
+
+											<div class="slds-m-top_medium slds-text-align_right">
+												<div><b>Hours of Operation</b></div>
+												<div class="slds-grid ">
+													<div class="slds-col slds-size_12-of-12 slds-p-around_none">
+														<template for:each={dealerHours} for:item="arr">
+															<div key={arr}> {arr} </div>
+														</template>
+													</div>
+												</div>
+
+												<!-- <span>Mon-Fri 7:00AM-6:00PM;</span><br><span>Sat 7:00AM-5:00PM;<br> Sun Closed</span> -->
+
+											</div>
+										</div>
+
+									</div>
+								</article>
+							</div>
+
+						</template>
+					</div>
+				</lightning-layout>
+			</div>
+		<!--End By Shalini Soni 06-10-2021-->
+</template>

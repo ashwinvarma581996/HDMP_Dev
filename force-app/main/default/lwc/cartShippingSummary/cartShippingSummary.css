@@ -1,0 +1,109 @@
+.shippingCalculation {
+    align-items: center;
+    justify-content: flex-end;
+    padding-top: 16px;
+    border-bottom: 1px solid #d9d9d9;
+    padding-bottom: 25px;
+    text-align: right;
+    font-size: 16px;
+    display: flex;
+}
+
+.estimateShippingCalculation {
+    align-items: flex-end;
+    justify-content: flex-end;
+    padding-top: 16px;
+    border-bottom: 1px solid #d9d9d9;
+    padding-bottom: 25px;
+    text-align: right;
+    font-size: 16px;
+    float: right;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.estimateTaxCalculation {
+    align-items: flex-end;
+    justify-content: flex-end;
+    padding-top: 0px;
+    padding-bottom: 25px;
+    text-align: right;
+    font-size: 16px;
+    float: right;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.cartShippingNote {
+    font-weight: bold;
+    padding-right: 25px;
+    margin-right: auto;
+    max-width: 60%;
+}
+
+.shippingField label+div {
+    display: flex;
+    align-items: flex-end;
+}
+
+.shippingField label {
+    margin-bottom: -10px;
+    display: block;
+}
+
+.shippingField .slds-form-element__label {
+    display: none;
+}
+
+.shippingField lightning-input {
+    margin-right: 20px;
+}
+
+.priceLabel {
+    font-size: 18px;
+    padding-top: 8px;
+    width: 400px;
+    word-wrap: break-word;
+    vertical-align: middle;
+}
+
+.priceLabel span:first-child {
+    display: inline-block;
+    text-align: right;
+}
+
+.priceLabel span:last-child {
+    text-align: right !important;
+    display: inline-block;
+    padding-left: 5px;
+    vertical-align: top;
+}
+
+.shippingCalculation {
+    width: 100%;
+}
+
+.cartShippingNote {
+    text-align: left;
+}
+
+@media only screen and (max-width: 767px) {
+    .shippingCalculation {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .cartShippingNote {
+        margin-bottom: 20px;
+        padding-right: 0;
+        max-width: 100%;
+    }
+    .cartShippingNote {
+        max-width: 100%;
+    }
+    .shippingCalculation .shippingField {
+        justify-content: center;
+        width: 100%;
+    }
+}

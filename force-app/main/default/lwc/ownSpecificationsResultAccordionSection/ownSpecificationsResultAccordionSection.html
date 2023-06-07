@@ -1,0 +1,272 @@
+<template>
+  <li class="slds-accordion__list-item">
+    <section class={sectionClass}>
+      <div class="slds-accordion__summary accordion__summary ">
+        <h2 class="slds-accordion__summary-heading">
+          <button class="slds-button slds-button_reset slds-accordion__summary-action" title="Accordion summary"
+            onclick={handleSectionClick} data-id={result.id}>
+            <lightning-icon icon-name="utility:down" size="xx-small"
+              class="custom-icon slds-accordion__summary-action-icon slds-button__icon slds-button__icon_left">
+            </lightning-icon>
+            <span class={sectionTitleClass}> <lightning-formatted-rich-text value={result.categoryTitle}></lightning-formatted-rich-text></span>
+           
+          </button>
+        </h2>
+      </div>
+     
+      <template if:true={noTrims}>
+        <template if:true={isSelectedRow}>
+          <div  class="specifics-list">
+          <template for:each={result.categorySpecList} for:item="prop">
+            <template if:true={isSelectedRow}>
+              
+
+              
+              <div key={prop.name} class="specifics">
+                <lightning-layout class="slds-wrap">
+                  <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="6" class="specifics-name">
+                  <lightning-formatted-rich-text value={prop.specName}></lightning-formatted-rich-text>
+                  </lightning-layout-item>
+                  <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="6" class="specifics-details">
+                    <lightning-formatted-rich-text value={prop.specDetail}></lightning-formatted-rich-text>
+                  </lightning-layout-item>
+                </lightning-layout>
+              </div>
+            
+            </template>
+          </template>
+</div>
+          <!-- <div class="jsOnly">
+            <div class="specifics">
+              <lightning-layout>
+                <lightning-layout-item size="6">
+                  Engine Type
+                </lightning-layout-item>
+                <lightning-layout-item size="6" class="specifics-details">
+                  3.5-liter Aluminum Alloy V-6
+                </lightning-layout-item>
+              </lightning-layout>
+            </div>
+            <div class="specifics">
+              <lightning-layout>
+                <lightning-layout-item size="6">
+                  Valvetrain
+                </lightning-layout-item>
+                <lightning-layout-item size="6" class="specifics-details">
+                  24'Valve, SOHC I-VTEC®
+                </lightning-layout-item>
+              </lightning-layout>
+            </div>
+            <div class="specifics">
+              <lightning-layout>
+                <lightning-layout-item size="6">
+                  Horsepower @ rpm (SAE net)
+                </lightning-layout-item>
+                <lightning-layout-item size="6" class="specifics-details">
+                  290 @ 6200
+                </lightning-layout-item>
+              </lightning-layout>
+            </div>
+            <div class="specifics">
+              <lightning-layout>
+                <lightning-layout-item size="6">
+                  Throttle Control
+                </lightning-layout-item>
+                <lightning-layout-item size="6" class="specifics-details">
+                  Drive-By-Wire
+                </lightning-layout-item>
+              </lightning-layout>
+            </div>
+            <div class="specifics">
+              <lightning-layout>
+                <lightning-layout-item size="6">
+                  Compression Ration
+                </lightning-layout-item>
+                <lightning-layout-item size="6" class="specifics-details">
+                  11.5:1
+                </lightning-layout-item>
+              </lightning-layout>
+            </div>
+            <div class="specifics">
+              <lightning-layout>
+                <lightning-layout-item size="12">
+                  Variable Cylinder Management (VCM®)
+                </lightning-layout-item>
+              </lightning-layout>
+            </div>
+            <div class="specifics">
+              <lightning-layout>
+                <lightning-layout-item size="12">
+                  Idle Stop
+                </lightning-layout-item>
+              </lightning-layout>
+            </div>
+            <div class="specifics">
+              <lightning-layout>
+                <lightning-layout-item size="6">
+                  EPA Fuel Economy Ratings (city / highway / combined)
+                </lightning-layout-item>
+                <lightning-layout-item size="6" class="specifics-details">
+                  11.5:1
+                </lightning-layout-item>
+              </lightning-layout>
+            </div>
+            <div class="specifics">
+              <lightning-layout>
+                <lightning-layout-item size="6">
+                  Recommended Fuel
+                </lightning-layout-item>
+                <lightning-layout-item size="6" class="specifics-details">
+                  Premium Unleaded 91 Octane
+                </lightning-layout-item>
+              </lightning-layout>
+            </div>
+            <div class="specifics">
+              <lightning-layout>
+                <lightning-layout-item size="6">
+                  Fuel Tank Capacity (U.S. gal)
+                </lightning-layout-item>
+                <lightning-layout-item size="6" class="specifics-details">
+                  18.5
+                </lightning-layout-item>
+              </lightning-layout>
+            </div>
+            <div class="specifics">
+              <lightning-layout>
+                <lightning-layout-item size="6">
+                  CARB Emissions Rating
+                </lightning-layout-item>
+                <lightning-layout-item size="6" class="specifics-details">
+                  ULEV-70
+                </lightning-layout-item>
+              </lightning-layout>
+            </div>
+            <div class="specifics">
+              <lightning-layout>
+                <lightning-layout-item size="6">
+                  Tune-Up Interval
+                </lightning-layout-item>
+                <lightning-layout-item size="6" class="specifics-details">
+                  No scheduled tune-ups required for 100,000 +/- miles
+                </lightning-layout-item>
+              </lightning-layout>
+            </div>
+            <div class="specifics">
+              <lightning-layout>
+                <lightning-layout-item size="12">
+                  Front-Wheel Drive
+                </lightning-layout-item>
+              </lightning-layout>
+            </div>
+            <div class="specifics">
+              <lightning-layout>
+                <lightning-layout-item size="12">
+                  10-Speed Automatic Transmission with Sequential SprotShift Paddle Shifters
+                </lightning-layout-item>
+              </lightning-layout>
+            </div>
+            <div class="specifics">
+              <lightning-layout>
+                <lightning-layout-item size="12">
+                  <p>Gear Ratios (:1):</p>
+                  </br>
+                  <p>1st: 5.25</p>
+                  <p>2nd: 3.27</p>
+                  <p>3rd: 2.19</p>
+                  <p>4th: 1.60</p>
+                  <p>5th: 1.30</p>
+                  <p>6th: 1.00</p>
+                  <p>7th: 0.18</p>
+                  <p>8th: 0.65</p>
+                  <p>9th: 0.58</p>
+                  <p>10th: 0.52</p>
+                  <p>Reverse: 3.97</p>
+                  <p>Final Drive: 4.17</p>
+                  </br>
+                </lightning-layout-item>
+              </lightning-layout>
+            </div>
+
+            <div class="specifics">
+              <lightning-layout>
+                <lightning-layout-item size="6">
+                  Max Towing Capacity (lbs)
+                </lightning-layout-item>
+                <lightning-layout-item size="6" class="specifics-details">
+                  3,500
+                </lightning-layout-item>
+              </lightning-layout>
+            </div>
+
+            <div class="specifics-footer">
+              <lightning-layout>
+                <lightning-layout-item size="12">
+                  <span class="specifics-details">3</span> Does not apply to fluid and filter changes or particle
+                  inspections. Please refer to the maintanence section of your owner's manual to determine all
+                  appropriate maintenance instructions.
+                </lightning-layout-item>
+              </lightning-layout>
+            </div>
+            <div class="specifics-footer">
+              <lightning-layout>
+                <lightning-layout-item size="12">
+                  <span class="specifics-details">19</span> Some models recieve premium fuel and for others, it's
+                  recommended. Consult your dealer for details.
+                </lightning-layout-item>
+              </lightning-layout>
+            </div>
+            <div class="specifics-footer">
+              <lightning-layout>
+                <lightning-layout-item size="12">
+                  <span class="specifics-details">91</span> Towing requires the addition of the Acura accessory trailer
+                  hitch and hitch ball. Please see your Acura dealer for details. Added cargo weight in the vehicle may
+                  reduce max towing capacity, see Owner's Guide for details.
+                </lightning-layout-item>
+              </lightning-layout>
+            </div>
+            <div class="specifics-footer">
+              <lightning-layout>
+                <lightning-layout-item size="12">
+                  <span class="specifics-details">123</span> Based on 2022 EPA milage rating. Use for comparison purpose
+                  only. Your actual milage will vary, depending on how you drive and maintain your vehicle, driving
+                  conditions, battery pack age/condition (hybrid only) and other factors
+                </lightning-layout-item>
+              </lightning-layout>
+            </div>
+          </div> -->
+        </template>
+      </template>
+      
+      <div class="spec-wrapper">
+      <template if:false={noTrims}>
+        
+        <template for:each={result.categorySpecList} for:item="prop">
+          <template if:true={isSelectedRow}>
+            <div key={prop.name} >
+              <div class="multi-specifics-name">
+                <lightning-formatted-rich-text value={prop.specName}></lightning-formatted-rich-text>
+              </div>
+              <div class="multi-specifics-details">
+                 <lightning-formatted-rich-text value={prop.specDetail}></lightning-formatted-rich-text>
+              </div>
+              </br>
+            </div>
+          </template>
+        
+        </template>
+      </template>
+      <template for:each={result.disclaimerList} for:item="discla">
+        <template if:true={isSelectedRow}>
+          <div key={discla.name} >
+            <div class="multi-specifics-details">
+               <lightning-formatted-rich-text value={discla.disclaimerText}></lightning-formatted-rich-text>
+            </div>
+            </br>
+          </div>
+        </template>
+      
+      </template>
+    </div>
+    </section>
+  </li>
+</template>

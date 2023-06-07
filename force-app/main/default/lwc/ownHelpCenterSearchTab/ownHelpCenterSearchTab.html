@@ -1,0 +1,49 @@
+<!-- //============================================================================
+// Title:    Honda Owners Experience - Help Center
+//
+// Summary:  This is the search tab html seen at the help center of the Honda Owner Community
+//
+// Details:  Extend the LightningElement with this Base Element to gain access to the Messaging Channel and other logic herein and this is the parent component for all help center pages.
+//
+//
+// History:
+// May 17, 2021 Arunprasad N (Wipro) Original Author
+//=========================================================================== -->
+<template>
+    <div class="c-container">
+        <div class="tab-large">
+            <lightning-layout multiple-rows="true" horizontal-align="center">
+                <lightning-layout-item padding="around-small">
+                    <div class="slds-tabs_default tabs">
+                        <ul class="slds-tabs_default__nav slds-grid_align-space" role="tablist">
+                            <template for:each={tabs} for:item="tab">
+                                <li key={tab.value} data-value={tab.value} data-tab="true" class={tab.itemclass} data-id={tab.id} title={tab.label} role="presentation" onclick={handleActive}>
+                                    <a data-tab-value={tab.control} class="slds-tabs_default__link tab-label" role="tab" tabindex={tab.tabindex} aria-selected={tab.ariaselected} aria-controls={tab.control} id={tab.id}>{tab.label}</a>
+                                </li>
+                            </template>
+                        </ul>
+                        <c-own-help-center-search-results></c-own-help-center-search-results>
+                    </div>
+                </lightning-layout-item>
+            </lightning-layout>
+        </div>
+        <div class="tab-small">
+            <lightning-layout multiple-rows horizontal-align="center">
+                <lightning-layout-item padding="around-small">
+                    <lightning-combobox
+                        class="tab-combobox"
+                        name="brand"
+                        label="Brand"
+                        value={category}
+                        placeholder="Select Brand"
+                        options={tabs}
+                        variant="label-hidden"
+                        onchange={handleChange} ></lightning-combobox>
+                </lightning-layout-item>
+                <lightning-layout-item size="12">
+                    <c-own-help-center-search-results category={category}></c-own-help-center-search-results>
+                </lightning-layout-item>
+            </lightning-layout>
+        </div>
+    </div>
+</template>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>52.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+
+            <property label="own Warranty Booklet1" name="contentId" type="ContentReference" /> 
+            <property label="own Warranty Booklet Autos" name="contentAutos" type="ContentReference" /> 
+            <property label="own Warranty Booklet Powersports" name="contentPS" type="ContentReference" />
+            <property label="Emission Warranty All" name="contentEmissionWarrantyAll" type="ContentReference" /> 
+            <property label="Emission Warranty CA" name="contentEmissionWarrantyCA" type="ContentReference" /> 
+            <property label="Save To My Garage Banner" name="saveToMyGarageContentId" type="ContentReference" /> 
+            <property label="Content Topic Acura" name="contentTopicAcura" type="String"/>
+            <property label="Content Topic Honda" name="contentTopicHonda" type="String"/>
+            <property label="Accordian Topic Acura" name="accordianTopicAcura" type="String"/>
+            <property label="Accordian Topic Honda" name="accordianTopicHonda" type="String"/>           
+            <property label="Warranty Page Content Powerequipment" name="contentIdPowerequipmentPage" type="ContentReference"/>           
+            <property label="PE Warranty PDFs based on purchase date - Topic" name="dateWisePdfTopicPowerequipment" type="String"/>        
+            <property label="PE Warranty PDFs based on Emission CS - Topic" name="emmissionWisePdfTopicPowerequipment" type="String"/>      
+            <property label="Marine Warranty PDFs based on Emission CS - Topic" name="emmissionWisePdfTopicMarine" type="String"/>
+            <property label="Warranty Page Content Marine" name="contentIdMarinePage" type="ContentReference"/>   
+            <property label="Outboard Motors Document Content Marine" name="contentIdMarineDoc" type="ContentReference"/>   
+            <property label="Warranties Powersports - Topic" name="warrantiesTopicPowersports" type="String"/>
+
+    </targetConfig>
+</targetConfigs>
+</LightningComponentBundle>

@@ -1,0 +1,53 @@
+<template>
+    <div class="slds-container_medium slds-container_center slds-p-around_medium">
+        <p class="slds-m-bottom_x-large">
+            The following report is as of <span>{date}</span>. You should also directly check your vehicle since this report might not reflect current vehicle status.
+        </p>
+        <div class="detail-wrapper slds-m-bottom_xx-large">
+            <div class="slds-grid slds-m-bottom_medium">
+                <label class="label_style">OIL LIFE</label>
+                <p>{vehicleHealthReport.oilLife}%</p>
+            </div>
+            <div class="slds-grid slds-m-bottom_medium">
+                <label class="label_style">Odometer</label>
+                <p>{vehicleHealthReport.mileage}</p>
+            </div>
+            <div class="slds-grid slds-m-bottom_medium">
+                <label class="label_style">Recall</label>
+                <p>{totalRecalls}</p>
+            </div>
+        </div>
+        <div class="vehicle_status_wrapper">
+            <h3>Your Vehicle Status</h3>
+            <div class="slds-grid slds-grid_vertical-align-center">
+                <i class="fa fa-lg fa-check check_icon" aria-hidden="true"></i>
+                <p class="slds-m-left_medium">Working Properly</p>
+            </div>
+            <div class="slds-grid slds-grid_vertical-align-center">
+                <i class="fa fa-lg fa-wrench wrench_icon" aria-hidden="true"></i>
+                <p class="slds-m-left_medium">Service Recommended</p>
+            </div>
+            <div class="horizontal_line"></div>
+            <div class="slds-grid slds-warp column1-wrapper-main">
+                <div class="slds-col slds-size_6-of-12 column1-wrapper">
+                    <div class="status-wrapper">
+                        <div class="container">
+                            <template for:each={vehiclestautscategory} for:item="vsc">
+                                <div key={vsc} class="auto-div">
+                                    <div class="status-head">{vsc}</div>
+                                    <c-own-Child-Vehicle-Health-Detail vehicle-category={vsc}></c-own-Child-Vehicle-Health-Detail>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+                <div class="slds-col slds-size_6-of-12 column2-wrapper">
+                </div>
+            </div>
+            <div class="horizontal_line"></div>
+        </div>
+        <div class="below-text">
+            Report is based on the last known data received from your vehicle at or prior to the 13th of every month. This report may not include all recommended services for your vehicle. For more information, please contact your dealer.
+        </div>
+    </div>
+</template>

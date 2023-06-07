@@ -1,0 +1,106 @@
+.page-title {
+    font-family: Roboto;
+    font-size: 50px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 55px;
+    letter-spacing: 1.5px;
+    text-align: center;
+}
+
+.page-subtitle {
+    font-family: Roboto;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 27px;
+    letter-spacing: 0.02em;
+    text-align: center;
+}
+
+.progress-label {
+    position: absolute;
+    width: 130px;
+    font-size: 16px;
+    font-weight: 300;
+    text-align: center;
+    left: -55px;
+}
+
+.progress-indicater {
+    position: relative;
+}
+
+.pdp-page-close-icon {
+    display: none;
+}
+
+.slds-progress__item.slds-is-completed .slds-progress__marker, .slds-progress__item.slds-is-active .slds-progress__marker {
+    background: white;
+    border-color: var(--HondaRed);
+}
+
+.progress-small-background {
+    background: #f6f6f6;
+}
+
+
+.breadcrum-style{
+    font-family: 'Roboto';
+font-style: normal;
+font-weight: 900;
+font-size: 14px;
+line-height: 22px;
+/* identical to box height, or 157% */
+
+letter-spacing: 0.02em;
+
+/* Primary / E42525 */
+
+color: #E42525;
+text-decoration: none;
+}
+/* Footer_desktop */
+@media only screen and (min-width: 601px) {
+    .progress-large {
+        display: block;
+    }
+
+    .progress-small {
+        display: none;
+        background: #f6f6f6;
+    }
+
+    .pdp-page-color {
+        background-color: #F5F5F5;
+    }
+}
+
+/* Footer_phone */
+@media only screen and (max-width: 600px) {
+    .page-title {
+        font-size: 30px;
+        line-height: 35px;
+        letter-spacing: 0.04em;
+    }
+
+    .page-subtitle {
+        font-size: 16px;
+        line-height: 24px;
+        letter-spacing: 0em;
+    }
+
+    .progress-large {
+        display: none;
+    }
+
+    .progress-small {
+        display: block;
+    }
+
+    .page-header {
+        border: 1px solid #DDDBDA;
+        box-shadow: 0px 2px 2px 0px #0000001a;
+        border-radius: 2px;
+    }
+}

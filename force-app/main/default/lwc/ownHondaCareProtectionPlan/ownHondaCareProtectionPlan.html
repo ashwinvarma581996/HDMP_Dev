@@ -1,0 +1,51 @@
+<template>
+	<template if:true={pageContentNodes}>
+		<!-- <c-own-product-header image-url={productImageURL} is-generic-header={isGeneric} product-sub-title={productSubTitle} product-title={pageContentNodes.title.value} brand={division}></c-own-product-header> -->
+		<!-- <c-own-page-header title={pageContentNodes.title.value} subtitle={productSubTitle}></c-own-page-header> -->
+		<c-own-page-header subtitle={pageContentNodes.title.value} isproductbadge="true" image="product.png"
+			title={productSubTitle}>
+		</c-own-page-header>
+		<div class="slds-container">
+			<lightning-layout horizontal-align="space" multiple-rows="true">
+				<lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="7"
+					padding="around-small">
+					<lightning-formatted-rich-text class="body-text" value={body}></lightning-formatted-rich-text>
+				</lightning-layout-item>
+				<lightning-layout-item class="slds-m-vertical_large" size="12" small-device-size="12"
+					medium-device-size="12" large-device-size="7" padding="around-small">
+					<!-- <c-own-find-dealers-card title="FIND A DEALER" titlecolor="Honda Black" icon=""
+						actiontitle="Schedule service" actionicon="utility:forward" map-image={mapImage}
+						isprotectionplanpage="true" brand="powersports"></c-own-find-dealers-card> -->
+					<c-own-find-dealer></c-own-find-dealer>
+				</lightning-layout-item>
+				<!--<lightning-layout-item if:false={isGeneric} class="slds-m-vertical_large" size="12" small-device-size="12" medium-device-size="12" large-device-size="7" padding="around-small">
+					<c-own-protection-plan-pricing-calendar-card class="pricing-calendar-large" heading1={pricingCardLargeScreenContent.phone_label.value} heading2={pricingCardLargeScreenContent.phone2_label.value} pricing-image1={pricingCardLargeScreenContent.body.value} pricing-image2={pricingCardLargeScreenContent.image.url}></c-own-protection-plan-pricing-calendar-card>
+					<c-own-protection-plan-pricing-calendar-card class="pricing-calendar-small" heading1={pricingCardSmallScreenContent.phone_label.value} heading2={pricingCardSmallScreenContent.phone2_label.value} pricing-image1={pricingCardSmallScreenContent.body.value} pricing-image2={pricingCardSmallScreenContent.image.url}></c-own-protection-plan-pricing-calendar-card>
+				</lightning-layout-item>-->
+				<lightning-layout-item class="slds-m-vertical_large" size="12" small-device-size="12"
+					medium-device-size="12" large-device-size="7" padding="around-small">
+					<c-own-accordion heading={pageContentNodes.description_label.value}
+						content-for-large-screen={planDetailsAccordion} content-for-small-screen={planDetailsAccordion}>
+					</c-own-accordion>
+				</lightning-layout-item>
+				<lightning-layout-item class="slds-m-vertical_large" size="12" small-device-size="12"
+					medium-device-size="12" large-device-size="7" padding="around-small">
+					<c-own-accordion heading={pageContentNodes.description2_label.value}
+						content-for-large-screen={termsAndChartsLargeScreenAccordion}
+						content-for-small-screen={termsAndChartsSmallScreenAccordion}></c-own-accordion>
+				</lightning-layout-item>
+				<lightning-layout-item class="slds-m-vertical_large" size="12" small-device-size="12"
+					medium-device-size="12" large-device-size="7" padding="around-small">
+					<lightning-layout horizontal-align="space" multiple-rows="true">
+						<lightning-layout-item size="12" class="headline-3">
+							{pageContentNodes.section_label.value}
+						</lightning-layout-item>
+						<lightning-layout-item class="slds-m-top_large slds-m-bottom_small custom-section" size="12">
+							<lightning-formatted-rich-text value={section_content}></lightning-formatted-rich-text>
+						</lightning-layout-item>
+					</lightning-layout>
+				</lightning-layout-item>
+			</lightning-layout>
+		</div>
+	</template>
+</template>

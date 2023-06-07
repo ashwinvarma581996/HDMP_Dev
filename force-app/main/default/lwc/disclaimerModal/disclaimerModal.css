@@ -1,0 +1,9 @@
+ul:not(.browser-default) li {
+    list-style-type: disc;
+}
+
+@media(max-width: 568px){
+    .size{
+        color: blue;
+    }
+}

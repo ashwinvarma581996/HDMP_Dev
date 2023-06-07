@@ -1,0 +1,37 @@
+<template>
+    <div class="categoryPage slds-show_large slds-p-right_x-large">
+        <p class="left-title">CATEGORIES</p>
+        <ul class="slds-accordion">
+            <li class="slds-accordion__list-item" if:true={currentParent}>
+                <section class="slds-accordion__section">
+                        <lightning-icon 
+                            class="arrowicon slds-m-left_x-small" 
+                            icon-name="utility:back" 
+                            size="x-small"
+                            onclick={handleBack}>
+                        </lightning-icon>
+                        <span class="slds-accordion__summary-content slds-m-left_small nItem-name-parent">
+                            {currentParent}
+                        </span>
+                </section>
+            </li>
+            <template for:each={navigationList} for:item="nItem" for:index="index">
+                <li class="slds-accordion__list-item" key={nItem}>
+                    <section class="slds-accordion__section">
+                        <lightning-icon 
+                            class="arrowicon slds-m-left_x-small" 
+                            if:true={nItem.hasChild}
+                            icon-name="utility:chevronright" 
+                            size="x-small"
+                            data-index={index}
+                            onclick={handleIconClick}>
+                        </lightning-icon>
+                        <span class="slds-accordion__summary-content slds-m-left_small">
+                            <a href={nItem.categoryUrl} class="nItem-name" onclick={closeNavigation}>{nItem.categoryName}</a>
+                        </span>
+                    </section>
+                </li>
+            </template>
+        </ul>
+    </div>
+</template>

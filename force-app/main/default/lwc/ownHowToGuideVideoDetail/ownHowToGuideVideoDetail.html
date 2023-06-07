@@ -1,0 +1,28 @@
+<template>
+        <lightning-layout multiple-rows horizontal-align="space">
+            <lightning-layout-item size="12" small-device-size="10" medium-device-size="10" large-device-size="8" >
+            <div class="slds-p-vertical_medium slds-p-horizontal_small">
+                <lightning-formatted-rich-text class="content" value={content}></lightning-formatted-rich-text>
+            </div>
+            <div class="videoContainer custom-column">
+                <iframe 
+                class="frameBox"
+                src={videoLink} 
+                frameborder="0" 
+                width="100%" 
+                height="100%"
+                allowfullscreen
+                ></iframe> 
+            </div>
+            </lightning-layout-item>
+        </lightning-layout>
+    
+        <!-- <lightning-layout multiple-rows horizontal-align="space">
+            <lightning-layout-item size="12" padding="around-small" small-device-size="10" medium-device-size="10" large-device-size="8">
+                <lightning-formatted-rich-text class="title" value={subtitle}></lightning-formatted-rich-text>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" padding="around-small" small-device-size="10" medium-device-size="10" large-device-size="8">
+                    
+            </lightning-layout-item>
+        </lightning-layout> -->
+</template>

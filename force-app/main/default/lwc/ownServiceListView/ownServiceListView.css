@@ -1,0 +1,138 @@
+.vehicle-image-round{
+    border-radius: 50%;
+    padding: 0px;
+    width: 200px;
+    height: 200px;
+    background: #F0F0F0;
+    object-fit: contain;
+}
+
+.vehicle-image-round-small{
+    border-radius: 50%;
+    padding: 0px;
+    width: 50px;
+    height: 50px;
+    background: #F0F0F0;
+    object-fit: contain;
+}
+.header-div{
+    background: #F5F5F5;
+    border-bottom: 1px solid #5E6162;
+}
+.breadcrumb {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    line-height: 22px;
+    letter-spacing: 0.02em;
+}
+.breadcrumb-text-color {
+    color: #E42525 !important;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 14px;
+    line-height: 22px;
+}
+.breadcrumb-item-back::before {
+    content: "<" !important;
+    position: absolute;
+    left: -.75rem;
+    color: #E42525;
+}
+.page-description {
+    width: 70%;
+    margin-bottom: 30px;
+}
+
+.page-description p {
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 26px;
+    margin-bottom: 30px;
+}
+
+
+.table-wrapper .header-div lightning-layout-item {
+    align-items: center;
+    display: flex;
+    font-weight: 900;
+    font-size: 14px;
+    line-height: 22px;
+}
+
+.table-wrapper .table-rows lightning-layout-item {
+    border-bottom: 1px solid #D9D9D9;
+}
+
+button.primary-button {
+    background: #E42525;
+    border-radius: 2px;
+    color: #fff;
+    border: 2px solid #E42525;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    font-weight: 900;
+    font-size: 16px;
+    line-height: 24px;
+    padding: 10px 32px;
+    margin-right: 15px;
+    transition: all 0.5s ease;
+}
+button.primary-button:hover {
+    background: #ffffff;
+    color: #E42525;
+}
+
+button.primary-outline-button {
+    background: #ffffff;
+    border-radius: 2px;
+    color: #E42525;
+    border: 2px solid #E42525;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    font-weight: 900;
+    font-size: 16px;
+    line-height: 24px;
+    padding: 10px 32px;
+    margin-right: 15px;
+    transition: all 0.5s ease;
+}
+button.primary-outline-button:hover {
+    background: #E42525;
+    color: #ffffff;
+}
+
+@media screen and (max-width: 700px) {
+    .page-description {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    button.primary-button {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    button.primary-outline-button {
+        width: 100%;
+    }
+    .header-div {
+        display: none;
+    }
+    /* .table-rows {
+        display: none;
+    } */
+}
+
+.no-row {
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 26px;
+    padding: 40px 0;
+}
+
+.spinner-1 { 
+        padding-top: 10%;
+        padding-bottom: 10%;
+        position: relative;
+  }

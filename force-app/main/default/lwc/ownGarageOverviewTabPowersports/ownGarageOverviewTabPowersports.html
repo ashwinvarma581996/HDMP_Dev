@@ -1,0 +1,176 @@
+<!-- //============================================================================
+// Title:    Honda Owners Experience - Overview Tab for Powersports
+//
+// Summary:  This is the Tab for Powersports Overview
+//
+//
+// History:
+// May 17, 2021 Arunprasad N (Wipro) Original Author
+// July 15, 2021 Jim Kohs (Wipro) refactored to ownBaseCard2
+//=========================================================================== -->
+<template>
+    <div class="c-container garage-overview-tab-large">
+        <lightning-layout horizontal-align="spread" class="slds-p-top_large" multiple-rows>
+            <lightning-layout-item padding="around-small">
+                <h3 title="Service & Parts">
+                    <span class="garage-overview-tab-title">Service & Parts</span>
+                </h3>
+            </lightning-layout-item>
+            <lightning-layout-item padding="around-small">
+                <h3 title="ALL SERVICE & PARTS">
+                    <span class="garage-overview-tab-title-cta">ALL SERVICE & PARTS</span>
+                </h3>
+            </lightning-layout-item>
+        </lightning-layout>
+        <lightning-layout multiple-rows>
+            <lightning-layout-item size="8" padding="around-small">
+                <lightning-layout multiple-rows>
+                    <lightning-layout-item size="12">
+                        <c-own-find-dealers-card brand="powersports"></c-own-find-dealers-card>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </lightning-layout-item>
+            <lightning-layout-item size="4" padding="around-small">
+                <lightning-layout multiple-rows>
+                    <lightning-layout-item size="12">
+                        <c-own-my-service-history-card brand="powersports"></c-own-my-service-history-card>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </lightning-layout-item>
+        </lightning-layout>
+        <lightning-layout multiple-rows>
+            <lightning-layout-item size="4" padding="around-small">
+                <c-own-parts-and-accessories-card brand="powersports"></c-own-parts-and-accessories-card>
+            </lightning-layout-item>
+        </lightning-layout>
+        <lightning-layout horizontal-align="spread" class="slds-p-top_large" multiple-rows>
+            <lightning-layout-item padding="around-small">
+                <h3 title="Finance">
+                    <span class="garage-overview-tab-title">Finance</span>
+                </h3>
+            </lightning-layout-item>
+        </lightning-layout>
+        <lightning-layout multiple-rows>
+            <lightning-layout-item size="4" padding="around-small">
+                <c-own-sign-up-for-autopay-card brand="Powersports"></c-own-sign-up-for-autopay-card>
+            </lightning-layout-item>
+            <lightning-layout-item size="4" padding="around-small">
+                <c-own-view-financing-options-card brand="powersports"></c-own-view-financing-options-card>
+            </lightning-layout-item>
+        </lightning-layout>
+        <lightning-layout horizontal-align="spread" class="slds-p-top_large" multiple-rows>
+            <lightning-layout-item padding="around-small">
+                <h3 title="Resources & Downloads">
+                    <span class="garage-overview-tab-title">Resources & Downloads</span>
+                </h3>
+            </lightning-layout-item>
+            <lightning-layout-item padding="around-small">
+                <h3 title="All Connected Services">
+                    <span class="garage-overview-tab-title-cta">All Resources & Downloads</span>
+                </h3>
+            </lightning-layout-item>
+        </lightning-layout>
+        <lightning-layout multiple-rows>
+            <lightning-layout-item size="4" padding="around-small">
+                <c-own-how-to-guides-card brand="powersports"></c-own-how-to-guides-card>
+            </lightning-layout-item>
+            <lightning-layout-item size="4" padding="around-small">
+                <c-own-specifications-card brand="powersports"></c-own-specifications-card>
+            </lightning-layout-item>
+            <lightning-layout-item size="4" padding="around-small">
+                <c-own-product-manual-card brand="powersports"></c-own-product-manual-card>
+            </lightning-layout-item>
+        </lightning-layout>
+        <lightning-layout multiple-rows>
+            <lightning-layout-item size="4" padding="around-small">
+                <c-own-wallpaper-card brand="powersports"></c-own-wallpaper-card>
+            </lightning-layout-item>
+        </lightning-layout>
+        <lightning-layout horizontal-align="spread" class="slds-p-top_large" multiple-rows>
+            <lightning-layout-item padding="around-small">
+                <h3 title="We're Here to Help">
+                    <span class="garage-overview-tab-title">We're Here to Help</span>
+                </h3>
+            </lightning-layout-item>
+        </lightning-layout>
+        <lightning-layout multiple-rows>
+            <lightning-layout-item size="4" padding="around-small">
+                <c-own-help-center-card brand="powersports"></c-own-help-center-card>
+            </lightning-layout-item>
+            <lightning-layout-item size="4" padding="around-small">
+                <c-own-browse-faqs-card brand="powersports"></c-own-browse-faqs-card>
+            </lightning-layout-item>
+            <lightning-layout-item size="4" padding="around-small">
+                <c-own-quick-start-guide-card brand="powersports"></c-own-quick-start-guide-card>
+            </lightning-layout-item>
+        </lightning-layout>
+    </div>
+    <div class="c-container garage-overview-tab-small">
+        <lightning-layout multiple-rows>
+            <lightning-layout-item size="12" class="slds-p-top_large">
+                <h3 title="Service & Parts">
+                    <span class="garage-overview-tab-title-small">Service & Parts</span>
+                </h3>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class="slds-p-vertical_small">
+                <c-own-find-dealers-card brand="powersports"></c-own-find-dealers-card>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class="slds-p-vertical_small">
+                <c-own-my-service-history-card brand="powersports"></c-own-my-service-history-card>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class="slds-p-vertical_small">
+                <c-own-parts-and-accessories-card> brand="powersports"</c-own-parts-and-accessories-card>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class="slds-p-vertical_small">
+                <h3 title="ALL SERVICE & PARTS">
+                    <span class="garage-overview-tab-title-cta">ALL SERVICE & PARTS</span>
+                </h3>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class="slds-p-top_large">
+                <h3 title="Finance">
+                    <span class="garage-overview-tab-title-small">Finance</span>
+                </h3>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class="slds-p-vertical_small">
+                <c-own-sign-up-for-autopay-card brand="Powersports"></c-own-sign-up-for-autopay-card>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class="slds-p-vertical_small">
+                <c-own-view-financing-options-card brand="powersports"></c-own-view-financing-options-card>
+            </lightning-layout-item>
+            
+            <lightning-layout-item size="12" class="slds-p-top_large">
+                <h3 title="Resources & Downloads">
+                    <span class="garage-overview-tab-title-small">Resources & Downloads</span>
+                </h3>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class="slds-p-vertical_small">
+                <c-own-how-to-guides-card brand="powersports"></c-own-how-to-guides-card>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class="slds-p-vertical_small">
+                <c-own-specifications-card brand="powersports"></c-own-specifications-card>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class="slds-p-vertical_small">
+                <c-own-product-manual-card brand="powersports"></c-own-product-manual-card>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class="slds-p-vertical_small">
+                <h3 title="All Resources Downloads">
+                    <span class="garage-overview-tab-title-cta">All Resources Downloads</span>
+                </h3>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class="slds-p-top_large">
+                <h3 title="We're Here to Help">
+                    <span class="garage-overview-tab-title-small">We're Here to Help</span>
+                </h3>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class="slds-p-vertical_small">
+                <c-own-help-center-card brand="powersports"></c-own-help-center-card>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class="slds-p-vertical_small">
+                <c-own-browse-faqs-card brand="powersports"></c-own-browse-faqs-card>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class="slds-p-vertical_small">
+                <c-own-quick-start-guide-card brand="powersports"></c-own-quick-start-guide-card>
+            </lightning-layout-item>
+        </lightning-layout>
+    </div>
+</template>

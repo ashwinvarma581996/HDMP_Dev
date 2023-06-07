@@ -1,0 +1,46 @@
+<template>
+    <div class="slds-grid slds-grid_vertical slds-grid_vertical-align-center ownEditImage">
+        <div class="slds-grid slds-align_absolute-center product-icon">
+            <!-- Alexander Dzhitenov (Wipro) DOE-4825 - Added error handling for broken image links -->
+            <!-- <img class="slds-align_absolute-center vehicle-image-round" src={image}> -->
+            <c-own-product-image product-image={image} brand={division}></c-own-product-image>
+        </div>
+        <div class="slds-grid slds-grid_vertical slds-grid_vertical-align-center slds-grid_align-center ownAddPhotoContainer">
+            <div class="slds-form-element">
+                <div class="slds-form-element__control">
+                    <div class="slds-file-selector slds-file-selector_files">
+                        <div class="slds-file-selector_integrated">
+                            <input type="file" id="custom-image-upload"
+                                class="slds-file-selector__input slds-assistive-text" accept="image/*"
+                                onchange={handleUserImageUpload} />
+                            <label for="custom-image-upload" id="custom-image-upload-label">
+                                <div
+                                    class="slds-grid slds-align_absolute-center slds-file-selector__button slds-file-selector__input ownAddPhoto">
+                                    <img src={camera_icon} />
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- style="width: 50%; text-align:center;" -->
+            <div><h3 class="custom-image-name">{customImage.name}</h3></div>
+            <h3 class="slds-m-top_small ownAddPhotoHead">Edit Image</h3>
+        </div>
+        <template if:true={showImageError}>
+            <lightning-layout multiple-rows="true" class="err-container">
+                <lightning-layout-item  size="12" class="err-layout-item">
+                    <div class="">
+                        <img src={warningicon} class="warning-icon error-img-div"/>
+                        <lightning-icon icon-name='utility:close'  size='x-small' class="close-icon close-icon-div" onclick={handleErrorClose}></lightning-icon>
+                    </div>
+                </lightning-layout-item>
+                <lightning-layout-item  size="12" class="err-layout-item">
+                    <div class="error-msg">
+                        Image should be JPG, GIF or PNG File. Maximum file size is 3 MB
+                    </div>
+                </lightning-layout-item>
+            </lightning-layout>
+        </template>
+    </div>
+</template>

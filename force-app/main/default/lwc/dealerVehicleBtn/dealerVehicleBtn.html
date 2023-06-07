@@ -1,0 +1,14 @@
+<template>
+    <template if:true={showComponents}>
+        <div class="slds-grid dealerVehicle bgLight">
+            <div class="slds-container_center containerWrapper">
+                <div class="slds-grid slds-grid_align-spread slds-wrap">
+                        <c-vehicle-Selector></c-vehicle-Selector>
+                        <template if:true={showDealer}>
+                            <c-pop-dealer display-my-dealer-text></c-pop-dealer>
+                        </template>
+                </div>
+            </div>
+        </div>
+    </template>
+</template>

@@ -1,0 +1,58 @@
+<!-- //============================================================================
+// Title:    Honda Owners Experience - Fuel Recomendations Card
+//
+// Summary:  This Card links to the Fuel Recomendations
+//
+//
+// History:
+// May 17, 2021 Arunprasad N (Wipro) Original Author
+// July 15, 2021 Jim Kohs (Wipro) refactored to ownBaseCard2
+//=========================================================================== -->
+<template>
+    <div class={cardDivClass}>
+    <c-own-card title={title} icon-image={iconImage} brand={brand} showfooter={showFooter} onheader={handleHeader} onfooter={handleFooter} onaction={handleAction}>    
+        <div slot="default">
+            <!-- ============================= -->
+            <!-- ====== Default HTML ========= -->
+            <!-- ============================= -->
+            <div class="card-body-content">Err: Please chose a brand</div>
+        </div>
+
+        <div slot="acura">
+            <!-- ============================= -->
+            <!-- ====== Acura HTML   ========= -->
+            <!-- ============================= -->
+            <div class="card-body-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</div>
+        </div>
+
+        <div slot="honda">
+            <!-- ============================= -->
+            <!-- ====== Honda HTML   ========= -->
+            <!-- ============================= -->
+            <div class="card-body-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</div>
+        </div>
+
+        <div slot="powersports">
+            <!-- ============================= -->
+            <!-- ====== PS HTML      ========= -->
+            <!-- ============================= -->
+            <div class="card-body-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</div>
+        </div>
+
+        <div slot="powerequipment">
+            <!-- ============================= -->
+            <!-- ====== PE HTML      ========= -->
+            <!-- ============================= -->
+            <div class="card-body-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</div>
+        </div>
+
+        <!-- ============================= -->
+        <!-- ====== Marine HTML   ========= -->
+        <!-- ============================= -->
+        <div slot="marine">
+            <P class="card-body-content">Keep your fuel system running smoothly with these tips to avoid fuel-related problems.</P><br>
+            <!-- <a class="external-link">Find Out More</a> -->
+        </div>
+    </c-own-card>
+    </div>
+</template>

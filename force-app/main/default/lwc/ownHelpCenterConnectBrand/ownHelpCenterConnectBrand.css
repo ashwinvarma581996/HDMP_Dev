@@ -1,0 +1,89 @@
+.connect-brand-text-headline {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    /*font-size: 32px;
+    line-height: 37px;*/
+    text-align: center;
+    /*letter-spacing: 0.02px;*/
+    color: #000000;
+}
+.connect-brand-card {
+    width: 221px;
+    height: 196px;
+    background: #FFFFFF;
+    border: 1px solid #D9D9D9;
+    box-sizing: border-box;
+    box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 2px;
+}
+.connect-brand-card-text {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 14px;
+    line-height: 22px;
+    text-align: center;
+    letter-spacing: 0.02em;
+    color: #000000;
+}
+.connect-brand-card-small {
+    height: 80px;
+}
+.connect-brand-small button {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 14px;
+    letter-spacing: 0.02em;
+    color: #080707;
+    justify-content: flex-start;
+}
+.connect-brand-card img {
+    width: 130px;
+    height: 130px;
+}
+.connect-brand-card-small img {
+    width: 90px;
+    height: 90px;
+}
+.img-cursor {
+    cursor: pointer;
+}
+@media only screen and (min-width: 1201px) {
+    .connect-brand-small {
+        display: none;
+    }
+    .connect-brand-large {
+        display: block;
+    }
+}
+@media screen and (min-width: 905px) and (max-width: 1200px) { 
+    .connect-brand-card {
+        width: 151px;
+        height: 126px;
+    }
+    
+    .connect-brand-small {
+        display: none;
+    }
+    .connect-brand-large {
+        display: block;
+    }
+    .connect-brand-card img {
+        width: 80px;
+        height: 80px;
+    }
+
+}
+@media only screen and (max-width: 904px) {
+    .connect-brand-large {
+        display: none;
+    }
+    .connect-brand-small {
+        display: block;
+    }
+}
+.find-powersports{
+    padding: 12px;
+}

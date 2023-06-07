@@ -1,0 +1,31 @@
+<template>
+    <div class="slds-p-bottom_xx-large slds-container_large large-screen" >
+        <lightning-layout if:true={collisionBodyShopData} multiple-rows horizontal-align="space">
+            <lightning-layout-item  size="12" small-device-size="12" medium-device-size="12" large-device-size="10">
+                <!-- <img src={collisionBodyShopData.image} style="width:100%;" class="slds-m-bottom_large"> -->
+                <div class="desktop-image">
+                    <lightning-formatted-rich-text value={collisionBodyShopData.desktopImage} class="slds-m-bottom_large" ></lightning-formatted-rich-text>
+                </div>
+                <div class="mobile-image">
+                    <lightning-formatted-rich-text value={collisionBodyShopData.mobileImage} class="slds-m-bottom_large" ></lightning-formatted-rich-text>
+                </div>
+                
+            </lightning-layout-item>
+            <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="10" class="slds-p-top_large"> 
+                <div class="title slds-p-bottom_large">{collisionBodyShopData.title}</div>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="10">
+                <lightning-formatted-rich-text class="text-style" value={collisionBodyShopData.body}></lightning-formatted-rich-text>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="10">
+                <div class="slds-m-vertical_xx-large">
+                <c-own-dealer-locator-card brand={brand}></c-own-dealer-locator-card>
+            </div>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="10">
+                <lightning-formatted-rich-text class="text-style" value={collisionBodyShopData.description}></lightning-formatted-rich-text>
+               <!-- <c-own-collision-repair-detail content-id={contentId} ></c-own-collision-repair-detail>  -->
+            </lightning-layout-item>
+        </lightning-layout>
+    </div> 
+</template>

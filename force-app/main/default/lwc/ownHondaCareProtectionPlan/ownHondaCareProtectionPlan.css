@@ -1,0 +1,51 @@
+.body-text{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 26px;
+}
+.list-style{
+    color: red;
+}
+.headline-3{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 32px;
+    line-height: 37px;
+    letter-spacing: 0.02em;
+    color: #000000;
+}
+.custom-section{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 26px;
+    color: #000000;
+}
+.link-color{
+    color:red;
+}
+.link-color a{
+    color:red;
+}
+
+@media only screen and (min-width: 601px) {
+    .pricing-calendar-small {
+        display: none;
+    }
+    .pricing-calendar-large {
+        display: block;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .pricing-calendar-large {
+        display: none;
+    }
+    .pricing-calendar-small {
+        display: block;
+    }
+}

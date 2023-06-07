@@ -1,0 +1,17 @@
+:host {
+    --sds-c-button-brand-color-background: #5E6162;
+    --sds-c-button-brand-color-border: #5E6162;
+    --sds-c-button-brand-color-background-hover: #333536;  /*for hover*/
+    --sds-c-button-brand-color-border-hover: #333536;
+    --sds-c-button-brand-color-link: #333536;
+    --sds-c-button-brand-font-style: "Roboto";
+    
+    --sds-c-button-neutral-color-background-hover: #D9D9D9;
+    --sds-c-button-neutral-color-border: #5E6162;
+    /*--sds-c-button-neutral-color-link: #000000;*/
+ 
+
+  }
+  .THIS.customRadioCls .slds-form-element__control .slds-radio{
+    display : inline-block !important;
+}

@@ -1,0 +1,44 @@
+.imagewidth{
+    max-width: 40%;
+}
+
+.imagewidthcustom {
+    max-width: 50%;
+}
+
+.image-padding {
+    padding-top: 21px;
+}
+
+.title{
+        font-weight: bold;
+        font-size: 20px;
+        line-height: 30px;
+        letter-spacing: 0.04em;
+        color: #000000;
+}
+
+
+.feature-footer{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 18px;
+    display: flex;
+    color: #000000;
+    padding-top:15px;
+     overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-box-orient: vertical; 
+}
+.overlap{
+    position: relative;
+    z-index: 1;
+    cursor: pointer;
+}
+.iframe{
+    position: relative;
+    z-index: -1;
+}

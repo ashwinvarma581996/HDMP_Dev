@@ -1,0 +1,28 @@
+<template>
+    <div class="slds-container_medium slds-container_center slds-p-around_large">
+        <div class="system-warranty">
+            <h3>Outboard Motors Warranty Documents</h3>
+            <lightning-layout class="slds-grid_vertical-align-end slds-m-bottom_xx-large slds-m-top_x-small"
+                multiple-rows>
+                <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="6">
+                    <template if:true={emission}>
+                        <c-own-card title={emission.title} brand="default" icon-image={icon} titlecolor={titlecolor}
+                            hide-body-section={emission.hideBody} header-clickable="true" onheader={handleHeaderClick}
+                            data-link={emission.download_link} data-title={emission.title}>
+                            <div slot="action">
+                                <lightning-icon class={iconClass} icon-name="utility:download" size="x-small"
+                                    slot="actions" data-link={emission.download_link} onclick={handleHeaderClick}
+                                    data-title={emission.title}>
+                                </lightning-icon>
+                            </div>
+                            <div slot="default">
+                                <lightning-formatted-rich-text value={emission.body}></lightning-formatted-rich-text>
+                            </div>
+                        </c-own-card>
+                    </template>
+                </lightning-layout-item>
+            </lightning-layout>
+
+        </div>
+    </div>
+</template>

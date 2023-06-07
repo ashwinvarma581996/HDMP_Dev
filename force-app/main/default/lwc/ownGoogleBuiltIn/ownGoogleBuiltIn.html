@@ -1,0 +1,51 @@
+<template>
+    <lightning-layout multiple-rows class="slds-align_absolute-center">
+        <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="11">
+            <lightning-layout multiple-rows>
+                <template iterator:item={googleRecords}>
+
+
+
+                    <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="4"
+                        key={item.value.title} class="custom-border custom-div">
+                        <div class="slds-p-around_small">
+                            <lightning-layout-item size="4" small-device-size="4" medium-device-size="4"
+                                large-device-size="4">
+                                <template if:true={item.value.image}>
+                                    <template if:true={item.value.customImage}>
+                                        <img class="imagewidthcustom" src={item.value.image} />
+                                    </template>
+                                    <template if:false={item.value.customImage}>
+                                        <img class="imagewidth" src={item.value.image} />
+                                    </template>
+                                </template>
+                            </lightning-layout-item>
+                            <!-- <lightning-layout-item size="8" small-device-size="8" medium-device-size="8"
+                                large-device-size="8">
+                                <span class="title">{item.value.title}</span>
+                            </lightning-layout-item> -->
+                            <template if:true={item.value.image}>
+                                <template if:true={item.value.customImage}>
+                                    <div class="slds-p-top_small"></div>
+                                </template>
+                                <template if:false={item.value.customImage}>
+                                    <div class="image-padding"></div>
+                                </template>
+                                <div class="overlap" data-label={item.value.title}>
+                                    <iframe allow="autoplay" class="iframe" width="100%" height="264px" src={item.value.vedioLink} frameborder="0"
+                                        allowfullscreen></iframe>
+                                </div>
+                                <div class="slds-p-top_small"></div>
+                            </template>
+                            <lightning-formatted-rich-text value={item.value.body}
+                                class="slds-align_absolute-center feature-footer"></lightning-formatted-rich-text>
+                        </div>
+                    </lightning-layout-item>
+
+
+                </template>
+            </lightning-layout>
+        </lightning-layout-item>
+    </lightning-layout>
+
+</template>

@@ -1,0 +1,153 @@
+<template>
+    <lightning-layout class="slds-p-bottom_xx-large" multiple-rows>
+        <lightning-layout-item size="12" padding="around-small" small-device-size="12" medium-device-size="12"
+            large-device-size="12">
+            <div if:true={isError} class="error-message">
+                <img src={errorLogo} class="slds-m-right_small" />
+                DATA UNAVAILABLE
+            </div>
+            <div if:true={isContentShow} class="custom-box form-styles">
+                <lightning-layout multiple-rows="true">
+                    <lightning-layout-item size="12">
+                        <lightning-layout multiple-rows="true">
+                            <lightning-layout-item size="12" small-device-size="1" medium-device-size="2"
+                                large-device-size="2">
+                            </lightning-layout-item>
+                            <lightning-layout-item size="12" small-device-size="1" medium-device-size="8"
+                                large-device-size="8">
+                                <div class="heading-text">
+                                    <template if:true={isPageActive}>
+                                        <lightning-formatted-rich-text value={activePageTitle}></lightning-formatted-rich-text>
+                                    </template>
+                                    <template if:false={isPageActive}>
+                                        <lightning-formatted-rich-text value={inactivePageTitle}></lightning-formatted-rich-text>
+                                    </template>
+                                </div>
+                                <template if:false={isQuickStartGuide}>
+                                     <div class="section-title slds-p-top_x-small"><b>Select your phone</b></div>
+                                </template>     
+                            </lightning-layout-item>
+                            <lightning-layout-item size="12" small-device-size="1" medium-device-size="2"
+                                large-device-size="2">
+                            </lightning-layout-item>
+                        </lightning-layout>
+                    </lightning-layout-item>
+
+                    <lightning-layout-item size="12">
+                        <lightning-layout multiple-rows="true">
+                            <lightning-layout-item size="12" small-device-size="1" medium-device-size="2"
+                                large-device-size="2">
+                            </lightning-layout-item>
+                            <lightning-layout-item size="12" small-device-size="1" medium-device-size="8"
+                                large-device-size="8">
+                                <template if:false={isQuickStartGuide}>
+                                    <lightning-layout multiple-rows="true">
+                                        <lightning-layout-item size="12" small-device-size="12" medium-device-size="12"
+                                            large-device-size="3">
+                                            <div class="combobox-gutters slds-p-top_x-small">
+                                                <span class="custom-input-label"><b>Phone Carrier</b></span>
+                                                <lightning-combobox class="find-brand-combobox" label="Phone Carrier"
+                                                    variant="label-hidden" options={phoneCarrierOptions}
+                                                    placeholder="Select Phone Carrier" value={phoneCarrier} onchange={handlePhoneCarrier}>
+                                                </lightning-combobox>
+                                            </div>
+                                        </lightning-layout-item>
+                                        <lightning-layout-item size="12" small-device-size="12" medium-device-size="12"
+                                            large-device-size="3">
+                                            <div class="combobox-gutters slds-p-top_x-small">
+                                                <span class="custom-input-label"><b>Manufacturer</b></span>
+                                                <lightning-combobox class={isManufacturerComboboxActive}
+                                                    label="Manufacturer" variant="label-hidden"
+                                                    options={ManufacturerOptions} placeholder="Select Manufacturer"
+                                                    disabled={isManufacturerDisable} value={manufacturer} onchange={handleManufacturer}>
+                                                </lightning-combobox>
+                                            </div>
+                                        </lightning-layout-item>
+                                        <lightning-layout-item size="12" small-device-size="12" medium-device-size="12"
+                                            large-device-size="3">
+                                            <div class="combobox-gutters slds-p-top_x-small">
+                                                <span class="custom-input-label"><b>Phone Model</b></span>
+                                                <lightning-combobox class={isPhoneModelComboboxActive}
+                                                    name="Phone Model" label="Phone Model" variant="label-hidden"
+                                                    options={phoneModelOptions} placeholder="Select Phone Model"
+                                                    onchange={handlePhoneModel} value={phoneModel} disabled={isModelDisable}>
+                                                </lightning-combobox>
+                                            </div>
+                                        </lightning-layout-item>
+                                        <lightning-layout-item size="12" small-device-size="12" medium-device-size="12"
+                                            large-device-size="3">
+                                            <div class={viewButtonClass}>
+                                                <div>
+                                                    <span>&nbsp;</span>
+                                                </div>
+                                                <div>
+                                                    <button
+                                                        class="slds-button slds-button_neutral slds-m-top_x-small custom-button custom-button-find"
+                                                        onclick={handleViewCompatibility} disabled={isViewButtonDisabled}>{buttonName}</button>
+                                                </div>
+                                            </div>
+                                        </lightning-layout-item>
+                                    </lightning-layout>
+                                </template>
+                                <template if:true={isQuickStartGuide}>
+                                    <lightning-layout multiple-rows="true">
+                                        <lightning-layout-item size="12" small-device-size="12" medium-device-size="12"
+                                            large-device-size="12">
+                                            <div class="slds-p-top_x-small">
+                                                <!-- <span class="custom-input-label"><b>Phone Carrier</b></span> -->
+                                                <lightning-combobox class="find-brand-combobox" label="Phone Carrier"
+                                                    variant="label-hidden" options={phoneCarrierOptions}
+                                                    placeholder="Select Phone Carrier" value={phoneCarrier} onchange={handlePhoneCarrier}>
+                                                </lightning-combobox>
+                                            </div>
+                                        </lightning-layout-item>
+                                        <lightning-layout-item size="12" small-device-size="12" medium-device-size="12"
+                                            large-device-size="12">
+                                            <div class="slds-p-top_x-small">
+                                                <!-- <span class="custom-input-label"><b>Manufacturer</b></span> -->
+                                                <lightning-combobox class={isManufacturerComboboxActive}
+                                                    label="Manufacturer" variant="label-hidden"
+                                                    options={ManufacturerOptions} placeholder="Select Manufacturer"
+                                                    disabled={isManufacturerDisable} value={manufacturer} onchange={handleManufacturer}>
+                                                </lightning-combobox>
+                                            </div>
+                                        </lightning-layout-item>
+                                        <lightning-layout-item size="12" small-device-size="12" medium-device-size="12"
+                                            large-device-size="12">
+                                            <div class="slds-p-top_x-small">
+                                                <!-- <span class="custom-input-label"><b>Phone Model</b></span> -->
+                                                <lightning-combobox class={isPhoneModelComboboxActive}
+                                                    name="Phone Model" label="Phone Model" variant="label-hidden"
+                                                    options={phoneModelOptions} placeholder="Select Phone Model"
+                                                    onchange={handlePhoneModel} value={phoneModel} disabled={isModelDisable}>
+                                                </lightning-combobox>
+                                            </div>
+                                        </lightning-layout-item>
+                                        <lightning-layout-item size="12" small-device-size="12" medium-device-size="12"
+                                            large-device-size="12">
+                                            <div class={viewButtonClass}>
+                                                <div>
+                                                    <span>&nbsp;</span>
+                                                </div>
+                                                <div>
+                                                    <button
+                                                        class="slds-button slds-button_neutral slds-m-top_x-small custom-button custom-button-find find-a-phone"
+                                                        onclick={handleViewCompatibility} disabled={isViewButtonDisabled}>{buttonName}</button>
+                                                </div>
+                                            </div>
+                                        </lightning-layout-item>
+                                    </lightning-layout>
+                                </template>
+                            </lightning-layout-item>
+                            <lightning-layout-item size="12" small-device-size="1" medium-device-size="2"
+                                large-device-size="2">
+                            </lightning-layout-item>
+                        </lightning-layout>
+                    </lightning-layout-item>
+
+
+                </lightning-layout>
+            </div>
+        </lightning-layout-item>
+    </lightning-layout>
+</template>

@@ -1,0 +1,91 @@
+<template>
+    <div if:true={isLoading} class="slds-is-relative slds-spinner_container">
+        <lightning-spinner alternative-text="Please Wait..." variant="brand"></lightning-spinner>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </div>
+    <!-- OPEN MODAL -->
+    <template if:true={showModalBox}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+            aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open vehicleModal">
+            <div class="slds-modal__container">
+                <div class="modal-header" style="padding-bottom:0">
+                    <header class="slds-modal__header" style='border: none;padding-bottom:0'>
+                        <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                            title="Close" onclick={closeChangeModalPopUp}>
+                            <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse"
+                                size="small"></lightning-icon>
+                            <!-- <span class="slds-assistive-text">Close</span> -->
+                        </button>
+                        <h1 class="slds-text-align_center slds-p-bottom_small font-h5"> {modalTitle} </h1>
+                    </header>
+                </div>
+                <div class="slds-modal__content slds-p-around_large" id="modal-content-id-1" style="padding-top:0;">
+                <!-- Modal/Popup Box LWC body starts here -->
+                <div class="slds-grid slds-m-bottom_medium slds-p-bottom_large slds-grid_align-center megaMenuDropdown" style="border-bottom: #666 1px solid;">
+                    
+                    <div class="slds-col slds-size_12-of-12 slds-medium-size_5-of-12">
+                        <lightning-combobox name="product" class="product hideLabel" options={productTypeOptions}
+                            onchange={handleProductTypeOptions}> </lightning-combobox>
+                    </div>
+                </div>
+                <div class="slds-modal__content slds-p-around_small">
+                    <div if:true={isLoaded} class="slds-spinner_container">
+                        <lightning-spinner alternative-text="Loading..." variant="brand">
+                        </lightning-spinner>
+                    </div>
+                    <div class="slds-grid slds-gutters slds-wrap slds-p-bottom_x-large" style="border-bottom: #666 1px solid; align-items: stretch; justify-content: center;">
+                        <div class="slds-col slds-size_12-of-12 slds-medium-size_5-of-12">
+                            <h3 class="slds-text-align_center font-h6"><strong>By Year/Model</strong></h3>
+
+                            <lightning-combobox name="Year" class="Year" label="Year" data-index=1
+                                options={yearOptions} onchange={handleYearChange} disabled required=true> </lightning-combobox>
+
+                            <lightning-combobox name="Model" class="Model" label="Model" data-index=1
+                                options={modelOptions} onchange={handleModelChange} disabled required=true>
+                            </lightning-combobox>
+
+                            <lightning-combobox name="Trim" class="Trim" label="Trim" data-index=1
+                                options={trimOptions} onchange={handleTrimChange} disabled required=true>
+                            </lightning-combobox>
+                        </div>
+                        <div
+                            class="slds-col slds-size_12-of-12 slds-medium-size_1-of-12 slds-grid slds-grid_align-center slds-grid_vertical-align-center slds-is-relative slds-m-top_small">
+                            <span class="orText">OR</span>
+                        </div>
+                        <div class="slds-col slds-size_12-of-12 slds-medium-size_5-of-12">
+                            <h3 class="slds-text-align_center font-h6"><strong>By VIN</strong></h3>
+                            <!-- lightning-input Attribute :- message-when-too-short="VIN number is very short"-->
+                            <lightning-input type="text" data-index="1" class="Vin" name="Vin" label="VIN#"
+                                max-length="17" placeholder="Enter Vehicle VIN" onchange={handleVinChange}
+                                onkeypress={handleVINKeyPress} autocomplete="off" disabled></lightning-input>
+                            <p><a href="https://crrs.secure.force.com/hondaknowledge/articles/Public_Knowledge/What-is-the-VIN/?q=vin&l=en_US&c=Division_Subdivision%3AHonda&fs=Search&pn=1"
+                                    target="_blank" class="vinError">Where Can I Find My VIN?</a> </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Vehicle Name Section -->
+                <div class="slds-text-align_center vehicle-selection">
+                    <label class="custom-label">Vehicle Nickname</label>
+                    <lightning-input type="text" label="" data-index="1" max-length="100" class="vehicleName hideLabel"
+                            autocomplete="off" placeholder="Enter vehicle nickname">
+                    </lightning-input>
+                </div>
+                <!-- Vehicle Name Section End -->
+                
+                <!-- Botton Button  -->
+                <lightning-layout multiple-rows class="my-products-buttons slds-m-bottom_medium">
+                    <lightning-layout-item size="6" small-device-size="6" medium-device-size="6" large-device-size="6" padding="horizontal-small">
+                        <button class="slds-button themeBtn primaryRedBtn acurabutton" 
+                        onclick={handleToCreateAndUpdate} title="ADD">{editAndCreateButtonLabel}</button>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="6" small-device-size="6" medium-device-size="6" large-device-size="6" padding="horizontal-small">
+                        <button class="slds-button  themeBtn primaryGrayBtn hondabutton " onclick={closeChangeModalPopUp} title="CANCEL">CANCEL</button>
+                    </lightning-layout-item>
+                </lightning-layout>
+                <!-- Botton Button  -->
+            </div>
+        </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>

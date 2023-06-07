@@ -1,0 +1,227 @@
+<template>
+   <div class="slds-container_center containerWrapper slds-m-top_large slds-m-bottom_large">
+      <p class="head"><b>Find Your Order</b></p>
+      <br>
+
+      <p class="slds-text-heading_medium">To find your order, provide at least 2 of the following 3 items:</p>
+
+      <template if:true={showErrorMessage}>
+         <br>
+         <p class="slds-text-heading_medium slds-text-color_destructive">* Must provide at least 2 pieces of information
+         </p>
+      </template>
+      <!--updated  by saikiran as Part of HDMP-12150-->
+      <div
+         class="slds-m-bottom_small slds-col slds-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 slds-m-top_medium">
+         <lightning-input autocomplete="none" name="orderNumber" type="text" pattern="[A-Z]{1}[0-9]{13}|[0-9]{8}$"
+            value={searchValue} label="Order Number" onchange={searchKeyword}></lightning-input>
+      </div>
+      <div
+         class="slds-m-bottom_small slds-col slds-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 slds-m-top_medium">
+         <lightning-input autocomplete="none" name="email" type="text" value={searchValue1} label="Email Address"
+            onchange={searchKeyword1}>
+         </lightning-input>
+      </div>
+      <div
+         class="slds-m-bottom_small slds-col slds-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 slds-m-top_medium">
+         <lightning-input autocomplete="none" name="zip" type="text" value={searchValue2}
+            pattern="[0-9]{5}|[0-9]{5}-[0-9]{4}" label="Billing Zip Code" onchange={searchKeyword2}></lightning-input>
+      </div>
+
+      <lightning-button label="Find Order" onclick={handleSearchKeyword} variant="brand"></lightning-button>
+
+      <template if:true={showData}>
+
+         <p class="head slds-text-align_center slds-m-top_large"><b>Order Result</b></p>
+         <div class="tableResponsive">
+            <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-m-top_small">
+               <thead>
+                  <tr class="slds-line-height_reset">
+                     <th class="" scope="col">
+                        <div class="slds-truncate" title="Order Number">Order Number</div>
+                     </th>
+                     <th class="" scope="col">
+                        <div class="slds-truncate" title="Total Status">Status</div>
+                     </th>
+
+                     <th class="" scope="col">
+                        <div class="slds-truncate" title="Ordered Date">Ordered Date</div>
+                     </th>
+                     <th class="" scope="col">
+                        <div class="slds-truncate" title="Dealer">Dealer</div>
+                     </th>
+                     <th class="" scope="col">
+                        <div class="slds-truncate" title="Dealer">Shipment Tracking</div>
+                     </th>
+                     <th class="" scope="col">
+                        <div class="slds-truncate" title="Dealer">Shipment Method</div>
+                     </th>
+                     <th class="" scope="col">
+                        <div class="slds-truncate finalAmount" title="Dealer">Order Total</div>
+                     </th>
+                  </tr>
+               </thead>
+
+               <tbody>
+                  <template for:each={OrdersRecord} for:item="ord">
+                     <tr class="slds-hint-parent" key={ord.id}>
+                        <td if:false={ord.isStatusDraft} key={ord.id}>
+                           <template if:true={ord.OrderReferenceNumber}>
+                              <!--Added by saikiran as part of HDMP-12241-->
+                              <a style="color: #006dcc;" onclick={navigateToOrderRecordPage}
+                                 data-record-id={ord.OrderNumber}>{ord.OrderReferenceNumber}</a>
+                           </template>
+                           <template if:false={ord.OrderReferenceNumber}>
+                              <a style="color: #006dcc;" onclick={navigateToOrderRecordPage}
+                                 data-record-id={ord.OrderNumber}>{ord.OrderNumber}</a>
+                           </template>
+                        </td>
+                        <td if:false={ord.isStatusDraft}>
+                           <div class="slds-truncate">{ord.CustomerOrderStatus}</div>
+                        </td>
+
+                        <td if:false={ord.isStatusDraft}>
+                           <div class="slds-truncate">{ord.ActivatedDate}</div>
+                        </td>
+                        <td if:false={ord.isStatusDraft}>
+                           <div class="slds-truncate">{ord.AccountId}</div>
+                        </td>
+                        <td if:false={ord.isStatusDraft}>
+                           <div if:true={ord.showshippingNumber}>
+                              <div if:true={ord.Othercarrierpresent} class="slds-truncate">{ord.ShippingNumber}</div>
+
+                              <div if:false={ord.Othercarrierpresent}>
+                                 <a style="color: #006dcc;" onclick={navigateToShippingTrackPage}
+                                    data-id={ord.ShippingNumber} data-name={ord.ShippingVendor}
+                                    class="slds-truncate">{ord.ShippingNumber}</a>
+                              </div>
+                           </div>
+                        </td>
+                        <td if:false={ord.isStatusDraft}>
+                           <div if:true={ord.showshippingNumber}>
+                              <template if:false={ord.Othercarrierpresent}>
+                                 <div class="slds-truncate">{ord.ShippingVendor}</div>
+                              </template>
+                              <template if:true={ord.Othercarrierpresent}>
+                                 <div class="slds-truncate">{ord.OtherCarrier}</div>
+                              </template>
+                           </div>
+                        </td>
+                        <td if:false={ord.isStatusDraft}>
+                           <div class="slds-truncate finalAmount">
+                              <lightning-formatted-number value={ord.OrderTotal} format-style="currency"
+                                 maximum-fraction-digits="2" minimum-fraction-digits="2" currency-code="USD">
+                              </lightning-formatted-number>
+                           </div>
+                        </td>
+
+                     </tr>
+                  </template>
+
+               </tbody>
+            </table>
+         </div>
+      </template>
+
+      <template if:true={fromorderrec}>
+         <p class="head slds-text-align_center slds-m-top_large"><b>Order Result</b></p>
+         <div class="tableResponsive">
+            <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-m-top_small">
+               <thead>
+                  <tr class="slds-line-height_reset">
+                     <th class="" scope="col">
+                        <div class="slds-truncate" title="Order Number">Order Number</div>
+                     </th>
+                     <th class="" scope="col">
+                        <div class="slds-truncate" title="Total Status">Status</div>
+                     </th>
+
+                     <th class="" scope="col">
+                        <div class="slds-truncate" title="Ordered Date">Ordered Date</div>
+                     </th>
+                     <th class="" scope="col">
+                        <div class="slds-truncate" title="Dealer">Dealer</div>
+                     </th>
+                     <th class="" scope="col">
+                        <div class="slds-truncate" title="Dealer">Shipment Tracking</div>
+                     </th>
+                     <th class="" scope="col">
+                        <div class="slds-truncate" title="Dealer">Shipping Vendor</div>
+                     </th>
+                  </tr>
+               </thead>
+
+               <tbody>
+                  <template for:each={ordRec} for:item="ord">
+                     <tr class="slds-hint-parent" key={ord.id}>
+                        <td key={ord.id}>
+                           <a style="color: #006dcc;" onclick={navigateToOrderRecordPage}
+                              data-record-id={ord.OrderNumber}>{ord.OrderNumber}</a>
+                        </td>
+                        <td>
+                           <div class="slds-truncate">{ord.CustomerOrderStatus}</div>
+                        </td>
+
+                        <td>
+                           <div class="slds-truncate">{ord.ActivatedDate}</div>
+                        </td>
+                        <td>
+                           <div class="slds-truncate">{ord.AccountId}</div>
+                        </td>
+                        <td>
+                           <a style="color: #006dcc;" data-name={ord.ShippingVendor}
+                              onclick={navigateToShippingTrackPage} data-id={ord.ShippingNumber}
+                              class="slds-truncate">{ord.ShippingNumber}</a>
+                        </td>
+                        <td>
+                           <template if:false={othercarrierpresent}>
+                              <div class="slds-truncate">{ord.ShippingVendor}</div>
+                           </template>
+                           <template if:true={othercarrierpresent}>
+                              <div class="slds-truncate">{ord.OtherCarrier}</div>
+                           </template>
+                        </td>
+
+                     </tr>
+                  </template>
+
+               </tbody>
+            </table>
+         </div>
+
+      </template>
+
+   </div>
+
+   <!-- Modal/Popup Box LWC starts here -->
+   <template if:true={isModalOpen}>
+      <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+         aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+         <div class="slds-modal__container">
+            <!-- Modal/Popup Box LWC header here -->
+            <header class="slds-modal__header">
+               <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close"
+                  onclick={closeModal}>
+                  <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse" size="small">
+                  </lightning-icon>
+                  <span class="slds-assistive-text">Close</span>
+               </button>
+               <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Order Not Found</h2>
+            </header>
+            <!-- Modal/Popup Box LWC body starts here -->
+            <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+               <p><b>Sorry, we couldn’t find any orders that matched that info. Please recheck your info and try again
+                     or contact your fulfillment dealer.</b></p>
+
+            </div>
+            <!-- Modal/Popup Box LWC footer starts here -->
+            <footer class="slds-modal__footer">
+
+               <button class="slds-button slds-button_brand" onclick={submitDetails} title="OK">OK</button>
+            </footer>
+         </div>
+      </section>
+      <div class="slds-backdrop slds-backdrop_open"></div>
+   </template>
+
+</template>

@@ -1,0 +1,16 @@
+<template>
+    <div class="card card-size">
+        <lightning-card>
+            <div slot="title" class="slds-truncate" onclick={handleClickHeader}>
+                <img src={icon} class="slds-p-right_small custom-icon">
+                <span class={titleClass}>{title}</span>
+            </div>
+            <div class="slds-card__body_inner card-body">
+                <lightning-formatted-rich-text value={body}></lightning-formatted-rich-text>
+                <template if:true={chatBotLinkLabel}>
+                    <p><a class="red" onclick={handleChatBotClick} tabindex="0" role="link">{chatBotLinkLabel}</a></p>
+                </template>
+            </div>
+        </lightning-card>
+    </div>
+</template>

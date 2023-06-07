@@ -1,0 +1,38 @@
+<template>   
+    <p class="left-title">CATEGORIES</p>
+    <!--<ul class="slds-accordion">
+        <template if:true={categories} for:each={categories} for:item="category" for:index="index">
+            <li key={category.section} class="slds-accordion__list-item">
+                <section class="slds-accordion__section elementnode">
+
+
+                    <button data-id={category.section} data-index={index}
+                        class="slds-button slds-button_reset slds-accordion__summary-action" onclick={showCollapseData}
+                        aria-controls="referenceId-42" aria-expanded="true" >
+                        <lightning-icon class="arrowicon slds-m-left_x-small " icon-name={category.chevron}
+                            alternative-text="Doc image" size="x-small"></lightning-icon>
+                        <span class="slds-accordion__summary-content slds-m-left_small">{category.section}
+                        </span>
+                    </button>-->
+
+             <!--COMMENTED BELOW LINES FOR HDMP-3683-->
+                 <!--   <div class="slds-accordion__content bgLighter">
+                        <template if:true={category.subCategories} for:each={category.subCategories}
+                            for:item="subCategory" for:index="index">
+                            <div class="slds-m-left_small subcategory" style="cursor: pointer;" key={subCategory.op_cd}
+                                data-id={subCategory.op_cd} onclick={handleOnSelectSubCategory}> {subCategory.AccessoryName}
+                            </div>
+                        </template>
+</div> -->
+<!--</section>
+            </li>
+        </template>
+    </ul>-->
+    <div class="categories-accessories">
+       <!--removed onclick={clearFilter} for HDMP-7470--> 
+        <template if:true={categories} for:each={categories} for:item="category" for:index="index">
+            <lightning-input key={category.section} type="radio" label={category.section} name="category" value={index} 
+            onchange={handleOptionChange} style="display:inline-block;" checked={category.checked}></lightning-input>
+        </template>
+    </div>
+</template>

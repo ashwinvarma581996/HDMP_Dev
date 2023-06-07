@@ -1,0 +1,49 @@
+<!-- //============================================================================
+// Title:    Honda Owners Experience - Logo
+//
+// Summary:  This is the html seen at the top of the Honda Owner Community
+//
+// Details:  Extend the LightningElement with this Base Element to gain access to the Messaging Channel and other logic herein and this is the logo component for all community pages.
+//
+//
+// History:
+// June 18, 2021 Arunprasad N (Wipro) Original Author
+//=========================================================================== -->
+<template>
+    <ul class="slds-global-actions">
+        <li class="slds-global-actions__item">
+          <div data-id="profile" class="slds-dropdown-trigger slds-dropdown-trigger_hover">
+            <button class="slds-button slds-global-actions__avatar slds-global-actions__item-action" title={firstName} aria-haspopup="true">
+              <span class="slds-avatar slds-avatar_circle slds-avatar_medium" tabindex="0" role="button" >
+                <img alt={firstName} src={image} title="User avatar" onclick={handleAvtarClick} />
+              </span>
+            </button>
+            <div class="slds-dropdown slds-dropdown_right slds-nubbin_top-right profile-dropdown-container" >
+              <ul class="slds-dropdown__list profile-dropdown" role="menu" tabindex="0">
+                <li class="slds-dropdown__item slds-p-left_xxx-small slds-p-vertical_xx-small" role="option" onclick={handleAvtarClick} tabindex="-1">
+                  <a href="#" tabindex="0">
+                    <span class="slds-truncate profile-label" title="Settings">
+                      <span class="slds-icon_container slds-icon-standard-event slds-m-right_x-small" title="Description of icon when needed">
+                        <span class="slds-assistive-text">Description of icon when needed</span>
+                      </span>My Account</span>
+                  </a>
+                </li>
+                <li class="slds-dropdown__item slds-p-left_xxx-small slds-p-vertical_xx-small" role="option">
+                  <a role="menuitem" tabindex="0" onclick={handleLogOutClick}> <!--href={logoutLink}-->
+                    <span class="slds-truncate profile-label-logout" title="LOG OUT">
+                      <span class="slds-icon_container slds-icon-standard-note slds-m-right_x-small" title="Description of icon when needed">
+                        <span class="slds-assistive-text">Description of icon when needed</span>
+                      </span>LOG OUT</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </li>
+        <li class="slds-global-actions__item">
+            <div class="slds-dropdown-trigger slds-dropdown-trigger_click profile-name">
+              Hi, {firstName}
+            </div>
+          </li>
+      </ul>
+</template>

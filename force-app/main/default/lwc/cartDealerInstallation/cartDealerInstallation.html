@@ -1,0 +1,62 @@
+<template>
+    <!-- spinner start -->
+    <template if:true={isLoader}>
+        <lightning-spinner alternative-text="Loading"
+            class="slds-is-relative slds-align_absolute-center slds-m-around_large" variant="brand">
+        </lightning-spinner>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+    <!-- spinner end -->
+
+    <div class="slds-grid slds-gutters cartDealerInstall slds-p-vertical_large slds-grid_vertical-align-center slds-m-top_small slds-p-bottom_none">
+        <div class="absoluteCenter slds-p-horizontal_medium slds-grid_vertical-align-center slds-grid" style="border: 1px solid #979797; height:160px;">
+            <div class="inlineBlock">
+                <label class="centerElement slds-is-relative labelRadio">
+                    <input type="checkbox" onclick={handleDealerInstallation} name="PickUpAtDealer"
+                        value="Pick Up At Dealer">
+                    <span class="checkmark"></span> <span class="labelText">{label.PickUpDealer}</span>
+                </label>
+            </div>
+        </div>
+        <div class="absoluteCenter slds-p-horizontal_medium slds-grid_vertical-align-center slds-grid slds-is-relative" style="border: 1px solid #979797; height:160px;">
+            <div class="inlineBlock">
+                <label class="centerElement slds-is-relative labelRadio">
+                    <input type="checkbox" onclick={handleDealerInstallation} name="InstallAtDealer"
+                        value="Install At Dealer" disabled={anyPartProductExistsOnly}> 
+                    <span class="checkmark"></span> <span class="labelText">{label.InstallAtDealer}</span>
+                    <div class="subtext">All accessories<br> will be installed</div>
+                </label>
+            </div>
+        </div>
+        <div class="absoluteCenter slds-p-horizontal_medium slds-grid_vertical-align-center slds-grid slds-is-relative" style="border: 1px solid #979797; height:160px;">
+            <div class="inlineBlock">
+                <label class="centerElement slds-is-relative labelRadio">
+                    <input type="checkbox" onclick={handleDealerInstallation} name="ShipToMe" value="Ship to Me" disabled={anyProductPickupDealerOnly}>
+                    <span class="checkmark"></span> <span class="labelText">{label.ShiptoMe}</span>
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="slds-grid slds-gutters">
+        <div class="absoluteCenter slds-grid slds-col slds-size_1-of-3">
+        </div>
+        <div class="absoluteCenter slds-grid slds-col slds-size_1-of-3">
+            <template if:true={anyPartProductExistsOnly}>
+                <div class="slds-p-around_medium errorMsgs">Installation is not available for some items in your cart.  Remove the items that are not available for install to make this option available.</div>
+            </template>
+            <!-- By Faraz on 27/06/2022 for 5326 - Start-->
+            <template if:true={isAPIIssue}>
+                <div class="slds-p-around_medium errorMsgs">{labelInstallAtDealerAPIIssue}</div>
+            </template>
+            <template if:true={isPriceIssue}>
+                <div class="slds-p-around_medium errorMsgs">{labelInstallAtDealerZeroPrice}</div>
+            </template>
+            <!-- By Faraz on 27/06/2022 for 5326 - End -->
+        </div>
+        <div class="absoluteCenter slds-grid slds-col slds-size_1-of-3 slds-grid_align-center">
+            <template if:true={anyProductPickupDealerOnly}>
+                <div class="slds-p-around_medium errorMsgs">{label.ShippableErrorMessage}</div>
+            </template>
+        </div>
+    </div>
+</template>

@@ -1,0 +1,43 @@
+<template>
+    <div>
+        <template if:false={isDealerSelected}>
+            <div class="slds-grid slds-grid_vertical slds-grid_vertical-align-center slds-p-around_large lgc-bg">
+                    <!-- with border filled -->
+                    
+                        <lightning-icon class="slds-icon_container slds-icon_large slds-icon-utility-warning" icon-name="utility:warning" variant="border" size="large"
+                            alternative-text="Settings" title="Settings"></lightning-icon>
+                        <h2 class="slds-m-bottom_large slds-text-align_center errorHeading">
+                            Please select a dealer<br>to see the final price.
+                        </h2>
+                <template if:true={showDealerPop}>
+                        <c-pop-dealer></c-pop-dealer>  
+                </template>
+            </div>
+        </template>
+        <!-- Cart Summary Header -->
+        <!-- <h2 class="summary-header slds-p-left_medium">
+            {labels.cartSummaryHeader}
+        </h2> -->
+        <template if:true={isDealerSelected}>
+            <div class="slds-p-top_medium subTotal">
+                <!-- ORIGINAL PRICE INFO -->
+                <lightning-formatted-number if:true={showOriginal}
+                    class="original-price slds-p-right_medium slds-text-heading_small"
+                    aria-label={ariaLabelForOriginalPrice} format-style="currency" currency-code={currencyCode}
+                    currency-display-as="symbol" maximum-fraction-digits="2" value={prices.originalPrice}>
+                </lightning-formatted-number>
+
+                <!-- FINAL PRICE INFO -->
+                <!-- <div class="final-price-container slds-grid slds-grid_align-end" aria-live="assertive"
+                    aria-atomic="true">
+                    <span class="slds-text-heading_medium">
+                        {labels.total}
+                    </span>
+                    <lightning-formatted-number class="slds-p-left_medium slds-text-heading_large"
+                        format-style="currency" currency-code={currencyCode} currency-display-as="symbol"
+                        maximum-fraction-digits="2" value={prices.finalPrice}></lightning-formatted-number>
+                </div> -->
+            </div>
+        </template>
+    </div>
+</template>

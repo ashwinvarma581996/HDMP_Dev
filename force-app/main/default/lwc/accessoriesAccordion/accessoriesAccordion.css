@@ -1,0 +1,13 @@
+*,
+*:before,
+*:after {
+    font-size: 13px;
+}
+
+.subcategoryselected {
+    background: lightgray;
+}
+
+lightning-input.slds-form-element:last-child {
+    margin-bottom: 20px;
+}

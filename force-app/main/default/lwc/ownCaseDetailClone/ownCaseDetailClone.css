@@ -1,0 +1,194 @@
+@media only screen and (min-width: 905px) {
+    .main-container{
+        padding: 10px 30px;
+    }
+    .att-c{
+        display: grid;
+        grid-template-columns: auto auto;
+        grid-gap: 0px 30px;
+    }
+}
+@media only screen and (max-width: 904px) {
+    .main-container{
+        padding: 10px 15px;
+    }
+    .att-c{
+        display: grid;
+        grid-template-columns: auto;
+        grid-gap: 0px 30px;
+    }
+}
+.main-container{
+    border: 1px solid whitesmoke;
+    border-radius: 20px;
+}
+.cc-rows{
+    margin-bottom: 18px;
+}
+.cc-row-1{
+    font-size: 20px;
+}
+.cc-row-2{
+    font-size: 15px;
+    font-weight: bold;
+    
+}
+.c-container{
+    display: grid;
+    grid-template-columns: 100%;
+}
+.cc-row-3-c{
+    display: grid;
+    grid-template-columns: 100px auto;
+    border: 1px ridge rgba(202,202,202,0.57);
+    -webkit-box-shadow: -1px -1px 8px 3px rgba(202,202,202,0.57);
+    -moz-box-shadow: -1px -1px 8px 3px rgba(202,202,202,0.57);
+    box-shadow: -1px -1px 8px 3px rgba(202,202,202,0.57);
+    border-radius: 5px;
+    padding: 20px;
+    margin-top: 25px;
+}
+.cc-row-3-c-c1-d1, .cc-row-3-c-c2-d1{
+    font-size: 15px;
+    font-weight: bold;
+    
+}
+.cc-row-3-c-c1-d2, .cc-row-3-c-c2-d2{
+    font-size: 15px;
+    
+    margin-top: 10px;
+}
+.cc-row-3-c-c2{
+    /* border-left: 3px solid lightgray; */
+    border-left: 2px solid #E42525;
+    padding-left: 20px;
+}
+.cc-row-5{
+    border: 1px ridge rgba(202,202,202,0.57);
+    -webkit-box-shadow: -1px -1px 8px 3px rgba(202,202,202,0.57);
+    -moz-box-shadow: -1px -1px 8px 3px rgba(202,202,202,0.57);
+    box-shadow: -1px -1px 8px 3px rgba(202,202,202,0.57);
+    border-radius: 5px;
+    padding: 20px;
+    font-size: 15px;
+    font-weight: bold;
+    
+}
+.details-div, .activity-div{
+    border: 1px ridge rgba(202,202,202,0.57);
+    -webkit-box-shadow: -1px -1px 8px 3px rgba(202,202,202,0.57);
+    -moz-box-shadow: -1px -1px 8px 3px rgba(202,202,202,0.57);
+    box-shadow: -1px -1px 8px 3px rgba(202,202,202,0.57);
+    border-radius: 5px;
+    padding: 20px;
+    
+}
+.d-td-h{
+    font-size: 15px;
+    font-weight: bold;
+    
+}
+.d-td-v{
+    font-size: 15px;
+    margin-top: 5px;
+    padding-bottom: 10px;
+}
+.d-td{
+    border-bottom: 3px solid whitesmoke;
+    padding: 10px 0px;
+}
+.comment-avatar{
+    height: 37px;
+    width: 37px;
+    border-radius: 50%;
+    border: 1px solid gray;
+    padding: 2px;
+}
+.activity-div-message{
+    display: grid;
+    grid-template-columns: 50px auto;
+}
+.commenter-name{
+    font-weight: bold;
+}
+.comment-date{
+    font-style: italic;
+}
+.comment-value{
+    margin-top: 10px;
+}
+.activity-div-message{
+    margin-bottom: 30px;
+}
+.btn-add-comment{
+    background: #ffffff;
+    border: 2px solid #E42525;
+    color: #E42525;
+    font-weight: 900;
+    font-size: 14px;
+    line-height: 15px;
+    padding: 8px 15px;
+    border-radius: 2px;
+}
+.add-a-comment-div{
+    padding-left: 50px;
+}
+.btn-add-comment:hover {
+    background-color: #E42525;
+    color: white;
+}
+.att-inner-c{
+    display: grid;
+    grid-template-columns: 50px auto;
+}
+.att-name{
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: underline;
+}
+.att-name:hover{
+    font-size: 14.2px;
+}
+.att-date{
+    font-style: italic;
+    font-size: 12px;
+    font-weight: normal;
+}
+.att-c-div{
+    margin-bottom: 20px;
+    border: 1px solid whitesmoke;
+    padding: 10px 10px;
+    -webkit-box-shadow: -1px -1px 2px 1px rgba(202,202,202,0.57);
+    -moz-box-shadow: -1px -1px 2px 1px rgba(202,202,202,0.57);
+    box-shadow: -1px -1px 2px 1px rgba(202,202,202,0.57);
+}
+.att-avatar{
+    max-width: 100%;
+    height: 35px;
+}
+.att-c{
+    margin-top: 15px;
+}
+.btn-cancel-comment{
+    margin-left: 20px;
+}
+.btn-cancel-comment{
+    background: #ffffff;
+    background-color: #E42525;
+    border: 2px solid #E42525;
+    color: white;
+    font-weight: 900;
+    font-size: 14px;
+    line-height: 15px;
+    padding: 8px 15px;
+    border-radius: 2px;
+}
+.btn-cancel-comment:hover {
+    color: #E42525;
+    background-color: white;
+}
+.text-area-div{
+    padding-left: 50px;
+    margin-bottom: 15px;
+}

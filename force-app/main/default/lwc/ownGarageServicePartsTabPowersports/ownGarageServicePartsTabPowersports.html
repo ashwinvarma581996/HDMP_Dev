@@ -1,0 +1,111 @@
+<!-- //============================================================================
+// Title:    Honda Owners Experience - Tab for Power Sports / Services & Parts
+//
+// Summary:  This is the html seen on the Garage Power Sports / Services & Parts
+//
+// History:
+// May 17, 2021 Arunprasad N (Wipro) Original Author
+// Jul 13, 2021 Jim Kohs (Wipro) changed c-own-garage-overview-locate-dealer-card to c-own-garage-overview-locate-dealer-card1
+// July 15, 2021 Jim Kohs (Wipro) refactored to ownBaseCard2
+//=========================================================================== -->
+<template>
+    <div class="c-container garage-overview-tab-large">
+        <lightning-layout multiple-rows class="slds-p-top_large">
+            <lightning-layout-item size="12" small-device-size="12" medium-device-size="4" large-device-size="4">
+                <h3 title="Find Service Information">
+                    <span class="garage-overview-tab-title">Find Service Information</span>
+                </h3>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" small-device-size="12" medium-device-size="8" large-device-size="8">
+                <lightning-layout multiple-rows>
+                    <lightning-layout-item size="12" padding="around-small">
+                        <c-own-find-dealers-card brand="powersports"></c-own-find-dealers-card>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="6" padding="around-small">
+                        <c-own-my-service-history-card brand="powersports"></c-own-my-service-history-card>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="6" padding="around-small">
+                        <c-own-maintenance-minder-card brand="powersports"></c-own-maintenance-minder-card>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="6" padding="around-small">
+                        <c-own-honda-care-card brand="powersports"></c-own-honda-care-card>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </lightning-layout-item>
+        </lightning-layout>
+        <lightning-layout multiple-rows class="slds-p-top_large">
+            <lightning-layout-item size="12" small-device-size="12" medium-device-size="4" large-device-size="4">
+                <h3 title="Parts & Accessories">
+                    <span class="garage-overview-tab-title">Parts & Accessories</span>
+                </h3>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" small-device-size="12" medium-device-size="8" large-device-size="8">
+                <lightning-layout multiple-rows>
+                    <lightning-layout-item size="6" padding="around-small">
+                        <c-own-parts-card brand="powersports"></c-own-parts-card>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="6" padding="around-small">
+                        <c-own-accessories-card brand="powersports"></c-own-accessories-card>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </lightning-layout-item>
+        </lightning-layout>
+        <lightning-layout multiple-rows class="slds-p-top_large">
+            <lightning-layout-item size="12" small-device-size="12" medium-device-size="4" large-device-size="4">
+                <h3 title="Parts & Accessories">
+                    <span class="garage-overview-tab-title">Additional Assistance</span>
+                </h3>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" small-device-size="12" medium-device-size="8" large-device-size="8">
+                <lightning-layout multiple-rows>
+                    <lightning-layout-item size="6" padding="around-small" if:true={protectionPlanContent}>
+                        <c-own-honda-care-protection-plans-card source ='Service & Parts' body={protectionPlanContent.body.value} title={protectionPlanContent.title.value} brand="powersports"></c-own-honda-care-protection-plans-card>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </lightning-layout-item>
+        </lightning-layout>
+    </div>
+    <div class="c-container garage-overview-tab-small">
+        <lightning-layout multiple-rows>
+            <lightning-layout-item size="12" class="slds-p-top_large">
+                <h3 title="Find Service Information">
+                    <span class="garage-overview-tab-title-small">Find Service Information</span>
+                </h3>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class="slds-p-vertical_small">
+                <c-own-find-dealers-card brand="powersports"></c-own-find-dealers-card>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class="slds-p-vertical_small">
+                <c-own-my-service-history-card brand="powersports"></c-own-my-service-history-card>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class="slds-p-vertical_small">
+                <c-own-maintenance-minder-card brand="powersports"></c-own-maintenance-minder-card>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class="slds-p-vertical_small">
+                <c-own-roadside-assistance-information-card brand="Powersports"></c-own-roadside-assistance-information-card>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class="slds-p-vertical_small">
+                <c-own-honda-care-card brand="powersports"></c-own-honda-care-card>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class="slds-p-top_large">
+                <h3 title="Parts & Accessories">
+                    <span class="garage-overview-tab-title-small">Parts & Accessories</span>
+                </h3>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class="slds-p-vertical_small">
+                <c-own-parts-card brand="powersports"></c-own-parts-card>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class="slds-p-vertical_small">
+                <c-own-accessories-card brand="powersports"></c-own-accessories-card>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class="slds-p-top_large">
+                <h3 title="Parts & Accessories">
+                    <span class="garage-overview-tab-title-small">Additional Assistance</span>
+                </h3>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class="slds-p-vertical_small" if:true={protectionPlanContent}>
+                <c-own-honda-care-protection-plans-card source ='Service & Parts' body={protectionPlanContent.body.value} title={protectionPlanContent.title.value} brand="powersports"></c-own-honda-care-protection-plans-card>
+            </lightning-layout-item>
+        </lightning-layout>
+    </div>
+</template>

@@ -1,0 +1,24 @@
+<template>
+    <div class="container">
+        <lightning-layout class="breadcrumb-container">
+            <lightning-layout-item>
+                <div class="breadcrumb-large slds-m-top_medium slds-m-left_medium">
+                    <div class="breadcrumb" aria-label="Breadcrumbs" role="navigation">
+                    <div role="list" class="slds-breadcrumb slds-list_horizontal slds-wrap">
+                        <div class="slds-breadcrumb__item breadcrumb-item-back">
+                            <a class="breadcrumb-text-color" onclick={handleBreadcrumbClick}>
+                            {breadcrumbLabel}
+                            </a>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </lightning-layout-item>
+        </lightning-layout>
+        <div class="image-container slds-m-left_medium slds-m-right_medium">
+            <div class="img-div">
+                <img src={imageUrl} class="img"/>
+            </div>
+        </div>
+    </div>
+</template>

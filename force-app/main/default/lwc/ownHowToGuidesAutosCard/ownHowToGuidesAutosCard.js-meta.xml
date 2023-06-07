@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>55.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <!-- <property type="ContentReference" name="contentId" label="Content ID" /> -->
+            <property label="Icon" name="icon" type="String" />
+            <property label="Title" name="title" type="String" />
+            <property label="Title Color" name="titlecolor" type="String" datasource="Black,Honda Red"/>
+            <property label="Header Link" name="headerlink" type="String" />
+            <property label="Action Button Label" name="actionbuttonlabel" type="String" />
+            <property label="Brand" name="brand" type="String" datasource="Honda,Acura,Powersports,Powerequipment,Marine"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

@@ -1,0 +1,689 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 06-06-2023
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+    <!-- Added by Faraz -->
+    <div if:true={isLoading} class="slds-is-relative slds-spinner_container">
+        <lightning-spinner alternative-text="Please Wait..." variant="brand"></lightning-spinner>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </div>
+    <div if:true={isError}
+        class="slds-container_center containerWrapper slds-m-top_large slds-p-top_large slds-p-bottom_large slds-p-left_medium">
+        <div class="slds-text-heading_large slds-text-color_error errorTxt">
+            We're experiencing technical difficulties, please try again later.
+        </div>
+    </div>
+    <!-- END -->
+
+    <template if:false={isError}>
+        <div class="slds-container_center containerWrapper orderDetail">
+            <template if:false={editpage}>
+                <lightning-card>
+                    <lightning-record-view-form record-id={recordId} object-api-name="Order">
+                        <template for:each={Orderdetailresult} for:item="ord">
+                            <div key={ord.id}>
+                                <lightning-layout multiple-rows="true">
+                                    <lightning-layout-item size="12" class="slds-p-horizontal_small">
+                                        <div class="custom-box slds-grid slds-text-heading_large slds-p-bottom_medium"
+                                            style="align-items:center;">
+                                            <lightning-icon icon-name="custom:custom59"
+                                                title="custom59"></lightning-icon>
+                                            <p class="slds-p-left_medium slds-p-top_x-small slds-text-title_bold"><span
+                                                    class="font-h5">Order</span>
+                                                <template if:true={ord.OrderReferenceNumber}>
+                                                    <span class="font-h5"> # {ord.OrderReferenceNumber}</span>
+                                                </template>
+                                                <template if:false={ord.OrderReferenceNumber}>
+                                                    <span class="font-h5"> # {ord.OrderNumber}</span>
+                                                </template>
+                                            </p>
+                                            <!--// added by Yashika for R2 story: appointment scheduling-->
+                                            <div if:true={isDealerInstallationType} class="slds-m-left_small">
+                                                <div if:true={isScheduleLinkAvailableOrNot}>
+                                                    <lightning-button variant="brand" label={schedule_installation}
+                                                        onclick={handleOnScheduleInstallation}
+                                                        class=""></lightning-button>
+                                                </div>
+                                                <div if:false={isScheduleLinkAvailableOrNot}>
+                                                    <h5 style="font-size:13px;">Contact the Dealer to Schedule your
+                                                        appointment</h5>
+                                                </div>
+                                            </div>
+                                            <!--ends here-->
+                                            <div if:true={showPaymentButtons} class="slds-m-left_small">
+                                                <lightning-button if:true={ord.CC_Last4__c} variant="brand"
+                                                    label="RETRY PAYMENT" title="Retry Payment"
+                                                    onclick={handleRetryPayment}></lightning-button>
+                                            </div>
+                                            <div if:true={showPaymentButtons} class="slds-m-left_small">
+                                                <lightning-button variant="brand" label="UPDATE PAYMENT"
+                                                    title="Update Payment"
+                                                    onclick={handleUpdatePayment}></lightning-button>
+                                            </div>
+                                        </div>
+                                    </lightning-layout-item>
+                                    <lightning-layout-item size="12"
+                                        class="slds-medium-size_1-of-2 slds-p-horizontal_small slds-p-top_large">
+                                        <div class="orderInfo">
+                                            <div class="orderInfo__group">
+                                                <p class="slds-p-top_large slds-p-bottom_x-small slds-text-title_bold">
+                                                    <span class="font-h5">Billing Info</span>
+                                                </p>
+                                                <div class="slds-grid slds-m-bottom_medium orderInfo__group--input">
+                                                    <div class="labelname"><b> Name </b> </div>
+                                                    <div if:false={ord.cart__r.Pickup_Dealer__c} class="labelinput">
+                                                        {ord.Customer_Name__c}</div>
+                                                    <div if:true={ord.cart__r.Pickup_Dealer__c} class="labelinput">
+                                                        {ord.Customer_Name__c}</div>
+                                                </div>
+                                                <div class="slds-grid slds-m-bottom_medium orderInfo__group--input">
+                                                    <div class="labelname"><b>Phone </b> </div>
+                                                    <div class="labelinput"><lightning-formatted-phone
+                                                            value={ord.BillingPhoneNumber}>
+                                                        </lightning-formatted-phone></div>
+                                                </div>
+                                                <div class="slds-grid slds-m-bottom_medium orderInfo__group--input">
+                                                    <div class="labelname"><b>Email </b> </div>
+                                                    <div class="labelinput">{ord.BillingEmailAddress}</div>
+                                                </div>
+                                                <div class="slds-grid slds-m-bottom_medium orderInfo__group--input">
+                                                    <div class="labelname"><b>Address </b> </div>
+                                                    <div class="labelinput">{ord.BillingStreet} <br>
+                                                        {ord.BillingCity}, {ord.BillingState}
+                                                        {ord.BillingPostalCode}</div>
+                                                </div>
+                                                <div class="slds-grid slds-m-bottom_medium orderInfo__group--input">
+                                                    <div class="labelname"><b>Payment Info </b> </div>
+                                                    <div if:true={ord.CC_Last4__c} class="labelinput">Card ending in
+                                                        {ord.CC_Last4__c}</div>
+                                                    <div if:false={ord.CC_Last4__c} class="labelinput">PayPal</div>
+                                                </div>
+                                                <div class="slds-grid slds-m-bottom_medium orderInfo__group--input">
+                                                    <div if:true={ord.CC_Last4__c} class="labelname"><b>Payment Type
+                                                        </b> </div>
+                                                    <div if:true={ord.CC_Last4__c} class="labelinput">
+                                                        {ord.Payment_Type__c}</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </lightning-layout-item>
+                                    <lightning-layout-item size="12"
+                                        class="slds-medium-size_1-of-2 slds-p-horizontal_small slds-p-top_large">
+                                        <div class="orderInfo">
+                                            <p class="slds-p-top_large slds-p-bottom_x-small slds-text-title_bold"><span
+                                                    class="font-h5">Shipping Info</span>
+                                            </p>
+                                            <div class="orderInfo__group">
+                                                <div class="slds-grid slds-m-bottom_medium orderInfo__group--input">
+                                                    <div class="labelname"><b>Phone </b> </div>
+                                                    <div if:false={ord.cart__r.Pickup_Dealer__c} class="labelinput">
+                                                        <lightning-formatted-phone
+                                                            value={ord.cart__r.Customer_Phone__c}>
+                                                        </lightning-formatted-phone>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="orderInfo__group">
+                                                <div class="slds-grid slds-m-bottom_medium orderInfo__group--input">
+                                                    <div class="labelname"><b> Name </b> </div>
+                                                    <div if:false={ord.cart__r.Pickup_Dealer__c} class="labelinput">
+                                                        {ord.Shipping_Customer_Name__c}</div>
+                                                </div>
+                                            </div>
+                                            <div class="orderInfo__group">
+                                                <div class="slds-grid slds-m-bottom_medium orderInfo__group--input">
+                                                    <div class="labelname"><b>Address</b> </div>
+                                                    <div if:false={ord.cart__r.Pickup_Dealer__c} class="labelinput">
+                                                        {ord.ShippingStreet} <br>
+                                                        {ord.ShippingCity}, {ord.ShippingState}
+                                                        {ord.ShippingPostalCode}</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </lightning-layout-item>
+                                </lightning-layout>
+                                <lightning-layout class="slds-wrap">
+                                    <lightning-layout-item size="12"
+                                        class="slds-p-horizontal_small slds-medium-size_1-of-2">
+                                        <div class="orderInfo">
+                                            <div class="orderInfo__group">
+                                                <p class="slds-p-top_large slds-p-bottom_x-small slds-text-title_bold">
+                                                    <span class="font-h5">Order Info</span>
+
+                                                </p>
+                                                <div class="slds-grid slds-m-bottom_medium orderInfo__group--input">
+                                                    <div class="labelname"><b>Order Status </b> </div>
+                                                    <div class="labelinput">{ord.CustomerOrderStatus__c}</div>
+                                                </div>
+                                                <div class="slds-grid slds-m-bottom_medium orderInfo__group--input">
+                                                    <div class="labelname"><b>Order Date </b> </div>
+                                                    <div class="labelinput">{ord.OrderedDate}</div>
+                                                </div>
+                                                <div class="slds-grid slds-m-bottom_medium orderInfo__group--input"
+                                                    style="width: 100%;">
+                                                    <!--Added by shalini soni 24 Dec 2021 HDMP-5428 R2 Story-->
+                                                    <div if:true={ord.cart__r.Delivery_Type__c}
+                                                        class="slds-grid slds-wrap" style="width: 100%;">
+                                                        <div class="labelname"><b>Shipping Type </b>
+                                                        </div>
+                                                        <div class="labelinput">{ord.cart__r.Delivery_Type__c}</div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="slds-grid slds-m-bottom_medium orderInfo__group--input">
+                                                    <div class="labelname"><b>Tracking Number </b> </div>
+                                                    <div if:true={showShippingNumber}>
+                                                        <div if:true={showothercarrier} class="labelinput">
+                                                            {ord.ShippingNumber__c}</div>
+                                                        <div if:false={showothercarrier} class="labelinput">
+                                                            <a onclick={navigateToShippingTrackPage}
+                                                                data-id={ord.ShippingNumber__c}
+                                                                data-name={ord.Shipping_Vendors__c}
+                                                                class="slds-truncate"
+                                                                style="pointer-events: all; color:#e42525">{ord.ShippingNumber__c}</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="slds-grid slds-m-bottom_medium orderInfo__group--input">
+                                                    <div class="labelname"><b>Shipping Carrier </b> </div>
+                                                    <div if:true={showShippingNumber}>
+                                                        <div if:true={showothercarrier} class="labelinput">
+                                                            {ord.Other_Carrier__c}</div>
+                                                        <div if:false={showothercarrier} class="labelinput">
+                                                            {ord.Shipping_Vendors__c}</div>
+                                                    </div>
+                                                </div>
+                                                <div class="slds-grid slds-m-bottom_medium orderInfo__group--input">
+                                                    <div class="labelname"><b>Shipping Speed </b> </div>
+                                                    <div if:false={showShippingNumber} class="labelinput">
+                                                        {ord.Customer_Preferred_Speeds__c}</div>
+                                                    <div if:true={showShippingNumber} class="labelinput">
+                                                        {ord.Dealer_Shipping_Speed__c}</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </lightning-layout-item>
+
+                                    <lightning-layout-item size="12"
+                                        class="slds-p-horizontal_small slds-medium-size_1-of-2">
+                                        <div class="orderInfo">
+                                            <div class="orderInfo__group">
+
+                                                <p class="slds-p-top_large slds-p-bottom_x-small slds-text-title_bold">
+                                                    <span class="font-h5">Dealer Info</span>
+                                                </p>
+
+                                                <div class="slds-grid slds-m-bottom_medium orderInfo__group--input">
+                                                    <div class="labelname"><b>Name </b> </div>
+                                                    <div class="labelinput"> {ord.Account.Name}</div>
+                                                </div>
+                                                <div class="slds-grid slds-m-bottom_medium orderInfo__group--input">
+                                                    <div class="labelname"><b>Contact </b> </div>
+                                                    <div class="labelinput">
+                                                        <lightning-formatted-phone value={ord.Account.Phone}>
+                                                        </lightning-formatted-phone> <br>
+                                                        {ord.cart__r.DealerId__r.Email__c}
+                                                    </div>
+
+                                                </div>
+                                                <div class="slds-grid slds-m-bottom_medium orderInfo__group--input">
+                                                    <div class="labelname"><b>Address </b> </div>
+                                                    <div class="labelinput">{ord.cart__r.DealerId__r.ShippingStreet}
+                                                        <br>
+                                                        {ord.cart__r.DealerId__r.ShippingCity},
+                                                        {ord.cart__r.DealerId__r.ShippingState},
+                                                        {ord.cart__r.DealerId__r.ShippingPostalCode}
+                                                    </div>
+                                                </div>
+                                                <div class="slds-grid slds-m-bottom_medium orderInfo__group--input">
+                                                    <div class="labelname"><b>Hours of Op. </b> </div>
+                                                    <div class="labelinput"> {ord.Account.Operation_Hour__c}</div>
+                                                </div>
+                                                <div style="padding-left: 42%;">
+                                                    <a class="disc-popup" onclick={handleDisclamerPopup}
+                                                        data-id="Terms_and_Conditions_of_sale"><u>Terms and Conditions
+                                                            of
+                                                            Sale</u></a>
+                                                    <br />
+                                                    <a class="disc-popup" onclick={handleDisclamerPopup}
+                                                        data-id="Return_Policy"><u>Dealer Return
+                                                            Policy</u></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </lightning-layout-item>
+
+                                </lightning-layout>
+                            </div>
+                        </template>
+                    </lightning-record-view-form>
+                </lightning-card>
+            </template>
+            <br />
+
+            <lightning-card class="ordersummary">
+                <div class="slds-align_absolute-center slds-text-heading_medium slds-p-bottom_medium">
+                    <h2 class=font-h4>Order Summary</h2>
+                </div>
+                <div class="tableResponsive">
+                    <table class="slds-table slds-table_cell-buffer slds-m-top_small tableBordered">
+                        <thead>
+                            <tr class="slds-line-height_reset">
+                                <th class="" scope="col">
+                                    <div class="slds-truncate" title="Product Name">Product Name</div>
+                                </th>
+                                <th class="" scope="col">
+                                    <div class="slds-truncate" title="Product SKU">Part Number</div>
+                                </th>
+                                <!-- <template if:true={isInstallatDealer}>
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="Product SKU">Install Dealer</div>
+                        </th>
+                    </template> 
+                    Commented by Faraz on 02/08/2022 for HDMP-11853 -->
+                                <!-- Lakshmi HDMP-19519 removing extra dot -->
+                                <th class="" scope="col">
+                                    <div class="slds-truncate" title="Quantity">Orig Qty</div>
+                                </th>
+                                <th class="" scope="col">
+                                    <div class="slds-truncate" title="Quantity">Updated Qty</div>
+                                </th>
+                                <th class="" scope="col">
+                                    <div class="slds-truncate" title="Quantity">Return Qty</div>
+                                </th>
+                                <th class="" scope="col">
+                                    <div class="slds-truncate" title="Price" style="text-align: right;">Unit Price</div>
+                                </th>
+                                <th class="" scope="col">
+                                    <div class="slds-truncate" title="Price" style="text-align: right;">Extended Price
+                                    </div>
+                                </th>
+                                <th class="" scope="col">
+                                    <div class="slds-truncate" title="Price" style="text-align: left;">Vehicle</div>
+                                </th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <template for:each={OrderItemsRelated} for:item="ord">
+                                <tr class="slds-hint-parent" key={ord.id}>
+                                    <td>
+                                        <div class="slds-truncate">{ord.Cart_Item_Product_Name__c}</div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate">{ord.Product_SKU__c}</div>
+                                    </td>
+                                    <!--Added by shalini soni 24 Dec 2021 HDMP-5428 R2 Story-->
+                                    <!-- <template if:true={isInstallatDealer}>
+                        <td>
+                            <div class="slds-truncate ">$<lightning-formatted-number value={ord.InstallationPrice} 
+                                maximum-fraction-digits="2" minimum-fraction-digits="2" currency-code="USD">
+                                </lightning-formatted-number>  </div>
+                        </td>
+                        </template> 
+                        Commented by Faraz on 02/08/2022 for HDMP-11853 -->
+                                    <!--End-->
+                                    <td>
+                                        <div class="slds-truncate">{ord.Quantity}</div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate">{ord.Updated_Quantity__c}</div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate">{ord.Return_Quantity__c}</div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate finalAmount">
+                                            <lightning-formatted-number value={ord.ListPrice} format-style="currency"
+                                                maximum-fraction-digits="2" minimum-fraction-digits="2"
+                                                currency-code="USD"></lightning-formatted-number>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate finalAmount">
+                                            <lightning-formatted-number value={ord.Extended_Price__c}
+                                                format-style="currency" maximum-fraction-digits="2"
+                                                minimum-fraction-digits="2"
+                                                currency-code="USD"></lightning-formatted-number>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate">{ord.Product_Model_Marketing_Name__c}</div>
+                                    </td>
+                                </tr>
+                            </template>
+                        </tbody>
+                    </table>
+                </div>
+
+            </lightning-card>
+            <!-- Start Aditya - Core charges popur Added as a part of HDMP-16550 -->
+            <div if:true={isRemanPresent} class="corechargepopup">
+                <!-- Added u tag and removed space for 19520 -->
+                <a data-id="Core_Charge_Disclaimer" onclick={handleDisclamerPopup}><span><u>What is a core
+                            charge?</u></span></a>
+            </div>
+            <!-- End Aditya - Core charges popur Added as a part of HDMP-16550 -->
+            <!--added by yashika for motocompacto-->
+            <div if:true={isMotoCompacto} class="slds-p-around_small">
+                <a class="disc-popup" onclick={handleDisclamerPopup} data-id="Motocompacto">Product Disclaimer</a>
+            </div>
+            <lightning-card>
+                <template for:each={Orderdetailresult} for:item="ord">
+                    <div key={ord.id}>
+                        <lightning-layout multiple-rows class="">
+                            <lightning-layout-item size="12" small-device-size="12" medium-device-size="6"
+                                large-device-size="6" class="slds-p-horizontal_small">
+                                <div class="orderInfo">
+                                    <div class="orderInfo__group">
+                                        <div class="slds-grid slds-m-bottom_medium orderInfo__group--input">
+                                            <div class="labelname"><b>Item Subtotal </b> </div>
+                                            <div class="slds-truncate finalAmount"><lightning-formatted-number
+                                                    value={ord.Updated_Order_Amount__c} format-style="currency"
+                                                    maximum-fraction-digits="2" minimum-fraction-digits="2"
+                                                    currency-code="USD">
+                                                </lightning-formatted-number></div>
+                                        </div>
+                                        <!--LTIM Saravanan Ashwin added belowpiece for 16459 to show core charge value-->
+                                        <div if:true={isRemanPresent}
+                                            class="slds-grid slds-m-bottom_medium orderInfo__group--input">
+                                            <!-- LTIM Saravanan Added for CoreCharges for 19531-->
+                                            <div class="labelname"><b>Core charges </b> </div>
+                                            <!-- Saravanan LTIM Added for 19487-->
+                                            <div class="slds-truncate finalAmount"><lightning-formatted-number
+                                                    value={coreChargePickedandReturn} format-style="currency"
+                                                    maximum-fraction-digits="2" minimum-fraction-digits="2"
+                                                    currency-code="USD">
+                                                </lightning-formatted-number></div>
+                                        </div>
+                                        <div if:true={ord.Updated_Shipping__c}
+                                            class="slds-grid slds-m-bottom_medium orderInfo__group--input">
+                                            <div class="labelname"><b>Shipping </b> </div>
+                                            <div class="slds-truncate finalAmount"><lightning-formatted-number
+                                                    value={ord.Updated_Shipping__c} format-style="currency"
+                                                    maximum-fraction-digits="2" minimum-fraction-digits="2"
+                                                    currency-code="USD">
+                                                </lightning-formatted-number> </div>
+                                        </div>
+                                        <!--//Added by shalini soni 24 Dec 2021 HDMP-5428 R2 Story-->
+                                        <template if:true={isInstallatDealer}>
+                                            <div class="slds-grid slds-m-bottom_medium orderInfo__group--input">
+                                                <div class="labelname"><b>Installation Charges </b> </div>
+                                                <div class="slds-truncate finalAmount"><lightning-formatted-number
+                                                        value={ord.Total_Installation_Charges__c}
+                                                        format-style="currency" maximum-fraction-digits="2"
+                                                        minimum-fraction-digits="2" currency-code="USD">
+                                                    </lightning-formatted-number> </div>
+                                            </div>
+                                        </template>
+                                        <!--div class="slds-grid slds-m-bottom_medium orderInfo__group--input">
+        <div class="labelname"><b>Restocking Fee </b> </div>
+        <div class="slds-truncate finalAmount">
+            <lightning-formatted-number value={ord.Total_Restocking_Fees__c} format-style="currency" maximum-fraction-digits="2" minimum-fraction-digits="2" currency-code="USD">
+            </lightning-formatted-number>
+        </div>
+    </div-->
+                                        <!--//End by shalini soni 24 Dec 2021 HDMP-5428 R2 Story-->
+                                        <div class="slds-grid slds-m-bottom_medium orderInfo__group--input">
+                                            <div class="labelname"><b>Tax </b> </div>
+                                            <div class="slds-truncate finalAmount">
+                                                <lightning-formatted-number value={ord.Updated_Total_Tax__c}
+                                                    format-style="currency" maximum-fraction-digits="2"
+                                                    minimum-fraction-digits="2" currency-code="USD">
+                                                </lightning-formatted-number>
+                                            </div>
+                                        </div>
+                                        <div class="slds-grid slds-m-bottom_medium orderInfo__group--input">
+                                            <div class="labelname"><b>Total </b> </div>
+                                            <div class="slds-truncate finalAmount">
+                                                <lightning-formatted-number value={ord.Updated_Order_Total__c}
+                                                    format-style="currency" maximum-fraction-digits="2"
+                                                    minimum-fraction-digits="2"
+                                                    currency-code="USD"></lightning-formatted-number>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </lightning-layout-item>
+                            <!-- Dealer Note Added by Faraz for 8722 on 01/06/22 Start -->
+                            <lightning-layout-item if:true={isCustomerNotesExist} size="12" small-device-size="12"
+                                medium-device-size="6" large-device-size="6"
+                                class="slds-p-horizontal_small customerNotes">
+                                <p class="slds-text-title_bold">Notes</p>
+                                <p if:true={ord.Customer_Notes__c} class="slds-p-bottom_small">{ord.Customer_Notes__c}
+                                </p>
+                                <p if:true={ord.createdFormatDate} class="slds-p-bottom_small">{ord.createdFormatDate}
+                                </p>
+                                <br />
+                            </lightning-layout-item>
+                            <!-- Dealer Note Added by Faraz for 8722 on 01/06/22 End -->
+                        </lightning-layout>
+                    </div>
+                </template>
+            </lightning-card>
+            <!--added by Yashika for R2 story 5411 : starts here-->
+            <template if:true={isStatusReturn}>
+                <div class="slds-wrap slds-grid">
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                        <p class="slds-p-top_large slds-p-bottom_x-small slds-text-title_bold slds-p-horizontal_small">
+                            <span class="font-h5">Return Processed</span>
+                        </p>
+                        <lightning-card>
+                            <template for:each={Orderdetailresult} for:item="ord">
+                                <div key={ord.id}>
+                                    <lightning-layout class="flexColumn">
+                                        <lightning-layout-item size="10"
+                                            class="slds-p-horizontal_small slds-medium-size_10-of-12">
+                                            <div class="orderInfo">
+                                                <div class="orderInfo__group">
+                                                    <div class="slds-grid slds-m-bottom_medium orderInfo__group--input">
+                                                        <div class="labelname"><b>Date </b> </div>
+                                                        <div class="slds-truncate finalAmount">{ord.returnDate}</div>
+                                                    </div>
+                                                    <div class="slds-grid slds-m-bottom_medium orderInfo__group--input">
+                                                        <div class="labelname"><b>Item Refund </b> </div>
+                                                        <div class="slds-truncate finalAmount">
+                                                            <lightning-formatted-number value={ord.Total_Item_Return__c}
+                                                                format-style="currency" maximum-fraction-digits="2"
+                                                                minimum-fraction-digits="2" currency-code="USD">
+                                                            </lightning-formatted-number>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Start Aditya HDMP-17176 -->
+                                                    <div class="slds-grid slds-m-bottom_medium orderInfo__group--input">
+                                                        <div class="labelname"><b>Core Charge Refund </b> </div>
+                                                        <div class="slds-truncate finalAmount">
+                                                            <lightning-formatted-number
+                                                                value={ord.Total_Core_Charge_Return_Amount__c}
+                                                                format-style="currency" maximum-fraction-digits="2"
+                                                                minimum-fraction-digits="2" currency-code="USD">
+                                                            </lightning-formatted-number>
+                                                        </div>
+                                                    </div>
+                                                    <!-- End Aditya HDMP-17176 -->
+                                                    <div class="slds-grid slds-m-bottom_medium orderInfo__group--input">
+                                                        <div class="labelname"><b>Restocking fee </b> </div>
+
+                                                        <div class="slds-truncate finalAmount">
+                                                            -<lightning-formatted-number
+                                                                value={ord.Total_Restocking_Fees__c}
+                                                                format-style="currency" maximum-fraction-digits="2"
+                                                                minimum-fraction-digits="2" currency-code="USD">
+                                                            </lightning-formatted-number> </div>
+                                                    </div>
+                                                    <div class="slds-grid slds-m-bottom_medium orderInfo__group--input">
+                                                        <div class="labelname"><b>Shipping Refund </b> </div>
+                                                        <div class="slds-truncate finalAmount">
+                                                            <lightning-formatted-number value={ord.Total_Ship_Return__c}
+                                                                format-style="currency" maximum-fraction-digits="2"
+                                                                minimum-fraction-digits="2" currency-code="USD">
+                                                            </lightning-formatted-number>
+                                                        </div>
+                                                    </div>
+                                                    <div class="slds-grid slds-m-bottom_medium orderInfo__group--input">
+                                                        <div class="labelname"><b>Installation Refund </b> </div>
+                                                        <div class="slds-truncate finalAmount">
+                                                            <lightning-formatted-number
+                                                                value={ord.Total_Installation_Return__c}
+                                                                format-style="currency" maximum-fraction-digits="2"
+                                                                minimum-fraction-digits="2" currency-code="USD">
+                                                            </lightning-formatted-number>
+                                                        </div>
+                                                    </div>
+                                                    <div class="slds-grid slds-m-bottom_medium orderInfo__group--input">
+                                                        <div class="labelname"><b>Tax Refund </b> </div>
+                                                        <div class="slds-truncate finalAmount">
+                                                            <lightning-formatted-number value={ord.Total_Tax_Return__c}
+                                                                format-style="currency" maximum-fraction-digits="2"
+                                                                minimum-fraction-digits="2"
+                                                                currency-code="USD"></lightning-formatted-number>
+                                                        </div>
+                                                        <!--div class="labelinput">${ord.Updated_Order_Total__c}</div-->
+                                                    </div>
+                                                    <div class="slds-grid slds-m-bottom_medium orderInfo__group--input">
+                                                        <div class="labelname"><b>Total Refund </b> </div>
+                                                        <div class="slds-truncate finalAmount">
+                                                            <lightning-formatted-number value={ord.Total_Return__c}
+                                                                format-style="currency" maximum-fraction-digits="2"
+                                                                minimum-fraction-digits="2"
+                                                                currency-code="USD"></lightning-formatted-number>
+                                                        </div>
+                                                        <!--div class="labelinput">${ord.Updated_Order_Total__c}</div-->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </lightning-layout-item>
+
+                                    </lightning-layout>
+                                </div>
+                            </template>
+                        </lightning-card>
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_6-of-12">
+                        <p class="slds-p-top_large slds-p-bottom_x-small slds-text-title_bold slds-p-horizontal_small">
+                            <span class="font-h5">Net Total</span>
+                        </p>
+                        <lightning-card>
+                            <template for:each={Orderdetailresult} for:item="ord">
+                                <div key={ord.id}>
+                                    <lightning-layout class="flexColumn">
+                                        <lightning-layout-item size="10"
+                                            class="slds-p-horizontal_small slds-medium-size_10-of-12">
+                                            <div class="orderInfo">
+                                                <div class="orderInfo__group">
+                                                    <div class="slds-grid slds-m-bottom_medium orderInfo__group--input">
+                                                        <div class="labelname"><b>Item Total</b> </div>
+                                                        <div class="slds-truncate finalAmount">
+                                                            <lightning-formatted-number value={netItems}
+                                                                format-style="currency" maximum-fraction-digits="2"
+                                                                minimum-fraction-digits="2" currency-code="USD">
+                                                            </lightning-formatted-number>
+                                                        </div>
+                                                    </div>
+                                                    <div class="slds-grid slds-m-bottom_medium orderInfo__group--input">
+                                                        <div class="labelname"><b>Restocking Fee</b> </div>
+                                                        <div class="slds-truncate finalAmount">
+                                                            -<lightning-formatted-number
+                                                                value={ord.Total_Restocking_Fees__c}
+                                                                format-style="currency" maximum-fraction-digits="2"
+                                                                minimum-fraction-digits="2" currency-code="USD">
+                                                            </lightning-formatted-number> </div>
+                                                    </div>
+                                                    <div class="slds-grid slds-m-bottom_medium orderInfo__group--input">
+                                                        <div class="labelname"><b>Shipping Charges </b> </div>
+
+                                                        <div class="slds-truncate finalAmount">
+                                                            -<lightning-formatted-number value={netShipping}
+                                                                format-style="currency" maximum-fraction-digits="2"
+                                                                minimum-fraction-digits="2" currency-code="USD">
+                                                            </lightning-formatted-number> </div>
+                                                    </div>
+                                                    <div class="slds-grid slds-m-bottom_medium orderInfo__group--input">
+                                                        <div class="labelname"><b>Installation Charges </b> </div>
+                                                        <div class="slds-truncate finalAmount">
+                                                            <lightning-formatted-number value={netInstall}
+                                                                format-style="currency" maximum-fraction-digits="2"
+                                                                minimum-fraction-digits="2" currency-code="USD">
+                                                            </lightning-formatted-number>
+                                                        </div>
+                                                    </div>
+                                                    <div class="slds-grid slds-m-bottom_medium orderInfo__group--input">
+                                                        <div class="labelname"><b>Total Tax </b> </div>
+                                                        <div class="slds-truncate finalAmount">
+                                                            <lightning-formatted-number value={netTax}
+                                                                format-style="currency" maximum-fraction-digits="2"
+                                                                minimum-fraction-digits="2" currency-code="USD">
+                                                            </lightning-formatted-number>
+                                                        </div>
+                                                    </div>
+                                                    <div class="slds-grid slds-m-bottom_medium orderInfo__group--input">
+                                                        <div class="labelname"><b>Tax Purchase </b> </div>
+                                                        <div class="slds-truncate finalAmount">
+                                                            <lightning-formatted-number value={netTotal}
+                                                                format-style="currency" maximum-fraction-digits="2"
+                                                                minimum-fraction-digits="2"
+                                                                currency-code="USD"></lightning-formatted-number>
+                                                        </div>
+                                                        <!--div class="labelinput">${ord.Updated_Order_Total__c}</div-->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </lightning-layout-item>
+
+                                    </lightning-layout>
+                                </div>
+                            </template>
+                        </lightning-card>
+                    </div>
+                </div>
+                <br />
+            </template>
+            <!--ends here-->
+
+            <div if:true={dealerPrivacyPolicy} class="slds-p-left_small slds-p-bottom_small slds-text-title_bold">See
+                our<a href={dealerPrivacyPolicy} target="_blank"> Privacy Policy</a>.</div>
+            <!--Added by Faraz for HDMP-11637-->
+            <!--Added by Sayalee as a bug HDMP-9902 Start-->
+            <!--<p class="slds-p-left_small slds-p-bottom_small slds-text-title_bold">{returnPolicy}</p>-->
+            <!-- <div class="slds-p-left_small slds-p-bottom_small slds-text-title_bold" data-id="returnpolicy"></div> -->
+            <!--End-->
+            <lightning-button variant="brand" label="Go Back" title="Go back" onclick={navigateToFindMyOrder}
+                class="slds-p-horizontal_small">
+            </lightning-button>
+            <br /><br />
+
+            <!-- Payment Info Model - starts here-->
+            <template if:true={showPaymentInfoModel}>
+                <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-02" aria-modal="true"
+                    aria-describedby="modal-content-id-2" class="slds-modal slds-fade-in-open">
+                    <div class="slds-modal__container">
+                        <header class="slds-modal__header" style="border-bottom: 0;">
+                            <h3 id="modal-heading-02" class="slds-text-heading_medium slds-p-top_medium warning-text">
+                                {paymentInfoLabel}</h3>
+                        </header>
+                        <footer class="slds-modal__footer slds-text-align_center slds-p-top_medium slds-p-bottom_medium"
+                            style="border-top: 0;">
+                            <lightning-button variant="brand" label="OK" title="Okay" class="slds-m-left_small"
+                                onclick={handleClosePaymentInfoModel}></lightning-button>
+                        </footer>
+                    </div>
+                </section>
+                <div class="slds-backdrop slds-backdrop_open"></div>
+            </template>
+            <!-- End here -->
+
+            <!-- Disclaimers Changes Starts -->
+            <!-- <template if:true={showTermsModal}>
+        <c-disclaimer-popup mdt-record-id={metadatarecid} onclose={handleShowHide}></c-disclaimer-popup>
+    </template> -->
+            <template if:true={showDealerModal}>
+                <c-disclaimer-popup modaltype={disclaimerType} dealer-return-policy-markup={dealerReturnPolicyMarkup}
+                    onclose={handleShowHide}></c-disclaimer-popup>
+            </template>
+        </div>
+    </template>
+</template>

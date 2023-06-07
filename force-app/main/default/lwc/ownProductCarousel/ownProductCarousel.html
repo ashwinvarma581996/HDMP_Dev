@@ -1,0 +1,335 @@
+<!-- //============================================================================
+// Title:    Honda Owners Experience - Footer
+//
+// Summary:  This is the html seen at the Owners Garage Find - Honda Auto Body of the Honda Owner Community
+//
+// Details:  Extend the LightningElement with this Base Element to gain access to the Messaging Channel and other logic herein and this is the own garage find honda body component for all community pages.
+//
+//
+// History:
+// October 5, 2021 Ravindra (Wipro) Original Author
+//============================================================= -->
+
+<!-- sldsValidatorIgnore -->
+<!-- sldsValidatorIgnore -->
+<template>
+    <template if:false={accountInfo}>
+        <div class="garage-product-details-header-large slds-grid_vertical-align-center slds-grid_align-center">
+            <lightning-layout
+                class="slds-media_center slds-has-flexi-truncate slds-grid_align-center slds-grid_vertical-align-center">
+                <lightning-layout-item if:true={displayBreadcrumb}>
+                    <div class="breadcrumb-large slds-m-bottom_large breadcrumb-div-width">
+                        <div class="breadcrumb" aria-label="Breadcrumbs" role="navigation">
+                            <div role="list" class="slds-breadcrumb slds-list_horizontal slds-wrap">
+                                <slot>
+                                    <div class="slds-breadcrumb__item breadcrumb-item-back">
+                                        <!--<a class="breadcrumb-text-color" onclick={handleCrumbClick}>
+                                        {breadcrumbLabel}
+                                    </a>-->
+                                        <a class="breadcrumb-text-color" onclick={handleBreadcrumb}>
+                                            {breadcrumb.label}
+                                        </a>
+                                    </div>
+                                </slot>
+                            </div>
+                        </div>
+                    </div>
+                </lightning-layout-item>
+                <lightning-layout-item alignment-bump="left">
+                    <div class="slds-no-flex slds-m-bottom_medium">
+                        <h2 class="my-garage-label">
+                            <span>My Products</span>
+                        </h2>
+                    </div>
+                </lightning-layout-item>
+                <template if:false={isguest}>
+                    <lightning-layout-item style="vertical-align: middle;display: flex;">
+                        <template if:true={isPreviousButtonEnabled}>
+                            <lightning-button-icon icon-name="utility:chevronleft" style="vertical-align: middle;"
+                                class="button-left" variant="bare" onclick={previousImage}
+                                alternative-text="previous Image" title="left">
+                            </lightning-button-icon>
+                        </template>
+                        <template for:each={displayedItems} for:item="product">
+                            <div key={product.id} title={product.tooltip} data-id={product.id}
+                                data-pagename={product.pagename} class="product-items" onclick={handleIconClick}>
+                                <div class="p-image">
+                                    <!-- <img src={product.image} class="circular-image" alt={product.label} /> -->
+                                    <c-own-product-image product-image={product.image} brand={product.division}>
+                                    </c-own-product-image>
+                                </div>
+                                <template if:true={product.displayRecallAlert}>
+                                    <div class="box overlay message-dot">
+                                        <span class="aler-mark">!</span>
+                                        <!-- <span class="aler-mark">{product.recallCount}</span> -->
+                                        <!-- <span><img src={alerticon}/></span> -->
+                                    </div>
+                                </template>
+                                <figcaption class={product.isSelectedItem} role="button" tabindex="0">{product.label}</figcaption>
+                            </div>
+                        </template>
+                        <template if:true={isNextButtonEnabled}>
+                            <lightning-button-icon icon-name="utility:chevronright" class="button-right" variant="bare"
+                                onclick={NextImage} alternative-text="Next Image" title="right">
+                            </lightning-button-icon>
+                        </template>
+                    </lightning-layout-item>
+                </template>
+                <lightning-layout-item>
+                    <div class="slds-no-flex slds-m-left_medium">
+                        <template if:false={isguest}>
+                            <span
+                                class="slds-avatar slds-avatar_circle slds-avatar_medium slds-grid slds-align_absolute-center slds-m-bottom_x-small garage-add-red-circle"
+                                title="Add Product" onclick={handleFind} role="link" tabindex="0" aria-label="Add to Product">
+                                <!-- <img class="garage-add-icon" src="/resource/Owners/Icons/garage_add.png" /> -->
+                                <lightning-icon icon-name='utility:add' alternative-text='add' size='large' title='add'
+                                    class="add-icon"></lightning-icon>
+                            </span>
+                            <p class="iconText">Add Product</p>
+
+                        </template>
+                        <template if:true={isguest}>
+                            <span
+                                class="slds-avatar slds-avatar_circle slds-avatar_medium slds-grid slds-align_absolute-center slds-m-bottom_x-small garage-add-grey-circle"
+                                title="Guest Login" onclick={handleFind}>
+                                <img class="garage-guestuser-icon slds-p-around_small"
+                                    src="/resource/Owners/Icons/garage_guestcarlogo.png" />
+                                <span class="slds-assistive-text">Guest Login</span>
+                            </span>
+                        </template>
+                    </div>
+                </lightning-layout-item>
+            </lightning-layout>
+        </div>
+
+        <div class="garage-product-details-header-small">
+            <!-- DOE-4240 Ravindra Ravindra -->
+            <lightning-layout class="slds-media slds-media_center slds-has-flexi-truncate">
+                <lightning-layout-item if:true={displayBreadcrumb}>
+                    <div class="breadcrumb-large slds-m-left_medium breadcrumb-div-width">
+                        <div class="breadcrumb" aria-label="Breadcrumbs" role="navigation">
+                            <div role="list" class="slds-breadcrumb slds-list_horizontal slds-wrap">
+                                <slot>
+                                    <div class="slds-breadcrumb__item breadcrumb-item-back">
+                                        <!-- <a class="breadcrumb-text-color" onclick={handleCrumbClick}>
+                                    {breadcrumbLabel}
+                                    </a> -->
+                                        <a class="breadcrumb-text-color" onclick={handleBreadcrumb}>
+                                            {breadcrumb.label}
+                                        </a>
+                                    </div>
+                                </slot>
+                            </div>
+                        </div>
+                    </div>
+                </lightning-layout-item>
+                <lightning-layout-item>
+                    <div class="slds-no-flex" if:false={isguest}>
+                        <h2 class="my-garage-label">
+                            <span>My Products</span>
+                        </h2>
+                    </div>
+                </lightning-layout-item>
+                <template if:false={isguest}>
+                    <lightning-layout-item class="slds-grid slds-grid_align-center carousel-wrapper">
+                        <template if:true={isPreviousButtonEnabled}>
+                            <lightning-button-icon icon-name="utility:chevronleft" style="vertical-align: middle;"
+                                class="button-left-mobile" variant="bare" onclick={previousImage}
+                                alternative-text="previous Image" title="left"></lightning-button-icon>
+                        </template>
+                        <template for:each={displayedItems} for:item="product">
+                            <div key={product.id} title={product.tooltip} data-id={product.id}
+                                data-pagename={product.pagename} class="product-items-mobile" onclick={handleIconClick}>
+                                <div class="p-image">
+                                    <!-- <img src={product.image} class="circular-image" alt={product.label} /> -->
+                                    <c-own-product-image product-image={product.image} brand={product.division}>
+                                    </c-own-product-image>
+                                </div>
+                                <template if:true={product.displayRecallAlert}>
+                                    <div class="box overlay message-dot">
+                                        <span class="aler-mark">!</span>
+                                    </div>
+                                </template>
+                                <figcaption class={product.isSelectedItem}>{product.label}</figcaption>
+                            </div>
+                        </template>
+                        <template if:true={isNextButtonEnabled}>
+                            <lightning-button-icon icon-name="utility:chevronright" class="button-right-mobile"
+                                variant="bare" onclick={NextImage} alternative-text="Next Image" title="right">
+                            </lightning-button-icon>
+                        </template>
+                    </lightning-layout-item>
+                </template>
+                <lightning-layout-item>
+                    <div class="slds-no-flex slds-m-left_medium ">
+                        <template if:false={isguest}>
+                            <!-- DOE-4240 Ravindra Ravindra -->
+                            <span
+                                class="slds-avatar slds-avatar_circle slds-avatar_medium slds-grid slds-m-top_medium slds-align_absolute-center slds-m-bottom_x-small garage-add-red-circle"
+                                title="Add Product" onclick={handleFind}>
+                                <!-- <img class="garage-add-icon" src="/resource/Owners/Icons/garage_add.png" /> -->
+                                <lightning-icon icon-name='utility:add' alternative-text='add' size='large' title='add'
+                                    class="add-icon"></lightning-icon>
+                            </span>
+                            <p class="iconText">Add</p>
+                        </template>
+                        <!-- <template if:true={isguest}>
+                        <span
+                            class="slds-avatar slds-avatar_circle slds-avatar_medium slds-grid slds-align_absolute-center slds-m-bottom_x-small garage-add-grey-circle"
+                            title="Guest Login" onclick={handleFind}>
+                            <img class="garage-guestuser-icon slds-p-around_small"
+                                src="/owners/resource/Owners/Icons/garage_guestcarlogo.png" />
+                            <span class="slds-assistive-text">Guest Login</span>
+                        </span>
+                    </template> -->
+                    </div>
+                </lightning-layout-item>
+            </lightning-layout>
+        </div>
+    </template>
+    <template if:true={accountInfo}>
+        <div
+            class="fullwidth garage-product-details-header-small garage-product-details-header-large slds-float_left accountInfo">
+            <lightning-layout class="slds-media slds-media_center slds-has-flexi-truncate">
+
+                <lightning-layout-item class="" size="12" small-device-size="12" medium-device-size="12"
+                    large-device-size="12">
+                    <h3 class="my-account-garage-label slds-m-bottom_large table-title text-style">
+                        My Products
+                    </h3>
+                    <p if:true={emptyGarageFlag} class="slds-m-bottom_large">
+                        You haven't yet added any vehicles to your garage. Add your first product below.
+                    </p>
+                </lightning-layout-item>
+            </lightning-layout>
+            <template if:false={accountPageDetailsLoaded}>
+                <div class="demo-only demo-only_viewport" style="height:6rem;position:relative">
+                    <div role="status" class="slds-spinner slds-spinner_medium">
+                        <span class="slds-assistive-text">Loading</span>
+                        <div class="slds-spinner__dot-a"></div>
+                        <div class="slds-spinner__dot-b"></div>
+                    </div>
+                </div>
+            </template>
+            <template if:true={accountPageDetailsLoaded}>
+                <div class="slds-grid slds-gutters slds-wrap">
+                    <!--             <template for:each={displayedItems} for:item="product">
+                    <div key={product.id} title={product.tooltip} data-id={product.id}
+                        data-pagename={product.pagename} class="product-items-mobile" onclick={handleIconClick}>
+                        <img src={product.image} class="circular-image slds-m-bottom_x-small" alt={product.label} />
+                        <figcaption class={product.isSelectedItem}>{product.label}</figcaption>
+                    </div>
+                </template> -->
+                    <template for:each={displayedItems} for:item="product">
+                        <div class={cardClass} key={product.id} title={product.tooltip} data-id={product.id}
+                            data-pagename={product.pagename}>
+                            <div class="card slds-card">
+                                <div class="slds-grid slds-grid_align-spread card-header">
+                                    <h3>{product.label}</h3>
+                                    <button class="slds-button slds-button_neutral btnBorder" key={product.id}
+                                        title={product.tooltip} data-id={product.id} data-pagename={product.pagename}
+                                        onclick={handleIconClick} role="button" tabindex="0" aria-label="View">View</button>
+                                </div>
+                                <div class="slds-card__body slds-card__body_inner card-body">
+                                    <span class="product-image">
+                                        <!-- <img src={product.image} class="circular-image" alt={product.label} /> -->
+                                        <c-own-product-image product-image={product.image} brand={product.division}>
+                                        </c-own-product-image>
+
+                                    </span>
+                                    <template if:true={product.isPrimary}>
+                                        <span class="prodInfoContainer">
+                                            <span class="productNameDetails">
+                                                <label>{product.year} {product.divisionAccountInfo}
+                                                    {product.model}</label>
+                                            </span>
+                                            <div class="">
+                                                <label>Connected Services:<br />
+                                                    <template if:true={product.packages}>
+                                                        <template for:each={product.packages} for:item="packageItem">
+                                                            <a key={packageItem.packageName} data-packagename={packageItem.packageName}
+                                                                onclick={handlePackageNavigation}
+                                                                data-vin={product.vin}>{packageItem.packageDisplayName}
+                                                                <br></a>
+                                                            <!--href="#"-->
+                                                        </template>
+                                                    </template>
+                                                    <template if:false={product.packages}><a href="#">None
+                                                            Active</a></template>
+                                                </label>
+                                            </div>
+                                            <!--Card Body appears here-->
+                                        </span>
+                                    </template>
+                                    <template if:false={product.isPrimary}>
+                                        <div class="text-container">
+                                            <label>{product.year} {product.divisionAccountInfo} {product.model}</label>
+                                        </div>
+                                    </template>
+                                </div>
+                                <footer class="slds-card__footer footer card-body-footer">
+                                    <button data-id={product.id} onclick={handleEditSettingsClick} tabindex="0"
+                                        role="link" aria-label="Edit"> Edit</button>
+                                </footer>
+                            </div>
+                        </div>
+                    </template>
+
+
+                    <div class={cardClass}>
+                        <div class="card slds-card" onclick={handleFind}>
+
+                            <div class="slds-grid slds-align_absolute-center headerBodyContainer">
+                                <span
+                                    class="slds-avatar slds-avatar_circle slds-avatar_medium slds-grid slds-align_absolute-center slds-m-bottom_x-small garage-add-red-circle"
+                                    title="Add Product" tabindex="0" role="button">
+                                    <!-- <img class="garage-add-icon" src="/resource/Owners/Icons/garage_add.png" /> -->
+                                    <lightning-icon icon-name='utility:add' alternative-text='add' size='large'
+                                        title='add' class="add-icon"></lightning-icon>
+                                </span>
+
+                            </div>
+                            <footer class="slds-card__footer footer card-body-footer">
+                                <button tabindex="0" role="link"> {addButtonLabel} </button>
+                            </footer>
+                        </div>
+                    </div>
+                </div>
+            </template>
+        </div>
+        <div lwc:dom="manual" data-id="sso"></div>
+        <!-- popup -->
+        <template if:true={showPopup}>
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+                class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                        onclick={closePopup}>
+                        <lightning-icon icon-name="utility:close" alternative-text="Close" title="Cancel and close"
+                            class="popup-icon">
+                        </lightning-icon>
+                        <span class="slds-assistive-text">Cancel and close</span>
+                    </button>
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                        <lightning-layout multiple-rows>
+                            <lightning-layout-item size="12" class="slds-text-align_center">
+                                <b>{popupText}</b>
+                            </lightning-layout-item>
+                            <lightning-layout-item size="6" class="slds-text-align_right">
+                                <img class="slds-p-around_small popup-button" data-hondaurl={appStoreURL}
+                                    data-acuraurl={acuraAppStoreURL} src={popupAppStoreIcon}
+                                    onclick={handleNavigations} />
+                            </lightning-layout-item>
+                            <lightning-layout-item size="6" class="slds-text-align_left">
+                                <img class="slds-p-around_small popup-button" data-hondaurl={playStoreURL}
+                                    data-acuraurl={acuraPlayStoreURL} src={popupPlayStoreIcon}
+                                    onclick={handleNavigations} />
+                            </lightning-layout-item>
+                        </lightning-layout>
+                    </div>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+        </template>
+    </template>
+</template>

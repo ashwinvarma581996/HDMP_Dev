@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>55.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>B2B Category Banner</masterLabel>
+    <description>Category Page Banner</description>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property
+                name="titleSize"
+                type="String"
+                label="Category Title - Text Size"
+                description="Change the size of the category title text"
+                default="Medium" 
+                datasource="Small,Medium,Large"
+            />
+            <property
+                name="titleColor"
+                type="Color"
+                label="Category Title - Text Color"
+                description="Change the color of the category title text"
+                default="#000000"
+            />
+            <property
+                name="descriptionSize"
+                type="String"
+                label="Category Description - Text Size"
+                description="Change the size of the category description text"
+                default="Medium" 
+                datasource="Small,Medium,Large"
+            />
+            <property
+                name="descriptionColor"
+                type="Color"
+                label="Category Description - Text Color"
+                description="Change the color of the category description text"
+                default="#000000"
+            />
+            <property
+                    name="ctaAlignment"
+                    type="String"
+                    label="Category CTA - Alignment"
+                    description="Change position of the CTA button. Mobile view defaults to center."
+                    default="Left"
+                    datasource="Left,Center,Right"
+            />
+            <property
+                    name="ctaButtonLabel"
+                    type="String"
+                    label="CTA Button - Label"
+                    description="Set the label for the select vehicle button"
+                    default="Select Vehicle"
+            />
+            <property
+                    name="ctaButtonTextColor"
+                    type="Color"
+                    label="CTA Button - Text Color"
+                    description="Change the color of the select vehicle button"
+                    default="#FFFFFF"
+            />
+            <property
+                    name="ctaButtonTextSize"
+                    type="String"
+                    label="CTA Button - Text Size"
+                    description="Change the size of the select vehicle button"
+                    default="Medium"
+                    datasource="Small,Medium,Large"
+            />
+            <property
+                    name="ctaButtonColor"
+                    type="Color"
+                    label="CTA Button - Background Color"
+                    description="Change the background color of the select vehicle button"
+                    default="#c31f20"
+            />
+            <property
+                    name="recordId"
+                    type="String"
+                    label="Record Id"
+                    description="Automatically bind the page's record id to the component variable"
+                    default="{!recordId}"
+            />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

@@ -1,0 +1,120 @@
+.color {
+    background-color: grey;
+}
+
+.styleinput {
+    position: centre;
+    width: 250px;
+}
+
+.center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.center2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.orText:before,
+.orText:after {
+    width: 1px;
+    height: 36%;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+}
+
+.orText:before,
+.orText:after {
+    content: '';
+    position: absolute;
+    background: #666;
+}
+
+.labelRadio input[type='checkbox'] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    top: 12px;
+    left: 18px;
+    z-index: 9;
+}
+
+.labelRadio input[type='checkbox']:checked~.checkmark:after {
+    display: block;
+}
+
+.labelRadio span:last-child {
+    display: inline-block;
+    padding-top: 5px;
+    vertical-align: text-bottom;
+    padding-left: 10px;
+}
+
+.orText:before {
+    top: 10px;
+}
+
+.orText:after {
+    bottom: 10px;
+}
+.vinError {
+    color: #1d89dc;
+    text-align: center;
+    display: block;
+    text-decoration: underline;
+    margin-top:5px;
+}
+
+@media screen and (max-width: 767px) {
+    .confirm-fitment {
+        flex-direction: column;
+    }
+    .confirm-fitment > .slds-col {
+        width: 100%;
+        padding-left: 0;
+        padding-right: 0;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    .confirm-fitment .orText {
+        width: 100%;
+        text-align: center;
+    }
+    .confirm-fitment .orText:before {
+        top: 50%;
+        left: 0;
+        margin: 0;
+        width: 45%;
+        height: 1px;
+    }
+    .confirm-fitment .orText:after {
+        width: 45%;
+        height: 1px;
+        top: 50%;
+        right: 0%;
+        margin: 0;
+        left: auto;
+    }
+}
+@media screen and (max-width: 479px) {
+    .vinfit .slds-modal__container {
+        margin-left: 16px;
+        margin-right: 16px;
+    }
+    .vinfit .slds-modal__content {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+    .vinfit .slds-button {
+        min-width: unset;
+        padding: 7px 30px !important;
+    }
+}

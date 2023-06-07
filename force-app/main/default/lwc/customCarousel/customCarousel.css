@@ -1,0 +1,215 @@
+.container {
+    margin: auto;
+}
+
+.text-section {
+    position: absolute;
+    color: #f2f2f2;
+    font-size: 15px;
+    bottom: 0px;
+    width: 100%;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.7);
+}
+
+
+/* .prev,
+.next {
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+    transform: translateY(-50%);
+} */
+
+.playpause1 {
+    position: absolute;
+    bottom: -4px;
+    right: 10px;
+    width: 5%;
+    cursor: pointer;
+}
+
+.playpause2 {
+    position: absolute;
+    bottom: 16px;
+    right: 30px;
+    width: 2.5%;
+    cursor: pointer;
+}
+
+
+/* .next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+} */
+
+.prev:hover,
+.next:hover {
+    background: rgba(227, 36, 36, 0.8);
+}
+
+.slideNumbers {
+    font-size: 12px;
+    position: absolute;
+    padding: 8px 12px;
+    top: 0;
+    color: #f2f2f2;
+}
+
+.dot {
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.fade {
+    animation-name: fade;
+    animation-duration: 1.5s;
+}
+
+.customCarousel {
+    position: relative;
+}
+
+.customCarousel img {
+    width: 100%;
+}
+
+.carouselControls {
+    position: absolute;
+    /* top: 50%; */
+    transform: translateY(-50%);
+    width: 100%;
+    /* padding: 14px; */
+    bottom: 50px;
+}
+
+.prev,
+.next {
+    cursor: pointer;
+    background: #E32424;
+    width: 30px;
+    height: 30px;
+    padding: 25px !important;
+    position: absolute;
+}
+
+a.prev {
+    right: 50px;
+}
+
+.next {
+    right: 0px !important;
+}
+
+a.prev:after {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    transform: rotate(-45deg);
+    left: 20px;
+    border-top: 2px solid #fff;
+    border-left: 2px solid #fff;
+    top: 20px;
+}
+
+.next::after {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    color: #fff;
+    transform: rotate(135deg);
+    border-top: 2px solid #fff;
+    border-left: 2px solid #fff;
+    top: 20px;
+    right: 20px;
+}
+
+@keyframes fade {
+    from {
+        opacity: .4
+    }
+    to {
+        opacity: 1
+    }
+}
+
+@media (max-width:1199px) {
+    .playpause2 {
+        bottom: 16px;
+        right: 10px;
+        width: 13px;
+        height: 14px;
+    }
+    .playpause1 {
+        bottom: 16px;
+        right: 6px;
+        width: 27px;
+        height: 15px;
+    }
+}
+@media (max-width:1080px) {
+    .carouselControls {
+        bottom: 36px;
+    }
+    .prev,
+    .next {
+        width: 30px;
+        height: 30px;
+        padding: 18px !important;
+    }
+    a.prev {
+        right: 30px!important;
+    }
+    a.prev:after {
+        width: 10px;
+        height: 10px;
+        left: 15px;
+        top: 13px;
+    }
+    .next::after {
+        width: 10px;
+        height: 10px;
+        top: 13px;
+        right:15px;
+    }
+    
+}
+
+@media (max-width:767px) {
+    .carouselControls {
+        bottom: 16px;
+    }
+    .prev,
+    .next {
+        width: 15px;
+        height: 15px;
+        padding: 8px !important;
+    }
+    a.prev {
+        right: 16px!important;
+    }
+    a.prev:after {
+        width: 6px;
+        height: 6px;
+        left: 7px;
+        top: 5px;
+    }
+    .next::after {
+        width: 6px;
+        height: 6px;
+        top: 5px;
+        right:7px;
+    }
+    
+}

@@ -1,0 +1,36 @@
+p {
+    font-size: 16px;
+    line-height: 26px;
+    color: #000000;
+    margin-bottom: 10px;
+}
+.list-item_wrapper {
+    flex-direction: column;
+}
+.list-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.list-item input {
+    margin-right: 5px;
+}
+.slds-button {
+    border-radius: 2px;
+    height: 48px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    font-weight: 900;
+    font-size: 16px;
+    background: #E42525;
+    color: #ffffff;
+    border: 1px solid #e42525;
+    padding: 10px 30px;
+    transition: 0.5s all;
+    margin-top: 20px;
+}
+.slds-button:hover {
+    color: #ffffff;
+    border: 1px solid #E42525;
+    background: #C42121;
+}

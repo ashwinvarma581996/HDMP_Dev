@@ -1,0 +1,635 @@
+<!-- //============================================================================
+// Title:    Honda Owners Experience - Footer
+//
+// Summary:  This is the html seen at the Owners Garage Find - Honda Auto of the Honda Owner Community
+//
+// Details:  Extend the LightningElement with this Base Element to gain access to the Messaging Channel and other logic herein and this is the own garage find honda component for all community pages.
+//
+//
+// History:
+// May 17, 2021 Arunprasad N (Wipro) Original Author
+//=========================================================================== -->
+<template>
+
+    <!-- Changer for Desktop -->
+
+    <template if:true={displaySearched}>
+        <div
+            class="garage-product-details-large garage-product-changer slds-grid_vertical-align-center slds-grid_align-center">
+            <lightning-layout multiple-rows horizontal-align="start">
+                <lightning-layout-item size="12" small-device-size="12" medium-device-size="8" large-device-size="6">
+                    <lightning-layout multiple-rows>
+                        <lightning-layout-item if:false={displayRegisterProduct} size="12" small-device-size="12"
+                            medium-device-size="12" large-device-size="12">
+                            <c-own-find-products-dropdowns division={division} onproductfound={handleProductChange}>
+                            </c-own-find-products-dropdowns>
+                        </lightning-layout-item>
+                        <!-- <lightning-layout-item if:false={displayRegisterProduct} size="12" small-device-size="12"
+                            medium-device-size="4" large-device-size="4">
+                            <div>
+                                <span class="change-combobox-label">Year</span>
+                                <lightning-combobox class="change-brand-combobox slds-m-top_xx-small" name="year"
+                                    label="Year" options={years} value={year} onchange={handleYearChange}
+                                    variant="label-hidden" placeholder="Year">
+                                </lightning-combobox>
+                            </div>
+                        </lightning-layout-item>
+                        <lightning-layout-item if:true={displayTrimInput} size="12" small-device-size="12"
+                            medium-device-size="4" large-device-size="4" class="slds-p-left_small slds-p-bottom_small">
+                            <span class="change-combobox-label">Trim</span>
+                            <lightning-combobox class="change-brand-combobox slds-m-top_xx-small" name="model"
+                                label="Trim" options={trims} value={modelId} onchange={handleTrimChange}
+                                variant="label-hidden" placeholder="Trim">
+                            </lightning-combobox>
+                        </lightning-layout-item> -->
+                        <!-- <lightning-layout-item if:true={displayRegisterProduct} size="12" small-device-size="12"
+                            medium-device-size="8" large-device-size="8" class="slds-p-left_small slds-p-bottom_small">
+                            <div>
+                                <span class="change-combobox-label">Serial Number</span>
+                                <lightning-input type="text" label="Serial Number"
+                                    class="change-brand-input  slds-m-top_xx-small" variant="label-hidden"
+                                    value={serialNumber} onchange={handleSerialNumberChange}
+                                    placeholder="Enter Serial Number"></lightning-input>
+                            </div>
+                            <template if:true={displayVINError}>
+                                <span class="find-brand-error">{vinErrorText}</span>
+                            </template>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="12" small-device-size="12" medium-device-size="4"
+                            large-device-size="4" if:true={displayRegisterProduct}>
+                            <div class=" slds-p-right_small slds-m-left_small slds-p-bottom_large ">
+                                <div class={changeButtonClass}>
+                                    <label class="slds-form-element__label">&nbsp;</label>
+                                    <button class="slds-button slds-button_brand slds-combobox_container"
+                                        disabled={changeButtonDisabled} onclick={handleChangerClick}>CHANGE
+                                    </button>
+                                </div>
+                            </div>
+                        </lightning-layout-item> -->
+                    </lightning-layout>
+                </lightning-layout-item>
+            </lightning-layout>
+        </div>
+    </template>
+
+    <!-- Details for Desktop -->
+
+    <div class="garage-product-details-large ">
+        <lightning-layout horizontal-align="center" multiple-rows>
+            <lightning-layout-item size="12" large-device-size="1" medium-device-size="12"></lightning-layout-item>
+            <lightning-layout-item padding="around-small" horizontal-align="end" size="12" large-device-size="3"
+                medium-device-size="5">
+                <div class="slds-float_right">
+                    <div class="ownProductImage">
+                        <!-- Alexander Dzhitenov (Wipro) DOE-4825 - Added error handling for broken image links -->
+                        <!-- <img class="slds-align_absolute-center imagecls" src={productImage}> -->
+                        <div class="slds-align_absolute-center">
+                            <c-own-product-image product-image={productImage} brand={division}></c-own-product-image>
+                        </div>
+                    </div>
+                </div>
+            </lightning-layout-item>
+            <lightning-layout-item padding="around-small" horizontal-align="left" size="12" large-device-size="8"
+                medium-device-size="7">
+                <div class="slds-m-left_x-large">
+                    <article class="slds-tile slds-media">
+                        <div class="slds-media__body">
+                            <h3 class="slds-tile__title garage-product-details-label-border" title="Details">
+                                <span
+                                    class="garage-product-details-label slds-align_absolute-left">{displayNickname}</span>
+                                <!--                                 <span if:false={fromProductChooser}
+                                    class="garage-product-details-label slds-align_absolute-left">{context.product.nickname}</span>
+                                <span if:true={fromProductChooser}
+                                    class="garage-product-details-label slds-align_absolute-left">{productDetails.nickname}</span> -->
+                            </h3>
+                            <div class="slds-tile__detail slds-p-top_medium">
+                                <dl if:true={displaySavedDetails}
+                                    class="slds-list_horizontal slds-wrap slds-container_medium">
+                                    <dt if:true={displayVin} class="slds-item_label garage-product-details-field-label">
+                                        VIN</dt>
+                                    <dd if:true={displayVin}
+                                        class="slds-item_detail slds-p-left_medium garage-product-details-field-value">
+                                        {context.product.vin}
+                                    </dd>
+                                    <dt class="slds-item_label garage-product-details-field-label">Model</dt>
+                                    <dd class="slds-item_detail slds-p-left_medium garage-product-details-field-value">
+                                        <span class="model-name">{context.product.model}</span>
+                                        <template if:true={displayRecallIcon}>
+                                            <!-- <lightning-icon icon-name='utility:info_alt' alternative-text='info_alt' size='x-small' title='info_alt' class="custom-icon"></lightning-icon> -->
+                                            <img src={alertIcon} class="alert-icon" alt="Alert Icon" />
+                                        </template>
+                                    </dd>
+                                    <dt if:true={displayRegisterProduct}
+                                        class="slds-item_label garage-product-details-field-label">Serial Number
+                                    </dt>
+                                    <dd if:true={displayRegisterProduct}
+                                        class="slds-item_detail slds-p-left_medium garage-product-details-field-value">
+                                        {context.product.vin} </dd>
+                                    <!-- Alexander Dzhitenov (Wipro): Commenting out as we do not currently have data mapped to these fields -->
+                                    <!-- <dt if:true={displayMarine}
+                                        class="slds-item_label garage-product-details-field-label">Category</dt>
+                                    <dd if:true={displayMarine}
+                                        class="slds-item_detail slds-p-left_medium garage-product-details-field-value">
+                                        - </dd>
+                                    <dt if:true={displayMarine}
+                                        class="slds-item_label garage-product-details-field-label">
+                                        Type</dt>
+                                    <dd if:true={displayMarine}
+                                        class="slds-item_detail slds-p-left_medium garage-product-details-field-value">
+                                        - </dd> -->
+                                    <dt if:true={displayExteriorColor}
+                                        class="slds-item_label garage-product-details-field-label">Exterior
+                                        Color</dt>
+                                    <dd if:true={displayExteriorColor}
+                                        class="slds-item_detail slds-p-left_medium garage-product-details-field-value">
+                                        {context.product.exteriorColor}</dd>
+                                    <dt if:true={displayVin} class="slds-item_label garage-product-details-field-label">
+                                        License Plate</dt>
+                                    <dd if:true={displayVin}
+                                        class="slds-item_detail slds-p-left_medium garage-product-details-field-value">
+                                        <!-- DOE-4791-->
+                                        <!-- {context.product.licenseState} &nbsp;{context.product.licenseNumber} -->
+                                        {licensePlateString}
+                                    </dd>
+                                    <!-- DOE-6523 start code for show radio/navi code -->
+                                    <dt if:true={displayRadioLink}
+                                        class="slds-item_label garage-product-details-field-label">
+                                        Navigation Code
+                                    </dt>
+                                    <dd if:true={displayRadioLink}
+                                        class="slds-item_detail slds-p-left_medium garage-product-details-field-value">
+                                        {navigationCode}
+                                    </dd>
+                                    <dt if:true={displayRadioLink}
+                                        class="slds-item_label garage-product-details-field-label">
+                                        Radio Code
+                                    </dt>
+                                    <dd if:true={displayRadioLink}
+                                        class="slds-item_detail slds-p-left_medium garage-product-details-field-value">
+                                        {radioCode}
+                                    </dd>
+                                    <!-- DOE-6523 End code for show radio/navi code -->
+                                    <!-- DOE-4256 Start (Code commented for Release 1 - Details: for hiding  Retrieve Radio / Navigation Codes ) -->
+                                    <!-- <dt if:true={displayRadioLink}
+                                        class="slds-item_label garage-product-details-field-label">Active
+                                        Subscriptions
+                                    </dt>
+                                    <dd if:true={displayRadioLink}>
+                                        <template for:each={subItems} for:item="activeSub">
+                                            <span class="slds-badge ownSubscriptions slds-m-top_medium"
+                                                key={activeSub.Id}>
+                                                {activeSub.Name}
+                                            </span>
+                                        </template>
+                                    </dd> -->
+                                    <!-- DOE-4256 End (Code commented for Release 1 - Details: for hiding  Retrieve Radio / Navigation Codes )-->
+                                    <!-- <dl if:true={displayRadioLink}> -->
+                                    <c-own-subscriptions vin={context.product.vin} division-id={divisionId}
+                                        page-type="pdp"></c-own-subscriptions>
+                                    <!-- </dl> -->
+                                </dl>
+
+                                <div if:false={displaySavedDetails} class=" slds-container_medium">
+
+                                    <P if:true={isguest} class="garage-product-details-field-value">
+                                        Create a
+                                        Honda
+                                        Owners account to register your vehicles and easily save <br />and
+                                        access your information. </P>
+                                    <dl if:false={isguest} class="slds-list_horizontal slds-wrap slds-container_medium">
+                                        <dt if:true={displayVin}
+                                            class="slds-item_label garage-product-details-field-label">
+                                            VIN
+                                        </dt>
+                                        <dd if:true={displayVin}
+                                            class="slds-item_detail slds-p-left_medium garage-product-details-field-value">
+                                            {productDetails.vin}
+                                        </dd>
+                                        <dt class="slds-item_label garage-product-details-field-label">Model</dt>
+                                        <dd
+                                            class="slds-item_detail slds-p-left_medium garage-product-details-field-value">
+                                            {productDetails.model}
+                                            <template if:true={displayRecallIcon}>
+                                                <!-- <lightning-icon icon-name='utility:info_alt' alternative-text='info_alt'
+                                                    size='x-small' title='info_alt' class="custom-icon">
+                                                </lightning-icon> -->
+                                                <img src={alertIcon} class="alert-icon" alt="Alert Icon" />
+                                            </template>
+                                        </dd>
+                                        <dt if:true={displayExteriorColor}
+                                            class="slds-item_label garage-product-details-field-label">Exterior
+                                            Color</dt>
+                                        <dd if:true={displayExteriorColor}
+                                            class="slds-item_detail slds-p-left_medium garage-product-details-field-value">
+                                            {productDetails.exteriorColor}</dd>
+                                    </dl>
+                                    <div class={addButtonClass}>
+                                        <label class="slds-form-element__label">&nbsp;</label>
+                                        <button class="slds-button slds-button_brand slds-combobox_container"
+                                            onclick={handleAdd} disabled={userHasProduct}>ADD TO MY GARAGE</button>
+                                    </div>
+                                    <div>
+                                        <span style="color:#E42525">{vinError}</span>
+                                    </div>
+                                    <div class="slds-item_detail slds-m-top_x-large">
+                                        <template if:true={displaySearched}>
+                                            <template if:false={displayRegisterProduct}>
+                                                <template if:false={hasVin}>
+                                                    <a class="external-link" onclick={handleEnterVIN} tabindex="0"
+                                                        role="link">
+                                                        Enter VIN
+                                                    </a>
+                                                </template>
+                                            </template>
+                                        </template>
+                                        <!--DOE-4256 Start (Code commented for Release 1 - Details: Hiding Retrieve radio navigation buttons.) -->
+                                        <template if:true={displaySearched}>
+                                            <template if:true={displayRadioLink}>
+                                                <template if:false={hasVin}>
+                                                    &nbsp; | &nbsp;
+                                                </template>
+                                            </template>
+                                        </template>
+                                        <template if:true={displayRadioLink}> <a class="external-link"
+                                                onclick={handleRadioNavCode} tabindex="0" role="link">
+                                                Retrieve
+                                                Radio / Navigation
+                                                Codes</a>
+                                        </template>
+                                        <!-- DOE-4256 End (Code commented for Release 1 - Details: Hiding Retrieve radio navigation buttons. )-->
+                                        <template if:true={displayRadioLink}>
+                                            <template if:true={displaySearched}>
+                                                <template if:false={displayRegisterProduct}>
+                                                    &nbsp; | &nbsp;
+                                                </template>
+                                            </template>
+                                            <a if:true={division} class="external-link" onclick={handleExploreLink}
+                                                tabindex="0" role="link">
+                                                Explore {division}Link
+                                            </a>
+                                        </template>
+                                        <!-- Commented For Release 1 By Abhishek Salecha DOE-4879 -->
+                                        <!--Alexander Dzhitenov (Wipro) - Uncommented for Release 2-->
+                                        <template if:true={displayRegisterProduct}>
+                                            <template if:true={displaySearched}>
+                                                <template if:false={displayRegisterProduct}>
+                                                    &nbsp; | &nbsp;
+                                                </template>
+                                            </template>
+                                            <template if:false={displaySearched}>
+                                                <template if:true={displayRadioLink}>
+                                                    &nbsp; | &nbsp;
+                                                </template>
+                                            </template>
+                                            <a class="external-link" onclick={handleRegisterProduct} tabindex="0"
+                                                role="link">
+                                                Register product without creating an account
+                                            </a>
+                                        </template>
+                                    </div>
+                                </div>
+                                <div if:true={displaySavedDetails} class="slds-item_detail slds-m-top_x-large">
+                                    <a class="external-link" onclick={handleEditSettingsClick}>Edit
+                                        Settings</a>
+                                    <template if:true={displayEnterVin}>
+                                        &nbsp; | &nbsp;<a class="external-link" onclick={handleEnterVIN} tabindex="0"
+                                            role="link">
+                                            Enter VIN
+                                        </a>
+                                    </template>
+
+                                    <template if:true={displayRegisterProduct}> &nbsp; | &nbsp; <a class="external-link"
+                                            onclick={handleRegisterProduct} tabindex="0" role="link">
+                                            Register
+                                            Product</a>
+                                    </template>
+                                    <template if:true={displayRadioLink}> &nbsp; | &nbsp; <a class="external-link"
+                                            onclick={handleRadioNavCode} tabindex="0" role="link">
+                                            Retrieve
+                                            Radio / Navigation
+                                            code</a>
+                                    </template>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </lightning-layout-item>
+        </lightning-layout>
+    </div>
+
+    <!--                                    Mobile Model Changer                                    -->
+
+    <div class="garage-product-details-small slds-p-around_medium">
+        <template if:true={displaySearched}>
+            <div class="accordian-border">
+                <lightning-accordion allow-multiple-sections-open onsectiontoggle={handleSectionToggle}
+                    active-section-name={activeSections}>
+                    <lightning-accordion-section name="A" label={accordinLabel}>
+                        <div
+                            class="slds-p-top_xx-large garage-product-details-small garage-product-changer slds-grid_vertical-align-center slds-grid_align-center">
+                            <lightning-layout multiple-rows horizontal-align="start">
+                                <lightning-layout-item size="12" small-device-size="12" medium-device-size="4"
+                                    large-device-size="4">
+                                    <lightning-layout multiple-rows>
+                                        <lightning-layout-item if:false={displayRegisterProduct} size="12"
+                                            small-device-size="12" medium-device-size="12" large-device-size="12">
+                                            <c-own-find-products-dropdowns division={division}
+                                                onproductfound={handleProductChange}></c-own-find-products-dropdowns>
+                                        </lightning-layout-item>
+                                        <!-- <lightning-layout-item if:false={displayRegisterProduct} size="12"
+                                            small-device-size="12" medium-device-size="4" large-device-size="4">
+                                            <div>
+                                                <span class="change-combobox-label">Year</span>
+                                                <lightning-combobox class="change-brand-combobox slds-m-top_xx-small"
+                                                    name="year" label="Year" options={years} value={year}
+                                                    onchange={handleYearChange} variant="label-hidden"
+                                                    placeholder="Select Year">
+                                                </lightning-combobox>
+                                            </div>
+                                        </lightning-layout-item>
+                                        <lightning-layout-item if:true={displayTrimInput} size="12"
+                                            small-device-size="12" medium-device-size="4" large-device-size="4"
+                                            class="slds-p-bottom_small">
+                                            <span class="change-combobox-label">Trim</span>
+                                            <lightning-combobox class="change-brand-combobox slds-m-top_xx-small"
+                                                name="model" label="Trim" options={trims} value={modelId}
+                                                onchange={handleTrimChange} variant="label-hidden"
+                                                placeholder="Select Trim" disabled={trimSelectionDisabled}>
+                                            </lightning-combobox>
+                                        </lightning-layout-item> -->
+                                        <lightning-layout-item if:true={displayRegisterProduct} size="12"
+                                            small-device-size="12" medium-device-size="8" large-device-size="8"
+                                            class="slds-p-left_small slds-p-bottom_small">
+                                            <div>
+                                                <span class="change-combobox-label">Serial Number</span>
+                                                <lightning-input type="text" label="Serial Number" value={serialNumber}
+                                                    onchange={handleSerialNumberChange}
+                                                    class="change-brand-input  slds-m-top_xx-small"
+                                                    variant="label-hidden" placeholder="Enter Serial Number">
+                                                </lightning-input>
+                                                <template if:true={displayVINError}>
+                                                    <span class="find-brand-error">{vinErrorText}</span>
+                                                </template>
+                                            </div>
+                                        </lightning-layout-item>
+                                        <lightning-layout-item if:true={displayRegisterProduct} size="12"
+                                            small-device-size="12" medium-device-size="4" large-device-size="4"
+                                            class="change-button">
+                                            <div class="">
+                                                <div class={changeButtonClass}>
+                                                    <button
+                                                        class="slds-button slds-button_brand slds-combobox_container"
+                                                        disabled={changeButtonDisabled}
+                                                        onclick={handleChangerClick}>CHANGE
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </lightning-layout-item>
+                                    </lightning-layout>
+                                </lightning-layout-item>
+                            </lightning-layout>
+                        </div>
+                    </lightning-accordion-section>
+
+                </lightning-accordion>
+            </div>
+
+        </template>
+    </div>
+    <!-- Mobile Details UI -->
+
+    <div class="garage-product-details-small slds-p-around_medium">
+        <lightning-layout horizontal-align="center" multiple-rows>
+            <lightning-layout-item padding="around-small" horizontal-align="right" size="4">
+                <!-- Alexander Dzhitenov (Wipro) DOE-4825 - Added error handling for broken image links -->
+                <!-- <div class="slds-align_absolute-center  ownProductMobileImage">
+                    <img class="slds-align_absolute-center imagecls" src={productImage}>
+                </div> -->
+                <div class="slds-align_absolute-center">
+                    <c-own-product-image product-image={productImage} brand={division}></c-own-product-image>
+                </div>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class="slds-p-vertical_large">
+                <div>
+                    <article class="slds-tile slds-media">
+                        <div class="slds-media__body">
+                            <h3
+                                class="slds-tile__title garage-product-details-label-border garage-product-details-label-center">
+                                <lightning-layout horizontal-align="center">
+                                    <lightning-layout-item padding="around-small">
+                                        <span class="garage-product-details-label">{displayNickname}</span>
+                                        <!--                                         <span if:false={fromProductChooser}
+                                            class="garage-product-details-label">{context.product.nickname}</span>
+                                        <span if:true={fromProductChooser}
+                                            class="garage-product-details-label">{productDetails.nickname}</span> -->
+                                    </lightning-layout-item>
+
+                                </lightning-layout>
+                            </h3>
+                            <div class="slds-tile__detail slds-p-top_medium">
+                                <dl if:true={displaySavedDetails}
+                                    class="slds-list_horizontal slds-wrap slds-container_medium">
+                                    <dt if:true={displayVin} class="slds-item_label garage-product-details-field-label">
+                                        VIN</dt>
+                                    <dd if:true={displayVin}
+                                        class="slds-item_detail slds-p-left_medium garage-product-details-field-value">
+                                        {context.product.vin}</dd>
+                                    <dt class="slds-item_label garage-product-details-field-label">Model</dt>
+                                    <dd class="slds-item_detail slds-p-left_medium garage-product-details-field-value">
+                                        <span class="model-name">{context.product.model}</span>
+                                        <template if:true={displayRecallIcon}>
+                                            <!-- <lightning-icon icon-name='utility:info_alt' alternative-text='info_alt'
+                                                size='x-small' title='info_alt' class="custom-icon"></lightning-icon> -->
+                                            <img src={alertIcon} class="alert-icon" />
+                                        </template>
+                                    </dd>
+                                    <!-- To be implement in future  -->
+                                    <dt if:true={displayRegisterProduct}
+                                        class="slds-item_label garage-product-details-field-label">Serial Number
+                                    </dt>
+                                    <dd if:true={displayRegisterProduct}
+                                        class="slds-item_detail slds-p-left_medium garage-product-details-field-value">
+                                        {context.product.vin} </dd>
+                                    <!-- Alexander Dzhitenov (Wipro): Commenting out as we do not currently have data mapped to these fields -->
+                                    <!-- To be implement in future  -->
+                                    <!-- <dt if:true={displayMarine}
+                                        class="slds-item_label garage-product-details-field-label">Category</dt>
+                                    <dd if:true={displayMarine}
+                                        class="slds-item_detail slds-p-left_medium garage-product-details-field-value">
+                                        - </dd> -->
+                                    <!-- To be implement in future  -->
+                                    <!-- <dt if:true={displayMarine}
+                                        class="slds-item_label garage-product-details-field-label">
+                                        Type</dt>
+                                    <dd if:true={displayMarine}
+                                        class="slds-item_detail slds-p-left_medium garage-product-details-field-value">
+                                        - </dd> -->
+                                    <dt if:true={displayExteriorColor}
+                                        class="slds-item_label garage-product-details-field-label">Exterior Color
+                                    </dt>
+                                    <dd if:true={displayExteriorColor}
+                                        class="slds-item_detail slds-p-left_medium garage-product-details-field-value">
+                                        {context.product.exteriorColor}</dd>
+                                    <dt if:true={displayVin} class="slds-item_label garage-product-details-field-label">
+                                        License Plate</dt>
+                                    <dd if:true={displayVin}
+                                        class="slds-item_detail slds-p-left_medium garage-product-details-field-value">
+                                        <!-- {context.product.licenseState} &nbsp;{context.licenseNumber} -->
+                                        {licensePlateString}
+                                    </dd>
+                                    <!-- DOE-6523 start code for show radio/navi code -->
+                                    <dt if:true={displayRadioLink}
+                                        class="slds-item_label garage-product-details-field-label">
+                                        Navigation Code
+                                    </dt>
+                                    <dd if:true={displayRadioLink}
+                                        class="slds-item_detail slds-p-left_medium garage-product-details-field-value">
+                                        {navigationCode}
+                                    </dd>
+                                    <dt if:true={displayRadioLink}
+                                        class="slds-item_label garage-product-details-field-label">
+                                        Radio Code
+                                    </dt>
+                                    <dd if:true={displayRadioLink}
+                                        class="slds-item_detail slds-p-left_medium garage-product-details-field-value">
+                                        {radioCode}
+                                    </dd>
+                                    <!-- DOE-6523 End code for show radio/navi code -->
+                                    <!-- DOE-4791-->
+                                    <c-own-subscriptions vin={context.product.vin} division-id={divisionId}
+                                        page-type="pdp"></c-own-subscriptions>
+                                    <!-- <dt if:true={displayRadioLink}
+                                        class="slds-item_label garage-product-details-field-label">Active
+                                        Subscriptions
+                                    </dt>
+                                    <dd if:true={displayRadioLink}>
+                                        <template for:each={subItems} for:item="activeSub">
+                                            <span class="slds-badge ownSubscriptions slds-m-top_medium"
+                                                key={activeSub.Id}>
+                                                {activeSub.Name}
+                                            </span>
+                                        </template>
+                                    </dd> -->
+                                </dl>
+                                <div if:false={displaySavedDetails} class=" slds-container_medium">
+                                    <P if:true={isguest} class=" slds-p-left_medium garage-product-details-field-value">
+                                        Create a
+                                        Honda
+                                        Owners account to register your vehicles and easily save <br />and
+                                        access your information. </P>
+                                    <dl if:false={isguest} class="slds-list_horizontal slds-wrap slds-container_medium">
+                                        <dt if:true={displayVin}
+                                            class="slds-item_label garage-product-details-field-label">
+                                            VIN
+                                        </dt>
+                                        <dd if:true={displayVin}
+                                            class="slds-item_detail slds-p-left_medium garage-product-details-field-value">
+                                            {productDetails.vin}
+                                        </dd>
+                                        <dt class="slds-item_label garage-product-details-field-label">Model</dt>
+                                        <dd
+                                            class="slds-item_detail slds-p-left_medium garage-product-details-field-value">
+                                            {productDetails.model}
+                                            <template if:true={displayRecallIcon}>
+                                                <!-- <lightning-icon icon-name='utility:info_alt' alternative-text='info_alt'
+                                                    size='x-small' title='info_alt' class="custom-icon">
+                                                </lightning-icon> -->
+                                                <img src={alertIcon} class="alert-icon" />
+                                            </template>
+                                        </dd>
+                                        <dt if:true={displayExteriorColor}
+                                            class="slds-item_label garage-product-details-field-label">Exterior
+                                            Color</dt>
+                                        <dd if:true={displayExteriorColor}
+                                            class="slds-item_detail slds-p-left_medium garage-product-details-field-value">
+                                            {productDetails.exteriorColor}</dd>
+                                    </dl>
+                                    <div class={addButtonClass}>
+                                        <label class="slds-form-element__label">&nbsp;</label>
+                                        <button class="slds-button slds-button_brand slds-combobox_container"
+                                            style="margin: auto;" onclick={handleAdd} disabled={addButtonDisabled}>ADD
+                                            TO MY GARAGE</button>
+                                    </div>
+                                    <div>
+                                        <span style="color:#E42525">{vinError}</span>
+                                    </div>
+                                    <div class="slds-item_detail slds-m-top_x-large">
+                                        <template if:true={displaySearched}>
+                                            <template if:false={displayRegisterProduct}>
+                                                <template if:false={hasVin}>
+                                                    <a class="external-link" onclick={handleEnterVIN}>
+                                                        Enter VIN
+                                                    </a>
+                                                </template>
+                                            </template>
+                                        </template>
+
+                                        <template if:true={displaySearched}>
+                                            <template if:true={displayRadioLink}>
+                                                <template if:false={hasVin}>
+                                                    &nbsp; | &nbsp;
+                                                </template>
+                                            </template>
+                                        </template>
+
+                                        <template if:true={displayRadioLink}> <a class="external-link"
+                                                onclick={handleRadioNavCode}>
+                                                Retrieve
+                                                Radio / Navigation
+                                                Codes</a>
+
+                                        </template>
+
+                                        <template if:true={displayRadioLink}>
+                                            <template if:true={displaySearched}>
+                                                <template if:false={displayRegisterProduct}>
+                                                    &nbsp; | &nbsp;
+                                                </template>
+                                            </template>
+                                            <a if:true={division} class="external-link" onclick={handleExploreLink}>
+                                                Explore {division}Link
+                                            </a>
+                                        </template>
+                                        <!-- Commented For Release 1 By Abhishek Salecha DOE-4879  -->
+                                        <!--Alexander Dzhitenov (Wipro) - Uncommented for Release 2-->
+                                        <template if:true={displayRegisterProduct}>
+                                            <a class="external-link" onclick={handleRegisterProduct}>
+                                                Register product without creating an account
+                                            </a>
+                                        </template>
+                                    </div>
+                                </div>
+                                <div if:true={displaySavedDetails} class="slds-item_detail slds-m-top_large">
+                                    <a class="external-link" onclick={handleEditSettingsClick}>Edit
+                                        Settings</a>
+                                    <template if:true={displayEnterVin}>
+                                        &nbsp; | &nbsp;<a class="external-link" onclick={handleEnterVIN}>
+                                            Enter VIN
+                                        </a>
+                                    </template>
+
+                                    <template if:true={displayRegisterProduct}> &nbsp; | &nbsp; <a class="external-link"
+                                            onclick={handleRegisterProduct}>
+                                            Register
+                                            Product</a>
+                                    </template>
+                                    <!--DOE-4256 Start (Code commented for Release 1 - Details: Hiding Retrieve radio navigation buttons.) -->
+
+                                    <template if:true={displayRadioLink}> &nbsp; | &nbsp; <a class="external-link"
+                                            onclick={handleRadioNavCode}>
+                                            Retrieve
+                                            Radio / Navigation
+                                            code</a>
+                                    </template>
+                                    <!-- DOE-4256 end (Code commented for Release 1 - Details: Hiding Retrieve radio navigation buttons.) -->
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </lightning-layout-item>
+        </lightning-layout>
+    </div>
+
+</template>

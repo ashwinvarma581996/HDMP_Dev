@@ -1,0 +1,11 @@
+<aura:component access="global" implements="forceCommunity:themeLayout" description="Pdf Document Theme">
+    
+    <aura:attribute name="pdftheme" type="Aura.Component[]" required="false" />
+
+    <div class="slds-grid slds-wrap">
+        <div class="slds-col slds-size_1-of-1 body-layout">
+            {!v.pdftheme}
+        </div>
+    </div>
+    
+</aura:component>

@@ -1,0 +1,111 @@
+<template>
+    <!--Content to display when a Enter VIN is selected-->
+    <!--img src={customImageSrcTest}/-->
+
+    <div class="slds-container_x-large slds-container_center">
+
+        <div class="product-heading-large">Enter {productIdentifierUppercase}
+            <a onclick={handleCloseEdit} class="find-brand-or-span-red">
+                <lightning-icon icon-name="utility:close" size="x-small" class="icon-red"></lightning-icon>
+                Close
+            </a>
+        </div>
+
+        <template if:false={hasVIN}>
+            <lightning-layout multiple-rows>
+                <lightning-layout-item size="12" small-device-size="12" medium-device-size="4" large-device-size="4">
+                    <lightning-layout multiple-rows>
+                        <lightning-layout-item size="12" padding="around-large" class="find-brand-large">
+                            <div class="slds-text-align_right product-form-section">
+                                <!-- <img class="vehicle-image-round" src={vehicleImage}/> -->
+                                <!-- Alexander Dzhitenov (Wipro) DOE-4825 - Added error handling for broken image links -->
+                                <div class="slds-align_absolute-center vehicle-image-round">
+                                    <c-own-product-image product-image={vehicleImage} brand={divisionName}></c-own-product-image>
+                                </div>
+                            </div>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="12" class="find-brand-small">
+                            <!--Vehicle image here-->
+                            <div class="slds-text-align_center">
+                                <!-- <img class="vehicle-image-round-mobile" src={vehicleImage}/> -->
+                                <div class="slds-align_absolute-center vehicle-image-round-mobile">
+                                    <c-own-product-image product-image={vehicleImage} brand={divisionName}></c-own-product-image>
+                                </div>
+                            </div>
+                        </lightning-layout-item>
+                    </lightning-layout>
+                </lightning-layout-item>
+                <!--Right content-->
+                <lightning-layout-item size="12" padding="around-large" small-device-size="12" medium-device-size="8" large-device-size="8">
+                    <div style="max-width: 800px">
+                        <lightning-layout multiple-rows>
+                            <lightning-layout-item size="12">
+                                <!--Vehicle Info-->
+                                <lightning-layout multiple-rows>
+                                    <lightning-layout-item size="12">
+                                        <div class="slds-tile__detail slds-p-top_xx-small slds-p-bottom_small">
+                                            <dl class="slds-list_horizontal slds-wrap">
+                                                <dt class="slds-item_label product-edit-ym-header slds-p-top_x-small garage-product-details-field-label" title="Year/Model">Year/Model</dt>
+                                                <dd class="slds-item_detail slds-text-color_weak slds-p-top_x-small garage-product-details-field-value">{year} {model}</dd>
+                                            </dl>
+                                        </div>
+                                    </lightning-layout-item>
+                                    <lightning-layout-item size="12" small-device-size="12" medium-device-size="8" large-device-size="8" class="product-form-body form-styles">
+                                        <div class="slds-form-element">
+                                            <label class="slds-form-element__label" for="vin-input-desktop own-combobox-label">{productIdentifierUppercase}</label>
+                                            <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon_right" onkeyup={handleVINChange}>
+                                                <template if:true={correctVINLength}>
+                                                    <lightning-icon icon-name="utility:check" size="x-small" class="icon-green slds-icon slds-input__icon slds-input__icon_right slds-icon-text-default"></lightning-icon>
+                                                </template>
+                                                <template if:true={incorrectVINLength}>
+                                                    <lightning-icon icon-name="utility:close" size="x-small" class="icon-red slds-icon slds-input__icon slds-input__icon_right slds-icon-text-default"></lightning-icon>
+                                                </template>
+                                                <input  type="text" name="vin-input" id="vin-input-desktop" class="slds-input find-brand-input slds-m-top_xx-small"
+                                                        value={vinInputVal} placeholder="Add a VIN number" minlength="17" maxlength="17"/>
+                                            </div>
+                                            <div>
+                                                <template if:true={displayVINError}>
+                                                    <span class="find-brand-error">{vinErrorText}</span>
+                                                </template>
+                                            </div>
+                                            <dd class="slds-item_detail garage-product-details-field-cta" title="ENTER VIN TO FIND YOUR VEHICLE">
+                                                <div class="slds-p-top_x-small"><a class="product-edit-helptext" onclick={handleVINHelp}>Where's my {productIdentifierUppercase}?</a></div>
+                                            </dd>
+                                        </div>
+                                    </lightning-layout-item>
+                                </lightning-layout>
+                            </lightning-layout-item>
+                            
+                            <lightning-layout-item size="12">
+                                <!--Buttons-->
+                                <div style="padding: 20px 0px">
+                                    <lightning-layout multiple-rows>
+                                        <lightning-layout-item size="12" small-device-size="12" medium-device-size="5" large-device-size="5">
+                                            <div class={saveButtonClass}>
+                                                <button name="SAVE" onclick={handleSave}
+                                                        class="slds-button slds-button_outline-brand slds-combobox_container product-button-large"
+                                                        disabled={saveButtonDisabled}>
+                                                    <span class="product-button-1-text">SAVE</span>
+                                                </button>
+                                            </div>
+                                        </lightning-layout-item>
+                                    </lightning-layout>
+                                    <lightning-layout multiple-rows>
+                                        <lightning-layout-item size="12" small-device-size="12" medium-device-size="5" large-device-size="5" class="slds-p-top_x-small">
+                                            <div class="product-button-2">
+                                                <button name="CANCEL" onclick={handleCancel}
+                                                        class="slds-button slds-button_outline-brand slds-combobox_container product-button-large">
+                                                    <span class="product-button-2-text">EXIT WITHOUT SAVING</span> 
+                                                </button>
+                                            </div>
+                                        </lightning-layout-item>
+                                    </lightning-layout>
+                                </div>
+                            </lightning-layout-item>
+                        </lightning-layout>
+                    </div>
+                </lightning-layout-item>
+            </lightning-layout>
+        </template>
+    </div>
+</template>

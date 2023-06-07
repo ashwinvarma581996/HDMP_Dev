@@ -1,0 +1,475 @@
+<template>
+	<template if:true={showLOader}>
+		<div class="exampleHolder">
+			<lightning-spinner alternative-text="Loading" variant="brand" size="large"></lightning-spinner>
+		</div>
+	</template>
+
+	<div class="checkoutPage slds-m-top_large">
+		<div class="slds-grid slds-wrap">
+			<div class="slds-col absoluteCenter allBorders tabHeight slds-m-around_medium">Shipping</div>
+			<div class="slds-col absoluteCenter allBorders greyColor tabHeight slds-m-around_medium">Checkout Summary
+			</div>
+			<div class="slds-col absoluteCenter allBorders greyColor tabHeight slds-m-around_medium">Payment
+			</div>
+			<div class="slds-col absoluteCenter allBorders greyColor tabHeight slds-m-around_medium">Confirmation</div>
+		</div>
+		<div class="slds-p-top_medium slds-p-right_medium">
+			<template for:each={cartItems} for:item="item">
+				<div class="slds-grid slds-m-around_medium slds-border_bottom" key={item.Id}>
+					<div class="slds-col slds-m-bottom_medium">
+						<div class="slds-p-bottom_small slds-text-heading_medium">{item.Name}</div>
+						<!--Added By Bhawesh 25-02-2022 for Bug No. 7434-->
+						<span class="slds-text-heading_small">
+							<template if:true={item.isMotocompacto}>Product </template>
+							<!-- Below template if:false={item.isCoreCharge} added by ashwin for 19505 -->
+							<template if:false={item.isCoreCharge}>
+								<template if:false={item.isMotocompacto}>{item.Product_Type__c} </template>
+							</template>
+							<!-- Below template if:true={item.isCoreCharge} added by ashwin for 19505 -->
+							<template if:true={item.isCoreCharge}>Part </template>
+							Number: {item.Product2.StockKeepingUnit}
+							<br />
+						</span>
+						<!--End-->
+						<span if:true={item.Color__c} class="slds-text-heading_small">Color: {item.Color__c}
+							<br /></span>
+						<span class="slds-text-heading_small">Dealer Price: <span
+								class="slds-text-heading_small textRed">
+								<lightning-formatted-number value={item.ListPrice} format-style="currency"
+									currency-code="USD" currency-display-as="symbol" minimum-fraction-digits="2">
+								</lightning-formatted-number>
+								<br />
+							</span></span>
+						<span class="slds-text-heading_small">Quantity: {item.Quantity}<br /></span>
+						<!-- added by ashwin as part of bug 18465-->
+						<template if:false={item.isCoreCharge}>
+							<template if:true={item.Product2.PickupatDealer__c}>
+								<span class="slds-text-heading_small">Shipping Options: Pick Up At Dealer Only<template
+										if:true={item.dealerInstall}>, Dealer Install</template> <br /></span>
+							</template>
+						</template>
+						<template if:false={item.Product2.PickupatDealer__c}>
+							<span class="slds-text-heading_small"> Shipping Options: Pick Up At Dealer<template
+									if:true={item.dealerInstall}>, Dealer Install</template>, Shippable <br />
+							</span>
+						</template>
+
+						<a href="https://automobiles.honda.com/images/downloads/prop-65-consumer-website-statement.pdf"
+							target="_blank"
+							class="slds-text-color_destructive slds-m-top_x-large slds-m-bottom_x-large">California
+							Proposition 65 Warning</a>
+
+						<div if:true={item.Product_Model_Marketing_Name__c} class="slds-text-heading_small">
+							<img if:false={item.isMotocompacto} src={carImage} style="width:60px; margin-left:-8px;">
+							<lightning-icon if:true={item.isMotocompacto}
+								class="slds-p-top_x-small slds-p-bottom_x-small" icon-name="utility:transport_bicycle"
+								size="small" alternative-text="Moto Compacto" title="Moto Compacto"
+								style="margin-right: 10px;">
+							</lightning-icon>
+							{item.Product_Model_Marketing_Name__c}
+						</div>
+						<template if:false={item.isMotocompacto}>
+							<div if:true={item.Product_Identifier__c} class="slds-text-heading_small">
+								VIN: {item.Product_Identifier__c}
+							</div>
+						</template>
+						<div if:true={item.isMotocompacto} class="slds-m-top_medium slds-text-color_destructive"
+							style="cursor:pointer" onclick={openDisclaimerPopup}>
+							Product Disclaimer
+						</div>
+						<!--Saravanan LTIM Added if True for 16456 , 17170-->
+						<div if:true={item.isCoreCharge}>
+
+							<a if:true={item.isCoreCharge} data-id={CoreChargeDisclaimerValue}
+								onclick={handleDisclamerPopup} style="color: rgb(234, 0, 30);font-size:14px;"><u>What is
+									a core
+									charge?</u></a>
+						</div>
+						<div if:true={item.subTotalForEveryProduct} class="slds-text-heading_medium"
+							style="float:right; text-align:right">
+							<div>Subtotal</div>
+							<lightning-formatted-number format-style="currency" currency-code={currencyCode}
+								class="negotiatedPrice" currency-display-as="symbol" maximum-fraction-digits="2"
+								value={item.subTotalForEveryProduct}>
+							</lightning-formatted-number>
+						</div>
+					</div>
+				</div>
+			</template>
+			<div class="slds-m-around_medium" style="text-align: end;">
+				<span class="font-h5 d-block">{cartItemsLength}</span>
+				<!-- <span class="slds-p-top_small textRed font-h5" style="display:block">${subTotal}</span> -->
+				<lightning-formatted-number format-style="currency" class="slds-p-top_small textRed font-h5 d-block"
+					currency-display-as="symbol" value={subTotal}></lightning-formatted-number>
+			</div>
+			<div class="slds-m-around_medium slds-text-heading_large  slds-border_bottom slds-p-bottom_medium">Shipping
+				Details
+			</div>
+			<!-- Added by Faraz for HDMP-5428 Start here R2 Story -->
+			<template if:true={displayDealerAddress}>
+				<div if:true={deliveryMethod} class="slds-grid slds-wrap slds-m-top_large slds-m-right_medium">
+					<div class="slds-size_4-of-6">
+						<div class="slds-text-align_left slds-m-left_medium">
+							<p class="slds-p-bottom_small slds-text-heading_medium">{deliveryMethod}</p>
+							<p class="slds-text-heading_small"> {selectedDealerName} </p>
+							<p class="slds-text-heading_small"> {dealerAddress.street} </p>
+							<p class="slds-text-heading_small"> {dealerAddress.city}, {dealerAddress.state} {zipCode}
+							</p>
+							<p class="slds-text-heading_small">
+								<lightning-formatted-phone value={dealerContactNumber}></lightning-formatted-phone>
+							</p>
+							<p class="slds-text-heading_small"> {selectedDealerEmailAddress} </p>
+
+							<!--Abhishek 16460-->
+							<br />
+							<a class="disc-popup" onclick={handleDisclamerPopup}
+								data-id="Terms_and_Conditions_of_sale"><u>Terms and
+									Conditions of
+									Sale</u></a>
+							<br />
+							<a class="disc-popup" onclick={handleDisclamerPopup} data-id="Return_Policy"><u>Dealer
+									Return
+									Policy</u></a>
+
+						</div>
+					</div>
+					<div if:true={isInstallAtDealer} class="slds-size_2-of-6 slds-text-align_right slds-m-top_medium">
+						<lightning-formatted-number format-style="currency"
+							class="slds-p-top_small textRed font-h5 d-block" currency-display-as="symbol"
+							value={totalShippingCharge}></lightning-formatted-number>
+					</div>
+				</div>
+			</template>
+			<!-- End here -By Faraz HDMP-5428 R2 Story -->
+			<!-- Start here -By Shalini  AddressBook R2 Story 22-01-2022-->
+
+			<template if:false={checkIfUserIsGuestUserOrNot}>
+				<template if:true={displayAddressBook}>
+					<div class="slds-m-around_medium slds-text-heading_large slds-p-bottom_medium">Shipping Address
+					</div>
+
+					<div class="slds-grid slds-wrap displayAddress">
+						<template for:each={addressList} for:item="addressitem" for:index="indx">
+
+							<div class="slds-col slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_4-of-12"
+								key={addressitem.Id}>
+								<div
+									class="slds-m-around--medium slds-m-top_small slds-p-horizontal_medium slds-p-vertical_large cartDealerInstall">
+
+									<div class="centerElement slds-p-around_small slds-is-relative">
+										<div class="addRadioWrap">
+											<input type="radio" onchange={handleSelectAddress} class="myaddress"
+												name="isPreferred" checked={addressitem.isPreferred__c}
+												value={addressitem.Id} data-indx={indx}>
+											<span class="checkmark"></span>
+										</div>
+										<label for="acuraParts" class="shipAddText slds-p-left_large">
+											{addressitem.Name} <br />
+											{addressitem.Address__c}<br />{addressitem.City__c}, {addressitem.State__c}
+											{addressitem.Zip__c}<br /> {addressitem.Phone__c}<br />
+											{addressitem.Notes__c}
+										</label>
+									</div>
+
+								</div>
+							</div>
+
+						</template>
+
+						<div class="slds-col slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_4-of-12">
+							<div onclick={showNewAddressFields}
+								class="add-new-address-box slds-m-around--medium slds-m-top_small slds-p-horizontal_medium slds-p-vertical_large cartDealerInstall"
+								style="border: 1px solid #979797; height:160px;">
+								+ Add New Address
+							</div>
+						</div>
+					</div>
+
+				</template>
+			</template>
+
+			<!-- Ended here -By Shalini-->
+			<template if:true={showAddressFields}>
+				<template if:true={showAddFields}>
+					<div class="slds-text-heading_medium slds-m-around_medium slds-p-top_medium">Shipping Information
+					</div>
+					<div class="slds-grid slds-wrap slds-m-top_small flexCloumn shipToMe">
+						<div class="slds-col slds-size_1-of-1 slds-p-around--small">
+							<p class="textRed">*Required fields</p>
+						</div>
+						<div
+							class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_6-of-12 slds-p-around--small">
+							<lightning-input class="Name" onkeypress={handleToAllowName} data-name="name" required
+								data-id="name" type="text" label="Name" value={name} onchange={validateName}>
+							</lightning-input>
+						</div>
+						<div
+							class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_6-of-12 slds-p-around--small">
+							&nbsp;</div>
+
+						<div
+							class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_6-of-12 slds-p-around--small">
+							<lightning-input required data-id="phone" data-name="phone" onkeypress={handleToAllowPhone}
+								type="text" label="Phone" value={phone} maxlength="10" pattern=[0-9]{10} class="Phone"
+								onchange={validatePhone}
+								message-when-pattern-mismatch="Invalid phone number pattern. Please enter a 10 digit numeric value.">
+							</lightning-input>
+						</div>
+						<div
+							class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_6-of-12 slds-p-around--small">
+							&nbsp;</div>
+
+						<div
+							class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_6-of-12 slds-p-around--small">
+							<lightning-input required data-id="street" data-name="street" type="text" label="Street"
+								value={shippingStreet} onchange={handleOnChangeValue}>
+							</lightning-input>
+							<span class="slds-text-color_destructive">Note:</span> <span> We cannot ship to PO
+								Boxes</span>
+						</div>
+						<div
+							class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_6-of-12 slds-p-around--small">
+							&nbsp;</div>
+
+						<div
+							class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_6-of-12 slds-p-around--small">
+							<lightning-input required data-id="city" data-name="city" type="text" label="City"
+								value={shippingCity} onkeypress={handleToAllowName} onchange={handleOnChangeValue}>
+							</lightning-input>
+						</div>
+						<div
+							class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_6-of-12 slds-p-around--small">
+							&nbsp;</div>
+
+						<div
+							class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_6-of-12 slds-p-around--small">
+
+							<!-- Added by Ravi Prasad as part of HDMP-8725 -->
+							<lightning-combobox name="state" label="State" data-id="state" class="state"
+								placeholder="Select an Option" value={state} options={stateOptionList}
+								onchange={handleOnSelectState} required>
+							</lightning-combobox>
+						</div>
+						<div
+							class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_6-of-12 slds-p-around--small">
+							&nbsp;</div>
+
+						<div
+							class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_6-of-12 slds-p-around--small">
+							<lightning-input required data-id="country" data-name="country" type="text" label="Country"
+								value={shippingCountry} disabled="true">
+							</lightning-input>
+						</div>
+						<div
+							class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_6-of-12 slds-p-around--small">
+							&nbsp;</div>
+
+						<div
+							class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_6-of-12 slds-p-around--small">
+							<lightning-input required class="myzipcode" data-id="zipCode" data-name="zipcode"
+								type="text" label="Zip Code" onkeypress={handleToAllowZipcode} maxlength="10"
+								value={shippingPostalCode} onchange={handleOnChangeValue}>
+							</lightning-input>
+						</div>
+						<div
+							class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_6-of-12 slds-p-around--small">
+							&nbsp;
+						</div>
+						<div if:false={checkIfUserIsGuestUserOrNot}
+							class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_6-of-12 slds-p-around--small">
+							<lightning-input class="notes" onkeypress={handleToAllowName} data-name="notes"
+								data-id="notes" type="text" label="Shipping Instructions/Notes" value={notes}
+								onchange={handleOnChangeValue}>
+							</lightning-input>
+						</div>
+						<div
+							class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_6-of-12 slds-p-around--small">
+							&nbsp; </div>
+					</div>
+
+				</template>
+				<template if:false={checkIfUserIsGuestUserOrNot}>
+					<div class="slds-grid slds-wrap slds-m-horizontal_medium">
+						<div class="slds-col slds-small-size_3-of-12 slds-medium-size_3-of-12 slds-large-size_3-of-12">
+							<span class="custom-box"> Save to address book?</span>
+						</div>
+						<div class="slds-col slds-small-size_3-of-12 slds-medium-size_3-of-12 slds-large-size_3-of-12">
+							<lightning-input name="SaveAddress" onchange={handleCheck}
+								type="checkbox"></lightning-input>
+						</div>
+					</div>
+					<div class="slds-grid slds-wrap slds-m-horizontal_medium">
+						<div class="slds-col slds-small-size_3-of-12 slds-medium-size_3-of-12 slds-large-size_3-of-12">
+							<span class="custom-box"> Make preferred address?</span>
+						</div>
+						<div class="slds-col slds-small-size_3-of-12 slds-medium-size_3-of-12 slds-large-size_3-of-12">
+							<template if:true={disabledPreferred}>
+								<lightning-input name="MarkPreferredAddress" disabled onchange={handleCheck}
+									type="checkbox"></lightning-input>
+							</template>
+							<template if:false={disabledPreferred}>
+								<lightning-input name="MarkPreferredAddress" onchange={handleCheck}
+									type="checkbox"></lightning-input>
+							</template>
+
+						</div>
+					</div>
+				</template>
+			</template>
+
+			<div if:true={isInstallAtDealer} class="slds-m-around_medium slds-p-top_large">
+				<p>Note: You will be billed for your products and their installation charges at the time of purchase.
+				</p>
+				<p class="slds-p-top_small">If you would like to remove installation, return to the shopping cart.</p>
+			</div>
+
+			<div class="slds-grid slds-wrap">
+				<div class="slds-col slds-m-around_medium text_md-center">
+					<lightning-button variant="neutral" label="Go Back" title="Go Back" onclick={gotoCart}
+						class="slds-p-top_medium">
+					</lightning-button>
+				</div>
+
+				<div class="slds-col slds-m-around_medium text_md-center" style="text-align: end;">
+					<lightning-button if:false={disabledProceedToCheckout} title="Proceed to Checkout Summary"
+						variant="brand" label="Proceed to Checkout Summary" onclick={handleOnProceedToCheckout}
+						class="slds-p-top_medium"></lightning-button>
+					<lightning-button if:true={disabledProceedToCheckout} title="Proceed to Checkout Summary"
+						variant="destructive" label="Proceed to Checkout Summary"
+						class="slds-p-top_medium"></lightning-button>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+
+	<template if:true={addressPicker}>
+		<section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+			aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open addressModal">
+			<div class="slds-modal__container">
+				<header class="slds-modal__header slds-text-align_left slds-p-around_x-large">
+					<button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+						onclick={handleCloseAddressPicker} title="Close">
+						<span class="slds-assistive-text">Close</span>X</button>
+					<div class="slds-text-heading_large slds-border_bottom slds-p-bottom_medium slds-p-top_large">
+						Confirm Address</div>
+
+					<lightning-layout multiple-rows class="slds-m-bottom_large">
+						<lightning-layout-item size="12">
+							<p class="font-h6 slds-m-top_medium">We found a similar address for your location. Please
+								select one and confirm the address.</p>
+						</lightning-layout-item>
+						<lightning-layout-item size="12" class="slds-medium-size_6-of-12 slds-p-top_large">
+							<!--newly added by Sayalee-->
+							<p class="slds-text-align_center slds-text-heading_medium slds-p-bottom_small">
+								<b>{label.CustomerEntered}</b>
+							</p>
+							<div class="custom-box slds-p-around_medium slds-m-right_small slds-is-relative"
+								style="border: 1px solid rgb(151, 151, 151); height:auto; min-height:100px;">
+								<lightning-input class="typedcls" type="checkbox" checked={enteredAddressCheck}
+									onchange={handleOnTypedAddress}>
+								</lightning-input>
+
+								<div class="slds-grid">
+									<div class="slds-col">
+										<div class="slds-text-heading_x-small">{enteredAddress.streetAddress1}
+											{enteredAddress.city}, {enteredAddress.mainDivision}
+											{enteredAddress.postalCode}</div>
+									</div>
+								</div>
+							</div>
+						</lightning-layout-item>
+
+						<lightning-layout-item size="12" class="slds-medium-size_6-of-12 slds-p-top_large">
+							<!--newly added by Sayalee-->
+							<p class="slds-text-align_center slds-text-heading_medium slds-p-bottom_small">
+								<b>{label.Recommended}</b>
+							</p>
+							<div class="custom-box slds-p-around_medium slds-m-left_small slds-is-relative"
+								style="border: 1px solid rgb(151, 151, 151); height:auto; min-height:100px;">
+								<lightning-input class="suggestedCls" type="checkbox" checked={suggestedAddressCheck}
+									onchange={handleOnSuggestedAddress}></lightning-input>
+								<div class="slds-grid">
+									<div class="slds-col">
+										<div class="slds-text-heading_x-small">{responsedAddress.StreetAddress1}
+											{responsedAddress.City}, {responsedAddress.MainDivision}
+											{responsedAddress.PostalCode}</div>
+									</div>
+								</div>
+
+							</div>
+						</lightning-layout-item>
+					</lightning-layout>
+
+					<lightning-button variant="brand" label="CONFIRM THIS ADDRESS" title="CONFIRM THIS ADDRESS"
+						onclick={handleOnConfirmAddress}
+						class="slds-grid slds-grid_align-center slds-m-top-medium slds-m-bottom_large">
+					</lightning-button>
+				</header>
+
+			</div>
+		</section>
+		<div class="slds-backdrop slds-backdrop_open"></div>
+	</template>
+
+	<!-- error popup start -->
+	<template if:true={showErrorPopup}>
+		<section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+			aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+			<div class="slds-modal__container">
+				<div class="modal-header">
+					<header class="slds-modal__header " style='border: none;'>
+						<button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+							title="Close" onclick={closeErrorPopup}>
+							<lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse"
+								size="small"></lightning-icon>
+							<!-- <span class="slds-assistive-text">Close</span> -->
+						</button>
+					</header>
+				</div>
+				<div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+					<lightning-icon icon-name="utility:error" size="large"
+						style="margin-left: 283px; margin-top: -18px;"></lightning-icon>
+					<h1 style="font-size:26px; text-align:center; padding-top: 5px;" class="slds-text-color_error">Oops!
+						Something went wrong.</h1>
+					<br />
+					<p style="text-align:center; font-size:17px">{errorMessage}</p>
+				</div>
+			</div>
+		</section>
+		<div class="slds-backdrop slds-backdrop_open"></div>
+	</template>
+	<!-- error popup end -->
+	<!-- Abhishek 16460 -->
+	<!-- <template if:true={showDealerModal}>
+		<c-disclaimer-popup modaltype={disclaimerType} onclose={handleShowHide}></c-disclaimer-popup>
+	</template> -->
+	<template if:true={showDealerModal}>
+		<c-disclaimer-popup modaltype={disclaimerType} dealer-return-policy-markup={dealerReturnPolicyMarkup}
+			onclose={handleShowHide}></c-disclaimer-popup>
+	</template>
+	<template if:true={showDisclaimerMarkup}>
+		<section role="dialog" tabindex="-1" aria-labelledby="modal-heading-03" aria-modal="true"
+			aria-describedby="modal-content-id-2" class="slds-modal slds-fade-in-open">
+			<div class="slds-modal__container">
+				<header class="slds-modal__header disclaimer-model-header">
+					<button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+						title="Close" onclick={closeDisclaimerPopup}>
+						<lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse"
+							size="small"></lightning-icon>
+						<span class="slds-assistive-text">Close</span>
+					</button>
+					<h3 id="modal-heading-03" class="slds-p-top_small slds-hyphenate font-h5">Product Disclaimer</h3>
+					<br />
+				</header>
+				<div class="slds-modal__content slds-p-horizontal_medium slds-p-bottom_xx-large"
+					id="modal-content-id-3">
+					<lightning-formatted-rich-text value={disclaimerMarkup}></lightning-formatted-rich-text>
+				</div>
+			</div>
+		</section>
+		<div class="slds-backdrop slds-backdrop_open"></div>
+	</template>
+</template>

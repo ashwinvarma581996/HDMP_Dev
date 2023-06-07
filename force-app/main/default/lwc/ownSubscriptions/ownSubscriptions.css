@@ -1,0 +1,31 @@
+.prodInfoContainer{
+    margin-left: 10px;
+    display: table-cell;
+}
+.prodInfoContainer label{
+    float: left;
+}
+.ownSubscriptions {
+    border: 2px solid green;
+    background-color: var(--lwc-colorTextInverse, #FFFFFF);
+    color: var(--lwc-colorBackgroundToastSuccess, rgb(46, 132, 74));
+}
+.garage-product-details-field-label {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 26px;
+    align-items: center;
+    color: #000000;
+    margin-top: 16px;
+}
+.garage-product-details-field-value {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 26px;
+    align-items: center;
+    color: #000000;
+}

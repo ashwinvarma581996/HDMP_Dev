@@ -1,0 +1,132 @@
+<!-- //============================================================================
+// Title:    Honda MyGarage Experience - Auto Link Feature
+//
+// Summary:  This is the Auto Link Convenient Features html seen at the page of the Honda MyGarage Community
+//
+// Details:  Auto Link Convenient Features for pages
+//
+// History:
+// October 18, 2021 Arunprasad N (Wipro) Original Author 
+//=========================================================================== -->
+<template>
+    <lightning-layout multiple-rows horizontal-align="space">
+        <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="8"
+            class="slds-p-vertical_large">
+            <div class="feature-section-sub-title">{title}</div>
+        </lightning-layout-item>
+        <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="11">
+            <lightning-layout multiple-rows vertical-align="start" horizontal-align="center"
+                class="slds-p-around_small">
+                <template if:true={convenientFeatures}>
+                    <template for:each={convenientFeatures} for:item="feature">
+                        <lightning-layout-item key={feature.title} size="12" small-device-size="12"
+                            medium-device-size="6" large-device-size="3" padding="horizontal-small"
+                            class="slds-p-vertical_small">
+                                <lightning-layout multiple-rows class="">
+                                    <lightning-layout-item size="12">
+                                        <lightning-layout multiple-rows class="card-layout">
+                                            <lightning-layout-item size="12">
+                                                <div class="desktop-image">
+                                                    <lightning-formatted-rich-text value={feature.desktopImage}
+                                                        class="features-image"></lightning-formatted-rich-text>
+                                                </div>
+                                                <div class="mobile-image">
+                                                    <lightning-formatted-rich-text value={feature.mobileImage}
+                                                        class="features-image"></lightning-formatted-rich-text>
+                                                </div>
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="12" class="slds-align_absolute-center">
+                                                <lightning-formatted-rich-text class="title" value={feature.title}>
+                                                </lightning-formatted-rich-text>
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="12" class="slds-align_absolute-center">
+                                                <lightning-formatted-rich-text class="body" value={feature.body}>
+                                                </lightning-formatted-rich-text>
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="12"
+                                                class="slds-align_absolute-center slds-p-horizontal_medium slds-p-vertical_large btn-wrapper ">
+                                                <button class="slds-button slds-button_outline-brand btn"
+                                                    data-value={feature.navigationUrl} onclick={handleClick}
+                                                    data-buttontitle={feature.subTitle}
+                                                    data-featuretitle={feature.title}>{feature.subTitle}</button>
+                                            </lightning-layout-item>
+                                        </lightning-layout>
+                                    </lightning-layout-item>
+                                    <lightning-layout-item size="12">
+                                        <template if:false={feature.isStaticFooterContent}>
+                                            <template if:true={feature.packageNames}
+                                                class="slds-p-horizontal_large slds-p-vertical_large ">
+                                                <div
+                                                    class="feature-footer slds-align_absolute-center feature-footer-desktop">
+                                                    Available in the &nbsp;
+                                                    <template iterator:pack={feature.packageNames}>
+                                                        <a if:true={pack.first} key={pack.value.desktopName}
+                                                            class="package-style" onclick={handleScroll}
+                                                            data-packagename={pack.value.desktopName}>{pack.value.desktopName}</a>
+                                                        <template if:true={pack.last}>
+                                                            <template if:false={pack.first}>
+                                                                &nbsp;and
+                                                                <a key={pack.value.desktopName} class="package-style"
+                                                                    onclick={handleScroll}
+                                                                    data-packagename={pack.value.desktopName}>&nbsp;{pack.value.desktopName}</a>
+                                                            </template>
+                                                        </template>
+                                                        <template if:false={pack.last}>
+                                                            <template if:false={pack.first}>
+                                                                ,&nbsp;
+                                                                <a key={pack.value.desktopName} class="package-style"
+                                                                    onclick={handleScroll}
+                                                                    data-packagename={pack.value.desktopName}>{pack.value.desktopName}</a>
+                                                            </template>
+                                                        </template>
+                                                    </template>
+                                                    &nbsp; Package
+                                                </div>
+                                                <div
+                                                    class="feature-footer slds-align_absolute-center feature-footer-mobile">
+                                                    Available in the &nbsp;
+                                                    <template iterator:pack={feature.packageNames}>
+                                                        <a if:true={pack.first} key={pack.value.mobileName}
+                                                            class="package-style" onclick={handleScroll}
+                                                            data-packagename={pack.value.mobileName}>{pack.value.desktopName}</a>
+                                                        <template if:true={pack.last}>
+                                                            <template if:false={pack.first}>
+                                                                &nbsp;and &nbsp;
+                                                                <a if:false={pack.first} key={pack.value.mobileName}
+                                                                    class="package-style" onclick={handleScroll}
+                                                                    data-packagename={pack.value.mobileName}>{pack.value.desktopName}</a>
+                                                            </template>
+                                                        </template>
+                                                        <template if:false={pack.last}>
+                                                            <template if:false={pack.first}>
+                                                                ,&nbsp;
+                                                                <a if:false={pack.first} key={pack.value.mobileName}
+                                                                    class="package-style" onclick={handleScroll}
+                                                                    data-packagename={pack.value.mobileName}>{pack.value.desktopName}</a>
+                                                            </template>
+                                                        </template>
+                                                    </template>
+                                                    &nbsp; Package
+                                                </div>
+                                            </template>
+                                        </template>
+                                        <template if:true={feature.isStaticFooterContent}>
+                                            <div
+                                                class="feature-footer feature-footer-static slds-align_absolute-center feature-footer-desktop">
+                                                <lightning-formatted-rich-text value={feature.footerContent}
+                                                    class="features-image"></lightning-formatted-rich-text>
+                                            </div>
+                                            <div class="feature-footer  slds-align_absolute-center feature-footer-mobile">
+                                                <lightning-formatted-rich-text value={feature.footerContent}
+                                                    class="features-image"></lightning-formatted-rich-text>
+                                            </div>
+                                        </template>
+                                    </lightning-layout-item>
+                                </lightning-layout>
+                        </lightning-layout-item>
+                    </template>
+                </template>
+            </lightning-layout>
+        </lightning-layout-item>
+    </lightning-layout>
+</template>

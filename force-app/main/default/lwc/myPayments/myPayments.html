@@ -1,0 +1,254 @@
+<template>
+    <div if:true={isLoading} class="slds-is-relative slds-spinner_container">
+        <lightning-spinner alternative-text="Please Wait..." variant="brand"></lightning-spinner>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </div>
+
+    <lightning-layout multiple-rows class="user-section-header slds-m-top_large">
+        <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="6" >
+            <!-- <c-section-navigation value="myPayments"></c-section-navigation> -->
+            <div class="slds-text-heading_medium default-color slds-p-left_small slds-m-top_large">My Payments</div>
+        </lightning-layout-item>
+        <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="6">
+            <div class="custom-box"></div>
+        </lightning-layout-item>
+    </lightning-layout>
+
+    <template if:true={paymentsList} for:each={paymentsList} for:item="item" for:index="index">
+        <lightning-layout key={item.Id} multiple-rows class="address-book-wrapper">
+            <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="6">
+                <lightning-layout key={item.Id} multiple-rows class="payment-rows">
+                    <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="12">
+                        <div class="custom-box slds-text-heading_medium slds-m-bottom_medium slds-hyphenate font-h4">
+                            <b>Card Ending in {item.Credit_Card_Number__c}</b> &nbsp;&nbsp;&nbsp;
+                            <template if:true={item.Default_Payment_Method__c}>
+                                <lightning-icon icon-name='utility:favorite' alternative-text='preferred' variant="error" size='small' title='Preferred'></lightning-icon>
+                            </template>
+                            <template if:false={item.Default_Payment_Method__c}>
+                                <template if:true={item.dateNotExpired}>
+                                    <strong class="textRed cursor-pointer" onclick={handleMarkPreferred} data-id={item.Id}>Mark preferred</strong>
+                                </template>
+                            </template>
+                        </div>
+                    </lightning-layout-item>
+    
+                    <lightning-layout-item size="12" small-device-size="12" medium-device-size="4" large-device-size="4">
+                        <div class="custom-box"><b>Type</b></div>
+                    </lightning-layout-item>
+    
+                    <lightning-layout-item size="12" small-device-size="12" medium-device-size="8" large-device-size="8" >
+                        <div class="custom-box">{item.Type__c}</div>
+                    </lightning-layout-item>
+    
+                    <lightning-layout-item size="12" small-device-size="12" medium-device-size="4" large-device-size="4" >
+                        <div class="custom-box"><b>Name</b></div>
+                    </lightning-layout-item>
+    
+                    <lightning-layout-item size="12" small-device-size="12" medium-device-size="8" large-device-size="8"  >
+                        <div class="custom-box">{item.Name}</div>
+                    </lightning-layout-item>
+    
+                    <lightning-layout-item size="12" small-device-size="12" medium-device-size="4" large-device-size="4" >
+                        <div class="custom-box"><b>Expiration</b></div>
+                    </lightning-layout-item>
+    
+                    <lightning-layout-item size="12" small-device-size="12" medium-device-size="8" large-device-size="8" >
+                        <div class="custom-box">
+                            <lightning-formatted-date-time value={item.CC_Expiration_Date__c} month="2-digit" year="numeric"></lightning-formatted-date-time>
+                            <template if:false={item.dateNotExpired}>
+                                &nbsp;&nbsp;&nbsp;<span class="textBlue">Expired</span>
+                            </template>
+                        </div>
+                    </lightning-layout-item>
+
+                    <lightning-layout-item size="12" small-device-size="12" medium-device-size="4" large-device-size="4" >
+                        <div class="custom-box"><b>Billing Address</b></div>
+                    </lightning-layout-item>
+    
+                    <lightning-layout-item size="12" small-device-size="12" medium-device-size="8" large-device-size="8" >
+                        <div class="custom-box">{item.My_Address_Book__r.Address__c}</div>
+                    </lightning-layout-item>
+
+                    <lightning-layout-item size="12" small-device-size="12" medium-device-size="4" large-device-size="4" >
+                        <div class="custom-box"><b></b></div>
+                    </lightning-layout-item>
+    
+                    <lightning-layout-item size="12" small-device-size="12" medium-device-size="8" large-device-size="8" >
+                        <div class="custom-box">{item.My_Address_Book__r.City__c}, {item.My_Address_Book__r.State__c} {item.My_Address_Book__r.Zip__c}</div>
+                    </lightning-layout-item>
+
+                    <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="12" >
+                        <div class="custom-box textRed cursor-pointer" onclick={removePaymentModelShow} data-cardnumber={item.Credit_Card_Number__c} data-id={item.Id}>Remove payment</div>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </lightning-layout-item>
+    
+            <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="6">
+                <div class="slds-text-align_center addressBookActions">
+                    <button class="slds-button themeBtn primaryGrayBtn hondabutton" title="Edit" onclick={openEditModel} data-id={item.Id} data-addressid={item.My_Address_Book__c}>EDIT</button>
+                </div>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" small-device-size="12" padding="horizontal-small"></lightning-layout-item>
+
+            <br /><br />
+        </lightning-layout>
+    </template>
+
+    <template if:true={showNoRecordFoundMsg}>
+        <div class="slds-text-heading_medium slds-text-align_center slds-p-vertical_large">Currently, there are no payments type found for your user!</div>
+    </template>
+
+    <!-- Remove Functionality starts here-->
+    <template if:true={showRemoveModal}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-02" aria-modal="true" aria-describedby="modal-content-id-2" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header" style="border-bottom: 0;">
+                    <span class="slds-modal__close">
+                        <lightning-icon icon-name="utility:close" variant="inverse" alternative-text="close" onclick={closeRemoveModel}></lightning-icon>
+                    </span>
+                    <h3 id="modal-heading-02" class="slds-text-heading_medium slds-p-top_medium warning-text">
+                        Are you sure you want to remove<br/>this payment method completely<br/>for the card ending in {paymentCardNumber}?
+                    </h3>
+                </header>
+
+                <div class="slds-modal__content slds-p-horizontal_medium slds-p-bottom_small slds-p-left_xx-large" id="modal-content-id-2">
+                    <lightning-layout multiple-rows></lightning-layout>
+                </div>
+                <footer class="slds-modal__footer slds-text-align_center slds-p-top_medium slds-p-bottom_medium" style="border-top: 0;">
+                    <lightning-button variant="brand" label="Yes, remove it" title="Yes, Remove it" class="slds-m-left_small" onclick={handleRemovePayment}></lightning-button>
+                    <lightning-button variant="" label="Cancel" title="Cancel" class="slds-m-left_small primaryGrayBtn" onclick={closeRemoveModel}></lightning-button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+
+    <!--Edit Address Book-->
+    <template if:true={showEditModal}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-02" aria-modal="true" aria-describedby="modal-content-id-2" class="slds-modal slds-fade-in-open payment-edit-model">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header" style="border-bottom: 0;">
+                    <span class="slds-modal__close">
+                        <lightning-icon icon-name="utility:close" variant="inverse" alternative-text="close" onclick={closeEditModel}></lightning-icon>
+                    </span>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium warning-text">Edit Payment</h2>
+                </header>
+                <div class="slds-modal__content slds-p-horizontal_medium slds-p-bottom_small slds-p-left_xx-large" id="modal-content-id-3">
+                    <lightning-layout multiple-rows vertical-align="center" class="billing-body">
+                        <lightning-layout-item padding="around-small" size="12" small-device-size="4" medium-device-size="3" large-device-size="3">
+                            <div class="slds-text-align_left heading-title">Cardholder Name</div>
+                        </lightning-layout-item>
+                        <lightning-layout-item padding="around-small" size="12" small-device-size="8" medium-device-size="5" large-device-size="5">
+                            <lightning-input onchange={handleUpdateFields} type="text" variant="label-hidden" name="Cardholdername" value={editPaymentRecord.Name} required  placeholder="type here..." onkeypress={handleToAllowName} class="card-holdername"></lightning-input>
+                        </lightning-layout-item>
+                        <lightning-layout-item class="cards-we-accept" padding="around-small" size="12" small-device-size="12" medium-device-size="4" large-device-size="4">
+                            <div class="cards-we-accept__inner">
+                                <div class="custom-box slds-text-heading_small" style="text-align: right; color:black;">We accept</div>  
+                                <div class="custom-box">          
+                                    <img style="margin-right: 0.2rem;" src="/resource/CardImages/CardImages/visa.png" width="30"/> 
+                                    <img style="margin-right: 0.2rem;" src="/resource/CardImages/CardImages/master.png" width="30"/> 
+                                    <img style="margin-right: 0.2rem;" src="/resource/CardImages/CardImages/amex.jpg" width="30"/> 
+                                    <img src="/resource/CardImages/CardImages/discover.jpg" width="30"/>                                    
+                                </div>
+                            </div>
+                        </lightning-layout-item>
+                        <lightning-layout-item padding="around-small" size="12" small-device-size="4" medium-device-size="3" large-device-size="3">
+                            <div class="slds-text-align_left heading-title">Card Number</div>
+                        </lightning-layout-item>
+                        <lightning-layout-item padding="around-small" size="12" small-device-size="8" medium-device-size="9" large-device-size="9">
+                            <div class="card-number">************{editPaymentRecord.Credit_Card_Number__c}</div>
+                        </lightning-layout-item>
+                        <lightning-layout-item padding="around-small" size="12" small-device-size="4" medium-device-size="3" large-device-size="3">
+                            <div class="slds-text-align_left heading-title">Expiration</div>
+                        </lightning-layout-item>
+                        <lightning-layout-item padding="around-small" size="12" small-device-size="8" medium-device-size="3" large-device-size="3">
+                            <!-- <lightning-input onchange={handleUpdateFields} type="date" variant="label-hidden" name="expiration" value={editPaymentRecord.CC_Expiration_Date__c} required placeholder="type here..." date-style="short"></lightning-input> -->
+                            <lightning-input onkeyup={formatString} onchange={handleUpdateFields} type="text" variant="label-hidden" name="expiration" value={editPaymentRecord.CC_Expiration_Date__c} required placeholder="MM/YY" maxlength='5'></lightning-input>
+                        </lightning-layout-item>
+                        <lightning-layout-item padding="around-small" size="12" small-device-size="4" medium-device-size="1" large-device-size="1">
+                            <div class="heading-title">CVV</div>
+                        </lightning-layout-item>
+                        <lightning-layout-item padding="around-small" size="12" small-device-size="8" medium-device-size="2" large-device-size="2">
+                            <lightning-input type="text" variant="standard" name="name" value="***" read-only placeholder="type here..."></lightning-input>
+                        </lightning-layout-item>
+                        <lightning-layout-item if:false={editPaymentRecord.dateNotExpired} padding="around-small" size="12" small-device-size="12" medium-device-size="12" large-device-size="12" >
+                            <div class="custom-box textRed">Card Expired</div>
+                        </lightning-layout-item>
+                        <br/><br/>
+                    </lightning-layout>
+                    <lightning-layout multiple-rows vertical-align="center" class="billing-body">
+                        <lightning-layout-item padding="around-small" size="12" small-device-size="12" medium-device-size="12" large-device-size="12" class="billing-title">
+                            <div class="slds-text-align_left slds-p-top_medium">Billing Address</div>
+                        </lightning-layout-item>
+                        <lightning-layout-item padding="around-small" size="12" small-device-size="4" medium-device-size="2" large-device-size="2">
+                            <div class="slds-text-align_left heading-title">Name</div>
+                        </lightning-layout-item>
+                        <lightning-layout-item padding="around-small" size="12" small-device-size="8" medium-device-size="10" large-device-size="10">
+                            <lightning-input onchange={handleUpdateFields} type="text" variant="label-hidden" name="Add-Name" value={editPaymentRecord.My_Address_Book__r.Name} required placeholder="type here..." onkeypress={handleToAllowName} class="add-name"></lightning-input>
+                        </lightning-layout-item>
+                        <lightning-layout-item padding="around-small" size="12" small-device-size="4" medium-device-size="2" large-device-size="2">
+                            <div class="slds-text-align_left heading-title">Address</div>
+                        </lightning-layout-item>
+                        <lightning-layout-item padding="around-small" size="12" small-device-size="8" medium-device-size="10" large-device-size="10">
+                            <lightning-input onchange={handleUpdateFields} type="text" variant="label-hidden" name="Add-Address" value={editPaymentRecord.My_Address_Book__r.Address__c} required placeholder="type here..."></lightning-input>
+                        </lightning-layout-item>
+                        <lightning-layout-item padding="around-small" size="12" small-device-size="4" medium-device-size="2" large-device-size="2">
+                            <div class="slds-text-align_left heading-title">City</div>
+                        </lightning-layout-item>
+                        <lightning-layout-item padding="around-small" size="12" small-device-size="8" medium-device-size="10" large-device-size="10">
+                            <lightning-input onchange={handleUpdateFields} type="text" variant="label-hidden" name="Add-City" value={editPaymentRecord.My_Address_Book__r.City__c} required placeholder="type here..." onkeypress={handleToAllowName} class="add-city"></lightning-input>
+                        </lightning-layout-item>
+                        <lightning-layout-item padding="around-small" size="12" small-device-size="4" medium-device-size="2" large-device-size="2">
+                            <div class="slds-text-align_left heading-title">State</div>
+                        </lightning-layout-item>
+                        <lightning-layout-item padding="around-small" size="12" small-device-size="8" medium-device-size="10" large-device-size="10">
+                            <!-- <lightning-input type="text" variant="standard" name="name" placeholder="type here..."></lightning-input> -->
+                            <lightning-combobox onchange={handleUpdateFields} name="Add-State" value={editPaymentRecord.My_Address_Book__r.State__c}  required placeholder="Select State" options={stateOptionList} 
+                             variant="label-hidden"></lightning-combobox>
+                        </lightning-layout-item>
+                        <lightning-layout-item padding="around-small" size="12" small-device-size="4" medium-device-size="2" large-device-size="2">
+                            <div class="slds-text-align_left heading-title">Zip</div>
+                        </lightning-layout-item>
+                        <lightning-layout-item padding="around-small" size="12" small-device-size="8" medium-device-size="10" large-device-size="10">
+                            <lightning-input onchange={handleUpdateFields} type="text" variant="label-hidden" name="Add-Zip" value={editPaymentRecord.My_Address_Book__r.Zip__c} required placeholder="type here..."></lightning-input>
+                        </lightning-layout-item>
+                        <lightning-layout-item padding="around-small" size="12" small-device-size="4" medium-device-size="2" large-device-size="2">
+                            <div class="slds-text-align_left heading-title">Phone</div>
+                        </lightning-layout-item>
+                        <lightning-layout-item padding="around-small" size="12" small-device-size="8" medium-device-size="10" large-device-size="10">
+                            <lightning-input onchange={handleUpdateFields} type="text" variant="label-hidden" name="Add-Phone" value={editPaymentRecord.My_Address_Book__r.Phone__c} required placeholder="type here..."></lightning-input>
+                        </lightning-layout-item>
+                        <lightning-layout-item if:true={isAddressesExist} padding="around-small" size="12" small-device-size="12" medium-device-size="12" large-device-size="12" class="replace-title">
+                            <div class="slds-text-align_left">Replace with Saved Address</div>
+                        </lightning-layout-item>
+                    </lightning-layout>
+                    <lightning-layout multiple-rows class="billing-body addresses-box">
+                        <template if:true={existingAddresses} for:each={existingAddresses} for:item="item" for:index="index">
+                            <lightning-layout-item  key={item.Id} size="12" padding="around-small" small-device-size="12" medium-device-size="4" large-device-size="4" >
+                                <div class="custom-box slds-align_absolute-center slds-form-element__control" style="border: 1px solid rgb(187, 179, 179);min-height: 5rem; padding: 5px 10px; justify-content: left; height: 100%;">           
+                                    <div class="custom-box"> <lightning-input type="radio" name="cards" label="" onchange={handleChangeAddress} data-selectid={item.Id}></lightning-input></div>
+                                    <div class="custom-box address-body">{item.Name}<br/>{item.Address__c}<br/>
+                                        {item.City__c}, {item.State__c} {item.Zip__c}
+                                    </div>
+                                </div>
+                            </lightning-layout-item>
+                        </template>
+                    </lightning-layout>
+                    <lightning-layout multiple-rows vertical-align="center" class="billing-body">
+                        <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="12" class="preferred">
+                            <div class="slds-text-align_center">
+                                <lightning-input onchange={handleUpdateFields}  name="MarkPreferredAddress" type="checkbox" class="mark-pref-checkbox" label="Preferred Payment Method" checked={editPaymentRecord.Default_Payment_Method__c}></lightning-input>
+                            </div>
+                        </lightning-layout-item>
+                    </lightning-layout>
+                </div>
+                <footer class="slds-modal__footer slds-text-align_center slds-p-top_medium slds-p-bottom_medium" style="border-top: 0;">
+                    <lightning-button variant="brand" label="SAVE CHANGES" title="SAVE CHANGES" class="slds-m-left_small" name="SAVECHANGES" onclick={handleEditSaveAction}></lightning-button>
+                    <lightning-button variant="" label="CANCEL" title="CANCEL" class="slds-m-left_small primaryGrayBtn" name="CANCEL" onclick={closeEditModel}></lightning-button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+
+</template>

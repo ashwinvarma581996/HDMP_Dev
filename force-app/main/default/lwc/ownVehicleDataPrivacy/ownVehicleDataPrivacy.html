@@ -1,0 +1,37 @@
+<template>
+    <div class="title">
+        Vehicle Data Privacy
+    </div>
+    <lightning-layout class="card-container" multiple-rows="true" >
+        <template if:true={products} for:each={products} for:item="product" >
+            <lightning-layout-item class="single-card" key={product.model} >
+                <c-own-card  title={product.nickname} brand="default" >
+                    <div slot="action">
+                        <button class="btn" value={product.productId} onclick={handleAction}>VIEW</button>
+                    </div>
+                    <div slot="default">
+                        <lightning-layout class="card-body-container">
+                            <lightning-layout-item class="section section-one">
+                                <!-- <span class="slds-icon_container circle-image-span">
+                                    <c-own-product-image product-image={product.image} brand={product.division}></c-own-product-image>
+                                </span> -->
+                                <div class="image-container">
+                                     <!-- <img src={product.image} class="img"/> -->
+                                     <div class="slds-align_absolute-center img">
+                                     <c-own-product-image product-image={product.image} brand={product.division}></c-own-product-image>
+                                    </div>
+                                </div>
+                               
+                            </lightning-layout-item>
+                            <lightning-layout-item class="section section-two">
+                                <div class="text-container">
+                                    {product.year} {product.division} {product.model}
+                                </div>
+                            </lightning-layout-item>
+                        </lightning-layout>
+                    </div>
+                </c-own-card>
+            </lightning-layout-item>
+        </template>
+    </lightning-layout>
+</template>

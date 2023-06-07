@@ -1,0 +1,9 @@
+:host {
+    display: flex;
+    flex-direction: column;
+}
+
+lightning-button.button {
+	--sds-c-button-brand-color-background: #353236;
+    --sds-c-button-text-color: #f4f7f9;
+}

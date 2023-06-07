@@ -1,0 +1,32 @@
+.slds-button{
+    font-weight: 900;
+font-size: 13px;
+line-height: 20px;
+text-align: center;
+padding: 4px 12px;
+border-radius: 2px;
+border: 1px solid #E42525;
+text-transform: uppercase;
+margin-left: 6px;
+}
+
+.signup_button{
+color: #FFFFFF;
+background-color: #E42525;
+}
+
+.login_button{
+
+color: #E42525;
+
+}
+
+@media only screen and (max-width: 600px) {
+.cart{
+    display:none;
+}
+
+.container img{
+    margin-right: 16px;
+}
+}

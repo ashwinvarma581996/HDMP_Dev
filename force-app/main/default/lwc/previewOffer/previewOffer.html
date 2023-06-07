@@ -1,0 +1,221 @@
+<template>
+    <template if:true={myAObjrray}>
+        <template if:true={isModalOpen}>
+           
+                <template if:true={checkfieldcondition}>
+                    <lightning-accordion class="modelPopup" allow-multiple-sections-open active-section-name={activeSections} title="Offer Preview">
+                    <lightning-accordion-section name="A" label="Offer Preview" >
+                        <lightning-record-edit-form record-id={recordId} object-api-name="Offers__c"
+                            onsuccess={handleSuccess} onsubmit={handleSubmit}>
+                            <lightning-messages></lightning-messages>
+                            <div class="slds-grid slds-wrap">
+                                <div class="slds-col slds-size_4-of-12 slds-var-p-horizontal_medium">
+                                    <lightning-output-field class="slds-border_bottom" field-name="Name"></lightning-output-field>
+                                    <lightning-output-field class="slds-border_bottom" field-name="Offer_Availability__c"></lightning-output-field>
+                                    <lightning-output-field class="slds-border_bottom" field-name="Vehicle_Type__c"></lightning-output-field>
+                                
+                                        <!-- <div class="my-output-field"> -->
+                                            
+                                    <lightning-output-field  field-name="AHM_Regions__c" ></lightning-output-field>
+                               
+                                <!-- </div> -->
+                                
+                                   
+                                </div>
+                                <div class="slds-col slds-size_4-of-12 slds-var-p-horizontal_medium">
+                                    <lightning-output-field class="slds-border_bottom" field-name="RecordTypeId" label="Record Type Name" style="pointer-events: none;"></lightning-output-field>
+                                   <template if:true={showAHMandAHFCSalesProgramId}>
+                                    <lightning-output-field  class="slds-border_bottom" field-name="AHFC_Sales_Program_ID__c"></lightning-output-field>
+                                </template>
+                                    <lightning-output-field class="slds-border_bottom" field-name="Brand__c"></lightning-output-field>
+                                </div>
+                                <div class="slds-col slds-size_4-of-12 slds-var-p-horizontal_medium">
+                                    <lightning-output-field class="slds-border_bottom" field-name="Descriptive_Name__c"></lightning-output-field>
+                                   <template if:true={showAHMandAHFCSalesProgramId}>
+                                    <lightning-output-field  class="slds-border_bottom" field-name="AHM_Sales_Program_ID__c" ></lightning-output-field>
+                                </template>
+                                <template if:true={showAHMandAHFCSalesProgramId}>
+                                     <lightning-output-field field-name="Zero_Due__c"></lightning-output-field>
+                                </template>
+                                </div>
+                            </div>
+                        </lightning-record-edit-form>
+                        </lightning-accordion-section>
+                    
+                    <template if:true={myAObjrray}>
+                        <template for:each={myAObjrray} for:item="item">
+                            <lightning-accordion-section key={item.id} name={item.SectionName} label={item.OfferTitle}>
+                            <div class="slds-grid " key={item.Id}>
+                                <div if:true={item.defaultImageUrl}  class="slds-col slds-size_3-of-12" style="max-height: 200px" key={item.Id}>
+                                    <img  style="max-height: 200px" alt="Image on T.O." src={item.defaultImageUrl} />
+                                </div>
+                                <div if:false={item.defaultImageUrl}  class="slds-col slds-size_3-of-12" style="max-height: 200px" key={item.Id}>
+                                    <img  style="max-height: 200px" alt="Image on T.O." src={torontoImage} />
+                                </div>
+                                <div class="slds-col slds-size_9-of-12 slds-wrap" key={item.Id}>
+                                    
+                                    <p if:true={item.OfferTitle} class="slds-p-top_medium slds-border_bottom "><b>{item.OfferTitle}</b></p>
+                                   <!--Show offer validity starts-->
+                                   <div class="offer-dates inclined-text">
+                                    <template if:true={validFromDate}>
+                                        Offer valid from
+                                        <!-- <span class="date"> {validFromDate} </span> -->
+                                        <lightning-formatted-date-time class="datespace"
+                                        month="numeric"
+                                        day="numeric"
+                                        year="numeric"
+                                        time-zone="UTC"
+                                        value={validFromDate}> </lightning-formatted-date-time> 
+                                         through 
+                                        <!-- <span class="date"> {validToDate} </span> -->
+                                        <lightning-formatted-date-time class="datespace"
+                                        month="numeric"
+                                        day="numeric"
+                                        year="numeric"
+                                        time-zone="UTC"
+                                        value={validToDate}></lightning-formatted-date-time>
+                                       <!-- <lightning-formatted-date-time 
+                                        year="numeric"
+                                       month="numeric"
+                                       day="numeric" value={validToDate}></lightning-formatted-date-time> -->
+                                    </template>
+                                    <template if:false={validFromDate}>
+                                        <div class="error-message">
+                                            Dates are not selected on the offer Record.
+                                        </div>
+                                    </template>
+                                </div>
+                                     <!--Show offer validity ends-->
+                                    <p if:true={item.ShortDescription} class="slds-p-top_medium slds-border_bottom ">{item.ShortDescription}</p>
+                                    <p if:true={item.LegalDesclaimer} class="slds-p-top_medium slds-border_bottom ">{item.LegalDesclaimer}</p>
+                                    <p if:true={item.DetailedDescription} class="slds-p-top_medium slds-border_bottom ">{item.DetailedDescription}</p>
+                                    <p if:true={item.TermsAndConditions} class="slds-p-top_medium slds-border_bottom ">{item.TermsAndConditions}</p>
+                                </div>
+                            </div>
+
+                            </lightning-accordion-section>
+
+                        </template>
+
+                    </template>
+                   
+                    </lightning-accordion>
+            <footer class="slds-modal__footer slds-var-p-horizontal_medium">
+                <div>
+                    <div if:true={hideMissingTagError} class="slds-text-align_left">
+                    <div class="slds-scoped-notification slds-media slds-media_center slds-theme_warning" role="status">
+                        <div class="slds-media__figure">
+                          <lightning-icon icon-name="utility:warning" alternative-text="Warning" size="small"> </lightning-icon>
+                            <span class="slds-assistive-text">warning</span>
+                        </div>
+                        <div class="slds-media__body">
+                          <p><span style="font-weight: bold;">{label.ErrorOnMissingTags}</span>
+                            <br/>
+                            <span > {errorMissingValues}</span>
+                          </p>
+                        </div>
+                      </div>
+                </div>
+
+                    <!--<span style="color:red;  font-weight: bold;">Error: </span>
+                    <span style="font-weight: bold;">{label.ErrorOnMissingTags}</span>
+                    <span class="error-text"> {errorMissingValues}</span>-->
+                
+                <div class="footer-buttons slds-p-top_x-small">
+                <button class="slds-button slds-button_neutral" onclick={closeModal} title="Cancel">Close</button>
+                <button class="slds-button slds-button_brand" onclick={updateofferObjRecord} title="OK" disabled={disableMarkAsPreviewed}>
+                OK, Mark as Previewed
+                </button>            
+                
+                </div>
+                </div>
+                </footer>
+                </template>
+          
+        </template>
+    </template>
+
+<template if:true={isModalOpenWarning}>
+    <div style="height:24rem">
+        <section role="dialog" tabindex="0" aria-modal="true" aria-labelledby="prompt-heading-id" aria-describedby="prompt-message-wrapper" class="slds-modal slds-fade-in-open slds-modal_prompt slds-modal_medium ">
+          <div class="slds-modal__container">
+            <div class="slds-modal__header slds-theme_error slds-theme_alert-texture">
+                
+              <h1 class="slds-text-heading_medium" id="prompt-heading-id">
+                   Offer Preview Denied
+                </h1>
+            </div>
+            <div class="slds-modal__content slds-p-around_medium" id="prompt-message-wrapper">
+              <!-- <p class="slds-align_absolute-left"> -->
+                <!-- <br/> -->
+                      <p>  {label.Preview_Offer_Criteria_One} &nbsp;&nbsp; </p>
+                      
+                        <p if:true={boilerplateError} class="slds-align_absolute-left">   
+                            <br/>               
+                            {label.Preview_Offer_Criteria_Four} 
+                        </p>
+                       <p if:true={eligibleModelAssociateError} class="slds-align_absolute-left"> 
+                        <br/>
+                        &nbsp;&nbsp;
+                          {label.Preview_Offer_Criteria_Two}  
+                       </p>                     
+                      <p if:true={IncSamPayOrFeaturedError} class="slds-align_absolute-left"> 
+                         <br/>
+                        &nbsp;&nbsp; {label.Preview_Offer_Criteria_Three}  
+                     </p>
+                      <p if:true={IncSamPayAndFeaturedError} class="slds-align_absolute-left">
+                        <br/>
+                        &nbsp;&nbsp; {label.Error_on_Preview_Offer_Criteria_Five}
+                        <br/>
+                    </p>  
+                      
+                        <p if:true={ApplyAllClearAllEditCashElementError} class="slds-align_absolute-left">   
+                            &nbsp;&nbsp; 
+                            {label.Error_on_Preview_Offer_Criteria_Six}  
+                            <br/></p>
+                       
+              <!-- </p> -->
+            </div>
+            <div class="slds-modal__footer slds-theme_default">
+              <button class="slds-button slds-button_neutral" onclick={closeModal}>Got It</button>
+            </div>
+          </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+      </div>
+    
+      <!--
+      <lightning-card  variant="Narrow"   title="Offer Preview Denied" icon-name="standard:account">
+
+    
+    
+                <div>
+                    <p>
+                        
+                        &nbsp;&nbsp; 
+                        <br/>
+                        &nbsp;&nbsp; {label.Preview_Offer_Criteria_One}
+                        <br/>
+                        &nbsp;&nbsp; {label.Preview_Offer_Criteria_Four}
+                        <br/>
+                        &nbsp;&nbsp; {label.Preview_Offer_Criteria_Two}                       
+                        <br/>
+                        &nbsp;&nbsp; {label.Preview_Offer_Criteria_Three}   
+                        <br/>
+                        &nbsp;&nbsp; {label.Error_on_Preview_Offer_Criteria_Five}
+                        <br/>
+                        &nbsp;&nbsp; {label.Error_on_Preview_Offer_Criteria_Six}
+                        <br/>
+            <br/>
+        </p>
+        </div>
+    
+    </lightning-card> 
+
+<footer class="slds-modal__footer">
+    <button class="slds-button slds-button_neutral" id="clodeBtn" onclick={closeModal} title="Cancel">Close</button>
+</footer> -->
+
+</template>
+
+</template>

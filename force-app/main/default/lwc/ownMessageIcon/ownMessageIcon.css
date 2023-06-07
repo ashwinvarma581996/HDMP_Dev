@@ -1,0 +1,25 @@
+.container{
+    position: relative;
+}
+
+.box{
+    position: absolute;
+    margin-top: -28px;
+    margin-left: 20px;
+}
+.overlay{
+    z-index: 9;
+}
+.box span{
+    font-weight: 700;
+    font-size: 11px;
+    line-height: 13px;
+    color: #000000;
+}
+.message-dot{
+    width:16px;
+    height : 16px;
+    background: #ffa200;
+    border-radius: 50%;
+    text-align: center;
+}

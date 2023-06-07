@@ -1,0 +1,311 @@
+<template>
+    <div class="slds-container_x-large slds-container_center slds-p-around_small">
+        <lightning-layout multiple-rows>
+            <lightning-layout-item>
+                <div class="breadcrumb-large  slds-m-left_medium slds-m-bottom_medium slds-no-print">
+                    <div class="breadcrumb" aria-label="Breadcrumbs" role="navigation">
+                        <div role="list" class="slds-breadcrumb slds-list_horizontal slds-wrap">
+                            <slot>
+                                <div class="slds-breadcrumb__item breadcrumb-item-back" role="listitem">
+                                    <a class="breadcrumb-text-color" onclick={handleBreadcrumbClick}>
+                                        My Service Records
+                                    </a>
+                                </div>
+                            </slot>
+                        </div>
+                    </div>
+                </div>
+            </lightning-layout-item>
+
+            <lightning-layout-item padding="around-small" size="12">
+                <c-own-product-header-2 product-title={title}
+                                        year={subTitle}
+                                        product-image={imgUrl}
+                                        division={division}>
+                </c-own-product-header-2>
+            </lightning-layout-item>
+        </lightning-layout>
+
+        <div class="page-btns slds-no-print">
+            <template if:true={displayScheduleService}>
+            <button onclick={handleScheduleNewService} class="slds-button slds-primary-outline-button">SCHEDULE NEW
+                SERVICE →</button>
+            </template>
+            <template if:false={isApiServiceNote}>
+                <button onclick={handleEditRecordClick} class="slds-button slds-primary-outline-button">EDIT SERVICE
+                    RECORD
+                    →</button>
+            </template>
+            <a onclick={handlePrintRecordClick} class="slds-link-button">PRINT SERVICE RECORD</a>
+        </div>
+
+        <template if:true={isApiServiceNote}>
+            <template if:true={displayAutos}>
+                <div class="page-content">
+                    <ul class="page-content_wrapper">
+                        <li>
+                            <h3>Service Date</h3>
+                            <p>{mServiceDate}</p>
+                        </li>
+                        <li>
+                            <h3>Miles</h3>
+                            <p>
+                                <lightning-formatted-number value={mMiles}>
+                                </lightning-formatted-number>
+                            </p>
+                        </li>
+                        <li>
+                            <h3>Service Facility</h3>
+                            <p>{mServiceFacility}</p>
+                        </li>
+                        <li>
+                            <h3>Service</h3>
+                            <p>{mServices}</p>
+                        </li>
+                        <li>
+                            <h3>Repair Order #</h3>
+                            <p>{mName}</p>
+                        </li>
+                    </ul>
+                </div>
+            </template>
+            <template if:true={displayPowerSports}>
+                <div class="page-content">
+                    <ul class="page-content_wrapper">
+                        <li>
+                            <h3>Service Date</h3>
+                            <p>{mServiceDate}</p>
+                        </li>
+                        <li>
+                            <h3>Miles</h3>
+                            <p>
+                                <lightning-formatted-number value={mMiles}>
+                                </lightning-formatted-number>
+                            </p>
+                        </li>
+                        <li>
+                            <h3>Operating Hours</h3>
+                            <p>
+                                <lightning-formatted-number value={mOperatingHours}>
+                                </lightning-formatted-number>
+                            </p>
+                        </li>
+                        <li>
+                            <h3>Service Facility</h3>
+                            <p>{mServiceFacility}</p>
+                        </li>
+                        <li>
+                            <h3>Service</h3>
+                            <p>{mServices}</p>
+                        </li>
+                        <li>
+                            <h3>Repair Order #</h3>
+                            <p>{mName}</p>
+                        </li>
+                    </ul>
+                </div>
+            </template>
+            <template if:true={displayPowerEquipmentOrMarine}>
+                <div class="page-content">
+                    <ul class="page-content_wrapper">
+                        <li>
+                            <h3>Service Date</h3>
+                            <p>{mServiceDate}</p>
+                        </li>
+                        <li>
+                            <h3>Operating Hours</h3>
+                            <p>
+                                <lightning-formatted-number value={mOperatingHours}>
+                                </lightning-formatted-number>
+                            </p>
+                        </li>
+                        <li>
+                            <h3>Service Facility</h3>
+                            <p>{mServiceFacility}</p>
+                        </li>
+                        <li>
+                            <h3>Service</h3>
+                            <p>{mServices}</p>
+                        </li>
+                        <li>
+                            <h3>Repair Order #</h3>
+                            <p>{mName}</p>
+                        </li>
+                    </ul>
+                </div>
+            </template>
+        </template>
+
+        <template if:false={isApiServiceNote}>
+            <template if:true={displayAutos}>
+                <div class="page-content">
+                    <ul class="page-content_wrapper">
+                        <li>
+                            <h3>Service Date</h3>
+                            <p>{mServiceDate}</p>
+                        </li>
+                        <li>
+                            <h3>Miles</h3>
+                            <p>
+                                <lightning-formatted-number value={mMiles}>
+                                </lightning-formatted-number>
+                            </p>
+                        </li>
+                        <li>
+                            <h3>Service Facility</h3>
+                            <p>{mServiceFacility}</p>
+                        </li>
+                        <li>
+                            <h3>Service</h3>
+                            <p>{mServices}</p>
+                            <template if:true={showOther}>
+                                <br />
+                                <p>{mOther}</p>
+                            </template>
+                        </li>
+                        <template if:true={showNotes}>
+                            <li>
+                                <h3>Additional Notes</h3>
+                                <p>{mNotes}</p>
+                            </li>
+                        </template>
+                    </ul>
+                </div>
+            </template>
+            <template if:true={displayPowerSports}>
+                <div class="page-content">
+                    <ul class="page-content_wrapper">
+                        <li>
+                            <h3>Service Date</h3>
+                            <p>{mServiceDate}</p>
+                        </li>
+                        <li>
+                            <h3>Miles</h3>
+                            <p>
+                                <lightning-formatted-number value={mMiles}>
+                                </lightning-formatted-number>
+                            </p>
+                        </li>
+                        <li>
+                            <h3>Operating Hours</h3>
+                            <p>
+                                <lightning-formatted-number value={mOperatingHours}>
+                                </lightning-formatted-number>
+                            </p>
+                        </li>
+                        <li>
+                            <h3>Service Facility</h3>
+                            <p>{mServiceFacility}</p>
+                        </li>
+                        <li>
+                            <h3>Service</h3>
+                            <p>{mServices}</p>
+                            <template if:true={showOther}>
+                                <br />
+                                <p>{mOther}</p>
+                            </template>
+                        </li>
+                        <template if:true={showNotes}>
+                            <li>
+                                <h3>Additional Notes</h3>
+                                <p>{mNotes}</p>
+                            </li>
+                        </template>
+                    </ul>
+                </div>
+            </template>
+            <template if:true={displayPowerEquipmentOrMarine}>
+                <div class="page-content">
+                    <ul class="page-content_wrapper">
+                        <li>
+                            <h3>Service Date</h3>
+                            <p>{mServiceDate}</p>
+                        </li>
+                        <li>
+                            <h3>Operating Hours</h3>
+                            <p>
+                                <lightning-formatted-number value={mOperatingHours}>
+                                </lightning-formatted-number>
+                            </p>
+                        </li>
+                        <li>
+                            <h3>Service Facility</h3>
+                            <p>{mServiceFacility}</p>
+                        </li>
+                        <li>
+                            <h3>Service</h3>
+                            <p>{mServices}</p>
+                            <template if:true={showOther}>
+                                <br />
+                                <p>{mOther}</p>
+                            </template>
+                        </li>
+                        <template if:true={showNotes}>
+                            <li>
+                                <h3>Additional Notes</h3>
+                                <p>{mNotes}</p>
+                            </li>
+                        </template>
+                    </ul>
+                </div>
+            </template>
+        </template>
+
+        <template if:true={isApiServiceNote}>
+            <div class="page-table">
+                <table class="slds-table slds-table_cell-buffer slds-table_bordered"
+                    aria-labelledby="element-with-table-label other-element-with-table-label">
+                    <thead>
+                        <tr class="slds-line-height_reset">
+                            <th class="" scope="col">
+                                <div class="slds-truncate" title="Job">Job</div>
+                            </th>
+                            <th class="" scope="col">
+                                <div class="slds-truncate" title="Service">Service</div>
+                            </th>
+                            <th class="" scope="col">
+                                <div class="slds-truncate" title="Description">Description</div>
+                            </th>
+                            <th class="" scope="col">
+                                <div class="slds-truncate" title="Part Names">Part Names</div>
+                            </th>
+                            <th class="" scope="col">
+                                <div class="slds-truncate" title="Part Numbers">Part Numbers</div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template for:each={jobrecord} for:item="job">
+                            <tr key={job.Job}>
+                                <td>
+                                    <div class="slds-truncate">{job.Job}</div>
+                                </td>
+                                <td>
+                                    <div class="slds-truncate">{job.Service}</div>
+                                </td>
+                                <td>
+                                    <div class="slds-truncate">{job.Description}</div>
+                                </td>
+                                <td>
+                                    <div class="slds-truncate">{job.partNames}</div>
+                                </td>
+                                <td>
+                                    <div class="slds-truncate">{job.partNumbers}</div>
+                                </td>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- For Mobile view -->
+            <div class="page-table_mobile hideInPrint slds-no-print">
+                <template for:each={jobrecord} for:item="job">
+                    <lightning-layout-item key={job.Job} size="12">
+                        <c-own-service-record-detail-job-record job={job}> </c-own-service-record-detail-job-record>
+                    </lightning-layout-item>
+                </template>
+            </div>
+        </template>
+    </div>
+</template>

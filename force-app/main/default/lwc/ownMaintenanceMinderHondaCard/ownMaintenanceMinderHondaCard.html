@@ -1,0 +1,33 @@
+<template>
+	<div class="slds-container_large slds-container_center slds-p-around_large">
+		<template if:true={data}>
+			<h3 class="head-maintanance-minder">{data.title} {title}</h3>
+			<div class="list-item-container">
+				<lightning-formatted-rich-text class="a" value={data.minders}></lightning-formatted-rich-text>
+			</div>
+			<p> {data.subtitle}</p>
+			<div class="table-container">
+				<table border="1" class="slds-m-vertical_large">
+					<thead>
+						<tr class="tr">
+							<th>Main Code</th>
+							<th>What We Do</th>
+						</tr>
+					</thead>
+					<template if:true={minders} for:each={minders} for:item="minder">
+					   <tr key={minder.mainCode}>
+							<th class="th th-head">{minder.mainCode}</th>
+							<td>
+								<lightning-formatted-rich-text value={minder.whatWeDo}></lightning-formatted-rich-text>
+							</td>
+						</tr>
+					</template>
+				</table>
+			</div>
+			<lightning-layout multiple-rows horizontal-align="center">
+				<div style="max-width:60%">
+				</div>
+			</lightning-layout>
+		</template>
+	</div>
+</template>

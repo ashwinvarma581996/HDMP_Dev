@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>55.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+				<targetConfig targets="lightningCommunity__Default">
+						<property label="About Maintenance Minder" name="contentId" type="ContentReference" />
+							<property label="Maintenance Minders" name="contentIdMM" type="ContentReference" />
+							<property label="Maintenance Minder A" name="contentIdMA" type="ContentReference" />
+							<property label="Maintenance Minder B" name="contentIdMB" type="ContentReference" />
+							<property label="Maintenance Minder 1" name="contentIdM1" type="ContentReference" />
+							<property label="Maintenance Minder 2" name="contentIdM2" type="ContentReference" />
+							<property label="Maintenance Minder 3" name="contentIdM3" type="ContentReference" />
+							<property label="Maintenance Minder 4" name="contentIdM4" type="ContentReference" />
+							<property label="Maintenance Minder 5" name="contentIdM5" type="ContentReference" />
+							<property label="Maintenance Minder 6" name="contentIdM6" type="ContentReference" />
+				</targetConfig>
+		</targetConfigs>
+</LightningComponentBundle>

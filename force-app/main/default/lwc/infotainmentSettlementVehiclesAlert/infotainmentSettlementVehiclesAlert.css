@@ -1,0 +1,37 @@
+.isor-row-container{
+    background-color: #FFA638;
+}
+.isor-notification{
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 26px;
+    /* align-items: center; */
+    padding: 12px 8px 6px 0px;
+}
+.isor-text-container{
+    align-items: center;
+    text-align: center;
+    
+}
+.isor-text{
+    margin-left: 5px;
+}
+.isor-close-container{
+    text-align: right;
+}
+.isor-view-link{
+    font-weight: bold;
+    text-decoration: underline;
+    color: black;
+}
+.click-here-link{
+    /* color: #E42525; */
+    color: black;
+    text-decoration: underline;
+}
+.custom-icon {
+    --sds-c-icon-color-foreground-default: black;
+}
+.close-icon{
+    cursor: pointer;
+}

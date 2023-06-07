@@ -1,0 +1,31 @@
+<template>
+    <div class="card card-size card-styles-wrapper">
+        <c-own-card title={title} brand="default" icon-image={icon} titlecolor={titlecolor} onheader={handleHeader}
+            header-clickable={headerClickable} onaction={handleHeader} hide-body-section="">
+            <template if:true={actionIcon}>
+                <template if:true={showActionIconLoggedIn}>
+                    <template if:false={isGuest}>
+                        <div slot="action">
+                            <img src={actionIcon} class="slds-p-right_x-small icon-image heading-link" slot="actions">
+                        </div>
+                    </template>
+                </template>
+                <template if:true={showActionIconLoggedOut}>
+                    <template if:true={isGuest}>
+                        <div slot="action">
+                            <img src={actionIcon} class="slds-p-right_x-small icon-image heading-link" slot="actions">
+                        </div>
+                    </template>
+                </template>
+            </template>
+            <div slot="default" class="font">
+                <lightning-formatted-rich-text value={body}></lightning-formatted-rich-text>
+                <template if:true={showWarrantyLink}>
+                    <div class="link-div">
+                        <a class="red" onclick={handleLinkClick} tabindex="0" role="link">{downloadLabel}</a>
+                    </div>
+                </template>
+            </div>
+        </c-own-card>
+    </div>
+</template>

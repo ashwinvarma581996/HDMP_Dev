@@ -1,0 +1,82 @@
+<!-- This Is Created For Tab 3, i.e., Safety Commitment
+    In this component we are fetching data, added link for CMS and Cards.
+    
+    Done By : pawan kumar 03-01-2022
+-->
+<template>
+  <div class="slds-container_large">
+    <lightning-layout multiple-rows horizontal-align="space" if:true={collisionSafty}>
+      <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="10">
+        <div class="title slds-p-bottom_large">{collisionSafty.title}</div>
+      </lightning-layout-item>
+      <lightning-layout-item class="slds-m-top_x-large" size="12" small-device-size="12" medium-device-size="12"
+        large-device-size="10">
+        <lightning-formatted-rich-text class="description text-style" value={collisionSafty.body}></lightning-formatted-rich-text>
+      </lightning-layout-item>
+
+      <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="10">
+      <!-- Adding Card -->
+      <lightning-layout multiple-rows="true" class="position-cards">
+
+        <lightning-layout-item padding="around-small" size="12" small-device-size="12" medium-device-size="6"
+          large-device-size="6">
+          <c-own-c-m-s-card titlecolor={titlecolor} icon={icon} showforwardicon="true" forwardiconright="true"
+            content-id={safetyCard1} header-right-icon="utility:download">
+          </c-own-c-m-s-card>
+        </lightning-layout-item>
+
+        <lightning-layout-item padding="around-small" size="12" small-device-size="12" medium-device-size="6"
+          large-device-size="6">
+          <c-own-c-m-s-card titlecolor={titlecolor} icon={icon} showforwardicon="true" forwardiconright="true"
+            content-id={safetyCard2} header-right-icon="utility:download">
+          </c-own-c-m-s-card>
+        </lightning-layout-item>
+
+        <lightning-layout-item padding="around-small" size="12" small-device-size="12" medium-device-size="6"
+          large-device-size="6">
+          <c-own-c-m-s-card titlecolor={titlecolor} icon={icon} showforwardicon="true" forwardiconright="true"
+            content-id={safetyCard3} header-right-icon="utility:download">
+          </c-own-c-m-s-card>
+        </lightning-layout-item>
+
+        <lightning-layout-item padding="around-small" size="12" small-device-size="12" medium-device-size="6"
+          large-device-size="6">
+          <c-own-c-m-s-card titlecolor={titlecolor} icon={icon} showforwardicon="true" forwardiconright="true"
+            content-id={safetyCard4} header-right-icon="utility:download">
+          </c-own-c-m-s-card>
+        </lightning-layout-item>
+
+        <lightning-layout-item padding="around-small" size="12" small-device-size="12" medium-device-size="6"
+          large-device-size="6">
+          <c-own-c-m-s-card titlecolor={titlecolor} icon={icon} showforwardicon="true" forwardiconright="true"
+            content-id={safetyCard5} header-right-icon="utility:download">
+          </c-own-c-m-s-card>
+        </lightning-layout-item>
+
+        <lightning-layout-item padding="around-small" size="12" small-device-size="12" medium-device-size="6"
+          large-device-size="6">
+          <c-own-c-m-s-card titlecolor={titlecolor} icon={icon} showforwardicon="true" forwardiconright="true"
+            content-id={safetyCard6} header-right-icon="utility:download">
+          </c-own-c-m-s-card>
+        </lightning-layout-item>
+
+        <lightning-layout-item padding="around-small" size="12" small-device-size="12" medium-device-size="6"
+          large-device-size="6">
+          <c-own-c-m-s-card titlecolor={titlecolor} icon={icon} showforwardicon="true"
+            content-id={safetyCard7} header-right-icon="utility:download" forwardiconright="true">
+          </c-own-c-m-s-card>
+        </lightning-layout-item>
+
+        <lightning-layout-item padding="around-small" size="12" small-device-size="12" medium-device-size="6"
+          large-device-size="6">
+          <c-own-c-m-s-card titlecolor={titlecolor} icon={icon} showforwardicon="true"
+            content-id={safetyCard8} header-right-icon="utility:download" forwardiconright="true">
+          </c-own-c-m-s-card>
+        </lightning-layout-item>
+
+      </lightning-layout>
+    </lightning-layout-item>
+    </lightning-layout>
+
+  </div>
+</template>

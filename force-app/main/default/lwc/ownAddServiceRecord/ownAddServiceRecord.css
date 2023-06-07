@@ -1,0 +1,228 @@
+label span {
+    color: #E42525;
+}
+
+.slds-form-element label.slds-form-element__label {
+    color: #000000;
+    font-size: 14px;
+    line-height: 18px;
+}
+
+.slds-form-element input {
+    height: 48px;
+    border-radius: 2px;
+    border: 1px solid #D2D2D2;
+}
+
+.slds-form-element {
+    margin-bottom: 20px;
+}
+
+.slds-form {
+    margin: 20px 0;
+}
+
+.slds-form-element h2 {
+    font-weight: 900;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-top: 50px;
+    margin-bottom: 20px;
+}
+
+.slds-form-element__control {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.slds-form .slds-form-element__control .slds-checkbox {
+    display: flex;
+    align-items: center;
+    flex: 1 0 33%;
+    margin-bottom: 20px;
+}
+
+.slds-form-element__control .slds-checkbox .slds-form-element {
+    margin-bottom: 0px;
+    height: auto;
+}
+
+span.slds-checkbox {
+    margin-bottom: 0px !important;
+}
+
+lightning-textarea.slds-form-element {
+    margin-bottom: 4px;
+}
+
+.slds-form-element h3 {
+    color: #767676;
+    font-size: 14px;
+    line-height: 18px;
+}
+
+textarea.slds-textarea {
+    height: 80px !important;
+    resize: none !important;
+}
+
+h2.additional {
+    margin-top: 30px !important;
+}
+
+.slds-form-element button.slds-button {
+    height: 48px;
+    padding: 0 60px;
+    font-weight: 900;
+    font-size: 16px;
+    line-height: 24px;
+    text-transform: uppercase;
+    border-radius: 2px;
+    margin: 40px 20px 0 0;
+}
+@media screen and (max-width: 600px) {
+    .slds-form-element button.slds-button {
+        margin: 20px 20px 0 0;
+        padding: 0px 0px;
+    }
+}
+
+.slds-form-element button.slds-button.slds-button_text-destructive {
+    border: 2px solid #E42525;
+}
+
+.slds-form-element button.slds-button.slds-button_text-destructive.slds-button-link {
+    border: 0px !important;
+    color: #E42525;
+}
+
+.btn-tertiary{
+    border: none !important;
+    letter-spacing: 2.8px !important;
+}
+
+.slds-form-element button.disabled {
+    background: #ACACAC;
+    color: #ffffff;
+    border-color: #acacac;
+    cursor: not-allowed;
+}
+
+.breadcrumb {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    line-height: 22px;
+    letter-spacing: 0.02em;
+}
+.breadcrumb-text-color {
+    color: #E42525 !important;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 14px;
+    line-height: 22px;
+}
+.breadcrumb-item-back::before {
+    content: "<" !important;
+    position: absolute;
+    left: -.75rem;
+    color: #E42525;
+}
+
+button.primary-button {
+    background: #E42525;
+    border-radius: 2px;
+    color: #fff;
+    border: 2px solid #E42525;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    font-weight: 900;
+    font-size: 16px;
+    line-height: 24px;
+    padding: 10px 32px;
+    margin-right: 15px;
+    transition: all 0.5s ease;
+}
+button.primary-button:hover {
+    background: #ffffff;
+    color: #E42525;
+}
+
+button.slds-link-button {
+    letter-spacing: 2.8px;
+    text-transform: uppercase;
+    color: #E42525;
+    font-weight: 900;
+    font-size: 14px;
+    line-height: 18px;
+    margin-left: 10px;
+}
+@media screen and (max-width: 600px) {
+    button.slds-link-button {
+        margin-left: 0;
+        display: flex;
+        justify-content: center;
+    }
+}
+
+button.primary-outline-button {
+    background: #ffffff;
+    border-radius: 2px;
+    color: #E42525;
+    border: 2px solid #E42525;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    font-weight: 900;
+    font-size: 16px;
+    line-height: 24px;
+    padding: 10px 32px;
+    margin-right: 15px;
+    transition: all 0.5s ease;
+}
+button.primary-outline-button:hover {
+    background: #E42525;
+    color: #ffffff;
+}
+
+.btn-color {
+    background: #E42525;
+}
+
+.btn-outline-color {
+    color: #E42525;
+    border: 2px solid #E42525;
+}
+
+@media screen and (max-width: 600px) {
+    .slds-form .slds-form-element__control .slds-checkbox {
+        flex: 1 1 100%;
+    }
+    button{
+        width :100%!important;
+    }
+    button.primary-button {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    button.primary-outline-button {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .slds-form-element.slds-form-btn button {
+        flex: 1 1 100%;
+        margin: 10px 0 !important;
+    }
+
+    .slds-form>.slds-form-element {
+        flex: 1 1 100%;
+        flex-wrap: wrap;
+    }
+
+    .slds-form-element.slds-form-btn {
+        display: flex;
+    }
+}

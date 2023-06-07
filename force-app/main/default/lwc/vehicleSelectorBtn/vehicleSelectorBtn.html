@@ -1,0 +1,199 @@
+<template>
+
+    <template if:true={boolVisible}>
+        <button class="clearButton slds-button slds-button_icon slds-float_right" title="" onclick={clearCookie}>
+            <!-- <lightning-icon icon-name="utility:close"
+                alternative-text="close"
+                size="small" ></lightning-icon> -->
+            <span class="slds-float_right"></span>
+        </button>
+        </template>
+<!-- lightning button for open modal window -->
+<lightning-button variant="brand" label={buttonLabel} title="Select Vehicle" class="slds-float_left slds-m-vertical_medium">
+</lightning-button>
+
+<!--Use template if:true to display/hide popup based on isModalOpen value-->
+<template if:true={isModalOpen}>
+        <!-- Modal/Popup Box LWC starts here -->
+        
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <!-- Modal/Popup Box LWC header here -->
+                <header class="slds-modal__header">
+                    <h2>I am looking for</h2>
+                </header>
+                <header class="slds-modal__header">
+
+                    
+                            
+                     <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeModal}>
+                        <lightning-icon icon-name="utility:close"
+                            alternative-text="close"
+                            variant="inverse"
+                            size="small" ></lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Select Vehicle</h2>
+                
+                 <!-- Modal/Popup Box LWC body starts here -->
+                 <div class="slds-col absoluteCenter" style="border: 1px solid #D4D4D4; height:100px;">
+                    <div class="centerElement">
+                        <input type="radio" id="Parts" name="1" value="Parts" onclick={handleChange} checked={defaultSelect}>
+                    </div>   
+                    <div>
+                        <label for="Parts">Parts</label>
+                    </div>
+                    <div class="centerElement">
+                        <input type="radio" id="Accessories" name="1" value="Accessories" onclick={handleChange} >
+                    </div>   
+                    <div>
+                        <label for="Accessories">Accessories</label>
+                    </div>
+                </div>
+
+                <template if:true={showParts}>
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+
+                        <div class="slds-grid slds-gutters">
+                            <div class="slds-col slds-size_1-of-2">
+                                <lightning-combobox
+                                name="Make"
+                                class="Make"
+                                label="Make"
+                                value={makeValue}
+                                disabled={makeDisabled}
+                                options={makeOptions}
+                                onchange={handleMakeChange}
+                                required=true
+                                 >
+                                </lightning-combobox>
+    
+                                <lightning-combobox
+                                name="Year"
+                                class="Year"
+                                label="Year"
+                                value={yearValue}
+                                options={yearOptions}
+                                onchange={handleYearChange} 
+                                disabled={yearDisabled}
+                                required=true
+                                >
+                                </lightning-combobox>
+    
+                                <lightning-combobox
+                                name="Model"
+                                class="Model"
+                                label="Model"
+                                value={modelValue}
+                                options={modelOptions}
+                                onchange={handleModelChange} 
+                                disabled={modelDisabled}
+                                required=true
+                                >
+                                </lightning-combobox>
+    
+                                <lightning-combobox
+                                name="Trim"
+                                class="Trim"
+                                label="Trim"
+                                value={trimValue}
+                                options={trimOptions}
+                                onchange={handleTrimChange} 
+                                disabled={trimDisabled}
+                                required=true
+                                >
+                                </lightning-combobox>
+                    
+    
+                            </div>
+                            <div class="slds-col slds-size_1-of-2">
+                                <lightning-input type="text" class="Vin" name="Vin" label="VIN#" max-length="17" min-length="17" onchange={handleVinChange}></lightning-input>
+                            </div>
+                          </div>
+    
+                        </div>
+
+
+                </template>
+<template if:true={showAccessories}>
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-2">
+
+                        <div class="slds-grid slds-gutters">
+                            <div class="slds-col slds-size_1-of-2">
+                                <lightning-combobox
+                                name="Make"
+                                class="Make"
+                                label="Make"
+                                value={makeValue}
+                                disabled={makeDisabled}
+                                options={makeOptions}
+                                onchange={handleMakeChange}
+                                required=true
+                                 >
+                                </lightning-combobox>
+    
+                                <lightning-combobox
+                                name="Year"
+                                class="Year"
+                                label="Year"
+                                value={yearValue}
+                                options={yearOptions}
+                                onchange={handleYearChange} 
+                                disabled={yearDisabled}
+                                required=true
+                                >
+                                </lightning-combobox>
+    
+                                <lightning-combobox
+                                name="Model"
+                                class="Model"
+                                label="Model"
+                                value={modelValue}
+                                options={modelOptions}
+                                onchange={handleModelChange} 
+                                disabled={modelDisabled}
+                                required=true
+                                >
+                                </lightning-combobox>
+    
+                                <lightning-combobox
+                                name="Doors"
+                                class="Doors"
+                                label="Doors"
+                                value={doorsValue}
+                                options={doorsOptions}
+                                onchange={handleDoorsChange} 
+                                disabled={trimDisabled}
+                                required=true
+                                >
+                                </lightning-combobox>
+                    
+    
+                            </div>
+                            <div class="slds-col slds-size_1-of-2">
+                                <lightning-input type="text" class="Vin" name="Vin" label="VIN#" max-length="17" min-length="17" onchange={handleVinChange}></lightning-input>
+                            </div>
+                          </div>
+    
+                        </div>
+
+                </template>
+
+
+
+</header>
+
+<!-- Modal/Popup Box LWC footer starts here -->
+<footer class="slds-modal__footer">
+    <button class="slds-button slds-button_neutral" onclick={closeModal} title="Cancel">Cancel</button>
+    <button class="slds-button slds-button_brand" onclick={submitDetails} title="OK">Search</button>
+</footer>
+
+</div>
+
+
+
+</section>
+<div class="slds-backdrop slds-backdrop_open"></div>
+</template>
+</template>

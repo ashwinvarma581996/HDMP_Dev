@@ -1,0 +1,122 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 06-06-2023
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+   <lightning-layout class="user-section-header slds-m-top_large">
+      <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="12">
+         <div class="slds-text-heading_medium default-color">Order History</div>
+      </lightning-layout-item>
+   </lightning-layout>
+   <lightning-layout class="slds-m-bottom_large orderHistorySearchParent">
+      <lightning-layout-item alignment-bump="left">
+         <div class="orderHistorySearchWrap">
+            <lightning-input class="orderSearch" name="search" label="" onchange={handleOrderSearch}
+                 value={searchedTerm} placeholder="Search" type="text"></lightning-input>
+                <lightning-button-icon icon-name="utility:search" size="large"
+                alternative-text="Search" class="slds-m-left_xx-medium searchIcon"
+                onclick={handleSearch} variant="destructive"
+                style="padding-left:7px; padding-top: 7px;">
+            </lightning-button-icon>
+         </div>
+      </lightning-layout-item>
+   </lightning-layout>
+   <div class="tableResponsive slds-m-bottom_large">
+      <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped">
+         <thead>
+            <tr class="slds-line-height_reset">
+               <th class="" scope="col">
+                  <!-- Saravanan LTIM Added for HDMP-19531-->
+                  <div class="slds-truncate" title="Order Number"> Dealer Order Number</div>
+               </th>
+               <th class="" scope="col">
+                  <div class="slds-truncate" title="Total Status">Status</div>
+               </th>
+               <th class="" scope="col">
+                  <div class="slds-truncate" title="Ordered Date">Ordered Date</div>
+               </th>
+               
+               <th class="" scope="col">
+                  <div class="slds-truncate" title="Dealer">Dealer</div>
+               </th>
+               <th class="" scope="col">
+                  <div class="slds-truncate" title="Dealer">Shipment Tracking</div>
+               </th>
+               <th class="" scope="col">
+                  <div class="slds-truncate" title="Dealer">Shipment Method</div>
+               </th>
+               <th class="" scope="col">
+                  <div class="slds-truncate finalAmount" title="Dealer">Order Total</div>
+               </th>
+            </tr>
+         </thead>
+         
+         <tbody>
+            <template if:false ={isOrder}>
+               <div class="slds-text-heading_medium slds-text-color_destructive slds-p-around_large">No orders found</div>
+            </template>
+            <template if:true ={isError}>
+               <div class="slds-text-heading_small slds-text-color_destructive slds-p-around_large">{errorMessage}</div>
+            </template>
+            <template if:true={isOrder} for:each={OrdersRecord} for:item="ord">
+               <tr class="slds-hint-parent" key={ord.id}>
+                  <!-- Saravanan LTIM makes Dealer order number HDMP-19531-->
+                  <td data-label="Dealer Order Number" if:false={ord.OrderReferenceNumber} key={ord.id}>
+                     <a style="color: #006dcc;" onclick={navigateToOrderRecordPage}
+                        data-record-id={ord.OrderNumber}>{ord.OrderNumber}</a>
+                  </td>
+                  <td data-label="Order Number" if:true={ord.OrderReferenceNumber} key={ord.id}>
+                     <a style="color: #006dcc;" onclick={navigateToOrderRecordPage}
+                        data-record-id={ord.OrderNumber} data-record-refnumber={ord.OrderReferenceNumber}>{ord.OrderReferenceNumber}</a>
+                  </td>
+                  <td data-label="Status" >
+                     <div class="slds-truncate">{ord.CustomerOrderStatus__c}</div>
+                  </td>
+
+                  <td data-label="Ordered Date" >
+                     <div class="slds-truncate">{ord.customOrderDate}</div>
+                  </td>
+                  <td data-label="Dealer" >
+                     <div class="slds-truncate">{ord.Account.Name}</div>
+                  </td>
+                  <td data-label="Shipment Tracking" >
+                     <div if:true={ord.showShippingNumber}>
+                        <div if:true={ord.Other_Carrier__c} class="slds-truncate">{ord.ShippingNumber__c}</div>
+
+                        <div if:false={ord.Other_Carrier__c}>
+                        <a style="color: #006dcc;" onclick={navigateToShippingTrackPage}
+                           data-id={ord.ShippingNumber__c} data-name={ord.Shipping_Vendors__c}
+                           class="slds-truncate">{ord.ShippingNumber__c}</a>
+                        </div>
+                     </div>
+                  </td>
+                  <td data-label="Shipment Method" >
+                     <div if:true={ord.showShippingNumber}>
+                     <template if:false={ord.Other_Carrier__c}>
+                        <div class="slds-truncate">{ord.Shipping_Vendors__c}</div>
+                     </template>
+                     <template if:true={ord.Other_Carrier__c}>
+                        <div class="slds-truncate">{ord.Other_Carrier__c}</div>
+                     </template>
+                  </div>
+                  </td>
+                  <td data-label="Order Total" >
+                     <div class="slds-truncate finalAmount">
+                        <lightning-formatted-number value={ord.Updated_Order_Total__c} format-style="currency"
+                           maximum-fraction-digits="2" minimum-fraction-digits="2" currency-code="USD">
+                        </lightning-formatted-number>
+                     </div>
+                  </td>
+               </tr>
+            </template>
+         </tbody>
+      </table>
+      <template if:true ={isOrder}>
+         <div class="slds-p-top_small">For any questions regarding your order, please contact the dealer for assistance.  
+            Dealer contact information is available on your order confirmation email or can be viewed with the order details.</div>
+      </template>
+   </div>
+</template>

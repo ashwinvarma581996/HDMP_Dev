@@ -1,0 +1,108 @@
+<template>
+    <!--
+    <lightning-record-edit-form object-api-name={childObjectApiName}>
+        <label for="fieldid">{fieldLabel}</label>
+        <lightning-input-field id="fieldid" required={required}  field-name={targetFieldApiName}
+            value={value} onchange={handleValueChange} >
+        </lightning-input-field>
+    </lightning-record-edit-form>      -->
+
+    <!--<lightning-combobox class="slds-m-right_x-small" name="Boilerplate" label="Boilerplate" placeholder="Choose Boilerplate" value={selectedName} onchange={handleChangeBoierplate} 
+            options={selectBoilerplateOption} size = "5" required>
+            </lightning-combobox> -->
+
+
+
+            <div class="slds-m-right_x-small">
+                <div class="slds-form-element">
+                    <div class="slds-form-element__control">
+
+                        
+                        <abbr title="required" class="slds-required">*</abbr>
+                        <label>Boilerplate</label>
+                        <lightning-input label="Boilerplate" type="search" onfocus={showPicklistOptions} variant="label-hidden"
+                            onchange={search} value={selectedName} placeholder="Choose Boilerplate">    
+                        </lightning-input>
+                        <div if:true={searchResults} class="slds-dropdown slds-dropdown_length-5 slds-dropdown_fluid"
+                            role="listbox">
+                            <ul class="slds-listbox slds-listbox_vertical" role="presentation">
+                                <template for:each={searchResults} for:item="searchResult">
+                                    <li key={searchResult.value} data-value={searchResult.value} role="presentation"
+                                        onclick={selectSearchResult} class="slds-listbox__item">
+                                        <div class="slds-media slds-listbox__option slds-listbox__option_plain slds-media_small "
+                                            role="option">
+                                            <span class="slds-media__body">
+                                                <span class="slds-truncate" title={searchResult.label}>
+                                                    {searchResult.label}
+                                                </span>
+                                            </span>
+                                        </div>
+                                    </li>
+                                </template>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!--
+            <template if:true={showErrorData}>
+                
+                <div class="slds-col slds-size_1-of-3"
+                        style="color:rgb(204, 64, 9);font-weight:bold;">No active boilerplate found.</div>
+            </template>-->
+    
+ 
+
+<!--
+<template>
+    <div>
+        <div class="slds-form-element">
+            <div class="slds-form-element__control">
+                <div class="slds-combobox_container">
+                    <div id="box" class={boxClass} aria-expanded="true" aria-haspopup="listbox" role="combobox">
+
+                        <template if:true={isValueSelected}>
+                            <div id="lookup-pill" class="slds-pill-container">
+                                <lightning-pill class="pillSize" label={selectedName} name={selectedName} onremove={handleRemovePill} href={href}>
+                                    <lightning-icon icon-name={iconName} alternative-text="acc" ></lightning-icon>
+                                </lightning-pill>
+                            </div>
+                        </template>
+                        <template if:false={isValueSelected}>
+                        <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right" role="none">
+                                <div class="slds-p-top_none">
+                                    <lightning-input class={inputClass} type="search" id="input" value={searchTerm}
+                                                     onclick={handleClick} onblur={onBlur} onchange={onChange}
+                                                     variant="label-hidden" autocomplete="off" placeholder={searchPlaceholder}>
+                                    </lightning-input>
+                                </div>
+                            
+                        </div>
+                    
+                        
+                        <div id="listbox-id-1" class="slds-dropdown slds-dropdown_length-with-icon-7 slds-dropdown_fluid" role="listbox">
+                            <ul class="slds-listbox slds-listbox_vertical" role="presentation">
+                                <template for:each={searchedRecords} for:item="record">
+                                    <li key={searchedRecords.Id} onclick={onSelect} data-id={searchedRecords.Id} role="presentation" data-name={searchedRecords.Name}>
+                                        <span class="slds-lookup__item-action slds-lookup__item-action--label" role="option">
+                                            <lightning-icon class="slds-icon slds-icon--small slds-icon-text-default" icon-name={iconName} alternative-text={objName} size="small"></lightning-icon>
+                                            <span class="slds-truncate">{searchedRecords.Name}</span>
+                                        </span>
+                                    </li>
+                                </template>
+                            </ul>
+                        </div>
+                    </template>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+-->
+
+
+
+</template>

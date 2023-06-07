@@ -1,0 +1,33 @@
+.dealerVehicle {
+    padding: 15px;
+    /* box-shadow: 0px 2px 12px rgb(0 0 0 / 15%); */
+}
+
+.popDealerLabel {
+    font-size: 16px;
+    font-weight: 500;
+    color: #000000;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+@media (max-width: 767px) {
+    .dealerVehicle c-vehicle-selector>div,
+    .dealerVehicle c-pop-dealer>div {
+        flex-direction: column;
+        margin-bottom: 10px;
+    }
+    .vehicleSelectorLabel {
+        font-size: 14px;
+        margin-bottom: 8px;
+    }
+    /*dealerVehicle .containerWrapper>.slds-grid.slds-grid_align-spread {
+        display: block;
+    }*/
+}
+
+@media (max-width: 768px) and (max-width: 1024px) {
+    .dealerVehicle {
+        margin-top: 50px;
+    }
+}

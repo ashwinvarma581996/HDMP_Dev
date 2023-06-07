@@ -1,0 +1,14 @@
+<template>
+    <span class="slds-radio customr-radio" onclick={handleOptionSelect}>
+        <template if:true={checked}>
+            <input type="radio" name="modelSelectButton" checked/>
+        </template>
+        <template if:false={checked}>
+            <input type="radio" name="modelSelectButton"/>
+        </template>
+        <label class="slds-radio__label">
+            <span class="slds-radio_faux"></span>
+            <span class="slds-form-element__label">{product.model}</span>
+        </label>
+    </span>
+</template>

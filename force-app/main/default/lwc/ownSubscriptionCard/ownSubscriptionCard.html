@@ -1,0 +1,54 @@
+<!-- //============================================================================
+// Title:    Honda MyGarage Experience - Promotional Hero
+//
+// Summary:  This is the Subscription Card html seen at the page of the Honda MyGarage Community 
+//
+// Details: Subscription Card for pages
+//
+// History:
+// December 20, 2021 Ravindar Ravindra (Wipro) Original Author 
+//=========================================================================== -->
+<template>
+    <div class="card card-size">
+        <lightning-card>
+            <div slot="title" class="slds-truncate" onclick={handleClickHeader}>
+                <img src={icon} class="slds-p-right_small custom-icon">
+                <span class={titleClass}>{title}</span>
+                <template if:true={showforwardicon}>
+                    <lightning-icon class={iconClass} icon-name="utility:forward" size="x-small"></lightning-icon>
+                </template>
+            </div>
+            <div slot="actions" onclick={handleClickAction}>
+                <slot name="action"></slot>
+            </div>
+            <div class={bodyClass}>
+                <lightning-formatted-rich-text value={body}></lightning-formatted-rich-text>
+                <template for:each={phoneFields} for:item="phoneField">
+                    <div key={phoneField.label}>
+                        <template if:true={phoneField.label}>
+                            <span class="slds-float_left">{phoneField.label} : </span>
+                        </template>
+                        <br/>
+                        <lightning-formatted-text class="show-desktop-format" value={phoneField.value}></lightning-formatted-text>
+                        <template if:true={phoneField.readonly}>
+                            <lightning-formatted-text class="show-mobile-format" value={phoneField.value}></lightning-formatted-text>
+                        </template>
+                        <template if:false={phoneField.readonly}>
+                            <lightning-formatted-phone class="show-mobile-format" value={phoneField.value}></lightning-formatted-phone>
+                        </template>
+                        <template if:true={phoneField.link}>
+                                <!-- //DOE-4594 Ravindra Ravindra (Wipro) -->
+                                <a class="red" data-link={phoneField.link} onclick={handlePhoneLinkClick} tabindex="0" role="link">{phoneField.link}</a>
+                        </template>
+                    </div>
+                    
+                </template>
+            </div>
+            <template if:true={showfooter}>
+                <div slot="footer">
+                    <slot class="footer" name="footer" onclick={handleClickFooter}></slot>
+                </div>
+            </template>
+        </lightning-card>
+    </div>
+</template>

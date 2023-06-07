@@ -1,0 +1,29 @@
+<template>
+    <template if:true={accountPage}>
+        <span class="prodInfoContainer">
+            <template if:true={hasPackages}>
+                <template for:each={packagesList} for:item="activeSub">
+                    <a key={activeSub} href="#">{activeSub}</a>
+                </template>
+            </template>
+            <template if:false={hasPackages}><a href="#">None Active</a></template>
+        </span>
+    </template>
+
+    <template if:true={productDetailsPage}>
+        <template if:true={hasPackages}>
+                    <dt
+                        class="slds-item_label garage-product-details-field-label">Active
+                        Subscriptions
+                    </dt>
+                    <dd class="slds-item_detail slds-p-left_medium garage-product-details-field-value">
+                        <template for:each={packagesList} for:item="activeSub">
+                            <span class="slds-badge ownSubscriptions slds-m-top_medium"
+                                        key={activeSub}>
+                                        {activeSub}
+                            </span>
+                        </template>
+                    </dd>
+        </template>
+    </template>
+</template>

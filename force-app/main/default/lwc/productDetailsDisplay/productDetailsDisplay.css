@@ -1,0 +1,113 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+lightning-breadcrumbs {
+    display: block;
+}
+
+.product-information {
+    display: flex;
+}
+
+.customTxt {
+    font-size: 18px;
+    text-align: center;
+    position: relative;
+    top: -30px;
+}
+
+.breadcurmbs {
+    cursor: default;
+}
+
+.customTxt span, .dealer-email{
+    color: #E42525
+}
+.productImageContainer {
+    position: relative;
+}
+.productImageContainer img{
+    max-height: 100%;
+}
+img {
+    object-fit: contain;
+}
+
+.breadcrumb-not-active {
+    color: inherit;
+    cursor: inherit;
+    text-decoration: inherit;
+}
+
+.itemAddingModal header {
+    border-bottom: 2px solid rgb(212, 212, 212);
+    padding: 16px;
+}
+
+.itemAddingModal h2 {
+    margin-top: 0;
+}
+
+.errortxt {
+    font-size: 14px!important;
+}
+.cartMar1 .slds-modal__header {border-radius: 4px;}
+
+/* CSS Styling for narrow screens (e.g. phones) */
+
+@media only screen and (min-width: 768px) {
+    .product-information {
+        flex-direction: row !important;
+    }
+}
+
+@media only screen and (max-width: 48em) {
+    /* SLDS token: mqSmall */
+    .product-information {
+        flex-direction: column;
+    }
+    .details-area {
+        padding-top: var(--lwc-spacingSmall);
+    }
+    .image {
+        align-self: center;
+    }
+    /* figure {
+        width: 200px;
+        height: 200px;
+    } */
+}
+
+.dealerLocationIcon {
+    width: 40px!important;
+}
+.prop-wd{
+    width:200px!important;
+}
+.cartMar0 header.slds-modal__header h2{
+    margin-top:0px;
+}
+.callTxt{
+color: black!important;
+text-decoration: none;
+cursor: default;
+font-size:14px!important;
+}
+.dealer-email{
+    color: black!important;
+    font-size:14px!important;
+}
+.CanvasDiv{
+    position: absolute;
+    display: block !important ;
+    max-height: 100%;
+}
+
+@media (max-width: 480px) {
+    .details-area lightning-button.productButton {
+        margin: 10px 7px 0px 0px !important;
+    }
+}

@@ -1,0 +1,70 @@
+<template>
+    <lightning-layout multiple-rows class="slds-align_absolute-center">
+        <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="11">
+            <lightning-layout  multiple-rows>
+                <template iterator:item={amazonAlexaRecords}>
+                    <lightning-layout-item if:false={item.last} size="12" small-device-size="12" medium-device-size="6" large-device-size="4" key={item.value.title} class="custom-border custom-div">
+                        <lightning-layout multiple-rows  horizontal-align="space">
+                            <lightning-layout-item size="12" class="custom-text">
+                                <lightning-layout horizontal-align="space">
+                                    <lightning-layout-item size="2" class="slds-p-right_medium">
+                                        <div class="number-icon slds-align_absolute-center">{item.value.serialNumber}</div>
+                                    </lightning-layout-item>
+                                    <lightning-layout-item size="10">
+                                        <b>{item.value.title}</b>
+                                    </lightning-layout-item>
+                                </lightning-layout>                            
+                            </lightning-layout-item>
+                            <lightning-layout-item size="9" class="custom-text slds-p-top_small slds-p-left_medium">
+                                <template if:true={item.value.eligibleVehicles} for:each={item.value.eligibleVehicles} for:item="vehicle">
+                                    <ul key={vehicle} class="slds-p-left_medium">
+                                        <li>{vehicle}</li>
+                                      </ul> 
+                                </template>
+                                <template if:true={item.value.image}>
+                                    <img src={item.value.image}/>
+                                </template>
+                                <template if:false={item.value.image}>
+                                    <lightning-formatted-rich-text value={item.value.body} class="slds-align_absolute-center"></lightning-formatted-rich-text>
+                                </template>
+                            </lightning-layout-item>
+                        </lightning-layout>
+                    </lightning-layout-item>
+                    <lightning-layout-item if:true={item.last} size="12" small-device-size="12" medium-device-size="6" large-device-size="4" key={item.value.title} class="custom-div">
+                        <lightning-layout multiple-rows  horizontal-align="space">
+                            <lightning-layout-item size="12" class="custom-text">
+                                <lightning-layout horizontal-align="space">
+                                    <lightning-layout-item size="2" class="slds-p-right_medium">
+                                        <div class="number-icon slds-align_absolute-center">{item.value.serialNumber}</div>
+                                    </lightning-layout-item>
+                                    <lightning-layout-item size="10">
+                                        <b>{item.value.title}</b>
+                                    </lightning-layout-item>
+                                </lightning-layout>                            
+                            </lightning-layout-item>
+                            <lightning-layout-item size="9" class="custom-text slds-p-top_small slds-p-left_medium">
+                                <template if:true={item.value.eligibleVehicles} for:each={item.value.eligibleVehicles} for:item="vehicle">
+                                    <ul key={vehicle}>
+                                        <li>{vehicle}</li>
+                                      </ul> 
+                                </template>
+                                <lightning-formatted-rich-text value={item.value.body} lass="slds-align_absolute-center"></lightning-formatted-rich-text>
+                            </lightning-layout-item>
+                        </lightning-layout>
+                    </lightning-layout-item>
+                </template>
+            </lightning-layout>
+        </lightning-layout-item>
+        <lightning-layout-item if:true={pageContent} size="12" small-device-size="12" medium-device-size="12" large-device-size="10" class="slds-align_absolute-center slds-m-vertical_large" padding="around-small">
+            <button class="slds-button custom-btn" >
+                <lightning-formatted-rich-text value={pageContent.enableAlexaButton}></lightning-formatted-rich-text>
+                <lightning-icon icon-name="utility:forward" size="x-small" class="custom-icon slds-m-left_x-small" ></lightning-icon>
+            </button>
+        </lightning-layout-item>
+        <lightning-layout-item if:true={pageContent} size="12" small-device-size="12" medium-device-size="10" large-device-size="10" padding="horizontal-large" class="slds-p-vertical_large slds-align_absolute-center">
+            <div class="bottom-text text-style">
+                <lightning-formatted-rich-text value={pageContent.footerContent}></lightning-formatted-rich-text>
+            </div>
+        </lightning-layout-item>
+    </lightning-layout>
+</template>

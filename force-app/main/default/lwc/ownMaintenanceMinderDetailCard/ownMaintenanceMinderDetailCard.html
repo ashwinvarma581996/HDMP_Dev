@@ -1,0 +1,46 @@
+<template>
+    <div class="slds-container_large slds-container_center slds-p-around_large">
+        <div class="head-container">
+            <div class="sub-container-1">
+                <img src={icon}/>
+            </div>
+            <div class="sub-container-2">
+                <span class="heading-text">Your Maintenance Minder(s) in Need of Attention</span>
+            </div>
+        </div>
+        <p class="sub-heading">We have detected an issue with your vehicle regarding Maintenance Minder {subheadingText}. Please attend to this issue as
+            soon as possible. We recommend scheduling a service appointment with your dealership as soon as possible.
+        </p>
+        <div class="table-container">
+            <table border="1" class="slds-m-vertical_large">
+                <thead>
+                    <tr class="tr">
+                        <th>Main Code</th>
+                        <th>What We Do</th>
+                    </tr>
+                </thead>
+                <template for:each={maintenanceMinders} for:item="item">
+                    <tr key={item.id}>
+                        <th class="th th-head">{item.Maintenance_Code__c}</th>
+                        <td>
+                            <ul>
+                                <template if:true={item.Service_Pre_Text__c}>
+                                    <li>{item.Service_Pre_Text__c}</li></br>
+                                </template>
+                                <template if:true={item.Service_Item_Description__c}>
+                                    <li>{item.Service_Item_Description__c}</li></br>
+                                </template>
+                                <template if:true={item.Service_Post_Text__c}>
+                                    <li>{item.Service_Post_Text__c}</li></br>
+                                </template>
+                                <template if:true={item.Legal_Description__c}>
+                                    <li class="legal-escription">{item.Legal_Description__c}</li></br>
+                                </template>
+                            </ul>
+                        </td>
+                    </tr>
+                </template>
+            </table>
+        </div>
+    </div>
+</template>

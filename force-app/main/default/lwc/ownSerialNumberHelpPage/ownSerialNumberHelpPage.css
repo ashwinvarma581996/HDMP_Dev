@@ -1,0 +1,29 @@
+.header {
+    position: absolute;
+    width: 947px;
+    height: 42px;
+    left: 298px;
+    top: 133px;
+    
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 40px;
+    line-height: 42px;
+  
+    letter-spacing: 1.2px;
+    color: #080707;
+}
+.breadcrumb-text-color {
+    color: #E42525 !important;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 14px;
+    line-height: 22px;
+}
+lightning-formatted-text{
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 20px;
+    color: #000000;
+}

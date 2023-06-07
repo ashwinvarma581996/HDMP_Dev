@@ -1,0 +1,17 @@
+.loading-text{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 16px;
+    line-height: 20px;
+    /* identical to box height, or 125% */
+
+    letter-spacing: 1px;
+    text-transform: uppercase;
+
+    /* Primary / 767676 */
+
+    color: #767676;
+
+    text-align: center;
+}

@@ -1,0 +1,81 @@
+<!-- //============================================================================
+// Title:    Honda Owners Experience - Footer
+//
+// Summary:  This is the html seen at the Owners Garage Find - Honda Auto Body of the Honda Owner Community
+//
+// Details:  Extend the LightningElement with this Base Element to gain access to the Messaging Channel and other logic herein and this is the own garage find honda body component for all community pages.
+//
+//
+// History:
+// May 17, 2021 Arunprasad N (Wipro) Original Author
+//=========================================================================== -->
+<template>
+    <div class="c-container garage-tab-large">
+        <lightning-layout multiple-rows="true">
+            <lightning-layout-item size="12" class="garage-tab-large">
+                <div class="slds-tabs_defaults tabs">
+                    <ul class="slds-tabs_default__nav slds-grid_align-space" role="tablist">
+                        <template for:each={tabs} for:item="tab">
+                            <li key={tab.value} data-tab="true" class={tab.itemclass}  data-value={tab.value} data-id={tab.id} title={tab.label} role="presentation" onclick={handleActive}>
+                                <a data-tab-value={tab.control} class="slds-tabs_default__link garage-tab-label" href="#" role="tab" tabindex={tab.tabindex} aria-selected={tab.ariaselected} aria-controls={tab.control} id={tab.id}>{tab.label}</a>
+                            </li>
+                        </template>
+                    </ul>
+                    <template for:each={tabs} for:item="tab">
+                        <div key={tab.value} id={tab.control} data-id={tab.id} class={tab.contentclass} role="tabpanel" aria-labelledby={tab.id}>
+                            <template if:true={isOverview}>
+                                <c-own-garage-overview-tab-marine></c-own-garage-overview-tab-marine>
+                            </template>
+                            <template if:true={isServiceParts}>
+                                <c-own-garage-service-parts-tab-marine></c-own-garage-service-parts-tab-marine>
+                            </template>
+                            <template if:true={isRecallsWarranties}>
+                                <c-own-garage-recalls-warranties-tab-marine></c-own-garage-recalls-warranties-tab-marine>
+                            </template>
+                            <template if:true={isResourcesDownloads}>
+                                <c-own-garage-resources-downloads-tab-marine></c-own-garage-resources-downloads-tab-marine>
+                            </template>
+                        </div>
+                    </template>
+                </div>
+            </lightning-layout-item>
+        </lightning-layout>
+    </div>
+    <div class="c-container garage-tab-small">
+        <lightning-layout multiple-rows="true">
+            <lightning-layout-item size="12">
+                <div>
+                    <lightning-combobox
+                        class="tab-combobox"
+                        name="tab"
+                        label="Tab"
+                        value={tab}
+                        placeholder="Select Tab"
+                        options={tabs}
+                        variant="label-hidden"
+                        onchange={handleChange} ></lightning-combobox>
+                </div>
+            </lightning-layout-item>
+            <template if:true={isOverview}>
+                <lightning-layout-item  size="12">
+                    <c-own-garage-overview-tab-marine></c-own-garage-overview-tab-marine>
+                </lightning-layout-item>
+            </template>
+            <template if:true={isServiceParts}>
+                <lightning-layout-item  size="12">
+                    <c-own-garage-service-parts-tab-marine></c-own-garage-service-parts-tab-marine>
+                </lightning-layout-item>
+            </template>
+            <template if:true={isRecallsWarranties}>
+                <lightning-layout-item  size="12">
+                    <c-own-garage-recalls-warranties-tab-marine></c-own-garage-recalls-warranties-tab-marine>
+                </lightning-layout-item>
+            </template>
+            <template if:true={isResourcesDownloads}>
+                <lightning-layout-item  size="12">
+                    <c-own-garage-resources-downloads-tab-marine></c-own-garage-resources-downloads-tab-marine>
+                </lightning-layout-item>
+            </template>
+        </lightning-layout>
+    </div>
+</template>

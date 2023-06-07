@@ -1,0 +1,40 @@
+.error-icon{
+    --sds-c-icon-color-foreground-default: #e42525;
+}
+.error-message{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color:#e42525; 
+}
+.vertical-center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+.card:nth-child(odd) {
+ padding-right: 8px;
+ padding-bottom: 16px;
+}
+.card:nth-child(even) {
+  padding-left: 8px;
+  padding-bottom: 16px;
+ }
+
+ @media only screen and (max-width: 600px){
+  .card:nth-child(odd) {
+    padding-right: 0px;
+    padding-bottom: 16px;
+   }
+   .card:nth-child(even) {
+     padding-left: 0px;
+     padding-bottom: 16px;
+    }
+
+ }

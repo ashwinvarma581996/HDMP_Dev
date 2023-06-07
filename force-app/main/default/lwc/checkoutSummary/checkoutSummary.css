@@ -1,0 +1,29 @@
+.absoluteCenter{
+    display: grid;
+    justify-content: center;
+    align-content: center;
+}
+.centerElement{
+    display: grid;
+    justify-content: center;
+}
+
+.greyColor{
+    color: #D4D4D4;
+}
+
+.allBorders{
+    border: 1px solid #D4D4D4;
+}
+
+.disc-popup{
+    font-size: 16px;
+}
+
+.tabHeight{
+    height:40px;
+}
+.disclaimer-model-header{
+    border-bottom: 0 !important;
+    padding-bottom: 0!important;
+}

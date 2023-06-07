@@ -1,0 +1,471 @@
+<template>
+   <div class="slds-container_x-large slds-container_center slds-p-around_small">
+      <lightning-layout multiple-rows>
+         <lightning-layout-item>
+            <div class="breadcrumb-large  slds-m-left_medium slds-m-bottom_medium">
+               <div class="breadcrumb" aria-label="Breadcrumbs" role="navigation">
+                  <div role="list" class="slds-breadcrumb slds-list_horizontal slds-wrap">
+                     <slot>
+                        <div class="slds-breadcrumb__item breadcrumb-item-back" role="listitem">
+                           <a class="breadcrumb-text-color" onclick={handleBreadcrumbClick}>
+                              My Service Records
+                           </a>
+                        </div>
+                     </slot>
+                  </div>
+               </div>
+            </div>
+         </lightning-layout-item>
+
+         <lightning-layout-item padding="around-small" size="12">
+            <c-own-product-header-2 product-title={title}
+                                        year={subTitle}
+                                        product-image={imgUrl}
+                                        division={division}>
+            </c-own-product-header-2>
+         </lightning-layout-item>
+      </lightning-layout>
+   </div>
+
+   <template if:false={isUpdateRecord}>
+      <div class="slds-container_medium slds-container_center slds-p-around_large add-service_wrapper">
+         <div class="slds-form">
+            <div class="slds-form-element">
+               <label class="slds-form-element__label" for="dateOfService">Date of Service
+                  (mm/dd/yyyy)<span>*</span></label>
+               <lightning-input type="date" id="dateOfService" data-id="Service_Date__c" name="input1"
+                  variant="label-hidden" value={dateOfServiceValue} date-style="short" onblur={handleBlur}>
+                  <lightning-formatted-date-time value="1547250828000" year="numeric" month="numeric" day="numeric"
+                     date-style="short"></lightning-formatted-date-time>
+               </lightning-input>
+            </div>
+
+            <div class="slds-form-element">
+               <label class="slds-form-element__label" for="totalCost">Cost</label>
+               <lightning-input type="number" id="totalCost" data-id="Total_Cost__c" name="input2"
+                  variant="label-hidden" onblur={handleBlur} value={totalCostValue} step="0.01"></lightning-input>
+            </div>
+
+            <div class="slds-form-element">
+               <label class="slds-form-element__label" for="serviceFacility">Service Facility<span>*</span></label>
+               <lightning-input type="text" id="serviceFacility" data-id="Location__c" variant="label-hidden"
+                  onblur={handleBlur} value={serviceFacilityValue}>
+               </lightning-input>
+            </div>
+
+            <template if:true={displayAutos}>
+               <div class="slds-form-element">
+                  <label class="slds-form-element__label" for="mileage">Mileage</label>
+                  <lightning-input type="number" id="mileage" data-id="Usage__c" name="input3" variant="label-hidden"
+                     onblur={handleBlur} value={mileageValue}></lightning-input>
+               </div>
+            </template>
+
+            <template if:true={displayPowerSports}>
+               <div class="slds-form-element">
+                  <label class="slds-form-element__label" for="mileage">Mileage</label>
+                  <lightning-input type="number" id="mileage2" data-id="Usage__c" name="input3" variant="label-hidden"
+                     onblur={handleBlur} value={mileageValue}></lightning-input>
+               </div>
+
+               <div class="slds-form-element">
+                  <label class="slds-form-element__label" for="operatingHours">Operating Hours</label>
+                  <lightning-input type="number" id="operatingHours" data-id="Operating_Hours__c" name="input3" variant="label-hidden"
+                     onblur={handleBlur} value={operatingHoursValue} step="0.01"></lightning-input>
+               </div>
+            </template>
+
+            <template if:true={displayPowerEquipmentOrMarine}>
+               <div class="slds-form-element">
+                  <label class="slds-form-element__label" for="operatingHours">Operating Hours</label>
+                  <lightning-input type="number" id="operatingHours2" data-id="Operating_Hours__c" name="input3" variant="label-hidden"
+                     onblur={handleBlur} value={operatingHoursValue} step="0.01"></lightning-input>
+               </div>
+            </template>
+
+
+            <div class="slds-form-element">
+               <h2>SELECT THE SERVICE(S) YOUR {productTypeText} RECEIVED</h2>
+
+               <template if:true={displayAutos}>
+                  <div class="slds-form-element__control">
+                     <div class="slds-checkbox">
+                        <lightning-input type="checkbox" id="oilChange1" data-id="Oil_Change__c" variant="label-hidden"
+                           name="input4" onblur={handleBlur} onchange={handleBlur} checked={oilChangeValue}></lightning-input>
+                        <label class="slds-form-element__label" for="oilChange">{oilcheckLabel}</label>
+                     </div>
+                     <div class="slds-checkbox">
+                        <lightning-input type="checkbox" id="tireRotation1" data-id="Tire_Rotation__c"
+                           variant="label-hidden" name="input5" onblur={handleBlur} onchange={handleBlur} checked={tireRotationValue}>
+                        </lightning-input>
+                        <label class="slds-form-element__label" for="tireRotation">{tireRotationLabel}</label>
+                     </div>
+                     <div class="slds-checkbox">
+                        <lightning-input type="checkbox" id="scheduledMaintenance1" data-id="Scheduled_Maintenance__c"
+                           variant="label-hidden" name="input6" onblur={handleBlur} onchange={handleBlur} checked={scheduledMaintenanceValue}>
+                        </lightning-input>
+                        <label class="slds-form-element__label"
+                           for="scheduledMaintenance">{scheduledMaintenanceLabel}</label>
+                     </div>
+                     <div class="slds-checkbox">
+                        <lightning-input type="checkbox" id="alignment1" data-id="Alignment__c" variant="label-hidden"
+                           name="input7" onblur={handleBlur} onchange={handleBlur} checked={AlignmentValue}></lightning-input>
+                        <label class="slds-form-element__label" for="alignment">{alignmentLabel}</label>
+                     </div>
+                     <div class="slds-checkbox">
+                        <lightning-input type="checkbox" id="brakes1" data-id="Brakes__c" variant="label-hidden"
+                           name="input8" onblur={handleBlur} onchange={handleBlur} checked={brakesValue}></lightning-input>
+                        <label class="slds-form-element__label" for="brakes">{brakesLabel}</label>
+                     </div>
+                     <div class="slds-checkbox">
+                        <lightning-input type="checkbox" id="multiPointInspection1" data-id="Multi_Point_Inspection__c"
+                           variant="label-hidden" name="input9" onblur={handleBlur} onchange={handleBlur} checked={multiPointInspectionValue}>
+                        </lightning-input>
+                        <label class="slds-form-element__label"
+                           for="multiPointInspection">{multiPointInspectionLabel}</label>
+                     </div>
+                  </div>
+
+               </template>
+
+               <template if:true={displayPowerSports}>
+                  <div class="slds-form-element__control">
+                     <div class="slds-checkbox">
+                        <lightning-input type="checkbox" id="oilChange2" data-id="Oil_Change__c" variant="label-hidden"
+                           name="input4" onblur={handleBlur} onchange={handleBlur} checked={oilChangeValue}></lightning-input>
+                        <label class="slds-form-element__label" for="oilChange">{oilcheckLabel}</label>
+                     </div>
+                     <div class="slds-checkbox">
+                        <lightning-input type="checkbox" id="brakes2" data-id="Brakes__c" variant="label-hidden"
+                           name="input8" onblur={handleBlur} onchange={handleBlur} checked={brakesValue}></lightning-input>
+                        <label class="slds-form-element__label" for="brakes">{brakesLabel}</label>
+                     </div>
+                     <div class="slds-checkbox">
+                        <lightning-input type="checkbox" id="tires2" data-id="Tires__c" variant="label-hidden"
+                           name="input5" onblur={handleBlur} onchange={handleBlur} checked={tiresValue}>
+                        </lightning-input>
+                        <label class="slds-form-element__label" for="tires">{tiresLabel}</label>
+                     </div>
+                     <div class="slds-checkbox">
+                        <lightning-input type="checkbox" id="scheduledMaintenance2" data-id="Scheduled_Maintenance__c"
+                           variant="label-hidden" name="input6" onblur={handleBlur} onchange={handleBlur} checked={scheduledMaintenanceValue}>
+                        </lightning-input>
+                        <label class="slds-form-element__label"
+                           for="scheduledMaintenance">{scheduledMaintenanceLabel}</label>
+                     </div>
+                     <div class="slds-checkbox">
+                        <lightning-input type="checkbox" id="fullService2" data-id="Full_Service__c"
+                           variant="label-hidden" name="input7" onblur={handleBlur} onchange={handleBlur} checked={fullServiceValue}>
+                        </lightning-input>
+                        <label class="slds-form-element__label" for="fullService2">{fullServiceLabel}</label>
+                     </div>
+
+                     <div class="slds-checkbox">
+                        <lightning-input type="checkbox" id="battery2" data-id="Battery__c" variant="label-hidden"
+                           name="input9" onblur={handleBlur} onchange={handleBlur} checked={batteryValue}>
+                        </lightning-input>
+                        <label class="slds-form-element__label" for="battery">{batteryLabel}</label>
+                     </div>
+                  </div>
+
+               </template>
+
+               <template if:true={displayPowerEquipmentOrMarine}>
+                  <div class="slds-form-element__control">
+                     <div class="slds-checkbox">
+                        <lightning-input type="checkbox" id="oilChange4" data-id="Oil_Change__c" variant="label-hidden"
+                           name="input4" onblur={handleBlur} onchange={handleBlur} checked={oilChangeValue}></lightning-input>
+                        <label class="slds-form-element__label" for="oilChange">{oilcheckLabel}</label>
+                     </div>
+                     <div class="slds-checkbox">
+                        <lightning-input type="checkbox" id="tuneUpPackages4" data-id="Tune_Up_Packages__c"
+                           variant="label-hidden" name="input5" onblur={handleBlur} onchange={handleBlur} checked={tuneUpPackagesValue}>
+                        </lightning-input>
+                        <template if:true={displayMarine}>
+                           <label class="slds-form-element__label" for="tuneUpPackages">{tuneUpPackagesLabel}</label>
+                        </template>
+                        <template if:true={displayPowerEquipment}>
+                           <label class="slds-form-element__label" for="tuneUpPackages">{powerEquipmentTuneUpText}</label>
+                        </template>
+                        
+                     </div>
+                     <div class="slds-checkbox">
+                        <lightning-input type="checkbox" id="repairs4" data-id="Repairs__c" variant="label-hidden"
+                           name="input6" onblur={handleBlur} onchange={handleBlur} checked={repairsValue}>
+                        </lightning-input>
+                        <label class="slds-form-element__label" for="repairs">{repairsLabel}</label>
+                     </div>
+                     <div class="slds-checkbox">
+                        <lightning-input type="checkbox" id="endOfSeasonMaintenance4"
+                           data-id="End_of_Season_Maintenance__c" variant="label-hidden" name="input5"
+                           onblur={handleBlur} onchange={handleBlur} checked={endOfSeasonMaintenanceValue}>
+                        </lightning-input>
+                        <label class="slds-form-element__label"
+                           for="endOfSeasonMaintenance">{endOfSeasonMaintenanceLabel}</label>
+                     </div>
+                  </div>
+
+               </template>
+               <div class="slds-form-element__control">
+                  <div class="slds-checkbox">
+                     <lightning-input type="checkbox" id="otherNew" data-id="Others__c" variant="label-hidden"
+                        name="input10" onblur={handleBlur} onchange={handleBlur} checked={otherValue}></lightning-input>
+                     <label class="slds-form-element__label" for="other">{othersLabel}</label>
+                  </div>
+               </div>
+               <template if:false={checkboxChecked}>
+                  <lightning-textarea name="input11" id="textarea" data-id="Other__c" disabled="true"
+                     variant="label-hidden" maxlength="200"></lightning-textarea>
+                  <h3>Limit 200 Characters</h3>
+                  <br>
+               </template>
+               <template if:true={checkboxChecked}>
+                  <lightning-textarea name="input11" id="textarea1" data-id="Other__c" variant="label-hidden"
+                     maxlength="200" onblur={handleBlur} value={textarea1Value}></lightning-textarea>
+                  <h3>Limit 200 Characters</h3>
+                  <br>
+               </template>
+
+            </div>
+
+            <div class="slds-form-element">
+               <h2 class="additional">ADDITIONAL NOTES FOR YOUR RECORDS</h2>
+               <lightning-textarea name="input12" id="textarea2" data-id="Note__c" variant="label-hidden"
+                  maxlength="500" onblur={handleBlur} value={textarea2Value}>
+               </lightning-textarea>
+               <h3>Limit 500 Characters</h3>
+            </div>
+
+            <div class="slds-form-element slds-form-btn">
+               <button class={submitButtonClassHere} onclick={createProductServiceRecord}>Submit</button>
+               <!-- <button class="slds-button slds-button_destructive" onclick={createProductServiceRecord}>Submit</button>-->
+               <button class="slds-button slds-button_text-destructive" onclick={handleCancel}>Cancel</button>
+            </div>
+         </div>
+      </div>
+   </template>
+
+   <template if:true={isUpdateRecord}>
+      <div class="slds-container_medium slds-container_center slds-p-around_large add-service_wrapper">
+         <div class="slds-form">
+            <div class="slds-form-element">
+               <label class="slds-form-element__label" for="dateOfService">Date of Service
+                  (mm/dd/yyyy)<span>*</span></label>
+               <lightning-input type="date" id="dateOfServiceNew" data-id="Service_Date__c" name="input1"
+                  variant="label-hidden" value={dateOfServiceValue} date-style="short" onblur={handleBlur}>
+                  <lightning-formatted-date-time value="1547250828000" year="numeric" month="numeric" day="numeric"
+                     date-style="short"></lightning-formatted-date-time>
+               </lightning-input>
+            </div>
+
+            <div class="slds-form-element">
+               <label class="slds-form-element__label" for="totalCost">Cost</label>
+               <lightning-input type="number" id="totalCostNew" data-id="Total_Cost__c" name="input2"
+                  variant="label-hidden" onblur={handleBlur} value={totalCostValue} step="0.01"></lightning-input>
+            </div>
+
+            <div class="slds-form-element">
+               <label class="slds-form-element__label" for="serviceFacility">Service Facility<span>*</span></label>
+               <lightning-input type="text" id="serviceFacilityNew" data-id="Location__c" variant="label-hidden"
+                  onblur={handleBlur} value={serviceFacilityValue}>
+               </lightning-input>
+            </div>
+
+            <template if:true={displayAutos}>
+               <div class="slds-form-element">
+                  <label class="slds-form-element__label" for="mileage">Mileage</label>
+                  <lightning-input type="number" id="mileage3" data-id="Usage__c" name="input3" variant="label-hidden"
+                     onblur={handleBlur} value={mileageValue}></lightning-input>
+               </div>
+            </template>
+
+            <template if:true={displayPowerSports}>
+               <div class="slds-form-element">
+                  <label class="slds-form-element__label" for="mileage">Mileage</label>
+                  <lightning-input type="number" id="mileage4" data-id="Usage__c" name="input3" variant="label-hidden"
+                     onblur={handleBlur} value={mileageValue}></lightning-input>
+               </div>
+
+               <div class="slds-form-element">
+                  <label class="slds-form-element__label" for="operatingHours">Operating Hours</label>
+                  <lightning-input type="number" id="operatingHours3" data-id="Operating_Hours__c" name="input3" variant="label-hidden"
+                     onblur={handleBlur} value={operatingHoursValue} step="0.01"></lightning-input>
+               </div>
+            </template>
+
+            <template if:true={displayPowerEquipmentOrMarine}>
+               <div class="slds-form-element">
+                  <label class="slds-form-element__label" for="operatingHours">Operating Hours</label>
+                  <lightning-input type="number" id="operatingHours4" data-id="Operating_Hours__c" name="input3" variant="label-hidden"
+                     onblur={handleBlur} value={operatingHoursValue} step="0.01"></lightning-input>
+               </div>
+            </template>
+
+            <div class="slds-form-element">
+               <h2>SELECT THE SERVICE(S) YOUR {productTypeText} RECEIVED</h2>
+
+               <template if:true={displayAutos}>
+                  <div class="slds-form-element__control">
+                     <div class="slds-checkbox">
+                        <lightning-input type="checkbox" id="oilChange5" data-id="Oil_Change__c" variant="label-hidden"
+                           name="input4" onblur={handleBlur} onchange={handleBlur} checked={oilChangeValue}></lightning-input>
+                        <label class="slds-form-element__label" for="oilChange">{oilcheckLabel}</label>
+                     </div>
+                     <div class="slds-checkbox">
+                        <lightning-input type="checkbox" id="tireRotation5" data-id="Tire_Rotation__c"
+                           variant="label-hidden" name="input5" onblur={handleBlur} onchange={handleBlur} checked={tireRotationValue}>
+                        </lightning-input>
+                        <label class="slds-form-element__label" for="tireRotation">{tireRotationLabel}</label>
+                     </div>
+                     <div class="slds-checkbox">
+                        <lightning-input type="checkbox" id="scheduledMaintenance5" data-id="Scheduled_Maintenance__c"
+                           variant="label-hidden" name="input6" onblur={handleBlur} onchange={handleBlur} checked={scheduledMaintenanceValue}>
+                        </lightning-input>
+                        <label class="slds-form-element__label"
+                           for="scheduledMaintenance">{scheduledMaintenanceLabel}</label>
+                     </div>
+                     <div class="slds-checkbox">
+                        <lightning-input type="checkbox" id="alignment5" data-id="Alignment__c" variant="label-hidden"
+                           name="input7" onblur={handleBlur} onchange={handleBlur} checked={AlignmentValue}></lightning-input>
+                        <label class="slds-form-element__label" for="alignment">{alignmentLabel}</label>
+                     </div>
+                     <div class="slds-checkbox">
+                        <lightning-input type="checkbox" id="brakes5" data-id="Brakes__c" variant="label-hidden"
+                           name="input8" onblur={handleBlur} onchange={handleBlur} checked={brakesValue}></lightning-input>
+                        <label class="slds-form-element__label" for="brakes">{brakesLabel}</label>
+                     </div>
+                     <div class="slds-checkbox">
+                        <lightning-input type="checkbox" id="multiPointInspection5" data-id="Multi_Point_Inspection__c"
+                           variant="label-hidden" name="input9" onblur={handleBlur} onchange={handleBlur} checked={multiPointInspectionValue}>
+                        </lightning-input>
+                        <label class="slds-form-element__label"
+                           for="multiPointInspection">{multiPointInspectionLabel}</label>
+                     </div>
+                  </div>
+
+               </template>
+
+               <template if:true={displayPowerSports}>
+                  <div class="slds-form-element__control">
+                     <div class="slds-checkbox">
+                        <lightning-input type="checkbox" id="oilChange6" data-id="Oil_Change__c" variant="label-hidden"
+                           name="input4" onblur={handleBlur} onchange={handleBlur} checked={oilChangeValue}></lightning-input>
+                        <label class="slds-form-element__label" for="oilChange">{oilcheckLabel}</label>
+                     </div>
+                     <div class="slds-checkbox">
+                        <lightning-input type="checkbox" id="brakes6" data-id="Brakes__c" variant="label-hidden"
+                           name="input8" onblur={handleBlur} onchange={handleBlur} checked={brakesValue}></lightning-input>
+                        <label class="slds-form-element__label" for="brakes">{brakesLabel}</label>
+                     </div>
+                     <div class="slds-checkbox">
+                        <lightning-input type="checkbox" id="tires6" data-id="Tires__c" variant="label-hidden"
+                           name="input5" onblur={handleBlur} onchange={handleBlur} checked={tiresValue}>
+                        </lightning-input>
+                        <label class="slds-form-element__label" for="tireRotation">{tiresLabel}</label>
+                     </div>
+                     <div class="slds-checkbox">
+                        <lightning-input type="checkbox" id="scheduledMaintenance6" data-id="Scheduled_Maintenance__c"
+                           variant="label-hidden" name="input6" onblur={handleBlur} onchange={handleBlur} checked={scheduledMaintenanceValue}>
+                        </lightning-input>
+                        <label class="slds-form-element__label"
+                           for="scheduledMaintenance">{scheduledMaintenanceLabel}</label>
+                     </div>
+                     <div class="slds-checkbox">
+                        <lightning-input type="checkbox" id="fullService6" data-id="Full_Service__c"
+                           variant="label-hidden" name="input7" onblur={handleBlur} onchange={handleBlur} checked={fullServiceValue}>
+                        </lightning-input>
+                        <label class="slds-form-element__label" for="fullService2">{fullServiceLabel}</label>
+                     </div>
+
+                     <div class="slds-checkbox">
+                        <lightning-input type="checkbox" id="battery6" data-id="Battery__c" variant="label-hidden"
+                           name="input9" onblur={handleBlur} onchange={handleBlur} checked={batteryValue}>
+                        </lightning-input>
+                        <label class="slds-form-element__label" for="battery">{batteryLabel}</label>
+                     </div>
+                  </div>
+
+               </template>
+
+               <template if:true={displayPowerEquipmentOrMarine}>
+                  <div class="slds-form-element__control">
+                     <div class="slds-checkbox">
+                        <lightning-input type="checkbox" id="oilChange7" data-id="Oil_Change__c" variant="label-hidden"
+                           name="input4" onblur={handleBlur} onchange={handleBlur} checked={oilChangeValue}></lightning-input>
+                        <label class="slds-form-element__label" for="oilChange">{oilcheckLabel}</label>
+                     </div>
+                     <div class="slds-checkbox">
+                        <lightning-input type="checkbox" id="tuneUpPackages7" data-id="Tune_Up_Packages__c"
+                           variant="label-hidden" name="input5" onblur={handleBlur} onchange={handleBlur} checked={tuneUpPackagesValue}>
+                        </lightning-input>
+                        <template if:true={displayMarine}>
+                           <label class="slds-form-element__label" for="tuneUpPackages">{tuneUpPackagesLabel}</label>
+                        </template>
+                        <template if:true={displayPowerEquipment}>
+                           <label class="slds-form-element__label" for="tuneUpPackages">{powerEquipmentTuneUpText}</label>
+                        </template>
+                     </div>
+                     <div class="slds-checkbox">
+                        <lightning-input type="checkbox" id="repairs7" data-id="Repairs__c" variant="label-hidden"
+                           name="input6" onblur={handleBlur} onchange={handleBlur} checked={repairsValue}>
+                        </lightning-input>
+                        <label class="slds-form-element__label" for="repairs">{repairsLabel}</label>
+                     </div>
+                     <div class="slds-checkbox">
+                        <lightning-input type="checkbox" id="endOfSeasonMaintenance7"
+                           data-id="End_of_Season_Maintenance__c" variant="label-hidden" name="input5"
+                           onblur={handleBlur} onchange={handleBlur} checked={endOfSeasonMaintenanceValue}>
+                        </lightning-input>
+                        <label class="slds-form-element__label"
+                           for="endOfSeasonMaintenance">{endOfSeasonMaintenanceLabel}</label>
+                     </div>
+                  </div>
+
+               </template>
+
+               <div class="slds-form-element__control">
+
+                  <div class="slds-checkbox">
+                     <lightning-input type="checkbox" id="otherNew1" data-id="Others__c" variant="label-hidden"
+                        name="input10" onblur={handleBlur} onchange={handleBlur} checked={otherValue}></lightning-input>
+                     <label class="slds-form-element__label" for="other">{othersLabel}</label>
+                  </div>
+               </div>
+
+               <template if:false={checkboxChecked}>
+                  <lightning-textarea name="input11" id="textareaNew1" data-id="Other__c" disabled="true"
+                     variant="label-hidden" maxlength="200"></lightning-textarea>
+                  <h3>Limit 200 Characters</h3>
+                  <br>
+               </template>
+               <template if:true={checkboxChecked}>
+                  <lightning-textarea name="input11" id="textarea1New1" data-id="Other__c" variant="label-hidden"
+                     maxlength="200" onblur={handleBlur} value={textarea1Value}></lightning-textarea>
+                  <h3>Limit 200 Characters</h3>
+                  <br>
+               </template>
+
+            </div>
+
+            <div class="slds-form-element">
+               <h2 class="additional">ADDITIONAL NOTES FOR YOUR RECORDS</h2>
+               <lightning-textarea name="input12" id="textarea2New" data-id="Note__c" variant="label-hidden"
+                  maxlength="500" onblur={handleBlur} value={textarea2Value}>
+               </lightning-textarea>
+               <h3>Limit 500 Characters</h3>
+            </div>
+
+            <div class="slds-form-element slds-form-btn">
+               <!-- <label class="slds-button slds-button_destructive">&nbsp;</label>-->
+               <button class={submitButtonClassHere} onclick={updateProductServiceRecord}>Save</button>
+               <!-- <button class="slds-button slds-button_destructive" onclick={createProductServiceRecord}>Submit</button>-->
+               <button class="slds-button slds-button_text-destructive btn-outline-color" onclick={handleCancel}>Cancel</button>
+               <button class="slds-button slds-button_text-destructive btn-tertiary slds-button-link"
+                  onclick={deleteProductServiceRecord}>Delete
+                  Record</button>
+            </div>
+         </div>
+      </div>
+   </template>
+
+</template>

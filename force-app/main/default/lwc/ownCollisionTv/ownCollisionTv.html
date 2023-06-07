@@ -1,0 +1,44 @@
+<template>
+   <div class="collisiontv-wrapper">
+      <lightning-layout multiple-rows horizontal-align="space"> 
+         <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="10" >
+            <h1>{title}</h1>
+         </lightning-layout-item>
+         <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="10">
+            <div class="video-cards_wrapper">
+               <lightning-layout multiple-rows="true" >
+                  <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="6" class="collisiontv-video">
+                       <c-own-video-card  class="video1" icon={icon1} content-id={contentid1} onvideoclick={handleVideo} iscollisionrepair=true></c-own-video-card> 
+                  </lightning-layout-item>
+                   <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="6" class="collisiontv-video">
+                      <c-own-video-card icon={icon1} content-id={contentid2} onvideoclick={handleVideo}  iscollisionrepair=true></c-own-video-card>  
+                  </lightning-layout-item> 
+                   <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="6" class="collisiontv-video">
+                       <c-own-video-card icon={icon1} content-id={contentid3} onvideoclick={handleVideo} iscollisionrepair=true></c-own-video-card> 
+                  </lightning-layout-item>
+                  <lightning-layout-item if:true={contentid4} size="12" small-device-size="12" medium-device-size="6" large-device-size="6" class="collisiontv-video">
+                      <c-own-video-card icon={icon1} content-id={contentid4} onvideoclick={handleVideo} iscollisionrepair=true></c-own-video-card>
+                  </lightning-layout-item>
+               </lightning-layout> 
+               <lightning-layout multiple-rows>
+                  <lightning-layout-item size="12" padding="around-small" small-device-size="12" medium-device-size="12" large-device-size="12" >
+                     <h1>Explore More Collision Resources</h1>
+                  </lightning-layout-item>
+                  <lightning-layout-item size="12" padding="around-small" small-device-size="12" medium-device-size="6" large-device-size="6" >
+                     <c-own-c-m-s-card titlecolor="Honda Red" icon="dealer.svg" onaction={handleAction} headerlink={findDealerLink} content-id={findDealer} ></c-own-c-m-s-card>
+                  </lightning-layout-item>
+                  <lightning-layout-item size="12" padding="around-small" small-device-size="12" medium-device-size="6" large-device-size="6">
+                     <c-own-c-m-s-card  titlecolor="Honda Red" icon="engine-system.svg" showforwardicon="true" forwardiconright="true" onaction={handleAction} content-id={genuineParts} headerlink={partsLink}></c-own-c-m-s-card> 
+                  </lightning-layout-item>
+                  <lightning-layout-item size="12" padding="around-small" small-device-size="12" medium-device-size="6" large-device-size="6">
+                     <c-own-c-m-s-card  titlecolor="Honda Red" icon="wheel.svg" showforwardicon="true" forwardiconright="true" onaction={handleAction} content-id={genuineAccessories} headerlink={accessoriesLink}></c-own-c-m-s-card> 
+                  </lightning-layout-item>
+                  <lightning-layout-item size="12" padding="around-small" small-device-size="12" medium-device-size="6" large-device-size="6">
+                     <c-own-c-m-s-card titlecolor="Honda Red" icon="car-mechanic.svg" onaction={handleAction} content-id={facilities} headerlink={certifiedLink}></c-own-c-m-s-card> 
+                  </lightning-layout-item>
+               </lightning-layout> 
+            </div>
+         </lightning-layout-item>
+      </lightning-layout>
+   </div>
+</template>

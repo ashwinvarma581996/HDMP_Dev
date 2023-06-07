@@ -1,0 +1,136 @@
+.button-section-disable .custom-button {
+    border-color: #ACACAC;
+    border-radius: 2px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    background: #ACACAC;
+    color: white;
+}
+
+.button-section-active .custom-button {
+    border-color: var(--HondaRed);
+    border-radius: 2px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    background: var(--HondaRed);
+    color: white;
+}
+
+.slds-button:hover {
+    color: white !important;
+}
+
+.custom-input-label {
+    color: black;
+    font-family: Roboto;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 500 !important; 
+    line-height: 15px;
+    letter-spacing: 0.02em;
+    text-align: left;
+}
+
+.custom-input-label-disabled {
+    color: #d9d9d9;
+    font-family: Roboto;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 500 !important; 
+    line-height: 15px;
+    letter-spacing: 0.02em;
+    text-align: left;
+}
+
+.find-brand-combobox {
+    background: #FFFFFF;
+    box-sizing: border-box;
+    border-radius: 2px;
+}
+
+.find-brand-input {
+    background: #FFFFFF;
+    box-sizing: border-box;
+    border-radius: 2px;
+}
+
+.custom-button-view {
+    width: 100%;
+}
+
+.section-title {
+    font-family: Roboto;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 900;
+    line-height: 22px;
+    letter-spacing: 0.02em;
+    text-align: left;
+    color:  #000000;
+
+}
+.section-content{
+    font-family: Roboto;
+    font-size: 14px;
+    font-style: normal;
+    line-height: 22px;
+    letter-spacing: 0.02em;
+    text-align: left;
+}
+
+
+.find-brand-combobox {
+    background: #FFFFFF;
+    box-sizing: border-box;
+    border-radius: 2px;
+}
+
+.find-brand-input {
+    background: #FFFFFF;
+    box-sizing: border-box;
+    border-radius: 2px;
+}
+
+.combobox-gutters {
+    padding-right: 16px;
+}
+
+.error-message {
+    font-family: Roboto;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 900;
+    line-height: 20px;
+    letter-spacing: 1px;
+    text-align: center;
+    color: #767676;
+}
+
+@media only screen and (min-width: 601px) {
+    
+
+}
+
+@media only screen and (max-width: 600px) {
+
+    .combobox-gutters {
+        padding-right: 0px;
+    }
+
+    .section-title {
+        font-family: Roboto;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 19px;
+        letter-spacing: 0.03em;
+        text-align: left;
+    }
+
+}

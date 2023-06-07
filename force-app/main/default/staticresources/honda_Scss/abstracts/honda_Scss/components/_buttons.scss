@@ -1,0 +1,75 @@
+.themeBtn {
+    display: block !important;
+}
+
+.themeBtn,
+.slds-button_neutral,
+.customBtn .slds-button,
+.slds-button_brand,
+.slds-button_outline-brand {
+    font-weight: 700 !important;
+    color: #fff !important;
+    border-radius: 2px !important;
+    font-size: 16px;
+    padding: 6px 30px !important;
+    min-width: 120px !important;
+    text-align: center !important;
+    text-transform: uppercase !important;
+}
+
+.slds-button_neutral,
+.slds-button_outline-brand {
+    border-radius: 4px !important;
+}
+
+.primaryRedBtn,
+.slds-button_brand {
+    background: $redBg !important;
+    border-color: $redBg !important;
+    &:focus {
+        box-shadow: 0 0 0 0.1rem rgba(228, 37, 37, 0.5) !important;
+    }
+    &:hover {
+        background: #c32020 !important;
+        border-color: #c32020 !important;
+    }
+}
+
+.slds-button_neutral {
+    background: #fff !important;
+    border-color: $redBg !important;
+    color: $redBg !important;
+    &:focus {
+        box-shadow: 0 0 0 0.1rem rgba(102, 102, 102, 0.5) !important;
+    }
+    // &:hover {
+    //     background: #efefef !important;
+    // }
+}
+
+.comm-user-profile-menu__login-button {
+    background: #5E6162 !important;
+    border-color: #5E6162 !important;
+    color: #fff !important;
+    &:hover {
+        background: #444 !important;
+        color: #fff !important;
+    }
+}
+
+.slds-button_icon.slds-button_icon-bare {
+    display: none !important;
+}
+
+button[disabled] {
+    background: #f0f0f0 !important;
+    border-color: #d9d9d9!important;
+    color: #D9D9D9 !important;
+}
+
+.slds-button_icon.slds-modal__close {
+    right: 20px;
+    top: 10px;
+    background: #5E6162;
+    border-radius: 0;
+}

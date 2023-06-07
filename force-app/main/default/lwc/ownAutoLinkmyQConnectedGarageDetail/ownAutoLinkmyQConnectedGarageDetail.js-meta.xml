@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>55.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property type="ContentReference" name="contentId" label="Content ID" />
+            <property type="ContentReference" name="contentId2" label="Content ID 2" />
+            <property type="ContentReference" name="contentId3" label="Content ID 3" />
+            <property type="ContentReference" name="contentId4" label="Content ID 4" />
+            <property type="String" name="getAppSectionTitle" label="Get App Section Title" />
+            <property type="String" name="featuresTitle" label="myQ Connected Features Title" />
+            <property type="String" name="includesTitle" label="Subscription Includes Title" />
+            <property label="Please specify the division name: Honda, Acura" name="division" type="String"
+                        datasource="Honda, Acura" default = "Honda" />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

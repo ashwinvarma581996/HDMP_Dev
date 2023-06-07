@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>55.0</apiVersion>
+    <isExposed>false</isExposed>
+    <masterLabel>B2B Category Layout</masterLabel>
+    <description>Category landing page grid for when no vehcile is selected.</description>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property 
+                name="fontColor" 
+                label="Category Title Color" 
+                type="Color"
+                description="Category Tile Font Color"
+                default="#000000"
+            />
+            <property 
+                label="Grid Max Columns Displayed" 
+                name="gridMaxColumnsDisplayed" 
+                type="String" 
+                default="3" 
+                datasource="3,4,5,6"
+            />
+            <property 
+                name="fontSize" 
+                label="Category Title Size"
+                type="String" 
+                description="Category Tile Font Size"
+                default="Medium" 
+                datasource="Small,Medium,Large"
+            />
+            <property
+                name="recordId"
+                type="String"
+                label="Record Id"
+                description="Automatically bind the page's record id to the component variable"
+                default="{!recordId}"
+            /> 
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

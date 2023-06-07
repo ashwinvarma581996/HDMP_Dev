@@ -1,0 +1,7 @@
+<template>
+    <button style={ctaButtonStyles} class={ctaButtonAlign} type="button" title="Select Vehicle" onclick={categoryBannerSelectVehicle}>{ctaButtonLabel}</button>
+
+    <template if:true={showChangeVehicleModal}>
+        <c-select-vehicle-modal onclosechangevehicle={closeChangeVehicleModal}></c-select-vehicle-modal>
+    </template>
+</template>

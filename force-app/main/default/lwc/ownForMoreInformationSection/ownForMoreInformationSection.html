@@ -1,0 +1,30 @@
+<template>
+    <div class="more-info-head-text">
+        <h1 class="more-info-head">{pspAdditionalInfo.title}</h1>
+        <div class="more-info-text">{pspAdditionalInfo.more_info}<span if:true={noRecalls}>&nbsp;<a onclick={navigateToDealer} class="more-info-link">Click here</a> to find your nearest dealer.</span></div>
+    </div>
+    <div class="c-rcl">
+        <div class="c-i-rcl c-i-1-rcl">
+            <div class="c-i-1-rcl-head">{pspAdditionalInfo.sec_1_head}</div>
+            <div class="c-i-1-rcl-phone-large">
+                <div class="c-i-1-rcl-text">{pspAdditionalInfo.sec_1_phone} {pspAdditionalInfo.sec_1_phone_label}</div>
+            </div>
+            <div class="c-i-1-rcl-phone-small">
+                <div class="c-i-1-rcl-text"><a href={pspAdditionalInfo.sec_1_phone_link} class="c-i-1-rcl-text-phone">{pspAdditionalInfo.sec_1_phone}</a> {pspAdditionalInfo.sec_1_phone_label}</div>
+            </div>
+            <div class="c-i-1-rcl-text">{pspAdditionalInfo.sec_1_time_label}</div>
+            <div class="c-i-1-rcl-text">{pspAdditionalInfo.sec_1_time}</div>
+        </div>
+        <div class="c-i-rcl c-i-2-rcl">
+            <div class="c-i-2-rcl-head">{pspAdditionalInfo.sec_2_head}</div>
+            <div class="c-i-2-rcl-text">{pspAdditionalInfo.sec_2_content_text}</div>
+            <div class="c-i-1-rcl-phone-large">
+                <div class="c-i-1-rcl-text">{pspAdditionalInfo.sec_2_phone} {pspAdditionalInfo.sec_2_phone_label}</div>
+            </div>
+            <div class="c-i-1-rcl-phone-small">
+                <div class="c-i-1-rcl-text"><a href={pspAdditionalInfo.sec_2_phone_link} class="c-i-1-rcl-text-phone">{pspAdditionalInfo.sec_2_phone}</a> {pspAdditionalInfo.sec_2_phone_label}</div>
+            </div>
+            <div class="c-i-2-rcl-text"><a class="c-i-2-rcl-link" href={pspAdditionalInfo.sec_2_link} target="_blank">{pspAdditionalInfo.sec_2_link}</a></div>
+        </div>
+    </div>
+</template>

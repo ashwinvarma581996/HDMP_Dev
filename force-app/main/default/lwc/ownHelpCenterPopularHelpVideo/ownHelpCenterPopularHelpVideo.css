@@ -1,0 +1,44 @@
+.popular-help-video-text-headline {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    /*font-size: 40px;
+    line-height: 42px;*/
+    text-align: center;
+    /*letter-spacing: 1.2px;*/
+    color: #000000;
+}
+.popular-help-video-card {
+    width: 840px;
+    height: 379px;
+    background: #C4C4C4;
+}
+.popular-help-video-card p {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 32px;
+    line-height: 37px;
+    text-align: center;
+    letter-spacing: 0.02em;
+    color: #000000;
+}
+@media only screen and (max-width: 7200px) {
+    .popular-help-video-small {
+        display: none;
+    }
+    .popular-help-video-large {
+        display: block;
+    }
+}
+@media only screen and (max-width: 600px) {
+    .popular-help-video-large {
+        display: none;
+    }
+    .popular-help-video-small {
+        display: block;
+    }
+}
+.c-container{
+    width: fit-content;
+}

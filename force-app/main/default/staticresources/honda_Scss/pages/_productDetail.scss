@@ -1,0 +1,234 @@
+.comm-page-detail-01t {
+    b2b_buyer_product_details-expandable-section {
+        .slds-accordion {
+            @include containerWrapper;
+            padding: 20px 0px;
+        }
+    }
+    .vinfit .slds-modal__content .slds-form-element__control.slds-grow {
+        max-width: 100%;
+        margin: 0 auto;
+    }
+    .slds-modal__content .slds-medium-size_5-of-12 .slds-form-element__control.slds-grow {
+        max-width: 100%;
+    }
+    .pdpQtyInput>.slds-grid_vertical-align-center input {
+        width: 75px;
+    }
+    .megaMenuDropdownm .slds-form-element__help {
+        float: left;
+        margin: 0;
+        margin-right: 2px;
+    }
+    .errorMsg {
+        max-width: 100%;
+        margin: 0 auto;
+        display: block;
+        @media (max-width: 768px) {
+            max-width: 100%;
+        }
+    }
+    header.slds-modal__header {
+        border-bottom: 0;
+        padding-bottom: 0;
+        button.slds-button.slds-button_icon.slds-modal__close.slds-button_icon-inverse {
+            right: 20px;
+            top: 10px;
+            background: $darkgrey;
+            border-radius: 0;
+            @media (max-width: 768px) {
+                top: -2.5rem;
+                right: -0.5rem;
+            }
+        }
+        h2 {
+            margin-top: 40px;
+        }
+    }
+    .slds-input {
+        border-color: #979797 !important;
+        border-radius: 2px !important;
+        padding: 5px 15px !important;
+    }
+    .font-h5 {
+        font-size: 22px;
+    }
+    .font-h6 {
+        font-size: 18px;
+    }
+    .productDetailHead+.slds-wrap {
+        img {
+            transform: scale(1);
+            transition: all 0.3s ease-in;
+            cursor: pointer;
+            &:hover {
+                transform: scale(1.04);
+            }
+        }
+        p {
+            cursor: pointer;
+            &:hover {
+                color: $redBg;
+            }
+        }
+    }
+    @media (max-width: 1170px) {
+        .containerWrapper {
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+    }
+}
+
+.details-area {
+    @media (max-width: 768px) {
+        padding: 0 !important;
+    }
+    .productName {
+        color: #000000;
+        font-size: 28px;
+        font-weight: 400;
+        word-break: break-word;
+        line-height: 130%;
+    }
+    .productNumber {
+        color: #767676;
+        font-size: 16px;
+        font-weight: 300;
+    }
+    .productDescription {
+        color: #767676;
+        font-size: 16px;
+        font-weight: 300;
+        // display: -webkit-box;
+        // -webkit-line-clamp: 2;
+        // -webkit-box-orient: vertical;
+        overflow: hidden;
+        border-top: 0.5px solid #e9e9e9;
+    }
+}
+
+.productImageContainer {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    height: 450px;
+    @media (max-width: 768px) {
+        padding-bottom: 30px !important;
+    }
+    img {
+        object-fit: contain;
+        // max-height: 400px;
+        // @media (max-width: 768px) {
+        //     height: 280px;
+        // }
+    }
+}
+
+.productImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.price {
+    color: black;
+    font-size: 24px;
+    font-weight: 400;
+}
+
+.productDetailHead {
+    color: black;
+    font-size: 24px;
+    font-weight: 400;
+    border-bottom: 1px solid #E42525;
+}
+
+.productDetailSubHead {
+    color: #767676;
+    font-size: 16px;
+    font-weight: 300;
+}
+
+.detailsSubhead {
+    color: black;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 200%;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    width: 600px;
+}
+
+.detailsContent {
+    color: #767676;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 200%;
+    margin-left: 24px;
+}
+
+.fitmentHead {
+    color: black;
+    font-size: 18px;
+    font-weight: 300;
+}
+
+.fitmentButton {
+    color: #fff;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 24px;
+    background: #E42525;
+    padding: 10px 15px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.checkIcon {
+    --sds-c-icon-color-foreground-default: #08B06A;
+}
+
+.closeIcon {
+    --sds-c-icon-color-foreground-default: #E42525;
+}
+
+.quantityWrapper {
+    color: #000000;
+    font-size: 16px;
+    margin-top: 16px;
+}
+
+.fitmentHead button.slds-button {
+    margin-top: 6px;
+}
+
+.pdpQtyInput .slds-size_5-of-12 abbr.slds-required {
+    display: none;
+}
+
+@media (min-width: 768px) {
+    .comm-page-detail-01t .containerWrapper .slds-spinner_container .slds-spinner {
+        top: 50% !important;
+        left: 50% !important;
+        position: fixed;
+    }
+}
+
+// .productButton .slds-button {
+//     @media (max-width: 768px) {
+//         width: 100% !important;
+//     }
+// }
+.requiredModal {
+    .slds-text-heading_large {
+        padding-top: 25px;
+    }
+    .slds-modal__footer {
+        .slds-button {
+            @media screen and (max-width: 340px) {
+                min-width: 100px !important;
+            }
+        }
+    }
+}

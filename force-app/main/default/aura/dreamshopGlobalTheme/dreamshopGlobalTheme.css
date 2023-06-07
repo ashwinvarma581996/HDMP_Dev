@@ -1,0 +1,15 @@
+.THIS.dreamshopGlobalTheme {
+    position: relative;
+    z-index: 1;
+    font-size: .8125rem;
+    width: 100%;
+    touch-action: manipulation;
+}
+
+.THIS .body.content, .THIS .header-container {
+    margin: 0 auto;
+}
+
+.THIS .body.content.margin-offset {
+    margin-top: 10em; /*offsets the fixed header components*/
+}

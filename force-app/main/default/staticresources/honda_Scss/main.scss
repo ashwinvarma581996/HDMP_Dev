@@ -1,0 +1,828 @@
+@import 'abstracts/vars';
+@import 'abstracts/mixins';
+@import 'base/typography';
+@import 'layouts/header';
+@import 'layouts/carousel';
+@import 'layouts/footer';
+@import 'layouts/forms';
+@import 'layouts/navigation';
+@import 'components/buttons';
+@import 'pages/cart';
+@import 'pages/home';
+@import 'pages/productlist';
+@import 'pages/productDetail';
+@import 'pages/category';
+@import 'pages/faq';
+@import 'pages/checkout';
+@import 'pages/_orderView';
+@import 'pages/findorder';
+@import 'themes/theme';
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+.bgLighter .left-title input {
+    font-size: 13px !important;
+}
+
+.orderDetail .slds-card .orderInfo__group .labelinput a {
+    color: rgb(105, 105, 105);
+    pointer-events: none;
+}
+
+.themeHeader .centerContainer .leftRegion .ui-widget {
+    display: none;
+}
+
+.product_item {
+    position: relative;
+    padding-bottom: 55px !important;
+}
+
+.phoneNumber a {
+    color: inherit !important;
+}
+
+.callTxt a {
+    color: inherit!important;
+}
+
+.cartDealerInstall span {
+    display: block !important;
+    text-align: center !important;
+    margin: 0 auto !important;
+}
+
+.dealerModal .slds-modal__header {
+    padding-bottom: 0;
+}
+
+.accessorySearch svg.slds-input__icon.slds-icon-text-default {
+    display: none;
+}
+
+.accessories .searchFilter .searchIcon {
+    top: 0px;
+    right: 0;
+    z-index: 99;
+}
+
+.user-section-header+.user-section-header.user-section-sub-header.slds-grid.slds-wrap {
+    margin: 0;
+}
+
+.dealerModal .slds-modal__header h2 {
+    margin-top: 15px !important;
+    @media (max-width: 767px) {
+        margin-top: 0 !important;
+        padding-top: 0;
+    }
+}
+
+@media (min-width: 769px) {
+    .mainHeader {
+        max-width: 1170px;
+        right: 0;
+        margin: 0 auto;
+        z-index: 7998 !important;
+    }
+}
+
+//        .mainHeader .slds-spinner_container {
+//     position: fixed !important;
+//     top: 50% !important;
+//     background-color: transparent !important;
+//     transform: translateY(-50%);
+// }
+.themeHeader .centerContainer .center {
+    max-width: 1200px !important;
+}
+
+.megaMenuDropdown .slds-form-element__help {
+    white-space: pre-wrap;
+}
+
+.mainHeader a.slds-context-bar__label-action,
+.mainHeader ul>li {
+    min-width: auto;
+    max-width: 166px;
+}
+
+.mainHeader .slds-context-bar__item {
+    height: 100%;
+}
+
+.megaMenuDropdown .slds-modal__content .slds-form-element {
+    max-width: 100%;
+}
+
+.vehicleModal {
+    .slds-combobox {
+        input.slds-input {
+            padding-right: 25px !important;
+        }
+    }
+}
+
+.mainHeader .slds-modal__content .slds-size_5-of-12 .slds-form-element .slds-listbox_vertical,
+.vehicleModal .slds-modal__content .slds-form-element .slds-listbox_vertical {
+    max-height: 150px;
+}
+
+.mainHeader .slds-modal__content .slds-size_5-of-12 .slds-form-element:last-of-type .slds-listbox_vertical,
+.vehicleModal .slds-modal__content .slds-form-element:last-child .slds-listbox_vertical {
+    max-height: 100px;
+}
+
+.megaMenuDropdown .slds-modal__content .slds-dropdown,
+.vehicleModal .slds-modal__content .slds-dropdown {
+    min-width: max-content !important;
+}
+
+
+/*Dealer Modal*/
+
+.dealerModal ul.slds-tabs_default__nav {
+    justify-content: center;
+    border-color: #979797;
+}
+
+.dealerTabbing label.slds-form-element__label {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.dealerModal .slds-modal__content {
+    padding: 15px 30px;
+    // min-height: 381px!important;
+    max-height: 100%!important;
+    overflow: auto!important;
+}
+
+.dealerModal .slds-card__body {
+    margin-top: 0;
+}
+
+.dealerModal .slds-card__header.slds-grid {
+    display: none;
+}
+
+.dealerModal h2,
+.vehicleModal h1 {
+    margin-top: 15px;
+}
+
+.dealerModal ul.slds-tabs_default__nav li {
+    border: 1px solid #979797;
+    border-bottom: 0;
+    margin: 0px 15px;
+    max-width: 240px;
+    text-align: center;
+    font-size: 16px;
+    width: 100%;
+}
+
+.dealerModal ul.slds-tabs_default__nav li[title="Dealers"] {
+    display: none;
+}
+
+.slds-tabs_default__content.slds-show {
+    border: 1px solid #979797;
+    border-top: 0;
+    padding: 0 30px 30px;
+}
+
+.dealerModal ul.slds-tabs_default__nav .slds-tabs_default__item.slds-is-active:after {
+    background: #fff !important;
+    bottom: -5px;
+    height: 10px;
+}
+
+.dealerModal ul.slds-tabs_default__nav .slds-tabs_default__item:hover:after {
+    background: transparent;
+}
+
+.dealerModal ul.slds-tabs_default__nav .slds-tabs_default__item.slds-is-active:hover {
+    background: transparent;
+}
+
+.dealerModal ul.slds-tabs_default__nav li.slds-tabs_default__item:hover {
+    background: #efefef;
+}
+
+.dealerModal ul.slds-tabs_default__nav .slds-tabs_default__item.slds-is-active {
+    color: #E42525;
+}
+
+.dealerModal {
+    @media (max-width: 767px) {
+        .dealerTabbing {
+            padding: 0px;
+            .cityStateInputWrap {
+                margin-top: 0;
+            }
+            .slds-m-vertical_medium {
+                margin-top: 0;
+            }
+            lightning-input {
+                .slds-form-element__label:empty {
+                    display: none;
+                }
+            }
+            lightning-input.Dealer {
+                .slds-form-element__label {
+                    display: none;
+                }
+            }
+            lightning-layout-item {
+                display: flex;
+                flex-wrap: wrap;
+                width: 100%;
+                justify-content: center;
+                padding-top: 0;
+                &:last-child {
+                    padding-bottom: 0;
+                }
+            }
+        }
+        .slds-tabs_default__content.slds-show {
+            padding-bottom: 16px;
+        }
+        .VFIframe {
+            height: 150px !important;
+        }
+    }
+    .dealerLocationSelectors {
+        .centerElement {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            @media (max-width: 480px) {
+                padding-left: 10px !important;
+                padding-right: 10px !important;
+            }
+            input {
+                width: 100%;
+                height: 100%;
+                left: 0;
+                top: 0;
+            }
+            label {
+                padding-left: 10px;
+            }
+            .checkmark {
+                position: relative;
+                top: unset;
+                left: unset;
+            }
+        }
+    }
+    .cityStateSelection {
+        margin-bottom: 0;
+    }
+    .cityStateInputWrap {
+        display: flex;
+        align-items: flex-start;
+        width: 70%;
+        margin-top: 22px;
+        @media (max-width: 767px) {
+            width: 70%;
+        }
+        @media (max-width: 480px) {
+            width: 100%;
+        }
+        .slds-form-element {
+            &:first-child {
+                width: calc(100% - 80px) !important;
+            }
+            &:last-child {
+                width: 80px !important;
+            }
+        }
+        .slds-form-element__label {
+            display: none;
+        }
+        .slds-combobox__form-element {
+            width: 80px;
+        }
+        .slds-input {
+            &:focus,
+            &:active {
+                box-shadow: none;
+            }
+        }
+        .slds-combobox__input {
+            border-left: none;
+            border-right-width: 1px;
+        }
+        .slds-dropdown {
+            min-width: 80px;
+            max-height: 120px;
+            .slds-media__figure {
+                display: none;
+            }
+        }
+    }
+}
+
+.dealerTabbing .slds-form-element {
+    width: 70%;
+    margin: 0 auto;
+}
+
+.appendedCard .slds-grid_vertical-align-center>b {
+    padding-left: 16px;
+}
+
+.appendedCard .slds-truncate {
+    font-size: 14px;
+    font-weight: 100;
+    line-height: 18px;
+    color: #767676;
+}
+
+.textRed .slds-truncate {
+    color: #E42525;
+}
+
+.dealerWebsite a {
+    position: relative;
+    display: inline-block;
+    text-decoration: none !important;
+    color: $redBg !important;
+    border-radius: 2px !important;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 5px 10px !important;
+    min-width: 120px !important;
+    text-align: center !important;
+    text-transform: uppercase !important;
+    background: #fff !important;
+    border: 1px solid $redBg !important;
+    line-height: 32px;
+    // &:hover {
+    //     background: #efefef !important;
+    // }
+}
+
+.dealerWebsite a:after {
+    content: '\00bb';
+    position: relative;
+    opacity: 0;
+    top: 0px;
+    right: -20px;
+    transition: 0.5s;
+    background: #0000;
+    font-size: 17px;
+}
+
+.dealerWebsite a:hover::after {
+    opacity: 1;
+    right: -5px;
+}
+
+.appendedCard .slds-truncate:first-child {
+    margin-top: 5px;
+}
+
+.appendedCard .flexColumn button {
+    margin-right: 10px !important;
+}
+
+.requiredModal .slds-modal__footer .slds-button_neutral {
+    border: 1px solid rgb(94, 97, 98) !important;
+    color: rgb(94, 97, 98) !important;
+}
+
+.requiredModal .slds-modal__footer .slds-button_brand {
+    background: rgb(94, 97, 98) !important;
+    border: 1px solid rgb(94, 97, 98) !important;
+}
+
+.Products1 .slds-dropdown_fluid,
+.Products2 .slds-dropdown_fluid,
+.Products3 .slds-dropdown_fluid,
+.Products4 .slds-dropdown_fluid {
+    max-height: 170px!important;
+}
+
+@media (min-width: 768px) and (max-width:1199px) {
+    .dealerVehicle {
+        .slds-grid .vehicleSelectButton {
+            padding: 10px 5px!important;
+            font-size: 14px;
+        }
+        .slds-grid .slds-button_brand {
+            padding: 5px 5px !important;
+        }
+        .popDealerLabel,
+        .vehicleSelectorLabel {
+            font-size: 12px !important;
+        }
+        .slds-icon {
+            width: 15px;
+            margin-left: -5px;
+            margin-top: -3px;
+        }
+    }
+    .dealerModal .slds-modal__container {
+        width: 90%;
+        max-width: 55rem;
+    }
+    .vinfit .slds-modal__container {
+        margin: 0 auto;
+        width: 70%;
+    }
+    .dealerModal ul.slds-tabs_default__nav li {
+        width: auto;
+        font-size: 14px;
+    }
+}
+
+@media (min-width: 1199px) {
+    .dealerModal .slds-modal__container {
+        min-width: 90% !important;
+    }
+}
+
+@media (min-width: 768px) {
+    .dealerModal .slds-modal__container {
+        // min-width: 45rem;
+        max-height: 100%!important;
+    }
+    // .appendedCard {
+    //     .slds-card__body {
+    //         .slds-grid>div:first-child {
+    //             width: 33% !important;
+    //         }
+    //         .slds-grid .flexColumn {
+    //             width: 66% !important;
+    //         }
+    //     }
+    // }
+}
+
+@media (min-width: 1024px) {
+    .categoryPage .categoryDiv .cardImage img {
+        min-height: 175px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .categoryPage .categoryDiv .cardImage img {
+        -o-object-fit: contain;
+        object-fit: contain;
+    }
+    .dealerModal ul.slds-tabs_default__nav li.slds-tabs_default__overflow-button {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .categoryPage .categoryDiv .cardImage img {
+        -o-object-fit: contain;
+        object-fit: contain;
+    }
+    .comm-page-custom-findmyorder .forceCommunitySection .containerWrapper {
+        padding: 0 15px !important;
+    }
+    .logoImage {
+        margin-left: 30px;
+        margin-top: 8px;
+        max-height: 32px !important;
+    }
+    .forceCommunityThemeHeaderB2B .centerContainer {
+        height: auto !important;
+    }
+    .siteforceContentArea .contentRegion.comm-layout-column {
+        margin-top: 0 !important;
+    }
+    .comm-page-custom-acura .forceCommunitySection .ui-widget:first-child,
+    .forceCommunitySection .ui-widget:first-child {
+        margin-top: 0 !important;
+    }
+    .comm-page-home .siteforceContentArea {
+        margin-top: 50px;
+    }
+}
+
+@media (max-width: 1008px) {
+    c-parent-category-accordion {
+        display: none;
+    }
+}
+
+@media (min-width: 991px) {
+    .dealerModal .slds-tabs_default__overflow-button {
+        display: none;
+    }
+}
+
+@media (max-width: 767px) {
+    .dealerModal .appendedCard button,
+    .dealerModal .appendedCard .dealerWebsite a {
+        font-size: 14px;
+        padding: 2px 8px !important;
+    }
+    .comm-page-custom-my-dealers .user-section-header.slds-m-top_large {
+        margin-top: 50px;
+        margin-bottom: 0;
+        border: 0;
+        .slds-text-heading_large {
+            border-bottom: 1px solid #666;
+            padding-bottom: 10px;
+        }
+    }
+    .proceedToCheckout {
+        clear: both;
+        padding-top: 20px;
+    }
+    .comm-page-custom-my-dealers .user-section-header.user-section-sub-header {
+        margin-top: 0px;
+        padding: 16px;
+        border: 0;
+        .slds-text-heading_large {
+            border-bottom: 1px solid #666;
+            padding-bottom: 10px;
+        }
+    }
+    .comm-page-custom-my-dealers .slds-m-bottom_large.slds-p-bottom_large {
+        padding: 0 16px;
+    }
+    .comm-page-custom-my-dealers lightning-layout-item.dealers-listing .slds-p-right_small .custom-box {
+        margin-left: 0;
+    }
+    .comm-page-custom-my-dealers .user-section-header.user-section-sub-header.slds-m-horizontal_large.slds-grid.slds-wrap {
+        padding: 16px 0;
+        margin: 0;
+    }
+    .comm-page-custom-my-dealers .user-section-header.user-section-sub-header.slds-grid.slds-wrap {
+        padding: 0;
+    }
+    .mainHeader .slds-modal__content .slds-size_5-of-12 .slds-form-element:last-of-type .slds-listbox_vertical,
+    .vehicleModal .slds-modal__content .slds-form-element:last-child .slds-listbox_vertical {
+        min-width: initial !important;
+    }
+    .dealerTabbing .slds-combobox__form-element,
+    .slds-form-element__control input {
+        font-size: 16px;
+    }
+    .slds-modal__header h2 {
+        font-size: 22px;
+        padding-top: 10px;
+    }
+    .dealerModal .slds-modal__container {
+        margin: 0 8px;
+        padding-bottom: 10px;
+    }
+    .dealerModal .slds-modal__content {
+        padding: 15px 10px !important;
+    }
+    .dealerModal ul.slds-tabs_default__nav li {
+        font-size: 12px !important;
+        margin: 0 4px;
+        width: auto;
+    }
+    .dealerTabbing label.slds-form-element__label {
+        font-size: 15px;
+    }
+    .dealerVehicle c-vehicle-selector>div,
+    .dealerVehicle c-pop-dealer>div {
+        flex-direction: column;
+        margin-bottom: 10px;
+        margin-right: 0;
+    }
+    .vehicleSelectorLabel {
+        font-size: 14px !important;
+        margin-bottom: 8px !important;
+    }
+    .popDealerLabel {
+        font-size: 14px !important;
+        margin-bottom: 8px !important;
+    }
+    .dealerVehicle .slds-grid_align-spread {
+        justify-content: center;
+        display: block !important;
+        margin-top: 50px;
+    }
+    .vehicleSelectButton+.slds-m-left_x-small {
+        margin: 6px 0 0;
+    }
+    .comm-page-home .siteforceContentArea {
+        margin-top: 0 !important;
+    }
+    .dealerVehicle {
+        margin-top: 0px!important;
+    }
+    .logoImage {
+        margin-left: 0px !important;
+    }
+}
+
+@media (max-width: 600px) {
+    .comm-page-checkout .slds-grid.cB2B_BraintreeForm {
+        flex-wrap: wrap;
+    }
+    .comm-page-checkout .slds-grid.cB2B_BraintreeForm .slds-p-right_large div#paypal-button {
+        float: none !important;
+    }
+    .comm-page-checkout .slds-grid.cB2B_BraintreeForm .slds-p-around_xx-small {
+        order: 2;
+    }
+    .dealerModal .slds-modal__container {
+        margin: 0 8px;
+    }
+    .dealerModal .slds-modal__content {
+        padding: 15px 10px !important;
+    }
+    .dealerModal ul.slds-tabs_default__nav li {
+        margin: 0px 4px !important;
+        max-width: 160px !important;
+        font-size: 12px !important;
+        padding: 0 6px !important;
+        width: auto !important;
+    }
+    .dealerModal ul.slds-tabs_default__nav li button {
+        color: #979797 !important;
+        text-transform: capitalize !important;
+        padding: 0 4px !important;
+        margin: 0;
+    }
+    // .dealerVehicle button.slds-button {
+    //     margin: 5px 0;
+    // }
+    .dealerVehicle .vehicleSelectButton {
+        padding: 10px 8px!important;
+    }
+}
+
+@media (max-width: 480px) {
+    .dealerVehicle .vehicleSelectButton {
+        font-size: 12px !important;
+    }
+    .dealerModal ul.slds-tabs_default__nav li {
+        margin: 0 !important;
+        max-width: 150px !important;
+        padding: 0 5px !important;
+        width: 90px !important;
+    }
+    .dealerModal ul.slds-tabs_default__nav li {
+        font-size: 12px !important;
+    }
+    .dealerModal ul.slds-tabs_default__nav li a.slds-tabs_default__link {
+        white-space: break-spaces;
+        line-height: normal;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .dealerModal ul.slds-tabs_default__nav li.slds-tabs_default__overflow-button {
+        display: none;
+    }
+    .dealerTabbing .slds-form-element {
+        width: 100%;
+    }
+    // .dealerTabbing .slds-form-element__control input {
+    //     font-size: 13px;
+    // }
+    .dealerModal .dealerTabbing .slds-button,
+    .customBtn .slds-button,
+    .slds-button_brand,
+    .dealerWebsite a {
+        font-size: 13px;
+        padding: 5px 10px !important;
+        min-width: 92px !important;
+    }
+    .dealerModal .appendedCard button,
+    .dealerModal .appendedCard .dealerWebsite a {
+        min-width: 150px !important;
+        line-height: 18px;
+        font-size: 12px;
+    }
+    .appendedCard .slds-card__body .slds-grid .flexColumn {
+        margin-top: 10px;
+        align-items: flex-start;
+    }
+    .appendedCard .slds-card__body lightning-button,
+    .appendedCard .slds-card__body .dealerWebsite {
+        margin-bottom: 10px;
+    }
+}
+
+@media (max-width: 460px) {
+    .appendedCard .slds-grid.slds-grid_vertical-align-center.slds-gutters {
+        display: block;
+    }
+    .appendedCard .slds-grid.slds-grid_vertical-align-center.slds-gutters .slds-col {
+        margin-bottom: 5px;
+    }
+    .appendedCard .contact-hours {
+        display: block;
+    }
+    .appendedCard .contact-hours .slds-text-align_right,
+    .appendedCard .contact-hours .slds-text-align--right {
+        text-align: left !important;
+    }
+}
+
+@media (max-width: 360px) {
+    .dealerModal ul.slds-tabs_default__nav li {
+        width: 75px !important;
+    }
+    .dealerModal ul.slds-tabs_default__nav li a.slds-tabs_default__link {
+        height: 50px !important;
+    }
+    .dealerModal .slds-tabs_default__content.slds-show {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+}
+
+.categories-accessories {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #D5D5D5;
+    border-radius: 2px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    >.slds-form-element {
+        background-color: #E7E7E7;
+        margin: 0 !important;
+        &:not(:first-child) {
+            border-top: 1px solid #D5D5D5;
+        }
+        label {
+            padding: 12px 10px;
+            display: block;
+        }
+        .slds-form-element__label {
+            font-size: 13px;
+            color: #000000 !important;
+        }
+        .slds-radio_faux {
+            height: 16px;
+            width: 16px;
+            background-color: #fff;
+            border: 1px solid #666 !important;
+            position: relative;
+            &:after {
+                top: 7px !important;
+                left: 7px !important;
+                width: 10px !important;
+                height: 10px !important;
+                background: #E42525 !important;
+            }
+        }
+    }
+}
+
+div.body .slds-spinner_container {
+    position: fixed;
+    background: none;
+}
+
+// .slds-backdrop {
+//     background: rgba(255,255,255,0.5) !important;
+// }
+// div.body .slds-spinner {
+//     position: fixed;
+// }
+// .dealerModal .slds-modal__content {
+//     min-height: 381px!important;
+//     max-height: 381px!important;
+//     overflow: auto!important;
+// }
+.partsearch .slds-input {
+    padding-right: 35px!important;
+}
+
+.accessorySearch .slds-input {
+    padding-right: 35px!important;
+}
+
+.maintenance-pd-banner {
+    max-height: 300px!important;
+}
+
+.myAddressBookModal,
+.payment-edit-model {
+    label:empty {
+        position: absolute;
+    }
+}
+
+.myAddressBookModal {
+    label {
+        position: absolute;
+        .slds-required {
+            display: none;
+        }
+    }
+    .markPreferred {
+        .slds-checkbox__label {
+            position: relative;
+        }
+    }
+}

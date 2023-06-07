@@ -1,0 +1,770 @@
+<template>
+    <template if:true={isDataPresent}>
+    <li class="slds-accordion__list-item li-items">
+        <section class={sectionClass}>
+            <div class="slds-accordion__summary accordion__summary ">
+                <h2 class="slds-accordion__summary-heading">
+                    <button class="slds-button slds-button_reset slds-accordion__summary-action"
+                        title="Accordion summary" onclick={handleSectionClick} data-value={headerTitle}>
+                        <lightning-icon icon-name="utility:down" size="xx-small"
+                            class="custom-icon slds-accordion__summary-action-icon slds-button__icon slds-button__icon_left">
+                        </lightning-icon>
+                        <span class={sectionTitleClass} aria-expanded="true" aria-controls="sect1" id="accordion1id">{headerTitle}</span>
+                    </button>
+                </h2>
+            </div>
+            <template if:true={isSelectedRow}>
+                <div  class="specifics-list slds-p-bottom_small"></div>
+                <template if:true={isGeneralNews}>
+                    <template if:true={isAcuraPresent}>
+                        <h3 class="sub-title slds-p-top_small slds-p-bottom_small" aria-controls="sect1" aria-labelledby="accordion1id">Acura Autos</h3>
+                        <div class="slds-grid slds-wrap">
+                        <template for:each={acuraData} for:item="data">
+                            <div class="slds-col slds-size_1-of-3" key={data.InterestID}>
+                            <lightning-input type="checkbox" label={data.InterestName} name={data.InterestName} data-id={data.InterestID} checked={data.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                        </div>
+                        </template>
+                        </div>
+                    </template>
+                    <template if:true={isHondaPresent}>
+                        <h3 class="sub-title slds-p-top_small slds-p-bottom_small">Honda Autos</h3>
+                        <div class="slds-grid slds-wrap">
+                        <template for:each={hondaData} for:item="data">
+                            <div class="slds-col slds-size_1-of-3" key={data.InterestID}>
+                            <lightning-input type="checkbox" label={data.InterestName} name={data.InterestName} data-id={data.InterestID} checked={data.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                        </div>
+                        </template>
+                        </div>
+                    </template>
+                    <template if:true={isPSPresent}>
+                        <h3 class="sub-title slds-p-top_small slds-p-bottom_small">Powersports</h3>
+                        <div class="slds-grid slds-wrap">
+                        <template for:each={psData} for:item="data">
+                            <div class="slds-col slds-size_1-of-3" key={data.InterestID}>
+                            <lightning-input type="checkbox" label={data.InterestName} name={data.InterestName} data-id={data.InterestID} checked={data.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                        </div>
+                        </template>
+                        </div>
+                    </template>
+                    <template if:true={isPEPresent}>
+                        <h3 class="sub-title slds-p-top_small slds-p-bottom_small">Power Equipment</h3>
+                        <div class="slds-grid slds-wrap">
+                        <template for:each={peData} for:item="data">
+                            <div class="slds-col slds-size_1-of-3" key={data.InterestID}>
+                            <lightning-input type="checkbox" label={data.InterestName} name={data.InterestName} data-id={data.InterestID} checked={data.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                        </div>
+                        </template>
+                        </div>
+                    </template>
+                    <template if:true={isMarinePresent}>
+                        <h3 class="sub-title slds-p-top_small slds-p-bottom_small">Marine</h3>
+                        <div class="slds-grid slds-wrap">
+                        <template for:each={marineData} for:item="data">
+                            <div class="slds-col slds-size_1-of-3" key={data.InterestID}>
+                            <lightning-input type="checkbox" label={data.InterestName} name={data.InterestName} data-id={data.InterestID} checked={data.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                        </div>
+                        </template>
+                        </div>
+                    </template>
+                    <template if:true={isEnginesPresent}>
+                        <h3 class="sub-title slds-p-top_small slds-p-bottom_small">Engines</h3>
+                        <div class="slds-grid slds-wrap">
+                        <template for:each={enginesData} for:item="data">
+                            <div class="slds-col slds-size_1-of-3" key={data.InterestID}>
+                            <lightning-input type="checkbox" label={data.InterestName} name={data.InterestName} data-id={data.InterestID} checked={data.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                        </div>
+                        </template>
+                        </div>
+                    </template>
+                    <!-- <template if:true={isAcuraPresent}>
+                        <div class="slds-col slds-size_3-of-3">
+                            <lightning-input type="checkbox"  label="Receive emails about general news and information from Acura" name={acuraData.CategoryName} data-id={acuraData.InterestID} checked={acuraData.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                        </div>
+                    </template>
+                    <template if:true={isHondaPresent}>
+                        <div class="slds-col slds-size_3-of-3">
+                            <lightning-input type="checkbox"  label='Receive emails about general news and information from Honda' name={hondaData.CategoryName} data-id={hondaData.InterestID} checked={hondaData.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                        </div>
+                    </template>
+                    <template if:true={isPSPresent}>
+                        <div class="slds-col slds-size_3-of-3">
+                            <lightning-input type="checkbox"  label='Receive emails about general news and information from Powersports' name={psData.CategoryName} data-id={psData.InterestID} checked={psData.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                        </div>
+                    </template>
+                    <template if:true={isPEPresent}>
+                        <div class="slds-col slds-size_3-of-3">
+                            <lightning-input type="checkbox"  label='Receive emails about general news and information from Power Equipment' name={peData.CategoryName} data-id={peData.InterestID} checked={peData.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                        </div>
+                    </template>
+                    <template if:true={isMarinePresent}>
+                            <div class="slds-col slds-size_3-of-3">
+                            <lightning-input type="checkbox"  label='Receive emails about general news and information from Marine' name={marineData.CategoryName} data-id={marineData.InterestID} checked={marineData.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                        </div>
+                    </template> -->
+                </template>
+                <template if:true={isProductInformation}>
+                    <template if:true={isAcuraPresent}>
+                        <h3 class="sub-title slds-p-top_small slds-p-bottom_small">Acura Autos</h3>
+                        <div class="slds-grid slds-wrap">
+                        <template for:each={acuraData} for:item="data">
+                            <div class="slds-col slds-size_1-of-3 slds-max-medium-size_3-of-3" key={data.InterestID}>
+                            <lightning-input type="checkbox"  label={data.InterestName} name={data.InterestName} data-id={data.InterestID} checked={data.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                        </div>
+                        </template>
+                        </div>
+                    </template>
+                    <template if:true={isHondaPresent}>
+                        <h3 class="sub-title slds-p-top_small slds-p-bottom_small">Honda Autos</h3>
+                        <div class="slds-grid slds-wrap">
+                        <template for:each={hondaData} for:item="data">
+                            <div class="slds-col  slds-size_1-of-3 slds-max-medium-size_3-of-3" key={data.InterestID}>
+                            <lightning-input type="checkbox" label={data.InterestName} name={data.InterestName} data-id={data.InterestID} checked={data.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                        </div>
+                        </template>
+                        </div>
+                    </template>
+                    <template if:true={isPSPresent}>
+                        <h3 class="sub-title slds-p-top_small slds-p-bottom_small">Powersports</h3>
+                        <div class="slds-grid slds-wrap">
+                        <template for:each={psData} for:item="data">
+                            <div class="slds-col  slds-size_1-of-3 slds-max-medium-size_3-of-3" key={data.InterestID}>
+                            <lightning-input type="checkbox" label={data.InterestName} name={data.InterestName} data-id={data.InterestID} checked={data.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                       </div>
+                        </template>
+                        </div>
+                    </template>
+                    <template if:true={isPEPresent}>
+                        <h3 class="sub-title slds-p-top_small slds-p-bottom_small">Power Equipment</h3>
+                        <div class="slds-grid slds-wrap">
+                        <template for:each={peData} for:item="data">
+                            <div class="slds-col slds-size_1-of-3 slds-max-medium-size_3-of-3" key={data.InterestID}>
+                            <lightning-input type="checkbox" label={data.InterestName} name={data.InterestName} data-id={data.InterestID} checked={data.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                       </div>
+                        </template>
+                        </div>
+                    </template>
+                    <template if:true={isMarinePresent}>
+                        <h3 class="sub-title slds-p-top_small slds-p-bottom_small">Honda Marine</h3>
+                        <div class="slds-grid slds-wrap">
+                        <template for:each={marineData} for:item="data">
+                            <div class="slds-col  slds-size_1-of-3 slds-max-medium-size_3-of-3" key={data.InterestID}>
+                            <lightning-input type="checkbox" label={data.InterestName} name={data.InterestName} data-id={data.InterestID} checked={data.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                        </div>
+                        </template>
+                        </div>
+                    </template>
+                </template>
+                <template if:true={isInVehicleService}>
+                    <div class="sub-description slds-p-top_small slds-p-bottom_small">As a Honda owner, you may receive information about your In-Vehicle service subscriptions and special offers from Honda and our third-party partners.</div>
+                    <template if:true={isAcuraPresent}>
+                        <h3 class="sub-title slds-p-top_small slds-p-bottom_small">Acura Autos</h3>
+                        <div class="slds-grid slds-wrap">
+                        <template for:each={acuraData} for:item="data">
+                            <div class="slds-col slds-size_1-of-3" key={data.InterestID}>
+                            <lightning-input type="checkbox"  label={data.InterestName} name={data.InterestName} data-id={data.InterestID} checked={data.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                        </div>
+                        </template>
+                        </div>
+                    </template>
+                    <template if:true={isHondaPresent}>
+                        <h3 class="sub-title slds-p-top_small slds-p-bottom_small">Honda Autos</h3>
+                        <div class="slds-grid slds-wrap">
+                        <template for:each={hondaData} for:item="data">
+                            <div class="slds-col slds-size_1-of-3" key={data.InterestID}>
+                            <lightning-input type="checkbox" label={data.InterestName} name={data.InterestName} data-id={data.InterestID} checked={data.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                        </div>
+                        </template>
+                        </div>
+                    </template>
+                    <template if:true={isPSPresent}>
+                        <h3 class="sub-title slds-p-top_small slds-p-bottom_small">Powersports</h3>
+                        <div class="slds-grid slds-wrap">
+                        <template for:each={psData} for:item="data">
+                            <div class="slds-col slds-size_1-of-3" key={data.InterestID}>
+                            <lightning-input type="checkbox" label={data.InterestName} name={data.InterestName} data-id={data.InterestID} checked={data.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                       </div>
+                        </template>
+                        </div>
+                    </template>
+                    <template if:true={isPEPresent}>
+                        <h3 class="sub-title slds-p-top_small slds-p-bottom_small">Power Equipment</h3>
+                        <div class="slds-grid slds-wrap">
+                        <template for:each={peData} for:item="data">
+                            <div class="slds-col slds-size_1-of-3" key={data.InterestID}>
+                            <lightning-input type="checkbox" label={data.InterestName} name={data.InterestName} data-id={data.InterestID} checked={data.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                       </div>
+                        </template>
+                        </div>
+                    </template>
+                    <template if:true={isMarinePresent}>
+                        <h3 class="sub-title slds-p-top_small slds-p-bottom_small">Honda Marine</h3>
+                        <div class="slds-grid slds-wrap">
+                        <template for:each={marineData} for:item="data">
+                            <div class="slds-col slds-size_1-of-3" key={data.InterestID}>
+                            <lightning-input type="checkbox" label={data.InterestName} name={data.InterestName} data-id={data.InterestID} checked={data.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                        </div>
+                        </template>
+                        </div>
+                    </template>
+                </template>
+                <template if:true={isOffers}>
+                    <template if:true={isAcuraPresent}>
+                        <h3 class="sub-title slds-p-top_small slds-p-bottom_small">Acura Autos</h3>
+                        <div class="slds-grid slds-wrap">
+                        <template for:each={acuraData} for:item="data">
+                            <div class="slds-col slds-size_1-of-3" key={data.InterestID}>
+                            <lightning-input type="checkbox"  label={data.InterestName} name={data.InterestName} data-id={data.InterestID} checked={data.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                        </div>
+                        </template>
+                        </div>
+                    </template>
+                    <template if:true={isHondaPresent}>
+                        <h3 class="sub-title slds-p-top_small slds-p-bottom_small">Honda Autos</h3>
+                        <div class="slds-grid slds-wrap">
+                        <template for:each={hondaData} for:item="data">
+                            <div class="slds-col slds-size_1-of-3" key={data.InterestID}>
+                            <lightning-input type="checkbox" label={data.InterestName} name={data.InterestName} data-id={data.InterestID} checked={data.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                        </div>
+                        </template>
+                        </div>
+                    </template>
+                    <template if:true={isPSPresent}>
+                        <h3 class="sub-title slds-p-top_small slds-p-bottom_small">Powersports</h3>
+                        <div class="slds-grid slds-wrap">
+                        <template for:each={psData} for:item="data">
+                            <div class="slds-col slds-size_1-of-3" key={data.InterestID}>
+                            <lightning-input type="checkbox" label={data.InterestName} name={data.InterestName} data-id={data.InterestID} checked={data.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                       </div>
+                        </template>
+                        </div>
+                    </template>
+                    <template if:true={isPEPresent}>
+                        <h3 class="sub-title slds-p-top_small slds-p-bottom_small">Power Equipment</h3>
+                        <div class="slds-grid slds-wrap">
+                        <template for:each={peData} for:item="data">
+                            <div class="slds-col slds-size_1-of-3" key={data.InterestID}>
+                            <lightning-input type="checkbox" label={data.InterestName} name={data.InterestName} data-id={data.InterestID} checked={data.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                       </div>
+                        </template>
+                        </div>
+                    </template>
+                    <template if:true={isMarinePresent}>
+                        <h3 class="sub-title slds-p-top_small slds-p-bottom_small">Honda Marine</h3>
+                        <div class="slds-grid slds-wrap">
+                        <template for:each={marineData} for:item="data">
+                            <div class="slds-col slds-size_1-of-3" key={data.InterestID}>
+                            <lightning-input type="checkbox" label={data.InterestName} name={data.InterestName} data-id={data.InterestID} checked={data.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                        </div>
+                        </template>
+                        </div>
+                    </template>
+                    <template if:true={isEnginesPresent}>
+                        <h1 class="sub-title slds-p-top_small slds-p-bottom_small">Engines</h1>
+                        <div class="slds-grid slds-wrap">
+                        <template for:each={enginesData} for:item="data">
+                            <div class="slds-col slds-size_1-of-3" key={data.InterestID}>
+                            <lightning-input type="checkbox" label={data.InterestName} name={data.InterestName} data-id={data.InterestID} checked={data.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                        </div>
+                        </template>
+                        </div>
+                    </template>
+                    <!-- <div class="slds-grid slds-wrap">
+                    <template if:true={isAcuraPresent}>
+                        <div class="slds-col slds-size_3-of-3 slds-max-medium-size_3-of-3">
+                            <lightning-input type="checkbox"  label="Offers and Promotions from Acura" name={acuraData.BusinessEntity} data-id={acuraData.InterestID} checked={acuraData.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                        </div>
+                    </template>
+                    <template if:true={isHondaPresent}>
+                        <div class="slds-col slds-size_3-of-3 slds-max-medium-size_3-of-3">
+                            <lightning-input type="checkbox"  label="Offers and Promotions from Honda" name={hondaData.BusinessEntity} data-id={hondaData.InterestID} checked={hondaData.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                        </div>
+                    </template>
+                    <template if:true={isPSPresent}>
+                        <div class="slds-col slds-size_3-of-3 slds-max-medium-size_3-of-3">
+                            <lightning-input type="checkbox"  label="Offers and Promotions from Powersports" name={psData.BusinessEntity} data-id={psData.InterestID} checked={psData.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                        </div>
+                    </template>
+                    <template if:true={isPEPresent}>
+                        <div class="slds-col slds-size_3-of-3 slds-max-medium-size_3-of-3">
+                            <lightning-input type="checkbox"  label="Offers and Promotions from Power Equipment" name={peData.BusinessEntity} data-id={peData.InterestID} checked={peData.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                        </div>
+                    </template>
+                    <template if:true={isMarinePresent}>
+                            <div class="slds-col slds-size_3-of-3 slds-max-medium-size_3-of-3">
+                            <lightning-input type="checkbox"  label="Offers and Promotions from Marine" name={marineData.BusinessEntity} data-id={marineData.InterestID} checked={marineData.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                        </div>
+                    </template>
+                </div> -->
+                </template>
+                <template if:true={isEvents}>
+                    <div class="slds-grid slds-wrap">
+                    <template if:true={isAcuraPresent}>
+                        <template for:each={acuraData} for:item="data">
+                            <div class="slds-col slds-size_1-of-3" key={data.InterestID}>
+                            <lightning-input type="checkbox" label={data.InterestName} name={data.InterestName} data-id={data.InterestID} checked={data.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                        </div>
+                        </template>
+                    </template>
+                    <template if:true={isHondaPresent}>
+                        <template for:each={hondaData} for:item="data">
+                            <div class="slds-col slds-size_1-of-3" key={data.InterestID}>
+                            <lightning-input type="checkbox" label={data.InterestName} name={data.InterestName} data-id={data.InterestID} checked={data.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                        </div>
+                        </template>
+                    </template>
+                    <template if:true={isPSPresent}>
+                        <template for:each={psData} for:item="data">
+                            <div class="slds-col slds-size_1-of-3" key={data.InterestID}>
+                            <lightning-input type="checkbox" label={data.InterestName} name={data.InterestName} data-id={data.InterestID} checked={data.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                        </div>
+                        </template>
+                    </template>
+                    <template if:true={isPEPresent}>
+                        <template for:each={peData} for:item="data">
+                            <div class="slds-col slds-size_1-of-3" key={data.InterestID}>
+                            <lightning-input type="checkbox" label={data.InterestName} name={data.InterestName} data-id={data.InterestID} checked={data.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                        </div>
+                        </template>
+                    </template>
+                    <template if:true={isMarinePresent}>
+                        <template for:each={marineData} for:item="data">
+                            <div class="slds-col slds-size_1-of-3" key={data.InterestID}>
+                            <lightning-input type="checkbox" label={data.InterestName} name={data.InterestName} data-id={data.InterestID} checked={data.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                        </div>
+                        </template>
+                    </template>
+                    <template if:true={isEnginesPresent}>
+                        <template for:each={enginesData} for:item="data">
+                            <div class="slds-col slds-size_1-of-3" key={data.InterestID}>
+                            <lightning-input type="checkbox" label={data.InterestName} name={data.InterestName} data-id={data.InterestID} checked={data.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                        </div>
+                        </template>
+                    </template>
+                </div>
+                    <!-- <div class="slds-grid slds-wrap">
+                        <template if:true={isAcuraPresent}>                
+                            <template for:each={acuraData} for:item="data">
+                                <div class="slds-col slds-size_1-of-3 slds-max-medium-size_3-of-3" key={data.InterestID}>
+                                <lightning-input type="checkbox"  label={data.InterestName} name={data.InterestName} data-id={data.InterestID} checked={data.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                            </div>
+                            </template>
+                        </template>
+                        <template if:true={isHondaPresent}>
+                            <template for:each={hondaData} for:item="data">
+                                <div class="slds-col  slds-size_1-of-3 slds-max-medium-size_3-of-3" key={data.InterestID}>
+                                <lightning-input type="checkbox" key={data.InterestID} label={data.InterestName} name={data.InterestName} data-id={data.InterestID} checked={data.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                            </div>
+                            </template>
+                        </template>
+                        <template if:true={isPSPresent}>
+                            <template for:each={psData} for:item="data">
+                                <div class="slds-col  slds-size_1-of-3 slds-max-medium-size_3-of-3" key={data.InterestID}>
+                                <lightning-input type="checkbox" key={data.InterestID} label={data.InterestName} name={data.InterestName} data-id={data.InterestID} checked={data.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                           </div>
+                            </template>
+                        </template>
+                        <template if:true={isPEPresent}>
+                            <template for:each={peData} for:item="data">
+                                <div class="slds-col slds-size_1-of-3 slds-max-medium-size_3-of-3" key={data.InterestID}>
+                                <lightning-input type="checkbox" key={data.InterestID} label={data.InterestName} name={data.InterestName} data-id={data.InterestID} checked={data.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                           </div>
+                            </template>
+                        </template>
+                        <template if:true={isMarinePresent}>
+                            <template for:each={marineData} for:item="data">
+                                <div class="slds-col  slds-size_1-of-3 slds-max-medium-size_3-of-3" key={data.InterestID}>
+                                <lightning-input type="checkbox" key={data.InterestID} label={data.InterestName} name={data.InterestName} data-id={data.InterestID} checked={data.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                            </div>
+                            </template>
+                        </template>
+                </div> -->
+                </template>
+                <template if:true={isDigitalMarketPlace}>
+                    <div class="slds-grid slds-wrap">
+                    <div class="sub-description slds-p-top_small slds-p-bottom_small">If you are looking to accessorize your new Honda or need replacement parts for an older vehicle, sign up to receive information from Dreamshop.</div>
+                    <template if:true={isAcuraPresent}>
+                        <template for:each={acuraData} for:item="data">
+                            <div class="slds-col slds-size_1-of-3" key={data.InterestID}>
+                            <lightning-input type="checkbox"  label={data.InterestName} name={data.InterestName} data-id={data.InterestID} checked={data.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                        </div>
+                        </template>
+                    </template>
+                    <template if:true={isHondaPresent}>
+                        <template for:each={hondaData} for:item="data">
+                            <div class="slds-col slds-size_1-of-3" key={data.InterestID}>
+                            <lightning-input type="checkbox"  label={data.InterestName} name={data.InterestName} data-id={data.InterestID} checked={data.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                        </div>
+                        </template>
+                    </template>
+                    <template if:true={isPSPresent}>
+                        <template for:each={psData} for:item="data">
+                            <div class="slds-col slds-size_1-of-3" key={data.InterestID}>
+                            <lightning-input type="checkbox"  label={data.InterestName} name={data.InterestName} data-id={data.InterestID} checked={data.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                        </div>
+                        </template>
+                    </template>
+                    <template if:true={isPEPresent}>
+                        <template for:each={peData} for:item="data">
+                            <div class="slds-col slds-size_1-of-3" key={data.InterestID}>
+                            <lightning-input type="checkbox"  label={data.InterestName} name={data.InterestName} data-id={data.InterestID} checked={data.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                        </div>
+                        </template>
+                    </template>
+                    <template if:true={isMarinePresent}>
+                        <template for:each={marineData} for:item="data">
+                            <div class="slds-col slds-size_1-of-3" key={data.InterestID}>
+                            <lightning-input type="checkbox"  label={data.InterestName} name={data.InterestName} data-id={data.InterestID} checked={data.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                        </div>
+                        </template>
+                    </template>
+                    <!-- <template if:true={isAcuraPresent}>
+                        <div class="slds-col slds-size_1-of-3">
+                            <lightning-input type="checkbox"  label="Acura eStore" name={acuraData.BusinessEntity} data-id={acuraData.InterestID} checked={acuraData.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                        </div>
+                    </template>
+                    <template if:true={isHondaPresent}>
+                        <div class="slds-col slds-size_1-of-3">
+                            <lightning-input type="checkbox"  label="Honda eStore" name={hondaData.BusinessEntity} data-id={hondaData.InterestID} checked={hondaData.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                        </div>
+                    </template>
+                    <template if:true={isPSPresent}>
+                        <div class="slds-col slds-size_1-of-3">
+                            <lightning-input type="checkbox"  label="Posersports eStore" name={psData.BusinessEntity} data-id={psData.InterestID} checked={psData.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                        </div>
+                    </template>
+                    <template if:true={isPEPresent}>
+                        <div class="slds-col slds-size_1-of-3">
+                            <lightning-input type="checkbox"  label="PowerEquipment eStore" name={peData.BusinessEntity} data-id={peData.InterestID} checked={peData.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                        </div>
+                    </template>
+                    <template if:true={isMarinePresent}>
+                            <div class="slds-col slds-size_1-of-3">
+                            <lightning-input type="checkbox"  label="Marine eStore" name={marineData.BusinessEntity} data-id={marineData.InterestID} checked={marineData.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                        </div>
+                    </template> -->
+                </div>
+                </template>
+                <template if:true={isRacing}>
+                    <div class="slds-grid slds-wrap">
+                        <template if:true={isAcuraPresent}>
+                            <template for:each={acuraData} for:item="data">
+                                <div class="slds-col slds-size_1-of-3" key={data.InterestID}>
+                                <lightning-input type="checkbox"  label={data.InterestName} name={data.InterestName} data-id={data.InterestID} checked={data.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                            </div>
+                            </template>
+                        </template>
+                        <template if:true={isHondaPresent}>
+                            <template for:each={hondaData} for:item="data">
+                                <div class="slds-col slds-size_1-of-3" key={data.InterestID}>
+                                <lightning-input type="checkbox"  label={data.InterestName} name={data.InterestName} data-id={data.InterestID} checked={data.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                            </div>
+                            </template>
+                        </template>
+                        <template if:true={isPSPresent}>
+                            <template for:each={psData} for:item="data">
+                                <div class="slds-col slds-size_1-of-3" key={data.InterestID}>
+                                <lightning-input type="checkbox"  label={data.InterestName} name={data.InterestName} data-id={data.InterestID} checked={data.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                            </div>
+                            </template>
+                        </template>
+                        <template if:true={isPEPresent}>
+                            <template for:each={peData} for:item="data">
+                                <div class="slds-col slds-size_1-of-3" key={data.InterestID}>
+                                <lightning-input type="checkbox"  label={data.InterestName} name={data.InterestName} data-id={data.InterestID} checked={data.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                            </div>
+                            </template>
+                        </template>
+                        <template if:true={isMarinePresent}>
+                            <template for:each={marineData} for:item="data">
+                                <div class="slds-col slds-size_1-of-3" key={data.InterestID}>
+                                <lightning-input type="checkbox"  label={data.InterestName} name={data.InterestName} data-id={data.InterestID} checked={data.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                            </div>
+                            </template>
+                        </template>
+                    </div>
+                    <!-- <template if:true={isPSPresent}>
+                        <div class="slds-col slds-size_3-of-3">
+                            <lightning-input type="checkbox"  label={psData.CategoryName} name={psData.BusinessEntity} data-id={psData.InterestID} checked={psData.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                        </div>
+                    </template> -->
+                </template>
+                <template if:true={isSoftwareUpdates}>
+                    <div class="slds-grid slds-wrap">
+                        <template if:true={isAcuraPresent}>
+                            <template for:each={acuraData} for:item="data">
+                                <div class="slds-col slds-size_1-of-3" key={data.InterestID}>
+                                <lightning-input type="checkbox"  label={data.InterestName} name={data.InterestName} data-id={data.InterestID} checked={data.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                            </div>
+                            </template>
+                        </template>
+                        <template if:true={isHondaPresent}>
+                            <template for:each={hondaData} for:item="data">
+                                <div class="slds-col slds-size_1-of-3" key={data.InterestID}>
+                                <lightning-input type="checkbox"  label={data.InterestName} name={data.InterestName} data-id={data.InterestID} checked={data.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                            </div>
+                            </template>
+                        </template>
+                        <template if:true={isPSPresent}>
+                            <template for:each={psData} for:item="data">
+                                <div class="slds-col slds-size_1-of-3" key={data.InterestID}>
+                                <lightning-input type="checkbox"  label={data.InterestName} name={data.InterestName} data-id={data.InterestID} checked={data.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                            </div>
+                            </template>
+                        </template>
+                        <template if:true={isPEPresent}>
+                            <template for:each={peData} for:item="data">
+                                <div class="slds-col slds-size_1-of-3" key={data.InterestID}>
+                                <lightning-input type="checkbox"  label={data.InterestName} name={data.InterestName} data-id={data.InterestID} checked={data.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                            </div>
+                            </template>
+                        </template>
+                        <template if:true={isMarinePresent}>
+                            <template for:each={marineData} for:item="data">
+                                <div class="slds-col slds-size_1-of-3" key={data.InterestID}>
+                                <lightning-input type="checkbox"  label={data.InterestName} name={data.InterestName} data-id={data.InterestID} checked={data.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                            </div>
+                            </template>
+                        </template>
+                    </div>
+                    <!-- <template if:true={isPSPresent}>
+                        <div class="slds-col slds-size_3-of-3">
+                            <lightning-input type="checkbox"  label={psData.CategoryName} name={psData.BusinessEntity} data-id={psData.InterestID} checked={psData.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                        </div>
+                    </template> -->
+                </template>
+                <template if:true={isAcuraMotorsports}>
+                    <div class="slds-grid slds-wrap">
+                        <template if:true={isAcuraPresent}>
+                            <template for:each={acuraData} for:item="data">
+                                <div class="slds-col slds-size_1-of-3" key={data.InterestID}>
+                                <lightning-input type="checkbox"  label={data.InterestName} name={data.InterestName} data-id={data.InterestID} checked={data.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                            </div>
+                            </template>
+                        </template>
+                        <template if:true={isHondaPresent}>
+                            <template for:each={hondaData} for:item="data">
+                                <div class="slds-col slds-size_1-of-3" key={data.InterestID}>
+                                <lightning-input type="checkbox"  label={data.InterestName} name={data.InterestName} data-id={data.InterestID} checked={data.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                            </div>
+                            </template>
+                        </template>
+                        <template if:true={isPSPresent}>
+                            <template for:each={psData} for:item="data">
+                                <div class="slds-col slds-size_1-of-3" key={data.InterestID}>
+                                <lightning-input type="checkbox"  label={data.InterestName} name={data.InterestName} data-id={data.InterestID} checked={data.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                            </div>
+                            </template>
+                        </template>
+                        <template if:true={isPEPresent}>
+                            <template for:each={peData} for:item="data">
+                                <div class="slds-col slds-size_1-of-3" key={data.InterestID}>
+                                <lightning-input type="checkbox"  label={data.InterestName} name={data.InterestName} data-id={data.InterestID} checked={data.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                            </div>
+                            </template>
+                        </template>
+                        <template if:true={isMarinePresent}>
+                            <template for:each={marineData} for:item="data">
+                                <div class="slds-col slds-size_1-of-3" key={data.InterestID}>
+                                <lightning-input type="checkbox"  label={data.InterestName} name={data.InterestName} data-id={data.InterestID} checked={data.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                            </div>
+                            </template>
+                        </template>
+                    </div>
+                    <!-- <template if:true={isPSPresent}>
+                        <div class="slds-col slds-size_3-of-3">
+                            <lightning-input type="checkbox"  label={psData.CategoryName} name={psData.BusinessEntity} data-id={psData.InterestID} checked={psData.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                        </div>
+                    </template> -->
+                </template>
+                <template if:true={isCurrentLeaseAndFinanceOffers}>
+                    <div class="slds-grid slds-wrap">
+                        <template if:true={isAcuraPresent}>
+                            <template for:each={acuraData} for:item="data">
+                                <div class="slds-col slds-size_1-of-3" key={data.InterestID}>
+                                <lightning-input type="checkbox"  label={data.InterestName} name={data.InterestName} data-id={data.InterestID} checked={data.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                            </div>
+                            </template>
+                        </template>
+                        <template if:true={isHondaPresent}>
+                            <template for:each={hondaData} for:item="data">
+                                <div class="slds-col slds-size_1-of-3" key={data.InterestID}>
+                                <lightning-input type="checkbox"  label={data.InterestName} name={data.InterestName} data-id={data.InterestID} checked={data.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                            </div>
+                            </template>
+                        </template>
+                        <template if:true={isPSPresent}>
+                            <template for:each={psData} for:item="data">
+                                <div class="slds-col slds-size_1-of-3" key={data.InterestID}>
+                                <lightning-input type="checkbox"  label={data.InterestName} name={data.InterestName} data-id={data.InterestID} checked={data.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                            </div>
+                            </template>
+                        </template>
+                        <template if:true={isPEPresent}>
+                            <template for:each={peData} for:item="data">
+                                <div class="slds-col slds-size_1-of-3" key={data.InterestID}>
+                                <lightning-input type="checkbox"  label={data.InterestName} name={data.InterestName} data-id={data.InterestID} checked={data.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                            </div>
+                            </template>
+                        </template>
+                        <template if:true={isMarinePresent}>
+                            <template for:each={marineData} for:item="data">
+                                <div class="slds-col slds-size_1-of-3" key={data.InterestID}>
+                                <lightning-input type="checkbox"  label={data.InterestName} name={data.InterestName} data-id={data.InterestID} checked={data.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                            </div>
+                            </template>
+                        </template>
+                    </div>
+                </template>
+                <template if:true={isGenuineParts}>
+                    <div class="slds-grid slds-wrap">
+                        <template if:true={isAcuraPresent}>
+                            <template for:each={acuraData} for:item="data">
+                                <div class="slds-col slds-size_1-of-3" key={data.InterestID}>
+                                <lightning-input type="checkbox"  label={data.InterestName} name={data.InterestName} data-id={data.InterestID} checked={data.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                            </div>
+                            </template>
+                        </template>
+                        <template if:true={isHondaPresent}>
+                            <template for:each={hondaData} for:item="data">
+                                <div class="slds-col slds-size_1-of-3" key={data.InterestID}>
+                                <lightning-input type="checkbox"  label={data.InterestName} name={data.InterestName} data-id={data.InterestID} checked={data.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                            </div>
+                            </template>
+                        </template>
+                        <template if:true={isPSPresent}>
+                            <template for:each={psData} for:item="data">
+                                <div class="slds-col slds-size_1-of-3" key={data.InterestID}>
+                                <lightning-input type="checkbox"  label={data.InterestName} name={data.InterestName} data-id={data.InterestID} checked={data.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                            </div>
+                            </template>
+                        </template>
+                        <template if:true={isPEPresent}>
+                            <template for:each={peData} for:item="data">
+                                <div class="slds-col slds-size_1-of-3" key={data.InterestID}>
+                                <lightning-input type="checkbox"  label={data.InterestName} name={data.InterestName} data-id={data.InterestID} checked={data.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                            </div>
+                            </template>
+                        </template>
+                        <template if:true={isMarinePresent}>
+                            <template for:each={marineData} for:item="data">
+                                <div class="slds-col slds-size_1-of-3" key={data.InterestID}>
+                                <lightning-input type="checkbox"  label={data.InterestName} name={data.InterestName} data-id={data.InterestID} checked={data.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                            </div>
+                            </template>
+                        </template>
+                    </div>
+                    <!-- <div class="slds-grid slds-wrap">
+                    <template if:true={isAcuraPresent}>
+                        <div class="slds-col slds-size_3-of-3">
+                            <lightning-input type="checkbox"  label="Receive special offers on Acura Genuine Parts" name={acuraData.BusinessEntity} data-id={acuraData.InterestID} checked={acuraData.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                        </div>
+                    </template>
+                    <template if:true={isHondaPresent}>
+                        <div class="slds-col slds-size_3-of-3">
+                            <lightning-input type="checkbox"  label="Receive special offers on Honda Genuine Parts" name={hondaData.BusinessEntity} data-id={hondaData.InterestID} checked={hondaData.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                        </div>
+                    </template>
+                    <template if:true={isPSPresent}>
+                        <div class="slds-col slds-size_3-of-3">
+                            <lightning-input type="checkbox"  label="Receive special offers on Powersports Genuine Parts" name={psData.BusinessEntity} data-id={psData.InterestID} checked={psData.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                        </div>
+                    </template>
+                    <template if:true={isPEPresent}>
+                        <div class="slds-col slds-size_3-of-3">
+                            <lightning-input type="checkbox"  label="Receive special offers on Power Equipment Genuine Parts" name={peData.BusinessEntity} data-id={peData.InterestID} checked={peData.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                        </div>
+                    </template>
+                    <template if:true={isMarinePresent}>
+                            <div class="slds-col slds-size_3-of-3">
+                            <lightning-input type="checkbox"  label="Receive special offers on Honda Marine Genuine Parts" name={marineData.BusinessEntity} data-id={marineData.InterestID} checked={marineData.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                        </div>
+                    </template>
+                </div> -->
+                </template>
+                <template if:true={isEnvironmentAndTechnologies}>
+                    <div class="slds-grid slds-wrap">
+                        <div class="sub-description slds-p-top_small slds-p-bottom_small">Information and current offers on home and mobility energy efficiency and renewable energy products and technologies.</div>
+                        <template if:true={isAcuraPresent}>
+                            <template for:each={acuraData} for:item="data">
+                                <div class="slds-col slds-size_1-of-3" key={data.InterestID}>
+                                <lightning-input type="checkbox"  label={data.InterestName} name={data.InterestName} data-id={data.InterestID} checked={data.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                            </div>
+                            </template>
+                        </template>
+                        <template if:true={isHondaPresent}>
+                            <template for:each={hondaData} for:item="data">
+                                <div class="slds-col slds-size_1-of-3" key={data.InterestID}>
+                                <lightning-input type="checkbox"  label={data.InterestName} name={data.InterestName} data-id={data.InterestID} checked={data.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                            </div>
+                            </template>
+                        </template>
+                        <template if:true={isPSPresent}>
+                            <template for:each={psData} for:item="data">
+                                <div class="slds-col slds-size_1-of-3" key={data.InterestID}>
+                                <lightning-input type="checkbox"  label={data.InterestName} name={data.InterestName} data-id={data.InterestID} checked={data.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                            </div>
+                            </template>
+                        </template>
+                        <template if:true={isPEPresent}>
+                            <template for:each={peData} for:item="data">
+                                <div class="slds-col slds-size_1-of-3" key={data.InterestID}>
+                                <lightning-input type="checkbox"  label={data.InterestName} name={data.InterestName} data-id={data.InterestID} checked={data.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                            </div>
+                            </template>
+                        </template>
+                        <template if:true={isMarinePresent}>
+                            <template for:each={marineData} for:item="data">
+                                <div class="slds-col slds-size_1-of-3" key={data.InterestID}>
+                                <lightning-input type="checkbox"  label={data.InterestName} name={data.InterestName} data-id={data.InterestID} checked={data.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                            </div>
+                            </template>
+                        </template>
+                    </div>
+                    <!-- <div class="sub-description slds-p-top_small slds-p-bottom_small">Information and current offers on home and mobility energy efficiency and renewable energy products and technologies.</div>
+                    <template if:true={isAcuraPresent}>
+                        <div class="slds-col slds-size_1-of-3">
+                            <lightning-input type="checkbox"  label={acuraData.CategoryName} name={acuraData.CategoryName} data-id={acuraData.InterestID} checked={acuraData.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                        </div>
+                    </template>
+                    <template if:true={isHondaPresent}>
+                        <div class="slds-col slds-size_1-of-3">
+                            <lightning-input type="checkbox"  label={hondaData.CategoryName} name={hondaData.CategoryName} data-id={hondaData.InterestID} checked={hondaData.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                        </div>
+                    </template>
+                    <template if:true={isPSPresent}>
+                        <div class="slds-col slds-size_1-of-3">
+                            <lightning-input type="checkbox"  label={psData.CategoryName} name={psData.CategoryName} data-id={psData.InterestID} checked={psData.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                        </div>
+                    </template>
+                    <template if:true={isPEPresent}>
+                        <div class="slds-col slds-size_1-of-3">
+                            <lightning-input type="checkbox"  label={peData.CategoryName} name={peData.CategoryName} data-id={peData.InterestID} checked={peData.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                        </div>
+                    </template>
+                    <template if:true={isMarinePresent}>
+                            <div class="slds-col slds-size_1-of-3">
+                            <lightning-input type="checkbox"  label={marineData.CategoryName} name={marineData.CategoryName} data-id={marineData.InterestID} checked={marineData.OptInFlag} class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+                        </div>
+                    </template> -->
+                </template>
+                <template if:true={isContactPrefence}>
+                    <lightning-radio-group name="radioGroup" label="How often should we contact you for non product related updates such as offers and news?"
+                    type="radio" options={contactFrequency}
+                    ></lightning-radio-group>
+                    <lightning-combobox name="Select Time Zone" label="Select Time Zone" 
+                    options={timezone} class="time-zone find-brand-combobox">
+                    </lightning-combobox>
+                    <lightning-radio-group name="radioGroup" label="What time of day works best for us to contact you?"
+                    type="radio" options={contactday}
+                    ></lightning-radio-group>
+                </template>
+                <template if:true={isUnsubscribeAll}>
+                <div class="sub-description slds-p-top_small slds-p-bottom_small">Check the box next to your email address and save your preferences to stop receiving email updates from Honda.</div>
+                <lightning-input type="checkbox"  label={getEmail} name={getEmail} data-id="unsubscribeall"  class="checkbox" onchange={handleChexboxClick}> </lightning-input>
+
+                </template>
+            </template>
+        </section>
+    </li>
+</template>
+</template>

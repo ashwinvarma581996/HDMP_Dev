@@ -1,0 +1,32 @@
+<template>
+    <template if:true={isYearValid}>
+        <div class={mainCardClass}>
+            <lightning-card class="card-styles">
+                <h3 slot="title" class="slds-truncate" onclick={handleClickHeader}>
+                    <img src={icon} class="slds-p-right_small custom-icon">
+                    <span class={titleClass}>{title}</span>
+                    <template if:true={showforwardicon}>
+                        <lightning-icon class={iconClass} icon-name={headerRightIcon} size="x-small"></lightning-icon>
+                    </template>
+                </h3>
+                <div slot="actions" onclick={handleClickAction}>
+                    <slot name="action">
+                        <template if:true={actionButton}>
+                            <button class="slds-button slds-button_outline-brand action-button">{actionButton}
+                            </button>
+                        </template>
+                    </slot>
+                </div>
+                <div class={bodyClass}>
+                    <lightning-formatted-rich-text value={body}></lightning-formatted-rich-text>
+                    
+                </div>
+                <template if:true={showfooter}>
+                    <div slot="footer">
+                        <slot class="footer" name="footer" onclick={handleClickFooter}></slot>
+                    </div>
+                </template>
+            </lightning-card>
+        </div>
+    </template>
+    </template>

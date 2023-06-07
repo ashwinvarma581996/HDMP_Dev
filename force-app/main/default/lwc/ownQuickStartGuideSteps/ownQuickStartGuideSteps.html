@@ -1,0 +1,473 @@
+<template>
+    <div if:true={isGetToKnowYourHonda}>
+        <lightning-layout if:true={isSourceTypePdp} multiple-rows>
+            <lightning-layout-item if:true={isHonda} size="12" padding="around-small" small-device-size="12"
+                medium-device-size="12" large-device-size="12">
+                <lightning-layout multiple-rows>
+                    <lightning-layout-item size="12" padding="around-small" small-device-size="12"
+                        medium-device-size="12" large-device-size="4">
+                        <c-own-video-card content-id={contentId}></c-own-video-card>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="12" padding="around-small" small-device-size="12"
+                        medium-device-size="12" large-device-size="4">
+                        <c-own-video-card content-id={contentId}></c-own-video-card>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="12" padding="around-small" small-device-size="12"
+                        medium-device-size="12" large-device-size="4">
+                        <c-own-video-card content-id={contentId}></c-own-video-card>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </lightning-layout-item>
+
+            <lightning-layout-item if:true={isAcura} size="12" padding="around-small" small-device-size="12"
+                medium-device-size="12" large-device-size="12">
+                In Development
+            </lightning-layout-item>
+            <lightning-layout-item if:true={isPowersports} size="12" padding="around-small" small-device-size="12"
+                medium-device-size="12" large-device-size="12">
+                In Development
+            </lightning-layout-item>
+            <lightning-layout-item if:true={isPowerequipment} size="12" padding="around-small" small-device-size="12"
+                medium-device-size="12" large-device-size="12">
+                In Development
+            </lightning-layout-item>
+            <lightning-layout-item if:true={isMarine} size="12" padding="around-small" small-device-size="12"
+                medium-device-size="12" large-device-size="12">
+                In Development
+            </lightning-layout-item>
+        </lightning-layout>
+
+        <lightning-layout if:false={isSourceTypePdp} multiple-rows>
+            <lightning-layout-item if:true={isAcura} size="12" padding="around-small" small-device-size="12"
+                medium-device-size="12" large-device-size="12">
+                In Development
+            </lightning-layout-item>
+            <lightning-layout-item if:true={isHonda} size="12" padding="around-small" small-device-size="12"
+                medium-device-size="12" large-device-size="12">
+                <lightning-layout multiple-rows>
+                    <lightning-layout-item size="12" padding="around-small" small-device-size="12"
+                        medium-device-size="12" large-device-size="4">
+                        <c-own-video-card icon="chat.svg" content-id={contentId}></c-own-video-card>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="12" padding="around-small" small-device-size="12"
+                        medium-device-size="12" large-device-size="4">
+                        <c-own-video-card icon="chat.svg" content-id={contentId}></c-own-video-card>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="12" padding="around-small" small-device-size="12"
+                        medium-device-size="12" large-device-size="4">
+                        <c-own-video-card icon="chat.svg" content-id={contentId}></c-own-video-card>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </lightning-layout-item>
+            <lightning-layout-item if:true={isPowersports} size="12" padding="around-small" small-device-size="12"
+                medium-device-size="12" large-device-size="12">
+                In Development
+            </lightning-layout-item>
+            <lightning-layout-item if:true={isPowerequipment} size="12" padding="around-small" small-device-size="12"
+                medium-device-size="12" large-device-size="12">
+                In Development
+            </lightning-layout-item>
+            <lightning-layout-item if:true={isMarine} size="12" padding="around-small" small-device-size="12"
+                medium-device-size="12" large-device-size="12">
+                In Development
+            </lightning-layout-item>
+        </lightning-layout>
+    </div>
+
+    <div if:true={isGetToKnowYourMotor}>
+        <!-- if:true={isSourceTypePdp} -->
+        <lightning-layout  multiple-rows>
+            <lightning-layout-item if:true={isMarine} size="12" padding="around-small" small-device-size="12"
+            medium-device-size="12" large-device-size="12">
+                <lightning-layout multiple-rows>
+                    <lightning-layout-item size="12" padding="around-small" small-device-size="12"
+                        medium-device-size="12" large-device-size="4">
+                        <c-own-video-card content-id={contentId}></c-own-video-card>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="12" padding="around-small" small-device-size="12"
+                        medium-device-size="12" large-device-size="4">
+                        <c-own-video-card content-id={contentId}></c-own-video-card>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="12" padding="around-small" small-device-size="12"
+                        medium-device-size="12" large-device-size="4">
+                        <lightning-layout multiple-rows>
+                            <lightning-layout-item size="12" small-device-size="12" medium-device-size="12"
+                                large-device-size="12">
+                                <h1 class="slds-text-heading_large slds-text-align_center slds-p-horizontal_x-large slds-p-top_medium">
+                                    Honda HD-4 Gauge Setup</h1>
+                            </lightning-layout-item>
+                            <lightning-layout-item size="12" small-device-size="12" medium-device-size="12"
+                                large-device-size="12">
+                                <p class="slds-text-color_weak slds-p-top_medium content-text">The Honda HD-4 display offers a smart
+                                    interface to engine data, fuel management, and more. Connected to your boat’s NMEA
+                                    2000 network, the HD-4 automatically detects and displays the most relevant
+                                    information available on a series of preset and user-customizable data pages.</p>
+                                <p class="slds-text-color_weak slds-p-top_medium content-text">For more information please go to</p>
+                                <p class="slds-p-top_xx-small">
+                                    <a
+                                        class="connect-phone-link content-text-link">https://marine.honda.com/support/maintenance/hd-4-display-support</a>
+                                </p>
+                            </lightning-layout-item>
+                        </lightning-layout>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </lightning-layout-item>
+        </lightning-layout>
+    </div>
+
+    <lightning-layout if:true={isConnectyourSmartphone} multiple-rows>
+        <lightning-layout-item if:true={isSourceTypePdp} size="12" small-device-size="12" medium-device-size="12"
+            large-device-size="12">
+            <lightning-layout if:true={isHonda} multiple-rows>
+                <lightning-layout-item size="12" padding="around-small" small-device-size="12" medium-device-size="12"
+                    large-device-size="4">
+                    <c-own-video-card content-id={contentId}></c-own-video-card>
+                </lightning-layout-item>
+                <lightning-layout-item size="12" padding="around-small" small-device-size="12" medium-device-size="12"
+                    large-device-size="4">
+                    <c-own-video-card content-id={contentId}></c-own-video-card>
+                </lightning-layout-item>
+                <lightning-layout-item size="12" padding="around-small" small-device-size="12" medium-device-size="12"
+                    large-device-size="4">
+                    <lightning-layout multiple-rows>
+                        <lightning-layout-item size="12" small-device-size="12" medium-device-size="12"
+                            large-device-size="12">
+                            <h1 class="slds-text-heading_large slds-text-align_center slds-p-horizontal_x-large">How to
+                                Set-Up
+                                Bluetooth in your Honda</h1>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="12" small-device-size="12" medium-device-size="12"
+                            large-device-size="12">
+                            <p class="slds-text-color_weak slds-p-top_medium">On your Honda multimedia screen, press the
+                                Home button at the top
+                                left.</p>
+                            <ol class="slds-list_ordered slds-p-top_medium slds-text-color_weak">
+                                <li>
+                                    On your Honda multimedia screen, press the Home button at the top left.
+                                    Press "Phone", then press "Yes" to confirm. You will then be prompted to add a new
+                                    device,
+                                    tap "Yes". Select your mobile device from the multimedia screen.
+                                </li>
+                            </ol>
+                            <p class="slds-text-color_weak slds-p-top_medium">For more information please go to</p>
+                            <p class="slds-p-top_xx-small">
+                                <a class="connect-phone-link">https://www.handsfreelink.com/Honda</a>
+                            </p>
+                        </lightning-layout-item>
+                    </lightning-layout>
+                </lightning-layout-item>
+            </lightning-layout>
+
+            <lightning-layout if:true={isAcura} multiple-rows>In Development</lightning-layout>
+            <lightning-layout if:true={isPowersports} multiple-rows>In Development</lightning-layout>
+            <lightning-layout if:true={isPowerequipment} multiple-rows>In Development</lightning-layout>
+            <lightning-layout if:true={isMarine} multiple-rows>In Development</lightning-layout>
+        </lightning-layout-item>
+
+        <lightning-layout-item if:false={isSourceTypePdp} class="step-container" size="12" small-device-size="12"
+            medium-device-size="12" large-device-size="12">
+            <lightning-layout if:true={isHonda} multiple-rows>
+                <lightning-layout-item size="12" class="custom-card slds-text-align_center" padding="around-small"
+                    small-device-size="12" medium-device-size="12" large-device-size="12">
+                    <p class="slds-text-heading_small step-padding"><strong>Step 1 - Phone Compatability</strong></p>
+                    <p class="slds-text-heading_large step-padding">Let’s check to see if your Smartphone is compatible
+                    </p>
+                    <lightning-layout multiple-rows>
+                        <lightning-layout-item size="12" class="slds-text-align_center" padding="around-small"
+                            small-device-size="12" medium-device-size="12" large-device-size="6">
+                            <p class="slds-text-heading_medium slds-p-vertical_medium">My Honda</p>
+                            <div>
+                                <img src={productImage} />
+                            </div>
+                            <div class="slds-text-heading_small slds-p-top_medium">
+                                2019 HR-V
+                            </div>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="12" class="slds-text-align_center" padding="around-small"
+                            small-device-size="12" medium-device-size="12" large-device-size="6">
+                            <p class="slds-text-heading_medium slds-p-vertical_medium">Select a Phone</p>
+                            <div>
+                                <c-own-phone-compatibility-phone button-name="FIND A PHONE"></c-own-phone-compatibility-phone>
+                            </div>
+                        </lightning-layout-item>
+                    </lightning-layout>
+                </lightning-layout-item>
+
+                <lightning-layout-item size="12" class="custom-card slds-text-align_center slds-m-top_x-large"
+                    padding="around-small" small-device-size="12" medium-device-size="12" large-device-size="12">
+                    <lightning-layout multiple-rows>
+                        <lightning-layout-item size="12" class="slds-text-align_center" padding="around-small"
+                            small-device-size="12" medium-device-size="12" large-device-size="12">
+                            <p class="slds-text-heading_small step-padding"><strong>Step 2 - Bluetooth
+                                    HandsFreeLink</strong></p>
+                            <p class="slds-text-heading_large step-padding">Learn how to connect your AT&T Apple iPhone
+                                12 Pro with
+                                your 2019 HR-V Navigation</p>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="12">
+                        <lightning-layout multiple-rows>
+                            <lightning-layout-item size="12" small-device-size="12" medium-device-size="12"
+                                large-device-size="12">
+                                <lightning-layout multiple-rows>
+                                    <lightning-layout-item size="12" small-device-size="12" medium-device-size="12"
+                                        large-device-size="1">
+                                    </lightning-layout-item>
+                                    <lightning-layout-item size="12" padding="around-small" small-device-size="12"
+                                        medium-device-size="12" large-device-size="5">
+                                        <div>
+                                            <c-own-video-card icon="chat.svg" content-id={contentId}></c-own-video-card>
+                                        </div>
+                                        <div>    
+                                        <p class="slds-text-color_weak slds-text-align_left slds-p-top_x-small">How to
+                                            Set
+                                            up
+                                            Bluetooth in Your Honda - 3:22</p>
+                                        </div>    
+                                    </lightning-layout-item>
+                                    <lightning-layout-item size="12" class="slds-text-color_weak" padding="around-small"
+                                        small-device-size="12" medium-device-size="12" large-device-size="5">
+                                        <lightning-layout class="slds-text-align_left slds-p-top_xx-large" multiple-rows>
+                                            <lightning-layout-item class="slds-p-top_small slds-p-horizontal_large" size="12" small-device-size="12"
+                                                medium-device-size="12" large-device-size="12">
+                                                <lightning-layout class="slds-text-align_left" multiple-rows>
+                                                    <lightning-layout-item size="1" small-device-size="1"
+                                                        medium-device-size="1" large-device-size="1">
+                                                        <lightning-icon class="custom-icon" icon-name="utility:play"
+                                                            size="xx-small">
+                                                        </lightning-icon>
+                                                    </lightning-layout-item>
+                                                    <lightning-layout-item size="9" small-device-size="9"
+                                                        medium-device-size="9" large-device-size="9">
+                                                        Checking compatability
+                                                    </lightning-layout-item>
+                                                    <lightning-layout-item size="2" small-device-size="2"
+                                                        medium-device-size="2" large-device-size="2">
+                                                        1:44
+                                                    </lightning-layout-item>
+                                                </lightning-layout>
+                                            </lightning-layout-item>
+                                            <lightning-layout-item class="slds-p-top_small slds-p-horizontal_large" size="12" small-device-size="12"
+                                                medium-device-size="12" large-device-size="12">
+                                                <lightning-layout class="slds-text-align_left" multiple-rows>
+                                                    <lightning-layout-item size="1" small-device-size="1"
+                                                        medium-device-size="1" large-device-size="1">
+                                                        <lightning-icon class="custom-icon" icon-name="utility:play"
+                                                            size="xx-small">
+                                                        </lightning-icon>
+                                                    </lightning-layout-item>
+                                                    <lightning-layout-item size="9" small-device-size="9"
+                                                        medium-device-size="9" large-device-size="9">
+                                                        Connecting Bluetooth
+                                                    </lightning-layout-item>
+                                                    <lightning-layout-item size="2" small-device-size="2"
+                                                        medium-device-size="2" large-device-size="2">
+                                                        2:37
+                                                    </lightning-layout-item>
+                                                </lightning-layout>
+                                            </lightning-layout-item>
+                                            <lightning-layout-item class="slds-p-top_small slds-p-horizontal_large" size="12" small-device-size="12"
+                                                medium-device-size="12" large-device-size="12">
+                                                <lightning-layout class="slds-text-align_left" multiple-rows>
+                                                    <lightning-layout-item size="1" small-device-size="1"
+                                                        medium-device-size="1" large-device-size="1">
+                                                        <lightning-icon class="custom-icon" icon-name="utility:play"
+                                                            size="xx-small">
+                                                        </lightning-icon>
+                                                    </lightning-layout-item>
+                                                    <lightning-layout-item size="9" small-device-size="9"
+                                                        medium-device-size="9" large-device-size="9">
+                                                        Hondalink
+                                                    </lightning-layout-item>
+                                                    <lightning-layout-item size="2" small-device-size="2"
+                                                        medium-device-size="2" large-device-size="2">
+                                                        0:56
+                                                    </lightning-layout-item>
+                                                </lightning-layout>
+                                            </lightning-layout-item>
+                                            <lightning-layout-item class="slds-p-top_small slds-p-horizontal_large" size="12" small-device-size="12"
+                                                medium-device-size="12" large-device-size="12">
+                                                <lightning-layout class="slds-text-align_left" multiple-rows>
+                                                    <lightning-layout-item size="1" small-device-size="1"
+                                                        medium-device-size="1" large-device-size="1">
+                                                        <lightning-icon class="custom-icon" icon-name="utility:play"
+                                                            size="xx-small">
+                                                        </lightning-icon>
+                                                    </lightning-layout-item>
+                                                    <lightning-layout-item size="9" small-device-size="9"
+                                                        medium-device-size="9" large-device-size="9">
+                                                        Honda Apps & Downloads
+                                                    </lightning-layout-item>
+                                                    <lightning-layout-item size="2" small-device-size="2"
+                                                        medium-device-size="2" large-device-size="2">
+                                                        2:21
+                                                    </lightning-layout-item>
+                                                </lightning-layout>
+                                            </lightning-layout-item>
+                                        </lightning-layout>
+                                    </lightning-layout-item>
+                                    <lightning-layout-item size="12" small-device-size="12" medium-device-size="12"
+                                        large-device-size="1">
+                                    </lightning-layout-item>
+                                </lightning-layout>
+                            </lightning-layout-item>
+                            <lightning-layout-item size="12" class="slds-text-align_left" small-device-size="12"
+                                medium-device-size="12" large-device-size="12">
+                                <lightning-layout  multiple-rows>
+                                    <lightning-layout-item size="12" small-device-size="12" medium-device-size="12"
+                                        large-device-size="1">
+                                    </lightning-layout-item>
+                                    <lightning-layout-item size="12" padding="around-small" small-device-size="12"
+                                        medium-device-size="12" large-device-size="5">
+                                        <p class="slds-text-heading_medium slds-p-vertical_medium">How to Set up
+                                            Bluetooth
+                                            in
+                                            Your Honda</p>
+                                        <p class="slds-text-color_weak">
+                                            Make sure Bluetooth is activated on your mobile device.
+                                        </p>
+                                        <ol class="slds-list_ordered slds-p-top_medium slds-text-color_weak">
+                                            <li>
+                                                On your Honda multimedia screen, press the Home button at the top
+                                                left.On
+                                                your
+                                                Honda multimedia screen, press the Home button at the top left.
+                                            </li>
+                                            <li>
+                                                Press "Phone", then press "Yes" to confirm. You will then be prompted to
+                                                add
+                                                a
+                                                new device, tap "Yes". Select your mobile device from the multimedia
+                                                screen.
+                                            </li>
+                                        </ol>
+                                    </lightning-layout-item>
+                                    <lightning-layout-item size="12" padding="around-small" small-device-size="12"
+                                        medium-device-size="12" large-device-size="5">
+                                        <p class="slds-text-heading_medium slds-p-vertical_medium">How to Set up
+                                            Bluetooth on your phone</p>
+                                        <p class="slds-text-color_weak">
+                                            On your mobile device, select HandsFreeLink® fron the Bluetooth menu. The
+                                            two will now begin pairing.
+                                        </p>
+                                        <ol class="slds-list_ordered slds-p-top_medium slds-text-color_weak">
+                                            <li>
+                                                Your mobile device and Honda multimedia system are now connected via
+                                                Bluetooth and HandsFreeLink®.
+                                            </li>
+                                        </ol>
+                                        <p class="slds-text-color_weak slds-p-top_medium">For more information please go
+                                            to</p>
+                                        <p class="slds-p-top_xx-small">
+                                            <a class="connect-phone-link">www.handsfreelink.com/Honda</a>
+                                        </p>
+                                    </lightning-layout-item>
+                                    <lightning-layout-item size="12" small-device-size="12" medium-device-size="12"
+                                        large-device-size="1">
+                                    </lightning-layout-item>
+                                </lightning-layout>
+                            </lightning-layout-item>
+                        </lightning-layout>
+                    </lightning-layout-item>
+                    </lightning-layout>
+                </lightning-layout-item>
+
+                <lightning-layout-item size="12" class="slds-text-align_center custom-card slds-m-top_x-large"
+                    padding="around-small" small-device-size="12" medium-device-size="12" large-device-size="12">
+                    <p class="slds-text-heading_small step-padding"><strong>Step 3 - Set-Up HondaLink</strong></p>
+                    <p class="slds-text-heading_large step-padding">HondaLink is a first generation system connectivity
+                        suite that lets you enjoy your favorite smartphone apps from inside your Honda</p>
+                    <lightning-layout multiple-rows>
+                        <lightning-layout-item size="12" small-device-size="12" medium-device-size="12"
+                            large-device-size="1">
+                        </lightning-layout-item>
+                        <lightning-layout-item size="12" class="slds-text-align_center" padding="around-small"
+                            small-device-size="12" medium-device-size="12" large-device-size="5">
+                            <div>
+                                <c-own-video-card icon="chat.svg" content-id={contentId}></c-own-video-card>
+                            </div>
+                            <div>
+                                <p class="slds-text-color_weak slds-text-align_left slds-p-top_x-small">How to
+                                    Set up HondaLink in Your Honda - 2:15</p>
+                            </div>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="12" class="slds-text-align_left" padding="around-small"
+                            small-device-size="12" medium-device-size="12" large-device-size="5">
+                            <p class="slds-text-heading_medium slds-p-vertical_medium">Connecting to HondaLink is a
+                                quick and relatively easy process. Just follow these steps:</p>
+                            <div>
+                                <ol class="slds-list_ordered slds-p-top_medium slds-text-color_weak">
+                                    <li>Download and open the app for your compatible Android or Apple smartphone</li>
+                                    <li>Enter your Vehicle Identification Number (check on the driver-side door jam if
+                                        you don’t know it)</li>
+                                    <li>Create a new account or enter an existing Honda ID to skip this step</li>
+                                    <li>Follow the steps to sync your phone and vehicle with Bluetooth</li>
+                                    <li>Select the HondaLink icon on the home screen of your car’s infotainment display
+                                    </li>
+                                    <li>You’re ready to use HondaLink</li>
+                                </ol>
+                            </div>
+                            <p class="slds-text-color_weak slds-p-top_medium">For more information please go to</p>
+                            <p class="slds-p-top_xx-small">
+                                <a class="connect-phone-link">www.hondalink.honda.com/#/</a>
+                            </p>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="12" small-device-size="12" medium-device-size="12"
+                            large-device-size="1">
+                        </lightning-layout-item>
+                    </lightning-layout>
+                </lightning-layout-item>
+
+                <lightning-layout-item size="12" class="slds-text-align_center custom-card slds-m-top_x-large"
+                    padding="around-small" small-device-size="12" medium-device-size="12" large-device-size="12">
+                    <p class="slds-text-heading_small step-padding"><strong>Step 4 - Apps Download & Update</strong></p>
+                    <p class="slds-text-heading_large step-padding">HondaLink is a first generation system connectivity
+                        suite that lets you enjoy your favorite smartphone apps from inside your Honda</p>
+                    <lightning-layout multiple-rows>
+                        <lightning-layout-item size="12" small-device-size="12" medium-device-size="12"
+                            large-device-size="1">
+                        </lightning-layout-item>
+                        <lightning-layout-item size="12" class="slds-text-align_center" padding="around-small"
+                            small-device-size="12" medium-device-size="12" large-device-size="5">
+                            <div>
+                                <c-own-video-card icon="chat.svg" content-id={contentId}></c-own-video-card>
+                            </div>
+                            <div>
+                                <p class="slds-text-color_weak slds-text-align_left slds-p-top_x-small">Downloading and
+                                    Updating your Apps - 2:37</p>
+                            </div>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="12" class="slds-text-align_left" padding="around-small"
+                            small-device-size="12" medium-device-size="12" large-device-size="5">
+                            <p class="slds-text-heading_medium slds-p-vertical_medium">You can add apps or widgets to
+                                the Home screen for easy selection.</p>
+                            <div>
+                                <ol class="slds-list_ordered slds-p-top_medium slds-text-color_weak">
+                                    <li>From the Home screen, select and hold an empty</li>
+                                    <li>space.</li>
+                                    <li>Select Add App or Add Widget. The Apps screen</li>
+                                    <li>appears.</li>
+                                    <li>Select and hold the app or widget you want to add to the Home screen. The
+                                        customization screen appears.</li>
+                                    <li>Select and hold the app or widget and move it to where you want.</li>
+                                    <li>Select OK when complete.</li>
+                                </ol>
+                            </div>
+                            <p class="slds-text-color_weak slds-p-top_medium">For more information please go to</p>
+                            <p class="slds-p-top_xx-small">
+                                <a class="connect-phone-link">www.owners.honda.com/vehicles/subscriptions-downloads</a>
+                            </p>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="12" small-device-size="12" medium-device-size="12"
+                            large-device-size="1">
+                        </lightning-layout-item>
+                    </lightning-layout>
+                </lightning-layout-item>
+            </lightning-layout>
+
+            <lightning-layout if:true={isAcura} multiple-rows>In Development</lightning-layout>
+            <lightning-layout if:true={isPowersports} multiple-rows>In Development</lightning-layout>
+            <lightning-layout if:true={isPowerequipment} multiple-rows>In Development</lightning-layout>
+            <lightning-layout if:true={isMarine} multiple-rows>In Development</lightning-layout>
+        </lightning-layout-item>
+    </lightning-layout>
+</template>

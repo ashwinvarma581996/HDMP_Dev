@@ -1,0 +1,44 @@
+<!-- //============================================================================
+// Title:    Honda Owners Experience - Footer
+//
+// Summary:  This is the html seen at the Owners Garage Find - Honda Auto Body of the Honda Owner Community
+//
+// Details:  Extend the LightningElement with this Base Element to gain access to the Messaging Channel and other logic herein and this is the own garage find honda body component for all community pages.
+//
+//
+// History:
+// May 17, 2021 Arunprasad N (Wipro) Original Author
+//=========================================================================== -->
+<template>
+    <div class="garage-product-edit-header-large">
+        <lightning-layout class="slds-media_center slds-has-flexi-truncate">
+            <lightning-layout-item padding="around-small">
+                <div>
+                    <h2 class="product-edit-header-title">
+                      <span>Edit Product</span>
+                    </h2>
+                </div>
+            </lightning-layout-item>
+            <lightning-layout-item>
+                <div>
+                      <span class="garage-close-label" title="close" onclick={handleClose}>
+                        <img class="garage-close-icon"/>
+                        close
+                      </span>
+                </div>
+            </lightning-layout-item>
+        </lightning-layout>
+    </div>
+    <div class="garage-product-edit-header-small">
+        <lightning-layout class="slds-media slds-media_center slds-has-flexi-truncate" horizontal-align="end">
+            <lightning-layout-item padding="around-small">
+                <div class="slds-no-flex">
+                    <span class="garage-close-label" title="close" onclick={handleClose}>
+                        <img class="garage-close-icon"/>
+                        close
+                      </span>
+                </div>
+            </lightning-layout-item>
+        </lightning-layout>
+    </div>
+</template>

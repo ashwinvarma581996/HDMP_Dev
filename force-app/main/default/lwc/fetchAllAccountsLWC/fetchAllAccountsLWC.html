@@ -1,0 +1,20 @@
+<template>
+    <lightning-card title="All Accounts" icon-name="custom:custom63">
+        <div class="slds-var-m-around_medium">
+            <lightning-input
+                label="State"
+                type="string"
+                value={accountType}
+                class="string-input"
+                onchange={nameChange}
+            ></lightning-input>
+            </div>
+            <lightning-button label="Update Account" title="Non-primary action" onclick={updateAccountData} class="slds-m-left_x-small"></lightning-button>
+    </lightning-card>
+    <div>
+        StoreId: {storeId}
+    </div><br>
+    <div>
+        ProductName: {pName}
+    </div>
+</template>

@@ -1,0 +1,105 @@
+.productPage {
+    padding: 0 15px;
+    &.productAccessories {
+        .cardImage {
+            img {
+                height: 300px !important;
+                width: 100%;
+                border: 1px solid #979797;
+                padding: 10px;
+                object-fit: contain;
+            }
+        }
+    }
+    .productImg {
+        &-toZoom {
+            width: 65%;
+            max-height: 420px;
+            object-fit: contain;
+            @media (max-width: 1024px) {
+                width: 100%!important;
+            }
+            &:hover+.productImg__wrapper {
+                display: block;
+                width: 250px;
+                height: 100%;
+                z-index: 4;
+                @media (min-width: 1200px) {
+                    width: 270px;
+                }
+            }
+        }
+        &__wrapper {
+            top: 0;
+            right: 0px;
+            // left: -270px;
+            @media (min-width: 1200px) {
+                right: 0px;
+                // left: -310px;
+            }
+            @media (max-width: 1023px) {
+                display: block;
+                border: none;
+                width: 100%;
+                top: 102%;
+                left: 0;
+                height: 100%;
+            }
+            &--ZoomEffect {
+                height: 100%;
+                .drift-open {
+                    border-left: 1px solid #979797;
+                    z-index: 9;
+                }
+            }
+        }
+    }
+    ul {
+        align-items: inherit;
+        li {
+            @include card;
+            width: calc(50% - 15px);
+            padding: 20px;
+            margin: 15px;
+            position: relative;
+            padding-bottom: 25px;
+            &:nth-child(odd) {
+                margin-left: 0;
+            }
+            &:nth-child(even) {
+                margin-right: 0;
+            }
+            @media (max-width:767px) {
+                width: 100%;
+                margin: 15px 0;
+            }
+            .slds-tile {
+                &_board {
+                    position: initial;
+                }
+                &__detail {
+                    position: initial;
+                    // button {
+                    //     position: absolute;
+                    //     bottom: 12px;
+                    // }
+                }
+            }
+        }
+    }
+}
+
+.categoryPage .errorShow .slds-combobox {
+    text-transform: capitalize;
+    letter-spacing: 0;
+    font-weight: 400;
+}
+
+.comm-page-detail-0ZG header.slds-modal__header {
+    padding-bottom: 0;
+    border-bottom: 0;
+}
+
+// .searchFilter .slds-input {
+//     padding-left: 32px !important;
+// }

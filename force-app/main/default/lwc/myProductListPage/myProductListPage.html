@@ -1,0 +1,127 @@
+<template>
+    <div if:true={isLoading} class="slds-is-relative slds-spinner_container">
+        <lightning-spinner alternative-text="Loading..." variant="brand">
+        </lightning-spinner>
+    </div>
+
+    <lightning-layout class="user-section-header slds-m-top_large slds-m-bottom_xx-large" multiple-rows>
+        <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="6">
+            <div class="custom-box slds-text-heading_medium slds-hyphenate font-h4">My Products</div>
+        </lightning-layout-item>
+        <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="6"
+            class="user-header-actions">
+            <template if:false={isGuest}>
+                <button class="slds-button themeBtn primaryRedBtn hondabutton" title="Add Product"
+                    onclick={handleToAddProduct}> ADD PRODUCT
+                </button>
+            </template>
+</lightning-layout-item>
+</lightning-layout>
+<lightning-layout multiple-rows class="my-products-wrapper">
+    <template if:true={isDataFetch}>
+        <template if:false={hasData}>
+            <div class="slds-container_center containerWrapper slds-m-bottom_large" style="padding:0">
+                <div class="slds-text-heading_large slds-text-color_error errorTxt slds-text-align_center slds-m-bottom_large">
+                    <template if:false={isGuest}>You have no saved products</template>
+    <template if:true={isGuest}>Sorry, Currently there are no Products found for your user!</template>
+    </div>
+    </div>
+    </template>
+    <template if:true={hasData}>
+            <template if:true={myAllProductList} for:each={myAllProductList} for:item="myProduct">
+                <lightning-layout multiple-rows="true" key={myProduct.Id} style="width:100%;">
+                    <template if:true={myProduct.showBrand}>
+                        <lightning-layout-item size="12" small-device-size="12" medium-device-size="12"
+                            large-device-size="12">
+                            <div class="user-section-header user-section-sub-header">
+                                <h2 class="slds-text-heading_large slds-m-top_large">{myProduct.brandName}</h2>
+                            </div>
+                        </lightning-layout-item>
+                    </template>
+    <template for:each={myProduct.productList} for:item="product">
+                        <lightning-layout multiple-rows="true" key={myProduct.Id} class="productItem">
+                            <lightning-layout-item padding="small" size="12" small-device-size="4" medium-device-size="3" large-device-size="3" class="product-image">
+                                <img src={product.productImageURL} class="slds-p-right--large">
+                            </lightning-layout-item>
+                            <lightning-layout-item padding="small" size="12" small-device-size="8" medium-device-size="6" large-device-size="6" class="slds-p-bottom_x-large product-info">
+                                <lightning-layout multiple-rows="true">
+                                    <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="12">
+                                        <div class="custom-box slds-text-heading_medium slds-hyphenate font-h4 slds-p-bottom--small">
+                                            <template if:true={product.Nickname__c}>{product.Nickname__c}</template>
+    <template if:false={product.Nickname__c}>{product.Honda_Product__r.Product_Models__r.Model_Year__c}&nbsp;{product.Honda_Product__r.Product_Models__r.Model_Name__c}</template>
+    </div>
+    </lightning-layout-item>
+    <lightning-layout-item size="4" class="slds-p-bottom_xx-small">
+        <span class="custom-box"><b> Type </b></span>
+    </lightning-layout-item>
+    <lightning-layout-item size="8" class="slds-p-bottom_xx-small">
+        <span class="custom-box">{product.Honda_Product__r.Product_Models__r.Product_Subdivision__c}</span>
+    </lightning-layout-item>
+    <lightning-layout-item size="4" class="slds-p-bottom_xx-small">
+        <span class="custom-box"><b> Model </b></span>
+    </lightning-layout-item>
+    <lightning-layout-item size="8" class="slds-p-bottom_xx-small">
+        <span class="custom-box">{product.Honda_Product__r.Product_Models__r.Model_Name__c}</span>
+    </lightning-layout-item>
+    <lightning-layout-item size="4" class="slds-p-bottom_xx-small">
+        <span class="custom-box"><b> Year </b></span>
+    </lightning-layout-item>
+    <lightning-layout-item size="8" class="slds-p-bottom_xx-small">
+        <span class="custom-box">{product.Honda_Product__r.Product_Models__r.Model_Year__c}</span>
+    </lightning-layout-item>
+    <lightning-layout-item size="4" class="slds-p-bottom_xx-small">
+        <span class="custom-box"><b> Trim </b></span>
+    </lightning-layout-item>
+    <lightning-layout-item size="8" class="slds-p-bottom_xx-small">
+        <span class="custom-box">{product.Honda_Product__r.Product_Models__r.Trim__c}</span>
+    </lightning-layout-item>
+    <lightning-layout-item size="4" class="slds-p-bottom_xx-small">
+        <span class="custom-box"><b> VIN </b></span>
+    </lightning-layout-item>
+    <lightning-layout-item size="8" class="slds-p-bottom_xx-small">
+        <span class="custom-box">{product.Honda_Product__r.Product_Identifier__c}</span>
+    </lightning-layout-item>
+    <lightning-layout-item size="12" class="slds-m-top_small">
+        <div if:true={product.removable} class="custom-box">
+            <a style="color:red" data-id={product.Id} data-origination={product.Ownership_Origination__c} onclick={handleRemoveMyProduct}>Remove Product</a>
+        </div>
+    </lightning-layout-item>
+</lightning-layout>
+</lightning-layout-item>
+<lightning-layout-item padding="small" size="12" small-device-size="12" medium-device-size="3" large-device-size="3" adding="horizontal-small" alignment-bump="left">
+    <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="6" padding="horizontal-small" alignment-bump="left">
+        <!-- key={product.Id} -->
+        <lightning-layout multiple-rows>
+            <div class="addressBookActions slds-text-align_center">
+                <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="12" padding="horizontal-small">
+                    <div class="addressBookActions slds-text-align_center">
+                        <template if:true={product.hideShopButton}>
+                                                        <button class="slds-button themeBtn primaryRedBtn hondabutton" disabled>SHOP NOW</button>
+                                                    </template>
+                        <template if:false={product.hideShopButton}>
+                                                        <button class="slds-button themeBtn primaryRedBtn hondabutton" data-productid={product.Id} onclick={handleToShop}>SHOP NOW</button>
+                                                    </template>
+                    </div>
+                </lightning-layout-item>
+                <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="12" padding="horizontal-small">
+                    <div class="addressBookActions slds-text-align_center">
+                        <button class="slds-button themeBtn primaryGrayBtn hondabutton" data-productid={product.Id} onclick={editMyProductRecord}>Edit</button>
+                    </div>
+                </lightning-layout-item>
+            </div>
+        </lightning-layout>
+    </lightning-layout-item>
+</lightning-layout-item>
+</lightning-layout>
+</template>
+</lightning-layout>
+</template>
+</template>
+</template>
+</lightning-layout>
+
+<template if:true={showModaxBox}>
+        <c-my-product-modal-box onclosemodalbox={closeModalBoxPopup} vehicle-data={editvehicleData}>
+        </c-my-product-modal-box>
+    </template>
+</template>

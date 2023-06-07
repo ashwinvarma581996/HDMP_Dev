@@ -1,0 +1,79 @@
+.find-dealers-button {
+    font-weight: 900;
+    font-size: 14px;
+    line-height: 22px;
+    text-align: center;
+    text-transform: uppercase;
+    color: #E42525;
+    background: #FFFFFF;
+    border: 2px solid #E42525;
+    border-radius: 2px;
+    height: 34px;
+}
+.external-link{
+    color :#E42525;
+}
+.body-title {
+    font-family: Roboto;
+    font-style: normal;
+    font-size: 16px;
+    line-height: 20px;
+    color: #000000;
+    letter-spacing: 0.03em;
+}
+
+.custom-icon {
+    --sds-c-icon-color-foreground-default: #e42525;
+    --sds-c-icon-color-background: white;
+}
+.service-link{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 14px;
+    line-height: 18px;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 2.8px;
+    text-transform: uppercase;
+    color: #E42525;
+}
+.more-recall-link{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 26px;
+    color: #E42525;
+}
+.footer-icon{
+    margin-left: 5px;
+    bottom: 2px;
+    position: relative;
+}
+.recall-title{
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 900;
+    color: #000000;
+    letter-spacing: 0.03em;
+}
+.recall-info{
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: 0.03em;
+}
+.body-description{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 26px;
+    letter-spacing: 0.03em;
+}
+
+@media only screen and (max-width: 700px) {
+    .recall-padding {
+        padding: 0px !important;
+    }
+}

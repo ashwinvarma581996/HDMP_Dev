@@ -1,0 +1,130 @@
+<template>
+
+    <!-- Vehicle Selector Modal -->
+    <template if:true={showChangeVehicleModal}>
+        <c-select-vehicle-modal onclosechangevehicle={closeChangeVehicleModal}></c-select-vehicle-modal>
+    </template>
+
+    <!-- Display for Product Listing -->
+    <template if:false={displayCats}>
+        <div class="slds-grid slds-wrap category-landing-main">
+            <div class="slds-container_center containerWrapper">
+                <lightning-layout>
+                    <lightning-layout-item size="12" class="slds-p-vertical_small" large-device-size="12">
+                        <div class="custom-box productPage">
+                            <!-- Product Listing Hero Image -->
+                            <template if:true={plpImage}>
+                                <div style="display: block; position: relative; padding: 0px;">
+                                    <img 
+                                        src={plpImage} 
+                                        height="350px" 
+                                        width="700px" 
+                                        alt={plpImageAltText}
+                                        title={plpImageTitle}
+                                        class="slds-align_absolute-center"
+                                    >
+                                </div>
+                            </template>
+                            <!-- Product Listing Tiles -->
+                            <div class="slds-large-size_12-of-12 slds-m-top_large">
+                                <template if:true={prodList}>
+                                    <ul class="slds-grid slds-wrap">
+                                        <template for:each={prodList} for:item="prod" for:index="index">
+                                            <li class="slds-item product_item" key={prod}>
+                                                <article class="slds-tile slds-tile_board">
+                                                    <!-- No Vehicle Selected -->
+                                                    <template if:false={vehicleSelected}>
+                                                        <h3 class="slds-tile__title slds-text-heading_medium" title={prod.Name}>
+                                                            <a class="slds-text-heading_medium" href={prod.url} data-id={prod.Id} data-sku={prod.StockKeepingUnit} onclick={plpSelectVehicle}>{prod.Name}</a>
+                                                        </h3>
+                                                        <p style="max-width: fit-content;" class="slds-m-bottom_small">
+                                                            Part Number: {prod.StockKeepingUnit}
+                                                        </p>
+                                                        <p class="slds-text-heading_medium slds-m-bottom_small">
+                                                            Enter vehicle details for pricing
+                                                        </p>
+                                                        <button style={ctaStyles} class="slds-button slds-button_brand" type="button" data-id={prod.Id} data-sku={prod.StockKeepingUnit} title={ctaNoVehicleMsg} onclick={plpSelectVehicle}>{ctaNoVehicleMsg}</button>
+                                                    </template>
+                                                    <!-- Vehicle Selected -->
+                                                    <template if:true={vehicleSelected}>
+                                                        <h3 class="slds-tile__title slds-text-heading_medium" title={prod.Name}>
+                                                            <a class="slds-text-heading_medium" href={prod.url} data-id={prod.Id} onclick={goToPDP}>{prod.Name}</a>
+                                                        </h3>
+                                                        <p style="max-width: fit-content;" class="slds-m-bottom_small">
+                                                            Part Number: {prod.StockKeepingUnit}
+                                                        </p>
+                                                        <p class="slds-text-heading_medium slds-m-bottom_small">
+                                                            Enter vehicle details for pricing
+                                                        </p>
+                                                        <button style={ctaStyles} class="slds-button slds-button_brand" type="button" data-id={prod.Id} title={ctaVehicleSelectedMsg} onclick={goToPDP}>{ctaVehicleSelectedMsg}</button>
+                                                    </template>
+                                                    
+                                                </article>
+                                            </li>
+                                        </template>
+                                    </ul>
+                                </template>
+                                <!-- No Products associated to megaCategory -->
+                                <template if:false={prodList}>
+                                    <div class="slds-box slds-theme_shade">
+                                        <p class="slds-align_absolute-center">
+                                          <strong>{noResultMessage}</strong> 
+                                        </p>
+                                        <div class="slds-align_absolute-center slds-m-top_small">
+                                            <button style={ctaStyles} class="slds-button slds-button_brand" type="button" title={ctaNoVehicleMsg} onclick={plpSelectVehicle}>{ctaNoVehicleMsg}</button>
+                                        </div>
+                                   </div>
+                                </template>
+                            </div>
+                        </div>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </div>
+        </div>
+    </template>
+
+    <!-- Display for Category Landing -->
+    <template if:true={displayCats}>
+        <div class="slds-grid slds-wrap slds-p-vertical_small category-landing-main">
+            <template for:each={categoryList} for:item="cItem" for:index="index">
+                <div key={cItem} style={gridCustomStyles} class="category-tile-container slds-var-p-around_small">
+                    <div class="category-tile slds-card">
+                        <a class="content" onclick={goToCategory} data-id={cItem.Id} title={cItem.Name} href={cItem.url}>
+                          <!-- Main category image -->
+                            <template if:true={cItem.Category_Image__c}>
+                                <div class="img-container">
+                                    <img
+                                        src={cItem.Category_Image__c}
+                                        class="product slds-align_absolute-center"
+                                        alt={cItem.Category_Image_Alt_Text__c}
+                                        title={cItem.Category_Image_Title__c}
+                                        onclick={goToCategory} 
+                                        data-id={cItem.Id}
+                                    />
+                                </div>
+                            </template>
+
+                            <!-- Backup/Default Category image if main is blank -->
+                            <template if:true={cItem.Category_Image_Default__c}>
+                              <div class="img-container">
+                                  <img
+                                      src={cItem.Category_Image_Default__c}
+                                      class="product slds-align_absolute-center img-default"
+                                      alt={cItem.Category_Image_Alt_Text__c}
+                                      title={cItem.Category_Image_Title__c}
+                                      onclick={goToCategory} 
+                                      data-id={cItem.Id}
+                                  />
+                              </div>
+                            </template>
+                          
+                          <!-- Category Tile Name -->
+                          <h2 style={componentStyles} class="title slds-align_absolute-center">{cItem.Name}</h2>
+                        
+                        </a>
+                    </div>  
+                </div>
+            </template>
+        </div>
+    </template>
+</template>

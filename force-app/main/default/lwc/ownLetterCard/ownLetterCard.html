@@ -1,0 +1,13 @@
+<template>
+    <div class="card card-size card-styles-wrapper">
+        <lightning-card class="card-styles">
+            <div slot="title" class="slds-truncate" onclick={handleClickHeader}>
+                <img src={icon} class="slds-p-right_small custom-icon">
+                <span class={titleClass}>{title}</span>
+            </div>
+            <div class="slds-card__body_inner card-body">
+                <lightning-formatted-rich-text value={body} onclick={handleAddressClick}></lightning-formatted-rich-text>
+            </div>
+        </lightning-card>
+    </div>
+</template>

@@ -1,0 +1,82 @@
+<template>
+    <template if:true={showLoader}>
+        <div>
+            <lightning-spinner variant="brand" alternative-text="Loading" size="large"></lightning-spinner>
+        </div>
+    </template>
+<section role="dialog" tabindex="-1" aria-labelledby="modal-heading-02" aria-modal="true" aria-describedby="modal-content-id-2" class="slds-modal slds-fade-in-open requiredModal">
+    <div class="slds-modal__container">
+        <header class="slds-modal__header" style="border-bottom: 0;">
+            <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeRequiredProductDialog}>
+                    <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse" size="small">
+                    </lightning-icon>
+                    <span class="slds-assistive-text">Close</span>
+                </button>
+            <h3 id="modal-heading-02" class="slds-text-heading_large slds-p-top_medium slds-hyphenate font-h5">
+                Additional Products Required:</h3><br>
+        </header>
+
+        <div class="slds-modal__content slds-p-horizontal_medium slds-p-bottom_small slds-p-left_xx-large" id="modal-content-id-2">
+
+            <lightning-layout multiple-rows>
+                <template if:true={requiredProductList} for:each={requiredProductList} for:item="requiredProduct" for:index="index">
+                        <lightning-layout-item size="12" medium-device-size="4" key={requiredProduct.index}>
+                            <div>
+                                <div class="custom-box slds-text-heading_medium">
+                                    <a class="slds-text-heading_medium" data-id={requiredProduct.op_cd}>
+                                        <lightning-formatted-rich-text data-id={requiredProduct.op_cd}
+                                         value={requiredProduct.AccessoryName}>
+                                        </lightning-formatted-rich-text>
+                                    </a>
+                                </div>
+                                <span style="color: darkgray;">Accessory Number: {requiredProduct.partNumber}</span>
+                            </div>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="12" medium-device-size="8" class="slds-grid slds-wrap slds-p-top_xx-small product-price" key={requiredProduct.index}>
+                            <div class="product-price-action">
+                                <template if:true={requiredProduct.dealerPrice}>
+                                    <div class="custom-box slds-text-heading_medium slds-m-right_medium"><span>{pricetype} : ${requiredProduct.dealerPrice}</span></div>
+                                    <!-- <span class="slds-text-heading_medium"> {pricetype} {requiredProduct.dealerPrice}</span> -->
+                                </template>
+                    <template if:false={requiredProduct.dealerPrice}>
+                                    <div class="custom-box slds-text-heading_medium slds-m-right_medium"><span> {pricetype} : ${requiredProduct.msrp}</span></div>
+                                    <!-- <span class="slds-text-heading_medium"> {pricetype} {requiredProduct.msrp}</span> -->
+                                </template>
+                                <lightning-button data-opcode={requiredProduct.op_cd} data-medium={requiredProduct.AssetMediumURL} data-thumb={requiredProduct.AssetThumbURL} data-price={requiredProduct.msrp} variant="brand" label="ADD TO CART" title="Add to Cart" onclick={handleAddToCart}>
+                                </lightning-button>
+                            </div>
+                </lightning-layout-item>
+                <!-- <lightning-layout-item size="3" class="slds-p-top_medium" key={requiredProduct.index}>
+                            <div class="custom-box slds-text-heading_medium">MSRP : ${requiredProduct.msrp}</div>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="5" class="slds-p-top_medium" key={requiredProduct.index}> -->
+                <!-- <template if:true={requiredProduct.displayAddToCart}> -->
+                <!-- <lightning-button data-opcode={requiredProduct.op_cd} data-price={requiredProduct.msrp}
+                                variant="brand" label="ADD TO CART" title="ADD TO CART" onclick={handleAddToCart}>
+                        </lightning-button> -->
+                <!-- </template> -->
+                <!-- <template if:false={requiredProduct.displayAddToCart}> -->
+                <!-- <p class="slds-line-clamp_x-small"> Multiple accessories are available</p> -->
+                <!-- </template> -->
+
+                <!-- </lightning-layout-item> -->
+                </template>
+            </lightning-layout>
+        </div>
+        <footer class="slds-modal__footer slds-text-align_center slds-p-top_medium slds-p-bottom_medium" style="border-top: 0;">
+            <lightning-button variant="neutral" label="SKIP" title="SKIP" onclick={closeRequiredProductDialog} class="slds-m-right_small">
+            </lightning-button>
+            <template if:true={cartId}>
+                    <lightning-button variant="brand" label="GO TO CART" title="Go to Cart" onclick={handleOnGoToCart} class="slds-m-left_small">
+                    </lightning-button>
+                </template>
+            <template if:false={cartId}>
+                    <lightning-button disabled variant="brand" label="GO TO CART" title="Go to Cart" class="slds-m-left_small"></lightning-button>
+                </template>
+
+
+        </footer>
+    </div>
+</section>
+<div class="slds-backdrop slds-backdrop_open"></div>
+</template>

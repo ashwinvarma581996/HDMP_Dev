@@ -1,0 +1,70 @@
+<!-- //============================================================================
+// Title:    Honda Owners Experience - Help Center
+//
+// Summary:  This is the html seen at the help center of the Honda Owner Community
+//
+// Details:  Extend the LightningElement with this Base Element to gain access to the Messaging Channel and other logic herein and this is the parent component for all help center pages.
+//
+//
+// History:
+// May 17, 2021 Arunprasad N (Wipro) Original Author
+//=========================================================================== -->
+<template>
+    <div>
+        <lightning-layout multiple-rows horizontal-align="center">
+            <lightning-layout-item size="12" class="slds-p-vertical_medium">
+                <span class="search-result-title">SEARCH RESULTS {resultsCount}</span>
+            </lightning-layout-item>
+            <template if:true={hasResults}>
+                <lightning-layout-item size="12" class="slds-p-vertical_small">
+                    <lightning-combobox
+                            class="sortby-combobox"
+                            name="sortby"
+                            label="Sort By"
+                            value={sortBy}
+                            placeholder="Select Sort By"
+                            options={sortBys}
+                            variant="label-hidden"
+                            onchange={handleChange} ></lightning-combobox>
+                </lightning-layout-item>
+                <lightning-layout-item size="12" class="slds-p-vertical_small">
+                    <div>
+                        <ul class="slds-has-dividers_bottom slds-has-block-links_space result-list">
+                            <template for:each={results} for:item="result">
+                                <li key={result.id} data-id={result.id} data-urlname={result.urlName} class="slds-item" onclick={handleClick}>
+                                    <a>{result.title}</a>
+                                </li> 
+                            </template>
+                        </ul>
+                    </div>
+                </lightning-layout-item>
+                <template if:false={hideShowMore}>
+                    <lightning-layout-item size="12">
+                        <div class="search-results-large">
+                            <lightning-layout>
+                                <lightning-layout-item class="slds-p-vertical_small">
+                                    <button class="slds-button slds-button_outline-brand show-more-button" onclick={handleClickShowMore}>Show More</button>
+                                </lightning-layout-item>
+                            </lightning-layout>
+                        </div>
+                        <div class="search-results-small">
+                            <lightning-layout horizontal-align="center">
+                                <lightning-layout-item class="slds-p-vertical_small">
+                                    <button class="slds-button slds-button_outline-brand show-more-button" onclick={handleClickShowMore}>Show More</button>
+                                </lightning-layout-item>
+                            </lightning-layout>
+                        </div>
+                    </lightning-layout-item>
+                </template>
+            </template>
+            <template if:false={hasResults}>
+                <lightning-layout-item size="12" class="slds-p-vertical_small">
+                    <span class="search-no-result">Sorry, looks like we don't have any results that match your search. We can still help — try another term or <!-- &nbsp; -->
+                        <!-- <lightning-button variant="base" label="contact us" title="contact us"></lightning-button> -->
+                        <a class="search-no-result-link" onclick={handleContactUs}>contact us</a><!-- us  --> with your specific question.</span>
+                </lightning-layout-item>
+            </template>
+        </lightning-layout>
+    </div>
+    <!--<c-avatar-upload></c-avatar-upload>-->
+</template>

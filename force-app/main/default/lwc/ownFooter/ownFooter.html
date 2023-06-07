@@ -1,0 +1,413 @@
+<!-- //============================================================================
+// Title:    Honda Owners Experience - Footer
+//
+// Summary:  This is the html seen at the bottom of the Honda Owner Community
+//
+// Details:  Extend the LightningElement with this Base Element to gain access to the Messaging Channel and other logic herein and this is the footer component for all community pages.
+//
+//
+// History:
+// May 17, 2021 Arunprasad N (Wipro) Original Author
+//=========================================================================== -->
+<template>
+    <footer>
+        <div class="c-container slds-no-print">
+            <div class="footer-large">
+                <lightning-layout horizontal-align="spread" class="header-column">
+                    <template for:each={brands} for:item="brand">
+                        <lightning-layout-item key={brand.label} padding="around-small">
+                            <div class="footer-quick-links">
+                                <div class="footer-logos">
+                                    <img src={brand.logo} alt={brand.label}>
+                                </div>
+                                <div class="footer-links">
+                                    <h3 class="field-title" title={brand.label}>{brand.label}</h3>
+                                    <template for:each={brand.pages} for:item="page">
+                                        <div key={page.label}>
+                                            <a data-url={page.url} data-label={brand.label} data-page-label={page.label}
+                                                onclick={handleClick} tabindex="0">
+                                                <p class="page-title" data-label={brand.label} data-page={page.label}>
+                                                    {page.label}
+                                                    <i data-url={page.url} data-label={brand.label}
+                                                        data-page={page.label} onclick={handleClick}
+                                                        class={page.class}></i>
+                                                </p>
+                                            </a>
+                                        </div>
+                                    </template>
+                                </div>
+                            </div>
+                        </lightning-layout-item>
+                    </template>
+                </lightning-layout>
+                <lightning-layout class="header-column register-your-product-layout-margin" horizontal-align="spread">
+                    <!--DOE-4256 Start (Code commented for Release 1 - Details: Hiding Register Your Product)-->
+                    <lightning-layout-item padding="around-small">
+                        <div>
+                            <!-- <a data-url="https://owners.honda.com/" onclick={handleClick}> -->
+                            <p class="register-your-product-title" title={registerYourProduct.label}>
+                                <!-- {registerYourProduct.label} -->
+                            </p>
+                            <!-- </a> -->
+                            <p class="register-your-product-content">
+                                <!-- {registerYourProduct.content} -->
+                            </p>
+                        </div>
+                    </lightning-layout-item>
+                    <!-- DOE-4256 End(Code commented for Release 1 - Details: Hiding Register Your Product)-->
+                    <!-- <lightning-layout-item size="3" medium-device-size="3" small-device-size="2" padding="around-small">
+                    </lightning-layout-item> -->
+                    <lightning-layout-item padding="around-small">
+                        <!--class="slds-m-left_large"-->
+                        <p class="exploremorefromhonda-field-title exploremorefromhonda-field-title-border-bottom"
+                            title="Explore More from Honda">Explore More from Honda</p>
+                        <lightning-layout>
+                            <lightning-layout-item>
+                                <div>
+                                    <a data-url="https://global.honda/about/" data-link-label="ABOUT HONDA"
+                                        onclick={handleClick} aria-label="About Honda" tabindex="0">
+                                        <p class="exploremorefromhonda-page-title-first-row" title="ABOUT HONDA">
+                                            ABOUT HONDA
+                                            <i class="fas fa-arrow-right fa-sm vector-icon-left"></i>
+                                        </p>
+                                    </a>
+                                    <a data-url="https://hondanews.com/en-US" data-link-label="MEDIA NEWSROOM"
+                                        aria-label="MEDIA NEWSROOM" tabindex="0">
+                                        <p class="exploremorefromhonda-page-title" title="MEDIA NEWSROOM"
+                                            onclick={handleClick}>
+                                            MEDIA NEWSROOM
+                                            <i class="fas fa-arrow-right fa-sm vector-icon-left"></i>
+                                        </p>
+                                    </a>
+                                </div>
+                            </lightning-layout-item>
+                            <lightning-layout-item class="slds-p-left_small">
+                                <div>
+                                    <a data-url="https://global.honda/innovation/" data-link-label="INNOVATION"
+                                        onclick={handleClick} aria-label="INNOVATION" tabindex="0">
+                                        <p class="exploremorefromhonda-page-title-first-row" title="INNOVATION">
+                                            INNOVATION
+                                            <i class="fas fa-arrow-right fa-sm vector-icon-left"></i>
+                                        </p>
+                                    </a>
+                                    <a data-url="https://hondanews.com/en-US/honda-automobiles/channels/honda-awards-recognition"
+                                        data-link-label="AWARDS & RECOGNITION" onclick={handleClick}
+                                        aria-label="AWARDS & RECOGNITION" tabindex="0">
+                                        <p class="exploremorefromhonda-page-title" title="AWARDS & RECOGNITION">
+                                            AWARDS & RECOGNITION
+                                            <i class="fas fa-arrow-right fa-sm vector-icon-left"></i>
+                                        </p>
+                                    </a>
+                                </div>
+                            </lightning-layout-item>
+                        </lightning-layout>
+                    </lightning-layout-item>
+                    <lightning-layout-item>
+                        <lightning-layout>
+                            <!--class="header-column"-->
+                            <template for:each={followuss} for:item="followus">
+                                <lightning-layout-item key={followus.label} padding="around-small">
+                                    <div>
+                                        <p class="followus-field-title" title={followus.label}>
+                                            {followus.label}
+                                        </p>
+                                    </div>
+                                </lightning-layout-item>
+                            </template>
+                        </lightning-layout>
+                        <lightning-layout>
+                            <!--class="header-column"-->
+                            <template for:each={followuss} for:item="followus">
+                                <template for:each={followus.pages} for:item="page">
+                                    <lightning-layout-item key={page.label} class="followus-icon-wrapper">
+                                        <a data-url={page.url} data-link-label={page.label} onclick={handleClick}
+                                            aria-label={page.label} tabindex="0">
+                                            <i class={page.class}></i>
+                                        </a>
+                                    </lightning-layout-item>
+                                </template>
+                            </template>
+                        </lightning-layout>
+                    </lightning-layout-item>
+                </lightning-layout>
+                <lightning-layout class="rectangle footer-header-column" multiple-rows="true">
+                    <lightning-layout-item class="footer-margins">
+                        <lightning-layout>
+                            <template for:each={links} for:item="link">
+                                <lightning-layout-item key={link.label}>
+                                    <a data-url={link.url} data-adobe-action-label={link.adobeActionLabel}
+                                        onclick={handleClick} data-link-label={link.label} tabindex="0">
+                                        <p class="link-field-title" title={link.label}>
+                                            {link.label}
+                                        </p>
+                                    </a>
+                                </lightning-layout-item>
+                                <template if:true={link.icon}>
+                                    <lightning-layout-item key={link.label}>
+                                        <img data-url={link.url} data-adobe-action-label={link.adobeActionLabel}
+                                            onclick={handleClick} data-link-label={link.label} class={link.class}
+                                            src={link.icon}>
+                                    </lightning-layout-item>
+                                </template>
+                                <template if:false={link.isLast}>
+                                    <lightning-layout-item key={link.label}>
+                                        <p class="link-field-title">|</p>
+                                    </lightning-layout-item>
+                                </template>
+                            </template>
+                        </lightning-layout>
+                    </lightning-layout-item>
+                    <lightning-layout-item class="footer-margins" size="12">
+                        <div class="slds-m-top_medium footer-content">
+
+                            We use cookies to improve your experience on this site and show you personalized
+                            advertising. To find out more, read our&nbsp;
+                            <a onclick={handleCookiePolicyClick} style="display: inline-block;" tabindex="0">
+                                <p class="link-class">cookie policy.</p>
+                            </a>
+
+                        </div>
+                    </lightning-layout-item>
+                    <lightning-layout-item class="footer-margins" size="12">
+                        <div class="slds-m-top_medium footer-content">
+
+                            © {currentYear} American Honda Motor Co., Inc. All Information Contained Herein Applies To
+                            U.S. Products Only. For non-U.S-distributor information go to&nbsp;
+                            <a onclick={handleWorldHondaClick} style="display: inline-block;" tabindex="0">
+                                <p class="link-class">world.honda.com.</p>
+                            </a>
+
+                        </div>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </div>
+            <div class="footer-small">
+                <lightning-accordion allow-multiple-sections-open class="footer-margin"
+                    onsectiontoggle={handleSectionToggle} active-section-name={activeSections}>
+                    <template for:each={brands} for:item="brand">
+                        <lightning-accordion-section key={brand.label} name={brand.label} label={brand.label}
+                            class="footer slds-p-vertical_medium accordion-section-border-bottom">
+                            <template for:each={brand.pages} for:item="page">
+                                <div key={page.label}>
+                                    <a data-url={page.url} data-label={brand.label} data-page-label={page.label}
+                                        onclick={handleClick} tabindex="0">
+                                        <p class="page-title">
+                                            {page.label}
+                                            <i data-url={page.url} data-label={brand.label} onclick={handleClick}
+                                                class={page.class}></i>
+                                        </p>
+                                    </a>
+                                </div>
+                            </template>
+                        </lightning-accordion-section>
+                    </template>
+                </lightning-accordion>
+                <!--DOE-4256 Start (Code commented for Release 1 - Details: Hiding Register Your Product )-->
+                <lightning-layout class="register-your-product-layout-margin footer-margin">
+                    <lightning-layout-item padding="around-small">
+                        <div>
+                            <a data-url="https://owners.honda.com/" onclick={handleClick}>
+                                <p class="register-your-product-title" title={registerYourProduct.label}>
+                                    {registerYourProduct.label}
+                                </p>
+                            </a>
+                            <p class="register-your-product-content">
+                                {registerYourProduct.content}
+                            </p>
+                        </div>
+                    </lightning-layout-item>
+                </lightning-layout>
+                <!--DOE-4256 End (Code commented for Release 1 - Details: Hiding Register Your Product)-->
+                <lightning-layout class="register-your-product-layout-margin footer-margin">
+                    <lightning-layout-item padding="around-small">
+                        <p class="exploremorefromhonda-field-title" title="Explore More from Honda">Explore More from
+                            Honda</p>
+                        <lightning-layout>
+                            <lightning-layout-item>
+                                <div>
+                                    <a data-url="https://global.honda/about/" data-link-label="ABOUT HONDA"
+                                        onclick={handleClick}>
+                                        <p class="exploremorefromhonda-page-title" title="ABOUT HONDA">
+                                            ABOUT HONDA
+                                            <i class="fas fa-arrow-right fa-sm vector-icon-left"></i>
+                                        </p>
+                                    </a>
+                                    <a data-url="https://hondanews.com/en-US" data-link-label="MEDIA NEWSROOM"
+                                        onclick={handleClick}>
+                                        <p class="exploremorefromhonda-page-title" title="MEDIA NEWSROOM">
+                                            MEDIA NEWSROOM
+                                            <i class="fas fa-arrow-right fa-sm vector-icon-left"></i>
+                                        </p>
+                                    </a>
+                                    <a data-url="https://global.honda/innovation/" data-link-label="INNOVATION"
+                                        onclick={handleClick}>
+                                        <p class="exploremorefromhonda-page-title" title="INNOVATION">
+                                            INNOVATION
+                                            <i class="fas fa-arrow-right fa-sm vector-icon-left"></i>
+                                        </p>
+                                    </a>
+                                    <a data-url="https://hondanews.com/en-US/honda-automobiles/channels/honda-awards-recognition"
+                                        data-link-label="AWARDS & RECOGNITION" onclick={handleClick}>
+                                        <p class="exploremorefromhonda-page-title" title="AWARDS & RECOGNITION">
+                                            AWARDS & RECOGNITION
+                                            <i class="fas fa-arrow-right fa-sm vector-icon-left"></i>
+                                        </p>
+                                    </a>
+                                </div>
+                            </lightning-layout-item>
+                        </lightning-layout>
+                    </lightning-layout-item>
+                </lightning-layout>
+                <lightning-layout multiple-rows="true" class="footer-margin">
+                    <template for:each={followuss} for:item="followus">
+                        <lightning-layout-item key={followus.label} padding="around-small" size="12">
+                            <div>
+                                <p class="followus-field-title" title={followus.label}>
+                                    {followus.label}
+                                </p>
+                            </div>
+                        </lightning-layout-item>
+                        <template for:each={followuss} for:item="followus">
+                            <template for:each={followus.pages} for:item="page">
+                                <lightning-layout-item key={page.label} class="slds-p-around_small">
+                                    <a data-url={page.url} data-link-label={page.label} onclick={handleClick}>
+                                        <i class={page.class}></i>
+                                    </a>
+                                </lightning-layout-item>
+                            </template>
+                        </template>
+                    </template>
+                </lightning-layout>
+                <lightning-layout class="rectangle" multiple-rows="true">
+                    <lightning-layout-item class="footer-margin abcd">
+                        <lightning-layout>
+                            <lightning-layout-item class="slds-p-left_xx-small slds-p-top_small">
+                                <a data-url="https://www.honda.com/privacy/connected-product-privacy-notice"
+                                    onclick={handleClick} data-link-label="Vehicle Data Privacy"
+                                    data-adobe-action-label="COMPLIANCE_CLICK">
+                                    <p class="link-field-title" title="Data Privacy">
+                                        Vehicle Data Privacy
+                                    </p>
+                                </a>
+                            </lightning-layout-item>
+                            <lightning-layout-item class="slds-p-left_xx-small slds-p-top_small">
+                                <p class="link-field-title" title="Site Terms">
+                                    |
+                                </p>
+                            </lightning-layout-item>
+                            <lightning-layout-item class="slds-p-left_xx-small slds-p-top_small">
+                                <a data-url="https://www.honda.com/privacy/terms-and-conditions" onclick={handleClick}
+                                    data-link-label="Site Terms" data-adobe-action-label="COMPLIANCE_CLICK">
+                                    <p class="link-field-title" title="Site Terms">
+                                        Site Terms
+                                    </p>
+                                </a>
+                            </lightning-layout-item>
+                            <lightning-layout-item class="slds-p-left_xx-small slds-p-top_small">
+                                <p class="link-field-title" title="Site Terms">
+                                    |
+                                </p>
+                            </lightning-layout-item>
+                            <lightning-layout-item class="slds-p-left_xx-small slds-p-top_small">
+                                <a data-url="https://www.honda.com/privacy/sms-terms" onclick={handleClick}
+                                    data-link-label="SMS Terms & Conditions" data-adobe-action-label="COMPLIANCE_CLICK">
+                                    <p class="link-field-title" title="SMS Terms & Conditions">
+                                        SMS Terms & Conditions
+                                    </p>
+                                </a>
+                            </lightning-layout-item>
+                            <lightning-layout-item class="slds-p-left_xx-small slds-p-top_small">
+                                <p class="link-field-title" title="Site Terms">
+                                    |
+                                </p>
+                            </lightning-layout-item>
+                        </lightning-layout>
+                        <lightning-layout>
+                            <lightning-layout-item class="slds-p-left_xx-small slds-p-top_small">
+                                <a data-url={privacyPolicyURL} data-link-label="Privacy Notice" onclick={handleClick}
+                                    data-adobe-action-label="COMPLIANCE_CLICK">
+                                    <p class="link-field-title" title="Privacy Notice">
+                                        Privacy Notice
+                                    </p>
+                                </a>
+                            </lightning-layout-item>
+                            <lightning-layout-item class="slds-p-left_xx-small slds-p-top_small">
+                                <p class="link-field-title" title="Site Terms">
+                                    |
+                                </p>
+                            </lightning-layout-item>
+                            <lightning-layout-item class="slds-p-left_xx-small slds-p-top_small slds-text-link--reset">
+                                <a data-url="https://www.honda.com/privacy/your-privacy-choices" onclick={handleClick}
+                                    data-link-label="Your Privacy Choices" data-adobe-action-label="COMPLIANCE_CLICK">
+                                    <p class="link-field-title" title="Your Privacy Choices">
+                                        Your Privacy Choices
+                                    </p>
+                                </a>
+                            </lightning-layout-item>
+                            <lightning-layout-item class="slds-p-left_xx-small slds-p-top_small">
+                                <img data-url="https://www.honda.com/privacy/your-privacy-choices" onclick={handleClick}
+                                    data-link-label="Your Privacy Choices" data-adobe-action-label="COMPLIANCE_CLICK"
+                                    class="slds-p-right_xx-small slds-p-bottom_xx-small" src={privacyOptionIcon}>
+                            </lightning-layout-item>
+                            <lightning-layout-item class="slds-p-left_xx-small slds-p-top_small">
+                                <p class="link-field-title" title="Site Terms">
+                                    |
+                                </p>
+                            </lightning-layout-item>
+                        </lightning-layout>
+                        <lightning-layout>
+                            <lightning-layout-item class="slds-p-left_xx-small slds-p-top_small">
+                                <a data-url="https://www.honda.com/-/media/Honda-Homepage/PDF/Proposition-65-Consumer-Website-Statement-072518.pdf"
+                                    onclick={handleClick} data-link-label="Prop 65 Info"
+                                    data-adobe-action-label="COMPLIANCE_CLICK">
+                                    <p class="link-field-title" title="Prop 65 Info">
+                                        Prop 65 Info
+                                    </p>
+                                </a>
+                            </lightning-layout-item>
+
+                            <!--DOE-4256 Start (Code commented for Release 1 - Details: Hiding Site Map)-->
+                            <!--Alexander Dzhitenov (Wipro): Uncommented for Release 2-->
+                            <!-- <lightning-layout-item class="slds-p-left_small slds-p-top_small">
+                                <p class="link-field-title" title="Site Terms">
+                                    |
+                                </p>
+                            </lightning-layout-item>
+                            <lightning-layout-item class="slds-p-left_small slds-p-top_small">
+                                <a data-url="https://owners.honda.com/" onclick={handleClick}>
+                                    <p class="link-field-title" title="Data Privacy">
+                                        Site Map
+                                    </p>
+                                </a>
+                            </lightning-layout-item> -->
+                            <!--DOE-4256 Start (Code commented for Release 1 - Details: Hiding Site Map)-->
+                        </lightning-layout>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="9" class="slds-p-around_xx-small footer-margin">
+                        <div class="slds-m-top_medium footer-content">
+
+                            We use cookies to improve your experience on this site and show you personalized
+                            advertising. To find out more, read our&nbsp;
+                            <a onclick={handleCookiePolicyClick} style="display: inline-block;">
+                                <p class="link-class">cookie policy.</p>
+                            </a>
+
+                        </div>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="9" class="slds-p-around_xx-small footer-margin">
+                        <div class="slds-m-top_medium footer-content">
+
+                            © {currentYear} American Honda Motor Co., Inc. All Information Contained Herein Applies To
+                            U.S. Products Only. For non-U.S-distributor information go to&nbsp;
+                            <a onclick={handleWorldHondaClick} style="display: inline-block;">
+                                <p class="link-class">world.honda.com.</p>
+                            </a>
+
+
+                        </div>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </div>
+        </div>
+    </footer>
+</template>

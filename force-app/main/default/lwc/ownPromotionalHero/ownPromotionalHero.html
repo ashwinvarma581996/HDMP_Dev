@@ -1,0 +1,64 @@
+<!-- //============================================================================
+// Title:    Honda MyGarage Experience - Promotional Hero
+//
+// Summary:  This is the Promotional Hero html seen at the page of the Honda MyGarage Community
+//
+// Details:  Promotional Hero for pages
+//
+// History:
+// October 18, 2021 Arunprasad N (Wipro) Original Author 
+//=========================================================================== -->
+<template>
+    <div class={mainCardClass}>
+        <lightning-layout vertical-align="stretch" multiple-rows="true" class="hero-wrapper">
+            <lightning-layout-item class={contentSection}  flexibility="auto" size="12" small-device-size="12" medium-device-size="6" large-device-size="6">
+                
+                <div if:true={showbreadcrumb} class="backlink slds-p-bottom_x-large banner-inner-div">
+                    <lightning-formatted-rich-text value={backLinkContent} onclick={handleBreadcrumb}></lightning-formatted-rich-text>
+                </div>
+                <div if:true={titleIcon} class="title-icon banner-inner-div banner-top">
+                    <lightning-formatted-rich-text value={titleIcon} ></lightning-formatted-rich-text>
+                </div>
+
+                <div class={titleClass}>
+                    <lightning-formatted-rich-text value={title}></lightning-formatted-rich-text>
+                </div>
+                <div class="slds-m-top_medium content banner-inner-div">
+                    <lightning-formatted-rich-text class="promotional-body" value={body}></lightning-formatted-rich-text>
+                </div>
+                <template if:false={isDriverFeedback} >
+                    <template if:true={buttonLabel}>
+                        <template if:true={isCustomButton}>
+                            <div class="slds-m-top_medium banner-inner-div">
+                                <button class="custombtn" data-key={buttonLabel} onclick={handleButtonClick}>{buttonLabel}</button>  
+                            </div>
+                        </template>
+                        <template if:false={isCustomButton}>
+                            <div class="slds-m-top_medium banner-inner-div">
+                                <button class="btn" data-key={buttonLabel} onclick={handleButtonClick}>{buttonLabel}</button>  
+                            </div>
+                        </template>
+                    </template>
+                </template>
+                <template if:true={isDriverFeedback} >
+                    <template if:true={buttonLabel}>
+                        <div class="slds-m-top_large banner-inner-div">
+                            <button class="btn background-black" data-key={buttonLabel} onclick={handleButtonClick}>{buttonLabel}</button>  
+                        </div>
+                    </template>
+                </template>
+                <div if:true={footerMessage} class="footer-message banner-inner-div banner-top slds-p-top_medium">
+                    <lightning-formatted-rich-text value={footerMessage} ></lightning-formatted-rich-text>
+                </div>
+            </lightning-layout-item>
+            <lightning-layout-item class="image-section promotional-hero custom-img-size" flexibility="auto" size="12" small-device-size="12" medium-device-size="6" large-device-size="6"> 
+                <div class="image-container desktop-image">
+                    <lightning-formatted-rich-text class="image" value={desktopImage}></lightning-formatted-rich-text>
+                </div>
+                <div class="image-container mobile-image">
+                    <lightning-formatted-rich-text class="image" value={mobileImage}></lightning-formatted-rich-text>
+                </div>
+            </lightning-layout-item>
+        </lightning-layout>
+    </div>
+</template>

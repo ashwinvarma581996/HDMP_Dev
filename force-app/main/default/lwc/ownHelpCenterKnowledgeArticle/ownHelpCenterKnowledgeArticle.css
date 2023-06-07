@@ -1,0 +1,108 @@
+.article-title {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 32px;
+    line-height: 37px;
+    letter-spacing: 0.02em;
+    color: #000000;
+}
+.article-date {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 26px;
+    color: #5E6162;
+}
+.category-label {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: #000000;
+}
+.related-article-label {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 16px;
+    line-height: 19px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #000000;
+}
+.related-article-list a {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 26px;
+    color: var(--HondaRed);
+}
+.feedback-request-label {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 24px;
+    line-height: 28px;
+    color: #000000;
+}
+.vote-button {
+    border: 2px solid var(--HondaRed);
+    box-sizing: border-box;
+    border-radius: 2px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: var(--HondaRed);
+}
+.feedback-request-text {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 26px;
+}
+@media only screen and (min-width: 601px) {
+    .article-small {
+        display: none;
+    }
+    .article-large {
+        display: block;
+    }
+    .header-column {
+        padding: 0 72px;
+    }
+}
+@media only screen and (max-width: 600px) {
+    .article-large {
+        display: none;
+    }
+    .article-small {
+        display: block;
+    }
+    .header-column {
+        padding: 0;
+    }
+}
+
+.block-element {
+    width: 100%;
+}
+
+.popup-button {
+    color : white;
+    background-color: #E42525;
+    border-color: #E42525;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    border-radius: 2px;
+    letter-spacing: 2px;
+
+}

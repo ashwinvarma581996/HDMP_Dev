@@ -1,0 +1,14 @@
+h1 {
+    font-weight: 300;
+    font-size: 32px;
+    line-height: 37px;
+    letter-spacing: 0.02em;
+    margin-bottom: 20px;
+    margin-top : 32px;
+}
+
+@media only screen and (max-width: 768px){
+    h1{
+        font-size: 22px;
+    }
+}

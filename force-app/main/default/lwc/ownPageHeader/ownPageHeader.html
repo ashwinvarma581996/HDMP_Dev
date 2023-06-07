@@ -1,0 +1,110 @@
+<!-- //DEV3============================================================================
+// Title:    Honda MyGarage Experience - Page Header
+//
+// Summary:  This is the Page Header html seen at the page of the Honda MyGarage Community
+//
+// Details:  Page Header for pages
+//
+// History:
+// October 18, 2021 Arunprasad N (Wipro) Original Author 
+//=========================================================================== -->
+<template>
+  <template if:true={showData}>
+    <div class="header-box-wrapper">
+      <lightning-layout class="bread-crumb-container" if:true={pageUrl}>
+        <lightning-layout-item class="chevronleft-container">
+          <!--<template if:true={showBreadcrumbFlag}>
+          <div class="breadcrumb-large slds-m-top_medium">
+            <div class="breadcrumb" aria-label="Breadcrumbs" role="navigation">
+              <div role="list" class="slds-breadcrumb slds-list_horizontal slds-wrap">
+                <slot>
+                  <div class="slds-breadcrumb__item breadcrumb-item-back">
+                    <a data-url={breadcrumbUrl} class="breadcrumb-text-color" onclick={handleBreadcrumbClick}>
+                      {breadcrumbLabel}
+                    </a>
+                  </div>
+
+                </slot>
+              </div>
+            </div>
+          </div>
+        </template>-->
+          <lightning-icon icon-name='utility:chevronleft' alternative-text='chevronleft' size='xx-small'
+            class='chevronleft'></lightning-icon>
+        </lightning-layout-item>
+        <lightning-layout-item class="back-link-container">
+          <a class="back-link" onclick={handleBackLinkClick}>
+            <lightning-formatted-rich-text class="title" value={pageUrl}></lightning-formatted-rich-text>
+          </a>
+        </lightning-layout-item>
+      </lightning-layout>
+      <div class="slds-page-header custom-header-box slds-border_bottom slds-p-horizontal_none slds-p-vertical_large">
+        <div class="slds-page-header__row">
+          <div class="slds-page-header__col-title">
+            <div class="slds-media">
+              <template if:false={hideProductBadge}>
+                <div class="slds-media__figure">
+                  <template if:true={isproductbadge}>
+                    <span class="slds-icon_container circle-image-span" onclick={handleTitleClick}>
+                      <!-- <img class="circle-image" src={image} /> -->
+                      <c-own-product-image product-image={image} brand={brand}></c-own-product-image>
+                    </span>
+                  </template>
+                  <template if:false={isproductbadge}>
+                    <span class="slds-icon_container simple-image-span">
+                      <img src={image} class={rectImageClass} />
+                    </span>
+                  </template>
+                </div>
+              </template>
+              <div class="slds-media__body">
+                <div class="slds-page-header__name">
+                  <div class="slds-page-header__name-title">
+                    <h1>
+                      <span class="slds-text-color_error title" onclick={handleTitleClick}>
+                        {title}&nbsp;
+                      </span>
+                      <lightning-formatted-rich-text class="slds-page-header__title sub-title" title="Sub title"
+                        value={subtitle}>
+                      </lightning-formatted-rich-text>
+                    </h1>
+                    <template if:true={isRecallPage}>
+                      <!-- <template if:false={isGuest}> -->
+                      <template if:false={isPEorMarine}>
+                        <div class="container">
+                          <div class="grid-items grid-item-1">
+                            <template if:true={isPSP}>
+                              <p class="vin-label">VIN <span class="vin-data">{vinNumber}</span></p>
+                            </template>
+                            <template if:false={isPSP}>
+                              <p class="vin-label">VIN <span class="vin-data">{vinNumber}</span></p>
+                            </template>
+                          </div>
+                          <div class="grid-items grid-item-2">
+                            <template if:false={hideEnterVin}>
+                              <div><a onclick={handleEnterVinCLick} class="edit-vin">Edit VIN</a></div>
+                            </template>
+                          </div>
+                          <div class="grid-items grid-item-3">
+                            <c-own-save-to-my-garage at-page-header="true"></c-own-save-to-my-garage>
+                          </div>
+                        </div>
+                      </template>
+                      <!-- </template> -->
+                    </template>
+
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </template>
+  <template if:false={showData}>
+    <c-own-data-loading-spinner></c-own-data-loading-spinner>
+</template>
+</template>

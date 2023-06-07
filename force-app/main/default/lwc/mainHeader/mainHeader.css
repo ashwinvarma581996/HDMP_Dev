@@ -1,0 +1,557 @@
+.spacerBlank {
+    position: relative;
+    height: 50px;
+    top: 70px;
+}
+
+.mainHeader li.slds-dropdown-trigger.hondaMenuActive:after,
+.mainHeader li.slds-dropdown-trigger.acuraMenuActive:after {
+    top: 0;
+    left: 50%;
+    border: solid transparent;
+    content: "";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-color: rgba(136, 183, 213, 0) !important;
+    border-top-color: #797979 !important;
+    border-width: 6px;
+    margin-left: -6px;
+    background: none !important;
+    mix-blend-mode: unset !important;
+}
+
+.mainHeader li.slds-dropdown-trigger.acuraMenuActive:after {
+    margin-left: 3px;
+}
+
+.mainHeader ul li:first-child>a {
+    padding-left: 0;
+}
+
+.mainHeader .slds-modal__content {
+    overflow: visible !important;
+}
+
+.megaMenuDropdown .themeBtn {
+    margin: 30px auto 10px;
+}
+
+.navBarContainer {
+    display: none !important;
+}
+
+.mainHeader a span {
+    font-size: 16px;
+}
+
+.mainHeader span>img {
+    max-width: 112px;
+}
+
+
+/* .mainHeader nav ul li:first-child a {
+    padding-left: 0 !important;
+} */
+
+.hondaLogoContainer {
+    height: 18px;
+}
+
+@media (max-width: 767px) {
+    .hondaLogoContainer {
+        height: auto;
+    }
+}
+
+.megaMenuDropdown {
+    min-width: 770px !important;
+    padding: 20px 30px;
+    right: auto;
+    /* overflow: auto; */
+    max-height: calc(100vh - 120px);
+    margin-top: 0 !important;
+    border-radius: 0 !important;
+}
+
+.headerMobile .menu {
+    clear: both;
+    height: 0;
+    transition: all .2s ease-out;
+}
+
+
+/* menu icon */
+
+.headerMobile .menu-icon {
+    cursor: pointer;
+    display: inline-block;
+    padding: 22px 10px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    user-select: none;
+    z-index: 999;
+}
+
+.headerMobile .menu-icon .navicon {
+    background: #333;
+    display: block;
+    height: 2px;
+    position: relative;
+    transition: background .2s ease-out;
+    width: 20px;
+}
+
+.headerMobile .menu-icon .navicon:before,
+.headerMobile .menu-icon .navicon:after {
+    background: #333;
+    content: '';
+    display: block;
+    height: 100%;
+    position: absolute;
+    transition: all .2s ease-out;
+    width: 100%;
+}
+
+.headerMobile .menu-icon .navicon:before {
+    top: 6px;
+}
+
+.headerMobile .menu-icon .navicon:after {
+    top: -6px;
+}
+
+.headerMobile .menu-btn:checked .menu-icon {
+    right: 10px;
+    left: auto;
+}
+
+
+/* menu btn */
+
+.headerMobile .menu-btn,
+.subMenu {
+    display: none;
+}
+
+.headerMobile ul {
+    height: 0;
+    opacity: 0;
+    display: inline-block;
+    background: #fff;
+    top: 48px;
+    position: fixed;
+    z-index: 9;
+    padding: 0;
+    width: 100%;
+    left: 0;
+    overflow-y: auto;
+    border-top: 1px solid #ddd;
+}
+
+.headerMobile .menu-btn:checked~.menu {
+    height: calc(100% - 40px);
+    opacity: 1;
+}
+
+.headerMobile .menu-btn:checked~.menu-icon .navicon {
+    background: transparent;
+}
+
+.headerMobile .menu-btn:checked~.menu-icon .navicon:before {
+    transform: rotate(-45deg);
+}
+
+.headerMobile .menu-btn:checked~.menu-icon .navicon:after {
+    transform: rotate(45deg);
+}
+
+.headerMobile .menu-btn:checked~.menu-icon:not(.steps) .navicon:before,
+.headerMobile .menu-btn:checked~.menu-icon:not(.steps) .navicon:after {
+    top: 0;
+}
+
+.menu li {
+    border-bottom: 1px solid #ddd;
+}
+
+.menu a {
+    color: #696969;
+    font-size: 16px;
+    padding: 15px;
+    /* width: 100%;
+    display: block; */
+    width: 101px;
+    padding-right: 0;
+    display: inline-block;
+}
+
+.menu p a {
+    width: 100%;
+}
+
+
+/* Responsive Submenu */
+
+.down-icon {
+    /* position: absolute;
+    right: 20px;
+    z-index: 999;
+    top: 15px;
+    width: 30px;
+    height: 30px;
+    text-align: center; */
+    z-index: 999;
+    width: calc(100% - 102px);
+    text-align: right;
+    float: right;
+    padding: 15px 40px;
+}
+
+.headerMobile .megaMenuDropdown {
+    height: 0;
+    opacity: 0;
+    min-width: initial !important;
+    padding: 0;
+    border-top: 2px solid #ddd;
+    flex-direction: column;
+    background: #F0F0F0;
+    transition: height, opacity 0.2s ease;
+}
+
+.headerMobile .subMenu:checked~.megaMenuDropdown {
+    height: 100%;
+    opacity: 1;
+    padding: 15px;
+}
+
+.headerMobile .megaMenuDropdown .themeBtn {
+    display: inline-block !important;
+    vertical-align: middle;
+}
+
+.arrow {
+    border: solid black;
+    border-width: 0 2px 2px 0;
+    display: inline-block;
+    padding: 3px;
+}
+
+.subMenu:checked+label .down {
+    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
+}
+
+.down {
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+}
+
+.megaMenuDropdown .centerElement {
+    border: 1px solid #666;
+    margin: 0 10px;
+    max-width: 200px;
+    padding: 8px 20px!important;
+    width: 100%;
+}
+
+.megaMenuDropdown .font-h5,
+.megaMenuDropdown h2.font-h6 {
+    border-bottom: 1px solid #666;
+}
+
+.megaMenuDropdown .themeBtn {
+    margin: 0 auto;
+}
+
+.orText {
+    font-size: 18px;
+}
+
+.orText:before,
+.orText:after {
+    content: '';
+    position: absolute;
+    background: #666;
+}
+
+.megaMenuDropdown .slds-form-element:not(:last-child) {
+    margin-bottom: 2px;
+}
+
+input[type='radio'] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    top: 12px;
+    left: 18px;
+    z-index: 9;
+}
+
+.checkmark {
+    position: absolute;
+    top: 12px;
+    left: 18px;
+    height: 15px;
+    width: 15px;
+    background-color: #fff;
+    border: 1px solid #666;
+    border-radius: 50%;
+}
+
+input[type='radio']:checked~.checkmark {
+    background-color: transparent;
+    border: 1px solid #666;
+}
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+input[type='radio']:checked~.checkmark:after {
+    display: block;
+}
+
+.checkmark:after {
+    top: 2px;
+    left: 2px;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #E42525;
+}
+
+.mainHeader .slds-context-bar__item span img {
+    filter: grayscale(1);
+    opacity: 0.5;
+}
+
+.mainHeader .slds-context-bar__item:first-child span img {
+    opacity: 0.8;
+}
+
+.mainHeader .slds-context-bar__item:not(.slds-no-hover):hover span img,
+.mainHeader .slds-context-bar__item.slds-is-active span img {
+    filter: grayscale(0);
+    opacity: 1;
+}
+
+.mainHeader .slds-context-bar__item:not(.slds-no-hover):hover,
+.mainHeader .slds-context-bar__item.slds-is-active {
+    background-color: transparent !important;
+}
+.hondaSelected{
+    filter: grayscale(0) !important;
+    opacity: 1 !important;
+}
+.acuraSelected{
+    opacity: 1 !important;
+}
+
+.vinError {
+    color: #1d89dc;
+    text-align: center;
+    display: block;
+    text-decoration: underline;
+}
+
+
+/* .mainHeader .slds-context-bar__item:not(.slds-no-hover):hover a span,
+.mainHeader .slds-context-bar__item.slds-is-active a span {
+    color: #fff !important;
+} */
+
+.mainHeader ul>li .megaMenuDropdown {
+    display: none;
+}
+
+.mainHeader ul>li:hover .megaMenuDropdown {
+    display: block;
+}
+
+.megaMenuDropdown .checkmark+label.font-h6.slds-p-left_large {
+    margin-bottom: 0px !important;
+    line-height: 24px;
+}
+
+@media (min-width: 900px) {
+    .megaMenuDropdown {
+        min-width: 870px !important;
+    }
+}
+
+@media (max-width:1299px) and (min-width: 768px) {
+    .megaMenuDropdown {
+        overflow: auto;
+    }
+    .megaMenuDropdown h1 {
+        font-size: 18px;
+        padding-bottom: 5px;
+    }
+    .megaMenuDropdown .font-h6 {
+        font-size: 15px;
+    }
+    .megaMenuDropdown .centerElement {
+        padding: 6px 20px!important;
+    }
+    .megaMenuDropdown .slds-input {
+        padding: 3px 15px !important;
+    }
+    .megaMenuDropdown {
+        padding: 10px 30px;
+    }
+    .megaMenuDropdown .themeBtn {
+        font-size: 15px;
+        padding: 6px 25px !important;
+        display: inline-block !important;
+    }
+    .megaMenuDropdown .checkmark,
+    .megaMenuDropdown input[type="radio"] {
+        top: 10px;
+    }
+}
+
+@media (min-width: 769px) {
+    .megaMenuDropdown .themeBtn {
+        padding: 6px 25px !important;
+        display: inline-block !important;
+        vertical-align: middle;
+    }
+    .arrow {
+        border: solid #858585;
+        border-width: 0 3px 3px 0;
+        display: inline-block;
+        padding: 3px;
+        position: absolute;
+        right: -3px;
+        top: 20px;
+    }
+    .down {
+        transform: rotate(45deg);
+        -webkit-transform: rotate(45deg);
+    }
+    .comm-page-custom-acura .forceCommunitySection .ui-widget:first-child,
+    .forceCommunitySection .ui-widget:first-child {
+        margin-top: 120px;
+    }
+    .headerMobile .menu-icon,
+    .headerMobile {
+        display: none;
+    }
+    .mainHeader {
+        position: fixed;
+        width: 100%;
+        z-index: 999;
+        top: 70px;
+        left: 0;
+        border-top: 1px solid #979797;
+        padding: 0 10px;
+        min-height: 50px;
+        border-radius: 0 !important;
+        background: #f0f0f0;
+        /* box-shadow: 0 2px 12px rgb(0 0 0 / 15%); */
+    }
+    .mainHeader ul {
+        height: 100%;
+    }
+    .mainHeader nav {
+        margin: 0 auto;
+        max-width: 1170px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+    }
+    .navBarContainer .navBar {
+        display: none !important;
+    }
+    .orText:before,
+    .orText:after {
+        width: 1px;
+        height: 40%;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+    }
+    .orText:before {
+        top: 10px;
+    }
+    .orText:after {
+        bottom: 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .mainHeader,
+    .spacerBlank {
+        display: none;
+    }
+    /* .logoImage {
+        margin-top: 8px;
+    } */
+    .megaMenuDropdown {
+        max-height: initial;
+    }
+    .headerMobile .menu-icon {
+        top: 2px;
+        z-index: 9999;
+    }
+    .headerMobile ul {
+        top: 90px;
+    }
+}
+
+@media (max-width:480px) {
+    .mainHeader a span {
+        font-size: 14px;
+    }
+}
+
+.slds-spinner_container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: calc(9000 + 2);
+    background-color: rgba(255, 255, 255, .75);
+    visibility: visible;
+    opacity: 1;
+    transition: opacity .2s ease, visibility 0s;
+    transition-delay: 0s, .3s;
+}
+
+.Trim1 {
+    float: left!important;
+    width: 100%!important;
+}
+
+.Model1 {
+    float: left!important;
+    width: 100%!important;
+}
+
+.selectedindicator:after {
+    top: 0;
+    left: 50%;
+    border: solid transparent;
+    content: "";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-color: rgba(136, 183, 213, 0) !important;
+    border-top-color: #797979 !important;
+    border-width: 6px;
+    margin-left: -6px;
+    background: none !important;
+    mix-blend-mode: unset !important;
+}
+
+.acuraindicator.selectedindicator:after {
+    margin-left: 3px;
+}

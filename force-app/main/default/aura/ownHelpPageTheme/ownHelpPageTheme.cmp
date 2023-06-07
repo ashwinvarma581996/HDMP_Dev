@@ -1,0 +1,34 @@
+<!-- ======================================================================================================
+// Title: Lightning Aura Theme for Honda My Garage Experience Community
+//
+// Summary: This is the Theme for the Honda My Garage Experience Community Help-brand Pages
+//
+// Updated:
+// Dec 17, 2021 Ravindra Ravindra (Wipro) Original Author
+====================================================================================================== -->
+<aura:component access="global" implements="forceCommunity:themeLayout" description="Help Page Theme">
+    
+    <aura:attribute name="themeHeader" type="Aura.Component[]" required="false" />
+    <aura:attribute name="themeHero" type="Aura.Component[]" required="false" />
+    <aura:attribute name="themeFooter" type="Aura.Component[]" required="false" />
+  
+
+    <div class="slds-grid slds-wrap">
+        <div class="slds-col slds-size_1-of-1 ownHeader">
+            {!v.themeHeader}
+        </div>
+        
+        <div class="slds-col slds-size_1-of-1">
+            {!v.themeHero}
+        </div>
+        
+        <div class="slds-col slds-size_1-of-1 helpPageBody">
+            {!v.body}
+        </div>
+
+        <div class="slds-col slds-size_1-of-1">
+            {!v.themeFooter}
+        </div>
+    </div>    
+
+</aura:component>

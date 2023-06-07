@@ -1,0 +1,6 @@
+*, *:before, *:after {
+    font-size: 13px;
+}
+.subcategoryselected{
+    background: lightgray;
+}

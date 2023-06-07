@@ -1,0 +1,74 @@
+<!-- //============================================================================
+// Title:    Honda Owners Experience - Footer
+//
+// Summary:  This is the html seen at the Owners Garage Find - Honda Auto Body Explore Help Center of the Honda Owner Community
+//
+// Details:  Extend the LightningElement with this Base Element to gain access to the Messaging Channel and other logic herein and this is the own garage find honda body explore help center component for all community pages.
+//
+//
+// History:
+// July 11, 2021 Harsha
+//=========================================================================== -->
+<template>
+     <c-own-card title={cardTitle} titlecolor={titlecolor} icon-image={iconImageSrc} brand={brandForCard}  onaction={handleAction}>    
+         <div slot="action">
+             <button class="slds-button slds-button_outline-brand find-dealers-button">{actiontitle}
+                  <template if:true={actionicon}>
+                     <lightning-icon class="slds-p-left_small custom-icon" icon-name={actionicon} size="small"></lightning-icon>
+                  </template>
+             </button>
+         </div>
+         
+         <div slot="honda">
+             <lightning-layout class="slds-size_12-of-12" multiple-rows>
+               <template if:true={isDataLoading}>
+                    <lightning-layout-item size="12" >
+                         <div style="position: sticky;text-align:center" ><!--class="slds-m-top_xx-large slds-p-top_xx-large"-->
+                              <c-own-data-loading-spinner></c-own-data-loading-spinner>
+                         </div>
+                    </lightning-layout-item>
+               </template>
+               <template if:false={isDataLoading}>
+                    <template if:false={error}>
+                         <lightning-layout-item size="12" large-device-size="5" medium-device-size="5" small-device-size="12" >
+                              <div class="body-title">{bodyHeading}</div>
+                                   <p><span class="dealer-name">{dealerLocation.name}</span><br>
+                                        <span>{dealerLocation.addressLine1}
+                                   <br>{dealerLocation.addressLine2}</span></p>
+                                   <br>
+                                   <lightning-formatted-text class="show-desktop-format" value={dealerLocation.phone}></lightning-formatted-text>
+                                   <lightning-formatted-phone class="show-mobile-format" value={dealerLocation.phone}></lightning-formatted-phone>
+                                   <br><a style="color:#e42525;" href={dealerLocation.website} target="_blank">{dealerLocation.website}</a>
+                                   <!-- SCHEDULE SERVICE LINK COMMENTED AS PER ARUN'S DISCUSSION WITH GRACE -->
+                                        <span if:true={dealerLocation.scheduleServiceLink}>
+                                        <a class="schedule-text" href={dealerLocation.scheduleServiceLink} target="_blank">SCHEDULE SERVICE <lightning-icon icon-name="utility:forward" title="SCHEDULE" size="x-small" class="schedule-forward"></lightning-icon></a>
+                                   </span>
+                         </lightning-layout-item>
+                         <lightning-layout-item class="map-section" size="12" large-device-size="7" medium-device-size="7" small-device-size="12">
+                              <div class="show-desktop-format">
+                                   <lightning-map if:true={showMap} map-markers={mapMarkers} zoom-level={zoomLevel} options={mapOptions} class="img-map"></lightning-map>
+                              </div>
+                              <div class="show-mobile-format slds-m-top_small">
+                              <lightning-map if:true={showMap} map-markers={mapMarkers} zoom-level={zoomLevel} options={mapOptions} class="img-map"></lightning-map>
+                              </div>
+                         </lightning-layout-item>
+                    </template>
+                    <template if:true={error}>
+                         <lightning-layout-item size="12">
+                              <lightning-layout vertical-align="center">
+                                   <lightning-layout-item>
+                                        <lightning-icon class="slds-p-right_small error-icon" icon-name="utility:warning"
+                                        size="small"></lightning-icon>
+                                   </lightning-layout-item>
+                                   <lightning-layout-item >
+                                        <div class="slds-m-top_x-small error-message">{errorMessage}</div>
+                                   </lightning-layout-item>
+                              </lightning-layout>
+                         </lightning-layout-item>
+                    </template>
+               </template>
+             </lightning-layout>
+        </div>
+ 
+     </c-own-card>
+ </template>

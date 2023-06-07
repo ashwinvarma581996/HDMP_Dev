@@ -1,0 +1,19 @@
+<template>
+    <c-own-card title={title} titlecolor={titlecolor} icon-image={icon} brand={brand} showforwardicon={showForwardIcon} showfooter={showFooter} onheader={handleHeader} onfooter={handleFooter} onaction={handleAction} header-clickable="true">    
+        <div slot="marine">
+           Get upto four years of complete protection on your new motorcycle, ATV, side-by-side or scooter with our HondaCare&reg; and Roadside Assistance Protection Plans. 
+        </div>
+        <div slot="honda">
+            Get upto four years of complete protection on your new motorcycle, ATV, side-by-side or scooter with our HondaCare&reg; and Roadside Assistance Protection Plans. 
+         </div>  
+         <div slot="powerequipment">
+            Get upto four years of complete protection on your new motorcycle, ATV, side-by-side or scooter with our HondaCare&reg; and Roadside Assistance Protection Plans. 
+         </div>  
+         <div slot="powersports" if:true={body}>
+            <lightning-formatted-rich-text class="body-text" value={body}></lightning-formatted-rich-text>
+         </div> 
+         <div slot="acura">
+            Get upto four years of complete protection on your new motorcycle, ATV, side-by-side or scooter with our HondaCare&reg; and Roadside Assistance Protection Plans. 
+         </div>      
+    </c-own-card>
+</template>

@@ -1,0 +1,32 @@
+<template>
+    <template if:true={showSpinner}>
+        <lightning-spinner alternative-text="Loading" size="xx-medium"></lightning-spinner>
+    </template>
+    <div class="slds-card slds-scrollable_y">
+       
+    <template if:true={areDetailsVisible}>
+            <div class="slds-p-around_medium lgc-bg">
+            <c-customlookup field-label="Boilerplate" child-object-api-name='Offers__c' value={boilerplateid} offer ={offerid}
+            target-field-api-name='Boilerplate__c' required onvalueselected={handleValueSelcted} ></c-customlookup>
+            <lightning-textarea type="textArea" class="custom-textAreaTitle" max-length="32768" label="Offer Title"  value={offerTitle} onchange={handlechangoffertitle} required>
+                {offerTitle}
+            </lightning-textarea>
+
+            <template if:false={hidePowerSportsFields}>
+                <lightning-textarea type="textArea" label="Short Description" max-length="32768"  class="custom-textarea" value={shortDescription} onchange={handlechangeshortdescription} >
+                </lightning-textarea>
+                <lightning-textarea type="textArea" label="Detailed Description"  max-length="65000" class="custom-textarea" value={detailedDescription} onchange={handlechangedetailedDescription}  >
+                </lightning-textarea>
+                <lightning-textarea type="textArea" label="Legal Disclaimer" max-length="100000" class="custom-textarea" value={legalDesclaimer}  onchange={handlechangelegalDesclaimer} required >
+                </lightning-textarea>
+            </template>
+
+                 <lightning-textarea type="textArea"  label="Terms and Conditions" max-length="100000" class="custom-textarea" value={termsAndConditions} onchange={handlechangetermsAndConditions}>
+                 </lightning-textarea>
+    
+        </div>
+    </template>
+    </div>
+          <c-show-variable-name record-id={offerid}>
+          </c-show-variable-name>
+</template>

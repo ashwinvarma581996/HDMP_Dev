@@ -1,0 +1,439 @@
+<!-- //============================================================================
+// Title:    Honda Owners Product Settings
+//
+// Summary:  This is the html for the Product Settings page, including Edit Product
+//
+// Details:  Depending on whether or not a VIN was provided, the user is either
+//           given the option to provide a nickname and license plate number/state,
+//           or can enter additional information.
+//
+//
+// History:
+// Oct 8, 2021 Alexander D (Wipro) Original Author
+//=========================================================================== -->
+
+<template>
+    <template if:false={showConfirmationPopup}>
+        <lightning-spinner if:true={savingData} alternative-text="Loading" size="large"></lightning-spinner>
+        <lightning-layout multiple-rows>
+            <!--Header-->
+            <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="12" class="slds-p-around_large">
+                <c-own-product-header-2 product-title={productSettingsTitle}
+                                        year={year}
+                                        model={model}
+                                        trim={trim}
+                                        product-image={vehicleImage}
+                                        division={division}>
+                </c-own-product-header-2>
+            </lightning-layout-item>
+            <!--End Header-->
+            <!--Left Side - Large Image-->
+            <lightning-layout-item size="12" small-device-size="12" medium-device-size="4" large-device-size="4" class="slds-p-top_none">
+                <lightning-layout multiple-rows>
+                    <lightning-layout-item size="12" padding="around-large" class="find-brand-large">
+                        <div class=" product-form-section">
+                            <c-own-product-settings-image image={vehicleImage} onproductimageupload={handleCustomImageUpload} ondisablesavebutton={disableSaveButton} allow-image-upload={allowImageUpload} show-image-error={showImageError} division={division}></c-own-product-settings-image>
+                        </div>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="12" class="find-brand-small">
+                        <!--Vehicle image here-->
+                        <div class="slds-text-align_center">
+                            <c-own-product-settings-image image={vehicleImage} onproductimageupload={handleCustomImageUpload} ondisablesavebutton={disableSaveButton} show-image-error={showImageError} division={division}></c-own-product-settings-image>
+                        </div>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </lightning-layout-item>
+            <!--End Left Side - Large Image-->
+            <!--Right content-->
+            <lightning-layout-item size="12" padding="around-large" small-device-size="12" medium-device-size="8" large-device-size="8" class="slds-p-top_none">
+                <div class="vehicle-info">
+                    <lightning-layout multiple-rows>
+                        <lightning-layout-item size="12" class="product-form-section">
+                            <!--Header-->
+                            <div class="product-heading-medium">My Vehicle Info</div>
+                            <!--Vehicle Info-->
+                            <lightning-layout multiple-rows>
+                                <!--Nickname-->
+                                <lightning-layout-item size="12">
+                                    <lightning-layout multiple-rows>
+                                        <lightning-layout-item size="12" class="product-form-body" small-device-size="12" medium-device-size="6" large-device-size="6">
+                                            <span class="own-combobox-label">Nickname</span><!--Label-->
+                                            <lightning-input    name="Nickname"
+                                                                label="Nickname"
+                                                                value={nickname}
+                                                                placeholder="Add a nickname"
+                                                                onchange={handleNicknameChange} pattern="^[A-Za-z0-9 ]+$"  class="validate"
+                                                                variant="label-hidden" message-when-pattern-mismatch="Please enter only alphabets and numbers">
+                                            </lightning-input>
+                                        </lightning-layout-item>
+                                    
+                                    </lightning-layout>
+                                </lightning-layout-item>
+                                <!-- End Nickname-->
+                                <template if:true={hasVIN}>
+                                    <lightning-layout-item size="12" class="product-form-body">
+                                            <label for="VIN" class="own-combobox-label">{productIdentifierUppercase}</label><!--Label-->
+                                        <div id="VIN">{vin}</div>
+                                    </lightning-layout-item>
+                                </template>
+                                <!-- Alexander Dzhitenov (Wipro) DOE-4773 - The same layout will be displayed for products with and without a VIN, with the exception of the VIN entry field. -->
+                                <template if:false={hasVIN}>
+                                    <lightning-layout-item size="12" class="product-form-body"><!--VIN Input-->
+                                    <!--VIN input-->
+                                    <!-- <span class="own-combobox-label">VIN</span> --><!--Label-->
+                                    <lightning-layout multiple-rows>
+                                        <lightning-layout-item size="12">
+                                            <div class="slds-form-element">
+                                                <label class="slds-form-element__label" for="vin-input-desktop own-combobox-label">{productIdentifierUppercase}</label>
+                                                <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon_right" onkeyup={handleVINChange}>
+                                                    <template if:true={correctVINLength}>
+                                                        <lightning-icon icon-name="utility:check" size="x-small" class="icon-green slds-icon slds-input__icon slds-input__icon_right slds-icon-text-default"></lightning-icon>
+                                                    </template>
+                                                    <template if:true={incorrectVINLength}>
+                                                        <lightning-icon icon-name="utility:close" size="x-small" class="icon-red slds-icon slds-input__icon slds-input__icon_right slds-icon-text-default"></lightning-icon>
+                                                    </template>
+                                                    <input  type="text" name="vin-input" id="vin-input-desktop" class="slds-input find-brand-input slds-m-top_xx-small"
+                                                            value={vinInputVal} placeholder={productIdentifierEntryPlaceholder} minlength="17" maxlength="17"/>
+                                                </div>
+                                            </div>
+                                        </lightning-layout-item>
+                                        <lightning-layout-item size="12">
+                                            <template if:true={displayVINError}>
+                                                <span class="find-brand-error">{vinErrorText}</span>
+                                            </template>
+                                        </lightning-layout-item>
+                                    </lightning-layout>
+                                    <div class="slds-p-top_small"><a class="product-edit-helptext" onclick={handleVINHelp}>Where's my {productIdentifierUppercase}?</a></div>
+                                </lightning-layout-item><!--End VIN Input-->
+                                </template>
+                                <lightning-layout-item size="12" class="product-form-body">
+                                    <label for="Model" class="own-combobox-label">Model</label><!--Label-->
+                                    <div id="Model">{year} {model} {trim}</div>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="12" class="product-form-body" if:true={displayExteriorColor}>
+                                    <label for="ExteriorColor" class="own-combobox-label">Exterior Color</label><!--Label-->
+                                    <div id="ExteriorColor">{exteriorColor}</div>
+                                </lightning-layout-item>
+                                <!-- Alexander Dzhitenov (Wipro) DOE-4773 - Trim and Exterior Color should be read-only fields, both for vehicles with and without a VIN -->
+                                <!-- <template if:true={hasVIN}> -->
+                                <!-- </template> -->
+                                <!-- <template if:false={hasVIN}> -->
+                                    <!-- <lightning-layout-item size="12"> -->
+                                        <!--Vehicle Info-->
+                                        <!-- <lightning-layout multiple-rows> -->
+                                            <!-- <lightning-layout-item size="12" class="product-form-body"> --><!--VIN Input-->
+                                                <!--VIN input-->
+                                                <!--span class="own-combobox-label">VIN</span--><!--Label-->
+                                                <!-- <lightning-layout multiple-rows>
+                                                    <lightning-layout-item size="12">
+                                                        <div class="slds-form-element">
+                                                            <label class="slds-form-element__label" for="vin-input-desktop own-combobox-label">VIN</label>
+                                                            <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon_right" onkeyup={handleVINChange}>
+                                                                <template if:true={correctVINLength}>
+                                                                    <lightning-icon icon-name="utility:check" size="x-small" class="icon-green slds-icon slds-input__icon slds-input__icon_right slds-icon-text-default"></lightning-icon>
+                                                                </template>
+                                                                <template if:true={incorrectVINLength}>
+                                                                    <lightning-icon icon-name="utility:close" size="x-small" class="icon-red slds-icon slds-input__icon slds-input__icon_right slds-icon-text-default"></lightning-icon>
+                                                                </template>
+                                                                <input  type="text" name="vin-input" id="vin-input-desktop" class="slds-input find-brand-input slds-m-top_xx-small"
+                                                                        value={vinInputVal} placeholder="Enter VIN" minlength="17" maxlength="17"/>
+                                                            </div>
+                                                        </div>
+                                                    </lightning-layout-item>
+                                                    <lightning-layout-item size="12">
+                                                        <template if:true={displayVINError}>
+                                                            <span class="find-brand-error">{vinErrorText}</span>
+                                                        </template>
+                                                    </lightning-layout-item>
+                                                </lightning-layout>
+                                                <div class="slds-p-top_small"><a class="product-edit-helptext" onclick={handleVINHelp}>Where's my VIN?</a></div> -->
+                                            <!-- </lightning-layout-item> --><!--End VIN Input-->
+                                            <!-- <lightning-layout-item size="12"> -->
+                                                <!-- <lightning-layout>
+                                                    <lightning-layout-item size="6" class="product-form-body">
+                                                        <div class="product-edit-ym-header">Year/Model</div>
+                                                    </lightning-layout-item>
+                                                    <lightning-layout-item size="6" class="product-form-body">
+                                                        <div class="product-edit-ym">{year} {model}</div>
+                                                    </lightning-layout-item>
+                                                </lightning-layout>
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="12" class="product-form-body">
+                                                <span class="own-combobox-label">Trim</span>
+                                                <lightning-combobox name="Trim"
+                                                                    label="Trim"
+                                                                    options={trims}
+                                                                    value={modelId}
+                                                                    onchange={handleTrimChange}
+                                                                    variant="label-hidden"
+                                                                    disabled={userEnteredVIN}></lightning-combobox>
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="12" class="product-form-body"> --><!--Exterior Color-->
+                                                <!-- <span class="own-combobox-label">Exterior Color</span>
+                                                <lightning-combobox name="Exterior Color"
+                                                                    label="Exterior Color"
+                                                                    options={exteriorColors}
+                                                                    value={exteriorColor}
+                                                                    onchange={handleColorChange}
+                                                                    variant="label-hidden"
+                                                                    disabled={userEnteredVIN}></lightning-combobox> -->
+                                            <!-- </lightning-layout-item> --><!--End Exterior Color-->
+                                        <!-- </lightning-layout>
+                                    </lightning-layout-item>
+                                </template> -->
+                                
+
+                                <lightning-layout-item size="12"><!--License Plate/State-->
+                                    <lightning-layout multiple-rows>
+                                        <lightning-layout-item size="12" class="product-form-body" small-device-size="12" medium-device-size="6" large-device-size="6" if:true={displayLicensePlate}>
+                                            <span class="own-combobox-label">License Plate</span><!--Label-->
+                                            <lightning-input    name="License Plate"
+                                                                label="License Plate"
+                                                                value={licensePlate}
+                                                                onchange={handleLicensePlateChange}
+                                                                variant="label-hidden"
+                                                                max-length="25"></lightning-input>
+                                        </lightning-layout-item>
+                                        <lightning-layout-item size="12" class="product-form-body" small-device-size="12" medium-device-size="6" large-device-size="6" if:true={displayLicenseState}>
+                                            <span class="own-combobox-label">State</span><!--Label-->
+                                            <lightning-combobox name="State"
+                                                                label="State"
+                                                                value={state}
+                                                                options={states}
+                                                                onchange={handleLicensePlateStateChange}
+                                                                variant="label-hidden"></lightning-combobox>
+                                        </lightning-layout-item>
+                                    </lightning-layout>
+                                </lightning-layout-item>
+                                <!-- End License Plate/State-->
+                                
+                                <!--template if:false={hideRadioCode}>
+                                <lightning-layout-item size="12" class="product-form-body"--><!--Radio/Navigation Code-->
+                                    <!--span class="own-combobox-label">Radio/Navigation Code--><!--/span--><!--Label-->
+                                    <!--lightning-layout multiple-rows>
+                                        <lightning-layout-item size="12" class="product-form-body" small-device-size="12" medium-device-size="6" large-device-size="6">
+                                            <lightning-input    name="Radio Code"
+                                                                label="Radio Code"
+                                                                value={radioCode}
+                                                                placeholder="Add a radio code"
+                                                                onchange={handleRadioCodeChange}
+                                                                variant="label-hidden">
+                                            </lightning-input>
+                                        </lightning-layout-item>
+                                        <lightning-layout-item size="12" class="product-form-body" small-device-size="12" medium-device-size="6" large-device-size="6">
+                                            <lightning-input    name="Navigation Code"
+                                                                label="Navigation Code"
+                                                                value={navCode}
+                                                                placeholder="Add a navigation code"
+                                                                onchange={handleNavCodeChange}
+                                                                variant="label-hidden">
+                                            </lightning-input>
+                                        </lightning-layout-item>
+                                    </lightning-layout>
+                                    <div class="slds-p-top_small"><a class="product-edit-helptext" onclick={handleRadioCodeHelp}>How do I find my radio code?</a></div>
+                                </lightning-layout-item-->
+                                <!--End Radio/Navigation Code-->
+                                <!--/template-->
+                            </lightning-layout>
+                        </lightning-layout-item>
+                        <template if:true={showSubscriptionSection}>
+                            <lightning-layout-item size="12" class="product-form-section">
+                                <div class="product-heading-medium">My Subscriptions <a if:true={showEditPin} class="edit-pin slds-p-left_medium slds-p-top_x-small" onclick={handleEditPin}>Edit PIN</a></div>
+                                <div class="subscription-section">
+                                    <lightning-layout multiple-rows >
+                                        <template iterator:it={subscriptions}>
+                                            <template if:true={isErrorResponse}>
+                                                <lightning-layout-item  size="12"  key={it.value.packageName}>
+                                                    {it.value.status}
+                                                </lightning-layout-item>
+                                            </template>
+                                            <template if:false={isErrorResponse}>
+                                                <lightning-layout-item if:true={it.first} size="6" small-device-size="6" medium-device-size="3" large-device-size="3" class="slds-m-top_small slds-m-bottom_large" key={it.value.packageName}>
+                                                    <span class="small-subscription-header">{it.value.packageDisplayName}</span>
+                                                        <span><a class="small-subscription-link" data-value={it.value.link} data-pack={it.value.packageName} onclick={handleSubscriptionClick}>{it.value.link}</a></span>
+                                                        <div class="slds-p-top_small">
+                                                            <span class="slds-m-right_small" if:true={it.value.icon}><lightning-icon if:true={it.value.icon} icon-name={it.value.icon} variant={it.value.variant} size="x-small"></lightning-icon></span>
+                                                            <span>{it.value.status}</span>
+                                                        </div>
+                                                </lightning-layout-item>
+                                                <lightning-layout-item if:false={it.first} size="6" small-device-size="6" medium-device-size="3" large-device-size="3" class="subscription-div slds-m-top_small slds-m-bottom_large" key={it.value.packageName}>
+                                                    <span class="small-subscription-header">{it.value.packageDisplayName}</span>
+                                                        <span><a class="small-subscription-link" data-value={it.value.link} data-pack={it.value.packageName} onclick={handleSubscriptionClick}>{it.value.link}</a></span>
+                                                        <div class="slds-p-top_small">
+                                                            <span class="slds-m-right_small" if:true={it.value.icon}><lightning-icon if:true={it.value.icon} icon-name={it.value.icon} variant={it.value.variant} size="x-small"></lightning-icon></span>
+                                                            <span>{it.value.status}</span>
+                                                        </div>
+                                                </lightning-layout-item>
+                                            </template>                                            
+                                        </template>
+                                        <!--Alexander Dzhitenov (Wipro) DOE-4673-->
+                                        <!-- <lightning-layout-item size="6" small-device-size="6" medium-device-size="3" large-device-size="3" class="slds-p-top_small">
+                                            <span class="small-subscription-header">Security </span><template if:true={hasSecuritySubscription}>
+                                                <span><a class="small-subscription-link" data-subscription="security" onclick={handleEdit}>Edit</a></span>
+                                                <div class="slds-p-top_small">
+                                                    <span class="small-subscription-item"><lightning-icon icon-name="utility:success" size="x-small"></lightning-icon></span>
+                                                    <span class="small-subscription-item">Active</span>
+                                                </div>
+                                            </template>
+                                            <template if:false={hasSecuritySubscription}>
+                                                <span><a class="small-subscription-link" data-subscription="security" onclick={handleSignup}>Sign Up</a></span>
+                                                <div class="slds-p-top_small">
+                                                    <span class="small-subscription-item"><lightning-icon icon-name="utility:clear" size="x-small"></lightning-icon></span>
+                                                    <span class="small-subscription-item">Not Enrolled</span>
+                                                </div>
+                                            </template>
+                                        </lightning-layout-item>
+                                        <lightning-layout-item size="1" padding="around-medium">
+                                            <div class="find-brand-vertical-line"></div>
+                                        </lightning-layout-item>
+                                        <lightning-layout-item size="6" small-device-size="6" medium-device-size="3" large-device-size="3" class="slds-p-top_small">
+                                            <span class="small-subscription-header">Remote </span><template if:true={hasRemoteSubscription}>
+                                                <span><a class="small-subscription-link" data-subscription="remote" onclick={handleEdit}>Edit</a></span>
+                                                <div class="slds-p-top_small">
+                                                    <span class="small-subscription-item"><lightning-icon icon-name="utility:success" size="x-small"></lightning-icon></span>
+                                                    <span class="small-subscription-item">Active</span>
+                                                </div>
+                                            </template>
+                                            <template if:false={hasRemoteSubscription}>
+                                                <span><a class="small-subscription-link" data-subscription="remote" onclick={handleSignup}>Sign Up</a></span>
+                                                <div class="slds-p-top_small">
+                                                    <span class="small-subscription-item"><lightning-icon icon-name="utility:clear" size="x-small"></lightning-icon></span>
+                                                    <span class="small-subscription-item">Not Enrolled</span>
+                                                </div>
+                                            </template>
+                                        </lightning-layout-item>
+                                        <lightning-layout-item size="1" padding="around-medium" class="find-brand-large">
+                                            <div class="find-brand-vertical-line"></div>
+                                        </lightning-layout-item>
+                                        <lightning-layout-item size="6" small-device-size="6" medium-device-size="3" large-device-size="3" class="slds-p-top_small">
+                                            <span class="small-subscription-header">Concierge </span><template if:true={hasConciergeSubscription}>
+                                                <span><a class="small-subscription-link" data-subscription="concierge" onclick={handleEdit}>Edit</a></span>
+                                                <div class="slds-p-top_small">   
+                                                    <span class="small-subscription-item"><lightning-icon icon-name="utility:success" size="x-small"></lightning-icon></span>
+                                                    <span class="small-subscription-item">Active</span>
+                                                </div>
+                                            </template>
+                                            <template if:false={hasConciergeSubscription}>
+                                                <span><a class="small-subscription-link" data-subscription="concierge" onclick={handleSignup}>Sign Up</a></span>
+                                                <div class="slds-p-top_small">
+                                                    <span class="small-subscription-item"><lightning-icon icon-name="utility:clear" size="x-small"></lightning-icon></span>
+                                                    <span class="small-subscription-item">Not Enrolled</span>
+                                                </div>
+                                            </template>
+                                        </lightning-layout-item> -->
+                                    </lightning-layout>
+                                </div>
+                            </lightning-layout-item>
+                            <!--End Subscriptions-->
+                        </template>
+                        <lightning-layout-item size="12" class="product-form-section"><!--Actions-->
+                            <!--Header-->
+                            <div class="product-heading-medium">More Actions</div>
+                            <!--Action links-->
+                            <lightning-layout multiple-rows>
+                                <!-- <lightning-layout-item size="12" class="slds-p-top_small" small-device-size="12" medium-device-size="6" large-device-size="6">
+                                    <a onclick={handleRadioNavCodeAction} class="red link">Retrieve Radio/Navigation Codes</a>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="12" class="slds-p-top_small" small-device-size="12" medium-device-size="6" large-device-size="6">
+                                    <a onclick={handleReportStolen} class="red link">Report stolen</a>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="12" class="slds-p-top_small" small-device-size="12" medium-device-size="6" large-device-size="6">
+                                    <a onclick={handleViewSpecifications} class="red link">View specifications</a>
+                                </lightning-layout-item> -->
+                                <lightning-layout-item size="12" class="slds-p-top_small" small-device-size="12" medium-device-size="6" large-device-size="6">
+                                    <a onclick={handleRemoveFromGarage} class="red link">Remove from My Garage</a>
+                                </lightning-layout-item>
+                            </lightning-layout>
+                        </lightning-layout-item><!--End Actions-->
+                        <lightning-layout-item size="12"><!--Buttons: Save/Cancel-->
+                            <!--Buttons-->
+                            <div style="padding: 20px 0px">
+                                <lightning-layout>
+                                    <lightning-layout-item size="6" small-device-size="12" medium-device-size="6" large-device-size="6">
+                                        <div class={saveButtonClass} style="padding-right: 20px">
+                                            <button name="SAVE" onclick={handleSave}
+                                                    class="slds-button slds-button_outline-brand slds-combobox_container product-button-large"
+                                                    disabled={saveButtonDisabled}>
+                                                <span class="product-button-1-text">Save</span>
+                                            </button>
+                                        </div>
+                                    </lightning-layout-item>
+                                    <lightning-layout-item size="6" small-device-size="12" medium-device-size="6" large-device-size="6">
+                                        <div class="product-button-2" style="padding-right: 20px">
+                                            <button name="CANCEL" onclick={handleCancel}
+                                                    class="slds-button slds-button_outline-brand slds-combobox_container product-button-large">
+                                                <span class="product-button-2-text">Cancel</span> 
+                                            </button>
+                                        </div>
+                                    </lightning-layout-item>
+                                </lightning-layout>
+                            </div>
+                        </lightning-layout-item><!--End Buttons-->
+                    </lightning-layout>
+                </div>
+            </lightning-layout-item>
+        </lightning-layout>
+    </template>
+    <template if:true={showConfirmationPopup}>
+        <div class="slds-grid slds-wrap slds-p-around_x-large">
+            <div class="slds-col slds-size_1-of-1 slds-align_absolute-center">
+                <lightning-layout multiple-rows>
+                    <lightning-layout-item size="12" class="product-form-section">
+                        <div class="product-heading-xx-large">Remove Product</div>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="12" class="product-form-section">
+                        <span>Are you sure you want to remove this product?</span>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="12" class="product-form-section">
+                        <lightning-layout>
+                            <lightning-layout-item size="6" small-device-size="12" medium-device-size="6" large-device-size="6">
+                                <div class="product-button-1" style="padding-right: 20px">
+                                    <button name="YES" onclick={handleYes}
+                                            class="slds-button slds-button_outline-brand slds-combobox_container product-button-large">
+                                        <span class="product-button-1-text">Yes, Remove</span>
+                                    </button>
+                                </div>
+                            </lightning-layout-item>
+                            <lightning-layout-item size="6" small-device-size="12" medium-device-size="6" large-device-size="6">
+                                <div class="product-button-2" style="padding-right: 20px">
+                                    <button name="NO" onclick={handleNo}
+                                            class="slds-button slds-button_outline-brand slds-combobox_container product-button-large">
+                                        <span class="product-button-2-text">No, Go Back</span> 
+                                    </button>
+                                </div>
+                            </lightning-layout-item>
+                        </lightning-layout>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </div>
+        </div>
+    </template>
+    <!-- popup -->
+    <template if:true={showPopup}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+            class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" onclick={closePopup}>
+                    <lightning-icon icon-name="utility:close" alternative-text="Close" title="Cancel and close" class="popup-icon">
+                    </lightning-icon>
+                    <span class="slds-assistive-text">Cancel and close</span>
+                </button>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <lightning-layout multiple-rows>
+                        <lightning-layout-item size="12" class="slds-text-align_center">
+                            <b>{popupText}</b>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="6" class="slds-text-align_right"> 
+                            <img class="slds-p-around_small popup-button" data-hondaurl={appStoreURL} data-acuraurl={acuraAppStoreURL} src={popupAppStoreIcon} onclick={handleNavigations}/>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="6" class="slds-text-align_left"> 
+                            <img class="slds-p-around_small popup-button" data-hondaurl={playStoreURL} data-acuraurl={acuraPlayStoreURL} src={popupPlayStoreIcon} onclick={handleNavigations}/>
+                        </lightning-layout-item>
+                    </lightning-layout>
+                </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+    </template>
+    <div lwc:dom="manual" data-id="sso"></div>
+</template>

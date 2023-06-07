@@ -1,0 +1,89 @@
+.orderHistorySearchWrap {
+    display: flex;
+    align-items: flex-end;
+    position: relative;
+    width: 250px;
+}
+.searchIcon {
+    right: 0;
+    bottom: 5px;
+    position: absolute;
+    padding: 0 !important;
+}
+.orderSearch {
+    width: 100%;
+}
+.tableResponsive table{
+    border: #979797 1px solid;
+}
+.tableResponsive thead th,
+.tableResponsive tbody tr:nth-of-type(even)>td {
+    background: #f0f0f0;
+}
+.tableResponsive tbody tr:hover td{
+    background: none;
+}
+.tableResponsive thead th{
+    text-transform: uppercase;
+    padding-top: 15px !important;
+    padding-bottom: 15px !important;
+}
+.tableResponsive td,
+.tableResponsive th{
+    border-top: none;
+    border-bottom: none;
+    border-left: #979797 1px solid;
+}
+.tableResponsive td:first-child,
+.tableResponsive th:first-child {
+    border-left: none;
+}
+.finalAmount {
+    text-align: right;
+}
+@media screen and (max-width: 1130px) {
+    .user-section-header {
+        padding-left: 20px;
+    }
+    .orderHistorySearchParent {
+        padding: 0 20px;
+    }
+    .tableResponsive {
+        padding: 0 20px;
+    }
+}
+@media screen and (max-width: 767px) {
+    .user-section-header {
+        margin-top: 55px;
+    }
+    .tableResponsive table {border: none;}
+    .tableResponsive thead{display: none;}
+    .tableResponsive table tr {
+        border-bottom: #979797 1px solid;
+        display: block;
+        margin-bottom: .625em;
+    }
+    .tableResponsive table tr:hover td {
+        box-shadow: none;
+    }
+      
+    .tableResponsive  table td {
+        border: #979797 1px solid;
+        border-bottom: none;
+        display: flex;
+        justify-content: space-between;
+        font-size: .9em;
+        text-align: right;
+        padding: 8px !important;
+    }
+      
+    .tableResponsive table td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+    .tableResponsive tbody tr:hover:nth-of-type(even)>td {
+        background: #f0f0f0;
+    }
+    
+}

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>52.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property label="Image" name="image" type="String" />
+            <property label="Title" name="title" type="String" />
+            <property label="Sub Title" name="subtitle" type="String" />
+            <property label="Is Product Badge" name="isproductbadge" type="Boolean" />
+            <property label="is Recall Page" name="isRecallPage" type="Boolean" />
+            <property label="is TV Detail Page" name="isVideoDetailPage" type="Boolean" />
+            <property label="is Radio Nav" name="isRadioNavPage" type="Boolean" />
+            <property label="is Specifications Page" name="isSpecificationsPage" type="Boolean" />
+            <property label="Show Breadcrumb ?" default="true" name="showBreadcrumb" type="Boolean" />
+            <property label="Hide Product Badge ?" default="false" name="showProductBadge" type="Boolean" />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

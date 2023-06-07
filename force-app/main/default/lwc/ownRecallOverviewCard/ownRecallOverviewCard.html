@@ -1,0 +1,98 @@
+<!-- //============================================================================
+// Title:    Recall Overview Card
+//
+// Summary:  This is the html seen at the Service and Maintenance - Gives the overview of recalls for the vehicle.
+//
+// Details:  Get overview of the recalls for the vehicles.
+//
+//
+// History:
+// December 30, 2021 Madhushree
+//=========================================================================== -->
+<template>
+    <c-own-card title={title} titlecolor="Black" icon-image={icon} brand={brand} showfooter={footer}
+        onfooter={handleFooter} onaction={handleAction}>
+        <template if:true={showActionButton}>
+            <div slot="action">
+                <button class="slds-button slds-button_outline-brand find-dealers-button">{actiontitle}
+                </button>
+            </div>
+        </template>
+        <div slot="honda">
+            <template if:true={isDataLoading}>
+                <div style="position: sticky;">
+                    <!--class="slds-m-top_xx-large slds-p-top_xx-large"-->
+                    <c-own-data-loading-spinner></c-own-data-loading-spinner>
+                </div>
+            </template>
+            <template if:false={isDataLoading}>
+                <lightning-layout class="slds-size_12-of-12 " multiple-rows>
+                    <lightning-layout-item class="recall-padding" size="12" small-device-size="12"
+                        medium-device-size="4" large-device-size="4" padding="around-small">
+                        <div class="body-title"><strong>Number of Open Recalls: {totalRecalls}</strong></div>
+
+                        <!--<div class="body-title"><strong>Last Updated: </strong>{lastUpdatedDate}</div>-->
+
+                        <template if:true={showEnterVin}>
+                            <div class="slds-p-vertical_small">
+                                <div class="body-description">Please provide your VIN to see the active recalls that
+                                    apply only to your vehicle.</div>
+                            </div>
+                            <div class="slds-p-vertical_small  external-link">
+                                <a onclick={handleEditVin} class="service-link">ENTER YOUR VIN</a>
+                                <br />
+                            </div>
+                        </template>
+
+                    </lightning-layout-item>
+                    <template if:false={noRecalls}>
+                        <lightning-layout-item size="12" medium-device-size="8" small-device-size="12"
+                            large-device-size="8">
+                            <div class="slds-p-vertical_small">
+                                <template for:each={openRecalls} for:item="openRecall">
+                                    <template if:false={isGuest}>
+                                        <div key={openRecall.campaignID}>
+                                            <div class="recall-title">{openRecall.title}</div>
+                                            <div class="recall-info">Recall Issue Date: {openRecall.issueDate}</div>
+                                            <template if:true={showRecallStatus}>
+                                                <div class="recall-info">Recall Status: {openRecall.status}</div>
+                                            </template>
+                                            <a onclick={handleRecallRedirect} data-campaignid={openRecall.campaignId}
+                                                data-source={openRecall.source} class="recall-info external-link">Learn
+                                                More</a>
+                                            <br /><br />
+                                        </div>
+                                    </template>
+                                    <template if:true={isGuest}>
+                                        <div key={openRecall.campaignID}>
+                                            <a class="recall-info external-link" onclick={handleRecallRedirect}
+                                                data-campaignid={openRecall.campaignId}
+                                                data-source={openRecall.source}>{openRecall.title}</a>
+                                            <br /><br />
+                                        </div>
+                                    </template>
+                                </template>
+                            </div>
+                        </lightning-layout-item>
+                    </template>
+                    <template if:true={noRecalls}>
+                        <lightning-layout-item size="12" medium-device-size="8" small-device-size="12"
+                            large-device-size="8">
+                            <div class="slds-p-vertical_small body-description">
+                                There are currently no active safety recalls for this vehicle.
+                            </div>
+                            <a onclick={handleNoRecall} class="more-recall-link">Click here for more Honda Recall
+                                Information</a>
+                        </lightning-layout-item>
+                    </template>
+                </lightning-layout>
+            </template>
+        </div>
+        <div slot="footer">
+            <a class="service-link">Schedule Service</a>
+            <lightning-icon class="footer-icon" icon-name="utility:forward" variant="error" size="x-small"
+                title="Download">
+            </lightning-icon>
+        </div>
+    </c-own-card>
+</template>

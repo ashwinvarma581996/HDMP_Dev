@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>52.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <!-- Imtiyaz - RECALLS Start -->
+            <property label="More Information Acura" name="contentMoreInfoA" type="ContentReference" />
+            <property label="More Information Honda" name="contentMoreInfoH" type="ContentReference" />
+            <property label="More Information Powersports" name="contentMoreInfoP" type="ContentReference" />
+            <!-- Imtiyaz - RECALLS End -->
+            <property label="Collision Repair Content" name="contentId" type="ContentReference" />
+            <property label="Collision Repair Parts" name="contentId1" type="ContentReference" />
+            <property label="Collision Repair Parts1" name="contentId2" type="ContentReference" />
+            <!-- pawan  -->
+            <property label="Collision Insurance" name="contentId3" type="ContentReference" />
+            <property label="Collision Insurance2" name="contentId4" type="ContentReference" />
+            <property label="Collision Insurance3" name="contentId5" type="ContentReference" />
+            <property label="Collision Insurance4" name="contentId6" type="ContentReference" />
+            <property label="Collision Insurance5" name="contentId7" type="ContentReference" />
+            <property label="Collision Insurance6" name="contentId8" type="ContentReference" />  
+            <property label="Collision Insurance7" name="contentId9" type="ContentReference" />  
+            <property label="Collision Insurance8" name="contentId10" type="ContentReference" />
+            <!-- For collision Insurance -->
+            <property label="Collision Insurance99" name="contentId99" type="ContentReference" />
+            <property label="Collision Insurance98" name="contentId98" type="ContentReference" /> 
+            <property label="Collision Insurance97" name="contentId97" type="ContentReference" /> 
+            <property label="Collision Insurance96" name="contentId96" type="ContentReference" />
+            <!-- End --> 
+            <property name="collisionparts" label="page accordian for repair and parts" type="String"/>
+            <property name="collisioninsurance" label="page accordian for insurance" type="String"/> <!--Accordion for Collision Insurance -->  
+            <!-- pawan : Adding Cards for INsurance tab i.e., 3rd tab -->
+            <property type="ContentReference" name="findDealer" label="Content ID" />
+            <property type="ContentReference" name="genuineAccessories" label="Content ID" />  
+            <property type="ContentReference" name="genuineParts" label="Content ID" />
+            <!-- End -->  
+            <!-- Pawan : Adding Cards For Safety Commitment i.e,5th tab. -->
+            <property type="ContentReference" name="safetyCard1" label="Content ID" /> 
+            <property type="ContentReference" name="safetyCard2" label="Content ID" /> 
+            <property type="ContentReference" name="safetyCard3" label="Content ID" /> 
+            <property type="ContentReference" name="safetyCard4" label="Content ID" /> 
+            <property type="ContentReference" name="safetyCard5" label="Content ID" />
+            <property type="ContentReference" name="safetyCard6" label="Content ID" /> 
+            <property type="ContentReference" name="safetyCard7" label="Content ID" /> 
+            <property type="ContentReference" name="safetyCard8" label="Content ID" /> 
+            <!-- Safety Commitment Card End. -->
+            <!--  Adding topic string for Collision Glossary-->
+                <property name="collisionGlossary" label="Topic for Collision Glossary" type="String"/>
+            <!-- End --> 
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

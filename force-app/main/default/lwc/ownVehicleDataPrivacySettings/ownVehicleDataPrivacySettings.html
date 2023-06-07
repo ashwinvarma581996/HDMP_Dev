@@ -1,0 +1,49 @@
+<template>
+    <div class="page-header-container"><c-own-page-header isproductbadge="true" brand={brand} subtitle="Vehicle Data Privacy Settings"></c-own-page-header></div>
+    <lightning-layout class="container">
+        <lightning-layout-item class="section-1"></lightning-layout-item>
+        <lightning-layout-item class="section-2">
+            <template if:true={resultPageContent} >
+                <div class="heading-1"> {resultPageContent.titleUS} </div>
+                <div class="text-content">
+                    <lightning-formatted-rich-text  value={resultPageContent.content}></lightning-formatted-rich-text>
+                </div>
+                <div class="phone">
+                    <div class="phone-desktop" >{resultPageContent.phone}</div>
+                    <a href={resultPageContent.phone_href} class="phone-mobile">{resultPageContent.phone}</a>
+                    <div>{resultPageContent.phoneLabel}</div>
+                </div>
+                <div class="learn-more-div-1">
+                    {resultPageContent.learnMoreText} <a class="link-1"  href={resultPageContent.pdfLink} target="_blank">{resultPageContent.learnMoreLink}</a>
+                </div>
+                <div class="heading-2">
+                    {resultPageContent.titleCanada}
+                </div>
+                <div class="learn-more-div-2">
+                    {resultPageContent.learnMoreTextLine} <button class="link-2 learn-more-link" onclick={handleClickHere} value="yes">{resultPageContent.learnMoreTextLink}.</button>
+                </div>
+            </template>
+            <template if:true={questionPageContent} >
+                <div class="head-1">
+                    {questionPageContent.title}
+                </div>
+                <div class="text-1">
+                    {questionPageContent.subTitle}
+                </div>
+                <div class="img-div">
+                    <lightning-formatted-rich-text class="image" value={questionPageContent.image}></lightning-formatted-rich-text>
+                </div>
+                <lightning-layout class="buttons-div" multiple-rows="true">
+                    <lightning-layout-item class="btn-div-1"> 
+                        <button class="btn-1" onclick={handleClick} value="yes">YES</button>
+                    </lightning-layout-item>
+                    <lightning-layout-item class="btn-div-space"></lightning-layout-item>
+                    <lightning-layout-item class="btn-div-2"> 
+                        <button class="btn-2" onclick={handleClick} value="no">NO</button>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </template>
+        </lightning-layout-item>
+        <lightning-layout-item class="section-3"></lightning-layout-item>
+    </lightning-layout>
+</template>

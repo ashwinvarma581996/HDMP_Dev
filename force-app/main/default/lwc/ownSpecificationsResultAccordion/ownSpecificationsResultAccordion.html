@@ -1,0 +1,24 @@
+<template>
+    <!--div class="slds-page-header__title"> {vehicletrim}</div-->
+    <ul class="slds-accordion">
+        <!-- <template for:each={subcategory} for:item="result">
+            <div class="accordion-section" key={subcategory}>
+                <c-own-specifications-result-accordion-section result={result.results}
+                                                            selected-section-id={selectedSectionId}
+                                                            onsectionselect={handleSectionSelect}
+                                                            showtrimlist={showtrimlist}>
+                </c-own-specifications-result-accordion-section>
+            </div>
+        </template> -->
+        <template for:each={subcategories} for:item="result">
+            <div class="accordion-section" key={subcategory}>
+                <c-own-specifications-result-accordion-section result={result}
+                                                            selected-section-id={selectedSectionId}
+                                                            selected-section-ids={selectedSectionIds}
+                                                            onsectionselect={handleSectionSelect}
+                                                            showtrimlist={showtrimlist}>
+                </c-own-specifications-result-accordion-section>
+            </div>
+        </template> 
+    </ul>
+</template>

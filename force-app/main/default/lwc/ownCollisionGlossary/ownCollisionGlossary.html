@@ -1,0 +1,102 @@
+<template>
+    <div class="slds-container_large">
+        <lightning-layout multiple-rows horizontal-align="space" if:true={collisionGlossary}>
+            <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="11">
+                <div class="title slds-p-bottom_large">{collisionGlossary.title}</div>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="11">
+                <lightning-formatted-rich-text class="description text-style" value={collisionGlossary.body}></lightning-formatted-rich-text>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="11">
+                <div onkeyup={handleSearch}>
+                    <lightning-input type="search" placeholder={collisionGlossary.placeholder}
+                        class="slds-m-vertical_large search-input" label="Search" value={searchKey} minlength="3"
+                        variant="label-hidden" onchange={handleSearchChange} ></lightning-input>
+                </div>
+                <div class="slds-grid slds-container_center letter-links">
+                    <template if:true={accordinTestData} for:each={accordinTestData} for:item="sectionData">
+                        <p key={sectionData.key} data-target-id={sectionData.key} onclick={handleSectionClick}>
+                            {sectionData.title.value} </p>
+                    </template>
+                </div>
+            </lightning-layout-item>
+            <lightning-layout-item class="slds-m-vertical_large" size="12" small-device-size="12" medium-device-size="12"
+            large-device-size="11" padding="around-small">
+            <template if:true={showAccordins}>
+                <ul class="slds-accordion body-text slds-m-top_medium accordion-large">
+                    <template for:each={accordinTestData} for:item="sectionData">
+                        <li key={sectionData.key} class="slds-accordion__list-item">
+                            <section class={sectionData.class} data-id={sectionData.key}>
+                                <div class="slds-accordion__summary  custom-li">
+                                    <h2 class="slds-accordion__summary-heading">
+                                        <button value="planDetails" onclick={toggleAccordionSection}
+                                            data-target-id={sectionData.key} aria-controls="referenceId-51"
+                                            class="slds-button slds-button_reset slds-accordion__summary-action accordion-section-title"
+                                            aria-expanded="true" title={sectionData.title.value}>
+                                            <lightning-icon size="xx-small" icon-name={sectionData.icon}
+                                                alternative-text="down" title="down" class="custom-icon">
+                                            </lightning-icon>
+                                            <span
+                                                class="slds-accordion__summary-content slds-m-left_small custom-span">{sectionData.title.value}</span>
+                                        </button>
+                                    </h2>
+                                </div>
+                                <div class="slds-accordion__content">
+                                    <lightning-layout-item if:true={sectionData.body.value} size="12"
+                                        small-device-size="12" medium-device-size="12" large-device-size="12">
+                                        <lightning-formatted-rich-text class="section-content"
+                                            value={sectionData.body.value}></lightning-formatted-rich-text>
+                                    </lightning-layout-item>
+                                </div>
+                            </section>
+                        </li>
+                    </template>
+                </ul>
+            </template>
+            <template if:true={showAccordins}>
+                <ul class="slds-accordion body-text slds-m-top_medium accordion-small">
+                    <template for:each={accordinTestData} for:item="sectionData">
+                        <li key={sectionData.key} class="slds-accordion__list-item">
+                            <section class={sectionData.class} data-id={sectionData.key}>
+                                <div class="slds-accordion__summary  custom-li">
+                                    <h2 class="slds-accordion__summary-heading">
+                                        <button value="planDetails" onclick={toggleAccordionSection}
+                                            data-target-id={sectionData.key} aria-controls="referenceId-51"
+                                            class="slds-button slds-button_reset slds-accordion__summary-action accordion-section-title"
+                                            aria-expanded="true" title={sectionData.title.value}>
+                                            <lightning-icon size="xx-small" icon-name={sectionData.icon}
+                                                alternative-text="down" title="down" class="custom-icon">
+                                            </lightning-icon>
+                                            <span
+                                                class="slds-accordion__summary-content slds-m-left_small custom-span">{sectionData.title.value}</span>
+                                        </button>
+                                    </h2>
+                                </div>
+                                <div class="slds-accordion__content">
+                                    <lightning-layout-item if:true={sectionData.body.value} size="12"
+                                        small-device-size="12" medium-device-size="12" large-device-size="12">
+                                        <lightning-formatted-rich-text class="section-content"
+                                            value={sectionData.body.value}></lightning-formatted-rich-text>
+                                    </lightning-layout-item>
+                                </div>
+                            </section>
+                        </li>
+                    </template>
+                </ul>
+            </template>
+            <template if:false={showAccordins}>
+                <template if:true={showError}>
+                    <p>Your search did not return any matches.</p>
+                </template>
+                <template if:false={showError} for:each={resultData} for:item="res">
+                    <div key={res.data}>
+                        <lightning-formatted-rich-text class="section-content" value={res.data}>
+                        </lightning-formatted-rich-text>
+                        </br>
+                    </div>
+                </template>
+            </template>
+            </lightning-layout-item>
+        </lightning-layout>
+    </div>
+</template>

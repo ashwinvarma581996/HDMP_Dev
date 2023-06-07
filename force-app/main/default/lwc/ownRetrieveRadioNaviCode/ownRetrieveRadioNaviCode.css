@@ -1,0 +1,294 @@
+.main-wrapper{
+  margin-bottom : 80px;
+}
+.breadcrumb {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 22px;
+  letter-spacing: 0.02em;
+}
+.breadcrumb-text-color {
+    color: #E42525 !important;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 14px;
+    line-height: 22px;
+}
+.find-radionav-error {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 12px;
+  color: var(--HondaRed);
+  padding-top: 15px;
+}
+.breadcrumb-item-back::before {
+    content: "<" !important;
+    position: absolute;
+    left: -.75rem;
+    color: #E42525;
+}
+
+.breadcrumb-div-width {
+    min-width: 200px;
+}
+
+.find-brand-input {
+  background: #FFFFFF;
+  box-sizing: border-box;
+  border-radius: 2px;
+}
+
+.slds-form-element__label{
+  font-weight: 500 !important;
+  font-size: 13px !important;
+  line-height: 15px !important;
+  letter-spacing: 0.02em !important;
+  color: #000000 !important;
+}
+.required-field{
+  font-size: 14px;
+  color: #e42525;
+}
+
+p{
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 26px;
+  color: #080707;
+}
+.product-edit-helptext-desktop{
+  color:var(--HondaRed);
+  font-weight: 900;
+  font-size: 14px;
+  line-height: 22px;
+  letter-spacing: 0.02em;
+}
+
+.product-edit-helptext-mobile{
+  color:var(--HondaRed);
+  font-weight: 900;
+  font-size: 14px;
+  line-height: 22px;
+  letter-spacing: 0.02em;
+  margin-top: 10px;
+}
+.slds-radio-label{
+  font-weight: 300 !important;
+  font-size: 13px !important;
+  line-height: 15px !important;
+  letter-spacing: 0.02em !important;
+  color: #000000 !important;
+}
+.product-button-1 .slds-button{
+  border-color: var(--HondaRed);
+  border-radius: 2px;
+  font-family: Roboto;
+  font-style: normal;
+  height: 48px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  border: 2px solid #E42525;
+  background: #E42525;
+  font-weight: 900;
+  font-size: 16px;
+  line-height: 24px;
+  transition: 0.5s all;
+}
+.product-button-1 .slds-button:hover {
+  background: #C42121;
+}
+.product-button-1-text{
+  color: white;
+  size: 14px;
+}
+.product-button-2 .slds-button{
+  border-color: var(--HondaRed);
+  border-radius: 2px;
+  font-family: Roboto;
+  font-style: normal;
+  height: 48px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  border: 2px solid #E42525;
+  font-weight: 900;
+  font-size: 16px;
+  line-height: 24px;
+  transition: 0.5s all;
+}
+.product-button-2 .slds-button:hover {
+  background: #E42525;
+  color: #FFFFFF;
+}
+.product-button-2 .slds-button:hover .product-button-2-text {
+  color: #FFFFFF;
+}
+.product-button-2-text{
+  color: var(--HondaRed);
+  size: 14px;
+}
+.product-button-3 .slds-button{
+  border-radius: 2px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  background: white;
+  padding: 1px;
+}
+.product-button-3-text{
+  color: var(--HondaRed);
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  padding: 1px;
+}
+.product-button-1-disabled .slds-button {
+  border-color: #ACACAC;
+  border-radius: 2px;
+  font-family: Roboto;
+  font-style: normal;
+  background: #ACACAC;
+  font-weight: 900;
+  font-size: 16px;
+  line-height: 24px;
+  height: 48px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  transition: 0.5s all;
+}
+.product-button{
+  width: 60%;
+}
+.product-button-large{
+  width: 100%;
+}
+.product-button-item{
+  padding: 2px;
+}
+.product-button-section{
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+.find-brand-large .find-brand-button-active .slds-button, .find-brand-large .find-brand-button-disabled .slds-button {
+  width: 192px;
+}
+.find-brand-small .find-brand-button-active .slds-button, .find-brand-small .find-brand-button-disabled .slds-button {
+  justify-content: center;
+  width: 100%;
+}
+.find-brand-button-disabled .slds-button {
+  border-color: #ACACAC;
+  border-radius: 2px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  background: #ACACAC;
+}
+.find-brand-button-active .slds-button {
+  border-color: var(--HondaRed);
+  border-radius: 2px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  background: #E42525;
+}
+.find-brand-section-button-disabled .slds-button {
+  background: #FFFFFF;
+  border: 2px solid #767676;
+  box-sizing: border-box;
+  border-radius: 2px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 900;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: #767676;
+}
+.find-brand-section-button-active .slds-button {
+  background: #FFFFFF;
+  border: 2px solid var(--HondaRed);
+  box-sizing: border-box;
+  border-radius: 2px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 900;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--HondaRed);
+}
+.btn-wrapper{
+  margin: 16px 0px;
+  padding-right: 24px;
+}
+.bread-crumb-container{
+  padding-bottom: 20px;
+  padding-top: 20px;
+}
+.back-link{
+  margin-left: 6.5px;
+  height: 22px;
+  font-weight: 900;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+  color: #E42525;
+  padding-top: 5px;
+  line-height: 22px;
+}
+@media only screen and (max-width: 600px){
+  .product-edit-helptext-desktop{
+    display:none;
+  }
+  .product-edit-helptext-mobile{
+    display:block;
+  }
+  .btn-wrapper{
+    margin: 8px 0px;
+    padding-right: 0px;
+  }
+}
+
+
+@media only screen and (min-width: 601px) and (max-width: 1024px ){
+  .product-edit-helptext-desktop{
+    display:block;
+  }
+  .product-edit-helptext-mobile{
+    display:none;
+  }
+}
+
+
+@media only screen and (min-width: 1025px){
+  .product-edit-helptext-desktop{
+    display:block;
+  }
+  .product-edit-helptext-mobile{
+    display:none;
+  }
+  @media only screen and (min-width: 601px) {
+    .show-desktop-format {
+        display: block;
+    }
+    .show-mobile-format {
+        display: none;
+    }
+    .page-header-container{
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+}
+}

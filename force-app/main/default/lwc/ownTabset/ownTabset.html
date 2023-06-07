@@ -1,0 +1,49 @@
+<!-- //============================================================================
+// Title:    Honda MyGarage Experience - Promotional Hero
+//
+// Summary:  This is the Tabset html seen at the page of the Honda MyGarage Community
+//
+// Details:  Tabset for pages
+//
+// History:
+// November 5, 2021 Arunprasad N (Wipro) Original Author 
+//=========================================================================== -->
+<template>
+    <div class="c-container garage-tab-large">
+        <lightning-layout multiple-rows="true">
+            <lightning-layout-item size="12" class="garage-tab-large">
+                <div class="slds-tabs_defaults tabs">
+                    <ul class="slds-tabs_default__nav slds-grid_align-center" role="tablist">
+                        <template for:each={tabs} for:item="tab">
+                            <li key={tab.value} data-tab="true" class={tab.itemclass}  data-value={tab.value} data-id={tab.id} title={tab.label} role="presentation" onclick={handleActive}>
+                                <a  data-tab-value={tab.control} class="slds-tabs_default__link garage-tab-label" role="tab" tabindex={tab.tabindex} aria-selected={tab.ariaselected} aria-controls={tab.control} id={tab.id}>{tab.label}</a>
+                            </li>
+                        </template>
+                    </ul>
+                    <template for:each={tabs} for:item="tab">
+                        <div key={tab.value} id={tab.control} data-id={tab.id} class={tab.contentclass} role="tabpanel" aria-labelledby={tab.id}>
+                            
+                        </div>
+                    </template>
+                </div>
+            </lightning-layout-item>
+        </lightning-layout>
+    </div>
+    <div class="c-container garage-tab-small garage-tab-style">
+        <lightning-layout multiple-rows="true">
+            <lightning-layout-item size="12">
+                <div>
+                    <lightning-combobox
+                        class="tab-combobox"
+                        name="tab"
+                        label="Tab"
+                        value={tab}
+                        placeholder="Select Tab"
+                        options={tabs}
+                        variant="label-hidden"
+                        onchange={handleChange} ></lightning-combobox>
+                </div>
+            </lightning-layout-item>
+        </lightning-layout>
+    </div>
+</template>

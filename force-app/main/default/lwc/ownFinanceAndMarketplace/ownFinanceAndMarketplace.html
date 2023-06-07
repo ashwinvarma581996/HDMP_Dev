@@ -1,0 +1,14 @@
+<template>
+    <div class="section-row slds-container_large slds-container_center">
+        <div class="recall-heading">
+            <h3>{title}</h3>
+            <p>{body}</p>
+            <template if:true={buttontitle}>
+                <button onclick={handleRedirect} class="quick-actions-btn">{buttontitle}
+                    <lightning-icon class="slds-p-left_small custom-icon" icon-name="utility:forward" size="x-small">
+                    </lightning-icon>
+                </button>
+            </template>
+        </div>
+    </div>
+</template>

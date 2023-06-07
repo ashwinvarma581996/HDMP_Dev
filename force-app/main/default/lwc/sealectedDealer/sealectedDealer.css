@@ -1,0 +1,170 @@
+body {
+    background-color: lightblue;
+}
+
+.dealerTabbing {
+    display: block;
+    text-align: center;
+    padding-top: 20px;
+}
+
+.searchResult>.slds-grid.slds-wrap {
+    display: block;
+}
+
+.searchResult .appendedCard {
+    display: block;
+    box-shadow: 0px 0px 3px rgb(0 0 0 / 20%);
+    padding: 20px 30px 5px;
+    margin-top: 10px;
+    position: relative;
+    border-radius: 0;
+}
+
+.appendedCard p {
+    font-size: 18px;
+    font-weight: 700;
+    color: #000;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.searchLocation+span {
+    color: #E42525;
+    display: block;
+    padding-top: 2px;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.appendedCard:before {
+    content: "";
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    width: 0px;
+    height: 0px;
+    border-bottom: 22px solid #E42525;
+    border-left: 22px solid transparent;
+    box-shadow: 9px 9px 8px rgb(0 0 0 / 10%);
+}
+
+.appendedCard:after {
+    content: "";
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    width: 0px;
+    height: 0px;
+    border-top: 23px solid #fff;
+    border-right: 23px solid transparent;
+}
+
+.customIcon{
+    width: 29px;
+    height: 29px;
+    margin: 1px;
+}
+.contact-hours {
+    width: 100%;
+}
+.contact-hours .slds-col {
+    padding: 0;
+}
+.dealer-address {
+    display: flex;
+    align-items: flex-start;
+}
+.dealer-address .customIcon {
+    margin-left: -6px;
+    margin-top: 4px;
+    cursor: pointer;
+}
+
+.contact-name {
+    text-align: right;
+    
+}
+/* .telePhoneLink {
+    pointer-events: none;
+} */
+.contact-name .textRed {
+    word-break: break-word;
+}
+.checkmark {
+    position: absolute;
+    top: 12px;
+    left: 18px;
+    height: 15px;
+    width: 15px;
+    background-color: #fff;
+    border: 1px solid #666;
+    border-radius: 50%;
+}
+ .centerElement {
+    border: 1px solid #666;
+    margin: 0 10px;
+    max-width: 200px;
+    padding: 8px 20px!important;
+    width: 100%;
+}
+.cityStateSelection .slds-form-element{
+    width: 100%;
+}
+.VFIframe{
+    height:400px;
+    }
+@media (max-width: 767px) {
+    .VFIframe{
+        height: 250px!important;
+    }
+    .contact-hours {
+        
+        margin-top: 10px;
+    }
+    .contact-name {
+        text-align: left;
+    }
+    .contact-hours .slds-m-top_medium {
+        margin-top: 0;
+    }
+}
+
+
+@media (max-width: 480px) {
+    .dealerList .appendedCard .flexColumn {
+        align-items: flex-start;
+        margin-top: 15px;
+    }
+    .dealerList .appendedCard .flexColumn .slds-text-align_right {
+        text-align: left !important;
+    }
+    .contact-hours {
+        margin-top: 0px;
+    }
+    
+    .dealerWebsite {
+        margin-bottom: 0px !important;
+    }
+    .searchResult .appendedCard button, .searchResult .appendedCard .dealerWebsite a {
+        min-width: unset !important;
+        line-height: 18px !important;
+    }
+    .dealerLocationSelectors .centerElement{
+        flex-wrap: wrap;
+        flex-direction: column;
+    }
+    .dealerLocationSelectors .centerElement:first-child {
+        margin-left: 0;
+    }
+    .dealerLocationSelectors .centerElement:last-child {
+        margin-right: 0;
+    }
+    .dealerLocationSelectors .centerElement label {
+        padding-left: 0;
+        padding-top: 5px;
+        font-size: 16px;
+    }
+    
+}

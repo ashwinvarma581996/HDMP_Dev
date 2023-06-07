@@ -1,0 +1,88 @@
+<template>
+    <template if:false={showJobDetail}>
+        <div class="page-table_mobile" onclick={handleClick}>
+            <ul>
+                <li> <span class="arrow"></span> Job {jobNumber} </li>
+            </ul>
+        </div>
+    </template>
+    <template if:true={showJobDetail}>
+        <div class="selected-job-label">
+        <div class="page-selected-table_mobile" onclick={handleClick}>
+            <ul>
+                <li> <span class="arrow selected-down-arrow"></span> <span class="job-label">Job {jobNumber}</span></li>
+            </ul>
+        </div>
+        <div class="header-div slds-p-vertical_small">
+            <lightning-layout>
+                <lightning-layout-item size="5">
+                    <div class="slds-var-p-horizontal_small job-label">
+                        Job
+                    </div>
+                </lightning-layout-item>
+                <lightning-layout-item size="7">
+                    <div class="slds-var-p-horizontal_small job-desc">
+                        {job.Job}
+                    </div>
+                </lightning-layout-item>
+            </lightning-layout>
+            </br>
+            <lightning-layout>
+                <lightning-layout-item size="5">
+                    <div class="slds-var-p-horizontal_small job-label">
+                        Service
+                    </div>
+                </lightning-layout-item>
+                <lightning-layout-item size="7">
+                    <div class="slds-var-p-horizontal_small job-desc">
+                        {job.Service}
+                    </div>
+                </lightning-layout-item>
+            </lightning-layout>
+            </br>
+            <lightning-layout>
+                <lightning-layout-item size="5">
+                    <div class="slds-var-p-horizontal_small job-label">
+                        Description
+                    </div>
+                </lightning-layout-item>
+                <lightning-layout-item size="7">
+                    <div class="slds-var-p-horizontal_small job-desc">
+                        {job.Description}
+                    </div>
+                </lightning-layout-item>
+            </lightning-layout>
+            </br>
+            <template if:true={showPartNames}>
+                <lightning-layout>
+                    <lightning-layout-item size="5">
+                        <div class="slds-var-p-horizontal_small job-label">
+                            Part Names
+                        </div>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="7">
+                        <div class="slds-var-p-horizontal_small job-desc">
+                            {job.partNames}
+                        </div>
+                    </lightning-layout-item>
+                </lightning-layout>
+                </br>
+            </template>
+            <template if:true={showPartNumbers}>
+                <lightning-layout>
+                    <lightning-layout-item size="5">
+                        <div class="slds-var-p-horizontal_small job-label">
+                            Part Numbers
+                        </div>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="7">
+                        <div class="slds-var-p-horizontal_small job-desc">
+                            {job.partNumbers}
+                        </div>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </template>
+        </div>
+    </div>
+    </template>
+</template>

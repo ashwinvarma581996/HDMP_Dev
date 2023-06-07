@@ -1,0 +1,29 @@
+.back-link{
+    margin-left: 6.5px;
+    height: 22px;
+    font-weight: 900;
+    letter-spacing: 0.02em;
+    color: #E42525;
+    padding-top: 5px;
+    line-height: 22px;
+}
+.bread-crumb-container{
+    margin-bottom: 10px;
+    margin-top: 15px;
+}
+
+.chevronleft {
+    --sds-c-icon-color-foreground-default: #E42525;
+    --sds-c-icon-color-background: white;
+}
+
+@media only screen and (min-width: 601px) {
+    .back-link{
+        font-size: 14px;
+    }
+}
+@media only screen and (max-width: 600px) {
+    .back-link{
+        font-size: 12px;
+    }
+}

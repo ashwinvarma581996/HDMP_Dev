@@ -1,0 +1,47 @@
+<!-- //============================================================================
+// Title:    Honda Owners Experience - Footer
+//
+// Summary:  This is the html seen at the Owners Garage Find - Honda Auto Body Honda Link of the Honda Owner Community
+//
+// Details:  Extend the LightningElement with this Base Element to gain access to the Messaging Channel and other logic herein and this is the own garage find honda body honda link component for all community pages.
+//
+//
+// History:
+// May 17, 2021 Arunprasad N (Wipro) Original Author
+// Jul 03, 2021 Harshavardhan (Wipro)
+// July 15, 2021 Jim Kohs (Wipro) refactored to ownBaseCard2
+//=========================================================================== -->
+<template>
+    <div class={cardDivClass}>
+        <div class="card card-size card-styles-wrapper">
+            <lightning-card class="card-styles">
+                <div slot="title" class="slds-truncate" onclick={handleClickHeader}>
+                    <lightning-layout>
+                        <lightning-layout-item size="2">
+                            <img src={icon} class="slds-p-right_small custom-icon">
+                        </lightning-layout-item>
+                        <lightning-layout-item size="12" class="card-titlemain">
+                            <span class={titleClass}>{title}</span>
+                        </lightning-layout-item>
+                        <template if:true={showforwardicon}>
+                            <lightning-layout-item>
+                                <lightning-icon class={iconClass} icon-name="utility:forward" size="x-small">
+                                </lightning-icon>
+                            </lightning-layout-item>
+                        </template>
+                    </lightning-layout>
+                </div>
+                <div class="slds-card__body_inner card-body">
+                    <lightning-formatted-rich-text value={body}></lightning-formatted-rich-text>
+                    <template if:true={showFooter}>
+                        <div class="inner-body slds-p-top_medium ">
+                            <a class='footer-link' onclick={handleClickFooter} tabindex="0" role="link">View More</a>
+                        </div>
+                    </template>
+                </div>
+
+            </lightning-card>
+
+        </div>
+    </div>
+</template>

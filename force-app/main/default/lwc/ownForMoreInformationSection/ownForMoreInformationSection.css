@@ -1,0 +1,88 @@
+/* Imtiyaz - RECALLS Start */
+.content-text{
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 26px;
+    color: #080707;
+    margin-bottom: 10px !important;
+}
+
+.c-rcl{
+    display: grid;
+}
+.more-info-head-text{
+    margin-top: 30px;
+}
+.more-info-head{
+    font-style: normal;
+    font-weight: 900;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: 1px;
+    color: #000000;
+}
+.more-info-text{
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 26px;
+    color: #080707;
+    padding: 10px 0px;
+}
+.c-i-1-rcl-head{
+    font-style: normal;
+    font-weight: 900;
+    font-size: 16px;
+    line-height: 20px;
+    color: #000000;
+    margin: 4px 0px;
+}
+.c-i-1-rcl-text{
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 26px;
+    color: #080707;
+}
+.c-i-2-rcl-head{
+    font-style: normal;
+    font-weight: 900;
+    font-size: 16px;
+    line-height: 20px;
+    color: #000000;
+    margin: 4px 0px;
+}
+.c-i-2-rcl-text{
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 26px;
+    color: #080707;
+}
+.c-i-2-rcl-link, .more-info-link, .c-i-1-rcl-text-phone{
+    color: red;
+}
+@media only screen and (min-width: 601px) {
+    .c-i-1-rcl-phone-large{
+        display: block;
+    }
+    .c-i-1-rcl-phone-small{
+        display: none;
+    }
+    .c-rcl{
+        grid-template-columns: auto auto;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .c-i-1-rcl-phone-large{
+        display: none;
+    }
+    .c-i-1-rcl-phone-small{
+        display: block;
+    }
+    .c-rcl{
+        grid-template-columns: auto;
+    }
+    .c-i-2-rcl-head{
+        margin-top: 10px;
+    }
+}
+/* Imtiyaz - RECALLS End */

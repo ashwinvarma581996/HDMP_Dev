@@ -1,0 +1,183 @@
+<!-- //============================================================================
+// Title:    Honda MyGarage Experience - Product Compatibility Check
+//
+// Summary:  This is the Check Product Compatibility html seen at the page of the Honda MyGarage Community
+//
+// Details:  Product Compatibility Check for pages
+//
+// History:
+// October 18, 2021 Arunprasad N (Wipro) Original Author 
+//=========================================================================== -->
+<template>
+    <!-- <lightning-layout class="slds-p-bottom_xx-large" multiple-rows>
+        <lightning-layout-item size="12" padding="around-small" small-device-size="12" medium-device-size="12"
+            large-device-size="12">
+            <div class="custom-box ">
+                <lightning-layout multiple-rows="true">
+                    <lightning-layout-item size="12">
+                        <lightning-layout multiple-rows="true">
+                            <lightning-layout-item size="12" small-device-size="1" medium-device-size="1"
+                                large-device-size="3">
+                            </lightning-layout-item>
+                            <lightning-layout-item class="section-title" size="12" small-device-size="1"
+                                medium-device-size="1" large-device-size="7">
+                                {staticText}
+                            </lightning-layout-item>
+                            <lightning-layout-item size="12" small-device-size="1" medium-device-size="1"
+                                large-device-size="2">
+                            </lightning-layout-item>
+                        </lightning-layout>
+                    </lightning-layout-item>
+
+                    <lightning-layout-item size="12">
+                        <lightning-layout multiple-rows="true">
+                            <lightning-layout-item size="12" small-device-size="1" medium-device-size="1"
+                                large-device-size="3">
+                            </lightning-layout-item>
+                            <lightning-layout-item size="12" small-device-size="1" medium-device-size="1"
+                                large-device-size="6">
+                                <lightning-layout multiple-rows="true">
+                                    <lightning-layout-item size="12" small-device-size="12" medium-device-size="12"
+                                        large-device-size="3">
+                                        <div class="combobox-gutters slds-p-top_x-small">
+                                            <span class="custom-input-label"><b>Year</b></span>
+                                            <lightning-combobox class="find-brand-combobox" label="Year"
+                                                variant="label-hidden" placeholder="Select Year" options={years}
+                                                value={year} onchange={handleYear}></lightning-combobox>
+                                        </div>
+                                    </lightning-layout-item>
+                                    <lightning-layout-item size="12" small-device-size="12" medium-device-size="12"
+                                        large-device-size="3">
+                                        <div class="combobox-gutters slds-p-top_x-small">
+                                            <span class="custom-input-label">Model</span>
+                                            <lightning-combobox class="product-compatibility-combobox" label="Model"
+                                                variant="label-hidden" placeholder="Select Model" options={models}
+                                                value={model} onchange={handleModel} disabled={isModelDisable}>
+                                            </lightning-combobox>
+                                        </div>
+                                    </lightning-layout-item>
+                                    <lightning-layout-item size="12" small-device-size="12" medium-device-size="12"
+                                        large-device-size="3">
+                                        <div class="combobox-gutters slds-p-top_x-small">
+                                            <span class="custom-input-label">Trim</span>
+                                            <lightning-combobox class="product-compatibility-combobox" name="trim"
+                                                label="Trim" variant="label-hidden" placeholder="Select Trim"
+                                                options={trims} value={modelId} onchange={handleTrim}
+                                                disabled={isTrimDisable}></lightning-combobox>
+                                        </div>
+                                    </lightning-layout-item>
+                                    <lightning-layout-item size="12" small-device-size="12" medium-device-size="12"
+                                        large-device-size="3">
+                                        <div class={ymtButtonClass}>
+                                            <div>
+                                                <span>&nbsp;</span>
+                                            </div>
+                                            <div>
+                                                <button
+                                                    class="slds-button slds-button_neutral slds-m-top_x-small custom-button custom-button-find"
+                                                    onclick={handleFindByYearModel} disabled={isYmtButtonDisabled}>FIND</button>
+                                            </div>
+                                        </div>
+                                    </lightning-layout-item>
+                                </lightning-layout>
+                            </lightning-layout-item>
+                            <lightning-layout-item size="12" small-device-size="1" medium-device-size="1"
+                                large-device-size="3">
+                            </lightning-layout-item>
+                        </lightning-layout>
+                    </lightning-layout-item>
+
+
+                </lightning-layout>
+            </div>
+        </lightning-layout-item>
+        <lightning-layout-item size="12" padding="around-small" small-device-size="12" medium-device-size="12"
+            large-device-size="12">
+            <lightning-layout multiple-rows="true">
+                <lightning-layout-item size="12" small-device-size="1" medium-device-size="1" large-device-size="3">
+                </lightning-layout-item>
+                <lightning-layout-item size="12" small-device-size="1" medium-device-size="1" large-device-size="6">
+                    <lightning-layout multiple-rows="true">
+                        <lightning-layout-item size="12">
+                            <div class="seprater-section">
+                                <div class="custom-span-left" style="display: flex;">
+                                    <div class="slds-p-top_small" style="width: 90%;">
+                                        <div class="find-brand-horizontal-line"></div>
+                                    </div>
+                                    <div class="or-span">
+                                        <span class="find-brand-or-span"> OR </span>
+                                    </div>
+                                </div>
+                                <div class="custom-span-right slds-p-top_small">
+                                    <div class="find-brand-horizontal-line"></div>
+                                </div>
+                            </div>
+                        </lightning-layout-item>
+                    </lightning-layout>
+                </lightning-layout-item>
+                <lightning-layout-item size="12" small-device-size="1" medium-device-size="1" large-device-size="3">
+                </lightning-layout-item>
+
+
+            </lightning-layout>
+        </lightning-layout-item>
+
+        <lightning-layout-item size="12" padding="around-small" small-device-size="12" medium-device-size="12"
+            large-device-size="12">
+            <lightning-layout multiple-rows="true">
+
+                <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="12">
+                    <lightning-layout multiple-rows="true">
+                        <lightning-layout-item size="12" small-device-size="1" medium-device-size="1"
+                            large-device-size="3">
+                        </lightning-layout-item>
+                        <lightning-layout-item size="12" small-device-size="1" medium-device-size="1"
+                            large-device-size="6">
+                            <div class="section-title find-brand-heading slds-p-bottom_small">
+                                Enter your VIN number for details personalized to your vehicle
+                            </div>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="12" small-device-size="1" medium-device-size="1"
+                            large-device-size="3">
+                        </lightning-layout-item>
+                    </lightning-layout>
+                </lightning-layout-item>
+                <lightning-layout-item size="12" small-device-size="1" medium-device-size="1" large-device-size="3">
+                </lightning-layout-item>
+                <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="6">
+                    <lightning-layout multiple-rows="true">
+                        <lightning-layout-item size="12" small-device-size="12" medium-device-size="12"
+                            large-device-size="9">
+                            <div class="slds-form-element">
+                                <label class="slds-form-element__label custom-input-label"><b>VIN Number</b></label>
+                                <span style="position:relative;top:2px;left:2px;">
+                                    <button class="slds-button">
+                                        <img src={vinHelpIcon} />
+                                    </button>
+                                </span>
+                                <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon_right combobox-gutters">
+                                    <input type="text" class="slds-input find-brand-input slds-m-top_xx-small"
+                                        placeholder="Enter VIN" minlength="17" maxlength="17" oninput={handleVin} />
+                                </div>
+                            </div>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="12" small-device-size="12" medium-device-size="12"
+                            large-device-size="3">
+                            <div class={vinButtonClass}>
+                                <div>
+                                    <span>&nbsp;</span>
+                                </div>
+                                <div>
+                                    <button
+                                        class="slds-button slds-button_neutral slds-m-top_x-small custom-button custom-button-find" disabled={isVinButtonDisabled} onclick={handleFindByVin}>FIND</button>
+                                </div>
+                            </div>
+                        </lightning-layout-item>
+                    </lightning-layout>
+                </lightning-layout-item>
+                <lightning-layout-item size="12" small-device-size="1" medium-device-size="1" large-device-size="3">
+                </lightning-layout-item>
+            </lightning-layout>
+        </lightning-layout-item>
+    </lightning-layout> -->
+</template>

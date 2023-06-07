@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>54.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property label="Content" name="contentid" type="ContentReference"/>
+            <property label="Icon" name="icon" type="String" />
+            <property label="Brand" name="brand" type="String" />
+            <property label="Show Link" name="showWarrantyLink" type="Boolean" />
+            <property label="Header Link" name="headerLink" type="String" />
+            <property label="Action Icon" name="actionIcon" type="String"/>
+            <property label="Show action icon while logged in?" name="showActionIconLoggedIn" type="Boolean" />
+            <property label="Show action icon while logged out?" name="showActionIconLoggedOut" type="Boolean" />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

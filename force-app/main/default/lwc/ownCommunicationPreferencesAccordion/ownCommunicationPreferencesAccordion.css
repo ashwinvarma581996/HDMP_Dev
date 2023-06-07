@@ -1,0 +1,110 @@
+.header-title{
+    font-family: 'Roboto';
+font-style: normal;
+font-weight: 300;
+font-size: 32px;
+line-height: 37px;
+}
+.custom-icon{
+    --sds-c-icon-color-foreground-default: #e42525;
+}
+
+.selected-background{
+    background-color: #F5F5F5;
+}
+
+.selected-title{
+    font-weight:bold;
+}
+
+.section{
+    padding-top: 22px;
+    padding-bottom: 22px;
+}
+
+
+
+.section-content{
+    padding-left: 22px;
+}
+
+
+.accordian_section{
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    box-shadow: 0px 1px 0px #ffffff !important;
+}
+
+.specifics-list{
+    border-top: 2px solid #e42525;
+}
+
+
+.specifics-name{
+    font-weight: 300;
+    padding : 12px 16px;
+    background : #ffffff;
+    font-size: 16px;
+    line-height: 24px;
+    color: #080707;
+    border-bottom: 1px solid #D9D9D9;
+}
+.specifics-details{
+    font-weight: bold;
+    padding : 12px 16px;
+    font-size: 16px;
+    line-height: 24px;
+    color: #080707;
+    background: #f5f5f5;
+    border-bottom: 1px solid #D9D9D9;
+}
+.multi-specifics-name{
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 32px;
+    color: #000000;
+}
+.multi-specifics-details{
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 32px;
+    color: #000000;
+}
+
+.specifics-footer{
+    padding-left: 5px;
+    padding-top: 8px;
+    font-size: xx-small;
+}
+.section-closed .spec-wrapper{
+    display:none;
+}
+.spec-wrapper{
+    background: #F5F5F5;
+    padding : 24px;
+}
+.checkbox{
+    --sds-c-checkbox-mark-color-foreground: red;
+}
+.sub-title{
+    font-family: 'Roboto';
+font-style: normal;
+font-weight: 700;
+font-size: 16px;
+line-height: 20px;
+color :#000000;
+}
+.sub-description{
+    font-family: 'Roboto';
+font-style: normal;
+font-weight: 300;
+font-size: 16px;
+line-height: 26px;
+color :#000000;
+}
+.time-zone{
+    background: #FFFFFF;
+    box-sizing: border-box;
+    border-radius: 2px;
+    width : 30%;
+}

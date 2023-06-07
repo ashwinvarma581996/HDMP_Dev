@@ -1,0 +1,311 @@
+.garage-product-details-image-circle {
+    border: 1px solid #D9D9D9;
+    width: 272px;
+    height: 272px;
+}
+
+
+.garage-product-changer {
+    margin-bottom: 30px;
+    margin-top: -44px;
+}
+
+.change-brand-combobox {
+    background: #FFFFFF;
+    box-sizing: border-box;
+    border-radius: 2px;
+}
+
+.change-brand-input {
+    background: #FFFFFF;
+    box-sizing: border-box;
+    border-radius: 2px;
+}
+
+.change-combobox-label {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 13px !important;
+    line-height: 15px;
+    letter-spacing: 0.02em;
+    color: #000000 !important;
+}
+
+.change-brand-button-active .slds-button,
+.change-brand-button-disabled .slds-button {
+    justify-content: center;
+    width: 120px;
+}
+
+.change-brand-button-active .slds-button {
+    border-color: var(--HondaRed);
+    border-radius: 2px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    background: #E42525;
+}
+
+.change-brand-button-disabled .slds-button {
+    border-color: #ACACAC;
+    border-radius: 2px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    background: #ACACAC;
+}
+
+.garage-product-details-label {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 40px;
+    line-height: 42px;
+    letter-spacing: 0.02em;
+    color: #000000;
+}
+
+.garage-product-details-label-border {
+    border-bottom: 1px solid #d9d9d9;
+    padding-bottom: 8px;
+}
+
+.garage-product-details-label-center {
+    text-align: center;
+}
+
+
+.garage-product-details-field-label {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 26px;
+    align-items: center;
+    color: #000000;
+    margin-top: 10px;
+}
+
+.garage-product-details-field-cta {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 14px;
+    line-height: 26px;
+    letter-spacing: 2.8px;
+    text-transform: uppercase;
+    color: #E42525;
+    cursor: pointer;
+}
+
+.garage-product-details-field-value {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 26px;
+    align-items: center;
+    color: #000000;
+    margin-top: 10px;
+}
+
+.add-garage-button {
+    background: var(--HondaRed);
+    border: 2px solid var(--HondaRed);
+    box-sizing: border-box;
+    border-radius: 2px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 16px;
+    line-height: 24px;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: var(--HondaWhite);
+    height: 48px;
+}
+
+.add-garage-button-width {
+    width: 257px;
+}
+
+.garage-product-details-image {
+    content: url(/owners/resource/Owners/images/product_image.png);
+    position: relative;
+    top: 50%;
+    transform: translate(7%, -50%);
+}
+
+.garage-product-camera-icon {
+    content: var(--garageCamera);
+}
+
+.ownProductImage {
+    width: 272px;
+    height: 272px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 1px solid #D9D9D9;
+    margin-right: 0px;
+    position: relative;
+    display: flex;
+    overflow: hidden;
+}
+
+.ownProductMobileImage {
+    width: 50vw;
+    height: 50vw;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 1px solid #D9D9D9;
+    margin-left: -50%;
+    position: relative;
+    display: flex;
+    overflow: hidden;
+}
+
+.imagecls {
+    width: 90%;
+}
+
+.imageclsContain{
+    object-fit:contain;
+}
+.imageclsCover{
+    object-fit:cover;
+}
+
+.ownAddPhoto {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: #FFFFFF;
+    border: 1px dashed #E42525;
+}
+
+.ownAddPhotoHead {
+    font-size: 14px;
+    line-height: 18px;
+    text-align: center;
+    color: #E42525;
+}
+
+.ownAddPhotoContainer {
+    margin-top: -28px;
+}
+
+.ownSubscriptions {
+    border: 2px solid green;
+    background-color: var(--lwc-colorTextInverse, #FFFFFF);
+    color: var(--lwc-colorBackgroundToastSuccess, rgb(46, 132, 74));
+}
+
+.garage-question-mark {
+    content: var(--garageQuestionMark);
+    vertical-align: sub;
+}
+
+.garage-edit-icon {
+    content: var(--garageEdit);
+    padding-top: 9px;
+}
+
+.garage-edit-icon-border {
+    border-bottom: 1px solid var(--HondaRed);
+    padding-bottom: 9px;
+}
+
+@media only screen and (min-width: 601px) {
+    .garage-product-details-small {
+        display: none;
+    }
+
+    .garage-product-details-large {
+        display: block;
+    }
+}
+
+.add-brand-button .slds-button {
+    border-radius: 2px;
+    height: 48px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    font-weight: 900;
+    font-size: 16px;
+    background: #E42525;
+    border: 1px solid #e42525;
+    padding: 10px 30px;
+    transition: 0.5s all;
+}
+.add-brand-button .slds-button:hover {
+    color: #ffffff;
+    border: 1px solid #E42525;
+    background: #C42121;
+}
+.add-brand-button-disabled .slds-button {
+    border-color: #ACACAC;
+    border-radius: 2px;
+    height: 60px;
+    width: 300px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    background: #ACACAC;
+}
+.find-brand-error {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 12px;
+    color: var(--HondaRed);
+    padding-top: 15px;
+}
+
+.external-link {
+    text-decoration: none;
+    color: #E42525;
+    font-weight: bold;
+    font-size: 14px;
+}
+.custom-icon {
+    --sds-c-icon-color-foreground-default: #E42525;
+    --sds-c-icon-color-background: white;
+    margin-left: 5px;
+}
+@media only screen and (max-width: 600px) {
+    .garage-product-details-large {
+        display: none;
+    }
+
+    .garage-product-details-small {
+        display: block;
+    }
+
+    .accordian-border {
+        margin-top: 26px;
+        border: 1px solid #D9D9D9;
+        border-radius: 4px;
+    }
+
+    .change-button button {
+        width: 100% !important;
+    }
+}
+c-own-subscriptions {
+    width: 100%;
+    display: flex;
+}
+.alert-icon{
+    margin-left: 5px;
+    height: 14.5px;
+    margin-top: -3px;
+}

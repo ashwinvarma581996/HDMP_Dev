@@ -1,0 +1,71 @@
+<!-- //============================================================================
+// Title:    Honda MyGarage Experience - Phone Compatibility Product
+//
+// Summary:  This is the Phone Compatibility Product html seen at the page of the Honda MyGarage Community
+//
+// Details:  Phone Compatibility Product for pages
+//
+// History:
+// November 26, 2021 Arunprasad N (Wipro) Original Author 
+// UserStory: DOE-2382 
+//=========================================================================== -->
+<template>
+    <lightning-layout  class="slds-p-bottom_xx-large" multiple-rows>
+        <lightning-layout-item size="12" padding="around-small" small-device-size="12" medium-device-size="12"
+            large-device-size="12">
+            <div class="custom-box ">
+                <lightning-layout multiple-rows="true">
+                    <lightning-layout-item size="12" class="slds-p-bottom_small">
+                        <lightning-layout multiple-rows="true">
+                            <lightning-layout-item size="12" small-device-size="1" medium-device-size="2"
+                                large-device-size="2">
+                            </lightning-layout-item>
+                            <lightning-layout-item class="section-content" size="12" small-device-size="1"
+                                medium-device-size="7" large-device-size="7">
+                             {title}
+                            </lightning-layout-item>
+                            <lightning-layout-item size="12" small-device-size="1" medium-device-size="2"
+                                large-device-size="2">
+                            </lightning-layout-item>
+                        </lightning-layout>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="12" >
+                        <lightning-layout multiple-rows="true">
+                            <lightning-layout-item size="12" small-device-size="1" medium-device-size="2"
+                                large-device-size="2">
+                            </lightning-layout-item>
+                            <lightning-layout-item class="section-title" size="12" small-device-size="1"
+                                medium-device-size="7" large-device-size="7">
+                                {subTitle}
+                            </lightning-layout-item>
+                            <lightning-layout-item size="12" small-device-size="1" medium-device-size="2"
+                                large-device-size="2">
+                            </lightning-layout-item>
+                        </lightning-layout>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="12" >
+                        <lightning-layout multiple-rows="true">
+                            <lightning-layout-item size="12" small-device-size="1" medium-device-size="2"
+                                large-device-size="2">
+                            </lightning-layout-item>
+                            <lightning-layout-item size="12" small-device-size="1" medium-device-size="10"
+                                large-device-size="9">
+                                <c-own-find-products-dropdowns division={divisionName} button-label={buttonName} onproductfound={handleFoundProduct}></c-own-find-products-dropdowns>
+                            </lightning-layout-item>
+                            <lightning-layout-item size="12" small-device-size="1" medium-device-size="1"
+                                large-device-size="1">
+                            </lightning-layout-item>
+                        </lightning-layout>
+                    </lightning-layout-item>
+
+
+                </lightning-layout>
+            </div>
+            <div if:true={isError} class="error-message slds-p-top_large">
+                <img src={errorLogo} class="slds-m-right_small" />
+                DATA UNAVAILABLE
+            </div>
+        </lightning-layout-item>
+       
+    </lightning-layout>
+</template>

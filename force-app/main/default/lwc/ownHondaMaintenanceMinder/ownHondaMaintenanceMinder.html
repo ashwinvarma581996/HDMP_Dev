@@ -1,0 +1,51 @@
+<template>
+    <div class="outest-container">
+        <template if:true={dataArrived}>
+            <template if:false={isGuest}>
+                <c-own-maintenance-minder-detail-card is-guest={isGuest} context={context}></c-own-maintenance-minder-detail-card>
+                <c-own-maintenance-minder-honda-card is-guest={isGuest} context={context} 
+										content-id-m-m={contentIdMM}
+										content-id-m-a={contentIdMA}
+										content-id-m-b={contentIdMB}
+										content-id-m1={contentIdM1}
+										content-id-m2={contentIdM2}
+										content-id-m3={contentIdM3}
+										content-id-m4={contentIdM4}
+										content-id-m5={contentIdM5}
+										content-id-m6={contentIdM6}
+										>
+								</c-own-maintenance-minder-honda-card>
+                <c-own-about-maintenance-minder-card content-id={contentId} is-guest={isGuest} context={context}></c-own-about-maintenance-minder-card>
+                <div class="slds-container_large slds-container_center slds-p-around_large">
+                    <lightning-layout> 
+                        <lightning-layout-item  size="12" small-device-size="12" medium-device-size="12" large-device-size="12" >
+                            <c-own-find-dealer></c-own-find-dealer>
+                        </lightning-layout-item>
+                    </lightning-layout>
+                </div>
+            </template>
+            <template if:true={isGuest}>
+                <c-own-about-maintenance-minder-card content-id={contentId} is-guest={isGuest} context={context}></c-own-about-maintenance-minder-card>
+                <c-own-maintenance-minder-honda-card is-guest={isGuest} context={context} 
+										content-id-m-m={contentIdMM}
+										content-id-m-a={contentIdMA}
+										content-id-m-b={contentIdMB}
+										content-id-m1={contentIdM1}
+										content-id-m2={contentIdM2}
+										content-id-m3={contentIdM3}
+										content-id-m4={contentIdM4}
+										content-id-m5={contentIdM5}
+										content-id-m6={contentIdM6}
+										>
+								</c-own-maintenance-minder-honda-card>
+                <div class="slds-container_large slds-container_center slds-p-around_large">
+                    <lightning-layout> 
+                        <lightning-layout-item  size="12" small-device-size="12" medium-device-size="12" large-device-size="12" >
+                            <c-own-find-dealer></c-own-find-dealer>
+                        </lightning-layout-item>
+                    </lightning-layout>
+                </div>
+            </template>
+        </template>
+    </div>
+</template>

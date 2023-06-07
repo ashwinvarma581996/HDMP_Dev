@@ -1,0 +1,25 @@
+<!-- ======================================================================================================
+// Title: Lightning Aura Theme for Honda Owners Experience Community
+//
+// Summary: This is the Theme for the Honda Owners Community
+//
+// Updated:
+// July 19, 2021 Arunprasad N (Wipro) Original Author
+====================================================================================================== -->
+<aura:component access="global" implements="forceCommunity:themeLayout,forceCommunity:availableForAllPageTypes" description="Honda Owners Default Theme Layout">
+    <aura:attribute name="themeHeader" description="Footer" type="Aura.Component[]" required="false" />
+    <aura:attribute name="themeFooter" description="Footer" type="Aura.Component[]" required="false" />
+    <div class="c-container">
+        <lightning:layout multipleRows="true">
+            <lightning:layoutItem flexibility="auto" size="12">
+                {!v.themeHeader}
+            </lightning:layoutItem>
+            <lightning:layoutItem flexibility="auto" size="12">
+                {!v.body}
+            </lightning:layoutItem>
+            <lightning:layoutItem flexibility="auto" size="12">
+                {!v.themeFooter}
+            </lightning:layoutItem>
+        </lightning:layout>
+    </div>
+</aura:component>

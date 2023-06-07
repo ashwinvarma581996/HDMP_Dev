@@ -1,0 +1,318 @@
+<template>
+    <!--lightning-layout class="bread-crumb-container">
+        <lightning-layout-item class="chevronleft-container">
+           <lightning-icon icon-name='utility:chevronleft' alternative-text='chevronleft' size='xx-small' class='chevronleft'></lightning-icon>
+        </lightning-layout-item>
+        <lightning-layout-item class="back-link-container">
+            <a class="back-link" onclick={handleGoBack} >Back</a>
+        </lightning-layout-item>
+      </lightning-layout-->
+    <div class="slds-container_medium slds-container_center slds-p-around_medium main-wrapper">
+        <template if:true={isresult}>
+            <template if:false={isSuccess}>
+                <div class="header-text">Please Provide Your Complete Contact Information:</div>
+                <!--div class="slds-m-top_medium ">Please Provide Your Complete Contact Information:</div-->
+                <p class="slds-m-vertical_medium">
+                    <span class="required-field">*</span>Required Information
+                </p>
+
+                <div class="slds-form-element  slds-m-top_large">
+                    <div class="input-wrapper slds-m-top_large">
+                        <div class="slds-grid slds-grid_align-spread">
+                            <div>
+                                <label class="slds-form-element__label" for="vin-input-desktop own-combobox-label">First
+                                    Name</label>
+                                <span class="required-field">*</span>
+                            </div>
+                        </div>
+                        <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon_right">
+                            <lightning-input type="text" id="firstName" data-id="First_Name__c" maxlength="15"
+                                variant="label-hidden" value={firstName} onchange={handleKeyUp} required="true">
+                            </lightning-input>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="slds-form-element  slds-m-top_small">
+                    <div class="input-wrapper slds-m-top_small">
+                        <div class="slds-grid slds-grid_align-spread">
+                            <div>
+                                <label class="slds-form-element__label" for="vin-input-desktop own-combobox-label">Last
+                                    Name</label>
+                                <span class="required-field">*</span>
+                            </div>
+                        </div>
+                        <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon_right">
+                            <lightning-input type="text" id="lastName" data-id="Last_Name__c" maxlength="30"
+                                variant="label-hidden" value={lastName} onchange={handleKeyUp} required="true">
+                            </lightning-input>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="slds-grid slds-wrap">
+                    <div class=" slds-col slds-size_6-of-12 slds-max-medium-size_12-of-12 small-margin cgrid-margin "
+                        role="listitem">
+                        <label for="city" class="slds-form-element__label">Year <abbr class="slds-required"
+                                title="required">*</abbr></label>
+                        <lightning-combobox class="find-brand-combobox custom-margin" id="year" data-id="Model_Year__c"
+                            variant="label-hidden" placeholder="Select Year" options={yearsArray}
+                            onchange={handleChange} value={selectedYear} required>
+                        </lightning-combobox>
+                    </div>
+                    <div class="slds-col slds-size_6-of-12 slds-max-medium-size_12-of-12 cgrid-margin " role="listitem">
+                        <label class="slds-form-element__label">Model <abbr class="slds-required"
+                                title="required">*</abbr></label>
+                        <lightning-combobox class="find-brand-combobox" id="model1" data-id="Model_Name__c"
+                            variant="label-hidden" placeholder="Select Model" options={modelsArray}
+                            onchange={handleChange} value={modelName} required>
+                        </lightning-combobox>
+                    </div>
+                </div>
+
+                <div class="slds-form-element  slds-m-top_small">
+                    <div class="input-wrapper slds-m-top_small">
+                        <div class="slds-grid slds-grid_align-spread">
+                            <div>
+                                <label class="slds-form-element__label"
+                                    for="vin-input-desktop own-combobox-label">VIN</label>
+                                <span class="required-field">*</span>
+                            </div>
+                        </div>
+                        <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon_right">
+                            <lightning-input type="text" id="vin" data-id="Product_Identifier__c" minlength="17"
+                                maxlength="17" onchange={handleKeyUp} variant="label-hidden" value={vin}
+                                required="true">
+                            </lightning-input>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="input-wrapper slds-m-top_large">
+                    <div>
+                        <label class="slds-form-element__label" for="vin-input-desktop own-combobox-label">Manuals
+                            Requested:</label>
+                        <span class="required-field">*</span>
+                    </div>
+                    <div class="slds-grid slds-wrap slds-form-element__control">
+                        <template if:true={showBraille}>
+                            <span
+                                class="slds-col slds-size_1-of-1 slds-medium-size_5-of-12 slds-large-size_5-of-12 slds-m-vertical_medium slds-radio">
+                                <!--input type="radio" id="radio-43" value="radio-43" name="default"
+                                    checked={isOwnersManual} />
+                                <label class="slds-radio__label" for="radio-43">
+                                    <span class="slds-radio_faux"></span>
+                                    <span class="slds-radio-label">Owner’s Manual</span>
+                                </label-->
+                                <lightning-input type="checkbox" label="Rear Entertainment System Booklet in Braille"
+                                    name="Rear Entertainment System Booklet in Braille" class="checkbox" disabled="true"
+                                    checked={isBraille} onchange={handleBrailleManual}> </lightning-input>
+                            </span>
+                        </template>
+                        <template if:false={showBraille}>
+                            <template if:true={showOwnersManuals}>
+                                <span
+                                    class="slds-col slds-size_1-of-1 slds-medium-size_3-of-12 slds-large-size_3-of-12 slds-m-vertical_medium slds-radio">
+                                    <!--input type="radio" id="radio-43" value="radio-43" name="default"
+                                    checked={isOwnersManual} />
+                                <label class="slds-radio__label" for="radio-43">
+                                    <span class="slds-radio_faux"></span>
+                                    <span class="slds-radio-label">Owner’s Manual</span>
+                                </label-->
+                                    <lightning-input type="checkbox" label="Owner’s Manual" name="Owner’s Manual"
+                                        class="checkbox" checked={isOwnersManual} onchange={handleOwnersManual}>
+                                    </lightning-input>
+                                </span>
+                            </template>
+                            <span
+                                class="slds-col slds-size_1-of-1 slds-medium-size_3-of-12 slds-large-size_3-of-12 slds-m-vertical_medium slds-radio">
+                                <!--input type="radio" id="radio-44" value="radio-44" name="default"
+                                checked={isNavigationManual} />
+                            <label class="slds-radio__label" for="radio-44">
+                                <span class="slds-radio_faux"></span>
+                                <span class="slds-radio-label">Navigation Manual</span>
+                            </label-->
+                                <lightning-input type="checkbox" label="Navigation Manual" name="Navigation Manual"
+                                    class="checkbox" checked={isNavigationManual} onchange={handleNavigationManual}>
+                                </lightning-input>
+                            </span>
+                            <!--span onclick={handleBoth}
+                    class="slds-col slds-size_1-of-1 slds-medium-size_3-of-12 slds-large-size_3-of-12 slds-m-vertical_medium slds-radio">
+                    <input type="radio" id="radio-45" value="radio-45" name="default" checked={isBothManual}/>
+                    <label class="slds-radio__label" for="radio-45">
+                        <span class="slds-radio_faux"></span>
+                        <span class="slds-radio-label">Both</span>
+                    </label>
+                </span-->
+                        </template>
+                    </div>
+                </div>
+
+
+                <div class="slds-form-element  slds-m-top_small">
+                    <div class="input-wrapper slds-m-top_small">
+                        <div class="slds-grid slds-grid_align-spread">
+                            <div>
+                                <label class="slds-form-element__label"
+                                    for="vin-input-desktop own-combobox-label">Street
+                                    Address (Line 1)</label>
+                                <span class="required-field">*</span>
+                            </div>
+                        </div>
+                        <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon_right">
+                            <lightning-input type="text" id="addressLine1" data-id="Street__c" maxlength="45"
+                                onchange={handleKeyUp} variant="label-hidden" value={addressLine1} required="true">
+                            </lightning-input>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="slds-form-element  slds-m-top_small">
+                    <div class="input-wrapper slds-m-top_small">
+                        <div class="slds-grid slds-grid_align-spread">
+                            <div>
+                                <label class="slds-form-element__label"
+                                    for="vin-input-desktop own-combobox-label">Street
+                                    Address (Line 2)</label>
+                            </div>
+                        </div>
+                        <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon_right">
+                            <lightning-input type="text" id="addressLine2" data-id="Street2__c" maxlength="45"
+                                onchange={handleKeyUp} variant="label-hidden" value={addressLine2}></lightning-input>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="slds-grid slds-wrap">
+                    <div class=" slds-col slds-size_6-of-12 slds-max-medium-size_12-of-12 small-margin cgrid-margin "
+                        role="listitem">
+                        <label for="city" class="slds-form-element__label">City <abbr class="slds-required"
+                                title="required">*</abbr></label>
+                        <lightning-input type="text" id="city" data-id="City__c" maxlength="30" class="custom-margin"
+                            onchange={handleKeyUp} value={city} variant="label-hidden" required="true">
+                        </lightning-input>
+                    </div>
+                    <div class="slds-col slds-size_6-of-12 slds-max-medium-size_12-of-12 cgrid-margin " role="listitem">
+                        <label class="slds-form-element__label">State <abbr class="slds-required"
+                                title="required">*</abbr></label>
+                        <lightning-combobox class="find-brand-combobox" id="state" data-id="State__c"
+                            variant="label-hidden" placeholder="Select State" options={states} onchange={handleChange}
+                            value={state} required>
+                        </lightning-combobox>
+                    </div>
+                </div>
+
+                <div class="slds-form-element  slds-m-top_small">
+                    <div class="input-wrapper slds-m-top_small">
+                        <div class="slds-grid slds-grid_align-spread">
+                            <div>
+                                <label class="slds-form-element__label" for="vin-input-desktop own-combobox-label">Zip
+                                    Code</label>
+                                <span class="required-field">*</span>
+                            </div>
+                        </div>
+                        <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon_right"
+                            onkeyup={handleZipChange}>
+                            <lightning-input type="text" id="zip" data-id="Postal_Code__c" variant="label-hidden"
+                                maxlength="10" onchange={handleKeyUp} value={zip} pattern="[0-9]{5}(?:[- ]?[0-9]{4})?$"
+                                message-when-pattern-mismatch="Please enter a valid ZIP Code" required="true">
+                            </lightning-input>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="slds-form-element  slds-m-top_small">
+                    <div class="input-wrapper slds-m-top_small">
+                        <div class="slds-grid slds-grid_align-spread">
+                            <div>
+                                <label class="slds-form-element__label" for="vin-input-desktop own-combobox-label">Email
+                                    Address</label>
+                                <span class="required-field">*</span>
+                            </div>
+                        </div>
+                        <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon_right">
+                            <lightning-input type="email" id="email" data-id="Email_Address__c" maxlength="65"
+                                variant="label-hidden" value={email} onchange={handleKeyUp} required="true">
+                            </lightning-input>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="slds-form-element  slds-m-top_small">
+                    <div class="input-wrapper slds-m-top_small">
+                        <div class="slds-grid slds-grid_align-spread">
+                            <div>
+                                <label class="slds-form-element__label" for="vin-input-desktop own-combobox-label">Phone
+                                    Number</label>
+                                <span class="required-field">*</span>
+                            </div>
+                        </div>
+                        <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon_right">
+                            <lightning-input type="tel" id="phone" data-id="Phone__c" onchange={handleKeyUp}
+                                variant="label-hidden" message-when-too-short="Please enter a valid Phone Number"
+                                min-length="10" pattern="^[\d ()+-]+$"
+                                message-when-pattern-mismatch="Please enter a valid Phone Number" required="true"
+                                value={phone}>
+                            </lightning-input>
+                        </div>
+                    </div>
+                </div>
+                <template if:false={guestUser}>
+                    <div class="slds-form-element  slds-m-top_small">
+                        <lightning-input type="checkbox" label="Save this address to Account information"
+                            name="Save this address to Account information" class="checkbox" checked={saveToAccount}
+                            onchange={handleChexboxClick}> </lightning-input>
+                    </div>
+                </template>
+
+                <template if:true={showerror}>
+                    <p class="slds-m-vertical_medium">
+                        <span class="find-manual-error">{errorMessage}</span>
+                    </p>
+                </template>
+                <p if:true={guestUser} class="slds-m-top_small">
+                    <c-own-google-captcha oncaptcha={handleCaptcha}
+                        class="slds-m-top_small"></c-own-google-captcha><br />
+                </p>
+                <div class="form-buttons submit-button-bottom-margin">
+                    <div>
+                        <label class="slds-form-element__label">&nbsp;</label>
+                        <button class="slds-button slds-button_brand slds-combobox_container form-button_cancel"
+                            onclick={handleSubmit}>Submit</button>
+
+                    </div>
+                    <div>
+                        <label class="slds-form-element__label">&nbsp;</label>
+                        <button class="slds-button slds-button_brand slds-combobox_container form-button_cancel"
+                            onclick={handleCancelClick}>Cancel</button>
+                    </div>
+                </div>
+            </template>
+            <template if:true={isSuccess}>
+                <!--div class="header-text">Printed Manual Request Form</div-->
+
+                <p class="slds-m-top_medium textline">Your order has been received, if we have questions, we will
+                    contact you by e-mail. Please allow five weeks for processing, printing, and shipping. The online
+                    PDF can be used in the meantime for features description and detailed information about your
+                    vehicle. Feel free to contact your dealer if you have specific feature questions.
+                </p>
+
+                <div class="form-buttons slds-align_absolute-center slds-m-top_medium">
+                    <label class="slds-form-element__label">&nbsp;</label>
+                    <button class="slds-button slds-button_brand slds-combobox_container form-button_goback"
+                        onclick={handleGoBack}>GO BACK TO OWNER'S MANUALS PAGE</button>
+
+                </div>
+
+            </template>
+        </template>
+        <template if:false={isresult}>
+            <c-own-data-loading-spinner></c-own-data-loading-spinner>
+        </template>
+
+    </div>
+
+
+
+</template>

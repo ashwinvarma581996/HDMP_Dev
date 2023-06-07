@@ -1,0 +1,100 @@
+.message-head h2{
+    font-weight: 300;
+    font-size: 32px;
+    line-height: 37px;
+    letter-spacing: 0.02em;
+    color: #000000;
+}
+.sortby-combobox-wrapper{
+    width: 200px;
+    padding : 8px;
+}
+.view-combobox-wrapper{
+    width: 200px;
+    padding : 8px;
+    
+}
+.sortby-combobox-label{
+    font-style: normal;
+    font-weight: 500;
+    font-size: 13px !important;
+    line-height: 15px;
+    letter-spacing: 0.02em;
+    color: #000000 !important;
+}
+
+.find-brand-combobox {
+    background: #FFFFFF;
+    box-sizing: border-box;
+    border-radius: 2px;
+}
+
+.message-list-item{
+    padding : 20px 28px;
+    border-bottom: 1px solid #D9D9D9;
+    cursor:pointer;
+     
+}
+.message-list-item:nth-child(1){
+    border-top: 1px solid #D9D9D9;
+}
+
+.message-list-item h3{
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 26px;
+    color: #000000;
+    min-width: 80%;
+}
+
+.message-list-item p{
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 26px;
+    color: #000000;
+    min-width: 100px;
+}
+
+.message-list .unread{
+    background : #F5F5F5;
+}
+.message-list .unread .message-dot{
+    opacity: 1;
+}
+.message-list .unread h3{
+    font-weight: 700;
+}
+
+.message-list .unread p{
+    font-weight: 700;
+}
+
+.message-list-item .message-dot{
+    width:10px;
+    height : 10px;
+    background: #ffa200;
+    border-radius: 50%;
+    opacity: 0;
+}
+
+/* ------------------------------------------------------ */
+.message-detail{
+    background : #F5F5F5;
+}
+@media only screen and (min-width: 601px) {
+    .inbox-small{
+        display: none;
+    }
+    .inbox-large{
+        display: block;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .inbox-small{
+        display: block;
+    }
+    .inbox-large{
+        display: none;
+    }    
+}

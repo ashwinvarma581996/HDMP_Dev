@@ -1,0 +1,43 @@
+.comm-page-detail-01t .colorInput input {
+    width: 100%!important;
+}
+
+.dealerLocationIcon {
+    width: 40px!important;
+}
+
+.breadcrumb-not-active {
+    color: inherit;
+    cursor: inherit;
+    text-decoration: inherit;
+}
+
+.prop-wd {
+    width: 200px!important;
+}
+
+.cartMar0 header.slds-modal__header h2 {
+    margin-top: 0px;
+}
+
+.dealer-email {
+    color: black;
+    font-size: 14px!important;
+}
+
+.callTxt {
+    color: black!important;
+    text-decoration: none;
+    cursor: default;
+    font-size: 14px!important;
+}
+
+.cartMar1 .slds-modal__header {
+    border-radius: 4px;
+}
+
+@media (max-width: 480px) {
+    .details-area lightning-button.productButton {
+        margin: 10px 7px 0px 0px !important;
+    }
+}

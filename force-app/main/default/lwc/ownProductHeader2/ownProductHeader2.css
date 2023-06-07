@@ -1,0 +1,92 @@
+.product-image{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 1px solid #cacaca;
+    object-fit: contain;
+    padding: 5px;
+    background: white;
+    overflow: hidden;
+}
+.product-image-container{
+    width: 80px;
+    height: 80px;
+    display:inline-block;
+}
+@media only screen and (min-width: 905px) {
+    /* .header-small {
+        display: none1;
+    }
+    .header-large {
+        display: block;
+    } */
+    .header-large{
+        padding-left: 10%;
+        padding-right: 10%;
+        padding-top: 10px;
+    }
+    .generic-prod-title{
+        font-size: 40px;
+    }
+    .prod-title{
+       font-size: 40px; 
+    }
+}
+@media only screen and (max-width: 904px) {
+    /* .header-large {
+        display: none1; 
+    }
+    .header-small {
+        display: block; 
+    } */
+    .header-large{
+        padding-left: 3%;
+        padding-right: 3%;
+        padding-top: 10px;
+    }
+    .header-small{
+        padding-left: 3%;
+        padding-right: 3%;
+        padding-top: 10px;
+    }
+    .prod-title{
+       font-size: 26px; 
+    }
+    .generic-prod-title{
+        font-size: 26px;
+    }
+}
+.image-container{
+    margin-right: 20px;
+}
+
+.prod-title{
+    color:#080707;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 40px;
+    line-height: 42px;
+    letter-spacing: 1.2px;
+    padding-left:15px
+}
+.generic-prod-title{
+    color:#080707;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 40px;
+    line-height: 42px;
+    letter-spacing: 1.2px;
+}
+.prod-sub-title{
+    color: #E42525;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    padding-left:15px
+}

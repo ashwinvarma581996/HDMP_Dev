@@ -1,0 +1,233 @@
+<template>
+    <template if:true={notAbleToDecode}>
+        <div class="slds-grid slds-grid_vertical-align-center slds-p-right_x-large slds-p-vertical_large">
+            <lightning-icon class="slds-icon-utility-help" icon-name="utility:help" variant="border" size="medium">
+            </lightning-icon>
+            <div class="slds-m-left_medium fitmentHead">We were not able to locate your model, please check with your
+                dealer. &ensp;
+            </div>
+        </div>
+        <lightning-button onclick={handelEnterVin} variant="brand" label="Enter Vehicle VIN" title="Enter Vehicle VIN">
+        </lightning-button>
+    </template>
+
+
+    <template if:false={notAbleToDecode}>
+
+        <div>
+          
+            <template if:false={vincheck}>
+                <!-- <lightning-button  onclick={handelEnterVin} label="Enter Vin to confirm fitment" icon-name="utility:info" icon-position="right" size="large"> -->
+                <template if:true={showspinner}>
+                    <div class="slds-grid slds-grid_vertical-align-center slds-p-right_x-large slds-p-vertical_large">
+
+                        <div class="slds-m-left_medium fitmentHead">Verifying VIN Fitment .... </div>
+                    </div>
+                </template>
+                <template if:false={showspinner}>
+                    <div class="slds-grid slds-grid_vertical-align-center slds-p-right_x-large slds-p-vertical_large">
+                        <lightning-icon class="slds-icon-utility-help" icon-name="utility:help" variant="border"
+                            size="medium">
+                        </lightning-icon>
+                        <div class="slds-m-left_medium fitmentHead">Enter VIN to confirm fitment &ensp;<lightning-button
+                                onclick={handelEnterVin} variant="brand" label="Enter Vehicle VIN"
+                                title="Enter Vehicle VIN"></lightning-button>
+                        </div>
+                    </div>
+                </template>
+
+                <!-- </lightning-button> -->
+
+            </template>
+            <template if:true={productfit}>
+                <template if:true={prodIdDefined}>
+                    <template if:true={searchwithVIN}>
+                        <div
+                            class="slds-grid slds-grid_vertical-align-center slds-p-right_x-large slds-p-vertical_large">
+                            <lightning-icon class="checkIcon" icon-name="utility:check" variant="border" size="medium">
+                            </lightning-icon>
+                            <div class="slds-m-left_medium fitmentHead"> This part fits your vehicle<br></div>
+
+                        </div>
+                    </template>
+                    <template if:false={searchwithVIN}>
+                        <div
+                            class="slds-grid slds-grid_vertical-align-center slds-p-right_x-large slds-p-vertical_large">
+                            <lightning-icon class="checkIcon" icon-name="utility:check" variant="border" size="medium">
+                            </lightning-icon>
+                            <div class="slds-text-body_medium"> This part fits your vehicle</div>
+
+                        </div>
+                    </template>
+                </template>
+                <template if:false={prodIdDefined}>
+                    <div class="slds-grid slds-grid_vertical-align-center slds-p-right_x-large slds-p-vertical_large">
+                        <lightning-icon class="checkIcon" icon-name="utility:check" variant="border" size="medium">
+                        </lightning-icon>
+                        <div class="slds-text-body_medium"> This part fits your vehicle </div>
+
+                    </div>
+                </template>
+            </template>
+            <template if:true={productnotfit}>
+                <template if:true={prodIdDefined}>
+                    <template if:true={searchwithVIN}>
+                        <div
+                            class="slds-grid slds-grid_vertical-align-center slds-p-right_x-large slds-p-vertical_large">
+                            <lightning-icon class="closeIcon" icon-name="utility:close" variant="border" size="medium">
+                            </lightning-icon>
+                            <div class="slds-text-body_medium">&ensp; This part doesn't fit your vehicle &ensp;
+                                <lightning-button onclick={handelEnterVin} variant="brand" label="RE-ENTER VIN"
+                                    title="RE-ENTER VIN"></lightning-button>
+                            </div>
+                        </div>
+                    </template>
+                    <template if:false={searchwithVIN}>
+                        <div
+                            class="slds-grid slds-grid_vertical-align-center slds-p-right_x-large slds-p-vertical_large">
+                            <lightning-icon class="closeIcon" icon-name="utility:close" variant="border" size="medium">
+                            </lightning-icon>
+                            <div class="slds-text-body_medium">&ensp; This part doesn't fit your vehicle &ensp;
+                                <lightning-button onclick={handelEnterVin} variant="brand" label="RE-ENTER VIN"
+                                    title="RE-ENTER VIN"></lightning-button>
+                            </div>
+                        </div>
+                    </template>
+                </template>
+                <template if:false={prodIdDefined}>
+                    <div class="slds-grid slds-grid_vertical-align-center slds-p-right_x-large slds-p-vertical_large">
+                        <lightning-icon class="closeIcon" icon-name="utility:close" variant="border" size="small">
+                        </lightning-icon>
+                        <div class="slds-text-body_medium">&ensp; This part doesn't fit your vehicle &ensp;
+                            <lightning-button onclick={handelEnterVin} variant="brand" label="RE-ENTER VIN"
+                                title="RE-ENTER VIN"></lightning-button>
+                        </div>
+                    </div>
+                </template>
+            </template>
+
+            <template if:true={productTypeAccessories}>
+                <!-- <lightning-button
+                variant="success"
+                icon-name="utility:success"
+                label="This item fits your vehicle"
+                title="Success"
+                class="slds-p-around_xxx-small">
+                </lightning-button>
+                <lightning-icon icon-name="utility:edit" title="Edit" size="small" onclick={handelEnterVin}></lightning-icon> -->
+                <div class="slds-grid slds-grid_vertical-align-center slds-p-right_x-large slds-p-vertical_large">
+                    <lightning-icon class="checkIcon" icon-name="utility:check" variant="border" size="medium">
+                    </lightning-icon>
+                    <div class="slds-m-left_medium fitmentHead">This item fits your vehicle.<br></div>
+
+                </div>
+            </template>
+            <template if:true={vinCookievalue}>
+                <div>
+                    VIN: {vinCookievalue}
+                </div>
+            </template>
+        </div>
+
+        <!-- Modal/Popup Box LWC starts here -->
+        <template if:true={isModalOpen}>
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+                aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open vinfit">
+                <template if:true={showLOader}>
+                    <div class="exampleHolder">
+                        <lightning-spinner alternative-text="Loading" variant="brand" size="large"></lightning-spinner>
+                    </div>
+                </template>
+                <div class="slds-modal__container">
+                    <!-- Modal/Popup Box LWC header here -->
+                    <header class="slds-modal__header">
+                        <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                            title="Close" onclick={closeModal}>
+                            <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse"
+                                size="small"></lightning-icon>
+                            <span class="slds-assistive-text">Close</span>
+                        </button>
+                        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Enter VIN to Confirm
+                            Fitment
+                        </h2>
+                    </header>
+                    <!-- Modal/Popup Box LWC body starts here -->
+                    <div class="slds-modal__content slds-p-horizontal_xx-large slds-p-bottom_large"
+                        id="modal-content-id-1">
+                        <div class="slds-grid slds-gutters slds-m-top_large slds-m-bottom_large confirm-fitment">
+                            <div class="slds-col slds-size_3-of-7 slds-p-vertical_large">
+                                <lightning-input type="text" value={vin} placeholder="Enter Vehicle VIN" maxlength="17"
+                                    onchange={CheckVin} onkeypress={CheckVin}>
+                                </lightning-input>
+                                <template if:true={invalidvin}>
+                                    <div><span class="textRed errorMsg">{errorMsgDisplay}</span></div>
+                                </template>
+                                <template if:false={isGuest}>
+                                    <div class="slds-form-element slds-m-top_medium slds-grid slds-grid_align-center">
+                                        <label class="centerElement slds-is-relative labelRadio">
+                                            <input type="checkbox" name="savedProducts" class="savedProducts"
+                                                value="Saved to My Products">
+                                            <span class="checkmark"></span> <span class="labelText">Save to My
+                                                Products</span>
+                                        </label>
+                                    </div>
+                                </template>
+                                <p><a href="https://crrs.secure.force.com/hondaknowledge/articles/Public_Knowledge/What-is-the-VIN/?q=vin&l=en_US&c=Division_Subdivision%3AHonda&fs=Search&pn=1" target="_blank" class="vinError">Where Can I Find My VIN?</a> </p>
+                            </div>
+                            <div
+                                class="slds-col slds-size_1-of-7 slds-grid slds-grid_align-center slds-grid_vertical-align-center slds-is-relative slds-p-vertical_large">
+                                <span class="orText">OR</span>
+                            </div>
+                            <div class="slds-col slds-size_3-of-7 slds-p-vertical_large">
+
+                                <!--Added by Palak-->
+                                <template if:true={isGuest}>
+                                    <span class="slds-m-top_large" style="display: block;">
+                                       <strong onclick={redirectToLoginPage}>
+                                        <a href='' style="color: red">Login </a></strong>
+                                         or
+                                         <strong onclick={redirectToRegisterPage}>
+                                            <a href='' style="color: red"> Register </a></strong>
+                                             to select your saved products
+                                    </span>
+                                </template>
+                                <!--end here-->
+
+                                <template if:false={isGuest}>
+                                      <p>Select from your saved products which you have entered VIN numbers for:</p>
+                                        <template if:false={myProductOptions}>
+                                            <strong class="slds-p-around_small slds-text-heading_small textRed"
+                                            style="display:block;"> No vehicles saved
+                                            </strong>
+                                        </template>
+                                        <template if:true={myProductOptions}>
+                                        <lightning-combobox name="Select Products" class="Products" options={myProductOptions}
+                                            onchange={handleProductChange}>
+                                        </lightning-combobox>
+                                    </template>
+                                </template>
+                            </div>
+                        </div>
+                        <div class="slds-text-align_center slds-p-top_large">
+                            <button class="slds-button slds-button_neutral" onclick={ClearData}
+                                title="Clear">Clear</button>
+                            <button class="slds-button slds-button_brand" onclick={submitVin}
+                                title="Enter">Enter</button>
+
+                        </div>
+                    </div>
+                    <!-- Modal/Popup Box LWC footer starts here -->
+                    <!--
+                            <footer class="slds-modal__footer">
+                                <button class="slds-button slds-button_neutral" onclick={closeModal} title="Cancel">Cancel</button>
+                                <button class="slds-button slds-button_brand" onclick={submitDetails} title="OK">OK</button>
+                            </footer>
+                            -->
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </template>
+
+    </template>
+
+</template>

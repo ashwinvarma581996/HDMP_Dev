@@ -1,0 +1,90 @@
+.custom-icon{
+    --sds-c-icon-color-foreground-default: #FFFFFF;
+}
+.custom-text{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 26px;
+}
+ul{
+    list-style-type:disc;
+}
+.bottom-text{
+    font-weight: normal;
+    font-size: 14px;
+}
+@media only screen and (min-width: 601px) {
+    .custom-border{
+        border-right: 1px solid #c9c7c5;
+        /* height: 500px; */
+    }
+    .custom-div{
+        padding: 0px 20px;
+    }
+    .custom-btn{
+        background: #E42525;
+        border-radius: 2px;
+        color: #FFFFFF;
+        padding: 0px 30px;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        height: 48px;
+        font-weight: bold;
+    }
+    .number-icon{
+        background: #E42525;
+        border-radius: 50%;
+        color: #FFFFFF;
+        font-weight: 300;
+        font-size: 32px;
+        height: 44px;
+        width: 44px;
+        text-align: center;
+        line-height: 44px;
+    }
+}
+@media only screen and (max-width: 600px) {
+    .custom-border{
+        border-bottom: 1px solid #c9c7c5;
+    }
+    .custom-div{
+        padding: 20px 10px;
+    }
+    button.slds-button.custom-btn {
+        padding: 12px !important;
+        margin: 0 !important;
+        width: 100%;
+        justify-content: center;
+    }
+    .number-icon{
+        background: #E42525;
+        border-radius: 50%;
+        color: #FFFFFF;
+        font-weight: 300;
+        font-size: 32px;
+        height: 44px;
+        width: 44px;
+        text-align: center;
+        line-height: 44px;
+    }
+}
+button.slds-button.custom-btn {
+    padding: 10px 70px;
+    font-weight: 900;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    border: 1px solid #E42525;
+    background: #E42525;
+    color: #ffffff;
+    margin: 50px 0 80px 0;
+    border-radius: 2px;
+    transition: 0.5s all;
+}
+button.slds-button.custom-btn:hover {
+    color: #E42525 !important;
+    background: #ffffff;
+}

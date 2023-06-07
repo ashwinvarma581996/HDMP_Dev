@@ -1,0 +1,41 @@
+/* Added by Bhawesh 10-01-2022 for part search story Start. */
+.parthighlight {
+    border: 2px solid black;
+}
+.maintenance-pd-banner {
+    max-height: 400px!important;
+}
+.CanvasDiv{
+    position: absolute;
+    display:block;
+   /* max-width: 100%;*/
+}
+.customTxt {
+    font-size: 16px;
+    text-align: center;
+    position: relative;
+    top: 0px;
+    margin: 0.5rem;
+    color: #E42525;
+}
+/*begin by ashwin for US 16455 */
+.core-charge-txt{
+    padding-top: 23px;
+    padding-left: 12px;
+    font-size: 20px;
+    color: #303030;
+
+}
+/*ended by ashwin for US 16455 */
+
+@media (max-width: 768px) {
+    .customTxt {
+        font-size: 12px;
+        text-align: center;
+        position: relative;
+        top: 0px;
+        margin: 0.5rem;
+        color: #E42525;
+    }
+}
+/* End */

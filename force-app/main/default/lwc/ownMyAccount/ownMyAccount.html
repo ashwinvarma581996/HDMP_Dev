@@ -1,0 +1,153 @@
+<template>
+    <template if:true={showSpinner}>
+        <lightning-spinner alternative-text="Loading" size="large" variant=""></lightning-spinner>
+    </template>
+    <lightning-layout multiple-rows horizontal-align="space" class="slds-m-top_x-large slds-m-bottom_medium">
+        <lightning-layout-item if:true={showTabSet} size="12" small-device-size="12" medium-device-size="12"
+            large-device-size="11">
+            <span class="myaccount-head">My Account</span>
+        </lightning-layout-item>
+        <template if:false={isShowEditAddress}>
+            <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="11">
+                <div class="c-container myaccount-list-large">
+                    <div class="slds-vertical-tabs tabs slds-m-vertical_large">
+                        <ul class="slds-vertical-tabs__nav myaccount-tab slds-m-bottom_xx-large"
+                            aria-orientation="vertical" role="tablist">
+                            <template for:each={tabs} for:item="tab">
+                                <li key={tab.value} data-value={tab.value} data-tab="true" class={tab.itemclass}
+                                    data-id={tab.id} title={tab.label} role="presentation" onclick={handleActive}>
+                                    <a data-tab-value={tab.control} class="slds-vertical-tabs__link" role="tab"
+                                        tabindex="-1" aria-selected="false" aria-controls={tab.control}
+                                        id={tab.id}>{tab.label}</a>
+                                </li>
+                            </template>
+                        </ul>
+                        <div class="slds-p-horizontal_large slds-vertical-tabs__content slds-show tab-content" role="tabpanel">
+                            <template if:true={isAccountInformation}>
+                                <c-own-account-information account-id={accountId} play-store-u-r-l={playStoreURL}
+                                    app-store-u-r-l={appStoreURL} acura-play-store-u-r-l={acuraPlayStoreURL}
+                                    acura-app-store-u-r-l={acuraAppStoreURL} oneditaddress={handleOnEditAddress}
+                                    subscriptions-loaded={subscriptionsLoaded}>
+                                </c-own-account-information>
+                            </template>
+                            <template if:true={isCasesList}>
+                                <c-own-my-cases disclaimer={disclaimer}></c-own-my-cases>
+                            </template>
+                            <template if:true={isAutoLinkSubscriptionStatus}>
+                                <c-own-auto-link-subscription-status android-app-link={androidAppLink}
+                                    ios-app-link={iosAppLink} play-store-u-r-l={playStoreURL}
+                                    app-store-u-r-l={appStoreURL} acura-play-store-u-r-l={acuraPlayStoreURL}
+                                    acura-app-store-u-r-l={acuraAppStoreURL} sso-initiating-u-r-l={ssoInitiatingURL}
+                                    subscriptions={subscriptions} packages={packagesDisplayNames}
+                                    vehicle-infos={vehicleInfos}></c-own-auto-link-subscription-status>
+                            </template>
+                            <template if:true={isLinkedAccountsAndConnectedFeatures}>
+                                <c-own-auto-linked-accounts-connected-features>
+                                </c-own-auto-linked-accounts-connected-features>
+                            </template>
+                            <template if:true={isVehicleDataPrivacy}>
+                                <c-own-vehicle-data-privacy></c-own-vehicle-data-privacy>
+                            </template>
+                            <template if:true={isCommunicationPreferences}>
+                                <c-own-communication-preferences privacy-policy-link={privacyPolicyLink}>
+                                </c-own-communication-preferences>
+                            </template>
+                            <template if:true={isDigitalMarketplace}>
+                                <c-own-finance-and-marketplace title="Dreamshop" body={digitalMarketplaceBody} isdreamshop="true"
+                                    buttontitle="Shop Now" redirectlink={dreamshopLink} redirectloginlink={dreamShopIDPLoginURL} > </c-own-finance-and-marketplace>
+                            </template>
+                            <template if:true={isFinance}>
+                                <c-own-finance-and-marketplace body={financeBody}>
+                                </c-own-finance-and-marketplace>
+                            </template>
+                        </div>
+
+                        <!-- <template for:each={tabs} for:item="tab">
+                            <div key={tab.value} id={tab.control} data-id={tab.id} class={tab.contentclass} role="tabpanel" aria-labelledby={tab.id}>
+                                
+                            </div>
+                        </template> -->
+                    </div>
+                </div>
+                <div class="myaccount-list-small">
+                    <div if:true={showTabSet} class="slds-tabs-mobile__container slds-m-vertical_large">
+                        <ul class="slds-tabs-mobile">
+                            <template for:each={tabs} for:item="tab">
+                                <li key={tab.value} class="slds-tabs-mobile__item myaccount-tab-small">
+                                    <button data-value={tab.value} title={tab.label}
+                                        class="slds-button slds-button_full-width" onclick={handleSelect}>
+                                        <span title={tab.label}>{tab.label}</span>
+                                        <img src={rightArrow}>
+                                    </button>
+                                </li>
+                            </template>
+                        </ul>
+                    </div>
+                    <div if:false={showTabSet} class="tab-content">
+                        <!-- <lightning-button class="show-tabset" variant="base" label="< My Account" title="My Account"
+                            onclick={backToTabs}></lightning-button> -->
+                        <c-own-breadcrumb class="show-tabset" label="My Account" onnavigate={backToTabs} custom-event="true"></c-own-breadcrumb>
+                        <template if:true={isAccountInformation}>
+                            <lightning-layout-item size="12">
+                                <c-own-account-information account-id={accountId} play-store-u-r-l={playStoreURL}
+                                    app-store-u-r-l={appStoreURL} acura-play-store-u-r-l={acuraPlayStoreURL}
+                                    acura-app-store-u-r-l={acuraAppStoreURL} oneditaddress={handleOnEditAddress}>
+                                </c-own-account-information>
+                            </lightning-layout-item>
+                        </template>
+                        <template if:true={isCasesList}>
+                            <lightning-layout-item size="12">
+                                <c-own-my-cases disclaimer={disclaimer}></c-own-my-cases>
+                            </lightning-layout-item>
+                        </template>
+                        <template if:true={isAutoLinkSubscriptionStatus}>
+                            <lightning-layout-item size="12">
+                                <c-own-auto-link-subscription-status android-app-link={androidAppLink}
+                                    ios-app-link={iosAppLink} play-store-u-r-l={playStoreURL}
+                                    app-store-u-r-l={appStoreURL} acura-play-store-u-r-l={acuraPlayStoreURL}
+                                    acura-app-store-u-r-l={acuraAppStoreURL} sso-initiating-u-r-l={ssoInitiatingURL}
+                                    subscriptions={subscriptions} packages={packagesDisplayNames}
+                                    vehicle-infos={vehicleInfos}></c-own-auto-link-subscription-status>
+                            </lightning-layout-item>
+                        </template>
+                        <template if:true={isLinkedAccountsAndConnectedFeatures}>
+                            <lightning-layout-item size="12">
+                                <c-own-auto-linked-accounts-connected-features>
+                                </c-own-auto-linked-accounts-connected-features>
+
+                            </lightning-layout-item>
+                        </template>
+                        <template if:true={isVehicleDataPrivacy}>
+                            <lightning-layout-item size="12">
+                                <c-own-vehicle-data-privacy></c-own-vehicle-data-privacy>
+                            </lightning-layout-item>
+                        </template>
+                        <template if:true={isCommunicationPreferences}>
+                            <lightning-layout-item size="12">
+                                <c-own-communication-preferences privacy-policy-link={privacyPolicyLink}>
+                                </c-own-communication-preferences>
+                            </lightning-layout-item>
+                        </template>
+                        <template if:true={isDigitalMarketplace}>
+                            <lightning-layout-item size="12">
+                                <c-own-finance-and-marketplace title="Dreamshop" body={digitalMarketplaceBody} isdreamshop="true"
+                                    buttontitle="Shop Now" redirectlink={dreamshopLink} redirectloginlink={dreamShopIDPLoginURL}>
+                                </c-own-finance-and-marketplace>
+                            </lightning-layout-item>
+                        </template>
+                        <template if:true={isFinance}>
+                            <lightning-layout-item size="12">
+                                <c-own-finance-and-marketplace body={financeBody}>
+                                </c-own-finance-and-marketplace>
+                            </lightning-layout-item>
+                        </template>
+                    </div>
+                </div>
+            </lightning-layout-item>
+        </template>
+        <lightning-layout-item if:true={isShowEditAddress} size="12" small-device-size="12" medium-device-size="12"
+            large-device-size="11">
+            <c-own-edit-address account-id={accountId} oncancel={handleOnAddressChangeCancel}></c-own-edit-address>
+        </lightning-layout-item>
+    </lightning-layout>
+</template>

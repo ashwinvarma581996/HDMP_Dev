@@ -1,0 +1,12 @@
+<!--
+  @description       :
+  @author            : mbunch@gorillagroup.com
+  @group             :
+  @last modified on  : 10-10-2021
+  @last modified by  : mbunch@gorillagroup.com
+-->
+<aura:component implements="force:lightningQuickAction,lightning:availableForFlowActions,lightning:availableForFlowScreens"  access="global">
+    <c:resUtils aura:id="resUtils"/>
+    <aura:attribute name="url" type="String" />
+   <aura:handler name="init" value="{!this}" action="{!c.init}"/>
+</aura:component>

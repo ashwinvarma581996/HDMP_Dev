@@ -1,0 +1,138 @@
+.personal-info{
+    margin-bottom: 75px;
+}
+.personal-info .personal-breadcrumb{
+    width: 100%;
+    max-width: 1200px;
+    margin: 30px auto 40px;
+}
+.personal-info .breadcrumb-link a,
+.personal-info .breadcrumb-link a:visited,
+.personal-info .breadcrumb-link a:hover{
+    color: #434343;
+    font-size: 14px;
+    text-decoration: none;
+    font-weight: bold;
+    font-family: "Avenir";
+}
+.personal-info .heading{
+    max-width: 924px;
+    text-align: center;
+    margin: 0 auto;
+    margin-bottom: 70px;
+}
+
+.personal-info .heading__title{
+    font-size: 60px;
+    line-height: 64px;
+    margin-bottom: 12px;
+    font-family: "Acura";
+    font-weight: 300;
+    color: #000000 !important;
+}
+.personal-info .personal-info-terms-link{
+    font-size: 12px;
+    font-family: 'Avenir';
+    color: #1e2123;
+}
+.personal-info .personal-info-terms-link:hover{
+    text-decoration: none;
+}
+.personal-info .heading__sub-title_required, .personal-info .heading__sub-title{
+    font-size: 18px;
+    line-height: 28px;
+    font-weight: lighter;
+    color: #5D6061 !important;
+}
+
+.personal-info .row1 {
+    display: grid;
+    grid-template-columns: repeat(12,1fr);
+    grid-column-gap: 20px;
+    width: 100%;
+    max-width: 924px;
+    margin: 0 auto;
+}
+
+.personal-info .row1 .form-firstname {
+    grid-column: span 6;
+}
+.personal-info .row1 .form-lastname {
+    grid-column: span 6;
+}
+.personal-info .row1 .form-email {
+    grid-column: span 6;
+}
+.personal-info .row1 .form-zip {
+    grid-column: span 3;
+}
+.personal-info .row1 .form-phone {
+    grid-column: span 6;
+}
+.accepted-terms p{
+    color: #707070 !important;
+}
+.personal-info .row2{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    width: 100%;
+    grid-column-gap: 24px;
+    max-width: 924px;
+    margin: 0 auto;
+}
+.personal-info .row2 .accepted-terms{
+    grid-column: span 1;
+    display: flex;
+}
+
+.personal-info .row2 .submit-button{
+    justify-self: flex-end;
+}
+.personal-info .row3{
+    margin-top: 22px;
+    line-height: 28px;
+    font-weight: lighter;
+    font-family: "Acura";
+    display: grid;
+    grid-column-gap: 24px;
+
+
+}
+
+@media(max-width: 767px){
+    .personal-info{
+        margin-bottom: 14px;
+    }
+    .personal-info .breadcrumb{
+        margin-top: 22px;
+        margin-bottom: 30px;
+    }
+    .personal-info .heading{
+        margin-bottom: 38px;
+    }
+    .personal-info .heading__title{
+        font-size: 24px;
+        line-height: 28px;
+        margin-bottom: 8px;
+    }
+    .personal-info .heading__sub-title_required,.personal-info .heading__sub-title{
+        font-size: 16px;
+        line-height: 24px;
+    }
+    .personal-info .row1 .form-firstname,
+    .personal-info .row1 .form-lastname,
+    .personal-info .row1 .form-email,
+    .personal-info .row1 .form-zip,
+    .personal-info .row1 .form-phone,
+    .personal-info .row2 .accepted-terms,
+    .personal-info .row2 .submit-button {
+        grid-column: span 12;
+        width: 100%;
+    }
+    .personal-info .row1{
+        margin-bottom: 0;
+    }
+    .personal-info .row2 .accepted-terms{
+        margin-bottom: 30px;
+    }
+}

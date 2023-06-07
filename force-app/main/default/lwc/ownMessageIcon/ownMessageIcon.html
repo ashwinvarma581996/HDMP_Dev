@@ -1,0 +1,12 @@
+<template>
+    <div style="padding-right: 16px;" >
+    <div  onclick={handleclick} tabindex="0" role="button"><!-- Message Icon -->
+        <img style="height: 20px;" src={messageIcon} alt="Messages"/>
+    </div>
+    <template if:true={displayMessageCount}>
+        <div class="slds-grid slds-grid_vertical-align-center slds-grid_align-center box overlay message-dot" tabindex="0" role="option"><!-- Display unread messages -->
+            <span>{unreadMessageCount}</span>
+        </div>
+    </template>
+   </div>
+</template>

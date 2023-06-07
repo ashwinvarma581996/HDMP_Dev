@@ -1,0 +1,70 @@
+<template>
+    <div class="slds-container_medium slds-container_center slds-p-around_medium serial_number_wrapper">
+        <lightning-layout-item >
+            <div class="breadcrumb-large slds-m-bottom_large breadcrumb-div-width">
+                <div class="breadcrumb" aria-label="Breadcrumbs" role="navigation">
+                    <div role="list" class="slds-breadcrumb slds-list_horizontal slds-wrap">
+                        <slot>
+                            <div class="slds-breadcrumb__item breadcrumb-item-back">
+                                <a class="breadcrumb-text-color" onclick={handleBreadcrumb}>
+                                    {breadcrumb.label}
+                                </a>
+                            </div>
+                        </slot>
+                    </div>
+                </div>
+            </div>
+        </lightning-layout-item>
+        
+        <h2>Locate Device Serial Number </h2>
+        <p>There are several places to find your device's serial number: </p>
+        
+        <template if:true={isHonda}>
+            <lightning-accordion onsectiontoggle={handleToggleSection}
+                                active-section-name="serialnumber"> 
+                <lightning-accordion-section name="serialnumber" label="Serial Number Retrieval Help">
+                    <lightning-formatted-rich-text if:true={serialNumberRetrievalHelpBody} value={serialNumberRetrievalHelpBody.body}></lightning-formatted-rich-text>
+                </lightning-accordion-section>
+
+                <lightning-accordion-section  name="audiounit" label="Audio Unit Serial Number Retrieval">
+                    <lightning-formatted-rich-text if:true={audioUnitSerialNumberRetrievalBody} value={audioUnitSerialNumberRetrievalBody.body}></lightning-formatted-rich-text>
+                
+                </lightning-accordion-section>
+
+                <lightning-accordion-section name="devicedisplay" label="Retrieve Serial Number from Device Display">
+                   
+                    <lightning-formatted-rich-text if:true={retrieveSerialNumberFromDeviceDisplayBody} value={retrieveSerialNumberFromDeviceDisplayBody.body}></lightning-formatted-rich-text>
+                
+                </lightning-accordion-section>
+                <lightning-accordion-section  name="navigationunit" label="Retrieval Serial Number from Navigation Unit">
+                  
+                    <lightning-formatted-rich-text if:true={retrieveSerialNumberFromDeviceDisplayBody} value={retrievalSerialNumberFromNavigationUnitBody.body}></lightning-formatted-rich-text>
+                
+                </lightning-accordion-section>
+                
+            </lightning-accordion>
+        </template>
+        <template if:false={isHonda}>
+            <lightning-accordion onsectiontoggle={handleToggleSection}
+                                active-section-name="serialnumber"> 
+                <lightning-accordion-section name="serialnumber" label="Serial Number Retrieval Help">
+                    <lightning-formatted-rich-text if:true={acuraSerialNumberRetrievalHelpBody} value={acuraSerialNumberRetrievalHelpBody.body}></lightning-formatted-rich-text>
+                </lightning-accordion-section>
+
+                <lightning-accordion-section  name="audiounit" label="Audio Unit Serial Number Retrieval">
+                    <lightning-formatted-rich-text if:true={acuraAudioUnitSerialNumberRetrievalBody} value={acuraAudioUnitSerialNumberRetrievalBody.body}></lightning-formatted-rich-text>
+                
+                </lightning-accordion-section>
+
+                <lightning-accordion-section name="devicedisplay" label="Retrieve Serial Number from Device Display">
+                    <lightning-formatted-rich-text if:true={acuraRetrieveSerialNumberFromDeviceDisplayBody} value={acuraRetrieveSerialNumberFromDeviceDisplayBody.body}></lightning-formatted-rich-text>
+                
+                </lightning-accordion-section>
+                <lightning-accordion-section  name="navigationunit" label="Retrieval Serial Number from Navigation Unit">
+                    <lightning-formatted-rich-text if:true={acuraRetrievalSerialNumberFromNavigationUnitBody} value={acuraRetrievalSerialNumberFromNavigationUnitBody.body}></lightning-formatted-rich-text>
+                </lightning-accordion-section>
+                
+            </lightning-accordion>
+        </template>
+    </div>
+</template>

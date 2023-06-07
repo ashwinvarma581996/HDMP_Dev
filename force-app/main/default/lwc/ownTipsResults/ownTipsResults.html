@@ -1,0 +1,99 @@
+<template>
+    <div class="c-container">
+        <div class="category-result-large">
+            <lightning-layout>
+                <lightning-layout-item class="slds-p-horizontal_large">
+                    <div>
+                        <span class="result-title">{subcategory.label}</span>
+                    </div>
+                </lightning-layout-item>
+            </lightning-layout>
+            <lightning-layout>
+                <lightning-layout-item padding="around-large">
+                    <template if:true={isMixedCategory}>
+                        <div>
+                            <ul class="slds-has-dividers_bottom slds-has-block-links_space result-list">
+                                <template for:each={subcategory1.results} for:item="result">
+                                    <li key={result.id} data-id={result.id} class="slds-item" onclick={handleClick}>
+                                        <a>{result.title}</a>
+                                    </li>
+                                </template>
+                            </ul>
+                        </div> 
+                    </template>
+                    <template if:false={isMixedCategory}>
+                        <div class="table-container">
+                            <template if:true={showMultipleResults}>
+                                <c-own-help-center-result-accordion subcategory={subcategory1}></c-own-help-center-result-accordion>
+                            </template>
+                            <template if:true={showSingleResult}>
+                                <span class="selected-title slds-accordion__summary-content">{singleArticle.title}</span>
+                                <lightning-formatted-rich-text value={singleArticle.content}></lightning-formatted-rich-text>
+                            </template>
+                        </div>
+                    </template>
+                    <!-- <c-own-accordion heading={subcategory1.label} content-for-large-screen={subcategory1} content-for-small-screen={subcategory1}></c-own-accordion> -->
+<!--                     <lightning-accordion>
+                        <template for:each={subcategory1.results} for:item="result">
+                            <lightning-accordion-section name={result.title} label={result.title} key={result.id} data-id={result.id} class="slds-item">
+                                <div>
+                                    <lightning-formatted-rich-text value={result.content}></lightning-formatted-rich-text>
+                                </div>
+                            </lightning-accordion-section>
+                        </template>
+                    </lightning-accordion> -->
+<!---->
+                </lightning-layout-item>
+            </lightning-layout>
+        </div>
+        <div class="category-result-small">
+            <lightning-layout horizontal-align="center">
+                <!-- <lightning-layout-item padding="around-small">
+                    <div>
+                        <span class="result-title">{subcategory1.label}</span>
+                    </div>
+                </lightning-layout-item> -->
+            </lightning-layout>
+            <lightning-layout class="block-element">
+                <lightning-layout-item class="block-element">
+                    <template if:true={isMixedCategory}>
+                        <div>
+                            <ul class="slds-has-dividers_bottom slds-has-block-links_space result-list">
+                                <template for:each={subcategory1.results} for:item="result">
+                                    <li key={result.id} data-id={result.id} class="slds-item" onclick={handleClick}>
+                                        <a>{result.title}</a>
+                                    </li>
+                                </template>
+                            </ul>
+                        </div> 
+                    </template>
+                    <template if:false={isMixedCategory}>
+                        <c-own-tips-result-accordion subcategory={subcategory1}></c-own-tips-result-accordion>
+                    </template>
+<!--                     <lightning-accordion>
+                        <template for:each={subcategory1.results} for:item="result">
+                            <lightning-accordion-section name={result.title} label={result.title} key={result.id} data-id={result.id} class="slds-item">
+                                <div>
+                                    results
+                                </div>
+                            </lightning-accordion-section>
+                        </template>
+
+                    </lightning-accordion> -->
+<!--                     <div>
+                        <ul class="slds-has-dividers_bottom slds-has-block-links_space result-list">
+                            <template for:each={subcategory1.results} for:item="result">
+                                <li key={result.id} data-id={result.id} class="slds-item" onclick={handleClick}>
+                                    <button class="slds-button slds-button_reset" aria-expanded="true" title="List item">
+                                        <img src={rightArrow} />
+                                        <a>{result.title}</a>
+                                    </button>
+                                </li> 
+                            </template>
+                        </ul>
+                    </div> -->
+                </lightning-layout-item>
+            </lightning-layout>
+        </div>
+    </div>
+</template>

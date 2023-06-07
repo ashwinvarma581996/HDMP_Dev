@@ -1,0 +1,39 @@
+.videoContainer {
+    height: 508px; width: 100%; 
+}
+@media only screen and (max-width: 600px){
+    .content{
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 300;
+        font-size: 16px;
+        line-height: 24px;
+        color: #080707;
+    }
+    .title{
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 300;
+        font-size: 22px;
+        line-height: 27px;
+        letter-spacing: 0.02em;
+    }
+}
+@media only screen and (min-width: 601px){
+    .content{
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 300;
+        font-size: 16px;
+        line-height: 26px;
+        color: #080707;
+    }
+    .title{
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 300;
+        font-size: 32px;
+        line-height: 37px;
+        letter-spacing: 0.02em;
+    }
+}

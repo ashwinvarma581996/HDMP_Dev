@@ -1,0 +1,196 @@
+.cartPage {
+    .cartParent {
+        border-top: 1px solid #D9D9D9;
+        border-bottom: 1px solid #D9D9D9;
+    }
+    .cartHeading {
+        color: black;
+        font-size: 28px;
+        font-weight: 300;
+        border-bottom: 1px solid #D9D9D9;
+        // .headingCount{
+        //     color: $redBg;
+        //     font-size: 16px;
+        //     max-width: 20px;
+        //     max-height: 20px;
+        //     padding: 6px;
+        //     border : 2px solid $redBg;
+        //     border-radius: 2px;
+        // }
+    }
+    .itemName {
+        color: $redBg;
+        font-size: 24px;
+        font-weight: 200;
+        line-height: 30px;
+    }
+    .price {
+        align-items: center;
+        .negotiatedPrice {
+            color: black;
+            font-size: 24px;
+        }
+        .originalPrice {
+            color: #5E6162;
+            font-size: 16px;
+            text-decoration: line-through;
+        }
+    }
+    .errorHeading {
+        font-size: 16px;
+    }
+    .remove {
+        font-size: 14px;
+        color: #E42525;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+    position:relative;
+    header.slds-modal__header {
+        border-bottom: 0;
+        padding-bottom: 0;
+    }
+    .font-h5 {
+        font-size: 22px;
+    }
+}
+
+.comm-page-detail-0a6 {
+    .quantity-selector .qty .slds-form-element__help {
+        width: 300px !important;
+    }
+    .vinfit .slds-form-element,
+    .vinfit .errorMsg {
+        max-width: 60%;
+        margin: 0 auto;
+        display: block;
+    }
+}
+
+.itemsContainer {
+    border-bottom: 1px solid #D9D9D9;
+    // padding-right: 200px;
+    &:only-child {
+        border-bottom: none;
+    }
+    &:last-child {
+        border-bottom: none;
+    }
+}
+
+.cartRemove {
+    .slds-button_neutral {
+        background: #fff !important;
+        border: 0 !important;
+        color: #E42525 !important;
+    }
+    .slds-button {
+        font-size: 12px !important;
+        padding: 3px 0 !important;
+        text-transform: capitalize !important;
+        display: contents;
+    }
+}
+
+.subTotal {
+    position: absolute;
+    bottom: 0;
+    right: 0px;
+    width: 250px;
+}
+
+.lgc-bg .popDealerLabel {
+    display: none;
+}
+
+.quantity-selector {
+    .qty {
+        max-width: 70px;
+        position: relative;
+        label {
+            position: absolute;
+            left: -9px;
+        }
+        input {
+            max-height: 42px;
+        }
+        .slds-form-element__help {
+            position: absolute;
+            width: 220px;
+        }
+    }
+    .slds-button_destructive {
+        background: #E42525 !important;
+        border-color: #E42525 !important;
+        border-radius: 2px !important;
+    }
+}
+
+@media(max-width: 768px) {
+    .proceedToCheckout {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+        float: none !important;
+    }
+    .comm-page-detail-0a6 .quantity-selector .qty .slds-form-element__help {
+        font-size: 9px;
+    }
+}
+
+// .comm-page-detail-0a6 {
+//     .b2b_buyer_builderCartContents {
+//         @include containerWrapper;
+//         margin: 40px auto !important;
+//         .details {
+//             h3.item-name {
+//                 text-transform: capitalize;
+//             }
+//         }
+//         .product-fields {
+//             flex-direction: column;
+//             dt.slds-truncate:first-child {
+//                 color: $redBg;
+//             }
+//         }
+//         .quantity-selector {
+//             .decrement-btn svg,
+//             .increment-btn svg {
+//                 padding: 0 6px;
+//                 width: 25px;
+//                 fill: #000 !important;
+//             }
+//             .controls.slds-m-right_small {
+//                 border: 0;
+//                 margin: 0;
+//             }
+//             input {
+//                 border-top: 1px solid #ddd;
+//                 border-bottom: 1px solid #ddd;
+//                 width: 50px;
+//             }
+//         }
+//         // footer {
+//         //     display: none !important;
+//         // }
+//         .price[b2b_buyer_cart-items_items] {
+//             text-align: right;
+//         }
+//         .remove {
+//             display: none;
+//         }
+//     }
+//     .comm-content-footer {
+//         [data-region-name="footer"] {
+//             @include containerWrapper;
+//             [commerce_checkout-checkoutButton_checkoutButton-host] {
+//                 justify-content: flex-end;
+//             }
+//             button.slds-button.slds-button_brand {
+//                 display: inline-block;
+//                 max-width: 240px;
+//                 margin: 30px 0 20px !important;
+//             }
+//         }
+//     }
+// }

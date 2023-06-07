@@ -1,0 +1,27 @@
+.requiredModal .custom-box a {
+    color: rgb(105, 105, 105)
+}
+@media screen and (min-width: 768px){
+    .product-price {
+        justify-content: end;
+    }
+}
+.product-price {
+    margin-bottom: 20px;
+}
+@media screen and (max-width: 767px){
+    .product-price-action {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        justify-content: space-between;
+    }
+}
+@media screen and (max-width: 479px){
+    .product-price-action .slds-text-heading_medium{
+        font-size: 18px;
+    }
+    .product-price-action lightning-button {
+        min-width: 110px;
+    }
+}

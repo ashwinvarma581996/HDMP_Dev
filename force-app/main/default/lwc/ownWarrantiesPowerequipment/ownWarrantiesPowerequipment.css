@@ -1,0 +1,167 @@
+.own-combobox-label{
+    font-style: normal;
+    font-weight: 500;
+    font-size: 13px !important;
+    line-height: 15px;
+    letter-spacing: 0.02em;
+    color: #000000 !important;
+}
+.find-brand-combobox {
+    background: #FFFFFF;
+    box-sizing: border-box;
+    border-radius: 2px;
+}
+
+.slds-quick-actions {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 70px;
+}
+
+.slds-quick-actions_save {
+    width: 192px;
+    background: #000000;
+    text-align: center;
+    color: #fff;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    font-weight: 900;
+    font-size: 18px;
+    line-height: 26px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 20px;
+}
+.link-text{
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 26px;
+    color: var(--HondaRed);
+}
+
+.slds-quick-actions_save img {margin-bottom: 14px;}
+
+.slds-quick-actions_add {
+    background: #F0F0F0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 26px 34px;
+    flex: 1;
+}
+
+.slds-quick-actions_add p {
+    font-size: 20px;
+    line-height: 26px;
+}
+
+.quick-actions-btn {
+    color: #FFFFFF;
+    background: #E42525;
+    border-radius: 2px;
+    box-shadow: none;
+    border: 0px;
+    font-weight: 900;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    padding: 12px 36px;
+    margin-top: 20px;
+    transition: all 0.5s ease;
+}
+
+.quick-actions-btn:hover {
+    background: #C42121;
+}
+
+.slds-button{
+    border-radius: 2px;
+    font-weight: 900;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color:#FFFFFF;
+    padding: 0 48px;
+    justify-content: center;
+}
+.slds-brand-button-active{
+    border-color: var(--HondaRed);
+    background: var(--HondaRed);
+}
+.slds-brand-button-inactive{
+    border-color: #ACACAC;
+    background: #ACACAC;
+}
+.slds-brand-button-disabled{
+    border-color: #ACACAC;
+    background: #ACACAC;
+
+}
+
+.custom-icon {
+    --sds-c-icon-color-foreground-default: #e42525;
+    --sds-c-icon-color-background: white;
+    cursor: pointer;
+}
+.product-warranty h3{
+    font-weight: 300;
+    font-size: 32px;
+    line-height: 37px;
+    color: #080707;
+    margin: 0px 0px 24px;
+}
+
+.product-warranty p{
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 26px;
+    color: #080707;
+}
+
+.system-warranty h3{
+    font-weight: 300;
+    font-size: 32px;
+    line-height: 37px;
+    color: #080707;
+    margin: 0px 0px 24px;
+}
+
+.system-warranty p{
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 26px;
+    color: var(--HondaRed);
+}
+
+.content-body{
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 26px;
+    color: #080707;
+}
+
+@media only screen and (max-width: 550px) {
+    .slds-button{
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    .slds-quick-actions {
+        flex-direction: column;
+    }
+    .slds-quick-actions_save {
+        width: auto;
+        padding: 20px;
+        flex-direction: row;
+    }
+    .slds-quick-actions_save h4 {
+        margin-left: 10px;
+    }
+    .slds-quick-actions_add {
+        text-align: center;
+        align-items: center;
+    }
+}

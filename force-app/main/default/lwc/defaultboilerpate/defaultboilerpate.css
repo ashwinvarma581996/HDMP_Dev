@@ -1,0 +1,6 @@
+.custom-textarea {
+    --sds-c-textarea-sizing-min-height:80px;
+}
+.custom-textAreaTitle {
+    --sds-c-textarea-sizing-min-height:50px;
+}

@@ -1,0 +1,150 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 04-04-2023
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+    <template if:true={isDealerLoading}>
+        <lightning-spinner alternative-text="Loading..."
+            class="slds-is-relative slds-align_absolute-center slds-m-around_large" variant="brand">
+        </lightning-spinner>
+    </template>
+    <div class="searchResult">
+        <template if:true={dealerList}>
+            <template for:each={dealerList} for:item="acc">
+                <div class="slds-size_1-of-1" data-label="" key={acc.Id}>
+                    <article class={acc.boxStyle}> <!-- Class added by Shalini soni for HDMP-7572 Bug-->
+               
+                        <lightning-card class="slds-card_body">
+
+                            <div class="slds-grid slds-gutters slds-wrap">
+                                <div class="slds-max-medium-size_1-of-1 slds-col slds-size_2-of-3">
+                                    <p data-id={acc.Id} data-dealerno={acc.PoIId__c}
+                                        data-title={acc.Name}>
+                                        {acc.Name}
+                                    </p>
+
+                                    <span class="telePhoneLink">
+                                        <lightning-formatted-phone value={acc.Phone}>
+                                        </lightning-formatted-phone>
+                                    </span>
+                                    
+                                    <div name={acc.Id}
+                                        class="dealer-address slds-m-top_x-small slds-m-bottom_x-small ">
+                                        <img src={mapIcon} alt="lampIcon" class="customIcon">
+                                        <a onclick={goToMap} data-id={acc.Id}
+                                            data-title={acc.Name} data-dealerno={acc.PoIId__c}
+                                            data-street={acc.ShippingStreet}
+                                            data-city={acc.BillingCity}
+                                            data-province={acc.BillingState}
+                                            data-postalcode={acc.BillingPostalCode}>
+
+                                            <div class="textRed">
+                                                <div class="searchLocation textRed">
+                                                    {acc.ShippingStreet}<br />
+                                                    {acc.BillingCity},&nbsp;{acc.BillingState}&nbsp;{acc.BillingPostalCode}
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <!--<lightning-button name={acc.Id} variant="base"
+                                    data-id={acc.Id}
+                                    data-dealerno={acc.PoIId__c}
+                                    data-title={acc.Name} label="" title="Location"
+                                    onclick={goToMap}></lightning-button>-->
+
+
+                                    <div class="slds-grid slds-wrap slds-grid_vertical-align-center">
+                                        <div class="slds-grid slds-grid_vertical-align-center slds-gutters">
+                                            <template if:true={acc.isSelectedDealer}>
+                                                <b>	SELECTED DEALER </b>
+                                                </template>
+                                                <template if:false={acc.isSelectedDealer}>
+                                            <div class="slds-col">
+                                                <span>
+                                                    <lightning-button name={acc.Id} variant="brand"
+                                                        data-id={acc.Id}
+                                                        data-dealerno={acc.PoIId__c}
+                                                        data-title={acc.Name}
+                                                        data-contact={acc.Phone}
+                                                        data-street={acc.ShippingStreet}
+                                                        data-city={acc.BillingCity}
+                                                        data-state={acc.BillingState}
+                                                        label="SELECT THIS DEALER" title="SELECT THIS DEALER"
+                                                        onclick={selectDealer}>
+                                                    </lightning-button>
+                                                </span>
+                                                </div>
+                                             </template>
+                                            <div class="slds-col">
+                                                <span>
+                                                    <div class="dealerWebsite">
+                                                        <lightning-formatted-url label="Dealer Website"
+                                                            value={acc.Website}>
+                                                        </lightning-formatted-url>
+                                                    </div>
+                                                </span>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                <div
+                                    class="slds-max-small-size_1-of-1 slds-max-medium-size_1-of-1 slds-col slds-size_1-of-3 slds-grid slds-grid_vertical-align-end flexColumn">
+                                    <lightning-layout multiple-rows class="contact-hours">
+                                        <lightning-layout-item size="6" medium-device-size="12" flexibility="auto"
+                                            class="contact-name">
+                                            <span> <b> Contact </b> <br /></span>
+                                            <!-- Deeapk Mali -->
+                                            {acc.First_Name__c} {acc.Last_Name__c}<br />
+                                            <div> {acc.Email__c} </div>
+
+                                        </lightning-layout-item>
+                                        <lightning-layout-item size="6" medium-device-size="12" flexibility="auto">
+                                            <div class="slds-m-top_medium slds-text-align_right">
+                                                <div><b>Hours of Operation</b></div>
+                                                <div class="slds-grid ">
+                                                    <div class="slds-col slds-size_12-of-12 slds-p-around_none"> 
+                                                        <!-- <div > {acc.Operation_Hour__c} </div> -->
+                                                        <template for:each={acc.oprationHoursArr} for:item="arr">
+                                                            <div key={arr}> {arr} </div>
+                                                        </template>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </lightning-layout-item>
+
+                                        <!--Pratik Added Sp4 Sales Jursidications-->
+
+                                        <lightning-layout-item size="6" medium-device-size="12" flexibility="auto">
+                                            <div class="slds-m-top_medium slds-text-align_right">
+                                                <!--Lakshmi HDMP-19454,19445 - Sales tax juridisction-->
+                                                Ship to States : {acc.shippingtaxstate}
+                                                <div class="slds-grid ">
+                                                    <div class="slds-col slds-size_12-of-12 slds-p-around_none"> 
+                                                       
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </lightning-layout-item>
+                                        <!--Pratik Ended Sp4 Sales Jurisdications-->
+                                    </lightning-layout>
+
+                                </div>
+                            </div>
+
+                        </lightning-card>
+                   
+                   
+                    </article>
+
+                </div>
+
+            </template>
+        </template>
+    </div>
+</template>

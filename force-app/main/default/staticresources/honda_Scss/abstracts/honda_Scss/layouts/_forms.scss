@@ -1,0 +1,19 @@
+.slds-input {
+    border-color: #979797 !important;
+    border-radius: 0 !important;
+    padding: 6px 15px !important;
+    background-clip: padding-box;
+}
+
+@media (max-width: 768px) {
+    .slds-combobox__form-element,
+    .slds-form-element__control input {
+        font-size: 16px;
+        transform: scale(1);
+        transform-origin: left top;
+    }
+    .slds-dropdown {
+        max-height: 200px;
+        position: relative !important;
+    }
+}

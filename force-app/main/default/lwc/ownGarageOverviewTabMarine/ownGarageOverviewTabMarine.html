@@ -1,0 +1,244 @@
+<!-- //============================================================================
+// Title:    Honda Owners Experience - Footer
+//
+// Summary:  This is the html seen at the Owners Garage Find - Honda Auto Body of the Honda Owner Community
+//
+// Details:  Extend the LightningElement with this Base Element to gain access to the Messaging Channel and other logic herein and this is the own garage find honda body component for all community pages.
+//
+//
+// History:
+// May 17, 2021 Arunprasad N (Wipro) Original Author
+// Jul 13, 2021 Jim Kohs (Wipro) changed c-own-garage-overview-locate-dealer-card to c-own-garage-overview-locate-dealer-card1
+// July 15, 2021 Jim Kohs (Wipro) refactored to ownBaseCard2
+//=========================================================================== -->
+<template>
+    <div class="c-container garage-overview-tab-large">
+        <lightning-layout horizontal-align="spread" class="slds-p-top_large" multiple-rows>
+            <lightning-layout-item padding="around-small">
+                <h3 title="Service & Parts">
+                    <span class="garage-overview-tab-title">Service & Parts</span>
+                </h3>
+            </lightning-layout-item>
+            <lightning-layout-item padding="around-small">
+                <h3 title="ALL SERVICE & PARTS">
+                    <span class="garage-overview-tab-title-cta">ALL SERVICE & PARTS</span>
+                </h3>
+            </lightning-layout-item>
+        </lightning-layout>
+        <lightning-layout multiple-rows>
+            <lightning-layout-item size="8" padding="around-small">
+                <lightning-layout multiple-rows>
+                    <lightning-layout-item size="12">
+                        <c-own-find-dealers-card brand="marine"></c-own-find-dealers-card>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </lightning-layout-item>
+            <lightning-layout-item size="4" padding="around-small">
+                <lightning-layout multiple-rows>
+                    <lightning-layout-item size="12">
+                        <!-- <c-own-my-service-history-card></c-own-my-service-history-card> -->
+                        <c-own-store-your-service-records-card brand="marine"></c-own-store-your-service-records-card>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="12">
+                        <!-- <c-own-my-service-history-card></c-own-my-service-history-card> -->
+                        <c-own-parts-and-accessories-card brand="marine"></c-own-parts-and-accessories-card>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </lightning-layout-item>
+        </lightning-layout>
+        <!-- <lightning-layout multiple-rows>
+            <lightning-layout-item size="4" padding="around-small">
+                <c-own-maintenance-minder-card></c-own-maintenance-minder-card>
+            </lightning-layout-item>
+            <lightning-layout-item size="4" padding="around-small">
+                <c-own-parts-and-accessories-card></c-own-parts-and-accessories-card>
+            </lightning-layout-item>
+        </lightning-layout> -->
+        <lightning-layout horizontal-align="spread" class="slds-p-top_large" multiple-rows>
+            <lightning-layout-item padding="around-small">
+                <h3 title="Finance">
+                    <span class="garage-overview-tab-title">Finance</span>
+                </h3>
+            </lightning-layout-item>
+        </lightning-layout>
+        <lightning-layout multiple-rows>
+            <!-- <lightning-layout-item size="4" padding="around-small">
+                <c-own-sign-up-for-autopay-card></c-own-sign-up-for-autopay-card>
+            </lightning-layout-item> -->
+            <lightning-layout-item size="4" padding="around-small">
+                <c-own-view-financing-options-card brand="marine"></c-own-view-financing-options-card>
+            </lightning-layout-item>
+        </lightning-layout>
+        <!-- <lightning-layout horizontal-align="spread" class="slds-p-top_large" multiple-rows>
+            <lightning-layout-item padding="around-small">
+                <h3 title="Connected Services">
+                    <span class="garage-overview-tab-title">Connected Services</span>
+                </h3>
+            </lightning-layout-item>
+            <lightning-layout-item padding="around-small">
+                <h3 title="All Connected Services">
+                    <span class="garage-overview-tab-title-cta">All Connected Services</span>
+                </h3>
+            </lightning-layout-item>
+        </lightning-layout>
+        <lightning-layout multiple-rows>
+            <lightning-layout-item size="4" padding="around-small">
+                <c-own-view-my-subscriptions-card></c-own-view-my-subscriptions-card>
+            </lightning-layout-item>
+            <lightning-layout-item size="4" padding="around-small">
+                <c-own-download-acura-link-app-card></c-own-download-acura-link-app-card>
+            </lightning-layout-item>
+            <lightning-layout-item size="4" padding="around-small">
+                <c-own-amazon-key-card></c-own-amazon-key-card>
+            </lightning-layout-item>
+        </lightning-layout> -->
+        <lightning-layout horizontal-align="spread" class="slds-p-top_large" multiple-rows>
+            <lightning-layout-item padding="around-small">
+                <h3 title="Resources & Downloads">
+                    <span class="garage-overview-tab-title">Resources & Downloads</span>
+                </h3>
+            </lightning-layout-item>
+            <lightning-layout-item padding="around-small">
+                <h3 title="All Connected Services">
+                    <span class="garage-overview-tab-title-cta">All Resources & Downloads</span>
+                </h3>
+            </lightning-layout-item>
+        </lightning-layout>
+        <lightning-layout multiple-rows>
+            <lightning-layout-item size="4" padding="around-small">
+                <c-own-how-to-guides-card brand="marine"></c-own-how-to-guides-card>
+            </lightning-layout-item>
+            <lightning-layout-item size="4" padding="around-small">
+                <c-own-specifications-card brand="marine"></c-own-specifications-card>
+            </lightning-layout-item>
+            <lightning-layout-item size="4" padding="around-small">
+                <c-own-product-manual-card brand="marine"></c-own-product-manual-card>
+            </lightning-layout-item>
+        </lightning-layout>
+
+        <lightning-layout multiple-rows>
+            <lightning-layout-item size="4" padding="around-small">
+                <c-own-fuel-recommendations-card brand="marine"></c-own-fuel-recommendations-card>
+            </lightning-layout-item>
+        </lightning-layout>
+
+        <lightning-layout horizontal-align="spread" class="slds-p-top_large" multiple-rows>
+            <lightning-layout-item padding="around-small">
+                <h3 title="We're Here to Help">
+                    <span class="garage-overview-tab-title">We're Here to Help</span>
+                </h3>
+            </lightning-layout-item>
+        </lightning-layout>
+        <lightning-layout multiple-rows>
+            <lightning-layout-item size="4" padding="around-small">
+                <!-- <c-own-acura-help-center-card></c-own-acura-help-center-card> -->
+                <c-own-help-center-card brand="marine"></c-own-help-center-card>
+            </lightning-layout-item>
+            <lightning-layout-item size="4" padding="around-small">
+                <c-own-browse-faqs-card brand="marine"></c-own-browse-faqs-card>
+            </lightning-layout-item>
+            <lightning-layout-item size="4" padding="around-small">
+                <c-own-quick-start-guide-card brand="marine"></c-own-quick-start-guide-card>
+            </lightning-layout-item>
+        </lightning-layout>
+    </div>
+
+
+
+    <div class="c-container garage-overview-tab-small">
+        <lightning-layout multiple-rows>
+            <lightning-layout-item size="12" class="slds-p-top_large">
+                <h3 title="Service & Parts">
+                    <span class="garage-overview-tab-title-small">Service & Parts</span>
+                </h3>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class="slds-p-vertical_small">
+                <c-own-find-dealers-card></c-own-find-dealers-card>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class="slds-p-vertical_small">
+                <!-- <c-own-my-service-history-card></c-own-my-service-history-card> -->
+                <c-own-store-your-service-records-card brand="marine"></c-own-store-your-service-records-card>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class="slds-p-vertical_small">
+                <c-own-parts-and-accessories-card  brand="marine"></c-own-parts-and-accessories-card>
+            </lightning-layout-item>
+            <!-- <lightning-layout-item size="12" class="slds-p-vertical_small">
+                <c-own-maintenance-minder-card></c-own-maintenance-minder-card>
+            </lightning-layout-item> -->
+            <!-- <lightning-layout-item size="12" class="slds-p-vertical_small">
+                <c-own-parts-and-accessories-card></c-own-parts-and-accessories-card>
+            </lightning-layout-item> -->
+            <lightning-layout-item size="12" class="slds-p-vertical_small">
+                <h3 title="ALL SERVICE & PARTS">
+                    <span class="garage-overview-tab-title-cta">ALL SERVICE & PARTS</span>
+                </h3>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class="slds-p-top_large">
+                <h3 title="Finance">
+                    <span class="garage-overview-tab-title-small">Finance</span>
+                </h3>
+            </lightning-layout-item>
+            <!-- <lightning-layout-item size="12" class="slds-p-vertical_small">
+                <c-own-sign-up-for-autopay-card></c-own-sign-up-for-autopay-card>
+            </lightning-layout-item> -->
+            <lightning-layout-item size="12" class="slds-p-top_large">
+                <c-own-view-financing-options-card brand="marine"></c-own-view-financing-options-card>
+            </lightning-layout-item>
+            <!-- <lightning-layout-item size="12" class="slds-p-top_large">
+                <h3 title="Connected Services">
+                    <span class="garage-overview-tab-title-small">Connected Services</span>
+                </h3>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class="slds-p-vertical_small">
+                <c-own-view-my-subscriptions-card></c-own-view-my-subscriptions-card>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class="slds-p-vertical_small">
+                <c-own-download-acura-link-app-card></c-own-download-acura-link-app-card>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class="slds-p-vertical_small">
+                <c-own-amazon-key-card></c-own-amazon-key-card>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class="slds-p-vertical_small">
+                <h3 title="All Connected Services">
+                    <span class="garage-overview-tab-title-cta">All Connected Services</span>
+                </h3>
+            </lightning-layout-item> -->
+            <lightning-layout-item size="12" class="slds-p-top_large">
+                <h3 title="Resources & Downloads">
+                    <span class="garage-overview-tab-title-small">Resources & Downloads</span>
+                </h3>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class="slds-p-vertical_small">
+                <c-own-how-to-guides-card brand="marine"></c-own-how-to-guides-card>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class="slds-p-vertical_small">
+                <c-own-specifications-card brand="marine"></c-own-specifications-card>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class="slds-p-vertical_small">
+                <c-own-product-manual-card brand="marine"></c-own-product-manual-card>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" padding="slds-p-vertical_small">
+                <c-own-fuel-recommendations-card brand="marine"></c-own-fuel-recommendations-card>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class="slds-p-vertical_small">
+                <h3 title="All Resources Downloads">
+                    <span class="garage-overview-tab-title-cta">All Resources Downloads</span>
+                </h3>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class="slds-p-top_large">
+                <h3 title="We're Here to Help">
+                    <span class="garage-overview-tab-title-small">We're Here to Help</span>
+                </h3>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class="slds-p-vertical_small">
+                <c-own-help-center-card brand="marine"></c-own-help-center-card>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class="slds-p-vertical_small">
+                <c-own-browse-faqs-card brand="marine"></c-own-browse-faqs-card>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class="slds-p-vertical_small">
+                <c-own-quick-start-guide-card brand="marine"></c-own-quick-start-guide-card>
+            </lightning-layout-item>
+        </lightning-layout>
+    </div>
+</template>

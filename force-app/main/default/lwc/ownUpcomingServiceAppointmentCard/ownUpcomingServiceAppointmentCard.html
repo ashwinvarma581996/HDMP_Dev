@@ -1,0 +1,63 @@
+<template>
+    <c-own-card title={title} icon-image={iconImage} brand={brandForContent} showfooter={showFooter} onheader={handleHeader} >    
+        <div slot="honda">
+            <template if:true={isDataLoading}>
+                <div style="position: sticky;" ><!--class="slds-m-top_xx-large slds-p-top_xx-large"-->
+                     <c-own-data-loading-spinner></c-own-data-loading-spinner>
+                </div>
+           </template>
+           <template if:false={isDataLoading}>
+                <template if:true={error}>
+                     <lightning-layout-item size="12">
+                          <lightning-layout vertical-align="center">
+                               <lightning-layout-item if:true={showWarningIcon}>
+                                    <lightning-icon class="slds-p-right_small error-icon" icon-name="utility:warning"
+                                    size="small"></lightning-icon>
+                               </lightning-layout-item>
+                               <lightning-layout-item  class="card-body-content">
+                                    <div class="error-message">{errorMessage}</div>
+                               </lightning-layout-item>
+                          </lightning-layout>
+                     </lightning-layout-item>
+                </template>
+                <template if:false={error}>
+                    <div class="card-body-content">
+                        <lightning-layout horizontal-align="spread" multiple-rows  if:true={allServiceAppointments}>
+                            <template for:each={allServiceAppointments} for:item="appointment">
+                                <lightning-layout-item class="slds-border_bottom slds-m-bottom_medium slds-p-bottom_xx-small" size="12" key={appointment.appointmentIdent}>
+                                    <span class="serial-no">{appointment.sno}</span>
+                                        <lightning-layout class="details" multiple-rows horizontal-align="spread">
+                                            <lightning-layout-item size="12" large-device-size="6" medium-device-size="6" small-device-size="12" class="field-label">
+                                                Dealer Name
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="12" large-device-size="6" medium-device-size="6" small-device-size="12" class="field-value">
+                                                {appointment.dealerName}
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="12" large-device-size="6" medium-device-size="6" small-device-size="12" class="field-label slds-m-top_xx-small">
+                                                Scheduled Date
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="12" large-device-size="6" medium-device-size="6" small-device-size="12" class="field-value slds-m-top_xx-small">
+                                                {appointment.apptScheduledDate}
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="12" large-device-size="6" medium-device-size="6" small-device-size="12" class="field-label slds-m-top_xx-small">
+                                                Vehicle
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="12" large-device-size="6" medium-device-size="6" small-device-size="12" class="field-value slds-m-top_xx-small">
+                                                {appointment.modelName}
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="12" large-device-size="6" medium-device-size="6" small-device-size="12" class="field-label slds-m-top_xx-small">
+                                                Appointment Status
+                                            </lightning-layout-item>
+                                            <lightning-layout-item size="12" large-device-size="6" medium-device-size="6" small-device-size="12" class="field-value slds-m-top_xx-small">
+                                                {appointment.apptStatusCd}
+                                            </lightning-layout-item>
+                                        </lightning-layout>
+                                </lightning-layout-item>
+                            </template>
+                        </lightning-layout>
+                    </div>
+                </template>
+            </template>
+        </div>
+    </c-own-card>
+</template>

@@ -1,0 +1,38 @@
+<template>
+    <template if:true={hasRecall}>
+        <template if:true={isPdpOrHome}>
+            <div class="recall-row-container">
+                <lightning-layout class="recall-notification">
+                    <lightning-layout-item size="11" class="recall-text-container">
+                        <lightning-icon icon-name='utility:warning' alternative-text='warning' size='x-small' title='warning' class="custom-icon"></lightning-icon>
+                        <template if:true={isPdpPage}>
+                            <span class="recall-text">{initialTextPdp} {productName}. <a class="recall-view-link" onclick={handleViewRecall}>View it now</a> and take action.</span>
+                        </template>
+                        <template if:false={isPdpPage}>
+                            <span class="recall-text">{initialtext}<a class="recall-view-link" onclick={handleViewRecallAtHome}>View it now</a> and take action.</span>
+                        </template>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="1" class="recall-close-container">
+                        <lightning-icon icon-name='utility:close' alternative-text='close' size='x-small' class="custom-icon close-icon" onclick={handleCloseRecall}></lightning-icon>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </div>
+        </template>
+    </template>
+    <template if:true={isFindOrSearchPspOrPE_Label}>
+        <div class="recall-row-container">
+            <lightning-layout class="recall-notification">
+                <lightning-layout-item size="11" class="recall-text-container">
+                    <!-- <lightning-icon icon-name='utility:warning' alternative-text='warning' size='x-small' title='warning' class="custom-icon"></lightning-icon> -->
+                    <div if:true={isFindOrSearchPsp_HasLabel1} class="recall-text">{PSP_Banner_Text1} <a class="click-here-link" href={PSP_Banner_Link1} target="_blank" >Click Here</a></div>
+                    <div if:true={isFindOrSearchPsp_HasLabel2} class="recall-text">{PSP_Banner_Text2} <a class="click-here-link" href={PSP_Banner_Link2} target="_blank" >Click Here</a></div>
+                    <div if:true={isFindOrSearchPE_HasLabel1} class="recall-text">{PE_Banner_Text1} <a class="click-here-link" href={PE_Banner_Link1}  target="_blank">Click Here</a></div>
+                    <div if:true={isFindOrSearchPE_HasLabel2} class="recall-text">{PE_Banner_Text2} <a class="click-here-link" href={PE_Banner_Link2} target="_blank">Click Here</a></div>
+                </lightning-layout-item>
+                <lightning-layout-item size="1" class="recall-close-container">
+                    <!-- <lightning-icon icon-name='utility:close' alternative-text='close' size='x-small' class="custom-icon close-icon" onclick={handleCloseRecall}></lightning-icon> -->
+                </lightning-layout-item>
+            </lightning-layout>
+        </div>
+    </template>
+</template>

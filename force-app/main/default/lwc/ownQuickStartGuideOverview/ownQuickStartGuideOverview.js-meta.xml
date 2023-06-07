@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>54.0</apiVersion>
+    <isExposed>true</isExposed> 
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property type="ContentReference" name="contentId1" label="Get To Know Video 1" />
+            <property type="ContentReference" name="contentId2" label="Get To Know Video 2" />
+            <property type="ContentReference" name="contentId3" label="Get To Know Video 3" />
+            <property type="String" name="brand" label="Brand" datasource="Acura,Honda,Marine,Powersports,Powerequipment"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

@@ -1,0 +1,39 @@
+<template>
+    <lightning-button variant="destructive-text" label="GO BACK" title="RETURN"
+			onclick={handleReturnToList} class="slds-m-left_x-small">
+    </lightning-button>
+    <c-own-product-header product-title={selectedRecord.Service_Date__c} product-sub-title={selectedRecord.Nickname__c} is-generic-header="false" image-url="/resource/MyGarage/img/thumbnail_honda.png" brand="Honda"></c-own-product-header>
+    
+    <lightning-layout>
+        <lightning-layout-item>
+            <lightning-button variant="destructive" label="EDIT SERVICE RECORD" title="EDIT SERVICE RECORD" onclick={handleEditRecord}
+			class="slds-m-left_x-small"></lightning-button>
+        </lightning-layout-item>
+        <lightning-layout-item>
+            <lightning-button variant="destructive-text" label="SCHEDULE NEW SERVICE →" title="SCHEDULE NEW SERVICE"
+			onclick={handleScheduleNewService} class="slds-m-left_x-small"></lightning-button>
+        </lightning-layout-item>
+        <lightning-layout-item padding="around-small">
+            <div onclick={handlePrintRecord} class="print-text">PRINT SERVICE RECORD</div>
+        </lightning-layout-item>
+    </lightning-layout>
+    
+		
+    
+    <div class="thick" >Service Date</div>
+    <div>{selectedRecord.Service_Date__c}</div>
+
+            <div class="thick">Miles</div>
+            <div>{selectedRecord.Usage__c}</div>
+
+            <div class="thick">Service Facility</div>
+            <div>{selectedRecord.Location__c}</div>
+
+            <div class="thick">Service</div>
+                <div>{servicesPerformed}</div>
+                    <br/>
+                <div>{otherString}</div>
+                
+            <div class="thick">Additional Notes</div>
+            <div>{selectedRecord.Note__c}</div>
+</template>

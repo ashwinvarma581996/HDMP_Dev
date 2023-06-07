@@ -1,0 +1,49 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes,lightning:availableForFlowScreens,lightning:availableForFlowActions" access="global" controller="B2B_MyPaymentsController">
+    <aura:attribute name="myPayments" type="List" default="[]" />
+    <aura:attribute name="paypalErrorMessage" type="String" />
+    <aura:attribute name="parent" type="Aura.Component" />
+    <aura:attribute name="isPayPalAccepted" type="boolean" default="false" />
+
+    <lightning:layout class="slds-m-around_medium" multipleRows="true">
+        <lightning:layoutItem class="slds-p-around_xx-small" size="12" smallDeviceSize="12" largeDeviceSize="6">
+            <div class="custom-box slds-text-heading_small" style="min-height: 4rem;">My Payments: </div>
+        </lightning:layoutItem>
+        <lightning:layoutItem class="slds-p-around_xx-small" size="12" smallDeviceSize="12" largeDeviceSize="6">
+            <div class="custom-box" style="display: flex;float: right;">
+                <div class="custom-box slds-text-heading_small slds-m-right_small" style="line-height: 2rem;">We accept </div>
+                <div class="custom-box paymentCards">
+                    <img style="margin-right: 0.2rem;" src="/resource/CardImages/CardImages/visa.png" width="50" />
+                    <img style="margin-right: 0.2rem;" src="/resource/CardImages/CardImages/master.png" width="49" />
+                    <img style="margin-right: 0.2rem;" src="/resource/CardImages/CardImages/amex.jpg" width="46" />
+                    <img style="margin-right: 0.2rem;" src="/resource/CardImages/CardImages/discover.jpg" width="50" />
+                </div>
+            </div>
+        </lightning:layoutItem>
+        <!--loop for myPayments-->
+
+        <aura:iteration items="{!v.myPayments}" var="item">
+            <lightning:layoutItem class="slds-p-around_xx-small" size="12" smallDeviceSize="12" largeDeviceSize="4">
+                <div class="custom-box slds-align_absolute-center slds-form-element__control" style="border: 1px solid rgb(187, 179, 179);min-height: 5rem">
+                    <div class="custom-box">
+                        <lightning:input type="radio" name="PaymentOptions" label="" value="{!item.Id}" checked="{!item.Default_Payment_Method__c}" onchange="{!c.paymentMethodChange}"></lightning:input>
+                    </div>
+                    <div class="custom-box">{!item.type} Ending With {!item.Credit_Card_Number__c} ({!item.CC_Expiration_Month__c}/{!item.CC_Expiration_Year__c})</div>
+                </div>
+            </lightning:layoutItem>
+        </aura:iteration>
+        <aura:if isTrue="{!v.isPayPalAccepted}">
+            <lightning:layoutItem class="slds-p-around_xx-small" size="12" smallDeviceSize="12" largeDeviceSize="4">
+                <div class="custom-box slds-align_absolute-center slds-form-element__control" style="border: 1px solid rgb(187, 179, 179);min-height: 5rem">
+                    <div class="custom-box"> <lightning:input value="PayPal" type="radio" name="PaymentOptions" label="" onchange="{!c.paymentMethodChange}"></lightning:input></div>
+                    <div class="custom-box"><img src="/resource/CardImages/CardImages/PayPal.png" width="100"/> </div>
+                </div>
+                <div style="color: #c23934;font-weight: 500;">{!v.paypalErrorMessage}</div>
+            </lightning:layoutItem>
+        </aura:if>
+
+        <lightning:layoutItem class="slds-p-around_xx-small pointer" size="12" smallDeviceSize="12" largeDeviceSize="4">
+            <div class="custom-box slds-align_absolute-center" style="border: 1px solid rgb(187, 179, 179);min-height: 5rem;" onclick="{!c.addNewPaymentMethod}"> + Add New Payment </div>
+        </lightning:layoutItem>
+    </lightning:layout>
+
+</aura:component>

@@ -1,0 +1,63 @@
+<!-- //============================================================================
+// Title:    Honda Owners Experience - Help Center
+//
+// Summary:  This is the connect brand html seen at the help center of the Honda Owner Community
+//
+// Details:  Extend the LightningElement with this Base Element to gain access to the Messaging Channel and other logic herein and this is the parent component for all help center pages.
+//
+//
+// History:
+// May 17, 2021 Arunprasad N (Wipro) Original Author
+//=========================================================================== -->
+<template>
+    <div class="c-container">
+        <lightning-layout multiple-rows="true" horizontal-align="center">
+            <lightning-layout-item padding="around-small" size="12">
+                <div class="connect-brand-text-headline slds-text-heading_large">
+                    <h2>Connect with Support and More for Your Honda’s Brand</h2>
+                </div>
+            </lightning-layout-item>
+        </lightning-layout>
+        <div class="connect-brand-large">
+            <lightning-layout class="slds-grid slds-grid_align-spread slds-container_center slds-container_x-large">
+                <template for:each={brands} for:item="brand">
+                    <lightning-layout-item key={brand.value} class="slds-p-around_x-small">
+                        <div data-name={brand.value} onclick={handleClick} tabindex="0">
+                            <article class="slds-card connect-brand-card">
+                                <div class="slds-card__body slds-card__body_inner">
+                                    <div class="slds-illustration slds-illustration_small">
+                                        <img src={brand.img}>
+                                    </div>
+                                </div>
+                                <div slot="footer" class="slds-text-longform">
+                                    <h3 class="slds-text-heading_medium connect-brand-card-text">{brand.label}</h3>
+                                </div>
+                            </article>
+                        </div>
+                    </lightning-layout-item>
+                </template>
+            </lightning-layout>
+        </div>
+        <div class="connect-brand-small">
+            <lightning-layout multiple-rows="true" horizontal-align="spread">
+                <lightning-layout-item size="12">
+                    <div class="slds-tabs-mobile__container">
+                        <ul class="slds-tabs-mobile">
+                            <template for:each={brands} for:item="brand">
+                                <li key={brand.value}
+                                    class="slds-tabs-mobile__item connect-brand-card-small img-cursor slds-p-vertical_large">
+                                    <button data-value={brand.value} data-name={brand.value} onclick={handleClick}
+                                        class="slds-button slds-button_full-width">
+                                        <img src={brand.img} />
+                                        <span class="slds-m-left_x-large slds-truncate"
+                                            title={brand.label}>{brand.label}</span>
+                                    </button>
+                                </li>
+                            </template>
+                        </ul>
+                    </div>
+                </lightning-layout-item>
+            </lightning-layout>
+        </div>
+    </div>
+</template>

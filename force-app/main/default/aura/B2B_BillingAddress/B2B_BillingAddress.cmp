@@ -1,0 +1,28 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes,lightning:availableForFlowScreens,lightning:availableForFlowActions" access="global" controller="B2B_MyPaymentsController">
+    <aura:attribute name="myAddresses" type="List" default="[]" />
+    <aura:attribute name="parent" type="Aura.Component"/>
+
+    <lightning:layout class="slds-m-around_medium" multipleRows="true">
+        <lightning:layoutItem class="slds-p-around_xx-small" size="12">
+            <div class="custom-box slds-text-heading_small" style="min-height: 3rem;">Billing Address  </div>
+        </lightning:layoutItem>               
+        <aura:iteration items="{!v.myAddresses}" var="item">
+            <lightning:layoutItem class="slds-p-around_xx-small slds-size_6-of-12 slds-medium-size_4-of-12 slds-small-size_6-of-12">
+                <div class="custom-box slds-align_absolute-center slds-form-element__control" style="border: 1px solid rgb(187, 179, 179);">
+                    <div class="custom-box">
+                        <lightning:input value="{!item.Id}" type="radio" name="Address" label="" checked="{!item.isPreferred__c}" onchange="{!c.addressChange}"></lightning:input>
+                    </div>
+                    <div class="custom-box">
+                        <p>{!item.Name}</p>
+                        <p>{!item.Address__c}</p>
+                        <p>{!item.City__c}, {!item.State__c} &nbsp;{!item.Zip__c}</p>
+                    </div>
+                </div>
+            </lightning:layoutItem>    
+        </aura:iteration> 
+
+        <lightning:layoutItem class="slds-p-around_xx-small pointer slds-size_6-of-12 slds-medium-size_4-of-12 slds-small-size_6-of-12">
+            <div class="custom-box slds-align_absolute-center" style="border: 1px solid rgb(187, 179, 179);" onclick="{!c.addNewAddress}"> + Add New Address </div>
+        </lightning:layoutItem>     
+    </lightning:layout>
+</aura:component>

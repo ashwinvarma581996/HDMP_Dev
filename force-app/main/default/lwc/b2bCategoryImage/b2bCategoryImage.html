@@ -1,0 +1,10 @@
+<template>
+    <div class="slds-col banner-image slds-align_absolute-center">
+        <template if:true={bannerImage}>
+            <img src={bannerImage} alt={bannerImageAltText} title={bannerImageTitle}>
+        </template>
+        <template if:true={bannerImageDefault}>
+            <img src={bannerImageDefault} alt={bannerImageAltText} title={bannerImageTitle}>
+        </template>
+    </div>
+</template>

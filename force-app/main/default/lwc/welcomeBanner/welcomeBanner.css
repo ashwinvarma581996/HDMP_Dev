@@ -1,0 +1,25 @@
+.welcomeBanner {
+    border-top: 1px solid #f0f0f0;
+    padding: 50px 0px;
+}
+
+.welcomeBanner h1 {
+    line-height: 30px;
+    color: #000;
+    font-weight: 400 !important;
+}
+
+.welcomeBanner p {
+    font-size: 16px;
+    color: #000;
+}
+
+.honda_logo {
+    display: none;
+}
+
+@media (max-width: 767px) {
+    .honda_logo {
+        display: block!important;
+    }
+}

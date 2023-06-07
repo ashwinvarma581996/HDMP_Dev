@@ -1,0 +1,17 @@
+.productImg ul li {
+    width: 50%;
+    padding-bottom: 30px;
+}
+
+.productImg ul li:nth-child(even) {
+    padding-left: 60px;
+}
+
+figure {
+    border: 1px solid #ddd;
+    background-image: url({imgURL});
+}
+
+.partHighlight {
+    border: 2px solid black;
+}

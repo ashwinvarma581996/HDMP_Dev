@@ -1,0 +1,94 @@
+<!-- //============================================================================
+// Title:    Honda Owners Experience - Help Center
+//
+// Summary:  This is the search bar html seen at the help center of the Honda Owner Community
+//
+// Details:  Extend the LightningElement with this Base Element to gain access to the Messaging Channel and other logic herein and this is the search bar component for all help center pages.
+//
+//
+// History:
+// May 17, 2021 Arunprasad N (Wipro) Original Author
+//=========================================================================== -->
+<template>
+  <div class="c-container">
+      <lightning-layout  multiple-rows="true" horizontal-align="center" class="slds-m-bottom_xx-large">
+          <lightning-layout-item class="slds-p-bottom_small" size="12">
+              <div class="search-bar-text-headline slds-text-heading_large">
+                  <h2>{title}</h2>
+              </div>
+          </lightning-layout-item>
+          <lightning-layout-item class="slds-p-top_small" >
+              <div class="slds-form-element">
+                  <div class="slds-form-element__control">
+                    <div class="slds-combobox_container">
+                      <div class="search slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click" aria-expanded="true" aria-haspopup="listbox" role="combobox">
+                          <template if:false={isMobile}>
+                              <div onkeyup={handleSearch}>
+                                  <lightning-input
+                                      type="search"
+                                      placeholder="Search"
+                                      onchange={handleKeyChange}
+                                      class="search-input"
+                                      label="Search"
+                                      value={searchKey}
+                                      variant="label-hidden"
+                                      min-length="3" 
+                                  ></lightning-input>
+                              </div>  
+                          </template>
+                          <template if:true={isMobile}>
+                            Search Key : {searchKey}
+                              <div onkeyup={handleSearch}>
+                                  <lightning-input
+                                      type="search"
+                                      placeholder="Search"
+                                      onchange={handleKeyChange}
+                                      class="search-input"
+                                      label="Search"
+                                      value={searchKeyMobile}
+                                      variant="label-hidden"
+                                      min-length="3" 
+                                  ></lightning-input>
+                              </div>  
+                          </template>
+                        <div id="listbox-id-4" class="slds-dropdown slds-dropdown_length-with-icon-7 slds-dropdown_fluid suggest-box" role="listbox">
+                          <ul class="slds-listbox slds-listbox_vertical" role="presentation">
+                             <!--<li role="presentation" class="slds-listbox__item" data-search="true" onclick={handleSearch}>
+                              <div aria-selected="true" id="option0" class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_term slds-has-focus" role="option">
+                                <span class="slds-media__figure slds-listbox__option-icon">
+                                  <lightning-icon icon-name="utility:search" size="x-small" title="Search for term: "></lightning-icon>
+                                </span>
+                                <span class="slds-media__body">
+                                  <span class="slds-listbox__option-text slds-listbox__option-text_entity">{searchKey}</span>
+                                </span>
+                              </div>
+                            </li> -->
+                            <template if:true={hasResults}>
+                                <template for:each={results} for:item="result">
+                                  <li key={result.id} role="presentation" class="slds-listbox__item" data-id={result.id} data-urlname={result.urlName} onclick={handleClick}>
+                                    <div class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta" role="option">
+                                      <!-- <span class="slds-media__figure slds-listbox__option-icon slds-p-vertical_x-small">
+                                        <lightning-icon icon-name="utility:knowledge_base" size="x-small" title={result.objectLabel}></lightning-icon>
+                                      </span> -->
+                                      <div class="slds-media__body slds-p-vertical_x-small">
+                                        <div class="slds-listbox__option-text slds-listbox__option-text_entity">
+                                          <div class="search-result-text">
+                                            <lightning-formatted-text value={result.title}></lightning-formatted-text>
+                                          </div>
+                                        </div>
+                                        <span class="slds-listbox__option-meta slds-listbox__option-meta_entity search-result-sub-text slds-p-top_x-small">{result.objectLabel} • {result.lastPublishedDate}</span>
+                                      </div>
+                                    </div>
+                                  </li>
+                                </template>
+                            </template>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+          </lightning-layout-item>
+      </lightning-layout>
+  </div>
+</template>

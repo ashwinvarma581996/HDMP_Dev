@@ -1,0 +1,554 @@
+<template>
+    <template if:true={displayPeRegistration}>
+        <div>
+            <lightning-layout multiple-rows>
+
+                <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="12">
+                    <lightning-layout multiple-rows>
+                        <lightning-layout-item size="12" small-device-size="12" medium-device-size="2"
+                            large-device-size="2">
+                        </lightning-layout-item>
+
+                        <lightning-layout-item size="12" small-device-size="12" medium-device-size="8"
+                            large-device-size="8">
+                            <lightning-layout multiple-rows>
+                                <lightning-layout-item size="12" padding="around-small">
+                                    <div class="slds-text-align_left find-brand-body-second-title">{congratulationsText}
+                                    </div>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="12" padding="around-small">
+                                    <div class="find-brand-body-content">
+                                        <div class="slds-text-align_left "><b>Register Your Product</b></div>
+                                        <div class="slds-text-align_left ">Register your product to receive important
+                                            recall and warranty information. Your information will remain confidential.
+                                            It will not be released to any other company or organization.</div>
+                                    </div>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="12" padding="around-small">
+                                    <lightning-layout multiple-rows>
+                                        <lightning-layout-item size="12" small-device-size="12" medium-device-size="2"
+                                            large-device-size="2">
+                                            <div>
+                                                <div
+                                                    class="slds-form-element slds-p-right_small slds-p-bottom_small form-styles">
+                                                    <label class="slds-form-element__label" for="prefixMana"><b>Prefix
+                                                            (ie. MANA)</b></label>
+                                                    <div class="slds-form-element__control">
+                                                        <lightning-input type="text" id="prefixMana"
+                                                            data-id="prefixMana" variant="label-hidden"
+                                                            onchange={handleKeyUpPERegistration} value={prefixMana}
+                                                            disabled="true">
+                                                        </lightning-input>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </lightning-layout-item>
+
+                                        <lightning-layout-item size="12" small-device-size="12" medium-device-size="2"
+                                            large-device-size="2">
+                                            <div>
+                                                <div
+                                                    class="slds-form-element slds-p-left_small slds-p-right_small slds-p-bottom_small form-styles no-padding">
+                                                    <label class="slds-form-element__label"
+                                                        for="pe-number label-format"><b>Number (7 digits)</b></label>
+                                                    <div class="slds-form-element__control">
+
+                                                        <!-- <lightning-input type="Number" id="peNumber" data-id="peNumber"
+                                                            minlength="7" maxlength="7" variant="label-hidden"
+                                                            onchange={handleKeyUpPERegistration} value={serialNumber}>
+                                                        </lightning-input> -->
+                                                        <lightning-input pattern="[0-9]{7}" id="peNumber"
+                                                            data-id="peNumber" variant="label-hidden"
+                                                            onchange={handleKeyUpPERegistration} value={serialNumber}
+                                                            disabled="true">
+                                                        </lightning-input>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </lightning-layout-item>
+
+                                    </lightning-layout>
+                                </lightning-layout-item>
+
+                                <lightning-layout-item size="12" padding="around-small">
+                                    <div class="find-serial-number">
+                                        <a onclick={handleFindMySerialNumber}><span class="find-serial-number">How do I
+                                                find my serial
+                                                number?</span></a>
+                                    </div>
+                                </lightning-layout-item>
+
+                                <lightning-layout-item size="12" padding="around-small">
+                                    <lightning-layout multiple-rows>
+
+
+                                        <div class="form-buttons-pe">
+                                            <div>
+                                                <label class="slds-form-element__label">&nbsp;</label>
+                                                <button class={submitButtonClassPERegistration}
+                                                    onclick={handleNextPE}>NEXT</button>
+
+                                            </div>
+                                            <div>
+                                                <label class="slds-form-element__label">&nbsp;</label>
+                                                <button
+                                                    class="slds-button slds-button_brand slds-combobox_container form-button_cancel"
+                                                    onclick={handleCancelClick}>SKIP FOR NOW</button>
+                                            </div>
+                                        </div>
+
+
+                                    </lightning-layout>
+                                </lightning-layout-item>
+
+                            </lightning-layout>
+                        </lightning-layout-item>
+
+                        <lightning-layout-item size="12" small-device-size="12" medium-device-size="2"
+                            large-device-size="2">
+                        </lightning-layout-item>
+                    </lightning-layout>
+                </lightning-layout-item>
+
+
+            </lightning-layout>
+        </div>
+    </template>
+
+    <template if:true={displayRegistrationForm}>
+        <div class="slds_content_wrapper">
+            <div class="slds-container_medium slds-container_center">
+                <h2 class="find-brand-body-heading">Enter Your Information</h2>
+                <div class="slds-form" role="list">
+
+                    <div class="slds-form__row">
+                        <div class="slds-form__item">
+                            <div class="slds-form-element slds-form-element_compound">
+                                <div class="slds-form-element__row">
+                                    <div class="slds-size_5-of-12 slds-medium-size_1-of-12 custom-margin"
+                                        role="listitem">
+                                        <div class="slds-form-element slds-is-editing">
+                                            <label for="title" class="slds-form-element__label">Title</label>
+                                            <lightning-input type="text" id="title" data-id="Title__c"
+                                                variant="label-hidden" maxlength="10" onchange={handleKeyUp}
+                                                value={title}>
+                                            </lightning-input>
+                                        </div>
+                                    </div>
+                                    <div class="slds-size_7-of-12 slds-medium-size_4-of-12 custom-margin"
+                                        role="listitem">
+                                        <div class="slds-form-element slds-is-editing">
+                                            <label for="firstName" class="slds-form-element__label">First Name <abbr
+                                                    class="slds-required" title="required">*</abbr></label>
+                                            <lightning-input type="text" id="firstName" data-id="First_Name__c"
+                                                maxlength="15" variant="label-hidden" value={firstName}
+                                                onchange={handleKeyUp}>
+                                            </lightning-input>
+                                        </div>
+                                    </div>
+                                    <div class="slds-size_5-of-12 slds-medium-size_1-of-12 custom-margin"
+                                        role="listitem">
+                                        <div class="slds-form-element slds-is-editing">
+                                            <label for="initial" class="slds-form-element__label">M.I.</label>
+                                            <lightning-input type="text" id="initial" data-id="Middle_Initial__c"
+                                                maxlength="1" onchange={handleKeyUp} variant="label-hidden"
+                                                value={initial}>
+                                            </lightning-input>
+                                        </div>
+                                    </div>
+                                    <div class="slds-size_7-of-12 slds-medium-size_5-of-12 custom-margin"
+                                        role="listitem">
+                                        <div class="slds-form-element slds-is-editing">
+                                            <label for="lastName" class="slds-form-element__label">Last Name <abbr
+                                                    class="slds-required" title="required">*</abbr></label>
+                                            <lightning-input type="text" id="lastName" data-id="Last_Name__c"
+                                                maxlength="30" variant="label-hidden" value={lastName}
+                                                onchange={handleKeyUp}>
+                                            </lightning-input>
+                                        </div>
+                                    </div>
+                                    <div class="slds-size_5-of-12 slds-medium-size_1-of-12" role="listitem">
+                                        <div class="slds-form-element slds-is-editing">
+                                            <label for="suffix" class="slds-form-element__label">Suffix</label>
+                                            <lightning-input type="text" id="suffix" data-id="Suffix__c" maxlength="10"
+                                                onchange={handleKeyUp} variant="label-hidden">
+                                            </lightning-input>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="slds-form__row">
+                        <div class="slds-form__item">
+                            <div
+                                class="slds-form-element slds-form-element_compound slds-is-editing slds-form-element_stacked">
+                                <label for="addressLine1" class="slds-form-element__label">Address Line 1 <abbr
+                                        class="slds-required" title="required">*</abbr></label>
+                                <lightning-input type="text" id="addressLine1" data-id="Address_Line_1__c"
+                                    maxlength="45" onchange={handleKeyUp} variant="label-hidden" value={addressLine1}>
+                                </lightning-input>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="slds-form__row">
+                        <div class="slds-form__item">
+                            <div
+                                class="slds-form-element slds-form-element_compound slds-is-editing slds-form-element_stacked">
+                                <label for="addressLine2" class="slds-form-element__label">Address Line 2</label>
+                                <lightning-input type="text" id="addressLine2" data-id="Address_Line_2__c"
+                                    maxlength="45" onchange={handleKeyUp} variant="label-hidden"></lightning-input>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="slds-form__row">
+                        <div class="slds-form__item">
+                            <div
+                                class="slds-form-element slds-form-element_compound slds-is-editing slds-form-element_stacked">
+                                <div class="slds-form-element__row">
+                                    <div class="slds-size_12-of-12 slds-medium-size_4-of-12 custom-margin"
+                                        role="listitem">
+                                        <div class="slds-form-element slds-is-editing">
+                                            <label for="city" class="slds-form-element__label">City <abbr
+                                                    class="slds-required" title="required">*</abbr></label>
+                                            <lightning-input type="text" id="city" data-id="City__c" maxlength="30"
+                                                onchange={handleKeyUp} value={city} variant="label-hidden">
+                                            </lightning-input>
+                                        </div>
+                                    </div>
+                                    <div class="slds-size_6-of-12 slds-medium-size_4-of-12" role="listitem">
+                                        <div class="slds-form-element slds-is-editing">
+                                            <label class="slds-form-element__label">State <abbr class="slds-required"
+                                                    title="required">*</abbr></label>
+                                            <lightning-combobox class="find-brand-combobox" id="state"
+                                                data-id="State__c" variant="label-hidden" placeholder="Select State"
+                                                options={states} onchange={handleChange} value={state}>
+                                            </lightning-combobox>
+                                        </div>
+                                    </div>
+                                    <div class="slds-size_6-of-12 slds-medium-size_4-of-12" role="listitem">
+                                        <div class="slds-form-element slds-is-editing">
+                                            <label for="zip" class="slds-form-element__label">Zip Code <abbr
+                                                    class="slds-required" title="required">*</abbr></label>
+                                            <lightning-input type="text" id="zip" data-id="Zip__c"
+                                                variant="label-hidden" max length="9" onchange={handleKeyUp} value={zip}
+                                                pattern="[0-9]{5}(?:[- ]?[0-9]{4})?$"
+                                                message-when-pattern-mismatch="Please enter a valid ZIP Code">
+
+                                            </lightning-input>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="slds-form__row">
+                        <div class="slds-form__item">
+                            <div
+                                class="slds-form-element slds-form-element_compound slds-is-editing slds-form-element_stacked">
+                                <div class="slds-form-element__row">
+                                    <div class="slds-size_6-of-12 slds-medium-size_6-of-12" role="listitem">
+                                        <div class="slds-form-element slds-is-editing">
+                                            <label for="email" class="slds-form-element__label">Email <abbr
+                                                    class="slds-required" title="required">*</abbr></label>
+                                            <lightning-input type="email" id="email" data-id="Email__c" maxlength="65"
+                                                variant="label-hidden" value={email} onchange={handleKeyUp}
+                                                onblur={handleBlur} disabled={emailDisabled}>
+                                            </lightning-input>
+                                        </div>
+                                    </div>
+                                    <div class="slds-size_6-of-12 slds-medium-size_6-of-12" role="listitem">
+                                        <div class="slds-form-element slds-is-editing">
+                                            <label for="confirmEmail" class="slds-form-element__label">Confirm Email
+                                                <abbr class="slds-required" title="required">*</abbr></label>
+                                            <lightning-input type="email" id="confirmEmail" data-id="confirmEmail"
+                                                maxlength="65" variant="label-hidden" value={confirmEmail}
+                                                onchange={handleKeyUp} onblur={handleBlur} disabled={emailDisabled}>
+                                            </lightning-input>
+                                            <div if:true={displayError} class="custom-error">Email does not match!</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="slds-form__row">
+                        <div class="slds-form__item">
+                            <div class="slds-form-element slds-form-element_compound">
+                                <label for="phone" class="slds-form-element__label">Phone Number <abbr
+                                        class="slds-required" title="required">*</abbr></label>
+                                <lightning-input type="tel" id="phone" data-id="Phone__c" onchange={handleKeyUp}
+                                    variant="label-hidden" message-when-too-short="Please enter a valid Phone Number"
+                                    min-length="10" pattern="^[\d ()+-]+$"
+                                    message-when-pattern-mismatch="Please enter a valid Phone Number">
+                                </lightning-input>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="slds-form__row">
+                        <div class="slds-form__item">
+                            <div
+                                class="slds-form-element slds-form-element_compound slds-is-editing slds-form-element_stacked">
+                                <div class="slds-form-element__row">
+                                    <div class="slds-size_12-of-12 slds-medium-size_6-of-12 custom-margin"
+                                        role="listitem">
+                                        <div class="slds-form-element slds-is-editing">
+                                            <label for="datePurchased" class="slds-form-element__label">Date Purchased
+                                                <abbr class="slds-required" title="required">*</abbr></label>
+                                            <lightning-input type="date" id="datePurchased" data-id="Date_Purchased__c"
+                                                variant="label-hidden" date-style="short" onchange={handleChange}>
+                                            </lightning-input>
+                                        </div>
+                                    </div>
+                                    <div class="slds-size_12-of-12 slds-medium-size_6-of-12" role="listitem">
+                                        <div class="slds-form-element slds-is-editing">
+                                            <label for="productUse" class="slds-form-element__label">Product Used<abbr
+                                                    class="slds-required" title="required">*</abbr></label>
+                                            <lightning-combobox class="find-brand-combobox" id="productUse"
+                                                data-id="Product_Use_Code__c" variant="label-hidden"
+                                                placeholder="Select Product Use" onchange={handleChange}
+                                                options={productUse}>
+                                            </lightning-combobox>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="slds-form__row">
+                        <div class="slds-form__item">
+                            <div
+                                class="slds-form-element slds-form-element_compound slds-is-editing slds-form-element_stacked">
+                                <div class="slds-form-element__row">
+                                    <div class="slds-size_12-of-12 slds-medium-size_6-of-12 custom-margin"
+                                        role="listitem">
+                                        <div class="slds-form-element slds-is-editing">
+                                            <label for="locationPurchased" class="slds-form-element__label">Location
+                                                Purchased <abbr class="slds-required" title="required">*</abbr></label>
+                                            <lightning-input type="text" id="locationPurchased"
+                                                data-id="Location_Purchased__c" maxlength="65" onchange={handleKeyUp}
+                                                variant="label-hidden">
+                                            </lightning-input>
+                                        </div>
+                                    </div>
+                                    <div class="slds-size_12-of-12 slds-medium-size_6-of-12" role="listitem">
+                                        <div class="slds-form-element slds-is-editing">
+                                            <label for="purchaseVia" class="slds-form-element__label">Purchase Via <abbr
+                                                    class="slds-required" title="required">*</abbr></label>
+                                            <lightning-combobox class="find-brand-combobox" id="purchaseVia"
+                                                data-id="Purchased_Via_Code__c" variant="label-hidden"
+                                                placeholder="Select Purchase" onchange={handleChange}
+                                                options={purchaseVia}>
+                                            </lightning-combobox>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bottom_fields" if:true={isMarine}>
+                        <div class="slds-form__row">
+                            <div class="slds-form__item">
+                                <div
+                                    class="slds-form-element slds-form-element_compound slds-is-editing slds-form-element_stacked">
+                                    <div class="slds-form-element__row">
+                                        <div class="slds-size_12-of-12 slds-medium-size_4-of-12 custom-margin"
+                                            role="listitem">
+                                            <div class="slds-form-element slds-is-editing">
+                                                <label class="slds-form-element__label">Hull ID</label>
+                                                <lightning-input type="text" variant="label-hidden" id="hullID"
+                                                    data-id="Hull_ID__c" onchange={handleKeyUp}>
+                                                </lightning-input>
+                                            </div>
+                                        </div>
+                                        <div class="slds-size_12-of-12 slds-medium-size_4-of-12 custom-margin"
+                                            role="listitem">
+                                            <div class="slds-form-element slds-is-editing">
+                                                <label class="slds-form-element__label">Hull Material</label>
+                                                <lightning-combobox class="find-brand-combobox" variant="label-hidden"
+                                                    id="hullMaterial" data-id="Hull_Material__c" onchange={handleChange}
+                                                    options={hullMaterials}>
+                                                </lightning-combobox>
+                                            </div>
+                                        </div>
+                                        <div class="slds-size_12-of-12 slds-medium-size_4-of-12" role="listitem">
+                                            <div class="slds-form-element slds-is-editing">
+                                                <label class="slds-form-element__label">Boat Year</label>
+                                                <lightning-input type="text" variant="label-hidden" id="boatYear"
+                                                    data-id="Boat_Year__c" onchange={handleKeyUp}>
+                                                </lightning-input>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="slds-form__row">
+                            <div class="slds-form__item">
+                                <div
+                                    class="slds-form-element slds-form-element_compound slds-is-editing slds-form-element_stacked">
+                                    <div class="slds-form-element__row">
+                                        <div class="slds-size_12-of-12 slds-medium-size_4-of-12 custom-margin"
+                                            role="listitem">
+                                            <div class="slds-form-element slds-is-editing">
+                                                <label class="slds-form-element__label">Boat Make</label>
+                                                <lightning-input type="text" variant="label-hidden" id="boatMake"
+                                                    data-id="Boat_Make__c" onchange={handleKeyUp}>
+                                                </lightning-input>
+                                            </div>
+                                        </div>
+                                        <div class="slds-size_12-of-12 slds-medium-size_4-of-12" role="listitem">
+                                            <div class="slds-form-element slds-is-editing">
+                                                <label class="slds-form-element__label">Boat Model</label>
+                                                <lightning-input type="text" variant="label-hidden" id="boatModel"
+                                                    data-id="Boat_Model__c" onchange={handleKeyUp}>
+                                                </lightning-input>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
+                    <p if:true={isguest}>
+                        <c-own-google-captcha oncaptcha={handleCaptcha}></c-own-google-captcha><br />
+                    </p>
+
+                    <p if:false={isMarine}>
+                        <abbr class="slds-required" title="required">* </abbr>Required Fields
+                    </p>
+
+                    <div class="form-buttons submit-button-bottom-margin">
+                        <div>
+                            <label class="slds-form-element__label">&nbsp;</label>
+                            <button class={submitButtonClass} onclick={handleSubmit}>Submit</button>
+
+                        </div>
+                        <div>
+                            <label class="slds-form-element__label">&nbsp;</label>
+                            <button class="slds-button slds-button_brand slds-combobox_container form-button_cancel"
+                                onclick={handleCancelClick}>Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template if:true={displayConfirmationPage}>
+        <div class="slds_content_wrapper">
+            <div class="slds-container_medium slds-container_center">
+                <h2 class="find-brand-body-heading">Thank you for submitting your product registration!</h2><br>
+                <div class="find-brand-body-content">
+                    <div>Your product registration has been submitted and will be updated to your account in the next 24
+                        hours.Your information will remain confidential. It will not be released to any other company or
+                        organization.</div><br>
+                </div>
+
+                <div class="slds-grid slds-wrap find-brand-body-content">
+                    <div class="slds-col slds-medium-size_5-of-12 label_class">
+                        <span><b>Name</b></span>
+                    </div>
+                    <div class="slds-col slds-large-size_5-of-12 lable_result">
+                        <span>{context.product.model}</span>
+                    </div>
+                </div>
+
+                <div class="slds-grid slds-wrap find-brand-body-content">
+                    <div class="slds-col slds-medium-size_5-of-12 label_class">
+                        <span><b>Address</b></span>
+                    </div>
+                    <template if:true={addressLine2}>
+                        <div class="slds-col slds-large-size_5-of-12 lable_result">
+                            <span>{addressLine1}, {addressLine2}, {city}, {state}, {zip}</span>
+                        </div>
+                    </template>
+                    <template if:false={addressLine2}>
+                        <div class="slds-col slds-large-size_5-of-12 lable_result">
+                            <span>{addressLine1}, {city}, {state}, {zip}</span>
+                        </div>
+                    </template>
+                </div>
+
+                <div class="slds-grid slds-wrap find-brand-body-content">
+                    <div class="slds-col slds-medium-size_5-of-12 label_class">
+                        <span><b>Email</b></span>
+                    </div>
+                    <div class="slds-col slds-large-size_5-of-12 lable_result">
+                        <span>{email}</span>
+                    </div>
+                </div>
+
+                <div class="slds-grid slds-wrap find-brand-body-content">
+                    <div class="slds-col slds-medium-size_5-of-12 label_class">
+                        <span><b>Phone</b></span>
+                    </div>
+                    <div class="slds-col slds-large-size_5-of-12 lable_result">
+                        <span>{phone}</span>
+                    </div>
+                </div>
+
+                <div class="slds-grid slds-wrap find-brand-body-content">
+                    <div class="slds-col slds-medium-size_5-of-12 label_class">
+                        <span><b>Date Purchased</b></span>
+                    </div>
+                    <div class="slds-col slds-large-size_5-of-12 lable_result">
+                        <span>{displayDate}</span>
+                    </div>
+                </div>
+
+
+                <div class="slds-grid slds-wrap find-brand-body-content">
+                    <div class="slds-col slds-medium-size_5-of-12 label_class">
+                        <span><b>Serial Number</b></span>
+                    </div>
+                    <div class="slds-col slds-large-size_5-of-12 lable_result">
+                        <span>{prefixMana}-{serialNumber}</span>
+                    </div>
+                </div><br>
+
+                <template if:false={isguest}>
+                    <div class="slds-grid slds-wrap find-brand-visit-garage submit-button-bottom-margin">
+                        <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 link-cursor"
+                            onclick={handleCancelClick}>
+                            <span>VISIT MY GARAGE TO ACCESS MORE PRODUCT RESOURCES</span>
+                        </div>
+                    </div>
+                </template>
+                <template if:true={isguest}>
+                    <!-- <div class="slds-quick-actions submit-button-bottom-margin">
+                        <div class="slds-quick-actions_save">
+                            <img src={saveicon} />
+                            <h4>Save to my garage</h4>
+                        </div>
+                        <div class="slds-quick-actions_add">
+                            <p>Add this product to My Garage to get access to manuals, parts & accessories, product
+                                updates, and more.</p>
+                            <button class="quick-actions-btn" onclick={handleAdd}>Add to my garage</button>
+                        </div>
+                    </div> -->
+                    <div class="slds-container_medium slds-container_center">
+                        <c-own-save-to-my-garage content-id={saveToMyGarageContentId}></c-own-save-to-my-garage>
+                    </div>
+
+                </template>
+            </div>
+        </div>
+    </template>
+</template>

@@ -1,0 +1,101 @@
+<template>
+    <lightning-layout multiple-rows horizontal-align="space" class="slds-m-top_medium">
+        <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="11">
+            <div class="mymessages-list-large">
+                <div class="slds-vertical-tabs tabs slds-m-vertical_large">
+                    <ul class="slds-vertical-tabs__nav mymessages-tab slds-m-bottom_xx-large"
+                        aria-orientation="vertical" role="tablist">
+                        <template for:each={tabs} for:item="tab">
+                            <li key={tab.value} data-value={tab.value} data-tab="true" class={tab.itemclass}
+                                data-id={tab.id} title={tab.label} role="presentation" onclick={handleActive}>
+                                <a data-tab-value={tab.control} class="slds-vertical-tabs__link" role="tab"
+                                    tabindex="-1" aria-selected="false" aria-controls={tab.control}
+                                    id={tab.id}>{tab.label}</a>
+                            </li>
+                        </template>
+                    </ul>
+                    <div class="slds-p-horizontal_large slds-vertical-tabs__content slds-show" role="tabpanel">
+                        <!-- <template if:false={messageDetail}> -->
+                            <div
+                                class="slds-grid slds-grid_align-spread slds-grid_vertical-align-center slds-m-bottom_x-large message-head">
+                                <h2>{tab}</h2>
+                                <div class="slds-grid">
+                                    <div class="sortby-combobox-wrapper">
+                                        <span class=sortby-combobox-label>Sort by</span>
+                                        <lightning-combobox class="find-brand-combobox slds-m-top_xx-small"
+                                            name="Sort by" label="Sort by" variant="label-hidden" value={sortValue}
+                                            placeholder={sortValue} options={options} onchange={handleSort}
+                                            disabled={comboboxDisabled}>
+                                        </lightning-combobox>
+                                    </div>
+                                </div>
+                            </div>
+                        <!-- </template> -->
+
+                        <!-- <template if:true={messageDetail}> -->
+                            <!-- <div
+                                class="slds-grid slds-grid_align-spread slds-grid_vertical-align-center slds-m-bottom_x-large message-head">
+                                <h2 onclick={handleBreadCrump}> Inbox </h2>
+                                <lightning-layout class="bread-crumb-container">
+                                    <lightning-layout-item class="chevronleft-container">
+                                        <lightning-icon icon-name='utility:chevronleft' alternative-text='chevronleft' size='xx-small' class='chevronleft'></lightning-icon>
+                                    </lightning-layout-item>
+                                    <lightning-layout-item class="back-link-container">
+                                        <a class="back-link" onclick={handleBreadCrump} >Inbox</a>
+                                    </lightning-layout-item>
+                                </lightning-layout>
+                            </div> -->
+                            <div class="inbox-large">
+                                <ul class="message-list">
+                                    <template for:each={messages} for:item="message" >
+                                        <li key={message.key} data-url={message.link} onclick={handleClick} class="slds-grid slds-grid_align-spread slds-grid_vertical-align-center message-list-item">
+                                            <h3>{message.title}</h3>
+                                            <p><lightning-formatted-date-time value={message.date}  day="2-digit" month="2-digit" year="numeric"></lightning-formatted-date-time></p>
+                                            <span class="message-dot"></span>
+                                        </li>
+                                    </template>
+                                </ul>
+                            </div>
+                            
+                        <!-- </template> -->
+                    </div>
+                </div>
+            </div>
+            <div class="mymessages-list-small">
+                <template if:false={messageDetail}>
+                    <div class="slds-m-bottom_x-large message-head">
+                        <h2 style="padding-left:8px;">Messages</h2>
+                        <div class="slds-grid">
+                            <div class="view-combobox-wrapper">
+                                <span class=sortby-combobox-label>View</span>
+                                <lightning-combobox class="find-brand-combobox slds-m-top_xx-small" name="Sort by"
+                                    label="View" variant="label-hidden" value="All Messages" placeholder={tab}
+                                    options={tabOptions} onchange={handleSelect} disabled={comboboxDisabled}>
+                                </lightning-combobox>
+                            </div>
+                            <div class="sortby-combobox-wrapper">
+                                <span class=sortby-combobox-label>Sort by</span>
+                                <lightning-combobox class="find-brand-combobox slds-m-top_xx-small" name="Sort by"
+                                    label="Sort by" variant="label-hidden" value={sortValue} placeholder={sortValue}
+                                    options={options} onchange={handleSort} disabled={comboboxDisabled}>
+                                </lightning-combobox>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+               
+                <div class="inbox-small">
+                                <ul class="message-list">
+                                    <template for:each={messages} for:item="message" if:false={messagedetail}>
+                                        <li key={message.key} data-url={message.link}  onclick={handleClick} class="slds-grid slds-grid_vertical-align-center message-list-item">
+                                            <span class="message-dot"></span>
+                                            <h3>{message.title}</h3>
+                                            <p><lightning-formatted-date-time value={message.date}  day="2-digit" month="2-digit" year="numeric"></lightning-formatted-date-time></p>
+                                        </li>
+                                    </template>
+                                </ul>
+                            </div>
+            </div>
+        </lightning-layout-item>
+    </lightning-layout>
+</template>

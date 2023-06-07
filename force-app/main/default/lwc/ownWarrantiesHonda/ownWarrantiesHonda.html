@@ -1,0 +1,95 @@
+<!-- //============================================================================
+// Title:    Warranties Honda
+//
+// History:
+// Dec 14, 2021 Himanshu Khemani (Wipro) Original Author UI Development Done
+//=========================================================================== -->
+<template>
+    <c-own-product-header image-url={headerImage} is-generic-header={isGeneric} product-sub-title='2019 HR-V LX'
+        product-title='Warranties' brand={brand}></c-own-product-header>
+    <div class="slds-container_medium slds-container_center slds-p-around_large">
+        <div class="slds-m-bottom_xx-large product-warranty">
+            <h3>2019 HR-V Warranty Booklet</h3>
+            <lightning-layout class="slds-grid_vertical-align-end slds-m-bottom_xx-large slds-m-top_x-small"
+                multiple-rows>
+                <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="12">
+                    <c-own-card title={title1} titlecolor={titlecolor} icon={icon} brand={brand} showforwardicon={showForwardIcon} showfooter={showFooter} onheader={handleHeader} onfooter={handleFooter} onaction={handleAction}>
+        <div slot="action">
+            <lightning-icon icon-name="utility:download" alternative-text="Download" variant="error" size="x-small" title="Download"></lightning-icon>
+        </div>
+        <div slot="default">
+            <div>The Owner’s Manual has detailed information about the coverage and terms of your warranties including:
+                <ul  style="list-style-type:disc;" class="slds-m-left_medium">
+                <li>General warranty provisions</li>
+                <li>New vehicle limited warranty</li>
+                <li>Emissions warranties</li>
+                <li>Warranties on accessories, replacement parts, and more.</li>
+            </ul></div>
+        </div>
+    </c-own-card>
+                </lightning-layout-item>
+            </lightning-layout>
+
+        </div>
+        <div class="slds-m-bottom_xx-large emission-warranty">
+            <h3>Parts Covered by Emission Warranty</h3>
+            <p>To view a list of parts covered under your vehicle’s emissions warranty, select the state where the vehicle is registered and operated.</p>
+            <lightning-layout-item size="12" padding="around-small">
+                <lightning-layout class="slds-grid_vertical-align-end" multiple-rows>
+                    <lightning-layout-item size="12" small-device-size="12" medium-device-size="4" large-device-size="6"
+                        class="slds-m-right_large">
+                        <div>
+                            <span class=own-combobox-label>State</span>
+                            <lightning-combobox class="find-brand-combobox slds-m-top_xx-small" label=""
+                                variant="label-hidden" value={} placeholder="California"></lightning-combobox>
+                        </div>
+
+                    </lightning-layout-item>
+                    <lightning-layout-item size="12" small-device-size="12" medium-device-size="2"
+                        large-device-size="2">
+                        <button class="slds-button slds-brand-button-active">Find</button>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </lightning-layout-item>
+            <lightning-layout class="slds-grid_vertical-align-end slds-m-bottom_xx-large slds-m-top_x-small"
+                multiple-rows>
+                <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="6">
+                    <c-own-c-m-s-card title={title2} titlecolor={titlecolor} icon={icon} brand={brand}
+                        showforwardicon={showForwardIcon} showfooter={showFooter} onheader={handleHeader}
+                        onfooter={handleFooter} onaction={handleAction} body={body}>
+                    </c-own-c-m-s-card>
+                </lightning-layout-item>
+            </lightning-layout>
+            <p>Create a Honda Owners account to save your details and easily access your product’s recall and warranty information and other helpful resources. <span>Add to My Garage</span></p>
+        </div>
+        <div class="slds-m-bottom_xx-large tire-warranty">
+            <h3>Tire Warranty Information</h3>
+            <p>Downloadable PDF warranty information based on tire brand</p>
+            <lightning-layout class="slds-grid slds-wrap slds-gutters slds-m-bottom_xx-large slds-m-top_x-small"
+                multiple-rows>
+                <template for:each={cards} for:item="card">
+                <lightning-layout-item key={card.title} class="slds-col slds-p-vertical_small slds-size_1-of-1 slds-medium-size_6-of-12">
+                    
+                    <c-own-c-m-s-card  title={card.title} titlecolor={titlecolor} icon={icon} brand={brand}
+                        showforwardicon={showForwardIcon} showfooter={showFooter} onheader={handleHeader}
+                        onfooter={handleFooter} onaction={handleAction} body={body}>
+                    </c-own-c-m-s-card>
+                
+                </lightning-layout-item>
+            </template>
+            </lightning-layout>
+            
+        </div>
+        <div class="slds-quick-actions">
+            <div class="slds-quick-actions_save">
+                <img src={saveicon} />
+                <h4>Save to my garage</h4>
+            </div>
+            <div class="slds-quick-actions_add">
+                <p>Create a Honda Owners account to easily save your product’s information and access recall and
+                    warranty information.</p>
+                <button class="quick-actions-btn">Add to my garage</button>
+            </div>
+        </div>
+    </div>
+</template>

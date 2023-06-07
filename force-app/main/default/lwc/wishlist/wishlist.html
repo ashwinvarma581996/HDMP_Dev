@@ -1,0 +1,148 @@
+<template>
+    <template if:true={isLoading}>
+        <lightning-spinner alternative-text="Loading"
+            class="slds-is-relative slds-align_absolute-center slds-m-around_large" variant="brand">
+        </lightning-spinner>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+    <lightning-layout multiple-rows class="user-section-header slds-m-top_large">
+        <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="6" >
+            <!-- <c-section-navigation value="myPayments"></c-section-navigation> -->
+            <div class="slds-text-heading_medium default-color slds-p-left_small slds-m-top_large">My Wishlist</div>
+        </lightning-layout-item>
+        <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="6">
+            <div class="custom-box"></div>
+        </lightning-layout-item>
+    </lightning-layout>
+    <template if:false={isDataNotAvailable} for:each={wishlistRecord} for:item="wish" for:index="index">
+        <div key={wish.id}>
+            <lightning-layout multiple-rows="true" class="wishlist-item">
+                <lightning-layout-item size="12" small-device-size="12" medium-device-size="3" large-device-size="3">
+                    <div class="productImageContainer">
+                        <img if:true={wish.productImage__c} src={wish.productImage__c} data-index={index}
+                            class="productImage" onerror={handleShowDefaultImage} />
+                        <img if:false={wish.productImage__c} src={dreamshopDefaultImage} class="productImage" />
+                    </div>
+                    <div if:false={wish.productType__c} class="slds-p-around_small">
+                        <a class="disc-popup" onclick={handleDisclamerPopup} data-id="Motocompacto">Product
+                            Disclaimer</a>
+                    </div>
+                </lightning-layout-item>
+                <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="6">
+                        <div class="product-details">
+						<!-- {label.Reman_text} added by ashwin as fix of 18588 -->
+                            <h3 class="slds-m-bottom_small product-title">
+                                <p data-id={wish.Product2.Id} data-name={wish.Product2.Name}>{wish.Name}<!-- <span if:true={wish.Core_Charge_Unit_Price__c}> {label.Reman_text} </span> Removed by Aditya as this was a bug --></p>
+                            </h3>
+                        <div if:true={wish.productType__c} class="product-info-item">
+                                {wish.Product_Type__c} Number: {wish.Product2.StockKeepingUnit}
+                            </div>
+                        <div if:false={wish.productType__c} class="product-info-item">
+                            Product Number: {wish.Product2.StockKeepingUnit}
+                        </div>
+                            <div if:true={wish.color__c} class="product-info-item">
+                                Color: {wish.color__c}
+                            </div>
+                            <div if:false={wish.disableAddtoCart__c} class="product-info-item">
+                                MSRP Price: <b><lightning-formatted-number value={wish.Price__c} format-style="currency"
+                                    maximum-fraction-digits="2" minimum-fraction-digits="2" currency-code="USD">
+                                 </lightning-formatted-number> </b>
+                                 <!-- START Added by Aditya as a part of HDMP-16502 , 16538 Development-->
+                                </br>
+                                <template if:true={wish.Core_Charge_Unit_Price__c}>
+                                    <span style="font-size: 14px;">Core Charge : </span>
+                                    <b><lightning-formatted-number value={wish.Core_Charge_Unit_Price__c} format-style="currency"
+                                        maximum-fraction-digits="2" minimum-fraction-digits="2" currency-code="USD">
+                                    </lightning-formatted-number></b>
+                                    <br>
+                                    <a href="#" data-id="Core_Charge_Disclaimer" onclick={handleDisclamerPopup} style="padding-left: 47px; font-size:14px;"><u>What is a core
+                                            charge?</u></a>
+                                </template>
+                                <!-- END Added by Aditya as a part of HDMP-16502 Development-->
+                            </div>
+                            <div if:true={wish.disableAddtoCart__c} class="product-info-item">
+                                Contact Dealer for Price/Availability 
+                            </div>
+                            <div if:true={wish.Product_Identifier__c}>
+                                VIN: {wish.Product_Identifier__c}
+                            </div>
+                        <lightning-button variant="base" class="slds-m-bottom_x-small remove-item-wishlist"
+                            icon-name="utility:delete" label="Remove" title="Remove from list" data-id={wish.Id}
+                            onclick={handleRemoveItem}></lightning-button>
+                        <img if:true={wish.productType__c} src={carImage} style="width:60px; margin-left:-8px;">
+                        <lightning-icon if:false={wish.productType__c} icon-name="utility:transport_bicycle"
+                            alternative-text="Moto Compacto" title="Moto Compacto" style="margin-right: 10px;">
+                        </lightning-icon>
+                        <span>{wish.Product_Model_Marketing_Name__c}</span>
+                        </p>
+                            <div class="product-quantity slds-m-bottom_x-large">
+                                <lightning-input label="Quantity"  value={wish.Quantity__c} required max="25" min="1" type="number"
+                                onchange={quantityChange} maxlength="2" data-id={wish.Id}
+                                class="qty" message-when-range-underflow={minQuan}
+                                message-when-range-overflow={maxQuan}>
+                                </lightning-input>
+                                <lightning-button data-id={wish.Id}
+                                label="Update"
+                                title="Update" onclick={handleQuantitySelectorBlur} class="slds-m-left_x-small" >
+                                </lightning-button>
+                            </div>
+                        </div>
+                </lightning-layout-item>
+                <lightning-layout-item class="wishlist-item-actions" size="12" small-device-size="12" medium-device-size="3" large-device-size="3">
+                    <lightning-button if:false={wish.disableAddtoCart__c} variant="brand"  label="Add To Cart" title="Add to Cart" data-id={wish.Id} data-qty={wish.Quantity__c}
+                    data-partnumber={wish.Product2.StockKeepingUnit} data-core={wish.Core_Charge_Unit_Price__c}  data-brand={wish.Product_Subdivision__c} data-code={wish.Op_Code__c} data-name={wish.Name} data-price={wish.Price__c}
+							data-img={wish.productImage__c} data-type={wish.Product_Type__c} data-color={wish.color__c}	data-vin={wish.Product_Identifier__c} data-modelid={wish.Product_Model__c} data-modelname={wish.Product_Model_Marketing_Name__c} data-packagequan={wish.Item_Package_Quantity__c} data-secid={wish.Section_Id__c} data-illgrp={wish.Illustration_Group_Image_Id__c} data-illid={wish.Illustration_Id__c} onclick={handleAddToCart}></lightning-button>
+                        <!-- Aditya bug 17802 added core charges -->
+                    <lightning-button if:true={wish.disableAddtoCart__c} variant="brand"  label="Add To Cart" title="Add to Cart" disabled
+                    ></lightning-button>
+
+                    
+                </lightning-layout-item>
+            </lightning-layout>
+            
+        </div>
+    </template>
+    <template if:true={isDataNotAvailable}>
+        <div class="slds-container_center containerWrapper slds-m-bottom_large" style="padding:0">
+            <div class="slds-text-heading_large slds-text-color_error errorTxt slds-text-align_center slds-m-bottom_large">
+            There are currently no items added to your wishlist.
+            </div>
+          </div>
+    </template>
+    <template if:true={isModalOpen}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+            aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open cartMar0">
+            <div class="slds-modal__container">
+               <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                        title="Close" onclick={closeModal}>
+                        <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse"
+                            size="small"></lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Sorry, Honda and
+                        Acura
+                        Items Must Be In Separate Carts</h2>
+                </header>
+                 <div class="slds-modal__content slds-p-around_medium errortxt" id="modal-content-id-1">
+                    <p><b>We’re working on this, but right now, Honda and Acura items must be in separate
+                            shopping
+                            carts. Please complete your current order and start a new order for this item.</b>
+                    </p>
+                </div>
+                <footer class="slds-modal__footer">
+                    <button class="slds-button slds-button_neutral" onclick={closeModal}
+                        title="Cancel">Cancel</button>
+                    <button class="slds-button slds-button_brand" onclick={submitDetails} title="OK">OK</button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+    <!-- START Added by Aditya as a part of HDMP-16502 Development-->
+    <template if:true={showDealerModal}>
+        <c-disclaimer-popup modaltype={disclaimerType} dealer-return-policy-markup={dealerReturnPolicyMarkup}
+            onclose={handleShowHide}></c-disclaimer-popup>
+    </template>
+    <!-- END Added by Aditya as a part of HDMP-16502 Development-->
+</template>

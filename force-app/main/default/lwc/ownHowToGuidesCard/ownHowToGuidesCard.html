@@ -1,0 +1,64 @@
+<!-- //============================================================================
+// Title:    Honda Owners Experience - How To Guide Card
+//
+// Summary:  This Card links to the How To Guide
+//
+//
+// History:
+// May 17, 2021 Arunprasad N (Wipro) Original Author
+// July 15, 2021 Jim Kohs (Wipro) refactored to ownBaseCard2
+//=========================================================================== -->
+<template>
+    <div class={cardDivClass}>
+    <c-own-card title={title} titlecolor={titlecolor} icon={icon} brand={brand} showfooter={showFooter} onheader={handleHeader} onfooter={handleFooter} onaction={handleAction}>    
+        <div slot="action">
+            <button class="slds-button slds-button_outline-brand find-dealers-button">{actiontitle}
+                 <template if:true={actionicon}>
+                    <lightning-icon class="slds-p-left_small custom-icon" icon-name={actionicon} size="small"></lightning-icon>
+                 </template>
+            </button>
+        </div>
+        <div slot="default">
+            <!-- ============================= -->
+            <!-- ====== Default HTML ========= -->
+            <!-- ============================= -->
+            <div class="card-body-content">Err: Please chose a brand</div>
+        </div>
+
+        <div slot="acura">
+            <!-- ============================= -->
+            <!-- ====== Acura HTML   ========= -->
+            <!-- ============================= -->
+            <div class="card-body-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</div>
+        </div>
+
+        <div slot="honda">
+            <!-- ============================= -->
+            <!-- ====== Honda HTML   ========= -->
+            <!-- ============================= -->
+            <div class="card-body-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</div>
+        </div>
+
+        <div slot="powersports">
+            <!-- ============================= -->
+            <!-- ====== PS HTML      ========= -->
+            <!-- ============================= -->
+            <div class="card-body-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</div>
+        </div>
+
+        <div slot="powerequipment">
+            <!-- ============================= -->
+            <!-- ====== PE HTML      ========= -->
+            <!-- ============================= -->
+            <div class="card-body-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</div>
+        </div>
+
+        <!-- ============================= -->
+        <!-- ====== Marine HTML   ========= -->
+        <!-- ============================= -->
+        <div slot="marine">
+            <div class="card-body-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</div>
+        </div>
+    </c-own-card>
+</div>
+</template>

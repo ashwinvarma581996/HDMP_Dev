@@ -1,0 +1,102 @@
+<!-- //============================================================================
+// Title:    Honda Owners Experience - Help Center
+//
+// Summary:  This is the category list html seen at the help center of the Honda Owner Community
+//
+// Details:  Extend the LightningElement with this Base Element to gain access to the Messaging Channel and other logic herein and this is the component for category list.
+//
+//
+// History:
+// June 16, 2021 Arunprasad N (Wipro) Original Author
+//=========================================================================== -->
+<template>
+    <div class="c-container">
+        <div class="category-result-large">
+            <lightning-layout>
+                <lightning-layout-item size="8" class="slds-p-horizontal_large">
+                    <div>
+                        <span class="result-title">{subcategory.label}</span>
+                    </div>
+                </lightning-layout-item>
+            </lightning-layout>
+            <lightning-layout>
+                <lightning-layout-item size="8" padding="around-large">
+                    <template if:true={isMixedCategory}>
+                        <div>
+                            <ul class="slds-has-dividers_bottom slds-has-block-links_space result-list">
+                                <template for:each={subcategory.results} for:item="result">
+                                    <li key={result.id} data-id={result.id} data-urlname={result.urlName} class="slds-item" onclick={handleClick}>
+                                        <a>{result.title}</a>
+                                    </li>
+                                </template>
+                            </ul>
+                        </div> 
+                    </template>
+                    <template if:false={isMixedCategory}>
+                        <c-own-help-center-result-accordion subcategory={subcategory}></c-own-help-center-result-accordion>
+                    </template>
+                    <!-- <c-own-accordion heading={subcategory.label} content-for-large-screen={subcategory} content-for-small-screen={subcategory}></c-own-accordion> -->
+<!--                     <lightning-accordion>
+                        <template for:each={subcategory.results} for:item="result">
+                            <lightning-accordion-section name={result.title} label={result.title} key={result.id} data-id={result.id} class="slds-item">
+                                <div>
+                                    <lightning-formatted-rich-text value={result.content}></lightning-formatted-rich-text>
+                                </div>
+                            </lightning-accordion-section>
+                        </template>
+                    </lightning-accordion> -->
+<!---->
+                </lightning-layout-item>
+            </lightning-layout>
+        </div>
+        <div class="category-result-small">
+            <lightning-layout horizontal-align="center">
+                <lightning-layout-item padding="around-small">
+                    <div>
+                        <span class="result-title">{subcategory.label}</span>
+                    </div>
+                </lightning-layout-item>
+            </lightning-layout>
+            <lightning-layout class="block-element">
+                <lightning-layout-item class="block-element">
+                    <template if:true={isMixedCategory}>
+                        <div>
+                            <ul class="slds-has-dividers_bottom slds-has-block-links_space result-list">
+                                <template for:each={subcategory.results} for:item="result">
+                                    <li key={result.id} data-id={result.id} data-urlname={result.urlName} class="slds-item" onclick={handleClick}>
+                                        <a>{result.title}</a>
+                                    </li>
+                                </template>
+                            </ul>
+                        </div> 
+                    </template>
+                    <template if:false={isMixedCategory}>
+                        <c-own-help-center-result-accordion subcategory={subcategory}></c-own-help-center-result-accordion>
+                    </template>
+<!--                     <lightning-accordion>
+                        <template for:each={subcategory.results} for:item="result">
+                            <lightning-accordion-section name={result.title} label={result.title} key={result.id} data-id={result.id} class="slds-item">
+                                <div>
+                                    results
+                                </div>
+                            </lightning-accordion-section>
+                        </template>
+
+                    </lightning-accordion> -->
+<!--                     <div>
+                        <ul class="slds-has-dividers_bottom slds-has-block-links_space result-list">
+                            <template for:each={subcategory.results} for:item="result">
+                                <li key={result.id} data-id={result.id} class="slds-item" onclick={handleClick}>
+                                    <button class="slds-button slds-button_reset" aria-expanded="true" title="List item">
+                                        <img src={rightArrow} />
+                                        <a>{result.title}</a>
+                                    </button>
+                                </li> 
+                            </template>
+                        </ul>
+                    </div> -->
+                </lightning-layout-item>
+            </lightning-layout>
+        </div>
+    </div>
+</template>

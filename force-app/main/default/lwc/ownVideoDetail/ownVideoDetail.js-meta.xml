@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>52.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <!--For DOE-1712 -->
+            <property type="ContentReference" name="acuraMainMinderContentId" label="Acura View Maintenance Minders" />
+            <property type="ContentReference" name="hondaMainMinderContentId" label="Honda View Maintenance Minders" />
+            <property type="ContentReference" name="acuraVideo1" label="Acura Video 1" />
+            <property type="ContentReference" name="acuraVideo2" label="Acura Video 2" />
+            <property type="ContentReference" name="hondaVideo1" label="Honda Video 1" />
+            <property type="ContentReference" name="hondaVideo2" label="Honda Video 2" />
+            <!-- DOE-1712 -->
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>52.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property name="pageContentTopic" label="Topic of page content" type="String"  />
+            <property name="planDetailsContentTopic" label="Topic of plan details accordion content" type="String"  />
+            <property name="termChartsLargeScreenContentTopic" label="Topic of term charts and pricing accordion large screen content" type="String"  />
+            <property name="termChartsSmallScreenContentTopic" label="Topic of term charts and pricing accordion small screen content" type="String"  />
+            <property name="pricingCalendarLargeScreenTopic" label="Topic of protection plan pricing calendar card large screen content" type="String"/>
+            <property name="pricingCalendarSmallScreenTopic" label="Topic of protection plan pricing calendar card small screen content" type="String"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

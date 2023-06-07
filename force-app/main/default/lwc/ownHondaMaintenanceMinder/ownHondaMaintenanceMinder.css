@@ -1,0 +1,10 @@
+@media only screen and (min-width: 600px) {
+    .dealer-card{
+        padding: 0px 270px 40px;
+    } 
+}
+@media only screen and (max-width: 601px) {
+    .dealer-card{
+        padding: 0px 50px 40px;
+    }  
+}

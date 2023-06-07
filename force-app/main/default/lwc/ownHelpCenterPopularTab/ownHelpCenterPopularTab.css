@@ -1,0 +1,117 @@
+.tab-label {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900 !important;
+    font-size: 14px;
+    line-height: 22px;
+    letter-spacing: 0.02em;
+    color: #000000;
+}
+
+.slds-is-active:after {
+    background-color: #E42525;
+}
+
+.show-more-button {
+    border: 2px solid #E42525;
+    box-sizing: border-box;
+    border-radius: 2px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: #E42525;
+}
+
+.show-more-button-disabled {
+    border: 2px solid #ACACAC;
+    box-sizing: border-box;
+    border-radius: 2px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: var(--HondaWhite);
+    background: #ACACAC;
+}
+
+.tab-combobox {
+    width: 272px;
+}
+
+.custom-width {
+    width: 70%;
+}
+
+.result-list li a {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 26px;
+    color: #000000;
+    padding-top: 16px;
+    padding-bottom: 16px;
+}
+
+.custom-width ul.slds-tabs_default__nav.slds-grid_align-space {
+    padding: 10px 0 0;
+}
+
+.custom-width ul.slds-tabs_default__nav.slds-grid_align-space:focus {
+    border: 2px solid #28c131;
+}
+
+@media only screen and (max-width: 7200px) {
+    .tab-small {
+        display: none;
+    }
+
+    .tab-large {
+        display: block;
+    }
+
+    .tab-text-headline {
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: 300;
+        font-size: 32px;
+        line-height: 37px;
+        text-align: center;
+        letter-spacing: 0.02px;
+        color: #000000;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .tab-large {
+        display: none;
+    }
+
+    .tab-small {
+        display: block;
+    }
+
+    .tab-text-headline {
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: 300;
+        font-size: 22px;
+        line-height: 27px;
+        text-align: center;
+        letter-spacing: 0.02px;
+        color: #000000;
+    }
+}
+
+/* .c-container{
+    width: fit-content;
+} */
+@media only screen and (max-width: 830px) {
+    .custom-width {
+        width: 100%;
+    }
+
+}

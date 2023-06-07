@@ -1,0 +1,146 @@
+<template>
+    <div if:true={isLoading}>
+		<lightning-spinner alternative-text="Loading" variant="brand"></lightning-spinner>
+	</div>
+    <div class="slds-container_center containerWrapper slds-p-vertical_x-large aboutCar">
+        <!-- Motocompacto Starts -->
+        <lightning-layout class="slds-wrap slds-p-vertical_xx-large slds-grid_vertical-align-center">
+            <lightning-layout-item size="12" class="content2 slds-medium-size_6-of-12 slds-order_2 slds-p-left_medium">
+                <div class="slds-p-vertical_medium">
+                    <h2 class="slds-p-vertical_small font-h3"> Motocompacto </h2>
+
+                    <div if:true={motocompactoDesc} class="slds-m-bottom_small slds-p-top_medium">
+                        <lightning-formatted-rich-text value={motocompactoDesc} class="slds-text-heading_small"></lightning-formatted-rich-text>
+                    </div>
+                    <div if:true={bothBrand} class="slds-grid_vertical-align-bottom">
+                        <lightning-button class="slds-m-right_small motoBtn" variant="brand" name="SHOP FROM HONDA" label="SHOP FROM HONDA" title="SHOP FROM HONDA" onclick={handleShopFromBrand}></lightning-button>
+                        <lightning-button variant="brand" name="SHOP FROM ACURA" label="SHOP FROM ACURA" title="SHOP FROM ACURA" onclick={handleShopFromBrand}></lightning-button>
+                    </div>
+                    <div if:false={bothBrand} class="slds-grid_vertical-align-bottom">
+                        <template if:true={brandHonda}>
+                            <lightning-button variant="brand" name="SHOP FROM HONDA" label="SHOP NOW" title="SHOP NOW" onclick={handleShopFromBrand}></lightning-button>
+                        </template>
+                        <template if:true={brandAcura}>
+                            <lightning-button variant="brand" name="SHOP FROM ACURA" label="SHOP NOW" title="SHOP NOW" onclick={handleShopFromBrand}></lightning-button>
+                        </template>
+                    </div>
+                </div>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class="slds-p-horizontal_small slds-medium-size_6-of-12 ">
+                <div>
+                    <div class="aboutCarImg"><img src={motoImage} />  </div>                                  
+                    <div class="custom-box slds-p-top_small">
+						<div class="slds-align_absolute-center" style="font-size: 20px;color: black; font-weight: 500;">Download the Motocompacto App</div>
+						<div class="slds-align_absolute-center slds-p-top_small">
+							<img style="width:9rem;cursor:pointer;" name="apple store"  class="slds-m-right_small" src={appleStore} onclick={handleStoreImageClick}/>
+							<img style="width:10rem;cursor:pointer;" name="google store" src={googleStore} onclick={handleStoreImageClick}/>
+						</div>						
+					</div>
+                </div>
+            </lightning-layout-item>
+        </lightning-layout>
+        <!-- Motocompacto Ends -->
+        <!-- <lightning-layout class="slds-wrap slds-p-vertical_x-large slds-grid_vertical-align-center">
+            <lightning-layout-item size="12" class="content1 slds-medium-size_5-of-12">
+                <div class="slds-p-vertical_medium">
+                <span><strong>EYEBROW COPY</strong></span>
+                <h2 class="slds-p-vertical_small font-h3">Lorem Ipsum <br>Dolor Sit</h2>
+                <p class="slds-text-heading_small">Lorem Ipsum is simply dummy text of the printing and typesetting Ipsum is simply industry.</p>
+                </div>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class="slds-p-horizontal_small slds-medium-size_7-of-12 slds-text-align_right aboutCarImg">
+                <div>
+                    <img src={aboutUs} />
+                </div>
+            </lightning-layout-item>
+        </lightning-layout>
+        <lightning-layout class="slds-wrap slds-p-vertical_xx-large slds-grid_vertical-align-center">
+            <lightning-layout-item size="12" class="content2 slds-medium-size_5-of-12 slds-order_2">
+                <div class="slds-p-vertical_medium">
+                <span><strong>EYEBROW COPY</strong></span>
+                <h2 class="slds-p-vertical_small font-h3">Lorem Ipsum <br>Dolor Sit</h2>
+                <p class="slds-text-heading_small slds-m-bottom_large">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                <lightning-button variant="brand" label="CTA">
+                </lightning-button>
+                </div>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class="slds-p-horizontal_small slds-medium-size_7-of-12 aboutCarImg">
+                <div>
+                    <img src={aboutUs1} />
+                </div>
+            </lightning-layout-item>
+        </lightning-layout> -->
+
+        <template if:true={brandHonda}>
+            <lightning-layout class="slds-wrap slds-p-vertical_x-large slds-grid_vertical-align-center">
+            <lightning-layout-item size="12" class="content1 slds-medium-size_5-of-12">
+                <div class="slds-p-vertical_medium">
+                <h2 class="slds-p-vertical_small font-h3">Protection <br>Accessories</h2>
+                <p class="slds-text-heading_small">Protecting your investment is easy with Honda Genuine Accessories — from floor mats to splash guards and a whole lot more.</p>
+                </div>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class="slds-p-horizontal_small slds-medium-size_7-of-12 slds-text-align_right aboutCarImg">
+                <div>
+                    <img src={aboutUs} />
+                </div>
+            </lightning-layout-item>
+        </lightning-layout>
+        <lightning-layout class="slds-wrap slds-p-vertical_xx-large slds-grid_vertical-align-center">
+            <lightning-layout-item size="12" class="content2 slds-medium-size_5-of-12 slds-order_2">
+                <div class="slds-p-vertical_medium">
+                <h2 class="slds-p-vertical_small font-h3">Honda Roof <br>Attachments</h2>
+                <p class="slds-text-heading_small slds-m-bottom_large">The Honda Genuine Accessories Roof Attachments have unique clamp designed specific for the Honda Genuine cross bars.</p>
+                </div>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class="slds-p-horizontal_small slds-medium-size_7-of-12 aboutCarImg">
+                <div>
+                    <img src={aboutUs1} />
+                </div>
+            </lightning-layout-item>
+        </lightning-layout>
+        <lightning-layout class="slds-wrap slds-p-vertical_x-large slds-grid_vertical-align-center">
+            <lightning-layout-item size="12" class="content1 slds-medium-size_5-of-12">
+                <div class="slds-p-vertical_medium">
+                <h2 class="slds-p-vertical_small font-h3">Honda Genuine Accessory <br>Alloy Wheels</h2>
+                <p class="slds-text-heading_small slds-m-bottom_medium">Alloy Wheels add that finishing touch to your new Honda with an eye-catching upgrade that screams look at me.</p>
+                <p class="slds-text-heading_small">Their stylish appearance will enhance any new Honda.</p>
+                </div>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class="slds-p-horizontal_small slds-medium-size_7-of-12 slds-text-align_right aboutCarImg">
+                <div>
+                    <img src={aboutUs2} />
+                </div>
+            </lightning-layout-item>
+        </lightning-layout>
+        </template>
+        <template if:true={brandAcura}>
+            <lightning-layout class="slds-wrap slds-p-vertical_xx-large slds-grid_vertical-align-center">
+                <lightning-layout-item size="12" class="content2 slds-medium-size_5-of-12 slds-order_2">
+                    <div class="slds-p-vertical_medium">
+                    <h2 class="slds-p-vertical_small font-h3">Acura Genuine <br>Accessories</h2>
+                    <p class="slds-text-heading_small slds-m-bottom_large">Designed to be all new. Engineered to be all powerful. Personalized to be all yours.</p>
+                    </div>
+                </lightning-layout-item>
+                <lightning-layout-item size="12" class="slds-p-horizontal_small slds-medium-size_7-of-12 aboutCarImg">
+                    <div>
+                        <img src={aboutUs4} />
+                    </div>
+                </lightning-layout-item>
+            </lightning-layout>
+                <lightning-layout class="slds-wrap slds-p-vertical_x-large slds-grid_vertical-align-center">
+            <lightning-layout-item size="12" class="content1 slds-medium-size_5-of-12">
+                <div class="slds-p-vertical_medium">
+                <h2 class="slds-p-vertical_small font-h3">EXCELLENCE DESERVES <br>PROTECTION</h2>
+                <p class="slds-text-heading_small">Acura protection accessories designed specifically for your vehicle.</p>
+                </div>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class="slds-p-horizontal_small slds-medium-size_7-of-12 slds-text-align_right aboutCarImg">
+                <div>
+                    <img src={aboutUs3} />
+                </div>
+            </lightning-layout-item>
+        </lightning-layout>
+        </template>
+
+</div>
+</template>

@@ -1,0 +1,122 @@
+<!-- //============================================================================
+// Title:    Honda Owners Experience - Specifications
+//
+// Summary:  
+//
+// Details:  
+//
+//
+// History:
+// Feburary 7, 2022 Brett Spokes (Wipro) Original Author
+//=========================================================================== -->
+<template>
+    <div class="c-container header-column">
+        <lightning-layout multiple-rows>
+            <lightning-layout-item class="helpcenter-brand-large"  size="12">
+                <lightning-layout horizontal-align="spread">
+                    <template if:true={showTrimList}>
+                        <lightning-layout-item size="2" class="tab-wrapper">
+                            <c-own-specifications-trim-list modelid={modelId} categories={trims} brand={divisionId}
+                                ontrimselect={trimSelectHandler}></c-own-specifications-trim-list>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="12" small-device-size="12" medium-device-size="10" large-device-size="10">
+                        <template if:true={showData}>
+                            <template if:true={showMessage}>
+                                <div class="warning-message slds-p-top_large">
+                                    <img src={warningImage} class="slds-m-right_small" />
+                                    DATA UNAVAILABLE
+                                </div>
+                            </template>
+                            <template if:false={showMessage}>
+                                <template if:true={showTrimList}>
+                                    <div class="trim-title" ><span>{activeTrim}</span></div>
+                                </template>
+                                <c-own-specifications-result-accordion vehicletrim={selectedTrim} showtrimlist={showTrimList} modellist={vehicleTrimList}>
+                                </c-own-specifications-result-accordion>
+                            </template>
+                        </template>
+                        <template if:false={showData}>
+                            <c-own-data-loading-spinner></c-own-data-loading-spinner>
+                        </template>
+                        </lightning-layout-item>
+                    </template>
+                    <template if:false={showTrimList}> 
+                        <lightning-layout-item size="12" small-device-size="12" medium-device-size="10" large-device-size="10">
+                            <!--<c-own-specifications-trim-results></c-own-specifications-trim-results> -->
+                            <template if:true={showData}>
+                            <template if:true={showMessage}>
+                                <div class="warning-message slds-p-top_large">
+                                    <img src={warningImage} class="slds-m-right_small" />
+                                    DATA UNAVAILABLE
+                                </div>
+                            </template>
+                            <template if:false={showMessage}>
+                               
+                                <c-own-specifications-result-accordion vehicletrim={selectedTrim} showtrimlist={showTrimList} modellist={vehicleTrimList}>
+                                </c-own-specifications-result-accordion>
+                            </template>
+                        </template>
+                        <template if:false={showData}>
+                            <c-own-data-loading-spinner></c-own-data-loading-spinner>
+                        </template>
+                        </lightning-layout-item>
+                    </template>
+                </lightning-layout>
+            </lightning-layout-item>
+            <lightning-layout-item class="helpcenter-brand-small"  size="12">
+                <lightning-layout horizontal-align="spread">
+                    <template if:true={showTrimList}>
+                        <lightning-layout-item size="12" class="tab-wrapper">
+                            <c-own-specifications-trim-list modelid={modelId} categories={trims} brand={divisionId}
+                                ontrimselect={trimSelectHandler}></c-own-specifications-trim-list>
+                        </lightning-layout-item>
+                        
+                        <!--lightning-layout-item size="12" small-device-size="12" medium-device-size="10" large-device-size="10">
+                        <template if:true={showData}>
+                            <template if:true={showMessage}>
+                                <div class="warning-message slds-p-top_large">
+                                    <img src={warningImage} class="slds-m-right_small" />
+                                    DATA UNAVAILABLE
+                                </div>
+                            </template>
+                            <template if:false={showMessage}>
+                                <c-own-specifications-result-accordion vehicletrim={selectedTrim} showtrimlist={showTrimList} modellist={vehicleTrimList}>
+                                </c-own-specifications-result-accordion>
+                            </template>
+                        </template>
+                        <template if:false={showData}>
+                            <c-own-data-loading-spinner></c-own-data-loading-spinner>
+                        </template>
+                        </lightning-layout-item-->
+                    </template>
+                    <template if:false={showTrimList}> 
+                        <lightning-layout-item size="12" small-device-size="12" medium-device-size="10" large-device-size="10">
+                            <!--<c-own-specifications-trim-results></c-own-specifications-trim-results> -->
+                            <template if:true={isTrimsPresent}>
+                                <a class="backdrop" onclick={handlebackdrop}></a>
+                            </template>
+                            <template if:true={showData}>
+                            <template if:true={showMessage}>
+                                <div class="warning-message slds-p-top_large">
+                                    <img src={warningImage} class="slds-m-right_small" />
+                                    DATA UNAVAILABLE
+                                </div>
+                            </template>
+                            <template if:false={showMessage}>
+                                <template if:true={isTrimsPresent}>
+                                    <div class="trim-title" ><span>{activeTrim}</span></div>
+                                </template>
+                                <c-own-specifications-result-accordion vehicletrim={selectedTrim} showtrimlist={showTrimList} modellist={vehicleTrimList}>
+                                </c-own-specifications-result-accordion>
+                            </template>
+                        </template>
+                        <template if:false={showData}>
+                            <c-own-data-loading-spinner></c-own-data-loading-spinner>
+                        </template>
+                        </lightning-layout-item>
+                    </template>
+                </lightning-layout>
+            </lightning-layout-item>
+        </lightning-layout>
+    </div>
+</template>

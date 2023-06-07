@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>52.0</apiVersion>
+     <isExposed>true</isExposed>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property type="ContentReference" name="contentId1" label="Link" />
+            <property type="ContentReference" name="contentId2" label="Remote" />
+            <property type="ContentReference" name="contentId3" label="Security" />
+            <property type="ContentReference" name="contentId4" label="Concierge" />
+            <property type="ContentReference" name="contentId5" label="Marketing Page" />
+            <property type="ContentReference" name="contentId6" label="Basic" />
+            <property type="ContentReference" name="contentId7" label="Standard" />
+            <property type="ContentReference" name="contentId8" label="Connect" />
+            <property type="ContentReference" name="contentId9" label="Premium" />
+            <property type="String" name="brand" label="Brand Name" />
+            <property name="playStoreURL" type="String" label="Play Store URL"/>
+            <property name="appStoreURL" type="String" label="App Store URL"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

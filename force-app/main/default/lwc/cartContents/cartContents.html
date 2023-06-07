@@ -1,0 +1,55 @@
+<template>
+    <template if:true={isLoading}>
+        <lightning-spinner alternative-text="Loading"
+            class="slds-is-relative slds-align_absolute-center slds-m-around_large" variant="brand">
+        </lightning-spinner>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+    
+    <!-- Active Cart with Cart Items -->
+    <div class="continue-shopping"><a href="javascript:void(0)" class="slds-truncate" onclick={continueShopping}> &lt; Continue Shopping </a>
+    <a if:true={isLoggedIn} href="javascript:void(0)" class="slds-truncate" onclick={handleGoToWishlist}> | Go to Wishlist</a></div>
+    <template if:false={isCartClosed}>
+        <c-cart-items
+            cart-items={cartItems}
+            currency-code={currencyCode}
+            onquantitychanged={handleQuantityChanged}
+            onsinglecartitemdelete={handleCartItemDelete}
+            is-cart-disabled={isCartDisabled}
+            onupdatecartitem={handleUpdateCartItem}
+            class="cartPage"
+            cartid={cartid}
+            onvinchanged={handleVinChange}
+           
+        >
+        </c-cart-items>
+        <lightning-spinner
+            if:true={isCartItemListIndeterminate}
+            alternative-text={labels.loadingCartItems}
+            class="slds-is-relative slds-align_absolute-center slds-m-around_large"
+            variant="brand"
+        >
+        </lightning-spinner>
+        <div if:true={isCartItemListIndeterminate} class="slds-backdrop slds-backdrop_open"></div>
+        <div
+            if:true={isCartEmpty}
+            class="slds-text-align_center slds-text-color_weak slds-p-top_xx-large"
+        >
+            <h3 class="slds-text-heading_medium">
+                {labels.emptyCartHeaderLabel}
+            </h3>
+            <p class="slds-text-body_regular slds-p-top_small">
+                {labels.emptyCartBodyLabel}
+            </p>
+        </div>
+    </template>
+
+    <!-- Closed/Deleted Cart -->
+    <template if:true={isCartClosed}>
+        <div
+            class="slds-text-align_center slds-text-color_weak slds-p-top_xx-large"
+        >
+            <h3 class="slds-text-heading_medium">{labels.closedCartLabel}</h3>
+        </div>
+    </template>
+</template>

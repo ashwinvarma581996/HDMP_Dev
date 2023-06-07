@@ -1,0 +1,137 @@
+<template>
+	<div class="slds-large-size_12-of-12 slds-m-top_large">
+		<template if:true={isLoading}>
+			<lightning-spinner alternative-text="Loading"
+				class="slds-is-relative slds-align_absolute-center slds-m-around_large" variant="brand">
+			</lightning-spinner>
+			<div class="slds-backdrop slds-backdrop_open"></div>
+		</template>
+
+<div if:true={all_Accessories} data-index={index} onclick={openSubCategories}>
+    <div class="cardImage">
+        <template if:true={showOriginalCategoryImage}>
+					<img src={accessoriesList.ModelAssetURL} onerror={handleOnImageLoad} />
+				</template>
+        <template if:false={showOriginalCategoryImage}>
+					<img src={dreamshopDefaultImage} />
+					<!-- <img src="https://akamai-staging.dreamshop.honda.com/custom/1200px-No_image_available.png" /> -->
+				</template>
+    </div>
+</div>
+<div class="slds-text-heading_medium textRed slds-text-align_center slds-p-top_small">
+<template if:true={showNullMsg} ><h1>No search results found</h1></template>
+</div>
+<template if:false={showNullMsg}>
+<template if:false={showColorsList}>
+			<ul class="slds-grid slds-wrap">
+				<template if:true={all_Accessories} for:each={all_Accessories} for:item="accessories" for:index="index">
+					<li key={accessories.index} class="slds-item categoryDiv product_item" style="border:none">
+
+						<lightning-layout multiple-rows>
+							<lightning-layout-item size="4" padding="around-small">
+								<div class="custom-box">
+									<template if:true={accessories.AssetThumbURL}>
+										<img src={accessories.AssetThumbURL} data-index={index}
+											onerror={handleShowDefaultImage} />
+									</template>
+<template if:false={accessories.AssetThumbURL}>
+											<img src={dreamshopDefaultImage} />
+											<!-- <img src="https://akamai-staging.dreamshop.honda.com/custom/1200px-No_image_available.png" /> -->
+									</template>
+</div>
+</lightning-layout-item>
+
+<lightning-layout-item size="8" padding="around-x-small">
+    <div class="custom-box">
+        <article class="slds-tile slds-tile_board">
+            <h3 class="slds-tile__title">
+                <a class="slds-text-heading_medium" data-id={accessories.op_cd} title={accessories.AccessoryName}>
+                    <lightning-formatted-rich-text data-id={accessories.op_cd} onclick={handleToRedirectOnPDP} value={accessories.AccessoryName}></lightning-formatted-rich-text>
+                </a>
+            </h3>
+            <div class="slds-tile__detail">
+
+                <template if:true={accessories.displayAddToCart}>
+												<p class="slds-line-clamp_x-small" title={accessories.partNumber} style="max-width: fit-content;">
+													Accessory Number: {accessories.partNumber}
+												</p>
+												<template if:true={accessories.disableAddToCartWithZeroAmount}>
+													<p>Contact Dealer For
+														Price/Availability</p>
+													<lightning-button label="Add to Cart" disabled variant="destructive"
+														onclick={handleAddToCart1} class="productButton" title="Add to Cart">
+													</lightning-button>
+												</template>
+                <template if:false={accessories.disableAddToCartWithZeroAmount}>
+													<p
+														class="slds-text-heading_medium slds-m-bottom_small slds-m-top_xx-small">
+														{priceType} : ${accessories.msrp}</p>
+													<lightning-button variant="brand" label="Add To Cart"
+														data-opcode={accessories.op_cd} data-price={accessories.msrp}
+														onclick={handleAddToCart} title="Add to Cart">
+													</lightning-button>
+												</template>
+                </template>
+                <template if:false={accessories.displayAddToCart}>
+												<p class="slds-line-clamp_x-small">
+													Multiple accessories are available
+												</p>
+													<!-- HDMP-5036 starts  -->
+													<template if:true={accessories.isMultipleColor}> 
+												<i>
+															<p class="slds-text-heading_medium slds-m-top_xx-small">Multiple Color Options Available</p>
+												</i>
+											</template>
+													<template if:true={accessories.isRequriedProduct}> 
+														<i>
+															<p class="slds-text-heading_medium slds-m-top_xx-small">Additional Accessories required</p>
+														</i>
+													</template>
+													<!-- HDMP-5036 ends -->
+												</template>
+
+            </div>
+        </article>
+
+    </div>
+</lightning-layout-item>
+</lightning-layout>
+
+</li>
+</template>
+</ul>
+</template>
+</template>
+</div>
+<!-- Modal/Popup Box LWC starts here -->
+<template if:true={isModalOpen}>
+		<section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+			aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+			<div class="slds-modal__container">
+				<!-- Modal/Popup Box LWC header here -->
+				<header class="slds-modal__header">
+					<button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+						title="Close" onclick={closeModal}>
+						<lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse"
+							size="small"></lightning-icon>
+						<span class="slds-assistive-text">Close</span>
+					</button>
+					<h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Sorry, Honda and Acura
+						Items Must Be In Separate Carts</h2>
+				</header>
+				<!-- Modal/Popup Box LWC body starts here -->
+				<div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+					<p><b>We’re working on this, but right now, Honda and Acura items must be in separate shopping
+							carts. Please complete your current order and start a new order for this item.</b></p>
+
+				</div>
+				<!-- Modal/Popup Box LWC footer starts here -->
+				<footer class="slds-modal__footer">
+					<button class="slds-button slds-button_neutral" onclick={closeModal} title="Cancel">Cancel</button>
+					<button class="slds-button slds-button_brand" onclick={closeModal} title="OK">OK</button>
+				</footer>
+			</div>
+		</section>
+		<div class="slds-backdrop slds-backdrop_open"></div>
+	</template>
+</template>

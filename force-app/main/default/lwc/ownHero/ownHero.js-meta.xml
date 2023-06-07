@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>51.0</apiVersion>
+    <isExposed>true</isExposed> 
+    <masterLabel>Honda Owners Hero</masterLabel>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property label="Hero" name="hero" type="String" default="Home" datasource="Home,Honda Auto,Acura Auto,Power Equipment,Powersports,Marine" />
+            <property label="Category" name="categoryLabel" type="String" datasource="None, Acura Autos,Honda Autos,Honda Powersports,Honda Power Equipment,Honda Marine" default="None"/>
+            <property label="Page" name="page" type="String" default="Home" datasource="Home,Help Center,Find Product" />
+            <property label="Show Login Buttons?" name="showLoginButtons" type="Boolean" default="true" />
+            <property label="Show Back Link?" name="showBackLink" type="Boolean" default="false" />
+            <property label="Show Search Box?" name="showSearchBox" type="Boolean" default="false" />
+            <property label="Home Page Banner Images Topic Name" name="homePageBannerImagesTopic" type="String"/>
+            <property name="safetyAlertsTopic" label="Topic for Safety Alerts" type="String"/>
+            <property name="productAlertsTopic" label="Topic for Product Alerts" type="String"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

@@ -1,0 +1,87 @@
+<template>
+    <div class={cardDivClass}>
+        <div class="card card-size card-styles-wrapper">
+            <lightning-card class="card-styles two-column-card-outer-div">
+                <h3 slot="title" class="slds-truncate">
+                    <lightning-layout>
+                        <lightning-layout-item  class="custom-item">
+                            <img src={icon} class="slds-p-right_small custom-icon">
+                        </lightning-layout-item>
+                        <lightning-layout-item class="custom-item">
+                            <span class="slds-text-heading_small title">
+                                {title}
+                            </span>
+                        </lightning-layout-item>
+                    </lightning-layout>
+                </h3>
+                <div slot="actions" class="slot-actions-div">
+                    <slot name="action">
+                        <template if:true={buttonTitle}>
+                            <button class="slds-button slds-button_outline-brand action-button"
+                                onclick={handleClickHeader}>{buttonTitle}<lightning-icon
+                                    class="slds-p-left_small custom-icon" icon-name="utility:forward" size="x-small">
+                                </lightning-icon></button>
+                        </template>
+                    </slot>
+                </div>
+                <div class="slds-card__body_inner card-body">
+                    <lightning-layout multiple-rows>
+                        <lightning-layout-item size="12" small-device-size="12" medium-device-size="6"
+                            large-device-size="6"
+                            class="slds-p-horizontal_small slds-order_2 slds-medium-order_1 slds-large-order_1">
+                            <lightning-formatted-rich-text value={body} class="custom-body-tcc"></lightning-formatted-rich-text>
+                            <template if:true={link1Label}>
+                                <div><a style="color:#e42525" onclick={handleLink1}>{link1Label}</a></div>
+                            </template>
+                            <template if:true={link2Label}>
+                                <div><a style="color:#e42525" onclick={handleLink2}>{link2Label}</a></div>
+                            </template>
+                            <template if:true={link3Label}>
+                                <div><a style="color:#e42525" onclick={handleLink3}>{link3Label}</a></div>
+                            </template>
+                            <template if:true={link4Label}>
+                                <div><a style="color:#e42525" onclick={handleLink4}>{link4Label}</a></div>
+                            </template>
+                            <template if:true={leftColumnExternalLinkTitle}>
+                                <a onclick={handleExternalLink} data-label="Parts"
+                                    class="external-link">{leftColumnExternalLinkTitle}
+                                    <lightning-icon class="slds-p-left_small custom-icon" icon-name="utility:forward"
+                                        size="x-small">
+                                    </lightning-icon>
+                                </a>
+                            </template>
+                        </lightning-layout-item>
+                        <template if:true={containsImage}>
+                            <lightning-layout-item size="12" small-device-size="12" medium-device-size="6"
+                                large-device-size="6" class="slds-order_1 slds-medium-order_2 slds-large-order_2">
+                                <div class="desktop-image slds-text-align_center">
+                                    <lightning-formatted-rich-text class="two-column-image" value={desktopImage}>
+                                    </lightning-formatted-rich-text>
+                                </div>
+                                <div class="mobile-image slds-text-align_center">
+                                    <lightning-formatted-rich-text class="two-column-image" value={mobileImage}>
+                                    </lightning-formatted-rich-text>
+                                </div>
+                            </lightning-layout-item>
+                        </template>
+                        <template if:false={containsImage}>
+                            <lightning-layout-item size="12" small-device-size="12" medium-device-size="6"
+                                large-device-size="6"
+                                class="slds-p-horizontal_small slds-order_3 slds-medium-order_2 slds-large-order_2">
+                                <lightning-formatted-rich-text value={body2}></lightning-formatted-rich-text>
+                                <template if:true={rightcolumnExternalLinkTitle}>
+                                    <a onclick={handleExternalLink} data-label="Accessories"
+                                        class="external-link">{rightcolumnExternalLinkTitle}
+                                        <lightning-icon class="slds-p-left_small custom-icon"
+                                            icon-name="utility:forward" size="x-small">
+                                        </lightning-icon>
+                                    </a>
+                                </template>
+                            </lightning-layout-item>
+                        </template>
+                    </lightning-layout>
+                </div>
+            </lightning-card>
+        </div>
+    </div>
+</template>

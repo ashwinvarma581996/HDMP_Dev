@@ -1,0 +1,95 @@
+<template>
+    <lightning-layout multiple-rows horizontal-align="space" class="slds-p-top_large">
+        <lightning-layout-item if:true={showData} size="12" padding="around-small" small-device-size="12" medium-device-size="8" large-device-size="8" >
+            <div if:true={isMaintenanceMinder}>
+                <div class="head-container slds-p-vertical_medium">
+                    <div class="sub-container-1">
+                        <img src={icon}/>
+                    </div>
+                    <div class="sub-container-2">
+                        <span class="heading-text" if:true={pageContent}>{pageContent.title}</span>
+                    </div>
+                </div>
+                <div class="page-title">We have detected an issue with your vehicle regarding Maintenance Minder {subheadingText}. Please attend to this issue as
+                    soon as possible.</div>
+                
+                <br>
+                <div>
+                    <table class="table slds-table_bordered slds-table_col-bordered slds-no-row-hover ">
+                        <thead>
+                            <tr class="slds-line-height_reset">
+                                <th class="slds-border_left table-header slds-cell-wrap" width="25%">
+                                    <div class=" slds-p-around_small"><strong>Accelerated Service <br/>Maintenance
+                                            Minder Code</strong></div>
+                                </th>
+                                <th class="slds-border_right table-header slds-cell-wrap" width="75%">
+                                    <div class="  slds-p-around_small"><strong>Services Provided</strong></div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template if:true={maintenanceMinderData} for:each={maintenanceMinderData} for:item="Service">
+                                <tr key={Service.MaintenanceMinderCode} class="slds-hint-parent">
+                                    <td class="slds-border_left slds-cell-wrap first-td" width="25%">
+                                        <div class=" first-td-text slds-p-top_medium  slds-p-around_small" ><b>{Service.Maintenance_Code__c}</b></div>
+                                    </td>
+                                    <td class="slds-border_right first-td-text slds-p-around_small" width="75%">
+                                        <div if:true={Service.Service_Pre_Text__c} class="slds-p-vertical_xx-small " >{Service.Service_Pre_Text__c}</div>
+                                        <div if:true={Service.Service_Item_Description__c} class=" slds-p-vertical_xx-small" >{Service.Service_Item_Description__c}</div>
+                                        <div if:true={Service.Service_Post_Text__c} class="slds-cell-wrap slds-p-vertical_xx-small">{Service.Service_Post_Text__c}</div>
+                                        <div if:true={Service.Legal_Description__c} class="service-body slds-p-vertical_xx-small"> {Service.Legal_Description__c}</div>
+                                        
+                                    </td>
+                                </tr>
+                            </template>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="heading-text slds-p-top_large">{sectionTitle}</div>
+            </div>
+            <div if:false={isMaintenanceMinder}>
+                <div class="head-container slds-p-vertical_medium">
+                    <div class="sub-container-2">
+                        <span class="heading-text">{sectionTitle}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="slds-p-vertical_medium" if:true={pageContent}><lightning-formatted-rich-text class="page-title" value={pageContent.body}></lightning-formatted-rich-text></div>
+                <div>
+                    <table class="table slds-table_bordered slds-table_col-bordered slds-no-row-hover">
+                        <thead>
+                            <tr class="slds-line-height_reset">
+                                <th class="slds-border_left table-header slds-cell-wrap" width="25%">
+                                    <div class="  slds-p-around_small"><strong>Accelerated Service <br/>Maintenance
+                                            Minder Code</strong></div>
+                                </th>
+                                <th class="slds-border_right table-header slds-cell-wrap" width="75%">
+                                    <div class=" slds-p-around_small "><strong>Services Provided</strong></div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template if:true={accelratedServices} for:each={accelratedServices} for:item="Service">
+                                <tr key={Service.Id} class="slds-hint-parent">
+                                    <td scope="row" class="slds-border_left first-td" width="25%">
+                                        <lightning-formatted-rich-text class="slds-p-around_small slds-p-left_small first-td first-td-text" value={Service.ServicePreText}>
+                                        </lightning-formatted-rich-text>
+                                    </td>
+                                    <td class="slds-border_right" width="75%">
+                                        <lightning-formatted-rich-text class="table-body  slds-p-around_small" value={Service.ServiceBody}>
+                                        </lightning-formatted-rich-text>
+                                    </td>
+                                </tr>
+                            </template>
+                        </tbody>
+                    </table>
+                </div>
+                <div if:true={pageContent}>
+                    <p class="page-title slds-p-vertical_medium">{pageContent.footerContent}</p>
+                </div>
+        </lightning-layout-item>
+        <lightning-layout-item if:false={showData}>
+            <c-own-data-loading-spinner></c-own-data-loading-spinner>
+        </lightning-layout-item>
+    </lightning-layout>
+</template>

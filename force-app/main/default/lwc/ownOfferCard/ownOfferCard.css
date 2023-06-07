@@ -1,0 +1,161 @@
+.c-container {
+    border: 1px solid #DDDBDA;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    flex: 1;
+}
+
+.custom-box {
+    text-align: center;
+    background-color: #ffffff;
+    width: 260px;
+    
+}
+.divider-line{
+    height: 1px;
+    background: #D9D9D9;
+    margin: 20px 12px;
+}
+.custom-box1 {
+    background-color: #e4e9f0;
+    flex: 1;
+    background: #F5F5F5;
+}
+
+.brand-card-sub-title h3 {
+    font-weight: 300;
+    font-size: 32px;
+    line-height: 37px;
+}
+.brand-title{
+    font-weight: 300;
+    font-size: 32px;
+    line-height: 37px;
+    letter-spacing: 0.02em;
+    color: #000000;
+}
+.offer-cards {
+    display: flex;
+}
+
+.offer-cards_wrapper {
+    padding: 50px 80px 80px;
+}
+.model-grp-name {
+    font-weight: 300;
+    font-size: 24px;
+    line-height: 32px;
+    text-align: left;
+    padding: 14px 20px;
+}
+.custom-box img {
+    margin-bottom: 20px;
+    height: 125px;
+}
+.model-desc {
+    padding: 20px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.model-desc h4 {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 30px;
+}
+.model-desc h4 span {
+    position: relative;
+}
+.model-desc h4 span:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -4px;
+    background: #C42121;
+    height: 2px;
+}
+.model-desc strong {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 30px;
+}
+.model-desc p {
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 30px;
+}
+.model-desc-btn b {
+    color: #C42121;
+    letter-spacing: 0.02em;
+    font-weight: 900;
+    font-size: 14px;
+    line-height: 22px;
+    margin-left: 10px;
+}
+.model-desc-link{
+    color: #C42121;
+    letter-spacing: 0.02em;
+    font-weight: 900;
+    font-size: 14px;
+    line-height: 22px;
+    margin-left: 10px;
+}
+.card-content{
+    height: auto;
+}
+hr{  
+width: 50%;  
+margin-top: 0px;
+margin-bottom: 0px;
+border-top-width: 0px;
+height: 2px;
+background-color: #C42121;   
+}  
+@media only screen and (max-width: 1025px) {
+    .offer-cards {
+        flex-wrap: wrap;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .offer-cards_wrapper {
+        padding: 10px;
+    }
+    .c-container lightning-layout {
+        flex-wrap: wrap;
+    }
+    .custom-box {
+        width: 100%;
+    }
+    .brand-title{
+        font-weight: 300;
+        font-size: 22px;
+        line-height: 27px;
+        letter-spacing: 0.02em;
+        color: #000000;
+    }
+    .card-content{
+        height: auto;
+    }
+}
+.c-container lightning-layout {
+    height: 100%;
+}
+
+@media only screen and (min-width: 720px) and (max-width: 1200px) {
+    .c-container lightning-layout {
+        flex-direction: column;
+    }
+    .custom-box {
+        width: 100%;
+    }
+}
+.sub-head-container{
+    width: fit-content;
+}
+.hr-container{
+    border-top: 1.6px solid #C42121;
+    width: 50%;  
+}

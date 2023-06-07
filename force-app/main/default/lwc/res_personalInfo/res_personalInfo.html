@@ -1,0 +1,83 @@
+<!--
+  @description       :
+  @author            : mbunch@gorillagroup.com
+  @group             :
+  @last modified on  : 03-08-2022
+  @last modified by  : mbunch@gorillagroup.com
+-->
+<template>
+  <div data-id="formWrapper" class="slds-hidden">
+  <lightning-record-edit-form object-api-name="Reservation_Contact2__c" onsubmit={handleSubmit} onerror={handleError} density="comfy" class="slds-container_x-large">
+    <lightning-messages></lightning-messages>
+      <div class="personal-info">
+          <div class="personal-breadcrumb">
+            <div class="breadcrumb-link">
+              <a onclick={goBack}><span class="back-arrow"></span> BACK TO DEALER CONFIRMATION</a>
+            </div>
+          </div>
+          <div class="heading">
+            <div class="heading__title" lwc:dom="manual">
+              <!--{headingText}-->
+            </div>
+            <div class="heading__sub-title" lwc:dom="manual">
+              <!--{subHead}-->
+            </div>
+          </div>
+          <div class="row1">
+            <div class="form-firstname">
+                <lightning-input-field name="firstName" required="true" field-name={firstName} value={firstNameField}  ></lightning-input-field>
+            </div>
+            <div class="form-lastname">
+              <lightning-input-field name="lastName"  required="true" field-name={lastName} value={lastNameField} ></lightning-input-field>
+            </div>
+
+
+            <div class="form-email">
+                <!--Email type allows for email validation on entry however it requires a label -->
+                <lightning-input-field name="email"  label="Email Address" type="email" placeholder="username@example.com"
+                field-name={email} required="true" value={emailField}></lightning-input-field>
+            </div>
+
+            <div class="form-email">
+                <!--Confirm email type allows for email validation on entry however it requires a label -->
+                <lightning-input-field name="confirmEmail" label="Confirm Email Address" type="email" placeholder="username@example.com"
+                  field-name={confirmEmail} required="true" value={confirmEmailField}></lightning-input-field>
+            </div>
+
+            <div class="form-phone">
+              <!--Update to phone field to use Standard validation requires label-->
+              <lightning-input-field name="phone" type="tel" label="Phone"
+               pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="555-555-5555" field-name={phone} value={phoneField} required="true"></lightning-input-field>
+            </div>
+            <div class="form-zip">
+                <lightning-input-field name="zip" field-name={zip} required="true" value={zipField}></lightning-input-field>
+              </div>
+          </div>
+          <div class="row2">
+            <div class="accepted-terms">
+              <div class="accepted-terms-checkbox">
+                  <lightning-input-field name="accepted" field-name={accepted} value={acceptField}></lightning-input-field>
+              </div>
+              <div class="">
+
+                <div class="slds-form-element__static">
+                  <div class="byClickingcontainer" lwc:dom="manual">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="submit-button">
+              <lightning-button disabled={clickDisabled} type="submit" label={buttonLabel}></lightning-button>
+            </div>
+          </div>
+          <div class="row3">
+            <div class="slds-align_absolute-center">
+              <a class="personal-info-terms-link" href="https://www.acura.com/tools/reserve-online/terms-and-conditions" target="_blank"><u>View Full Reserve Terms and Conditions</u></a>
+              <!-- <a class="personal-info-terms-link" onclick={showTermsAndConditions}>View Full <u>Reserve Terms and Conditions</u></a> -->
+            </div>
+          </div>
+      </div>
+      <!---->
+  </lightning-record-edit-form>
+  </div>
+</template>

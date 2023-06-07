@@ -1,0 +1,54 @@
+<template>
+    <!-- <a id="top"></a> -->
+    <template if:true={showLoader}>
+        <lightning-spinner alternative-text="Loading" variant="brand" size="large"></lightning-spinner>
+
+    </template>
+    
+    <p class="left-title">CATEGORIES</p>
+    <ul class="slds-accordion">
+        <template if:true={categoryList} for:each={categoryList.Sections} for:item="parentCategory" for:index="index">
+            <li key={parentCategory.ID} class="slds-accordion__list-item">
+                <section class="slds-accordion__section elementnode">
+
+
+                    <button data-id={parentCategory.ID} data-index={index} data-name={parentCategory.Description}
+                        class="slds-button slds-button_reset slds-accordion__summary-action" onclick={showCollapseData}
+                        aria-controls="referenceId-42" aria-expanded="true" >
+                        <lightning-icon class="arrowicon slds-m-left_x-small " icon-name="utility:chevronright"
+                            alternative-text="Doc image" size="x-small"></lightning-icon>
+                        <span class="slds-accordion__summary-content slds-m-left_small">{parentCategory.Description}
+                        </span>
+                    </button>
+
+
+                    <div if:true={showSubCategory} class="slds-accordion__content bgLighter">
+                        <template if:true={subCategoryList} for:each={subCategoryList.IllustrationGroups}
+                            for:item="subCategory" for:index="index">
+                            <div class={subCategory.myCustomClass} style="cursor: pointer;" key={subCategory.index}
+                                data-id={subCategory.ID} onclick={handleOnSelectSubCategory}> {subCategory.Description}
+                            </div>
+                        </template>
+                    </div>
+                </section>
+            </li>
+        </template>
+    </ul>
+    <div class="slds-hide">
+    <!-- <template for:each={categoryList.Sections} for:item="category">
+        <lightning-accordion key={category.ID} allow-multiple-sections-open
+                         onsectiontoggle={handleSectionToggle}
+                         active-section-name={activeSections}>
+        <lightning-accordion-section name={category.ID} label={category.Description}>
+            <div if:true={showSubCategory} class="slds-accordion__content bgLighter">
+                <template if:true={subCategoryList} for:each={subCategoryList.IllustrationGroups} for:item="subCategory">
+                    <div class="slds-m-left_small subcategory" style="cursor: pointer;" key={subCategory.ID}
+                        data-id={subCategory.ID} onclick={handleOnSelectSubCategory}> {subCategory.Description}
+                    </div>
+                </template>
+            </div>
+        </lightning-accordion-section>
+    </lightning-accordion>
+    </template> -->
+</div>
+</template>

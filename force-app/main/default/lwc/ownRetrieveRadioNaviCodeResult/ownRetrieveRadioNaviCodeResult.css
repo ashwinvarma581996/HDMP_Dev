@@ -1,0 +1,74 @@
+.btn-wrapper{
+    margin: 16px 0px;
+    padding-right: 24px;
+  }
+  .label_style{
+    font-weight: 900;
+    font-size: 16px;
+    line-height: 26px;
+    letter-spacing: 1px;
+    color: #000000;
+    width: 50%;
+  }
+  .result_style{
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 26px;
+    letter-spacing: 1px;
+    color: #000000;
+    width: 50%;
+  }
+  .product-button-1 .slds-button{
+    border-color: var(--HondaRed);
+    border-radius: 2px;
+    font-family: Roboto;
+    font-style: normal;
+    height: 48px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    border: 2px solid #E42525;
+    background: #E42525;
+    font-weight: 900;
+    font-size: 16px;
+    line-height: 24px;
+    transition: 0.5s all;
+  }
+  .horizontal_line{
+    width: 100%;
+    height: 1px;
+    background: #D9D9D9;
+    margin: 28px 0px;
+  }
+  
+  .product-button-1 .slds-button:hover {
+    background: #C42121;
+  }
+  .product-button-1-text{
+    color: white;
+    size: 14px;
+  }
+  .product-button-2 .slds-button{
+    border-color: var(--HondaRed);
+    border-radius: 2px;
+    font-family: Roboto;
+    font-style: normal;
+    height: 48px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    border: 2px solid #E42525;
+    font-weight: 900;
+    font-size: 16px;
+    line-height: 24px;
+    transition: 0.5s all;
+  }
+  .product-button-2 .slds-button:hover {
+    background: #E42525;
+    color: #FFFFFF;
+  }
+  .product-button-2 .slds-button:hover .product-button-2-text {
+    color: #FFFFFF;
+  }
+  .product-button-2-text{
+    color: var(--HondaRed);
+    size: 14px;
+  }

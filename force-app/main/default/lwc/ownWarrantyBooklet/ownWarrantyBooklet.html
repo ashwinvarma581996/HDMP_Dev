@@ -1,0 +1,39 @@
+<template>
+    <div class="slds-container_medium slds-container_center slds-p-around_large">
+        <template if:true={booklet}>
+            <div class="slds-m-bottom_xx-large warranty-booklet">
+                <h3>Warranty Booklet</h3>
+                <lightning-layout class="slds-grid_vertical-align-end slds-m-bottom_xx-large slds-m-top_x-small"
+                    multiple-rows>
+                    <lightning-layout-item size="12" small-device-size="12" medium-device-size="12"
+                        large-device-size="12">
+                        <c-own-card title={booklet.title} brand="default" icon-image={icon} titlecolor={titlecolor}
+                            hide-body-section={booklet.hideBody} header-clickable="true" onheader={handleHeaderClick}
+                            data-link={booklet.download_link} data-title={booklet.title}>
+                            <div slot="action">
+                                <lightning-icon class={iconClass} icon-name="utility:download" size="x-small"
+                                    slot="actions" data-link={booklet.download_link} data-title={booklet.title}
+                                    onclick={handleHeaderClick}></lightning-icon>
+                            </div>
+                            <div slot="default">
+                                <lightning-formatted-rich-text value={booklet.body}></lightning-formatted-rich-text>
+                            </div>
+                        </c-own-card>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </div>
+        </template>
+        <template if:true={fetchedData}>
+            <template if:false={booklet}>
+                <div class="slds-m-bottom_xx-large warranty-booklet err-msg-div">
+                    <div class="err error-msg">
+                        <div class="err-title">
+                            [ Warranty Booklet ]
+                        </div>
+                        <img src={warningicon} class="warning-icon" />DATA UNAVAILABLE
+                    </div>
+                </div>
+            </template>
+        </template>
+    </div>
+</template>

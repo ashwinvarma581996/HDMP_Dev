@@ -1,0 +1,19 @@
+<template>
+   <div class="slds-container_large slds-container_center slds-p-around_large">
+        <lightning-layout multiple-rows if:true={aboutMaintenanceMinder}> 
+            <lightning-layout-item  size="12" small-device-size="12" medium-device-size="12" large-device-size="12" >
+                <h3>{aboutMaintenanceMinder.title}</h3>
+                <template if:false={isGuest}>
+                    <lightning-formatted-rich-text class="description" value={aboutMaintenanceMinder.descriptionContent}></lightning-formatted-rich-text>
+                </template>
+                <template if:true={isGuest}>
+                    <lightning-formatted-rich-text class="description" value={aboutMaintenanceMinder.body}></lightning-formatted-rich-text>
+                </template>
+            </lightning-layout-item>
+            <lightning-layout-item  size="12" small-device-size="12" medium-device-size="12" large-device-size="12" class="popular-help-video-large slds-m-vertical_xx-large">
+                <iframe class="iframe-video" frameborder="0" allowfullscreen src={aboutMaintenanceMinder.video1}>
+                </iframe>
+            </lightning-layout-item>
+        </lightning-layout>
+    </div>
+</template>

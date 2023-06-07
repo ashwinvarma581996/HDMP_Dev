@@ -1,0 +1,221 @@
+.head {
+    color: rgb(15, 15, 15);
+    font-style: bold;
+    position: static;
+    font-size: 26px;
+    /*  text-shadow: 2px 1px gray; */
+}
+
+.tableResponsive {
+    overflow-x: auto;
+}
+.finalAmount{
+    text-align:right!important;
+}
+.primaryGrayBtn{
+    background: gray !important;
+    background-color: gray !important;
+}
+.address-book-wrapper {
+    margin-bottom: 30px;
+    border-bottom: #ccc 1px solid;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+@media screen and (min-width: 768px) {
+    .address-book-wrapper {
+        margin-left: 100px;
+        margin-right: 100px;
+    }
+    .user-section-header .primaryRedBtn{
+        margin-left: auto;
+        margin-right: 88px;
+    }
+}
+.addressBookActions {
+    margin-left: auto;
+}
+.hondabutton {
+    height: 30px;
+    font-size: 12px;
+    font-weight: normal !important;
+    line-height: normal;
+    margin: 0;
+    width: 200px;
+    border-radius: 0 !important;
+}
+
+.myAddressBookModal {
+    font-size: 16px;
+}
+
+.slds-text-heading_medium .textRed {
+    font-size: 13px;
+    font-weight: normal;
+}
+.markPreferred lightning-input{display: inline-block;}
+@media screen and (max-width: 767px) {
+    .myAddressBookModal .slds-medium-size_6-of-12 .slds-text-align_right {
+        text-align: left;
+    }
+    .myAddressBookModal .slds-p-around_small.slds-size_12-of-12.slds-small-size_12-of-12.slds-medium-size_6-of-12.slds-large-size_6-of-12 {
+        padding: 0 12px;
+    }
+    .myAddressBookModal header.slds-modal__header {
+        padding: 6px;
+    }
+    .myAddressBookModal header.slds-modal__header h2 {
+        font-size: 18px;
+    }
+    .user-section-header {
+        margin-top: 50px;
+    }
+    .user-header-actions {
+        padding-top: 16px;
+    }
+    .user-header-actions .hondabutton {
+        margin: auto;
+    }
+    .addressBookActions {
+        float: none;
+        padding-top: 16px;
+        margin-left: unset;
+        width: 100%;
+    }
+    .addressBookActions .hondabutton {
+        margin: auto;
+    }
+}
+
+.absoluteCenter {
+    display: grid;
+    justify-content: center;
+    align-content: center;
+}
+.cartDealerInstall .slds-box {
+    border: 1px solid rgb(151, 151, 151);
+    height: 100px;
+    border-radius: 0;
+}
+.inlineBlock {
+    width: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.centerElement {
+    display: flex;
+    align-items: center;
+}
+
+
+.greyColor {
+    color: #D4D4D4;
+}
+
+.allBorders {
+    border: 1px solid #D4D4D4;
+}
+
+.tabHeight {
+    height: 40px;
+}
+
+.addressModal .custom-box .typedcls,
+.addressModal .suggestedCls {
+    display: inline-block;
+    width: 30px;
+    vertical-align: top;
+}
+
+.addressModal .custom-box .slds-grid {
+    width: calc(100% - 40px);
+    display: inline-block;
+}
+
+.d-block {
+    display: block;
+}
+
+@media (min-width: 48em) {
+    .addressModal .slds-modal__container {
+        width: 58%;
+        max-width: 68rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .addressModal .slds-modal__container .custom-box {
+        margin: 10px 0;
+    }
+}
+
+.selectState {
+    border-radius: 0px;
+    border: 1px solid #8f8c8c;
+    height: 45px;
+}
+
+.error-province {
+    border: 1.5px solid #ea3156;
+}
+
+.addRadioWrap {
+    position: relative;
+    min-height: 15px;
+    min-width: 15px;
+}
+input[type='radio'] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    top: 0px;
+    left: 0px;
+    z-index: 9;
+}
+.shipAddText {
+    font-size: 16px;
+    font-weight: normal;
+}
+.checkmark {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 15px;
+    width: 15px;
+    background-color: #fff;
+    border: 1px solid #666;
+    border-radius: 50%;
+}
+
+input[type='radio']:checked~.checkmark {
+    background-color: transparent;
+    border: 1px solid #666;
+}
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+input[type='radio']:checked~.checkmark:after {
+    display: block;
+}
+
+.checkmark:after {
+    top: 2px;
+    left: 2px;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #E42525;
+}
+.add-new-address-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    cursor: pointer;
+}

@@ -1,0 +1,204 @@
+<template>
+    <lightning-layout multiple-rows>
+        <lightning-layout-item size="12" padding="around-large" >
+            <lightning-layout multiple-rows>
+                <lightning-layout-item size="12">
+                    <div class="breadcrum-text" onclick={handleBackClick} tabindex="0" role="button"> Back </div>
+                </lightning-layout-item>
+                <lightning-layout-item size="12" small-device-size="12" medium-device-size="4" large-device-size="4"  class="page-title-div">
+                    <h1 class="page-title">Find {brandPrefix} <br/> {currentBrand} Dealer</h1>
+                </lightning-layout-item>
+                <lightning-layout-item size="12" small-device-size="12" medium-device-size="8" large-device-size="8" class="slds-p-top_large">
+                    <lightning-layout multiple-rows>
+                        <lightning-layout-item size="12" class="slds-p-bottom_small search-radio-div">
+                            <lightning-radio-group class="search-radio" name="radioGroup" options={searchTypes} value={selectedSearchType} type="button" onchange={searchTypeChange} tabindex="0"></lightning-radio-group>
+                        </lightning-layout-item>
+                        <lightning-layout-item if:true={isStateCity} size="12"  class="slds-p-bottom_small">   
+                            <lightning-layout>
+                                <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="6" >
+                                    <lightning-combobox class="find-brand-combobox filter-combobox slds-m-top_xx-small" name="State"
+                                    label="State" variant="label-hidden" value={selectedStateValue} placeholder={placeholderText}
+                                    options={dropdownOptions} onchange={handleStateSelection} disabled={comboboxDisabled} tabindex="0" required></lightning-combobox>
+                                </lightning-layout-item>
+                            </lightning-layout>
+                            <!-- <span class=own-combobox-label>State</span> -->
+                        </lightning-layout-item>
+                        <lightning-layout-item size="12" class="slds-p-bottom_small">   
+                            <lightning-layout multiple-rows vertical-align="start">
+                                <lightning-layout-item size="12" small-device-size="12" medium-device-size="3" large-device-size="4">
+                                    <lightning-input type="text" required variant="label-hidden" value={searchedText} placeholder={searchPlaceholder} class="input-search" onchange={handlSearchText}  aria-labelledby={searchPlaceholder}></lightning-input>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="12" small-device-size="12" medium-device-size="3" large-device-size="2">
+                                    <button class="list-button float-style" onclick={handleDealerSearch} tabindex="0">Search</button>
+                                </lightning-layout-item>
+                            </lightning-layout>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="12" class="slds-p-bottom_small">   
+                            <template for:each={mileValues} for:item="item">
+                                <fieldset key={item.value} style="display: block; float: left;">
+                                    <div class="slds-form-element__control">
+                                        <span class="slds-radio customr-radio">
+                                            <input name="radiogroup" id={item.value} type="radio" value={item.value} checked={item.checked} onchange={handlMile}/>
+                                            <label class="slds-radio__label" for={item.value}  aria-label="Radio button miles">
+                                                <span class="slds-radio_faux"></span>
+                                                <label for={item.label} class="slds-form-element__label">{item.label}</label>
+                                            </label>
+                                        </span>
+                                    </div>
+                                </fieldset>
+                            </template>          
+                        </lightning-layout-item>
+                        <lightning-layout-item if:true={isPowerequipment} size="12" small-device-size="12" medium-device-size="6" large-device-size="6" class="slds-p-bottom_small">   
+                            <lightning-combobox class="find-brand-combobox filter-combobox slds-m-top_xx-small" name="Product"
+                                    variant="label-hidden" value={selectedFilterCode}
+                                    options={PEProductFilterCodes} onchange={handleProductFilterSelection} ></lightning-combobox>        
+                        </lightning-layout-item>
+                    </lightning-layout>
+                </lightning-layout-item>
+            </lightning-layout>
+        </lightning-layout-item>
+        <lightning-layout-item size="12" class="slds-border_top slds-m-top_large">
+            <template if:true={isDataLoading}>
+                <div class="slds-m-vertical_xx-large slds-p-vertical_xx-large"  ><!---->
+                     <c-own-data-loading-spinner></c-own-data-loading-spinner>
+                 </div>
+           </template>
+           <template if:false={isDataLoading}>
+                <template if:true={error}>
+                    <lightning-layout-item if:true={errorMessage} size="12">
+                        <lightning-layout horizontal-align="center" class="slds-m-vertical_xx-large">
+                            <lightning-layout-item>
+                                <lightning-icon class="slds-p-right_small error-icon" icon-name="utility:warning"
+                                size="medium"></lightning-icon>
+                            </lightning-layout-item>
+                            <lightning-layout-item >
+                                <div class="slds-m-top_x-small error-message" role="alert" tabindex="0">{errorMessage}</div>
+                            </lightning-layout-item>
+                        </lightning-layout>
+                    </lightning-layout-item>
+                </template>
+                <template if:false={error}>
+                    <lightning-layout multiple-rows>
+                        <lightning-layout-item size="12"  small-device-size="12" medium-device-size="4" large-device-size="4"    class="dealer-list div1">
+                            <lightning-layout multiple-rows class="all-dealer-content">
+                                <lightning-layout-item size="12">
+                                    <lightning-layout multiple-rows horizontal-align="space">
+                                        <template if:true={enableFilter}>
+                                            <lightning-layout-item if:true={dealerAwards} size="10" small-device-size="10" medium-device-size="5" large-device-size="5">
+                                                <lightning-combobox class="filter-combobox" placeholder="Services & Awards" options={dealerAwards} value={selectedDealerAwards} onchange={handleChangeDealerAwards}></lightning-combobox>
+                                            </lightning-layout-item>
+                                            <lightning-layout-item if:true={dealerProducts} size="10" small-device-size="10" medium-device-size="5" large-device-size="5">
+                                                <lightning-combobox class="filter-combobox" placeholder="Products" options={dealerProducts} value={selectedDealerProduct} onchange={handleChangeDealerProduct}></lightning-combobox>
+                                            </lightning-layout-item>
+                                        </template>
+                                    </lightning-layout>
+                                </lightning-layout-item>
+                                <template if:false={dealerLocations.length}>
+                                    <div class="warning-message slds-p-top_large">
+                                        Sorry, there are no results based on the information you provided.
+                                    </div>
+                                </template>
+                                <template if:true={dealerLocations.length}>
+                                    <lightning-layout-item size="12" class="slds-p-top_large slds-p-horizontal_large">
+                                        <lightning-layout multiple-rows>
+                                            <template for:each={dealerLocations} for:item="dealer" for:index="index">
+                                                <lightning-layout-item  key={dealer.indxVal} class="slds-p-vertical_large slds-border_bottom" size="12" style="cursor: pointer;" data-idx={dealer.indxVal} >
+                                                    <lightning-layout>
+                                                        <lightning-layout-item size="1" class="slds-m-right_small">
+                                                            <div class="dealer-no">{dealer.sno}</div>
+                                                        </lightning-layout-item>
+                                                        <lightning-layout-item size="11">
+                                                            <lightning-layout multiple-rows>
+                                                                <lightning-layout-item size="12">
+                                                                    <lightning-layout>
+                                                                        <lightning-layout-item size="10">
+                                                                            <div class="location-title">{dealer.name}</div>
+                                                                        </lightning-layout-item>
+                                                                        <template if:false={dealer.serviceDealer}>
+                                                                            <lightning-layout-item if:true={showFavoriteIcon} size="2" class="slds-text-align_right">
+                                                                                <lightning-icon class={dealer.favoriteIconClass} icon-name="utility:favorite" data-name={dealer.name} data-poiid={dealer.poiid} data-index={dealer.indxVal} onclick={handleStarClick} size="small" title="Favorite">
+                                                                                </lightning-icon>
+                                                                            </lightning-layout-item>
+                                                                        </template>
+                                                                    </lightning-layout> 
+                                                                    <lightning-layout multiple-rows horizontal-align="spread" tabindex="0" role="link">
+                                                                        <template for:each={dealer.badges} for:item="badge">
+                                                                             <lightning-layout-item key={badge}>
+                                                                                  <lightning-badge  class="attribute-badge slds-m-bottom_small" label={badge}></lightning-badge>
+                                                                             </lightning-layout-item>
+                                                                        </template>
+                                                                   </lightning-layout>                                                    
+                                                                    <template if:true={dealer.showDistance}>
+                                                                        <div class="location-distance slds-p-bottom_small">{dealer.distance}</div>
+                                                                    </template>
+                                                                    <div class="location-address slds-p-bottom_small">
+                                                                        {dealer.shortAddr}
+                                                                        <br/>
+                                                                        {dealer.addressLine2}
+                                                                    </div>
+                                                                    <!-- <a class="location-contact">{dealer.phone}</a> -->
+                                                                    <lightning-formatted-text class="location-contact show-desktop-format" value={dealer.phone}></lightning-formatted-text>
+                                                                    <lightning-formatted-phone class="location-contact show-mobile-format" value={dealer.phone}></lightning-formatted-phone>
+                                                                </lightning-layout-item>
+                                                                <lightning-layout-item size="12" class="slds-p-vertical_small">
+                                                                    <a class="more-details-link" onclick={handleMoreDetails} data-index={dealer.indxVal} tabindex="0" role="link">
+                                                                        <lightning-icon class="more-details-icon" icon-name={dealer.detailsIcon} size="xx-small"></lightning-icon> {dealer.detailsLabel}
+                                                                    </a>
+                                                                </lightning-layout-item>
+                                                                <template if:true={dealer.website}>
+                                                                    <lightning-layout-item size="12" class="slds-p-vertical_small">
+                                                                        <lightning-layout multiple-rows>
+                                                                            <lightning-layout-item size="12" small-device-size="12" medium-device-size="5" large-device-size="5">
+                                                                                <button class="outline-btn" onclick={handleDealerWebsite} data-url={dealer.website} tabindex="0" role="button">Dealer Website</button>
+                                                                            </lightning-layout-item>
+                                                                            <!--  SCHEDULE SERVICE LINK COMMENTED AS PER ARUN'S DISCUSSION WITH GRACE-->
+                                                                                <lightning-layout-item if:true={dealer.serviceSchedulingUrl} size="12" small-device-size="12" medium-device-size="6" large-device-size="6">
+                                                                                <button class="outline-btn" data-url={dealer.serviceSchedulingUrl} onclick={handleScheduleService} tabindex="0" role="button">Schedule Service</button>        
+                                                                            </lightning-layout-item>
+                                                                        </lightning-layout>                                                                        
+                                                                    </lightning-layout-item>
+                                                                </template>
+                                                                <template if:true={dealer.showOperationHours}>
+                                                                    <lightning-layout-item size="12" class="slds-m-top_small slds-border_top slds-p-vertical_small">
+                                                                        <lightning-layout multiple-rows horizontal-align="spread">
+                                                                            <lightning-layout-item  size="12"  class="operation-hours-title slds-p-vertical_small">
+                                                                                HOURS OF OPERATION
+                                                                            </lightning-layout-item>
+                                                                            <template for:each={dealer.operationHours} for:item="operationHour">
+                                                                                <lightning-layout-item key={operationHour.name} size="5"  class="slds-p-vertical_small">
+                                                                                    <p class="hour-name">{operationHour.name}</p>
+                                                                                    <template for:each={operationHour.hours} for:item="hour">
+                                                                                        <p class="hour-detail" key={hour}>{hour}</p>
+                                                                                    </template>
+                                                                                </lightning-layout-item>
+                                                                            </template>
+                                                                        </lightning-layout>                                                                        
+                                                                    </lightning-layout-item>
+                                                                </template>
+                                                            </lightning-layout>
+                                                        </lightning-layout-item>
+                                                    </lightning-layout>                                        
+                                                </lightning-layout-item> 
+                                            </template>
+                                        </lightning-layout>   
+                                    </lightning-layout-item>
+                                </template>
+                                <lightning-layout-item if:true={showMoreDealers} size="12" class="slds-p-vertical_large slds-p-horizontal_large slds-text-align_center">
+                                    <button class="list-button" onclick={handlLoadMore} tabindex="0" role="link">More Dealers</button>
+                                </lightning-layout-item>
+                            </lightning-layout>               
+                        </lightning-layout-item>
+                        <template if:true={mapMarkers.length}>
+                            <lightning-layout-item size="12"  small-device-size="12" medium-device-size="8" large-device-size="8" class="div2">
+                                <lightning-map map-markers={mapMarkers} list-view="hidden" options={mapOptions} class="img-map"></lightning-map>
+                            </lightning-layout-item>
+                        </template>
+                        <lightning-layout-item size="12" class="slds-p-left_small slds-p-top_x-large slds-p-bottom_small div3">
+                            <a class="green-dealer-link" href="https://greendealer.honda.com" target="_blank" tabindex="0" role="link">For more information about Green Dealers, go to: <b>https://greendealer.honda.com</b></a>
+                        </lightning-layout-item>
+                    </lightning-layout>
+                </template>
+           </template>
+        </lightning-layout-item>
+    </lightning-layout>
+ </template>

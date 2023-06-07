@@ -1,0 +1,25 @@
+<template>
+    <!--{listCategories}-->
+
+    <!--div class="slds-m-around_medium"-->
+        <template if:true={listCategories}>
+            <!--div class="slds-grid" -->
+                <ul role="listbox" class="slds-grid slds-wrap">
+            <template for:each={listCategories} for:item="cat">
+                <!--li key={cat.Id}  class="slds-border_bottom" role="option"-->
+                
+                <div class=" slds-size_1-of-3 slds-box slds-box_x-small slds-text-align_center slds-m-around_x-small slds-theme_shade" data-label="" key={cat.Id}>
+                    <!--div class="slds-box slds-box_x-small slds-text-align_center slds-m-around_x-small slds-theme_shade"-->
+                        
+                        <a name={cat.Id} data-id={cat.Id} onclick={clickCategory} >
+                            {cat.Name} 
+                        </a>
+                      </div>
+                <!--/div-->
+            <!--/li-->
+            </template>
+        <!--/div-->
+        </ul>
+        </template>
+    <!--/div-->
+</template>

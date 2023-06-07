@@ -1,0 +1,54 @@
+<!-- //============================================================================
+// Title:    Honda Owners Experience - Free Trial Card
+//
+// Summary:  This Card links to the Free Trial
+//
+// History:
+// May 17, 2021 Arunprasad N (Wipro) Original Author
+// July 15, 2021 Jim Kohs (Wipro) refactored to ownBaseCard2
+//=========================================================================== -->
+<template>
+    <c-own-card title={title} titlecolor={titlecolor} icon={icon} brand={brand} showfooter={showFooter} onheader={handleHeader} onfooter={handleFooter} onaction={handleAction}>
+        <div slot="default">
+            <!-- ============================= -->
+            <!-- ====== Default HTML ========= -->
+            <!-- ============================= -->
+            <div>Err: Please chose a brand</div>
+        </div>
+
+        <div slot="acura">
+            <!-- ============================= -->
+            <!-- ====== Acura HTML   ========= -->
+            <!-- ============================= -->
+            <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</div>
+        </div>
+
+        <div slot="honda">
+            <!-- ============================= -->
+            <!-- ====== Honda HTML   ========= -->
+            <!-- ============================= -->
+            <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</div>
+        </div>
+
+        <div slot="powersports">
+            <!-- ============================= -->
+            <!-- ====== PS HTML      ========= -->
+            <!-- ============================= -->
+            <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</div>
+        </div>
+
+        <div slot="powerequipment">
+            <!-- ============================= -->
+            <!-- ====== PE HTML      ========= -->
+            <!-- ============================= -->
+            <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</div>
+        </div>
+
+        <!-- ============================= -->
+        <!-- ====== Marine HTML   ========= -->
+        <!-- ============================= -->
+        <div slot="marine">
+            <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</div>
+        </div>
+    </c-own-card>
+</template>

@@ -1,0 +1,99 @@
+.table-header {
+    background-color: #f3f3f3;
+    font-family: Roboto;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 900;
+    line-height: 22px;
+    letter-spacing: 0.02em;
+    text-align: left;
+    color: black;
+}
+
+.first-td {
+    vertical-align:top
+}
+
+.first-td-text {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 26px;
+    align-items: center;
+}
+.service-body{
+    font-style: italic;
+}
+@media only screen and (min-width: 601px) {
+    .page-title {
+        font-family: Roboto;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 300;
+        line-height: 26px;
+        letter-spacing: 0em;
+        text-align: left;
+    }
+    .table-body{
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 300;
+        font-size: 16px;
+        line-height: 26px;
+        display: flex;
+        align-items: center;
+        color: #080707;
+    }
+    .heading-text{
+        font-weight: 300;
+        font-size: 32px;
+        line-height: 37px;
+        letter-spacing: 0.02em;
+        color: #000000;
+     }
+}
+
+@media only screen and (max-width: 600px) {
+    .page-title {
+        font-family: Roboto;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 300;
+        line-height: 24px;
+        letter-spacing: 0em;
+        text-align: left;
+
+    }
+    .table-body{
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 300;
+        font-size: 16px;
+        line-height: 24px;
+        display: flex;
+        align-items: center;
+        color: #080707;
+    }
+     .heading-text{
+        font-weight: 300;
+        font-size: 22px;
+        line-height: 27px;
+        letter-spacing: 0.02em;
+        color: #000000;
+     }
+}
+.table td{
+    padding: 5px;
+}
+
+ .head-container{
+    display: flex;
+    align-items: center;
+}
+.sub-container-1{
+    min-width: 64px;
+}
+.sub-container-2{
+    margin-left: -10px;
+}

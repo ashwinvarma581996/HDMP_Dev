@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>52.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property label="Content 1" name="contentId1" type="ContentReference" />
+            <property label="Content 2" name="contentId2" type="ContentReference"/>
+            <property label="Content for Yes Acura MY23" name="contentYesAcuraMy23" type="ContentReference" />
+            <property label="Content for No Acura MY23" name="contentNoAcuraMy23" type="ContentReference" />
+            <property label="Content for Yes Acura" name="contentYesAcura" type="ContentReference" />
+            <property label="Content for No Acura" name="contentNoAcura" type="ContentReference" />
+            <property label="Content for Yes Honda" name="contentYesHonda" type="ContentReference" />
+            <property label="Content for No Honda" name="contentNoHonda" type="ContentReference" />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

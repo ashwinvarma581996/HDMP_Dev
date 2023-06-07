@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>52.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property type="ContentReference" name="hondaActiveContentId" label="Honda Active Content ID" />
+            <property type="ContentReference" name="hondaInactiveContentId" label="Honda Inactive Content ID" />
+            <property type="ContentReference" name="acuraActiveContentId" label="Acura Active Content ID" />
+            <property type="ContentReference" name="acuraInactiveContentId" label="Acura Inactive Content ID" />
+            <property label="Page Type" name="pageType" type="String" datasource="Phone,Bluetooth"/>
+            <property label="Button Name" name="buttonName" type="String" />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

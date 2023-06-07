@@ -1,0 +1,16 @@
+.THIS .cb-section_column{
+    padding: 8px 8px 13px 8px !important;
+}
+
+.THIS .helpPageBody{
+    padding : 50px 70px 0px 70px !important;
+}
+
+@media only screen and (max-width: 1025px){
+    .THIS .helpPageBody{
+        padding : 10px 10px !important;
+    }
+    /* .THIS .cb-section_column{
+        padding: 0px 8px !important;
+    } */
+}

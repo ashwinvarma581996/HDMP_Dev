@@ -1,0 +1,32 @@
+.recall-row-container{
+    background-color: #FFA638;
+}
+.recall-notification{
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 26px;
+    /* align-items: center; */
+    padding: 12px 8px 6px 0px;
+}
+.recall-text-container{
+    align-items: center;
+    text-align: center;
+    
+}
+.recall-text{
+    margin-left: 5px;
+}
+.recall-close-container{
+    text-align: right;
+}
+.recall-view-link{
+    font-weight: bold;
+    text-decoration: underline;
+    color: black;
+}
+.custom-icon {
+    --sds-c-icon-color-foreground-default: black;
+}
+.close-icon{
+    cursor: pointer;
+}

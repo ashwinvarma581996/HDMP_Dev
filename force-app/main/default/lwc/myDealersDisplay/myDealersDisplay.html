@@ -1,0 +1,254 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 06-06-2023
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+	<template  if:true={dealersList} for:each={dealersList} for:item="dealersItem"  for:index="indx"> 
+   <div key={dealersItem.Id} class=" slds-m-bottom_large slds-p-bottom_large">
+	  <lightning-layout multiple-rows>
+	 <lightning-layout-item class="dealers-listing" size="12" small-device-size="12" medium-device-size="9" large-device-size="9">
+		  <div class="custom-box slds-text-heading_medium slds-m-bottom_medium slds-hyphenate font-h4">{dealersItem.Name}</div> 
+		  <lightning-layout multiple-rows pull-to-boundary="small">
+			  <lightning-layout-item size="12" small-device-size="12" medium-device-size="2" large-device-size="2" padding="horizontal-small">
+				  <div class="custom-box"><b>Type</b></div>
+			  </lightning-layout-item>
+			  <!--Updated by saikiran as part of HDMP-12417-->
+			  <lightning-layout-item size="12" small-device-size="12" medium-device-size="4" large-device-size="4" padding="horizontal-small">
+				  <div class="custom-box">{dealersItem.brandName}</div>
+			  </lightning-layout-item>
+			  <lightning-layout-item size="12" small-device-size="12" medium-device-size="2" large-device-size="2" padding="horizontal-small">
+				  <div class="custom-box slds-m-left_large"><b>Parts Manager</b></div>
+			  </lightning-layout-item>
+			  <lightning-layout-item size="12" small-device-size="12" medium-device-size="4" large-device-size="4" padding="horizontal-small">
+				  <div class="custom-box">{dealersItem.First_Name__c} {dealersItem.Last_Name__c} </div>
+			  </lightning-layout-item>
+		  </lightning-layout>
+		  <lightning-layout multiple-rows pull-to-boundary="small">
+			  <lightning-layout-item size="12" small-device-size="12" medium-device-size="2" large-device-size="2" padding="horizontal-small">
+				  <div class="custom-box"><b>Address</b></div>
+			  </lightning-layout-item>
+			  <lightning-layout-item size="12" small-device-size="12" medium-device-size="4" large-device-size="4" padding="horizontal-small">
+				  <div class="custom-box">{dealersItem.ShippingStreet}<br/>
+								  {dealersItem.BillingCity},&nbsp;{dealersItem.BillingState}&nbsp;{dealersItem.BillingPostalCode}
+							  </div>
+							  <div class="mapInline">
+								  <div><img src={mapIcon} alt="lampIcon" class="customIcon" onclick={goToMap} data-dealerno={dealersItem.PoIId__c}
+									  data-title={dealersItem.Name}  ></div>
+								  <div class="textRed mapTitle" onclick={goToMap} 
+								  data-dealerno={dealersItem.PoIId__c}
+								  data-title={dealersItem.Name}>
+									  Map This
+								  </div>
+							  </div>
+			  </lightning-layout-item>
+			  <lightning-layout-item size="12" small-device-size="12" medium-device-size="2" large-device-size="2" padding="horizontal-small">
+				  <div class="custom-box slds-m-left_large"><b>Hours</b></div>
+			  </lightning-layout-item>
+			  <lightning-layout-item size="12" small-device-size="12" medium-device-size="4" large-device-size="4" padding="horizontal-small">
+				  <!--updated by saikian as part of HDMP 9914-->
+				  <template if:true={dealersItem.OperationHours}>
+					<template for:each ={dealersItem.OperationHours} for:item="hours">
+					  <div class="custom-box" key={hours}>{hours}</div>
+					</template>
+</template>
+</lightning-layout-item>
+</lightning-layout>
+<lightning-layout multiple-rows pull-to-boundary="small">
+    <lightning-layout-item size="12" small-device-size="12" medium-device-size="2" large-device-size="2" padding="horizontal-small">
+        <div class="custom-box"><b>Phone</b></div>
+    </lightning-layout-item>
+    <lightning-layout-item size="12" small-device-size="12" medium-device-size="4" large-device-size="4" padding="horizontal-small">
+        <div class="custom-box">
+            <lightning-formatted-phone disabled value={dealersItem.Phone}></lightning-formatted-phone>
+        </div>
+    </lightning-layout-item>
+    <lightning-layout-item size="12" small-device-size="12" medium-device-size="2" large-device-size="2" padding="horizontal-small">
+        <div class="custom-box slds-m-left_large"><b>Awards</b></div>
+    </lightning-layout-item>
+    <lightning-layout-item size="12" small-device-size="12" medium-device-size="4" large-device-size="4" padding="horizontal-small">
+        <div class="custom-box">{dealersItem.B2B_Dealer_Award__c}</div>
+    </lightning-layout-item>
+</lightning-layout>
+<lightning-layout multiple-rows pull-to-boundary="small">
+    <lightning-layout-item size="12" small-device-size="12" medium-device-size="2" large-device-size="2" padding="horizontal-small">
+        <div class="custom-box"><b>Email</b></div>
+    </lightning-layout-item>
+    <lightning-layout-item size="12" small-device-size="12" medium-device-size="4" large-device-size="4" padding="horizontal-small">
+        <div class="custom-box">{dealersItem.Email__c}</div>
+    </lightning-layout-item>
+    <lightning-layout-item size="12" small-device-size="12" medium-device-size="2" large-device-size="2" padding="horizontal-small">
+        <div class="custom-box slds-m-left_large"><b>Payments Type Supported</b></div>
+    </lightning-layout-item>
+    <lightning-layout-item size="12" small-device-size="12" medium-device-size="4" large-device-size="4" padding="horizontal-small">
+        <div class="custom-box">Visa , Master Card, Paypal</div>
+    </lightning-layout-item>
+</lightning-layout>
+<lightning-layout multiple-rows pull-to-boundary="small">
+    <lightning-layout-item size="12" small-device-size="12" medium-device-size="2" large-device-size="2" padding="horizontal-small">
+        <div class="custom-box"><b>Website</b></div>
+    </lightning-layout-item>
+    <lightning-layout-item size="12" small-device-size="12" medium-device-size="4" large-device-size="4" padding="horizontal-small">
+        <div class="custom-box">
+            <lightning-formatted-url value={dealersItem.Website}></lightning-formatted-url>
+        </div>
+    </lightning-layout-item>
+<!--Pratik LTIM added for Sp-4 Sales Tax Juris-->
+	<lightning-layout-item size="12" small-device-size="12" medium-device-size="2"
+							large-device-size="2" padding="horizontal-small">
+							<div class="custom-box slds-m-left_large"><b>Ship to States</b></div>
+						</lightning-layout-item>
+						<lightning-layout-item size="12" small-device-size="12" medium-device-size="4"
+							large-device-size="4" padding="horizontal-small">
+							<!--- Lakshmi LTIM Added for Sprint 4 Tax Jurist HDMP-19454,HDMP-19445-->
+							<div class="custom-box">{dealersItem.shippingtaxstate}</div>
+						</lightning-layout-item>
+						<!--Pratik LTIM added for Sp-4 Sales Tax Juris-->
+</lightning-layout>
+<lightning-layout multiple-rows pull-to-boundary="small">
+    <lightning-layout-item size="12" small-device-size="12" medium-device-size="2" large-device-size="2" padding="horizontal-small">
+        <div class="custom-box"><b>Policies</b></div>
+    </lightning-layout-item>
+    <lightning-layout-item size="12" small-device-size="12" medium-device-size="3" large-device-size="3" padding="horizontal-small">
+        <lightning-formatted-url value={dealersItem.Privacy_Policy_URL__c} label="Privacy Policy" target="_blank"></lightning-formatted-url>
+        <span class="textRed">&nbsp; | &nbsp;</span>
+		<!--Added by Pradeep for HDMP-8502-->
+        <template if:true={dealersItem.Return_Policy__c}>
+			<lightning-button variant="base" label="Return Policy" title="Return"  data-id={dealersItem.Id} onclick={showPopUp}
+			class="textRed hyperlinkButton"></lightning-button>
+		  </template>
+
+	</lightning-layout-item>
+    <lightning-layout-item size="12" small-device-size="12" medium-device-size="2" large-device-size="2" padding="horizontal-small">
+        <div class="custom-box">
+            <!--<b>Coupons and </br>Promos</b>--></div>
+    </lightning-layout-item>
+    <lightning-layout-item size="12" small-device-size="12" medium-device-size="4" large-device-size="4" padding="horizontal-small">
+        <div class="custom-box"></div>
+    </lightning-layout-item>
+</lightning-layout>
+
+
+
+
+<lightning-layout multiple-rows pull-to-boundary="small">
+    <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="2" padding="horizontal-small">
+        <!--updated by saikiran as part of HDMP-5381-->
+        <div class="custom-box slds-m-top_small"><a data-id={dealersItem.Id} data-division={dealersItem.DivisionCd__c} onclick={RemoveDealer}>Remove Dealer </a></div>
+    </lightning-layout-item>
+</lightning-layout>
+</lightning-layout-item>
+<lightning-layout-item size="12" small-device-size="12" medium-device-size="3" large-device-size="3" alignment-bump="left">
+    <div class="slds-text-align_right">
+        <template if:true={dealersItem.disableBtn}>
+				  <button class="slds-button slds-m-bottom_medium themeBtn primaryRedBtn hondabutton" title="Shop Now" disabled>
+					  Shop Now
+				  </button>
+			  </template>
+        <template if:false={dealersItem.disableBtn}>
+				  <button class="slds-button slds-m-bottom_medium themeBtn primaryRedBtn hondabutton" title="Shop Now" data-dealerno={dealersItem.PoIId__c}  data-title={dealersItem.Name} data-id={dealersItem.Id} onclick={handleToShop} data-division={dealersItem.DivisionCd__c}>
+					  Shop Now
+				  </button>
+			  </template>
+    </div>
+</lightning-layout-item>
+</lightning-layout>
+<div class="demo-only" style="height: 640px;" if:true={checkBool}>
+
+    <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+
+        <div class="slds-modal__container">
+
+            <header class="slds-modal__header">
+
+                <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeModal}>
+								  <lightning-icon icon-name="utility:close" size="medium">
+								  </lightning-icon>
+								  <span class="slds-assistive-text">Close</span>
+							  </button>
+                <h2 class="slds-text-heading_medium slds-hyphenate">Return Policy Information</h2>
+
+            </header>
+
+            <div class="slds-modal__content slds-p-around_medium">
+                <div class="modal-content__overflow">
+                    {returnPolicy}
+                </div>
+
+            </div>
+
+            <!--<footer class="slds-modal__footer"> 
+							  <h1 style="color:green;">Footer Information</h1>
+						  </footer> -->
+
+        </div>
+
+    </section>
+
+    <div class="slds-backdrop slds-backdrop_open"></div>
+</div>
+
+</div>
+</template>
+
+<!-- Modal/Popup Box LWC starts here -->
+<template if:true={isModalOpen}>
+		  <div class="demo-only" style="height: 800px; width: 600px;" >
+  
+			  <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+				  aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open mapModal">
+				  <div class="slds-modal__container">
+					  <header class="slds-modal__header">
+						  <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+							  title="Close" onclick={closeModal}>
+							  <lightning-icon icon-name="utility:close" size="medium">
+							  </lightning-icon>
+							  <span class="slds-assistive-text">Close</span>
+						  </button>
+					  </header>
+					  <div class="slds-modal__content slds-p-around_medium">
+						  <div id="myMap" class="slds-m-top--small">
+							  <iframe src={vfPageBingMapURL} class="VFIframe"
+								  style="position:relative;width:100%;border: 1px solid;">
+							  </iframe>
+						  </div>
+					  </div>
+				  </div>
+			  </section>
+  
+			  <div class="slds-backdrop slds-backdrop_open"></div>
+  </div>
+		  <div class="slds-backdrop slds-backdrop_open"></div>
+  </template>
+<!--Added by saikiran as part of HDMP- 5381_-->
+<template if:true={isShowModal1}>
+	<div class="demo-only" style="height: 640px;">
+	<section  role="dialog" tabindex="-1" aria-labelledby="modal-heading-01"
+			aria-modal="true" aria-describedby="modal-content-id-1"
+			class="slds-modal slds-modal--dealer-saved slds-fade-in-open">
+			<div class="slds-modal__container">
+				<div class="slds-modal__content  slds-align_absolute-center slds-m-around_large slds-text-heading_small"
+					id="modal-content-id-3">
+					<lightning-layout multiple-rows class="slds-m-vertical_xx-large">
+						<lightning-layout-item size="12" class="slds-m-bottom_medium slds-text-align_center">
+							Are you sure want to delete this dealer ?
+						</lightning-layout-item>
+						<lightning-layout-item size="12" class="slds-m-bottom_medium slds-text-align_center">
+							<lightning-button variant="brand" class ="slds-m-right_small" title="OK" label="OK"  onclick={removeSelectedDealer}>
+							</lightning-button>
+							<lightning-button variant="" label="cancel" title="Cancel" onclick={handleCancel}>
+							</lightning-button>
+						</lightning-layout-item>
+					</lightning-layout>
+				</div>
+
+			</div>
+		</section>
+	</div>
+
+	<div class="slds-backdrop slds-backdrop_open"></div>
+  </template>
+<!--End by Saikiran-->
+</template>

@@ -1,0 +1,151 @@
+<!-- //============================================================================
+// Title:    Honda Owners Experience - Tab for Acura Auto Downloads
+//
+// Summary:  This is the html seen at the Owners Garage Page - Tab for Acura Auto Downloads
+//
+//
+// History:
+// May 17, 2021 Arunprasad N (Wipro) Original Author
+// Jul 13, 2021 Jim Kohs (Wipro) changed c-own-garage-overview-locate-dealer-card to c-own-garage-overview-locate-dealer-card1
+// July 15, 2021 Jim Kohs (Wipro) refactored to ownBaseCard2
+//=========================================================================== -->
+<template>
+    <div class="c-container garage-overview-tab-large">
+        <lightning-layout multiple-rows class="slds-p-top_large">
+            <lightning-layout-item size="12" small-device-size="12" medium-device-size="4" large-device-size="4">
+                <lightning-layout multiple-rows>
+                    <lightning-layout-item size="12" padding="around-small">
+                        <h3 title="Your Vehicle">
+                            <span class="garage-overview-tab-title">Your Vehicle</span>
+                        </h3>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="12" padding="around-small">
+                        <h3 title="All Vehicle Info">
+                            <span class="garage-overview-tab-title-cta">All Vehicle Info</span>
+                        </h3>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" small-device-size="12" medium-device-size="8" large-device-size="8">
+                <lightning-layout multiple-rows>
+                    <lightning-layout-item size="6" padding="around-small">
+                        <c-own-specifications-card brand="Acura Auto"></c-own-specifications-card>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="6" padding="around-small">
+                        <c-own-product-manual-card brand="Acura Auto"></c-own-product-manual-card>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </lightning-layout-item>
+        </lightning-layout>
+        <lightning-layout multiple-rows class="slds-p-top_large">
+            <lightning-layout-item size="12" small-device-size="12" medium-device-size="4" large-device-size="4">
+                <lightning-layout multiple-rows>
+                    <lightning-layout-item size="12" padding="around-small">
+                        <h3 title="How To Guides">
+                            <span class="garage-overview-tab-title">How To Guides</span>
+                        </h3>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="12" padding="around-small">
+                        <h3 title="All How to Guides">
+                            <span class="garage-overview-tab-title-cta">All How to Guides</span>
+                        </h3>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" small-device-size="12" medium-device-size="8" large-device-size="8">
+                <lightning-layout multiple-rows>
+                    <lightning-layout-item size="6" padding="around-small">
+                        <c-own-adaptive-cruise-control-card brand="acura"></c-own-adaptive-cruise-control-card>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="6" padding="around-small">
+                        <c-own-collision-mitigating-braking-system-card brand="acura"></c-own-collision-mitigating-braking-system-card>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="6" padding="around-small">
+                        <c-own-connectivity-and-audio-card brand="acura"></c-own-connectivity-and-audio-card>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="6" padding="around-small">
+                        <c-own-door-locks-card brand="acura"></c-own-door-locks-card>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </lightning-layout-item>
+        </lightning-layout>
+        <lightning-layout multiple-rows class="slds-p-top_large">
+            <lightning-layout-item size="12" small-device-size="12" medium-device-size="4" large-device-size="4">
+                <lightning-layout multiple-rows>
+                    <lightning-layout-item size="12" padding="around-small">
+                        <h3 title="More Resources">
+                            <span class="garage-overview-tab-title">More Resources</span>
+                        </h3>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="12" padding="around-small">
+                        <h3 title="All Resources">
+                            <span class="garage-overview-tab-title-cta">All Resources</span>
+                        </h3>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" small-device-size="12" medium-device-size="8" large-device-size="8">
+                <lightning-layout multiple-rows>
+                    <lightning-layout-item size="6" padding="around-small">
+                        <c-own-quick-start-guide-card brand="Acura Auto"></c-own-quick-start-guide-card>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </lightning-layout-item>
+        </lightning-layout>
+    </div>
+    <div class="c-container garage-overview-tab-small">
+        <lightning-layout multiple-rows>
+            <lightning-layout-item size="12" class="slds-p-top_large">
+                <h3 title="Your Vehicle">
+                    <span class="garage-overview-tab-title-small">Your Vehicle</span>
+                </h3>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class="slds-p-vertical_small">
+                <c-own-specifications-card brand="Acura Auto"></c-own-specifications-card>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class="slds-p-vertical_small">
+                <c-own-product-manual-card brand="Acura Auto"></c-own-product-manual-card>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class="slds-p-vertical_small">
+                <h3 title="All Vehicle Info">
+                    <span class="garage-overview-tab-title-cta">All Vehicle Info</span>
+                </h3>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class="slds-p-top_large">
+                <h3 title="How To Guides">
+                    <span class="garage-overview-tab-title-small">How To Guides</span>
+                </h3>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class="slds-p-vertical_small">
+                <c-own-adaptive-cruise-control-card brand="acura"></c-own-adaptive-cruise-control-card>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class="slds-p-vertical_small">
+                <c-own-collision-mitigating-braking-system-card brand="acura"></c-own-collision-mitigating-braking-system-card>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class="slds-p-vertical_small">
+                <c-own-connectivity-and-audio-card brand="Acura Auto"></c-own-connectivity-and-audio-card>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class="slds-p-vertical_small">
+                <c-own-door-locks-card brand="acura"></c-own-door-locks-card>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class="slds-p-vertical_small">
+                <h3 title="All How to Guides">
+                    <span class="garage-overview-tab-title-cta">All How to Guides</span>
+                </h3>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class="slds-p-top_large">
+                <h3 title="More Resources">
+                    <span class="garage-overview-tab-title-small">More Resources</span>
+                </h3>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class="slds-p-vertical_small">
+                <c-own-quick-start-guide-card brand="Acura Auto"></c-own-quick-start-guide-card>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class="slds-p-vertical_small">
+                <h3 title="All Resources">
+                    <span class="garage-overview-tab-title-cta">All Resources</span>
+                </h3>
+            </lightning-layout-item>
+        </lightning-layout>
+    </div>
+</template>

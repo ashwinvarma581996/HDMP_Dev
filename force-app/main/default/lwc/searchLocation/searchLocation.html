@@ -1,0 +1,545 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 05-08-2023
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+
+	<lightning-card icon-name="standard:zipcode">
+		<template if:true={isLoading}>
+			<lightning-spinner alternative-text="Loading..."
+				class="slds-is-relative slds-align_absolute-center slds-m-around_large" variant="brand">
+			</lightning-spinner>
+
+		</template>
+		<lightning-tabset>
+			<!-- added by shalini soni for HDMP-212 R2 Story MyDealers-->
+    <lightning-tab label="My Dealers" value="MyDealers" onactive={handleActive}>
+				<template if:true={isGuestUser}>
+					<lightning-layout horizontal-align="space" class="dealerTabbing">
+						<lightning-layout-item flexibility="auto" padding="around-small" size="">
+							<div class="custom-box slds-text-heading_small slds-hyphenate ">
+								<span class="slds-m-top_large slds-m-bottom_x-large " style="display: block;">
+									In order to save the dealers,
+									<a class="textRed textCursor" onclick={redirectToLoginPage}> Login</a> or
+									<a class="textRed textCursor" onclick={redirectToRegisterPage}> Register</a>
+								</span>
+							</div>
+						</lightning-layout-item>
+						<lightning-layout-item>
+							<span class="slds-m-top_small slds-m-bottom_xx-large" style="display: block;">
+								<lightning-button variant="brand" label="LOGIN / REGISTER" title="LOGIN / REGISTER"
+									onclick={redirectToRegisterPage}></lightning-button>
+							</span>
+						</lightning-layout-item>
+					</lightning-layout>
+				</template>
+				<template if:false={isGuestUser}>
+					<template if:true={isFetchData}>
+						<template if:false={selectedDealerList}>
+							<lightning-layout horizontal-align="space" class="dealerTabbing">
+								<lightning-layout-item flexibility="auto" padding="around-small" size="">
+									<div
+										class="custom-box slds-text-heading_medium slds-hyphenate slds-m-vertical_xx-large">
+										You have no saved
+										dealers<br /> Find a dealer and click "Save to My Dealers" </div>
+								</lightning-layout-item>
+							</lightning-layout>
+						</template>
+						<template if:true={selectedDealerList}>
+							<c-my-saved-dealers if:true={selectedDealerList} all-dealer-list={selectedDealerList}>
+							</c-my-saved-dealers>
+						</template>
+					</template>
+				</template>
+			</lightning-tab>
+			<!-- Ended by shalini soni for HDMP-212 R2 Story MyDealers-->
+
+			<lightning-tab label="Search By Location" onactive={handleActive}>
+				<lightning-layout horizontal-align="space" class="dealerTabbing">
+
+					<lightning-layout-item flexibility="auto" padding="around-small" size="10">
+
+						<!-- Added DM -->
+						<div
+							class="slds-grid slds-m-vertical_medium slds-grid_align-center megaMenuDropdown dealerLocationSelectors">
+							<div class="centerElement slds-p-around_small slds-is-relative">
+								<input type="radio" id="ZipCode" name="1" value="ZipCode"
+									onclick={handleSelectOnZipAndState} checked={zipCodeBox}>
+								<span class="checkmark"></span>
+								<label for="Zip Code" class="font-h6 slds-p-left_large">Zip Code</label>
+							</div>
+							<div class="centerElement slds-p-around_small slds-is-relative">
+								<input type="radio" id="CityState" name="1" value="CityState"
+									onclick={handleSelectOnZipAndState}>
+								<span class="checkmark"></span>
+								<label for="City, State" class="font-h6 slds-p-left_large">City, State</label>
+							</div>
+						</div>
+						<!-- Ended DM -->
+						<template if:true={zipCodeBox}>
+							<lightning-input class="ZipCode" dataid="Zip" type="text" label=""
+								placeholder="Enter Zip Code" value={location} onchange={handleLocationChange}
+								onkeyup={handleKeyPressLocation} onkeypress={handleKeyPressLocation}
+								onblur={handleBlur}>
+							</lightning-input>
+						</template>
+
+						<template if:false={zipCodeBox}>
+							<div class="slds-grid slds-m-vertical_medium slds-grid_align-center cityStateSelection">
+								<div class="cityStateInputWrap">
+									<!-- Start-Added by imtiyaz Modified Line 88 Added class city-name to fix ipad issue-->
+									<lightning-input type="text" autocomplete="off" onkeyup={handleCityChange}
+										onkeypress={handleCityChange} value={city} placeholder="Enter City" class="city-name">
+									</lightning-input>
+									<!-- //Start-Modified by imtiyaz for HDMP-16589 -->
+									<lightning-combobox name="state" class="state" placeholder="State"
+										options={stateOptionList} onchange={handleStateChange} value={state}>
+									</lightning-combobox>
+									<!-- //End-Modified by imtiyaz for HDMP-16589 -->
+								</div>
+							</div>
+						</template>
+
+					</lightning-layout-item>
+            <lightning-layout-item flexibility="auto" class="slds-align_absolute-center" padding="around-small" size="10">
+                <template for:each={radiusOptions} for:item="item">
+							<fieldset key={item.value} style="display: block; float: left;">
+								<lightning-input style="width: fit-content;" id={item.value} value={item.value}
+									label={item.label} type="radio" name="radiogroup1" checked={item.checked}
+									onchange={handleRadiusChange} class="radioActive"></lightning-input>
+							</fieldset>
+						</template>
+            </lightning-layout-item>
+
+					<lightning-layout-item flexibility="auto" padding="around-small" size="2">
+						<div style="height: 20px;"></div>
+                <lightning-button variant='brand' label="Search" disabled={makeDisabled} onclick={selectLocation} class="slds-m-left_x-small searchBtn" title="Search">
+						</lightning-button>
+                <lightning-button variant='default' label="Clear" onclick={ClearData} class="slds-m-left_x-small" title="Clear"></lightning-button>
+
+					</lightning-layout-item>
+				</lightning-layout>
+			</lightning-tab>
+
+
+			<lightning-tab label="Dealers" onactive={handleActive}>
+				<lightning-layout horizontal-align="space" class="dealerTabbing">
+
+				</lightning-layout>
+			</lightning-tab>
+			<lightning-tab label="Search By Dealer Name" onactive={handleActive}>
+				<lightning-layout horizontal-align="space" class="dealerTabbing">
+
+					<lightning-layout-item flexibility="auto" padding="around-small" size="10">
+
+						<lightning-input type="text" class="Dealer" label="Find By Dealer Name"
+							placeholder="Enter Dealer Name" value={dealerName} onchange={handleLocationChangedealer}
+							onkeypress={handleLocationChangedealer}></lightning-input>
+
+					</lightning-layout-item>
+            <lightning-layout-item flexibility="auto" class="slds-align_absolute-center" padding="around-small" size="10">
+                <template for:each={radiusOptions} for:item="item">
+							<fieldset key={item.value} style="display: block; float: left;">
+								<lightning-input style="width: fit-content;" id={item.value} value={item.value}
+									label={item.label} type="radio" name="radiogroup" checked={item.checked}
+									onchange={handleRadiusChange} class="radioActive"></lightning-input>
+							</fieldset>
+						</template>
+            </lightning-layout-item>
+
+					<lightning-layout-item flexibility="auto" padding="around-small" size="2">
+						<div style="height: 20px;"></div>
+                <lightning-button variant='brand' label="Search" title="Search" onclick={selectLocationbyDealer} class="slds-m-left_x-small"></lightning-button>
+                <lightning-button variant='default' label="Clear" title="Clear" onclick={ClearData} class="slds-m-left_x-small"></lightning-button>
+					</lightning-layout-item>
+				</lightning-layout>
+			</lightning-tab>
+
+		</lightning-tabset>
+
+
+
+
+
+
+
+		<!--template if:true={openmodel}>
+        <div class="demo-only" style="height: 640px;">
+            <section if:true={openmodel} role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeModal}>
+                            <lightning-icon icon-name="utility:close" size="medium">
+                            </lightning-icon>
+                            <span class="slds-assistive-text">Close</span>
+                        </button>
+                        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Dealer Details</h2>
+                    </header-->
+		<!--div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1"-->
+
+		<div class="searchResult">
+			<lightning-layout multiple-rows="true">
+				<div>
+					<template if:true={errorenable}>
+
+						<div class="slds-m-vertical_medium">
+							<h1 class="slds-text-heading_small textRed" if:false={searchLocationErrors.length}>No Dealer
+								Found
+								As You Have Entered an Invalid Input</h1>
+							<h1 class="slds-text-heading_small textRed" if:true={searchLocationErrors.length}>
+								{searchLocationErrors}</h1>
+						</div>
+
+						<!--template if:true={openmodel}-->
+						<!--div class="slds-m-top_medium slds-m-bottom_x-large">
+                                                            <p class="slds-p-horizontal_small">
+                                                                No Dealer found.
+                                                            </p>
+                                                        </div-->
+
+						<!--/template-->
+
+					</template>
+					<template if:false={hideBingMap}>
+						<lightning-card>
+							<div id="myMap" class="slds-m-top--small">
+								<iframe src={vfPageBingMapURL} class="VFIframe"
+									style="position:relative;width:100%;border: 1px solid;">
+								</iframe>
+							</div>
+						</lightning-card>
+					</template>
+					<template if:true={DealerList}>
+						<template for:each={DealerList} for:item="acc">
+							<div class="slds-size_1-of-1" data-label="" key={acc.Id}>
+								<article class="slds-card appendedCard">
+									<lightning-card class="slds-card_body">
+
+										<div class="slds-grid slds-gutters slds-wrap">
+											<div class="slds-max-medium-size_1-of-1 slds-col slds-size_2-of-3">
+												<p data-id={acc.accountList.Id} data-dealerno={acc.accountList.PoIId__c}
+													data-title={acc.accountList.Name}>
+													{acc.accountList.Name}
+												</p>
+
+												<span class="telePhoneLink">
+													<lightning-formatted-phone value={acc.accountList.Phone}>
+													</lightning-formatted-phone>
+												</span>
+												</br>
+												<template if:true={showDistance}>
+													<span class="distance textRed">
+														<!--HDMP-16692 starts here -->
+														<template if:true={acc.Distance}>
+														<span class="">{acc.Distance } miles away</span>
+														</template>
+														<!--HDMP-16692 ends here -->
+													</span>
+												</template>
+
+												<!-- Lakshmi LTIM data-shippingtaxstate ={acc.shippingtaxstate}-->
+
+												<div name={acc.accountList.Id}
+													class="dealer-address slds-m-top_x-small slds-m-bottom_x-small ">
+													<img src={mapIcon} alt="lampIcon" class="customIcon">
+													<a onclick={goToMap} data-isselecteddealer=false
+														data-id={acc.accountList.Id} data-title={acc.accountList.Name}
+														data-dealerno={acc.accountList.PoIId__c}
+														data-street={acc.accountList.ShippingStreet}
+														data-city={acc.accountList.BillingCity}
+														data-province={acc.accountList.BillingState}
+														data-postalcode={acc.accountList.BillingPostalCode}
+														data-shippingtaxstate ={acc.shippingtaxstate}
+														>
+
+														<div class="textRed">
+															<div class="searchLocation textRed">
+																{acc.accountList.ShippingStreet}<br />
+																{acc.accountList.BillingCity},&nbsp;{acc.accountList.BillingState}&nbsp;{acc.accountList.BillingPostalCode}
+															</div>
+														</div>
+													</a>
+												</div>
+												<!--<lightning-button name={acc.accountList.Id} variant="base"
+													data-id={acc.accountList.Id}
+													data-dealerno={acc.accountList.PoIId__c}
+													data-title={acc.accountList.Name} label="" title="Location"
+													onclick={goToMap}></lightning-button>-->
+
+												<!-- LAkshmi LTIM 19454 data-shippingtaxstate ={acc.shippingtaxstate} -->
+												<div class="slds-grid slds-wrap slds-grid_vertical-align-center">
+													<div class="slds-grid slds-grid_vertical-align-center slds-gutters">
+														<div class="slds-col">
+															<span>
+																<lightning-button name={acc.accountList.Id}
+																	variant="brand" data-id={acc.accountList.Id}
+																	data-dealerno={acc.accountList.PoIId__c}
+																	data-title={acc.accountList.Name}
+																	data-contact={acc.accountList.Phone}
+																	data-street={acc.accountList.ShippingStreet}
+																	data-city={acc.accountList.BillingCity}
+																	data-state={acc.accountList.BillingState}
+																	data-dealerurl={acc.InternetAddress}
+																	label="SELECT THIS DEALER"
+																	title="SELECT THIS DEALER" onclick={clickAccount}
+																	data-shippingtaxstate ={acc.shippingtaxstate}
+																	>
+																</lightning-button>
+															</span>
+														</div>
+														<div class="slds-col">
+															<span>
+																<div class="dealerWebsite">
+																	<lightning-formatted-url label="Dealer Website"
+																		value={acc.InternetAddress}>
+																	</lightning-formatted-url>
+																</div>
+															</span>
+														</div>
+														<template if:true={acc.accountList.isSavedDealer}>
+															<b> SAVED TO MY DEALERS </b>
+														</template>
+														<template if:false={isGuestUser}>
+															<template if:false={acc.accountList.isSavedDealer}>
+																<div class="slds-col">
+																	<span>
+																		<lightning-button variant='default'
+																			name={acc.accountList.Id}
+																			data-id={acc.accountList.Id}
+																			data-dealerno={acc.accountList.PoIId__c}
+																			data-title={acc.accountList.Name}
+																			data-contact={acc.accountList.Phone}
+																			data-street={acc.accountList.ShippingStreet}
+																			data-city={acc.accountList.BillingCity}
+																			data-state={acc.accountList.BillingState}
+																			label="SAVE TO MY DEALERS"
+																			title="SAVE TO MY DEALERS"
+																			onclick={saveToMyDealers}>
+																		</lightning-button>
+																	</span>
+																</div>
+															</template>
+														</template>
+													</div>
+
+												</div>
+
+											</div>
+											<div
+												class="slds-max-small-size_1-of-1 slds-max-medium-size_1-of-1 slds-col slds-size_1-of-3 slds-grid slds-grid_vertical-align-end flexColumn">
+												<lightning-layout multiple-rows class="contact-hours">
+													<lightning-layout-item size="6" medium-device-size="12"
+														flexibility="auto" class="contact-name">
+														<span> <b> Contact </b> <br /></span>
+														<!-- Deeapk Mali -->
+														{acc.contactName} <br />
+														<div> {acc.dealerEmail} </div>
+
+													</lightning-layout-item>
+													<lightning-layout-item size="6" medium-device-size="12"
+														flexibility="auto">
+														<div class="slds-m-top_medium slds-text-align_right">
+															<div><b>Hours of Operation</b></div>
+															<div class="slds-grid ">
+																<div
+																	class="slds-col slds-size_12-of-12 slds-p-around_none">
+																	<template for:each={acc.operationHour}
+																		for:item="arr">
+																		<div key={arr}> {arr} </div>
+																	</template>
+																</div>
+															</div>
+														</div>
+													</lightning-layout-item>
+													<!-- Pratik Ends for Sp4 Tax Jurisdications-->
+													<lightning-layout-item size="6" medium-device-size="12"
+														flexibility="auto">
+														<div class="slds-m-top_medium slds-text-align_right">
+															<!--Lakshmi HDMP-19454,19445 - Sales tax juridisction-->
+															Ship to State: {acc.shippingtaxstate}
+												
+														</div>
+													</lightning-layout-item>
+													<!-- Pratik Added for Sp4 Tax Jurisdications-->
+												</lightning-layout>
+
+											</div>
+										</div>
+
+									</lightning-card>
+								</article>
+
+
+
+							</div>
+
+						</template>
+					</template>
+
+
+				</div>
+				<!--/lightning-card-->
+			</lightning-layout>
+		</div>
+
+		<!--Added By Shalini Soni 06-10-2021 -->
+
+		<template if:false={hideBingMap}>
+			<template if:true={isSelectedDealer}>
+				<div class="searchResult">
+					<lightning-layout multiple-rows="true">
+						<div>
+							<template if:false={DealerList}>
+								<div class="slds-size_1-of-1 dealerList" data-label="">
+									<article class="slds-card appendedCard">
+										<div class="slds-grid slds-wrap">
+											<div class="slds-max-medium-size_1-of-1 slds-col slds-size_2-of-3">
+												<p>
+													{allDealerValues.Name}
+												</p>
+												<span class="textDark">
+													<lightning-formatted-phone value={allDealerValues.Phone}>
+													</lightning-formatted-phone>
+												</span>
+												<div class="dealer-address slds-m-top_x-small slds-m-bottom_x-small ">
+													<img src={mapIcon} alt="lampIcon" class="customIcon">
+													<a onclick={goToMap} data-title={allDealerValues.Name}
+														data-dealerno={allDealerValues.PoIId__c}
+														data-street={allDealerValues.Street}
+														data-city={allDealerValues.City}
+														data-province={allDealerValues.State}
+														data-postalcode={allDealerValues.BillingPostalCode}
+														data-isselecteddealer=true>
+
+														<div class="textRed">
+															<div class="searchLocation textRed">
+																{allDealerValues.Street}<br />
+																{allDealerValues.City},&nbsp;{allDealerValues.State}&nbsp;{allDealerValues.zipCode}
+															</div>
+														</div>
+													</a>
+												</div>
+												<div class="slds-grid slds-wrap slds-grid_vertical-align-center">
+													<div class="slds-grid slds-grid_vertical-align-center slds-gutters">
+												<div class="slds-col">
+													<span>
+														<div class="dealerWebsite">
+															<lightning-formatted-url label="Dealer Website"
+																value={allDealerValues.dealerUrl}>
+															</lightning-formatted-url>
+														</div>
+													</span>
+												</div>
+														<template if:true={allDealerValues.isSavedDealer}>
+															<b> SAVED TO MY DEALERS </b>
+														</template>
+
+														<template if:false={isGuestUser}>
+															<template if:false={allDealerValues.isSavedDealer}>
+															<div class="slds-col">
+																<span>
+																	<lightning-button variant='default'
+																		data-id={allDealerValues.Id}
+																		data-dealerno={allDealerValues.POIId}
+																		data-title={allDealerValues.Name}
+																		label="SAVE TO MY DEALERS"
+																		title="SAVE TO MY DEALERS"
+																		onclick={saveToMyDealersfromAlreadySelected}>
+																	</lightning-button>
+																</span>
+															</div>
+															</template>
+														</template>
+													</div>
+												</div>
+												<!-- <div class="phoneNumber">
+												<lightning-formatted-phone value={allDealerValues.Phone}>
+												</lightning-formatted-phone>
+											</div> -->
+												<!-- <span class="textRed slds-text_small">{allDealerValues.Email}</span> -->
+
+											</div>
+											<div
+												class="slds-max-small-size_1-of-1 slds-max-medium-size_1-of-1 slds-col slds-size_1-of-3 slds-grid slds-grid_vertical-align-end flexColumn">
+												<lightning-layout multiple-rows class="contact-hours">
+													<lightning-layout-item size="6" medium-device-size="12"
+														flexibility="auto" class="contact-name">
+														<b> Contact</b><br />
+
+
+												{allDealerValues.firstName} {allDealerValues.lastName}
+												<div> {allDealerValues.Email} </div>
+													</lightning-layout-item>
+													<lightning-layout-item size="6" medium-device-size="12"
+														flexibility="auto">
+												<div class="slds-m-top_medium slds-text-align_right">
+													<div><b>Hours of Operation</b></div>
+													<div class="slds-grid ">
+														<div class="slds-col slds-size_12-of-12 slds-p-around_none">
+															<template for:each={dealerHours} for:item="arr">
+																<div key={arr}> {arr} </div>
+															</template>
+														</div>
+													</div>
+
+													<!-- <span>Mon-Fri 7:00AM-6:00PM;</span><br><span>Sat 7:00AM-5:00PM;<br> Sun Closed</span> -->
+
+												</div>
+													</lightning-layout-item>
+														<!--Lakshmi HDMP-19454,19445 - Sales tax juridisction-->	
+													<lightning-layout-item size="6" medium-device-size="12"
+														flexibility="auto">
+														<div class="slds-m-top_medium slds-text-align_right">
+															Ship to State: {allDealerValues.shippingtaxstate}
+														</div>
+													</lightning-layout-item>
+												
+												</lightning-layout>
+											</div>
+
+										</div>
+									</article>
+								</div>
+
+							</template>
+						</div>
+					</lightning-layout>
+				</div>
+			</template>
+		</template>
+		<!--End By Shalini Soni 06-10-2021-->
+
+		<!-- added by shalini soni for HDMP-212 R2 Story MyDealers-->
+		<template if:true={isShowModal}>
+			<div class="demo-only" style="height: 640px;">
+			<section  role="dialog" tabindex="-1" aria-labelledby="modal-heading-01"
+					aria-modal="true" aria-describedby="modal-content-id-1"
+					class="slds-modal slds-modal--dealer-saved slds-fade-in-open">
+					<div class="slds-modal__container">
+
+						<div class="slds-modal__content  slds-align_absolute-center slds-m-around_large slds-text-heading_small"
+							id="modal-content-id-2">
+							<lightning-layout multiple-rows class="slds-m-vertical_xx-large">
+								<lightning-layout-item size="12" class="slds-m-bottom_medium slds-text-align_center">
+									<lightning-icon icon-name="utility:check" alternative-text="approval"
+										title="approval" size="large"> </lightning-icon>
+								</lightning-layout-item>
+								<lightning-layout-item size="12" class="slds-text-align_center">
+									Dealer saved to "My Dealers"
+								</lightning-layout-item>
+							</lightning-layout>
+						</div>
+
+					</div>
+				</section>
+			</div>
+
+			<div class="slds-backdrop slds-backdrop_open"></div>
+		</template>
+		<!-- Ended by shalini soni for HDMP-212 R2 Story MyDealers-->
+	</lightning-card>
+</template>
+</template>

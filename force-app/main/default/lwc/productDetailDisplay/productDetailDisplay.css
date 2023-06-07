@@ -1,0 +1,65 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+lightning-breadcrumbs {
+    display: block;
+}
+lightning-button.button {
+	--sds-c-button-brand-color-background: #353236;
+    --sds-c-button-text-color: #f4f7f9;
+}
+
+.product-information {
+    display: flex;
+}
+
+figure {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    width: 400px;
+    height: 400px;
+}
+
+img {
+    object-fit: contain;
+}
+
+
+
+.details-area {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    align-items: stretch;
+    min-height: 400px;
+}
+
+.price {
+    align-self: end;
+}
+
+/* CSS Styling for narrow screens (e.g. phones) */
+@media only screen and (max-width: 48em) {
+    /* SLDS token: mqSmall */
+    .product-information {
+        flex-direction: column;
+    }
+
+    .details-area {
+        padding-top: var(--lwc-spacingSmall);
+    }
+
+    .image {
+        align-self: center;
+    }
+
+    figure {
+        width: 200px;
+        height: 200px;
+    }
+}
+.dealerLocationIcon{width:40px!important;}

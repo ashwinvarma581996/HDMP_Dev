@@ -1,0 +1,35 @@
+h3{
+    font-weight: 300;
+    font-size: 32px;
+    line-height: 37px;
+    color: #080707;
+    margin: 0px 0px 24px;
+}
+p{
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 26px;
+    color: #080707;
+}
+.quick-actions-btn {
+    color: #FFFFFF;
+    background: #E42525;
+    border-radius: 2px;
+    box-shadow: none;
+    border: 0px;
+    font-weight: 900;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    padding: 12px 36px;
+    margin-top: 20px;
+    transition: all 0.5s ease;
+}
+.custom-icon {
+    --sds-c-icon-color-foreground-default: white;
+    /* --sds-c-icon-color-background: white; */
+}
+.quick-actions-btn:hover {
+    background: #C42121;
+}

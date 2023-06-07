@@ -1,0 +1,11 @@
+<template>   
+    <div style="min-height: 12rem;display: flow-root;" class="custom-box slds-p-around_small">
+        <template if:true={isLoading}>
+            <lightning-spinner alternative-text="Processing" size="large"></lightning-spinner>   
+        </template>
+        <template if:false={isLoading}>
+            <div class="custom-box slds-align_absolute-center slds-text-heading_medium slds-p-around_small">{message}</div>
+            <div class="custom-box slds-align_absolute-center"> <lightning-button variant="brand" label="Close" title="close" onclick={handleCloseClick}></lightning-button> </div> 
+        </template>
+    </div> 
+</template>

@@ -1,0 +1,17 @@
+<template>
+    <div class="card card-size card-styles-wrapper">
+        <lightning-card class="card-styles">
+            <h3 slot="title" class="slds-truncate" onclick={handleHeader}>
+                <img src={icon} class="slds-p-right_small custom-icon">
+                <span class={titleClass} onclick={handleHeader}>{title}</span>
+                <span slot="action">
+                    <lightning-icon class="slds-float_right" icon-name="utility:download" alternative-text="Download"
+                        variant="error" size="x-small" title="Download"></lightning-icon>
+                </span>
+            </h3>
+            <div class="slds-card__body_inner card-body">
+                <lightning-formatted-rich-text value={body}></lightning-formatted-rich-text>
+            </div>
+        </lightning-card>
+    </div>
+</template>

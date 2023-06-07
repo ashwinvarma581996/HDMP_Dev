@@ -1,0 +1,181 @@
+<template>
+    <template if:true={isLoading}>
+        <lightning-spinner alternative-text="Loading" class="slds-align_absolute-center slds-m-around_large header-logo"
+            variant="brand"></lightning-spinner>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+    <header class="slds-global-header_container customHeader">
+        <div class="slds-global-header">
+            <div class="slds-global-header__item slds-global-header__item_logo">
+                <div class="logoContainer">
+                    <div class="imgLogo">
+                        <a href={communityBaseURL} target="_self">
+                            <!--<img src="{!$Resource.CapShiftStyle + '/CapShiftStyles/images/Capshift_logo.png'}" alt=""/>-->
+                            <img src={dreamShopLogoURL} alt="">
+                        </a>
+                        <a href="https://www.honda.com/" target="_blank">
+                            <img src={hondaLogoURL} alt="">
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="slds-float_right">
+                <div class="slds-grid slds-wrap slds-grid_vertical-align-center">
+
+                    <template if:true={isGuestUser}>
+                        <div class="slds-text-heading_small slds-m-right--small">
+                            <a href={loginUrlLink}
+                                class="loginClass" onclick={handleLoginDynamic}>Login</a>
+                            &nbsp;&nbsp;
+                            |&nbsp;&nbsp;<a
+                                href={loginUrlLink}
+                                class="loginClass" onclick={handleRegisterDynamic}>Register</a>
+                                &nbsp;&nbsp;
+                            |&nbsp;&nbsp;<a
+                                href={sfdcBaseURL}
+                                    class="loginClass" >Find My Order</a>
+                            </div>
+                    </template>
+
+<template if:false={isGuestUser}>
+                        <template if:true={userFirstName}>
+                            <div class="">
+                                <div class="slds-dropdown-trigger ">
+                                    <label for="profileMenuCheck" class="userName">{userFirstName}</label>
+                                    <input type="checkbox" id="profileMenuCheck" name="profileMenuCheck">
+                                    <div
+                                        class="slds-dropdown slds-dropdown--left slds-dropdown--actions slds-dropdown--menu slds-nubbin--top-right">
+                                        <ul class="slds-dropdown__list" role="menu">
+                                            <li id="menu1" href="#" class="slds-dropdown__item">
+                                                <a onclick={redirectToProfileUrl} role="menuitemradio">
+                                                    <p class="slds-truncate">
+                                                        <i class="ion  ion-checkmark  slds-m-right--x-small"></i>Profile
+                                                    </p>
+                                                </a>
+                                            </li>
+                                            
+                                            <li id="" href="#" class="slds-dropdown__item">
+                                                <a href={myProductsUrl} role="menuitemradio">
+                                                    <p class="slds-truncate">
+                                                        <i class="ion  ion-checkmark  slds-m-right--x-small"></i>My Products
+                                                    </p>
+                                                </a>
+                                            </li>
+                                            
+
+                                            <li href="#" class="slds-dropdown__item">
+                                                <a href={myDealersUrl} role="menuitemradio">
+                                                    <p class="slds-truncate">
+                                                        <i class="ion  ion-checkmark-circled slds-m-right--x-small"></i>
+                                                        My
+                                                        Dealers
+                                                    </p>
+                                                </a>
+                                            </li>
+                                            <li href="#" class="slds-dropdown__item">
+                                                <a href={myPaymentsUrl} role="menuitemradio">
+                                                    <p class="slds-truncate">
+                                                        <i class="ion  ion-checkmark-circled slds-m-right--x-small"></i>
+                                                        My
+                                                        Payments
+                                                    </p>
+                                                </a>
+                                            </li>
+                                            <li href="#" class="slds-dropdown__item">
+                                                <a href={myWishlistUrl} role="menuitemradio">
+                                                    <p class="slds-truncate">
+                                                        <i class="ion  ion-checkmark-circled slds-m-right--x-small"></i>
+                                                        My
+                                                        Wishlist
+                                                    </p>
+                                                </a>
+                                            </li>
+                                            <li href="#" class="slds-dropdown__item">
+                                                <a href={myAddressbookUrl} role="menuitemradio">
+                                                    <p class="slds-truncate">
+                                                        <i class="ion  ion-checkmark-circled slds-m-right--x-small"></i>
+                                                        My
+                                                        Address Book
+                                                    </p>
+                                                </a>
+                                            </li>
+                                            <li href="#" class="slds-dropdown__item">
+                                                <a href={mypreferencesUrl} role="menuitemradio">
+                                                    <p class="slds-truncate">
+                                                        <i class="ion  ion-checkmark-circled slds-m-right--x-small"></i>
+                                                        Preferences
+                                                    </p>
+                                                </a>
+                                            </li>
+                                            <li href="#" class="slds-dropdown__item">
+                                                <a href={orderhistoryUrl} role="menuitemradio">
+                                                    <p class="slds-truncate">
+                                                        <i
+                                                            class="ion  ion-checkmark-circled slds-m-right--x-small"></i>Order
+                                                        History
+                                                    </p>
+                                                </a>
+                                            </li>
+                                            <li href="#" class="slds-dropdown__item">
+                                                <a onclick={onLogout} href={logoutLink} c role="menuitemradio">
+                                                    <p class="slds-truncate">
+                                                        <i
+                                                            class="ion  ion-checkmark-circled slds-m-right--x-small"></i>Log Out
+                                                    </p>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <lightning-icon class="slds-m-right--small" icon-name='utility:user' alternative-text='user'
+                                size='small'>
+                            </lightning-icon>
+                            <a
+                            href={sfdcBaseURL}
+                                class="loginClass" >Find My Order </a>&nbsp;&nbsp;
+
+                        </template>
+</template>
+
+<div class="slds-is-relative">
+    <lightning-icon icon-name='utility:cart' class="cartIcon" onclick={openCart} alternative-text='cart' size='small' title={cartTitle}>
+    </lightning-icon>
+    <template if:true={cartItemCount}>
+                            <a href={cartUrl} onclick={openCart}>
+                                <span class="slds-badge slds-theme_error cartBadge cartIcon">{cartItemCount}</span>
+                                {count}
+                            </a>
+                        </template>
+</div>
+
+</div>
+</div>
+</div>
+<div class="slds-border_bottom"></div>
+</header>
+
+<template if:true={showLogoutModal}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-02" aria-modal="true" aria-describedby="modal-content-id-2" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header" style="border-bottom: 0;">
+                    <h3 id="modal-heading-02" class="slds-text-heading_medium slds-p-top_medium">
+                        For security, we suspend your session if you're inactive too long.<br/>
+                        If you don't click Continue Working within 10 minutes,<br/> we log you out.
+                    </h3>
+                </header>
+                <div class="slds-modal__content slds-p-horizontal_medium slds-p-bottom_small slds-p-left_xx-large" id="modal-content-id-2">
+                    <lightning-layout multiple-rows></lightning-layout>
+                </div>
+                <footer class="slds-modal__footer slds-text-align_center slds-p-top_medium slds-p-bottom_medium" style="border-top: 0;">
+                    <lightning-button variant="" label="Log Out" title="Logout" class="slds-m-left_small" onclick={logoutUser}></lightning-button>
+                    <lightning-button variant="brand" label="Continue Working" title="Continue Working" class="slds-m-left_small" onclick={handleLogoutModal}></lightning-button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+
+</template>

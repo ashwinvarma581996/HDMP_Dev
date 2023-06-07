@@ -1,0 +1,11 @@
+<template>
+    <lightning-layout class="bread-crumb-container">
+        <lightning-layout-item class="chevronleft-container">
+            <lightning-icon icon-name='utility:chevronleft' alternative-text='chevronleft' size='x-small' class='chevronleft'></lightning-icon>
+        </lightning-layout-item>
+        <lightning-layout-item class="back-link-container">
+            <a class="back-link" onclick={handleBackLinkClick} >{title}</a>
+        </lightning-layout-item>
+    </lightning-layout>
+   
+</template>

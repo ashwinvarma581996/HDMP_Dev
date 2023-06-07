@@ -1,0 +1,377 @@
+.find-dealers-button {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 16px;
+    line-height: 24px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: #E42525;
+    background: #FFFFFF;
+    border: 2px solid #E42525;
+    box-sizing: border-box;
+    border-radius: 2px;
+    /* width: 151px; */
+    height: 48px;
+}
+.green-dealer-link{
+    color:#E42525;
+    text-decoration: none;
+}
+p{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 26px;
+    color :#E42525;
+}
+p span{
+    color :#000000;
+}
+.body-title {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 16px;
+    line-height: 26px;
+    color: #000000;
+}
+
+
+.custom-icon {
+    --sds-c-icon-color-foreground-default: #e42525;
+    --sds-c-icon-color-background: white;
+}
+
+.dealer-address{
+    font-family: Roboto;
+    font-style: normal;
+    /*font-weight: bold;*/
+    font-size: 16px;
+    line-height: 26px;
+}
+
+.own-combobox-label{
+    font-style: normal;
+    font-weight: 500;
+    font-size: 13px !important;
+    line-height: 15px;
+    letter-spacing: 0.02em;
+    color: #000000 !important;
+}
+
+.find-brand-combobox {
+    background: #FFFFFF;
+    box-sizing: border-box;
+    border-radius: 2px;
+}
+
+
+
+.location-title{
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 24px;
+    line-height: 32px;
+    /* identical to box height, or 133% */
+
+
+    /* Text / Default */
+
+    color: #080707;
+}
+
+.location-distance{
+    font-family: 'Roboto';
+font-style: normal;
+font-weight: 400;
+font-size: 14px;
+line-height: 18px;
+/* identical to box height, or 129% */
+
+
+/* Primary / 767676 */
+
+color: #767676;
+}
+
+.location-address{
+    font-family: 'Roboto';
+font-style: normal;
+font-weight: 300;
+font-size: 16px;
+line-height: 26px;
+/* or 162% */
+
+
+/* Text / Default */
+
+color: #080707;
+
+}
+
+.location-contact{
+    font-family: 'Roboto';
+font-style: normal;
+font-weight: 300;
+font-size: 16px;
+line-height: 26px;
+/* identical to box height, or 162% */
+
+
+/* Primary / E42525 */
+
+}
+
+.more-details-link{
+    font-family: 'Roboto';
+font-style: normal;
+font-weight: 900;
+font-size: 14px;
+line-height: 18px;
+/* identical to box height, or 129% */
+
+letter-spacing: 2.8px;
+text-transform: uppercase;
+
+/* Primary / E42525 */
+
+color: #E42525;
+text-decoration: none;
+}
+
+.more-details-icon{
+    --sds-c-icon-color-foreground-default: #E42525;;
+}
+
+.outline-btn{
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: #E42525;
+    font-weight: 900;
+    font-size: 13px;
+    line-height: 24px;
+    background: #fff;
+    border: 2px solid #E42525;
+    margin-right: 10px;
+    padding: 10px;
+    border-radius: 2px;
+    transition: 0.5s all;
+}
+
+.outline-btn:hover {
+    background: #E42525;
+    color: #ffffff;
+}
+
+.list-button {
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    font-weight: 900;
+    font-size: 16px;
+    line-height: 24px;
+    background: #E42525;
+    border: 2px solid #E42525 !important;
+    border-radius: 2px;
+    border: 0px;
+    padding: 12px 22px;
+    transition: 0.5s all;
+    height: 48px;
+}
+
+.list-button:hover {
+    background: #ffffff;
+    border: 2px solid #E42525;
+    color: #E42525;
+}
+.dealer-no{
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 30px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #080707;
+}
+.inactive-star-icon{
+    --sds-c-icon-color-foreground-default: #7070707d;
+}
+.active-star-icon{
+    --sds-c-icon-color-foreground-default: #E42525;
+}
+.error-icon{
+    --sds-c-icon-color-foreground-default: #e42525;
+}
+.error-message{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #767676; 
+}
+
+.hour-name{
+    color: black;
+    font-weight: 900;
+    font-size: 15px;
+}
+.hour-detail{
+    color: black;
+    font-size: 15px;
+}
+.operation-hours-title{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 16px;
+}
+.all-dealer-content{
+    min-height: 400px;
+}
+.warning-message {
+    font-family: Roboto;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 900;
+    line-height: 20px;
+    letter-spacing: 1px;
+    text-align: center;
+    color: #767676;
+}
+@media only screen and (min-width: 601px) {
+    .breadcrum-text{
+        padding-left:24px;
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 900;
+        font-size: 14px;
+        line-height: 22px;
+        letter-spacing: 0.02em;
+        color: #E42525;
+        cursor: pointer;
+    }
+    .float-style{
+        float: right;
+    }
+    .dealer-list{
+        padding: 24px; 
+        max-height: 1500px; 
+        overflow-y: scroll;  
+    }
+    
+    .page-title{
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 300;
+        font-size: 40px;
+        line-height: 42px;
+        /* or 105% */
+
+        letter-spacing: 1.2px;
+
+        /* Text / Default */
+
+        color: #080707;
+        max-width: 75%;
+    }
+    .page-title-div{
+        padding-left:24px;
+        padding-top:24px;
+    }
+    
+    .img-map{
+        width: 100%;
+        height: 1034px;
+    }
+    .show-desktop-format {
+        display: block;
+    }
+    .show-mobile-format {
+        display: none;
+    }
+
+} 
+@media only screen and (max-width: 600px) {
+    
+    .breadcrum-text{
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 900;
+        font-size: 14px;
+        line-height: 22px;
+        letter-spacing: 0.02em;
+        color: #E42525;
+        cursor: pointer;
+    }
+    .list-button{
+        width: 100%;
+        margin-top: 20px;
+    }
+    .outline-btn{
+        width: 100%;
+        margin-top: 15px;
+    }
+    
+    .page-title{
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 300;
+        font-size: 26px;
+        line-height: 30px;
+        /* identical to box height, or 115% */
+
+        text-align: center;
+        letter-spacing: 0.02em;
+
+        /* Text / Default */
+
+        color: #080707;
+    }
+    .search-radio-div{
+        text-align: center;
+    }
+    
+    .img-map{
+        width: 100%;
+        height: 222px;
+    }
+    .div2{
+        order: 1;
+        padding: 20px;
+    }
+    .div1{
+        order: 2;
+    }
+    .show-desktop-format {
+        display: none;
+    }
+    .show-mobile-format {
+        display: block;
+    }
+}
+
+.div3{
+    order: 3;
+}
+.back-icon {
+    --sds-c-icon-color-foreground-default: #E42525;
+}
+
+.breadcrum-text::before {
+    content: "<" !important;
+    /* position: absolute; */
+    left: -0.75rem;
+    color: #E42525;
+    font-size: 15px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}

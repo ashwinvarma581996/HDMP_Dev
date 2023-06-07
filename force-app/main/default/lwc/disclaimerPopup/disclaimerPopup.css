@@ -1,0 +1,19 @@
+ul:not(.browser-default) li {
+    list-style-type: disc;
+}
+
+.slds-modal__content {
+    background-color: #ffffff;
+}
+
+.slds-modal .slds-modal__header {
+    border-bottom: none !important;
+}
+
+.modalbody{
+    border: 1px solid #979797;
+    padding: 15px 15px 15px 15px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+}

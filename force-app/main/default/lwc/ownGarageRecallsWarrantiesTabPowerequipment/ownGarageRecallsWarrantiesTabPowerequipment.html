@@ -1,0 +1,69 @@
+<!-- //============================================================================
+// Title:    Honda Owners Experience - Tab for Power Equipment Warranties
+//
+// Summary:  This is the html seen at the Owners Garage Page - Tab for Power Equipment Warranties
+//
+//
+// History:
+// May 17, 2021 Arunprasad N (Wipro) Original Author
+// Jul 13, 2021 Jim Kohs (Wipro) changed c-own-garage-overview-locate-dealer-card to c-own-garage-overview-locate-dealer-card1
+// July 15, 2021 Jim Kohs (Wipro) refactored to ownBaseCard2
+//=========================================================================== -->
+<template>
+    <div class="c-container garage-overview-tab-large">
+        <lightning-layout multiple-rows class="slds-p-top_large">
+            <lightning-layout-item size="12" small-device-size="12" medium-device-size="4" large-device-size="4">
+                <h3 title="Recalls for This Vehicle">
+                    <span class="garage-overview-tab-title">Recalls for This Vehicle</span>
+                </h3>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" small-device-size="12" medium-device-size="8" large-device-size="8">
+                <lightning-layout multiple-rows>
+                    <lightning-layout-item size="12" padding="around-small">
+                        <c-own-product-schedule-service-card brand="Power Equipment"></c-own-product-schedule-service-card>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </lightning-layout-item>
+        </lightning-layout>
+        <lightning-layout multiple-rows class="slds-p-top_large">
+            <lightning-layout-item size="12" small-device-size="12" medium-device-size="4" large-device-size="4">
+                <h3 title="Warranty Information">
+                    <span class="garage-overview-tab-title">Warranty Information</span>
+                </h3>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" small-device-size="12" medium-device-size="8" large-device-size="8">
+                <lightning-layout multiple-rows>
+                    <lightning-layout-item size="6" padding="around-small">
+                        <c-own-product-warranty-booklet-card brand="Power Equipment"></c-own-product-warranty-booklet-card>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="6" padding="around-small">
+                        <c-own-parts-covered-by-emissions-warranty-card brand="Power Equipment"></c-own-parts-covered-by-emissions-warranty-card>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </lightning-layout-item>
+        </lightning-layout>
+    </div>
+    <div class="c-container garage-overview-tab-small">
+        <lightning-layout multiple-rows>
+            <lightning-layout-item size="12" class="slds-p-top_large">
+                <h3 title="Recalls for This Vehicle">
+                    <span class="garage-overview-tab-title-small">Recalls for This Vehicle</span>
+                </h3>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class="slds-p-vertical_small">
+                <c-own-product-schedule-service-card brand="Power Equipment"></c-own-product-schedule-service-card>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class="slds-p-top_large">
+                <h3 title="Warranty Information">
+                    <span class="garage-overview-tab-title-small">Warranty Information</span>
+                </h3>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class="slds-p-vertical_small">
+                <c-own-parts-covered-by-emissions-warranty-card brand="Power Equipment"></c-own-parts-covered-by-emissions-warranty-card>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class="slds-p-vertical_small">
+                <c-own-accessories-card brand="powerequipment"></c-own-accessories-card>
+            </lightning-layout-item>
+        </lightning-layout>
+    </div>
+</template>

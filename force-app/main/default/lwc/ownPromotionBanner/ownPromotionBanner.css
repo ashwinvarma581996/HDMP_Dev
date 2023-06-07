@@ -1,0 +1,100 @@
+.section-background{
+    background: #000000; 
+}
+.section-img{
+    background: #000000;
+    
+    
+}
+.section-title{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 30px;
+    line-height: 37px; 
+    letter-spacing: 0.02em;
+    color: #FFFFFF;
+
+}
+.section-image{
+    width: 250px;
+    height: 150px;
+    object-fit: cover;
+}
+.section-content{
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 26px;
+    color: #FFFFFF;
+}
+
+
+
+.btn{
+    background: #E42525;
+    border: none;
+    border-radius: 2px;
+    color: #FFFFFF;
+    font-weight: 900;
+    font-size: 16px;
+    line-height: 24px;
+    padding-left: 43px;       
+    padding-right: 43px;       
+    padding-top: 11px;       
+    padding-bottom: 11px;
+}
+
+.vertical-line{
+    width: 1.5px;
+    height: 88px;
+    background: #E42525;
+}
+.section-title{
+    max-width: 25%;
+}
+.section-body{
+    max-width: 40%;
+}
+@media only screen and (min-width: 767px) {
+    .line-display{
+        display:block;
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+    
+  
+}
+@media only screen and (max-width: 766px) {
+    .line-display{
+        display:none;
+    }
+    .section-button{
+        padding-bottom: 20px;
+        width: 100%;
+    }
+    .section-image{
+        width: 100%;
+        height: 200px;
+    }
+    .section-title{
+        max-width: 80%;
+    }
+    .section-body{
+        max-width: 90%;
+    }
+    .section-title{
+        font-size: 26px;
+        line-height: 30px; 
+        margin-bottom: 20px;
+    
+    }
+    .section-content{
+        margin-bottom: 24px;
+    }
+    .content-background{
+        padding: 16px !important;
+    }
+    .btn{
+        width: 100%;
+    }
+}

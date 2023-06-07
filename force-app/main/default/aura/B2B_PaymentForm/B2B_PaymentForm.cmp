@@ -1,0 +1,358 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes,flexipage:availableForAllPageTypes" access="global"  controller="B2B_PaymentFormController">   
+    <!-- Holds the Braintree Hosted Fields instance -->
+    <aura:attribute name="hostedFieldsInstance" type="Object" />
+        
+    <!-- Configurable Variables from the Flow -->
+    <aura:attribute name="orderId" type="String" />
+    <aura:attribute name="cartId" type="String" />
+    <aura:attribute name="order" type="Object" />
+    <aura:attribute name="cardTypes" type="Object" />
+        
+        <!-- UI Variables -->
+    <aura:attribute name="iconName" type="String" />
+    <aura:attribute name="showSpinner" type="Boolean" default="false" />
+    <aura:attribute name="selectedPaymentType" type="String" default="CC" />
+    <aura:attribute name="paymentTypes" type="List" />
+    <aura:attribute name="stateCodes" type="List" />
+    <aura:attribute name="errorMessage" type="String" />
+    <aura:attribute name="successMessage" type="String" />
+    <aura:attribute name="isSuccess" type="Boolean" default="false"/>
+    <aura:attribute name="isError" type="Boolean" default="false"/>
+    <aura:attribute name="shippingAddress" type="Object" />
+    <aura:attribute name="dealerPickup" type="Boolean" default="true" />
+    <aura:attribute name="zipCode" type="String" />
+    <aura:attribute name="isShowForm" type="Boolean" default="true" />
+    <aura:attribute name="creditCardChecked" type="boolean" default="true"/>
+    <aura:attribute name="paypalChecked" type="boolean" default="false"/>
+    <aura:attribute name="paypalButtonStyle" type="String" default="width: 200px;float: left;display:none;"/>
+    <aura:attribute name="creditCardStyle" type="String" default=""/>
+    <aura:attribute name="paypalErrorMessage" type="String" />
+    <aura:attribute name="customerId" type="String" default=""/>
+
+    <aura:attribute name="cardholderName" type="String" />
+    <aura:attribute name="name" type="String" />
+    <aura:attribute name="address1" type="String" />
+    <aura:attribute name="address2" type="String" />
+    <aura:attribute name="city" type="String" />
+    <aura:attribute name="state" type="String" />
+    <aura:attribute name="country" type="String" default="United States" />
+
+
+
+    <ltng:require scripts="https://js.braintreegateway.com/web/3.81.0/js/client.min.js,
+                           https://js.braintreegateway.com/web/3.81.0/js/hosted-fields.min.js,
+                           /resource/paypalCheckout,
+                           /resource/PaypalClient,
+                           /resource/dataCollector,
+                           http://code.jquery.com/jquery-3.2.1.min.js"
+                  afterScriptsLoaded="{!c.doInit}" />
+    
+    <!-- <ltng:require scripts="https://js.braintreegateway.com/web/3.78.2/js/client.min.js,
+                            https://js.braintreegateway.com/web/3.78.2/js/hosted-fields.min.js,
+                            http://code.jquery.com/jquery-3.2.1.min.js" 
+                    afterScriptsLoaded="{!c.doInit}" /> -->
+
+        <aura:if isTrue="{!v.showSpinner}">
+            <lightning:spinner alternativeText="Loading" size="medium" />
+        </aura:if>
+        
+
+         <!-- Success Message (if set) -->
+         <aura:if isTrue="{!v.isSuccess}">
+            <lightning:layout multipleRows="true">     
+                <lightning:layoutItem class="slds-p-around_xx-small" size="12">
+                    <div class="slds-scoped-notification slds-media slds-media_center slds-theme_success"
+                        style="background-color: #fafaf9; color: #5cc234; border: .125rem solid #55c234;min-height:20rem">
+                        <div class="slds-media__figure">
+                            <lightning:icon iconName="{!v.iconName}" alternativeText="processing!" variant="processing" size="small" />
+                        </div>
+                        <div class="slds-media__body">
+                            {!v.successMessage}
+                        </div>
+                    </div>
+                </lightning:layoutItem>
+            </lightning:layout>
+        </aura:if>
+
+         <!-- Error Message (if set) -->
+         <aura:if isTrue="{!v.isError}">
+            <lightning:layoutItem class="slds-p-around_xx-small" size="12">
+                <div class="slds-scoped-notification slds-media slds-media_center slds-theme_error"
+                     style="background-color: #fafaf9; color: #c23934; border: .125rem solid #c23934;">
+                    <div class="slds-media__figure">
+                        <lightning:icon iconName="utility:error" alternativeText="Error!" variant="error" size="small" />
+                    </div>
+                    <div class="slds-media__body">
+                        {!v.errorMessage}
+                    </div>
+                </div>
+            </lightning:layoutItem>           
+        </aura:if>
+
+		 <aura:if isTrue="{!v.isShowForm}"> 
+        	<lightning:layout multipleRows="true">       
+
+                <lightning:layoutItem size="12" largeDeviceSize="4" >
+                    <div class="slds-p-around_small slds-card slds-m-around_small" style="background: whitesmoke;min-height: 33rem;box-shadow: 4px 4px 3px 0px #ccc;">
+                        <lightning:layout multipleRows="true">
+                            <lightning:layoutItem class="slds-p-around_xx-small" size="12" largeDeviceSize="12" >
+                                <div class="slds-text-heading_medium slds-text-align_center" > 
+                                    <b>Order Information</b>
+                                </div> 
+                            </lightning:layoutItem>
+                            <lightning:layoutItem class="slds-p-around_xx-small" size="12" largeDeviceSize="12" >
+                                <div class="slds-text-heading_small slds-text-align_left" > 
+                                    <b>Your Order</b>
+                                </div> 
+                                <div class="custom-box slds-text-align_left slds-text-heading_x-small" > 
+                                    <aura:if isTrue="{!v.order}">
+                                        <dl>
+                                            <dt><b>Order No : </b> {!v.order.OrderNumber} </dt>
+                                            <dt><b>Total Amount : </b> <lightning:formattedNumber value="{!v.order.Updated_Order_Total__c}" minimumFractionDigits="2" maximumFractionDigits="2" style="currency" currencyCode="USD"/></dt>  
+                                            <dt><b>Dealer Name : </b> <aura:if isTrue="{!v.order.cart__r}">{!v.order.cart__r.DealerId__r.Name}</aura:if></dt>                                                                                       
+                                        </dl>                                                                         
+                                    </aura:if>
+                                </div> 
+                            </lightning:layoutItem>
+                            <lightning:layoutItem class="slds-p-around_xx-small" size="12" largeDeviceSize="12" >
+                                <div class="slds-text-heading_small slds-text-align_left" > 
+                                    <b>Shipping Address</b>
+                                </div> 
+                                <div class="custom-box slds-text-align_left slds-text-heading_x-small" > 
+                                    <aura:if isTrue="{!v.shippingAddress}">                             
+                                        <dl>
+                                            <aura:if isTrue="{!v.shippingAddress.dealerPickup}"> 
+                                                <dt> <b>Please pickup the order from your dealer.</b> </dt>
+                                            </aura:if>
+                                            <dt><b>Address : </b> {!v.shippingAddress.address}</dt>
+                                            <dt><b>City : </b> {!v.shippingAddress.city}</dt>
+                                            <dt><b>State : </b> {!v.shippingAddress.state}</dt>
+                                            <dt><b>Country : </b> {!v.shippingAddress.country}</dt>
+                                            <dt><b>Zipcode : </b> {!v.shippingAddress.zipcode}</dt>
+                                            
+                                        </dl>                                                                         
+                                    </aura:if>
+                                </div> 
+                            </lightning:layoutItem>
+                            <lightning:layoutItem class="slds-p-around_xx-small" size="12" largeDeviceSize="12" >
+                                <div class="custom-box" style="margin-top:3rem">
+                                    <div class="slds-text-heading_small">Choose Payment Method</div>
+                                    <hr/>
+                                    <div class="slds-grid slds-gutters slds-wrap slds-m-top_medium shippingDetail">                 
+                                        <div class="absoluteCenter slds-p-horizontal_medium">
+                                            <div>
+                                                <label class="centerElement slds-is-relative labelRadio">
+                                                    <input type="radio" aura:id="shipToMe" name="ShippingDetails" value="ShipToMe" checked="{!v.creditCardChecked}" onclick="{!c.paymentOptionChange}"/>
+                                                    <span class="checkmark"></span> <span class="labelText">Credit Card</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="absoluteCenter slds-m-right_small slds-p-horizontal_medium">
+                                            <div>
+                                                <label class="centerElement slds-is-relative labelRadio">
+                                                    <input type="radio" aura:id="dealer" name="ShippingDetails" value="PickUpAtDealer" checked="{!v.paypalChecked}" onclick="{!c.paymentOptionChange}"/>
+                                                    <span class="checkmark"></span> <span class="labelText">PayPal</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>                
+                                </div>
+                            </lightning:layoutItem>
+                        </lightning:layout>
+                    </div>
+                </lightning:layoutItem>                
+                    <lightning:layoutItem size="12" largeDeviceSize="4">
+                        <div style="{!v.creditCardStyle}">
+                            <div class="slds-p-around_small slds-card slds-m-around_small" style="background: whitesmoke;min-height: 33rem;box-shadow: 4px 4px 3px 0px #ccc;">
+                                <lightning:layout multipleRows="true">
+                                <!-- Payment Type Input -->
+                                <lightning:layoutItem class="slds-p-around_xx-small" size="12" largeDeviceSize="12">
+                                    <div class="slds-text-heading_medium slds-text-align_center" > 
+                                        <b>Billing Information </b>
+                                    </div>  
+                                </lightning:layoutItem>
+
+                                    <!-- Name Input -->
+                                    <lightning:layoutItem class="slds-p-around_xx-small" size="12" smallDeviceSize="12">
+                                        <lightning:input name="Name" type="text" label="Name" required="true" aura:id="inputField" value="{!v.name}" onchange="{!c.removeCustomMessage}"/>
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem class="slds-p-around_xx-small" size="12" smallDeviceSize="12"/>
+                                    <!-- End Name Input -->
+
+                                    <lightning:layoutItem class="slds-p-around_xx-small" size="12" smallDeviceSize="12">
+                                        <lightning:input name="Address 1" type="text" label="Address 1" required="true" aura:id="inputField" value="{!v.address1}" onchange="{!c.removeCustomMessage}"/>
+                                    </lightning:layoutItem>
+                                
+                                    <!-- Address 1 Input -->
+                                    
+                                    <!-- Address 2 Input -->
+                                    <lightning:layoutItem class="slds-p-around_xx-small" size="12" smallDeviceSize="12">
+                                        <lightning:input name="Address 2" type="text" label="Address 2" aura:id="inputField" value="{!v.address2}" onchange="{!c.removeCustomMessage}"/>
+                                    </lightning:layoutItem>
+                                
+                                    <!-- End Address 2 Input -->
+                                    
+                                    <!-- City Input -->
+                                    <lightning:layoutItem class="slds-p-around_xx-small" size="12" smallDeviceSize="12">
+                                        <lightning:input name="City" type="text" label="City" required="true" aura:id="inputField" value="{!v.city}" onchange="{!c.removeCustomMessage}"/>
+                                    </lightning:layoutItem>
+                                
+                                    <!-- End City Input -->
+                                    
+                                    <!-- State Input -->
+                                    <lightning:layoutItem class="slds-p-around_xx-small" size="12" smallDeviceSize="12">
+                                        <lightning:select name="State" label="State/Territory" required="true" aura:id="inputField" value="{!v.state}" onchange="{!c.removeCustomMessage}">
+                                            <option text="Select an Option" value="" />
+                                            <aura:iteration items="{!v.stateCodes}" var="code">
+                                                <option text="{!code.label}" value="{!code.value}"/>
+                                            </aura:iteration>
+                                        </lightning:select>
+                                    </lightning:layoutItem>
+                            
+                                    <!-- End State Input --> 
+                                    
+                                    <!-- Zip Code Input -->
+                                    <lightning:layoutItem class="slds-p-around_xx-small" size="12" smallDeviceSize="6">
+                                        <lightning:input name="Zipcode" type="text" label="Zip Code" pattern="^[0-9]{5}(?:-[0-9]{4})?$" messageWhenTypeMismatch="please enter a valid value"  required="true" aura:id="inputField" value="{!v.zipCode}" onchange="{!c.removeCustomMessage}"/>
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem class="slds-p-around_xx-small" size="12" smallDeviceSize="6"/>
+                    
+
+                                </lightning:layout>
+                            </div>
+                        </div>
+                        <div style="{!v.paypalButtonStyle}">
+                            <div class="slds-p-around_small slds-card slds-m-around_small" style="background: whitesmoke;min-height: 33rem;box-shadow: 4px 4px 3px 0px #ccc;">                                        
+                                <lightning:layout multipleRows="true">           
+                                    <!-- Credit Card Information Section -->  
+                                    <!-- Payment Type Input -->                       
+    
+                                    <lightning:layoutItem class="slds-p-around_xx-small" size="12" largeDeviceSize="12">
+                                        <div class="slds-text-heading_medium slds-text-align_center" > 
+                                            <b>Provide Secure Payment Information </b>
+                                            <div class="slds-media__figure">
+                                                <lightning:icon iconName="utility:lock" alternativeText="secure!" variant="lock" size="small" />
+                                            </div>
+                                        </div>  
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem class="slds-p-around_xx-small slds-align_absolute-center" size="12" largeDeviceSize="12">
+                                        <div id="paypal-button" style="width: 200px;"></div>
+                                    </lightning:layoutItem>
+                                    <lightning:layoutItem class="slds-p-around_xx-small" size="12" largeDeviceSize="12">
+                                        <aura:if isTrue="{!!v.paypalErrorMessage}"><div style="color: #c23934;">{!v.paypalErrorMessage}</div></aura:if>
+                                    </lightning:layoutItem>
+                                </lightning:layout>
+                            </div>
+                        </div>
+                    </lightning:layoutItem>         
+               
+                <lightning:layoutItem size="12" largeDeviceSize="4">                 
+                    <div style="{!v.creditCardStyle}">
+                        <div class="slds-p-around_small slds-card slds-m-around_small" style="background: whitesmoke;min-height: 33rem;box-shadow: 4px 4px 3px 0px #ccc;">                      
+                            <lightning:layout multipleRows="true">           
+                            <!-- Credit Card Information Section -->  
+                            <!-- Payment Type Input -->                       
+    
+                            <lightning:layoutItem class="slds-p-around_xx-small" size="12" largeDeviceSize="12">
+                                <div class="slds-text-heading_medium slds-text-align_center" > 
+                                    <b>Provide Secure Payment Information </b>
+                                    <div class="slds-media__figure">
+                                        <lightning:icon iconName="utility:lock" alternativeText="secure!" variant="lock" size="small" />
+                                    </div>
+                                </div>  
+                            </lightning:layoutItem>                      
+    
+                            <lightning:layoutItem class="slds-p-around_xx-small" size="12" largeDeviceSize="12">                                                         
+                                    <div class="slds-media__figure slds-p-top_small" style="min-height: 3rem;">
+                                        <aura:if isTrue="{!v.cardTypes.visa}"><img style="margin-right: 0.2rem;" src="/resource/CardImages/CardImages/visa.png" width="50"/> </aura:if> 
+                                        <aura:if isTrue="{!v.cardTypes.master}"><img style="margin-right: 0.2rem;" src="/resource/CardImages/CardImages/master.png" width="49"/> </aura:if> 
+                                        <aura:if isTrue="{!v.cardTypes.amex}"><img style="margin-right: 0.2rem;" src="/resource/CardImages/CardImages/amex.jpg" width="46"/> </aura:if> 
+                                        <aura:if isTrue="{!v.cardTypes.discover}"><img style="margin-right: 0.2rem;" src="/resource/CardImages/CardImages/discover.jpg" width="50"/></aura:if>                                                    
+                                    </div>                      
+                            </lightning:layoutItem>                   
+                            <!-- <lightning:layoutItem class="slds-p-around_xx-small" size="12" largeDeviceSize="12">
+                                <lightning:select name="Payment Type" label="Select Payment Type" value="{!v.selectedPaymentType}">
+                                    <aura:iteration items="{!v.paymentTypes}" var="type">
+                                        <option text="{!type.label}" value="{!type.value}"/>
+                                    </aura:iteration>
+                                </lightning:select>
+                            </lightning:layoutItem> -->
+                            <!-- <lightning:layoutItem class="slds-p-around_xx-small" size="12" largeDeviceSize="6"/> -->
+                            <!-- End Payment Type Input --> 
+                            
+                            <!-- Cardholder Name Input -->
+                            <lightning:layoutItem class="slds-p-around_xx-small" size="12" largeDeviceSize="12">
+                                <div class="slds-form-element">
+                                    <span onkeypress="{!c.handleToAllowName}">
+                                        <lightning:input name="Cardholder Name" type="text" label="Cardholder Name" aura:id="inputField" value="{!v.cardholderName}" onchange="{!c.removeCustomMessage}" />
+                                    </span>
+                                    <!-- <label class="slds-form-element__label">                                  
+                                        Cardholder Name
+                                    </label>
+                                    <div class="slds-form-element__control">
+                                        <div id="cc-name" class="form-control slds-input" style="height: 44px;"></div>
+                                    </div> -->
+                                </div> 
+                            </lightning:layoutItem>
+                            <!-- <lightning:layoutItem class="slds-p-around_xx-small" size="12" largeDeviceSize="6"/> -->
+                            <!-- End Cardholder Name Input -->
+                            
+                            <!-- Credit Card Number Input -->
+                            <lightning:layoutItem class="slds-p-around_xx-small" size="12" largeDeviceSize="8">
+                                <div class="slds-form-element">
+                                    <label class="slds-form-element__label">
+                                        Credit Card Number
+                                    </label>
+                                    <div class="slds-form-element__control">
+                                        <div id="cc-number" class="form-control slds-input" style="height: 44px;"></div>
+                                    </div>
+                                </div> 
+                            </lightning:layoutItem>
+                            <!-- End Credit Card Number Input --> 
+                            
+                            <!-- Expiration Input -->
+                            <lightning:layoutItem class="slds-p-around_xx-small" size="6" largeDeviceSize="4">
+                                <div class="slds-form-element">
+                                    <label class="slds-form-element__label">
+                                        CVV
+                                    </label>
+                                    <div class="slds-form-element__control">
+                                        <div id="cc-cvv" class="form-control slds-input" style="height: 44px;"></div>
+                                    </div>
+                                </div>
+                            </lightning:layoutItem>
+                            <!-- <lightning:layoutItem class="slds-p-around_xx-small" size="6" largeDeviceSize="6"/> -->
+                            <!-- End Expiration Input -->
+                            
+                            <!-- CVV Input -->
+                            <lightning:layoutItem class="slds-p-around_xx-small" size="6" largeDeviceSize="4">
+                                <div class="slds-form-element">
+                                    <label class="slds-form-element__label">
+                                        Expiration
+                                    </label>
+                                    <div class="slds-form-element__control">
+                                        <div id="cc-expiration" class="form-control slds-input" style="height: 44px;"></div>
+                                    </div>
+                                </div>
+                            </lightning:layoutItem>
+                            <!--lightning:layoutItem class="slds-p-around_xx-small" size="12" largeDeviceSize="6">
+                               <lightning:input name="Zipcode" id="cc-zipcode" type="text" label="Zipcode" pattern="[0-9]{5}"  aura:id="inputField" value="{!v.zipCode}" />
+                            </lightning:layoutItem-->
+                            <!-- End CVV Input -->
+                            
+                            <lightning:layoutItem class="slds-p-around_xx-small" size="12" largeDeviceSize="12">
+                                <div class="slds-align_absolute-center" > 
+                                    <lightning:button variant="brand" label="Pay Now" title="Pay Now" onclick="{!c.handleSumbitOrder}" />
+                                </div>  
+                            </lightning:layoutItem>
+                            <!-- End of Credit Card Information Section -->
+                            </lightning:layout> 
+                        </div>
+                    </div>
+                    
+                </lightning:layoutItem>
+          
+            </lightning:layout>  
+        </aura:if>
+               
+</aura:component>

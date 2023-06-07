@@ -1,0 +1,433 @@
+<template>
+  <template  if:true={addressBookForGuestUser}>
+     <div class="slds-container_center containerWrapper slds-m-bottom_large" style="padding:0">
+      <div class="slds-text-heading_large slds-text-color_error errorTxt slds-text-align_center slds-m-bottom_large">
+        Sorry, there are currently no addresses available for Guest User's.
+      </div>
+      </div>
+  </template>
+  <template if:false={addressBookForGuestUser}>
+    <div if:true={isLoaded} class="slds-is-relative slds-spinner_container">
+        <lightning-spinner alternative-text="Loading..." variant="brand">
+        </lightning-spinner>
+    </div>
+  
+    <lightning-layout class="user-section-header slds-m-top_large" multiple-rows>
+        <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="6">
+            <div class="custom-box slds-text-heading_medium slds-hyphenate font-h4">My Address Book</div>
+        </lightning-layout-item>
+      <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="6" class="user-header-actions">
+        <button class="slds-button themeBtn primaryRedBtn hondabutton" title="Add new address"  onclick={createNewAddressHandler}>Add new address</button>
+      </lightning-layout-item>
+    </lightning-layout>
+  
+    <template if:true={addressList} for:each={addressList} for:item="addressitem" for:index="indx">
+      <!-- Row 1 --> 
+      <lightning-layout multiple-rows key={addressitem.Id} class="address-book-wrapper">
+  
+        <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="6"
+          padding="horizontal-small">
+          <lightning-layout multiple-rows key={addressitem.Id} pull-to-boundary="large">
+  
+            <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="12"
+              padding="horizontal-small">
+              <div class="custom-box slds-text-heading_medium slds-m-bottom_medium slds-hyphenate font-h4">{addressitem.NickName__c}  &nbsp;&nbsp;&nbsp; 
+                <template if:true={addressitem.isPreferred__c}>
+                  <lightning-icon icon-name='utility:favorite' alternative-text='preferred' variant="error" size='small' title='Preferred'></lightning-icon>
+              </template>
+              <template if:false={addressitem.isPreferred__c}>
+                  <strong class="textRed"><a data-id={addressitem.Id} onclick={handleClick}>Make Preferred</a></strong><!--Added by Sayalee for 7892-->
+                </template>
+              </div>
+             </lightning-layout-item>
+  
+            <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="6"
+              padding="horizontal-small">
+              <div class="custom-box"><b>Name</b></div>
+            </lightning-layout-item>
+  
+            <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="6"
+              padding="horizontal-small">
+              <div class="custom-box">{addressitem.Name}</div>
+            </lightning-layout-item>
+  
+            <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="6"
+              padding="horizontal-small">
+              <div class="custom-box"> <b> Address</b> </div>
+            </lightning-layout-item>
+  
+            <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="6"
+              padding="horizontal-small">
+              <div class="custom-box">{addressitem.Address__c}</div>
+            </lightning-layout-item>
+  
+            <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="6"
+              padding="horizontal-small">
+              <div class="custom-box"> <b> City </b> </div>
+            </lightning-layout-item>
+  
+            <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="6"
+              padding="horizontal-small">
+              <div class="custom-box">{addressitem.City__c}</div>
+            </lightning-layout-item>
+  
+            <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="6"
+              padding="horizontal-small">
+              <div class="custom-box"> <b>State </b> </div>
+            </lightning-layout-item>
+  
+            <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="6"
+              padding="horizontal-small">
+              <div class="custom-box">{addressitem.State__c}</div>
+            </lightning-layout-item>
+            
+            <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="6"
+              padding="horizontal-small">
+              <div class="custom-box"> <b>Country </b> </div>
+            </lightning-layout-item>
+  
+            <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="6"
+              padding="horizontal-small">
+              <div class="custom-box">{addressitem.Country__c}</div>
+            </lightning-layout-item>
+
+            <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="6"
+              padding="horizontal-small">
+              <div class="custom-box"> <b> Zip </b> </div>
+            </lightning-layout-item>
+  
+            <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="6"
+              padding="horizontal-small">
+              <div class="custom-box">{addressitem.Zip__c}</div>
+            </lightning-layout-item>
+  
+            <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="6"
+              padding="horizontal-small">
+              <div class="custom-box"> <b> Phone</b> </div>
+            </lightning-layout-item>
+  
+            <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="6"
+              padding="horizontal-small">
+              <div class="custom-box"> <lightning-formatted-phone class="address-phone" disabled value={addressitem.Phone__c}></lightning-formatted-phone></div>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="6"
+              padding="horizontal-small">
+              <div class="custom-box"> <b> Notes </b> </div>
+            </lightning-layout-item>
+  
+            <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="6"
+              padding="horizontal-small">
+              <div class="custom-box ">{addressitem.Notes__c}</div>
+            </lightning-layout-item>
+  
+          </lightning-layout>
+        </lightning-layout-item>
+  
+        <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="6"
+          padding="horizontal-small" alignment-bump="left">
+          <lightning-layout multiple-rows key={addressitem.Id} pull-to-boundary="large">
+            <div class="addressBookActions slds-text-align_center">
+  
+              <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="12"
+                padding="horizontal-small">
+                <button class="slds-button themeBtn primaryGrayBtn hondabutton" data-id={addressitem.Id} data-index={indx} 
+                  onclick={editAddressHandler} title="Edit" >EDIT</button>
+              </lightning-layout-item>
+  
+              <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="12"
+                padding="horizontal-small">
+                <button class="slds-button themeBtn primaryGrayBtn hondabutton" data-id={addressitem.Id}
+                  onclick={removeAddressModelShow} title="Remove">REMOVE</button>
+              </lightning-layout-item>
+  
+            </div>
+          </lightning-layout>
+        </lightning-layout-item>
+        <lightning-layout-item size="12" small-device-size="12" padding="horizontal-small"></lightning-layout-item>
+        <br> <br>
+      </lightning-layout>
+    </template>
+   
+    <template if:true={isDataNotAvailable}>
+      <div class="slds-container_center containerWrapper slds-m-bottom_large" style="padding:0">
+        <div class="slds-text-heading_large slds-text-color_error errorTxt slds-text-align_center slds-m-bottom_large">
+          No saved addresses.
+        </div>
+      </div>
+    </template>
+   
+    <!-- Remove Functionality starts here-->
+    <template if:true={showRemoveModalBox}>
+      <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-02" aria-modal="true"
+        aria-describedby="modal-content-id-2" class="slds-modal slds-fade-in-open myAddressBookModal">
+        <div class="slds-modal__container">
+          <header class="slds-modal__header" style="border-bottom: 0;">
+            <div if:true={currentRecord.isPreferred__c}> 
+              <h3 id="modal-heading-02" class="slds-text-heading_medium slds-p-top_medium slds-hyphenate font-h3" style="text-align: justify;">
+                {preferredAddressDeleteMessageLabel}
+              </h3>
+            </div>
+            <div if:false={currentRecord.isPreferred__c}> 
+              <h3 id="modal-heading-03" class="slds-text-heading_medium slds-p-top_medium slds-hyphenate font-h3" style="text-align: justify;">
+                {nonPreferredAddressDeleteMessageLabel}
+              </h3>
+            </div>
+          </header>
+  
+          <div class="slds-modal__content slds-p-horizontal_medium slds-p-bottom_small slds-p-left_xx-large"
+            id="modal-content-id-2">
+            <lightning-layout multiple-rows></lightning-layout>
+          </div>
+          <footer class="slds-modal__footer slds-text-align_center slds-p-top_medium slds-p-bottom_medium"
+            style="border-top: 0;">
+            <lightning-button variant="brand" label="Confirm" title="Confirm" class="slds-m-left_small"
+              onclick={removeAddressHandler}></lightning-button>
+            <lightning-button variant="" label="Cancel" title="Cancel" class="slds-m-left_small primaryGrayBtn"
+              onclick={closeRemoveModalBox}></lightning-button>
+          </footer>
+        </div>
+      </section>
+      <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+  
+    <!--New/Edit Address Book-->
+      <template if:true={showEditModalBox}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-02" aria-modal="true"
+          aria-describedby="modal-content-id-2" class="slds-modal slds-fade-in-open myAddressBookModal">
+          <div class="slds-modal__container">
+            <header class="slds-modal__header">
+              <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">{modalBoxName}</h2>
+            </header>
+            <div class="slds-modal__content slds-p-horizontal_medium slds-p-bottom_small slds-p-left_xx-large"
+              id="modal-content-id-3">
+              <!-- Row 1 -->
+              <lightning-layout multiple-rows vertical-align="center">
+                <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="4"
+                  padding="around-small">
+                  <div class="slds-text-align_right">Name <abbr title="required" class="slds-required">*</abbr></div>
+                </lightning-layout-item>
+                <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="7"
+                  padding="around-small">
+                  <lightning-input onchange={addressHandleChange} onkeypress={handleToAllowName} name="Name" type="text"
+                    value={currentRecord.Name} class="AddName" required>
+                  </lightning-input>
+                </lightning-layout-item>
+              </lightning-layout>
+              <!-- Row 2 -->
+              <lightning-layout multiple-rows vertical-align="center">
+                <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="4"
+                  padding="around-small">
+                  <div class="slds-text-align_right">Address <abbr title="required" class="slds-required">*</abbr></div>
+                </lightning-layout-item>
+                <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="7"
+                  padding="around-small">
+                  <lightning-input onchange={addressHandleChange} name="Address" type="text"
+                    value={currentRecord.Address__c} class="AddressName" required>
+                  </lightning-input>
+                </lightning-layout-item>
+              </lightning-layout>
+              <!-- Row 3 -->
+              <lightning-layout multiple-rows vertical-align="center">
+                <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="4"
+                  padding="around-small">
+                  <div class="slds-text-align_right">City <abbr title="required" class="slds-required">*</abbr></div>
+                </lightning-layout-item>
+                <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="7"
+                  padding="around-small">
+                  <lightning-input onkeypress={handleToAllowName} onchange={addressHandleChange} name="City" class="city"
+                    type="text" value={currentRecord.City__c} required>
+                  </lightning-input>
+                </lightning-layout-item>
+              </lightning-layout>
+              <!-- Row 4 -->
+              <lightning-layout multiple-rows vertical-align="center">
+                <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="4"
+                  padding="around-small">
+                  <div class="slds-text-align_right">State <abbr title="required" class="slds-required">*</abbr></div>
+                </lightning-layout-item>
+                <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="7"
+                  padding="around-small">
+                  <div class="custom-box">
+                    <lightning-combobox name="State" class="state" placeholder="State" value={currentRecord.State__c}
+                      options={stateOptionList} onchange={addressHandleChange} required>
+                    </lightning-combobox>
+                  </div>
+                </lightning-layout-item>
+              </lightning-layout>
+              <!-- Row 5 -->
+              <lightning-layout multiple-rows vertical-align="center">
+                <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="4"
+                  padding="around-small">
+                  <div class="slds-text-align_right">Country <abbr title="required" class="slds-required">*</abbr></div>
+                </lightning-layout-item>
+                <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="7"
+                  padding="around-small">
+                  <lightning-input name="Country" class="Country"
+                    type="text" value="United States" required disabled="true">
+                  </lightning-input>
+                </lightning-layout-item>
+              </lightning-layout>
+
+              <lightning-layout multiple-rows vertical-align="center">
+                <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="4" padding="around-small">
+                  <div class="slds-text-align_right">Zip <abbr title="required" class="slds-required">*</abbr></div>
+              </lightning-layout-item>
+              <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="7" padding="around-small">
+                  <lightning-input onkeypress={handleToAllowZipcode} onchange={addressHandleChange} class="zipCode"
+                    name="Zip" type="text" value={currentRecord.Zip__c} required>
+                  </lightning-input>
+                </lightning-layout-item>
+              </lightning-layout>
+              <!-- Row 6 Updated by Ravi Prasad as part of HDMP-13640 -->
+              <lightning-layout multiple-rows vertical-align="center">
+                <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="4"
+                  padding="around-small">
+                <div class="slds-text-align_right">Phone <abbr title="required" class="slds-required">*</abbr></div>
+                </lightning-layout-item>
+                <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="7"
+                  padding="around-small">
+                  <lightning-input onchange={addressHandleChange} onkeyup={validatePhone} class="Number" name="Phone"
+                  type="text" value={currentRecord.Phone__c} required>
+                  </lightning-input>
+                </lightning-layout-item>
+              </lightning-layout> 
+              <!-- Row 7 -->
+              <lightning-layout multiple-rows vertical-align="center">
+                <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="4"
+                  padding="around-small">
+                  <div class="slds-text-align_right">Notes</div>
+                </lightning-layout-item>
+                <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="7"
+                  padding="around-small">
+                  <lightning-input onchange={addressHandleChange} name="Notes" type="text" value={currentRecord.Notes__c}>
+                  </lightning-input>
+                </lightning-layout-item>
+              </lightning-layout>
+              <!-- Row 8 -->
+              <lightning-layout multiple-rows vertical-align="center">
+                <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="4"
+                  padding="around-small">
+                  <div class="slds-text-align_right">Address NickName</div>
+                </lightning-layout-item>
+                <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="7"
+                  padding="around-small">
+                  <lightning-input onchange={addressHandleChange} name="AddressNickName" value={currentRecord.NickName__c}
+                    type="text"></lightning-input>
+                </lightning-layout-item>
+              </lightning-layout>
+              <!-- Row 9 -->
+              <lightning-layout multiple-rows vertical-align="center">
+                <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="12"
+                  padding="around-small">
+                  <div class="slds-text-align_center markPreferred">
+                    <lightning-input onchange={addressHandleChange} name="MarkPreferredAddress"
+                      checked={currentRecord.isPreferred__c} type="checkbox" label="Make preferred address">
+                    </lightning-input>
+                  </div>
+                </lightning-layout-item>
+              </lightning-layout>
+            </div>
+            <footer class="slds-modal__footer slds-text-align_center slds-p-top_medium slds-p-bottom_medium"
+              style="border-top: 0;">
+              <lightning-button variant="brand" label={saveAndCreateButton} title="SAVE CHANGES" class="slds-m-left_small"
+                name="SAVECHANGES" onclick={handleEditAction}></lightning-button>
+              <lightning-button variant="" label="CANCEL" title="CANCEL" class="slds-m-left_small primaryGrayBtn"
+                name="CANCEL" onclick={handleEditAction}></lightning-button>
+            </footer>
+          </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+        <!-- error popup start -->
+        <template if:true={showErrorPopup}>
+          <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+            aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open" >
+            <div class="slds-modal__container">
+              <div class="modal-header">
+                <header class="slds-modal__header " style='border: none;'>
+                  <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                    title="Close" onclick={closeErrorPopup}>
+                    <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse"
+                      size="small"></lightning-icon>
+                    <!-- <span class="slds-assistive-text">Close</span> -->
+                  </button>
+                </header>
+              </div>
+              <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                <lightning-icon icon-name="utility:error" size="large"
+                  style="margin-left: 283px; margin-top: -18px;"></lightning-icon>
+                <h1 style="font-size:26px; text-align:center; padding-top: 5px;" class="slds-text-color_error">Oops!
+                  Something went wrong.</h1>
+                <br />
+                <p style="text-align:center; font-size:17px">{errorMessage}</p>
+              </div>
+            </div>
+          </section>
+          <div class="slds-backdrop slds-backdrop_open"></div>
+        </template>
+        <!-- error popup end -->
+      </template>
+    <template if:true={addressPicker}>
+      <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+        aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open addressModal">
+        <div class="slds-modal__container">
+          <header class="slds-modal__header slds-text-align_left slds-p-around_x-large">
+            <!--<button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+              onclick={handleCloseAddressPicker} title="Close">
+              <span class="slds-assistive-text">Close</span>X</button>-->
+            <div class="slds-text-heading_large slds-border_bottom slds-p-bottom_medium slds-p-top_large">
+              Confirm Address</div>
+  
+            <lightning-layout multiple-rows class="slds-m-bottom_large">
+              <!-- <template if:true={showEnteredAddress}> -->
+              <lightning-layout-item size="12">
+                <p class="font-h6 slds-m-top_medium">We found a similar address for your location. Please
+                  select one and confirm the address.</p>
+              </lightning-layout-item>
+              <lightning-layout-item size="12" class="slds-medium-size_6-of-12 slds-p-top_large">
+                 <!--newly added by Sayalee as a part of HDMP-8727-->
+                 <p class="slds-text-align_center slds-text-heading_medium slds-p-bottom_small"><b>{label.CustomerEntered}</b></p>
+                <div class="custom-box slds-p-around_medium slds-m-right_small slds-is-relative slds-grid"
+                  style="border: 1px solid rgb(151, 151, 151); height:auto; min-height:100px;">
+                  <lightning-input name="TYPED" type="checkbox" 
+                  data-id="checkbox"
+                    onchange={handleOnAddress}>
+                  </lightning-input>
+                  <div class="slds-grid">
+                    <div class="slds-col">
+                      <div class="slds-text-heading_x-small">{currentRecord.Address__c}
+                        {currentRecord.City__c},  {currentRecord.State__c}
+                        {currentRecord.Zip__c}</div>
+                    </div>
+                  </div>
+                </div>
+              </lightning-layout-item>
+              <!-- </template> -->
+  
+              <lightning-layout-item size="12" class="slds-medium-size_6-of-12 slds-p-top_large">
+                <!--newly added by Sayalee as a part of HDMP-8727-->
+                <p class="slds-text-align_center slds-text-heading_medium slds-p-bottom_small"><b>{label.Recommended}</b></p>
+    <div class="custom-box slds-p-around_medium slds-m-left_small slds-is-relative slds-grid" style="border: 1px solid rgb(151, 151, 151); height:auto; min-height:100px;">
+        <lightning-input name="SUGGESTED" type="checkbox" data-id="checkbox" onchange={handleOnAddress}></lightning-input>
+                  <div class="slds-grid">
+                    <div class="slds-col">
+                      <div class="slds-text-heading_x-small">{responsedAddress.StreetAddress1}
+                        {responsedAddress.City}, {responsedAddress.MainDivision}
+                        {responsedAddress.PostalCode}</div>
+                    </div>
+                  </div>
+  
+                </div>
+              </lightning-layout-item>
+            </lightning-layout>
+  
+            <lightning-button variant="brand" label="CONFIRM THIS ADDRESS" title="CONFIRM THIS ADDRESS"
+              onclick={handleOnConfirmAddress}
+              class="slds-grid slds-grid_align-center slds-m-top-medium slds-m-bottom_large">
+            </lightning-button>
+          </header>
+        </div>
+      </section>
+      <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+  </template>
+</template>

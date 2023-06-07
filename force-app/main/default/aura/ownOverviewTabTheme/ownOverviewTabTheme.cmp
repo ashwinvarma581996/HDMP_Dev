@@ -1,0 +1,33 @@
+<!-- ======================================================================================================
+// Title: Lightning Aura Theme for Honda Owners Experience Community
+//
+// Summary: This is the Theme for the product overview Tab
+//
+// Updated:
+// Feb 16, 2022 Ravindra Ravindra (Wipro) Original Author
+====================================================================================================== -->
+<aura:component access="global" implements="forceCommunity:themeLayout" description="Honda MyGarage Overview Theme Layout">
+    <aura:attribute name="themeHeader" description="Footer" type="Aura.Component[]" required="false" />
+    <aura:attribute name="themeProductDetail" description="Product Detail" type="Aura.Component[]" required="false" />
+    <aura:attribute name="themeTab" description="Tab" type="Aura.Component[]" required="false" />
+    <aura:attribute name="themeFooter" description="Footer" type="Aura.Component[]" required="false" />
+    <div class="c-container">
+        <lightning:layout multipleRows="true">
+            <lightning:layoutItem flexibility="auto" size="12">
+                {!v.themeHeader}
+            </lightning:layoutItem>
+            <lightning:layoutItem flexibility="auto" size="12">
+                {!v.themeProductDetail}
+            </lightning:layoutItem>
+            <lightning:layoutItem flexibility="auto" size="12">
+                {!v.themeTab}
+            </lightning:layoutItem>
+            <lightning:layoutItem flexibility="auto" size="12" class="content_class">
+                {!v.body}
+            </lightning:layoutItem>
+            <lightning:layoutItem flexibility="auto" size="12">
+                {!v.themeFooter}
+            </lightning:layoutItem>
+        </lightning:layout>
+    </div>
+</aura:component>

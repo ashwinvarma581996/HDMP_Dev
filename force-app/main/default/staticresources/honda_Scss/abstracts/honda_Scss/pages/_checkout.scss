@@ -1,0 +1,163 @@
+.comm-page-checkout {
+    .slds-global-header_container>.checkoutHeader>.slds-global-header__item:first-child {
+        width: 1181px;
+        margin: 0 auto;
+        padding: 0;
+        .slds-global-header__logo {
+            width: 220px;
+        }
+        @media (max-width:1181px) {
+            padding: 0 20px;
+        }
+    }
+    .slds-global-header_container>.checkoutHeader>.slds-global-header__item:last-child {
+        display: none;
+    }
+    article.slds-card {
+        margin: 30px 0;
+        box-shadow: 0px 15px 39px 0px rgba(8, 18, 109, 0.10);
+        background: #fff;
+        border: 0;
+        padding: 10px;
+        .checkoutPage {
+            .allBorders {
+                border-color: $darkgrey !important;
+                color: #fff;
+                text-transform: uppercase;
+                padding: 24px 20px;
+                font-size: 16px;
+                position: relative;
+                background: $darkgrey;
+                letter-spacing: 0.8px;
+                font-weight: bolder !important;
+                margin: 0;
+                border-left: 0;
+                &:first-child {
+                    border-left: 1px solid #D9D9D9 !important;
+                }
+                @media (min-width:768px) and (max-width: 991px) {
+                    font-size: 15px;
+                }
+                @media (max-width:767px) {
+                    font-size: 14px;
+                    padding: 20px 8px;
+                }
+                @media (max-width:600px) {
+                    width: 45%;
+                    flex: unset;
+                    margin: 6px;
+                    font-size: 12px;
+                    border: 1px solid #d9d9d9;
+                    padding: 20px 10px;
+                    text-align: center
+                }
+                &:not(.greyColor):before {
+                    content: '';
+                    position: absolute;
+                    bottom: -24px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    border-bottom: 12px solid transparent;
+                    border-top: 12px solid $darkgrey;
+                    border-left: 12px solid transparent;
+                    border-right: 12px solid transparent;
+                    @media (max-width: 767px) {
+                        display: none;
+                    }
+                }
+            }
+            .greyColor {
+                color: $lightgrey !important;
+                border-color: $lightgrey !important;
+                background: #f9f9f9 !important;
+            }
+            .shippingDetail {
+                .absoluteCenter {
+                    @media (min-width: 600px) {
+                        min-width: 160px;
+                    }
+                    @media (max-width: 599px) {
+                        min-width: 172px;
+                    }
+                    @media (max-width: 420px) {
+                        padding: 0 6px !important;
+                        min-width: 116px;
+                    }
+                }
+                .labelRadio {
+                    font-size: 16px;
+                    padding: 0 20px;
+                    @media (max-width: 600px) {
+                        font-size: 14px;
+                        padding: 0 16px;
+                    }
+                    @media (max-width: 400px) {
+                        font-size: 11px;
+                        padding: 0 15px;
+                    }
+                }
+            }
+            @media (max-width:600px) {
+                .flex-mob-column {
+                    flex-direction: column;
+                    .slds-col:last-child {
+                        text-align: left !important;
+                        margin-top: 20px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.addressModal {
+    label.slds-checkbox__label {
+        top: initial;
+        left: initial;
+        height: 15px;
+        width: 15px;
+        background-color: #fff;
+        border: 1px solid #666;
+        display: inline-block;
+        margin: 0 auto;
+        border-radius: 0;
+    }
+    span.slds-checkbox_faux,
+    .slds-form-element__label {
+        display: none !important;
+    }
+}
+
+.addressModal label.slds-checkbox__label:after {
+    content: "\f00c";
+    border-bottom: 2px solid #E42525;
+    border-right: 2px solid #E42525;
+    -webkit-transform: rotate( 45deg);
+    transform: rotate( 45deg);
+    border-radius: 0;
+    background: transparent;
+    top: -3px !important;
+    left: 7px;
+    width: 8px;
+    height: 16px;
+    position: absolute;
+    display: none;
+}
+
+.addressModal input[type='checkbox']:checked+label {
+    background-color: transparent;
+    border: 1px solid $redBg;
+}
+
+.addressModal input[type='checkbox']:checked+label:after {
+    display: block;
+}
+
+.shipToMe label {
+    position: relative;
+}
+
+.shipToMe abbr.slds-required {
+    position: absolute;
+    right: 0;
+}

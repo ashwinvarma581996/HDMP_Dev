@@ -1,0 +1,31 @@
+<apex:component access="global" controller="DisplayCartItemsCtrl" >
+    <apex:attribute name="relatedCartId" type="String" assignTo="{!cartId}" description="test" />
+    <apex:outputPanel rendered="{! IF(ISBLANK(CartItemList), false, true) }">
+    <apex:repeat var="oi" value="{!CartItemList}" >
+        <tr>
+            <td style="padding:8px 12px; border: 0;border-right:1px solid;border-left:1px solid;">{!oi.Name}</td>
+            <td style="padding:8px 12px; border: 0;border-right:1px solid;">{!oi.Sku}</td>
+            
+           <apex:outputPanel rendered="{!oi.Cart.Delivery_Type__c == 'Install At Dealer'}">
+             <td style="padding:8px 12px; border: 0;border-right:1px solid; text-align:right;">
+                 <apex:outputText value="${!oi.Dealer_Installation_Price__c/oi.Quantity}"></apex:outputText>
+             </td>
+           </apex:outputPanel>
+           
+            <td style="padding:8px 12px; border: 0;border-right:1px solid; text-align:right;">{!FLOOR(oi.Quantity)}</td>
+            <td style="padding:8px 12px; border: 0;border-right:1px solid; text-align:right;">$
+                <apex:outputText value="{0,number,#,##0.00}">
+                    <apex:param value="{!oi.ListPrice}" />
+                </apex:outPutText>  
+            </td>
+            <td style="padding:8px 12px;border: 0;border-bottom:0; text-align:right; border-right:1px solid; ">$
+                <apex:outputText value="{0,number,#,##0.00}">
+                    <apex:param value="{!oi.TotalPrice}" />
+                </apex:outPutText> 
+            </td>
+
+            <td style="padding:8px 12px; border: 0;border-right:1px solid;border-left:1px solid;">{!oi.Product_Model_Marketing_Name__c}</td>
+        </tr>
+    </apex:repeat>
+    </apex:outputPanel>
+</apex:component>

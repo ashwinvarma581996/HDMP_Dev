@@ -1,0 +1,56 @@
+<template>
+    <div class="slds-container_medium slds-container_center slds-p-around_large">
+        <div class="slds-m-bottom_xx-large emission-warranty">
+            <h3>Parts Covered by Emission Warranty</h3>
+            <div class="emission-warranty-section">
+                <p>To view a list of parts covered under your vehicle’s emissions warranty, select the state where the
+                    vehicle is registered and operated.</p>
+            </div>
+            <lightning-layout-item size="12" padding="around-small">
+                <lightning-layout class="slds-grid_vertical-align-end" multiple-rows>
+                    <lightning-layout-item size="12" small-device-size="12" medium-device-size="4" large-device-size="6"
+                        class="slds-m-right_large">
+                        <div>
+                            <template if:true={states}>
+                                <span class=own-combobox-label>State</span>
+                                <lightning-combobox value={mailingState} class="validate" required options={states}
+                                    onchange={handleStateChange} variant="label-hidden"></lightning-combobox>
+                            </template>
+                        </div>
+
+                    </lightning-layout-item>
+                    <lightning-layout-item size="12" small-device-size="12" medium-device-size="2"
+                        large-device-size="2">
+                        <button class="slds-button slds-brand-button-active" onclick={handleFindButton}>Find</button>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </lightning-layout-item>
+            <lightning-layout class="slds-grid_vertical-align-end slds-m-bottom_xx-large slds-m-top_x-small"
+                multiple-rows>
+                <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="6">
+                    <template if:true={showWarrantyCard}>
+                        <c-own-card  title={title1} brand="default" icon-image={icon} titlecolor={titlecolor} hide-body-section={hideBody} header-clickable="true"
+                        onheader={handleHeaderClick}>
+                            <div slot="action">
+                                <lightning-icon class={iconClass} icon-name="utility:download" size="x-small" slot="actions" onclick={handleHeaderClick}></lightning-icon>
+                            </div>
+                            <div slot="default">
+                                <lightning-formatted-rich-text value={body}></lightning-formatted-rich-text>
+                            </div>
+                        </c-own-card>
+                    </template>
+                </lightning-layout-item>
+            </lightning-layout>
+            <!-- <p>Create a Honda Owners account to save your details and easily access your product’s recall and warranty
+                information and other helpful resources. <a class="add-link">Add to My Garage</a></p> -->
+            </div>
+            <template if:false={isGuest}>
+                <template if:false={hasMailingState}>
+                    <div class="update-address-container">
+                        <p class="pp">We noticed that this state is different from the one provided in your address. We occassionally mail out recall information and other vehicle updates. Would you like to update your address? <a class="add-link" onclick={handleUpdateAddress}> Update Address</a></p>
+                    </div>
+                </template>
+            </template>
+            <c-own-save-to-my-garage content-id={bannercontentid} no-padding="true" no-banner="true"></c-own-save-to-my-garage>
+        </div>
+</template>

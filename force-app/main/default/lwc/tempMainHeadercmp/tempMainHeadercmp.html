@@ -1,0 +1,18 @@
+<template>
+
+    <div class="slds-context-bar mainHeader">
+        <nav class="slds-context-bar__secondary" role="navigation">
+            <ul class="slds-grid">
+                <li onmouseover={handleOnMouseOver} data-value="Honda"
+                    class="slds-context-bar__item slds-context-bar__dropdown-trigger slds-dropdown-trigger slds-dropdown-trigger_hover">
+                    <c-temp-main-header-items brand-name="Honda" brand-image-url={honda}></c-temp-main-header-items>
+                </li>
+
+                <li onmouseover={handleOnMouseOver} data-value="Acura"
+                    class="slds-context-bar__item slds-context-bar__dropdown-trigger slds-dropdown-trigger slds-dropdown-trigger_hover">
+                    <c-temp-main-header-items brand-name="Acura" brand-image-url={acura}></c-temp-main-header-items>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</template>

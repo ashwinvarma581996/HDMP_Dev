@@ -1,0 +1,20 @@
+<template>
+    <lightning-card title="Create Regional Offer">
+     
+
+        <div class="slds-m-horizontal_medium  slds-grid_align-center">
+
+            <lightning-input name="programname" label='Program Name' value={program} type='text'
+                onchange={handlechangeprogram} required="required">
+            </lightning-input>
+            <lightning-input name="Descriptive" label='Descriptive Name' value={descrptive}
+                onchange={handlechangedescriptive} required="required">
+            </lightning-input>
+        </div>
+    </lightning-card>
+    <br>
+    <div class="slds-align_absolute-center" style="height:5rem">
+        <lightning-button label="Submit" onclick={handlesaveoffer} variant="brand"></lightning-button> &nbsp; 
+        <lightning-button label="Cancel" onclick={handleCancel} variant="brand"></lightning-button>
+    </div>
+</template>

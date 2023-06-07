@@ -1,0 +1,126 @@
+<template>
+
+    <lightning-spinner if:true={savingData} alternative-text="Loading" size="large"></lightning-spinner>
+    <lightning-layout multiple-rows class="slds-align_absolute-center slds-p-vertical_medium slds-p-right_xx-large myGarageHeading">
+        <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="12">
+            <h3 class="table-title text-style"> Account Information</h3>
+        </lightning-layout-item>
+    </lightning-layout>
+
+    <div class="slds-grid slds-gutters slds-wrap slds-m-top_x-large">
+        <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-3 userIcon">
+            <div class="slds-grid slds-grid_vertical slds-grid_vertical-align-center ownEditImage">
+                <div class="slds-grid slds-align_absolute-center product-icon">
+                    <img class={imgCls} src={image}>
+                </div>
+                <div class="slds-grid slds-grid_vertical slds-grid_vertical-align-center ownAddPhotoContainer">
+                    <div class="slds-form-element">
+                        <div class="slds-form-element__control">
+                            <div class="slds-file-selector slds-file-selector_files">
+                                <div class="slds-file-selector_integrated">
+                                    <form enctype="multipart/form-data" method="POST">
+                                        <input type="file" id="custom-image-upload"
+                                            class="slds-file-selector__input slds-assistive-text" accept="image/*"
+                                            onchange={handleUserImageUpload} />
+                                        <label for="custom-image-upload" id="custom-image-upload-label" tabindex="0">
+                                            <div
+                                                class="slds-grid slds-align_absolute-center slds-file-selector__button slds-file-selector__input ownAddPhoto" role="img" aria-label="Choose File button">
+                                                <img src={camera_icon} alt="Choose File button" />
+                                            </div>
+                                        </label>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div>{customImage.name}</div> -->
+                    <div class="slds-m-top_small ownAddPhotoHead" tabindex="0">{uploadPhotoButtonLabel}</div>
+                </div>
+            </div>
+            <template if:true={showImageError}>
+                <lightning-layout multiple-rows="true" class="err-container">
+                    <!-- <lightning-layout-item  size="6" class="err-layout-item">
+                        <div class="error-img-div">
+                            <img src={warningicon} class="warning-icon"/>
+                        </div>
+                    </lightning-layout-item>
+                    <lightning-layout-item  size="6" class="err-layout-item close-icon-div">
+                        <lightning-icon icon-name='utility:close'  size='x-small' class="close-icon" onclick={handleErrorClose}></lightning-icon>
+                    </lightning-layout-item> -->
+                    <lightning-layout-item  size="12" class="err-layout-item">
+                        <div class="">
+                            <img src={warningicon} class="warning-icon error-img-div"/>
+                            <lightning-icon icon-name='utility:close'  size='x-small' class="close-icon close-icon-div" onclick={handleErrorClose}></lightning-icon>
+                        </div>
+                    </lightning-layout-item>
+                    <lightning-layout-item  size="12" class="err-layout-item">
+                        <div class="error-msg">
+                            Image should be JPG, GIF or PNG File. Maximum file size is 3 MB
+                        </div>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </template>
+        </div>
+
+        <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_2-of-4">
+         
+          <div class="subSectionHeading">
+            <div class="slds-float_left"><h4>Login Details</h4></div>
+            <div class="slds-float_right"><button onclick={handleOnEditUserNameAndPassword}>EDIT</button></div>
+          </div>
+          <div class="slds-grid slds-gutters slds-clear">
+                <div class="slds-col slds-size_1-of-2">
+                    <div class="slds-float_left fldLabel">
+                       <strong>Name</strong> 
+                    </div><br />
+                    <div class="slds-float_left field-value">
+                        {Name}
+                    </div>
+                    <div class="slds-float_left fldLabel rowlevel">
+                        <strong>Password</strong>
+                    </div><br />
+                    <div class="slds-float_left field-value">
+                        *******
+                    </div>
+                </div>
+                <div class="slds-col slds-size_1-of-2">
+                    <div class="slds-float_left fldLabel">
+                        <strong> Email</strong>
+                    </div><br />
+                    <div class="slds-float_left field-value">
+                        {email}
+                    </div>
+                </div>
+           </div> 
+           <div class="subSectionHeading slds-m-top_large">
+            <div class="slds-float_left"><h4>Home Address</h4></div>
+            <div class="slds-float_right"><button onclick={handleOnHomeAddressEdit}>{buttonLabel}</button></div>
+            </div>
+            <template if:true={isAddressPresents}>
+                <div>
+                    <span>{street}</span><br/>
+                    <span>{city} {state} {zipCode}</span>
+                </div>     
+            </template>
+            <template if:false={isAddressPresents}>
+                <div>
+                    <span>You haven't added a home address yet.</span>
+                </div>  
+            </template>
+
+        </div>
+      </div>
+
+<!--       <div class="slds-clear"></div>
+      <div class="nxtSection">
+          test
+        <c-own-c-m-s-card context={context} isguest={isGuest} >
+        </c-own-c-m-s-card>
+      </div> -->
+      <div class="slds-clear"></div>
+      <div class="nxtSection">
+        <c-own-product-carousel context={context} isguest={isGuest} account-info="true" play-store-u-r-l={playStoreURL} app-store-u-r-l={appStoreURL} acura-play-store-u-r-l={acuraPlayStoreURL} acura-app-store-u-r-l={acuraAppStoreURL} subscriptions-loaded={subscriptionsLoaded}>
+        </c-own-product-carousel>
+      </div>
+    
+</template>

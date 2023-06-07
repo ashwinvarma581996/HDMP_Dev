@@ -1,0 +1,42 @@
+.THIS .absoluteCenter{
+    display: grid;
+    justify-content: center;
+    align-content: center;
+}
+
+.THIS .centerElement{
+    display: grid;
+    justify-content: center;
+}
+
+.THIS .greyColor{
+    color: #D9D9D9 !important;
+    border-color: #D9D9D9 !important;
+    background: #f9f9f9 !important;
+}
+
+.THIS .allBorders{
+    border: 1px solid #D4D4D4;
+}
+
+.THIS .tabHeight{
+    height:40px;
+}
+
+.THIS .allBorders {
+    border-color: #5E6162 !important;
+    color: #fff;
+    text-transform: uppercase;
+    padding: 24px 20px;
+    font-size: 16px;
+    position: relative;
+    background: #5E6162;
+    letter-spacing: 0.8px;
+    font-weight: bolder !important;
+    margin: 0;
+    border-left: 0;
+}
+
+.THIS .textRed {
+    color: #E42525;
+}

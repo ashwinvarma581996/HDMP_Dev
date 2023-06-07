@@ -1,0 +1,401 @@
+<template>
+    <template if:false={hideSpinner} >
+        <div class="slds-spinner_container">
+            <lightning-spinner alternative-text="Loading" size="large" variant="base"></lightning-spinner>
+        </div>
+    </template>
+    <template if:true={hideSpinner} >
+        <div class="b-c-large">
+            <c-own-breadcrumb label={breadCrumbLabel} url={breadCrumbUrl}></c-own-breadcrumb>
+        </div>
+        <div class="c">
+            <div class="b-c-small">
+                <c-own-breadcrumb label={breadCrumbLabel} url={breadCrumbUrl}></c-own-breadcrumb>
+            </div>
+            <div class="ci" if:false={isCaseSubmissionSuccess}>
+                <div class="cii ci-1">
+                    <div class="financial-div" if:true={showFinancialDiv}>
+                        <p if:true={isAcura}>
+                            <b>{custom_metadata.Acura_Financial_Services.Acura_Financial_Services.Text}<a href={custom_metadata.Acura_Financial_Services.Acura_Financial_Services.LinkValue} target="_blank"> {custom_metadata.Acura_Financial_Services.Acura_Financial_Services.LinkLabel}</a></b>
+                        </p>
+                        <p if:true={isHonda}>
+                            <b>{custom_metadata.Honda_Financial_Services.Honda_Financial_Services.Text}<a href={custom_metadata.Honda_Financial_Services.Honda_Financial_Services.LinkValue} target="_blank"> {custom_metadata.Honda_Financial_Services.Honda_Financial_Services.LinkLabel}</a> </b>
+                        </p>
+                    </div>
+                    <h1 class="h1">Send an Email</h1>
+                    <div class="error-div" if:true={showErrorBox}>
+                        <lightning-icon icon-name='utility:error' alternative-text='error' size='small' title='error' class="custom-icon"></lightning-icon>
+                        <span class="err-text">{errorBoxLabel}</span>
+                    </div>
+                    <p class="p1">First, select a topic and sub-topic so we can better assist you. Then fill out the form with your information and tell us more about your Honda product. A Honda representative will respond to you soon.</p>
+                </div>
+                <div class="cii ci-2">
+                    <lightning-combobox
+                        name="Topic"
+                        label={topicLabel}
+                        value={selected_topic}
+                        placeholder="--None--"
+                        options={topics}
+                        onchange={handleChangeTopic}
+                        required={fields.Topic.required}
+                            message-when-value-missing="Required Field." data-apiname={fields.Topic.apiName}
+                        class="find-brand-combobox slds-m-top_xx-small case-form-combobox validation form-input validation form-input-1"
+                    >
+                    </lightning-combobox>
+                </div>
+                <div class="cii ci-2" if:false={isPEPressureWashers}>
+                    <lightning-combobox
+                        name="Sub Topic"
+                        label={subTopicLabel}
+                        value={selected_subtopic}
+                        placeholder="--None--"
+                        options={subtopics}
+                        onchange={handleChangeSubTopic}
+                        required={fields.Subtopic.required}
+                        disabled={disable_subtopics}
+                            message-when-value-missing="Required Field." data-apiname={fields.Subtopic.apiName}
+                        class="find-brand-combobox slds-m-top_xx-small case-form-combobox validation form-input validation form-input-2"
+                        >
+                    </lightning-combobox>
+                    <!-- disabled={fields.Subtopic.disabled} -->
+                </div>
+                <div class="cii ci-2" if:true={isPEPressureWashers}>
+                    <div class="PowerWasherLabel">
+                        {custom_metadata.PE_Pressure_Washers.PE_Pressure_Washers.Text}
+                        &nbsp;
+                        <a href={custom_metadata.PE_Pressure_Washers.PE_Pressure_Washers.LinkValue} class="PowerWasherLabel-link" target="_blank">{custom_metadata.PE_Pressure_Washers.PE_Pressure_Washers.LinkLabel}</a>.
+                    </div>
+                </div>
+                <template if:true={showFieldsSection}>
+                    <div class="cii ci-3 case-form-input" if:true={fields.Salutation.show}>
+                        <lightning-combobox
+                            name="Title"
+                            label="Title"
+                            value={selected_salutation}
+                            placeholder="--None--"
+                            options={salutations}
+                            onchange={handleChangeSalutation}
+                            required={fields.Salutation.required}
+                                message-when-value-missing="Required Field." data-apiname={fields.Salutation.apiName}
+                            class="find-brand-combobox slds-m-top_xx-small case-form-combobox validation form-input validation form-input-2"
+                            >
+                        </lightning-combobox>
+                    </div>
+                    <div class="cii ci-3 case-form-input" if:true={fields.FirstName.show}>
+                        <lightning-input label="First Name" value={formInputs.FirstName} required={fields.FirstName.required}  message-when-value-missing="Required Field." data-apiname={fields.FirstName.apiName} onchange={inputChange} class="inp first-name form-input validation form-input-3">
+                        </lightning-input>
+                    </div>
+                    <div class="cii ci-3 case-form-input" if:true={fields.LastName.show}>
+                        <lightning-input label="Last Name" value={formInputs.LastName} required={fields.LastName.required}  message-when-value-missing="Required Field." data-apiname={fields.LastName.apiName} onchange={inputChange} class="inp last-name form-input validation form-input-4">
+                        </lightning-input>
+                    </div>
+                    <div class="cii ci-3 case-form-input" if:true={fields.EmailAddress.show}>
+                        <lightning-input label="Email Address" disabled={disable_emai} value={formInputs.Email}  message-when-value-missing="Required Field." data-apiname={fields.EmailAddress.apiName} required={fields.EmailAddress.required} onchange={inputChange} class="inp email-address form-input validation form-input-5" type="email" message-when-pattern-mismatch="Please enter a valid Email Address" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}">
+                        </lightning-input>
+                    </div>
+                    <div class="cii ci-3 case-form-input" if:true={fields.Phone.show}>
+                        <lightning-input label="Phone" type="tel" pattern="[0-9]*" onkeypress={handleKeyPressPhone} required={fields.Phone.required}  message-when-value-missing="Required Field." data-apiname={fields.Phone.apiName} onchange={inputChange} class="inp phone form-input validation form-input-6" min-length="10" max-length="10" message-when-pattern-mismatch="Please enter a valid Phone Number">
+                        </lightning-input>
+                    </div>
+                    <div class="cii ci-3 case-form-input" if:true={fields.Street.show}>
+                        <lightning-input label="Street" value={formInputs.Street}  message-when-value-missing="Required Field." data-apiname={fields.Street.apiName} required={fields.Street.required} onchange={inputChange} class="inp street form-input validation form-input-7">
+                        </lightning-input>
+                    </div>
+                    <div class="cii ci-3 case-form-input" if:true={fields.AddressLine1.show}>
+                        <lightning-input value={formInputs.Street} label="Address Line 1"  message-when-value-missing="Required Field." data-apiname={fields.AddressLine1.apiName}  required={fields.AddressLine1.required} onchange={inputChange} class="inp city form-input validation form-input-8">
+                        </lightning-input>
+                    </div>
+                    <div class="cii ci-3 case-form-input" if:true={fields.AddressLine2.show}>
+                        <lightning-input label="Address Line 2"  message-when-value-missing="Required Field." data-apiname={fields.AddressLine2.apiName}  required={fields.AddressLine2.required} onchange={inputChange} class="inp city form-input validation form-input-8">
+                        </lightning-input>
+                    </div>
+                    <div class="cii ci-3 case-form-input" if:true={fields.City.show}>
+                        <lightning-input label="City"  message-when-value-missing="Required Field." data-apiname={fields.City.apiName} value={formInputs.City} required={fields.City.required} onchange={inputChange} class="inp city form-input validation form-input-8">
+                        </lightning-input>
+                    </div>
+                    <div class="cii ci-3 case-form-input" if:true={fields.State.show}>
+                        <div class="cii ci-2">
+                            <lightning-combobox
+                                name="State"
+                                label="State"
+                                value={formInputs.State}
+                                placeholder="--None--"
+                                options={states}
+                                onchange={handleChange}
+                                required={fields.State.required}
+                                    message-when-value-missing="Required Field." data-apiname={fields.State.apiName}
+                                class="find-brand-combobox slds-m-top_xx-small case-form-combobox validation form-input validation form-input-9"
+                            >
+                            </lightning-combobox>
+                        </div>
+                    </div>
+                    <div class="cii ci-3 case-form-input" if:true={fields.ZipCode.show}>
+                        Zip code: can be 5 digits or 5-4 eg: 20500 Or 20500-0001
+                    </div>
+                    <div class="cii ci-3 case-form-input" if:true={fields.ZipCode.show}>
+                        <lightning-input label="Zip Code"  message-when-value-missing="Required Field." data-apiname={fields.ZipCode.apiName} value={formInputs.PostalCode} required={fields.ZipCode.required} onchange={inputChange} class="inp zip-code form-input validation form-input-10" pattern="^\d{5}(-\d{4})?$" message-when-pattern-mismatch="Please enter a valid ZIP Code" minlength="5" maxlength="10">
+                        </lightning-input>
+                    </div>
+                    <div class="cii ci-3 case-form-input" if:true={fields.PreferredDealer.show}>
+                        <lightning-input label="Preferred Dealer" value={formInputs.preferredDealer}  message-when-value-missing="Required Field." data-apiname={fields.PreferredDealer.apiName}  required={fields.PreferredDealer.required} onchange={inputChange} class="inp zip-code form-input validation form-input-10">
+                        </lightning-input>
+                    </div>
+                    <div class="cii ci-3 case-form-input" if:true={fields.DealerCity.show}>
+                        <lightning-input label="Dealer's City"  message-when-value-missing="Required Field." data-apiname={fields.DealerCity.apiName} value={formInputs.City} required={fields.DealerCity.required} onchange={inputChange} class="inp city form-input validation form-input-8">
+                        </lightning-input>
+                    </div>
+                    <div class="cii ci-3 case-form-input" if:true={fields.DealerState.show}>
+                        <div class="cii ci-2">
+                            <lightning-combobox
+                                name="Dealer's State"
+                                label="Dealer's State"
+                                value={formInputs.State}
+                                placeholder="--None--"
+                                options={states}
+                                onchange={handleChangeDealerState}
+                                required={fields.DealerState.required}
+                                    message-when-value-missing="Required Field." data-apiname={fields.DealerState.apiName}
+                                class="find-brand-combobox slds-m-top_xx-small case-form-combobox validation form-input validation form-input-9"
+                            >
+                            </lightning-combobox>
+                        </div>
+                    </div>
+                    <div class="cii ci-3 case-form-input" if:true={fields.Dealership.show}>
+                        <div class="rad-c">
+                            <div class="rad-lab">
+                                <div class="inp-file-label">
+                                    Is your product at this dealership?
+                                    <abbr class="slds-required" title="required" if:true={fields.Dealership.required}>* </abbr>
+                                </div>
+                            </div>
+                            <div class="rad-container">
+                                <div class="rad">
+                                    <div class="flex-rad">
+                                        <div class="flex-rad">
+                                            <input type="radio" data-apiname={fields.Dealership.apiName} class="radio" name="dealership" onchange={handleRadioChange} data-label="Yes">
+                                        </div>
+                                        <div class="flex-rad">
+                                            <label class="rad-text">Yes</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="rad">
+                                    <div class="flex-rad">
+                                        <div class="flex-rad">
+                                            <input type="radio" data-apiname={fields.Dealership.apiName} class="radio" name="dealership" onchange={handleRadioChange} data-label="No" checked={radio_value}>
+                                        </div>
+                                        <div class="flex-rad">
+                                            <label class="rad-text">No</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cii ci-3 case-form-input" if:true={fields.Model.show}>
+                        <lightning-input label="Model"  message-when-value-missing="Required Field." data-apiname={fields.Model.apiName}  required={fields.Model.required} onchange={inputChange} class="inp zip-code form-input validation form-input-10">
+                        </lightning-input>
+                    </div>
+                    <div class="cii ci-3 case-form-input" if:true={fields.SerialNumber.show}>
+                        <lightning-input label="Serial Number"  message-when-value-missing="Required Field." data-apiname={fields.SerialNumber.apiName}  required={fields.SerialNumber.required} onchange={inputChange} class="inp zip-code form-input validation form-input-10">
+                        </lightning-input>
+                    </div>
+                    <div class="cii ci-3 case-form-input" if:true={fields.HowCanWeHelpYou.show}>
+                        <!-- <lightning-input label="How can we help you?"  message-when-value-missing="Required Field." data-apiname={fields.HowCanWeHelpYou.apiName}  required={fields.HowCanWeHelpYou.required} onchange={inputChange} class="inp zip-code form-input validation form-input-10 text-area-5-rows">
+                        </lightning-input> -->
+                        <lightning-textarea label="How can we help you?"  message-when-value-missing="Required Field." data-apiname={fields.HowCanWeHelpYou.apiName}  required={fields.HowCanWeHelpYou.required} onchange={inputChange} class="inp zip-code form-input validation form-input-10 text-area-5-rows"></lightning-textarea>
+                        <!-- <lightning-textarea label="Description"  message-when-value-missing="Required Field." data-apiname={fields.Description.apiName} required={fields.Description.required} class="description desc-inp form-input validation form-input-13" onchange={inputChange}></lightning-textarea> -->
+                    </div>
+                    <div class="cii ci-3 case-form-input" if:true={fields.VIN.show}>
+                        <lightning-input label="VIN"  message-when-value-missing="Required Field." data-apiname={fields.VIN.apiName} value={formInputs.Vin} disabled={disable_vin} required={fields.VIN.required} onchange={inputChange} class="inp vin form-input validation form-input-11"  maxlength="17" minlength="17">
+                        </lightning-input>
+                    </div>
+                    <!-- MAKE MANUALS -->
+                    <div class="cii ci-3 case-form-input" if:true={fields.MakeManual.show}>
+                        <lightning-combobox
+                            name="Make (manual)"
+                            label="Make (manual)"
+                            value={selected_makemanual}
+                            placeholder="--None--"
+                            options={manualDropdowns.make}
+                            onchange={handleChangeMakeManual}
+                            required={fields.MakeManual.required}
+                                message-when-value-missing="Required Field." data-apiname={fields.MakeManual.apiName}
+                            class="find-brand-combobox slds-m-top_xx-small case-form-combobox validation form-input validation form-input-2"
+                            >
+                        </lightning-combobox>
+                    </div>
+                    <!-- MAKE MANUALS -->
+        
+                    <!-- MODEL MANUALS -->
+                    <div class="cii ci-3 case-form-input" if:true={fields.ModelManual.show}>
+                        <lightning-combobox
+                            name="Model (Manual)"
+                            label="Model (Manual)"
+                            value={selected_modelmanual}
+                            placeholder="--None--"
+                            options={modelmanuals}
+                            onchange={handleChangeModelManual}
+                            required={fields.ModelManual.required}
+                                message-when-value-missing="Required Field." data-apiname={fields.ModelManual.apiName}
+                            disabled={disable_modelmanual}
+                            class="find-brand-combobox slds-m-top_xx-small case-form-combobox validation form-input validation form-input-2"
+                            >
+                        </lightning-combobox>
+                    </div>
+                    <!-- MODEL MANUALS -->
+        
+                    <!-- YEAR MANUALS -->
+                    <div class="cii ci-3 case-form-input" if:true={fields.YearManual.show}>
+                        <lightning-combobox
+                            name="Year (manual)"
+                            label="Year (manual)"
+                            value={selected_yearmanual}
+                            placeholder="--None--"
+                            options={yearmanuals}
+                            onchange={handleChangeYearManual}
+                            required={fields.YearManual.required}
+                                message-when-value-missing="Required Field." data-apiname={fields.YearManual.apiName}
+                            disabled={disable_yearmanual}
+                            class="find-brand-combobox slds-m-top_xx-small case-form-combobox validation form-input validation form-input-2"
+                            >
+                        </lightning-combobox>
+                    </div>
+                    <!-- YEAR MANUALS -->
+                    
+                    <div class="cii ci-3 case-form-input" if:true={fields.VehicleTrim.show}>
+                        <lightning-input label="Vehicle Trim"  message-when-value-missing="Required Field." data-apiname={fields.VehicleTrim.apiName} required={fields.VehicleTrim.required} onchange={inputChange} class="inp mileage form-input validation form-input-12">
+                        </lightning-input>
+                    </div>
+    
+                    <!-- Phone Carrier -->
+                    <div class="cii ci-3 case-form-input" if:true={fields.PhoneCarrier.show}>
+                        <lightning-combobox
+                            name="Phone Carrier"
+                            label="Phone Carrier"
+                            value={selected_phonecarrier}
+                            placeholder="--None--"
+                            options={phonecarriers}
+                            onchange={handleChangePhoneCarrier}
+                            required={fields.PhoneCarrier.required}
+                                message-when-value-missing="Required Field." data-apiname={fields.PhoneCarrier.apiName}
+                            class="find-brand-combobox slds-m-top_xx-small case-form-combobox validation form-input validation form-input-2"
+                            >
+                        </lightning-combobox>
+                    </div>
+                    <!-- Phone Carrier -->
+                    
+                    <!-- Phone Manufacturer -->
+                    <div class="cii ci-3 case-form-input" if:true={fields.PhoneManufacturer.show}>
+                        <lightning-combobox
+                            name="Phone Manufacturer"
+                            label="Phone Manufacturer"
+                            value={selected_phonemanufacturer}
+                            placeholder="--None--"
+                            options={phoneManufactureres}
+                            onchange={handleChangePhoneManufacturer}
+                            required={fields.PhoneManufacturer.required}
+                                message-when-value-missing="Required Field." data-apiname={fields.PhoneManufacturer.apiName}
+                            disabled={disable_phonemanufacturer}
+                            class="find-brand-combobox slds-m-top_xx-small case-form-combobox validation form-input validation form-input-2"
+                            >
+                        </lightning-combobox>
+                    </div>
+                    <!-- Phone Carrier -->
+                    
+                    <!-- Phone Model -->
+                    <div class="cii ci-3 case-form-input" if:true={fields.PhoneModel.show}>
+                        <lightning-combobox
+                            name="Phone Model"
+                            label="Phone Model"
+                            value={selected_phonemodel}
+                            placeholder="--None--"
+                            options={phoneModels}
+                            onchange={handleChangePhoneModel}
+                            required={fields.PhoneModel.required}
+                                message-when-value-missing="Required Field." data-apiname={fields.PhoneModel.apiName}
+                            disabled={disable_phonemodel}
+                            class="find-brand-combobox slds-m-top_xx-small case-form-combobox validation form-input validation form-input-2"
+                            >
+                        </lightning-combobox>
+                    </div>
+                    <!-- Phone Model -->
+                    
+                    <!-- Phone OS -->
+                    <div class="cii ci-3 case-form-input" if:true={fields.PhoneOS.show}>
+                        <lightning-combobox
+                            name="Phone OS"
+                            label="Phone OS"
+                            value={selected_phoneos}
+                            placeholder="--None--"
+                            options={phone_operatingsystems}
+                            onchange={handleChangePhoneOS}
+                            required={fields.PhoneOS.required}
+                                message-when-value-missing="Required Field." data-apiname={fields.PhoneOS.apiName}
+                            disabled={disable_phoneos}
+                            class="find-brand-combobox slds-m-top_xx-small case-form-combobox validation form-input validation form-input-2"
+                            >
+                        </lightning-combobox>
+                    </div>
+                    <!-- Phone OS -->
+                    <div class="cii ci-3 case-form-input" if:true={fields.Mileage.show}>
+                        <lightning-input type="number" label="Mileage"  message-when-value-missing="Required Field." data-apiname={fields.Mileage.apiName} required={fields.Mileage.required} onchange={inputChange} class="inp mileage form-input validation form-input-12">
+                        </lightning-input>
+                    </div>
+                    <div class="cii ci-4 case-form-input" if:true={fields.Description.show}>
+                        <lightning-textarea label="Description"  message-when-value-missing="Required Field." data-apiname={fields.Description.apiName} required={fields.Description.required} class="description desc-inp form-input validation form-input-13" onchange={inputChange}></lightning-textarea>
+                    </div>
+                    <div class="cii ci-5 case-form-input" if:true={fields.File1.show}>
+                        <div class="files-warning">
+                            Formats allowed for upload are .doc, .png, . jpeg, .jpg, .pdf, .docx and  should not exceed 25 MB. 
+                        </div>
+                    </div>
+                    <div class="cii ci-5 case-form-input File1" if:true={fields.File1.show}>
+                        <c-own-send-an-email-form-file class="File1" onfileupload={handleOnfileupload} label={fields.File1.Namelabel}  message-when-value-missing="Required Field." data-apiname={fields.File1.apiName} required={fields.File1.required} show-required-label={fields.File1.showRequiredLabel}></c-own-send-an-email-form-file>
+                    </div>
+                    <div class="cii ci-5 case-form-input File2" if:true={fields.File2.show}>
+                        <c-own-send-an-email-form-file class="File2" onfileupload={handleOnfileupload} label={fields.File2.Namelabel}  message-when-value-missing="Required Field." data-apiname={fields.File2.apiName} required={fields.File2.required} show-required-label={fields.File2.showRequiredLabel}></c-own-send-an-email-form-file>
+                    </div>
+                    <div class="cii ci-5 case-form-input File3" if:true={fields.File3.show}>
+                        <c-own-send-an-email-form-file class="File3" onfileupload={handleOnfileupload}  message-when-value-missing="Required Field." data-apiname={fields.File3.apiName} label={fields.File3.Namelabel} required={fields.File3.required} show-required-label={fields.File3.showRequiredLabel}></c-own-send-an-email-form-file>
+                    </div>
+                    <div class="cii ci-5 case-form-input File4" if:true={fields.File4.show}>
+                        <c-own-send-an-email-form-file class="File4" onfileupload={handleOnfileupload}  message-when-value-missing="Required Field." data-apiname={fields.File4.apiName} label={fields.File4.Namelabel} required={fields.File4.required} show-required-label={fields.File4.showRequiredLabel}></c-own-send-an-email-form-file>
+                    </div>
+                    <div class="cii ci-4 case-form-input" if:true={isguest}>
+                        <c-own-google-captcha oncaptcha={handleCaptcha}></c-own-google-captcha>
+                    </div>
+                    <div class="cii ci-6">
+                        <button class="submit" onclick={submitForm}>submit</button>
+                    </div>
+                </template>
+            </div>
+            <div class="case-detail-container" if:true={isCaseSubmissionSuccess}>
+                <h1 class="cdh cd-h1">Your Email Has Been Submitted</h1>
+                <div class="email-confirmation-text">You will receive an email confirmation shortly.</div>
+                <h2 class="cdh cd-h2" if:true={isguest}>Confirmation Number: {caseNumber}</h2>
+                <h2 class="cdh cd-h2" if:false={isguest}>Confirmation Number: <a onclick={handleGoToCaseDetail} class="case-number-link">{caseNumber}</a></h2>
+        
+                <div class="case-detail">
+                    <table class="cd case-detail-table">
+                        <template if:true={caseDetails} for:each={caseDetails} for:item="cs">
+                            <tr class="cd case-detail-tr" key={cs.Field} if:true={cs.Show}>
+                                <td class="cd case-detail-td case-detail-td-field">
+                                    {cs.Field}:
+                                </td>
+                                <td class="cd case-detail-td case-detail-td-value">
+                                    {cs.Value}
+                                </td>
+                            </tr>
+                        </template>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </template>
+    <template if:true={isFormSubmitting} >
+        <div class="slds-spinner_container">
+            <lightning-spinner alternative-text="Loading" size="large" variant="base"></lightning-spinner>
+        </div>
+    </template>
+</template>

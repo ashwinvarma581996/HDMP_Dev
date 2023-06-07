@@ -1,0 +1,103 @@
+<!-- //============================================================================
+// Title:    Honda MyGarage Experience - Auto Link Feature
+//
+// Summary:  This is the Auto Link Subscription html seen at the page of the Honda MyGarage Community
+//
+// Details:  Auto Link Subscription for pages
+//
+// History:
+// October 18, 2021 Arunprasad N (Wipro) Original Author 
+//=========================================================================== -->
+<template>
+    <template if:true={showMessage}>
+        <div class={mainCardClass}>
+            <div class="err error-msg">
+                <img src={warningicon} class="warning-icon"/>DATA UNAVAILABLE
+            </div>
+        </div>
+    </template>
+    <template if:false={showMessage}>
+        <div class={mainCardClass}>
+            <div class="card card-styles-wrapper">
+                <lightning-card class="card-styles">
+                    <h3 slot="title" class="slds-truncate" onclick={handleClickHeader}>
+                        <img src={icon} class="slds-p-right_small custom-icon">
+                        <span class={titleClass}>{title}</span>
+                    </h3>
+                    <div slot="actions" onclick={handleClickAction}>
+                        <slot name="action">
+                            <template if:true={actionbuttonlabel}>
+                                <button class="btn" onclick={handleClickLink} value="AccountManage">{actionbuttonlabel}</button>
+                            </template>
+                        </slot>
+                    </div>
+                    <div class="slds-card__body_inner card-body body-container">
+                        <template if:true={isConnectedPrimaryDriver}>
+                            <template class="slds-m-top_xx-large"  if:true={loading}>
+                                <div class="" style="position: sticky;">
+                                    <c-own-data-loading-spinner></c-own-data-loading-spinner>
+                                </div>
+                            </template>                        
+                            <lightning-layout if:false={loading} multiple-rows="true">
+                                <lightning-layout-item size="12" class="subtitle">
+                                    {description}
+                                </lightning-layout-item>
+                                <template for:each={subscriptions} for:item="item">
+                                    <lightning-layout-item size="6" class="slds-p-horizontal_medium sections" key={item.packageName} small-device-size="6" medium-device-size="4" large-device-size="3">
+                                        <div class="section-title">{item.packageDisplayName}</div>
+                                        <div class="horizontal-separator">
+                                            <div class="section-content">
+                                                <lightning-icon if:true={item.icon} icon-name={item.icon} alternative-text="Success!" variant={item.variant}
+                                                title="success variant small" size="small"></lightning-icon>
+                                                <div class="icon-bottom-text">
+                                                    {item.status}
+                                                </div>
+                                            </div>
+                                            <button class="section-button" onclick={handleClickLink} value={item.link} data-pack={item.packageName}>{item.link}</button>
+                                        </div>
+                                    </lightning-layout-item>
+                                </template>
+                            </lightning-layout>
+                        </template>
+                        <template if:false={isConnectedPrimaryDriver}>
+                            <lightning-layout multiple-rows="true">
+                                <lightning-layout-item size="12" class="error-msg">
+                                    {error}
+                                </lightning-layout-item>
+                            </lightning-layout>
+                        </template>
+                        
+                    </div>
+                </lightning-card>
+            </div>
+        </div>
+        <div lwc:dom="manual" data-id="sso"></div>
+         <!-- popup -->
+         <template if:true={showPopup}>
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+                class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" onclick={closePopup}>
+                        <lightning-icon icon-name="utility:close" alternative-text="Close" title="Cancel and close" class="popup-icon">
+                        </lightning-icon>
+                        <span class="slds-assistive-text">Cancel and close</span>
+                    </button>
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                        <lightning-layout multiple-rows>
+                            <lightning-layout-item size="12" class="slds-text-align_center">
+                                <b>{popupText}</b>
+                            </lightning-layout-item>
+                            <lightning-layout-item size="6" class="slds-text-align_right"> 
+                                <img class="slds-p-around_small popup-button" data-hondaurl={appStoreURL} data-acuraurl={acuraAppStoreURL} src={popupAppStoreIcon} onclick={handleNavigations}/>
+                            </lightning-layout-item>
+                            <lightning-layout-item size="6" class="slds-text-align_left"> 
+                                <img class="slds-p-around_small popup-button" data-hondaurl={playStoreURL} data-acuraurl={acuraPlayStoreURL} src={popupPlayStoreIcon} onclick={handleNavigations}/>
+                            </lightning-layout-item>
+                        </lightning-layout>
+                    </div>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+        </template>
+    </template>
+</template>

@@ -1,0 +1,127 @@
+<!-- //============================================================================
+// Title:    Honda Owners Experience - Header
+//
+// Summary:  This is the html seen at the top of the Honda Owner Community
+//
+// Details:  Extend the LightningElement with this Base Element to gain access to the Messaging Channel and other logic herein and this is the header component for all community pages.
+//
+//
+// History:
+// June 18, 2021 Arunprasad N (Wipro) Original Author
+//=========================================================================== -->
+<template>
+    <!-- //DOE-4714 Ravindra Ravindra(Wipro) -->
+    <div>
+        <template if:true={showSpinner}>
+            <lightning-spinner alternative-text={alternativeText} size={size} variant={variant}>
+            </lightning-spinner>
+        </template>
+    </div>
+    <!-- End of         //DOE-4714 Ravindra Ravindra(Wipro) -->
+    <div class="slds-container_center slds-container_large slds-no-print">
+        <div class="global-header-large">
+            <header class="slds-global-header_container horizontal-line">
+                <!-- <a href="#" class="slds-assistive-text slds-assistive-text_focus">Skip to Navigation</a>
+                <a href="#" class="slds-assistive-text slds-assistive-text_focus">Skip to Main Content</a> -->
+                <div class="slds-global-header slds-grid slds-grid_align-spread page-header header-column">
+                    <div class="slds-global-header__item">
+                        <div class="slds-global-header__logo">
+                            <c-own-logo></c-own-logo>
+                            <span class="slds-assistive-text">Honda Owners</span>
+                        </div>
+                    </div>
+                    <div class="slds-global-header__item level1-menu-flex">
+                        <c-own-level1-menu></c-own-level1-menu>
+                    </div>
+                    <template if:true={isGuest}>
+                        <div class="slds-global-header__item">
+                            <c-own-sign-up-login></c-own-sign-up-login>
+                        </div>
+                    </template>
+                    <template if:false={isGuest}>
+                        <div class="slds-global-header__item">
+                            <lightning-layout class="slds-grid slds-grid_vertical-align-center">
+                                
+                                    <c-own-message-icon class=""></c-own-message-icon> <!-- Alexander Dzhitenov (Wipro): Message icon displaying unread messages -->
+                                    <c-own-profile></c-own-profile>
+                                
+                            </lightning-layout>
+                        </div>
+                    </template>
+                </div>
+            </header>
+        </div>
+    </div>
+    <!--<header class="c-container slds-global-header_container">
+        <lightning-layout horizontal-align="spread" class="slds-global-header page-header">
+            <lightning-layout-item class="slds-global-header__item global-header-item-group">
+                <div class="slds-global-header__logo">
+                    <c-own-logo></c-own-logo>
+                </div>
+                <div>
+                    <c-own-level1-menu></c-own-level1-menu>
+                </div>
+            </lightning-layout-item>
+            <lightning-layout-item class="slds-global-header__item global-header-large">
+                <c-own-sign-up-login></c-own-sign-up-login>
+            </lightning-layout-item>
+        </lightning-layout>
+        <lightning-layout horizontal-align="spread">
+            <lightning-layout-item size="12">
+                <div class="horizontal-line"></div>
+            </lightning-layout-item>
+        </lightning-layout>
+    </header>-->
+    <div class="global-header-small slds-no-print horizontal-line">
+        <header class="slds-global-header_container ">
+            <!-- <a href="#" class="slds-assistive-text slds-assistive-text_focus">Skip to Navigation</a>
+            <a href="#" class="slds-assistive-text slds-assistive-text_focus">Skip to Main Content</a> -->
+            <div class="slds-global-header slds-grid slds-grid_align-spread page-header header-column">
+                <template if:true={header.showMenuLogo}>
+                    <div class="slds-global-header__item" style="padding:0;">
+                        <div class="slds-grid slds-global-header__logo">
+                            <div class="ownLogoSmall">
+                                <c-own-logo onselect={handleMenuSelect}></c-own-logo>
+                            </div>
+                           
+                           
+                            <span class="slds-assistive-text">Honda Owners</span>
+                        </div>
+                    </div>
+                    <template if:false={isGuest}>
+                        <c-own-message-icon></c-own-message-icon>
+                    </template>
+                </template>
+                <template if:true={header.showLeftArrow}>
+                    <div class="slds-global-header__item" onclick={handleLeftArrowClick} role="img" aria-label="MyGarage">
+                        <a href=""></a><img class="img-cursor" src={leftArrow} alt="MyGarage Arrow"></a>
+                    </div>
+                </template>
+                <template if:true={header.label}>
+                    <div class="slds-global-header__item header-small-label">
+                        <span>{header.label}</span>
+                    </div>
+                </template>
+                <template if:true={header.showLogo}>
+                    <div class="slds-global-header__item" role="img" aria-label="MyGarage">
+                        <a href=""><img class="img-cursor" src={logo} onclick={handleClick} alt="MyGarage"></a>
+                        <span class="slds-assistive-text">Honda Owners</span>
+                    </div>
+                </template>
+                <template if:true={header.showClose}>
+                    <div class="slds-global-header__item" onclick={handleCloseClick} role="img" aria-label="MyGarage">
+                        <a href=""><img class="img-cursor" src={close} alt="Close"></a>
+                    </div>
+                </template>
+            </div>
+        </header>
+        <template if:true={header.showMenu}>
+            <div class="menu-container">
+                <c-own-level1-menu menu={menu} onselect={handleMenuSelect}></c-own-level1-menu>
+            </div>
+        </template>
+    </div>
+    <template if:true={showFirstTimeLoginModal}>
+        <c-own-first-time-login-modal></c-own-first-time-login-modal>
+    </template>
+</template>

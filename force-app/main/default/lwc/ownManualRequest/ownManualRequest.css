@@ -1,0 +1,129 @@
+.main-wrapper{
+    margin-bottom : 80px;
+  }
+  .required-field{
+    font-size: 14px;
+    color: #e42525;
+  }
+
+  .form-buttons {
+    display: flex;
+    flex-wrap: wrap;
+}
+.checkbox{
+  --sds-c-checkbox-mark-color-foreground: red;
+}
+
+.form-button_goback{
+   width: 50% !important;
+}
+
+.form-buttons button {
+    border-radius: 2px;
+    width: 192px;
+    height: 48px;
+    font-weight: 900;
+    font-size: 16px;
+    line-height: 24px;
+    text-transform: uppercase;
+    background: #ffffff;
+    border: 2px solid #E42525;
+    color: #E42525;
+    margin-right: 20px;
+}
+
+.form-buttons button:hover {
+    color: #ffffff;
+    background: #E42525;
+}
+
+.form-buttons button.disabled {
+    background: #ACACAC;
+    color: #ffffff;
+    border-color: #acacac;
+    cursor: not-allowed;
+}
+
+
+.header-text{
+    color: #000000;
+    letter-spacing: 0.02em;
+    font-weight: 100;
+    font-size: 32px;
+    line-height: 37px;
+    font-style: normal;
+    width:110%;
+}
+  
+.find-manual-error {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 12px;
+  color: var(--HondaRed);
+  padding-top: 15px;
+}
+
+  @media only screen and (min-width: 601px)  {
+    .custom-margin {
+        margin-right: 10px;
+    }
+    .cgrid-margin {
+      margin-top: 10px;
+    }
+}
+
+@media only screen and (max-width: 601px)  {
+  .small-margin {
+      margin-bottom: 10px;
+      margin-top: 10px;
+  }
+  .form-buttons button {
+    margin-right: 0px;
+    width: 100%;
+}
+.form-button_goback{
+  width: 100% !important;
+}
+
+.form-buttons>div {
+    flex: 1 1 100%;
+}
+.header-text{
+  font-style: normal;
+  font-weight: 300 !important;
+  font-size: 26px !important;
+  line-height: 30px !important;
+}
+}
+
+.textline{
+  font-family: 'Roboto';
+font-style: normal;
+font-weight: 300;
+font-size: 16px;
+line-height: 26px;
+color: #000000;
+}
+
+.back-link{
+  margin-left: 6.5px;
+  height: 22px;
+  font-weight: 900;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+  color: #E42525;
+  padding-top: 5px;
+  line-height: 22px;
+}
+
+.bread-crumb-container{
+  padding-bottom: 20px;
+  padding-top: 20px;
+}
+
+.chevronleft {
+  --sds-c-icon-color-foreground-default: #E42525;
+  --sds-c-icon-color-background: white;
+}

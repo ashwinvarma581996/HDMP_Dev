@@ -1,0 +1,7 @@
+<apex:component access="global" controller="DisplayCartItemsCtrl">
+    <apex:attribute name="relatedCartId" type="String" assignTo="{!cartId}" description="Cart Id"/>
+    
+    <apex:outputPanel rendered="{!IsMotocompacto}">
+        <p><a style="color: red; cursor: pointer; text-decoration: none" href="{!disclaimerUrl}" target="_blank">Product Disclaimer</a></p>
+    </apex:outputPanel>
+</apex:component>

@@ -1,0 +1,32 @@
+<!-- //============================================================================
+// Title:    Honda Owners Experience - Logo
+//
+// Summary:  This is the html seen at the top of the Honda Owner Community
+//
+// Details:  Extend the LightningElement with this Base Element to gain access to the Messaging Channel and other logic herein and this is the sign up and log in component for all community pages.
+//
+//
+// History:
+// June 18, 2021 Arunprasad N (Wipro) Original Author
+//=========================================================================== -->
+<template>
+    <div class="c-container">
+        <div class="signup-login-large">
+            <lightning-layout>
+                <lightning-layout-item>
+                    <div>
+                        <button class="slds-button slds-button_brand slds-m-left_x-small sign-up-button"
+                            data-id="Sign_Up" onclick={handleClick}>SIGN
+                            UP</button>
+                    </div>
+                </lightning-layout-item>
+                <lightning-layout-item>
+                    <div>
+                        <button class="slds-button slds-button_outline-brand slds-m-left_x-small login-button"
+                            data-id="Log_In" onclick={handleClick}>LOG IN</button>
+                    </div>
+                </lightning-layout-item>
+            </lightning-layout>
+        </div>
+    </div>
+</template>

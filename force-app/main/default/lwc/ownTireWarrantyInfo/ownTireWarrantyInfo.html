@@ -1,0 +1,37 @@
+<template>
+    <div class="slds-container_medium slds-container_center slds-p-around_large">
+
+        <div class="slds-m-bottom_xx-large tire-warranty">
+            <h3>Tire Warranty Information</h3>
+            <div class="tire-warranty-section">
+                <p>These resources can help you learn more about the warranty protections and user manuals of your tire
+                    company.</p>
+            </div>
+            <lightning-layout class="slds-grid slds-wrap slds-gutters slds-m-bottom_xx-large slds-m-top_x-small"
+                multiple-rows>
+                <template for:each={cards} for:item="card">
+                    <lightning-layout-item key={card.title}
+                        class="slds-col slds-p-vertical_small slds-size_1-of-1 slds-medium-size_6-of-12">
+
+                        <!-- <c-own-c-m-s-card  title={card.title} titlecolor={titlecolor} icon={icon} brand={brand}
+                         content-id={card.key} headerlink={card.link}>
+                    </c-own-c-m-s-card> -->
+                        <c-own-card title={card.title.value} brand="default" icon-image={icon} titlecolor={titlecolor}
+                            hide-body-section="" header-clickable="true" onheader={handleHeaderClick}
+                            data-link={card.link} data-title={card.title.value}>
+                            <div slot="action">
+                                <lightning-icon class={iconClass} icon-name="utility:download" size="x-small"
+                                    slot="actions" onclick={handleHeaderClick} data-link={card.link}
+                                    data-title={card.title.value}></lightning-icon>
+                            </div>
+                            <div slot="default" class="card-body">
+                                <lightning-formatted-rich-text value={card.body.value}></lightning-formatted-rich-text>
+                            </div>
+                        </c-own-card>
+                    </lightning-layout-item>
+                </template>
+            </lightning-layout>
+
+        </div>
+    </div>
+</template>

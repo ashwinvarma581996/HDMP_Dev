@@ -1,0 +1,98 @@
+<!-- //============================================================================
+// Title:    Honda MyGarage Experience - Bluetooth Compatibility Results
+//
+// Summary:  This is the Bluetooth Compatibility Results html seen at the page of the Honda MyGarage Community
+//
+// Details:  Bluetooth Compatibility Results for pages
+//
+// History:
+// November 26, 2021 Arunprasad N (Wipro) Original Author 
+//=========================================================================== -->
+<template>
+    <template if:true={isDataLoading}>
+        <div class="slds-m-top_xx-large slds-p-top_xx-large">
+            <c-own-data-loading-spinner></c-own-data-loading-spinner>
+        </div>
+    </template>
+    <template if:false={isDataLoading}>
+        <template if:true={hasDataExist}>
+            <template if:true={iscompatible}>
+                <lightning-layout multiple-rows="true">
+                    <lightning-layout-item size="12" large-device-size="1" medium-device-size="12"
+                        small-device-size="12">
+                    </lightning-layout-item>
+                    <lightning-layout-item size="12" large-device-size="9" medium-device-size="12"
+                        small-device-size="12">
+                        <lightning-layout multiple-rows horizontal-align="center">
+                            <lightning-layout-item size="12" padding="around-small"
+                                class="section-title slds-p-bottom_large">
+                                {title}
+                            </lightning-layout-item>
+                            <template if:true={isFirstPhonedata}>
+                                <lightning-layout-item size="12" padding="around-small"
+                                    class="section-subtitle slds-p-bottom_large">
+                                    First Time
+                                </lightning-layout-item>
+                                <lightning-layout-item size="12" padding="around-small"
+                                    class="section-content slds-p-bottom_large">
+                                    <ol class="slds-list_ordered">
+                                        <template for:each={firstPhonedata} for:item="col">
+                                            <li key={col.num}>{col.text}</li>
+                                        </template>
+                                    </ol>
+                                </lightning-layout-item>
+                            </template>
+                            <template if:true={isOnThePhonedata}>
+                                <lightning-layout-item size="12" padding="around-small"
+                                    class="section-subtitle slds-p-bottom_large">
+                                    On the Phone
+                                </lightning-layout-item>
+                                <lightning-layout-item size="12" padding="around-small"
+                                    class="section-content slds-p-bottom_large">
+                                    <ol class="slds-list_ordered">
+                                        <template for:each={onThePhonedata} for:item="col">
+                                            <li key={col.num}>{col.text}</li>
+                                        </template>
+                                    </ol>
+                                </lightning-layout-item>
+                            </template>
+                            <template if:true={isSubSequentdata}>
+                                <lightning-layout-item size="12" padding="around-small"
+                                    class="section-subtitle slds-p-bottom_large">
+                                    Subsequent
+                                </lightning-layout-item>
+                                <lightning-layout-item size="12" padding="around-small"
+                                    class="section-content slds-p-bottom_large">
+                                    <ol class="slds-list_ordered">
+                                        <template for:each={subSequentdata} for:item="col">
+                                            <li key={col.num}>{col.text}</li>
+                                        </template>
+                                    </ol>
+                                </lightning-layout-item>
+                            </template>
+                            <lightning-layout-item size="12" padding="around-small"
+                                class="section-subtitle slds-p-bottom_large">
+                                Disclaimer
+                            </lightning-layout-item>
+                            <lightning-layout-item size="12" padding="around-small"
+                                class="section-content slds-p-bottom_large">
+                                <lightning-formatted-rich-text value={disclaimer}></lightning-formatted-rich-text>
+                            </lightning-layout-item>
+                        </lightning-layout>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="12" large-device-size="2" medium-device-size="12"
+                        small-device-size="12">
+                    </lightning-layout-item>
+
+
+                </lightning-layout>
+            </template>
+            <div if:false={iscompatible} class="error-message">
+                <img src={errorLogo} class="slds-m-right_small" />
+                DATA UNAVAILABLE
+            </div>
+        </template>
+    </template>
+    <div class="slds-p-bottom_xx-large"></div>
+
+</template>

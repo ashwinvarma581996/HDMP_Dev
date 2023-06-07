@@ -1,0 +1,86 @@
+<!-- //============================================================================
+// Title:    Honda Owners Experience - Help Center
+//
+// Summary:  This is the search tab html seen at the help center of the Honda Owner Community
+//
+// Details:  Extend the LightningElement with this Base Element to gain access to the Messaging Channel and other logic herein and this is the parent component for all help center pages.
+//
+//
+// History:
+// May 17, 2021 Arunprasad N (Wipro) Original Author
+//=========================================================================== -->
+<template>
+    <div class="c-container">
+        <lightning-layout multiple-rows="true" horizontal-align="center">
+            <lightning-layout-item padding="around-small" size="12">
+                <div class="tab-text-headline slds-text-heading_large">
+                    <h2>{title}</h2>
+                </div>
+            </lightning-layout-item>
+        </lightning-layout>
+        <div class="tab-large">
+            <lightning-layout multiple-rows="true" horizontal-align="center">
+                <lightning-layout-item padding="around-small " class="custom-width">
+                    <div class="slds-tabs_default tabs ">
+                        <ul class="slds-tabs_default__nav slds-grid_align-space" role="tablist">
+                            <template for:each={tabs} for:item="tab">
+                                <li key={tab.value} data-value={tab.value} data-tab="true" class={tab.itemclass}
+                                    data-id={tab.id} title={tab.label} role="presentation" onclick={handleActive}>
+                                    <a data-tab-value={tab.control} class="slds-tabs_default__link tab-label" role="tab"
+                                        tabindex={tab.tabindex} aria-selected={tab.ariaselected}
+                                        aria-controls={tab.control} id={tab.id}>{tab.label}</a>
+                                </li>
+                            </template>
+                        </ul>
+                        <template for:each={tabs} for:item="tab">
+                            <div key={tab.value} id={tab.control} data-id={tab.id} class={tab.contentclass}
+                                role="tabpanel" aria-labelledby={tab.id}>
+                                <div>
+                                    <ul class="slds-has-dividers_bottom slds-has-block-links_space result-list">
+                                        <template for:each={results} for:item="result">
+                                            <li key={result.id} class="slds-item" data-id={result.id}
+                                                data-urlname={result.urlName} onclick={handleClick}>
+                                                <a role="link" tabindex="0">{result.title}</a>
+                                            </li>
+                                        </template>
+                                    </ul>
+                                </div>
+                            </div>
+                        </template>
+                        <template if:false={hideShowMore}>
+                            <button class="slds-button slds-button_outline-brand show-more-button"
+                                onclick={handleClickShowMore}>Show More</button>
+                        </template>
+                    </div>
+                </lightning-layout-item>
+            </lightning-layout>
+        </div>
+        <div class="tab-small">
+            <lightning-layout multiple-rows="true" horizontal-align="center">
+                <lightning-layout-item padding="around-small">
+                    <lightning-combobox class="tab-combobox" name="brand" label="Brand" value={category}
+                        placeholder="Select Brand" options={tabs} variant="label-hidden" onchange={handleChange}>
+                    </lightning-combobox>
+                </lightning-layout-item>
+                <lightning-layout-item size="12">
+                    <div>
+                        <ul class="slds-has-dividers_bottom slds-has-block-links_space result-list">
+                            <template for:each={results} for:item="result">
+                                <li key={result.id} class="slds-item" data-id={result.id} data-urlname={result.urlName}
+                                    onclick={handleClick}>
+                                    <a role="link" tabindex="0">{result.title}</a>
+                                </li>
+                            </template>
+                        </ul>
+                    </div>
+                </lightning-layout-item>
+                <template if:false={hideShowMore}>
+                    <lightning-layout-item padding="around-small">
+                        <button class="slds-button slds-button_outline-brand show-more-button"
+                            onclick={handleClickShowMore}>Show More</button>
+                    </lightning-layout-item>
+                </template>
+            </lightning-layout>
+        </div>
+    </div>
+</template>

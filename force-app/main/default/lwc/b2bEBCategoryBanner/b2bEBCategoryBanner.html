@@ -1,0 +1,25 @@
+<template>
+    <template if:false={noCategorykey}>
+        <div class="category-banner slds-grid slds-wrap slds-m-bottom_large ">
+            <div class="slds-col slds-large-size_7-of-12 slds-size_1-of-1">
+                <div class="slds-col">
+                    <c-b2b-category-title class="slds-size_1-of-1"
+                                        record={recordId}
+                                        title-size={titleSize}
+                                        title-color={titleColor}
+                                        description-size={descriptionSize}
+                                        description-color={descriptionColor}>
+                    </c-b2b-category-title>
+                    <c-b2b-select-vehicle-cta class="slds-size_1-of-1"
+                                            alignment={ctaAlignment}
+                                            button-color={ctaButtonColor}
+                                            button-text-color={ctaButtonTextColor}
+                                            button-text-size={ctaButtonTextSize}
+                                            button-label={ctaButtonLabel}>
+                    </c-b2b-select-vehicle-cta>
+                </div>
+            </div>
+            <c-b2b-category-image record={recordId} class="slds-col slds-large-size_5-of-12 slds-size_1-of-1"></c-b2b-category-image>
+        </div>
+    </template>
+</template>

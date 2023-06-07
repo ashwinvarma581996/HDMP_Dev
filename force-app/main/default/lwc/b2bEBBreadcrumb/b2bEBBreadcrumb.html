@@ -1,0 +1,29 @@
+<template>
+    <template if:false={noCategorykey}>
+        <div class="slds-grid slds-p-top_large slds-p-bottom_large slds-m-top_xx-small" style="background: rgb(240, 240, 240);">
+            <div class="slds-col">
+                <nav role="navigation" aria-label="Breadcrumbs">
+                    <ol class="slds-breadcrumb slds-list_horizontal slds-wrap">
+                        <template if:true={baseCategory}>
+                            <li class="slds-breadcrumb__item" label={baseCategory} onclick={redirectToHome}>
+                                <a href={baseCategoryUrl}>{baseCategory}</a>
+                            </li>
+                        </template>
+                        <template if:false={baseCategory}>
+                            <li class="slds-breadcrumb__item" label="Home" onclick={redirectToHome}>
+                                <a href="/s">Home</a>
+                            </li>
+                        </template>
+                        <template if:true={showCategories}>
+                            <template for:each={categories} for:item="cat">
+                                <li class="slds-breadcrumb__item" label={cat.categoryName} key={cat.categoryId} data-id={cat.categoryId} onclick={handleNavigation}>
+                                    <a href={cat.categoryUrl}>{cat.categoryName}</a>
+                                </li>
+                            </template>
+                        </template>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </template>
+</template>

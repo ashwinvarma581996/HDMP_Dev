@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>52.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property label="Collision Certified Body Shop" name="contentId" type="ContentReference" />
+            <property label="Collision Repair Parts" name="contentId1" type="ContentReference" />
+            <property label="Collision Repair Parts1" name="contentId2" type="ContentReference" />
+            <!-- pawan  -->
+            <property label="Collision Insurance" name="contentId3" type="ContentReference" />
+            <property label="Collision Find A Dealer" name="contentId4" type="ContentReference" />
+            <property label="Collision Genuine Accessories" name="contentId5" type="ContentReference" />
+            <property label="Collision Genuine Parts" name="contentId6" type="ContentReference" />
+            <property label="Collision Facilities" name="contentId7" type="ContentReference" />
+            <property label="Collision TV Video 1" name="contentId8" type="ContentReference" />  
+            <property label="Collision TV Video 2" name="contentId9" type="ContentReference" />  
+            <property label="Collision TV Video 3" name="contentId10" type="ContentReference" />
+            
+            <property label="Collision TV Video 4" name="contentId99" type="ContentReference" />
+            <property label="Safety Commitment" name="contentId98" type="ContentReference" /> 
+            <property label="Collision Glossary" name="contentId97" type="ContentReference" /> 
+            <property label="Collision Insurance96" name="contentId96" type="ContentReference" />
+            <!-- End --> 
+            <property name="collisionparts" label="Page Accordion For Repair And Parts" type="String"/>
+            <property name="collisioninsurance" label="Page Accordion For Insurance" type="String"/> <!--Accordion for Collision Insurance -->  
+            <!-- pawan : Adding Cards for INsurance tab i.e., 3rd tab -->
+            <property type="ContentReference" name="findDealer" label="Content ID" />
+            <property type="ContentReference" name="genuineAccessories" label="Content ID" />  
+            <property type="ContentReference" name="genuineParts" label="Content ID" />
+            <!-- End -->  
+            <!-- Pawan : Adding Cards For Safety Commitment i.e,5th tab. -->
+            <property type="ContentReference" name="safetyCard1" label="Post-Collision Diagnostic Scan And Calibration" /> 
+            <property type="ContentReference" name="safetyCard2" label="Safety Recall" /> 
+            <property type="ContentReference" name="safetyCard3" label="Aftermarket/Alternative Parts Use" /> 
+            <property type="ContentReference" name="safetyCard4" label="Salvaged And Used Airbag Components" /> 
+            <property type="ContentReference" name="safetyCard5" label="Wheel Repair" />
+            <property type="ContentReference" name="safetyCard6" label="Unibody Repair" /> 
+            <property type="ContentReference" name="safetyCard7" label="Structural Parts Replacement" /> 
+            <property type="ContentReference" name="safetyCard8" label="salvage/Recycled Parts Use" /> 
+            <!-- Safety Commitment Card End. -->
+            <!--  Adding topic string for Collision Glossary-->
+                <property name="collisionGlossary" label="Topic for Collision Glossary" type="String"/>
+            <!-- End -->
+            <!-- Added by Yusuf -->
+            <property name="brand" type="String" label="Brand"/>
+            <property name="collisionTVTopic" label="Topic For Collision TV Videos" type="String"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

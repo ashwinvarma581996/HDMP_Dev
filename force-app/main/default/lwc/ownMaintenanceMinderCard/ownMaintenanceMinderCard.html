@@ -1,0 +1,53 @@
+<!-- //============================================================================
+// Title:    Honda Owners Experience - Maintenence Minder Card
+//
+// Summary:  This Card links to the Maintenence Minder
+//
+//
+// History:
+// May 17, 2021 Arunprasad N (Wipro) Original Author
+// July 15, 2021 Jim Kohs (Wipro) refactored to ownBaseCard2
+//=========================================================================== -->
+<template>
+    <c-own-card title={title} titlecolor={titlecolor} icon={icon} brand={brand} showfooter={showFooter} onheader={handleHeader} onfooter={handleFooter} onaction={handleAction}>    
+        <div slot="default">
+            <!-- ============================= -->
+            <!-- ====== Default HTML ========= -->
+            <!-- ============================= -->
+            <div>Err: Please chose a brand</div>
+        </div>
+        <div slot="acura">
+                <!-- ============================= -->
+                <!-- ====== Acura HTML   ========= -->
+                <!-- ============================= -->
+                <div>Your Honda measures driving style, road conditions, and more to let you know when service due. When you see the ranch, it's time for service.</div>
+        </div>
+        <div slot="honda">
+            <!-- ============================= -->
+            <!-- ====== Honda HTML   ========= -->
+            <!-- ============================= -->
+            <div>Your Honda measures driving style, road conditions, and more to let you know when service due. When you see the ranch, it's time for service.</div>
+        </div>
+
+        <div slot="powersports">
+            <!-- ============================= -->
+            <!-- ====== PS HTML      ========= -->
+            <!-- ============================= -->
+            <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</div>
+        </div>
+
+        <div slot="powerequipment">
+            <!-- ============================= -->
+            <!-- ====== PE HTML      ========= -->
+            <!-- ============================= -->
+            <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</div>
+        </div>
+
+        <!-- ============================= -->
+        <!-- ====== Marine HTML   ========= -->
+        <!-- ============================= -->
+        <div slot="marine">
+            <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</div>
+        </div>
+</c-own-card>
+</template>

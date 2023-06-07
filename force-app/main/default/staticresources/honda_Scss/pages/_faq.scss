@@ -1,0 +1,16 @@
+.faqPage{
+    background-color: #ffffff;
+    .head{
+        color:black;
+        font-size: 14px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+    }
+    .questionContainer{
+        border-bottom: 1px solid #D9D9D9;
+        font-size: 16px;
+        .question{
+            color:black; 
+        }
+    }
+}

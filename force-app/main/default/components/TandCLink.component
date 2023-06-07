@@ -1,0 +1,11 @@
+<!--
+  @description       :
+  @author            : mbunch@gorillagroup.com
+  @group             :
+  @last modified on  : 03-29-2022
+  @last modified by  : mbunch@gorillagroup.com
+-->
+<apex:component controller="RES_Send_Email" access="Global">
+<!-- <apex.outputText><a href="{!TandCLink}/terms-and-conditions" target="_blank" style="text-decoration: underline; color: #575757;" rel="noopener">Reserve Terms &amp; Conditions</a></apex.outputText> -->
+<apex.outputText><a href="https://www.acura.com/tools/reserve-online/terms-and-conditions" target="_blank" style="text-decoration: underline; color: #575757;" rel="noopener">Reserve Terms &amp; Conditions</a></apex.outputText>
+</apex:component>

@@ -1,0 +1,101 @@
+.head {
+    color: rgb(15, 15, 15);
+    font-style: bold;
+    position: static;
+    font-size: 26px;
+}
+
+.tableResponsive {
+    overflow-x: auto;
+}
+
+.finalAmount {
+    text-align: right!important;
+}
+
+.my-products-wrapper {
+    margin-bottom: 30px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.my-products-wrapper .productItem {
+    border-bottom: 1px solid #666;
+    margin-bottom: 40px;
+    width: 100%;
+}
+
+@media screen and (min-width: 768px) {
+    .my-products-wrapper {
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .user-section-header .primaryRedBtn {
+        margin-left: auto;
+        margin-right: 100px;
+    }
+}
+
+.addressBookActions {
+    margin-left: auto;
+}
+
+.hondabutton {
+    height: 30px;
+    font-size: 12px;
+    font-weight: normal !important;
+    line-height: normal;
+    margin: 0;
+    width: 200px;
+    border-radius: 0 !important;
+    margin-right: 100px;
+}
+
+.slds-text-heading_medium .textRed {
+    font-size: 13px;
+    font-weight: normal;
+}
+
+.primaryGrayBtn{
+    background: gray !important;
+    background-color: gray !important;
+}
+
+@media screen and (max-width: 767px) {
+    .product-image {
+        margin-bottom: 20px;
+    }
+    .product-info {
+        padding-bottom: 0;
+    }
+    .user-section-header {
+        margin-top: 55px;
+    }
+    .user-section-sub-header {
+        margin-top: 0;
+        padding-top: 0;
+    }
+    .slds-text-heading_large {
+        margin-top: 0;
+    }
+    .user-header-actions {
+        padding-top: 16px;
+    }
+    .user-header-actions .hondabutton {
+        margin: auto;
+    }
+    .addressBookActions {
+        float: none;
+        padding-top: 0;
+        margin-left: unset;
+        width: 100%;
+    }
+    .addressBookActions .hondabutton {
+        margin: auto;
+    }
+}
+@media screen and (max-width: 479px) {
+    .product-image {
+        text-align: center;
+    }
+}

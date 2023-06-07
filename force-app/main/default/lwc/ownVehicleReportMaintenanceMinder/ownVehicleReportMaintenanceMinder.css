@@ -1,0 +1,45 @@
+h3{
+    font-weight: 300;
+    font-size: 32px;
+    line-height: 37px;
+    color: #000000;
+    margin: 0px 0px 24px;
+}
+.mm_head{
+    font-weight: 900;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: 1px;
+    text-transform: capitalize;
+    color: #000000;
+}
+.mm_line{
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 26px;
+    color: #000000;
+}
+.mm_subline{
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 26px;
+    color: #000000;
+}
+.dealer-card{
+    margin-top: 60px;
+    margin-bottom: 60px;
+}
+.learn-more-div{
+    margin-top: 38px;
+}
+.learn-more{
+    color: #E42525;
+    font-weight: 900;
+    font-size: 14px;
+    line-height: 18px;
+    letter-spacing: 2.8px;
+    text-transform: uppercase;
+}
+.legal-escription{
+    font-style: italic;
+}

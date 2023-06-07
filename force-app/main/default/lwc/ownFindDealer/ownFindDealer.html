@@ -1,0 +1,127 @@
+<template>
+     <div class={cardDivClass}>
+          <c-own-card title={title} titlecolor={titlecolor} brand={brandSlot} showfooter={showFooter}
+               onheader={handleHeader} onfooter={handleFooter} icon-image={iconImageSrc} class="wrap-text-test">
+               <div slot="action">
+                    <template if:false={isDataLoading}>
+                         <!-- <template if:false={error}> -->
+                         <template if:false={hideScheduleButton}>
+                              <button class="slds-button slds-button_outline-brand find-dealers-button"
+                                   onclick={handleAction} value={actiontitle}>{actiontitle}
+                                   <template if:true={actionicon}>
+                                        <lightning-icon class="slds-p-left_x-small custom-icon" icon-name={actionicon}
+                                             size="x-small">
+                                        </lightning-icon>
+                                   </template>
+                              </button>
+                         </template>
+                         <!-- </template> -->
+                    </template>
+               </div>
+               <div slot="honda">
+                    <template if:true={isDataLoading}>
+                         <div style="position: sticky;">
+                              <!--class="slds-m-top_xx-large slds-p-top_xx-large"-->
+                              <c-own-data-loading-spinner></c-own-data-loading-spinner>
+                         </div>
+                    </template>
+                    <template if:false={isDataLoading}>
+                         <template if:true={error}>
+                              <lightning-layout-item size="12">
+                                   <lightning-layout vertical-align="center">
+                                        <lightning-layout-item>
+                                             <lightning-icon class="slds-p-right_small error-icon"
+                                                  icon-name="utility:warning" size="small"></lightning-icon>
+                                        </lightning-layout-item>
+                                        <lightning-layout-item>
+                                             <div class="slds-m-top_x-small error-message">{errorMessage}</div>
+                                        </lightning-layout-item>
+                                   </lightning-layout>
+                              </lightning-layout-item>
+                         </template>
+                         <template if:false={error}>
+                              <lightning-layout class="slds-size_12-of-12" multiple-rows horizontal-align="spread">
+                                   <template for:each={dealerLocations} for:item="dealerLocation">
+                                        <lightning-layout-item key={dealerLocation.name} size="12" large-device-size="4"
+                                             medium-device-size="4" small-device-size="12" class="dealer-item-div">
+                                             <lightning-layout multiple-rows>
+                                                  <lightning-layout-item class="dealer-address name-container"
+                                                       size="12">
+                                                       <lightning-layout>
+                                                            <lightning-layout-item size="10"
+                                                                 style="margin-top:1px; display:contents">
+                                                                 <span
+                                                                      style="font-weight: bold;">{dealerLocation.name}</span>
+                                                                 <lightning-icon
+                                                                      if:true={dealerLocation.showFavoriteIcon}
+                                                                      class="active-star-icon slds-p-bottom_small slds-p-left_small"
+                                                                      icon-name="utility:favorite" size="x-small"
+                                                                      title="Favorite">
+                                                                 </lightning-icon>
+                                                            </lightning-layout-item>
+                                                       </lightning-layout>
+                                                  </lightning-layout-item>
+                                                  <lightning-layout-item size="12">
+                                                       <lightning-layout multiple-rows horizontal-align="spread">
+                                                            <template for:each={dealerLocation.badges} for:item="badge">
+                                                                 <lightning-layout-item key={badge}>
+                                                                      <lightning-badge
+                                                                           class="attribute-badge slds-m-bottom_small"
+                                                                           label={badge}></lightning-badge>
+                                                                 </lightning-layout-item>
+                                                            </template>
+                                                       </lightning-layout>
+                                                  </lightning-layout-item>
+                                                  <lightning-layout-item class="dealer-address-details" size="12">
+                                                       {dealerLocation.addressLine1}
+                                                  </lightning-layout-item>
+                                                  <lightning-layout-item class="dealer-address-details" size="12">
+                                                       {dealerLocation.addressLine2}
+                                                  </lightning-layout-item>
+                                                  <lightning-layout-item class="dealer-phone-details slds-p-top_small"
+                                                       size="12">
+                                                       <lightning-formatted-text class="show-desktop-format"
+                                                            value={dealerLocation.phone}></lightning-formatted-text>
+                                                       <lightning-formatted-phone class="show-mobile-format"
+                                                            value={dealerLocation.phone}></lightning-formatted-phone>
+                                                  </lightning-layout-item>
+                                                  <lightning-layout-item if:true={dealerLocation.website}
+                                                       class="dealer-address-details" size="12">
+                                                       <a style="color:#e42525;" target="_blank"
+                                                            href={dealerLocation.website}>Dealer Website</a>
+                                                  </lightning-layout-item>
+                                                  <lightning-layout-item class="dealer-address-details slds-p-top_small"
+                                                       if:true={onlyOneDealer} size="12">
+                                                       <a style="color:#e42525;" onclick={handleAction}>Find Another
+                                                            Dealer</a>
+                                                  </lightning-layout-item>
+                                                  <template if:false={hideScheduleLink}>
+                                                       <!-- SCHEDULE SERVICE LINK COMMENTED AS PER ARUN'S DISCUSSION WITH GRACE -->
+                                                            <lightning-layout-item if:false={onlyOneDealer} class="slds-p-top_medium" size="12">
+                                                            <template if:true={dealerLocation.serviceSchedulingUrl}>
+                                                                 <a class="schedule-text" target="_blank" href={dealerLocation.serviceSchedulingUrl}>SCHEDULE SERVICE <lightning-icon icon-name="utility:forward" title="SCHEDULE" size="x-small" class="schedule-forward"></lightning-icon></a>
+                                                            </template>     
+                                                       </lightning-layout-item> 
+                                                  </template>
+                                             </lightning-layout>
+                                        </lightning-layout-item>
+                                   </template>
+                                   <template if:false={isGuest}>
+                                        <template if:true={showMap}>
+                                             <lightning-layout-item key={dealerLocation.name} size="12"
+                                                  large-device-size="5" medium-device-size="4" small-device-size="12">
+                                                  <div>
+                                                       <lightning-map map-markers={mapMarkers} zoom-level={zoomLevel}
+                                                            options={mapOptions} list-view={listView} class="img-map">
+                                                       </lightning-map>
+                                                  </div>
+                                             </lightning-layout-item>
+                                        </template>
+                                   </template>
+                              </lightning-layout>
+                         </template>
+                    </template>
+               </div>
+          </c-own-card>
+     </div>
+</template>

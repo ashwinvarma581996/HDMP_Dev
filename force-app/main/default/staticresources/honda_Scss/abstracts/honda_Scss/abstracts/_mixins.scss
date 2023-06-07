@@ -1,0 +1,22 @@
+@mixin containerWrapper {
+    max-width: 1181px;
+    margin: 0 auto;
+    padding-left: 15px;
+    padding-right: 15px;
+    width: 100%;
+}
+
+@mixin card {
+    background-color: #ffffff;
+    border: 1px solid #E7E7E7;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.15);
+    border-radius: 2px;
+}
+
+@mixin sectioncard {
+    margin: 30px 0;
+    box-shadow: 0px 15px 39px 0px rgba(8, 18, 109, 0.10);
+    background: #fff;
+    border: 0;
+    padding: 10px
+}

@@ -1,0 +1,29 @@
+h3{
+    font-weight: 300;
+    font-size: 32px;
+    line-height: 37px;
+    color: #080707;
+    margin: 0px 0px 24px;
+}
+.custom-icon {
+    --sds-c-icon-color-foreground-default: #e42525;
+    --sds-c-icon-color-background: white;
+    cursor: pointer;
+}
+.error-msg {
+    font-style: normal;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 26px;
+    color: #444444;
+}
+.warning-icon{
+    margin-right: 10px;
+    height: 20px;
+}
+.err-msg-div{
+    text-align: center;
+}
+.err-title{
+    margin-bottom: 7px;
+}

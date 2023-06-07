@@ -1,0 +1,23 @@
+<template>
+    <div class="header-title">Communication Preferences</div>
+    <template if:true={hasData}>
+        <ul class="ul-items">
+            <template for:each={headerTitles} for:item="headerTitle">
+                <c-own-communication-preferences-accordion key={headerTitle.Title__c} email={currentUserEmailId}
+                    title-division={headerTitle.ShortForm__c} header-title={headerTitle.Title__c}
+                    selected-titles={selectedTitles} result={resultData} onsectionselect={handleSelect}
+                    oncheckboxselect={handleCheckboxSelect} timezone={timeZone}>
+                </c-own-communication-preferences-accordion>
+            </template>
+        </ul>
+        <button class="button-save" onclick={handleSave}>SAVE CHANGES</button>
+        <div class="slds-p-bottom_medium"></div>
+        <div class="overview slds-p-bottom_medium">Honda respects the privacy of your personal information. Please see our <a class="redtext" onclick={handlePrivacyPolicy}>Privacy Policy</a> for more details.</div>
+
+    </template>
+    <template if:false={hasData}>
+        <div class="slds-m-top_xx-large slds-p-top_xx-large">
+            <c-own-data-loading-spinner></c-own-data-loading-spinner>
+        </div>
+    </template>
+</template>

@@ -1,0 +1,181 @@
+<template>
+    <!-- Retur Block Start -->
+    <lightning-card title="Returns">
+        <div class="slds-grid slds-grid_vertical">
+
+            <div class="slds-col">
+                <lightning-layout multiple-rows>
+                    <lightning-layout-item size="3"  >
+                        <div class="custom-box">Return window</div>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="3" >
+                        <div class="custom-box"><lightning-input type="text" variant="label-hidden" name="name" label="label" ></lightning-input></div>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="6" ></lightning-layout-item>
+                </lightning-layout>
+            </div></br>
+
+            <div class="slds-col">
+                <lightning-layout multiple-rows>
+                    <lightning-layout-item size="3"  >
+                        <div class="custom-box"> Charge restocking fee</div>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="3" >
+                        <div class="custom-box">
+                            <lightning-combobox
+                                name="progress"
+                                variant="label-hidden"
+                                value={value}
+                                placeholder="Select Progress"
+                                options={options}
+                                onchange={handleChange} ></lightning-combobox>
+                        </div>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="6" ></lightning-layout-item>
+                </lightning-layout>
+            </div></br>
+
+
+            <div class="slds-col">
+                <lightning-layout multiple-rows>
+                    <lightning-layout-item size="3"  >
+                        <div class="custom-box">Restocking fee type</div>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="3" >
+                        <div class="custom-box">
+                            <lightning-combobox
+                                name="progress"
+                                variant="label-hidden"
+                                value={value}
+                                placeholder="Select Progress"
+                                options={options}
+                                onchange={handleChange} ></lightning-combobox>
+                        </div>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="6" ></lightning-layout-item>
+                </lightning-layout>
+            </div></br>
+
+            <div class="slds-col">
+                <lightning-layout multiple-rows>
+                    <lightning-layout-item size="3"  >
+                        <div class="custom-box">Restocking fee</div>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="3" >
+                        <div class="custom-box"><lightning-input type="text" variant="label-hidden" name="name" label="label"></lightning-input></div>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="6" ></lightning-layout-item>
+                </lightning-layout>
+            </div>
+        </div>
+    </lightning-card>
+<!-- Retur Block End -->
+
+
+    <!-- Payment Block Start -->
+    <lightning-card title="Payment">
+        <div class="slds-grid slds-grid_vertical">
+
+            <div class="slds-col">
+                <lightning-layout multiple-rows>
+                    <lightning-layout-item size="3"  >
+                        <div class="custom-box">VISA</div>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="3" >
+                        <div class="custom-box">
+                            <lightning-combobox
+                                name="progress"
+                                label="Status"
+                                variant="label-hidden"
+                                value={value}
+                                placeholder="Select Progress"
+                                options={options}
+                                onchange={handleChange} ></lightning-combobox>
+                        </div>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="6" ></lightning-layout-item>
+                </lightning-layout>
+            </div></br>
+
+            <div class="slds-col">
+                <lightning-layout multiple-rows>
+                    <lightning-layout-item size="3"  >
+                        <div class="custom-box">Master Card</div>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="3" >
+                        <div class="custom-box">
+                            <lightning-combobox
+                                name="progress"
+                                variant="label-hidden"
+                                label="Status"
+                                value={value}
+                                placeholder="Select Progress"
+                                options={options}
+                                onchange={handleChange} ></lightning-combobox>
+                        </div>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="6" ></lightning-layout-item>
+                </lightning-layout>
+            </div></br>
+
+
+            <div class="slds-col">
+                <lightning-layout multiple-rows>
+                    <lightning-layout-item size="3"  >
+                        <div class="custom-box">Paypal</div>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="3" >
+                        <div class="custom-box">
+                            <lightning-combobox
+                                name="progress"
+                                label="Status"
+                                value={value}
+                                variant="label-hidden"
+                                placeholder="Select Progress"
+                                options={options}
+                                onchange={handleChange} ></lightning-combobox>
+                        </div>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="6" ></lightning-layout-item>
+                </lightning-layout>
+            </div>
+        </div>
+    </lightning-card>
+    <!-- Payment Block End -->
+
+
+    <!-- Shipping Block Start -->
+    <lightning-card title="Shipping">
+        <div class="slds-grid slds-grid_vertical">
+            <div class="slds-col">
+                <lightning-layout multiple-rows>
+                    <lightning-layout-item size="3"  >
+                        <div class="custom-box">Default Shipping Method</div>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="3" >
+                        <div class="custom-box">
+                            <lightning-combobox
+                                name="progress"
+                                value={value}
+                                variant="label-hidden"
+                                placeholder="Select Progress"
+                                options={options}
+                                onchange={handleChange} ></lightning-combobox>
+                        </div>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="6" ></lightning-layout-item>
+                </lightning-layout>
+            </div>
+        </div>
+    </lightning-card>
+
+    <!-- Shipping Block End -->
+
+
+
+
+
+
+
+
+</template>

@@ -1,0 +1,24 @@
+.external-link {
+    color: #E42525 !important;
+}
+
+:host {
+    --lwc-brandTextLink: #E42525;
+    --lwc-brandTextLinkActive: #E42525;
+}
+@media only screen and (min-width: 601px) {
+    .show-desktop-format {
+        display: block;
+    }
+    .show-mobile-format {
+        display: none;
+    }
+}
+@media only screen and (max-width: 600px) {
+    .show-desktop-format {
+        display: none;
+    }
+    .show-mobile-format {
+        display: block;
+    }
+}

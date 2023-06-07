@@ -1,0 +1,192 @@
+<apex:component access="global" controller="DisplayCartItemsCtrl" >
+    <apex:attribute name="relatedOrderId" type="String" assignTo="{!orderId}" description="test" />
+    
+    
+    <!-- attribute Added by ashwin for SP3-16542 -->
+    <apex:attribute name="compRender" type="Integer" default="0"  assignTo="{!compRend}" description="Use to decide which table should render" />
+    <apex:outputPanel rendered="{!compRend == 0}"><!-- Condition Added by ashwin for SP3-16542 -->
+    <apex:outputPanel rendered="{! IF(ISBLANK(OrderItemReturnList), false, true) }">
+        <apex:outputPanel rendered="{!isReturn == true}">
+            <apex:outputPanel rendered="{!isReturnEmpty == false}">
+                <table color="blue" border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse; border-top:1px solid;width: 600px;border-bottom: 1px solid black;">
+                    <thead>
+                        <tr>
+                            <th style="width: 150px;padding:8px 12px; text-transform:capitalize; background:#f2f2f2; border-right:1px solid; border-left:1px solid">PRODUCT</th>
+                            <th style="padding:8px 12px; text-transform:capitalize; background:#f2f2f2; border-right:1px solid;">PART NUMBER</th>
+                            <apex:outputPanel rendered="{!isDealerInstall == true}">
+                                <th style="padding:8px 12px; text-transform:capitalize; background:#f2f2f2; border-right:1px solid;">INSTALL</th>
+                            </apex:outputPanel>
+                            <th style="padding:8px 12px; text-transform:capitalize; background:#f2f2f2; border-right:1px solid;">QUANTITY</th>                      
+                            <th style="padding:8px 12px; text-transform:capitalize; background:#f2f2f2; border-right:1px solid;">UNIT PRICE</th>
+                            <th style="padding:8px 12px; text-transform:capitalize; background:#f2f2f2; border-right:1px solid">LINE TOTAL</th>
+                        </tr>
+                    </thead>
+                    <tbody style="border-bottom:1px solid">
+                        <apex:repeat var="oi" value="{!OrderItemReturnList}" >               
+                            <tr>
+                                <td style="padding:8px 12px; border-right:1px solid;border-left:1px solid">{!oi.Product_Name__c}</td>
+                                <td style="padding:8px 12px; border-right:1px solid;">{!oi.Product_SKU__c}</td>
+                                <apex:outputPanel rendered="{!isDealerInstall == true}">
+                                    <td style="padding:8px 12px; border-right:1px solid;text-align:right;">$
+                                        <apex:outputText value="{0,number,#,##0.00}">
+                                            <apex:param value="{!oi.Item_Installation_Price__c}" />
+                                        </apex:outputText>
+                                    </td>
+                                </apex:outputPanel>
+                                <td style="padding:8px 12px; border-right:1px solid;text-align:right;">{!FLOOR(oi.Item_Quantity__c)}</td>                           
+                                <td style="padding:8px 12px; border-right:1px solid;text-align:right;">$
+                                    <apex:outputText value="{0,number,#,##0.00}">
+                                        <apex:param value="{!oi.Unit_Price__c}" />
+                                    </apex:outputText>
+                                </td>
+                                <td style="padding:8px 12px;text-align:right;border-right:1px solid ">$
+                                    <apex:outputText value="{0,number,#,##0.00}">
+                                        <apex:param value="{!oi.Unit_Price__c * oi.Item_Quantity__c}" />
+                                    </apex:outputText>
+                                </td>
+                            </tr>                 
+                        </apex:repeat>
+                    </tbody>
+                </table>
+                <!-- Start Added by Aditya for 19428,19430 Fix -->
+                <apex:outputPanel rendered="{!IF(NonZeroCoreChrageItemExist,true,false)}"> 
+                    <div style="margin-top: 8px; margin-left:4px;"> 
+                        <apex:outputLink value="{!$Label.RE_Site_Base_URL}/s/core-charge?corecharge=true">What is a core charge ?</apex:outputLink>
+                    </div>
+                </apex:outputPanel>
+                <!-- End Added By Aditya  19428,19430 Fix -->
+            </apex:outputPanel>
+        </apex:outputPanel>
+    </apex:outputPanel>
+</apex:outputPanel>
+<apex:outputPanel rendered="{!compRend == 0}"> <!-- condition Added by ashwin for SP3-16542 -->
+    <apex:outputPanel rendered="{! IF(ISBLANK(OrderItemList), false, true) }">
+        <apex:outputPanel rendered="{!isReturn == false}">
+            <apex:repeat var="oi" value="{!OrderItemList}" >               
+                <tr>
+                    <td style="padding:8px 12px; border-right:1px solid;border-left:1px solid">{!oi.Cart_Item_Product_Name__c}</td>
+                    <td style="padding:8px 12px; border-right:1px solid;">{!oi.Product_SKU__c}1</td>
+					<td style="padding:8px 12px; border-right:1px solid;">{!SUBSTITUTE(TEXT(oi.Quantity), '.00', '')}</td> <!-- Added by ashwin for 19412 -->
+                    <td style="padding:8px 12px; border-right:1px solid;text-align:right;">
+                        <!-- Start Added by Aditya to fix HDMP-19425 -->
+                        <!-- {!FLOOR(oi.Updated_Quantity__c - oi.Return_Quantity__c)} -->
+                        <apex:outputText value="{0,number,#,##0.00}">
+                            <apex:param value="{!oi.UnitPrice}" />
+                        </apex:outputText>
+                    </td>
+                    <td style="padding:8px 12px; border-right:1px solid;text-align:right;">$
+                        <apex:outputText value="{0,number,#,##0.00}">
+                            <apex:param value="{!oi.UnitPrice * oi.Quantity}" />
+                        </apex:outputText>
+                    </td>
+                    <!-- <td style="padding:8px 12px;text-align:right;border-right:1px solid ">$
+                        <apex:outputText value="{0,number,#,##0.00}">
+                            <apex:param value="{!oi.UnitPrice * (oi.Updated_Quantity__c - oi.Return_Quantity__c)}" />
+                        </apex:outputText>
+                    </td> -->
+					<!-- commented by ashwin for 19412 -->
+                    <td style="padding:8px 12px; border-right:1px solid;border-left:1px solid">{!oi.Product_Model_Marketing_Name__c}</td>
+                    <!-- End Added by Aditya to fix HDMP-19425 -->
+                </tr>                 
+            </apex:repeat>
+        </apex:outputPanel>
+    </apex:outputPanel>
+</apex:outputPanel>   
+<!-- Begin by ashwin for SP3-16542 -->
+<apex:outputPanel rendered="{!compRend == 1}"> 
+    <apex:outputPanel rendered="{! IF(ISBLANK(OrderItemList), false, true) }">
+        <apex:outputPanel rendered="{!isReturn == false}">
+            <apex:repeat var="oi" value="{!OrderItemList}" > 
+		<!-- Updated below code condition by ashwin for 19418 bug --> 
+                <apex:outputPanel rendered="{!IF((oi.Product_Type__c == 'Core Charge' && oi.Updated_Quantity__c - oi.Return_Quantity__c > 0) || oi.Product_Type__c != 'Core Charge' , true, false)}">
+                    <tr>
+                        <td style="padding:8px 12px; border-right:1px solid;border-left:1px solid">{!oi.Cart_Item_Product_Name__c}</td>
+                        <td style="padding:8px 12px; border-right:1px solid;">{!oi.Product_SKU__c}</td>                    
+                        <td style="padding:8px 12px; border-right:1px solid;text-align:right;">{!FLOOR(oi.Updated_Quantity__c - oi.Return_Quantity__c)}</td>
+                        <td style="padding:8px 12px; border-right:1px solid;text-align:right;">$
+                            <apex:outputText value="{0,number,#,##0.00}">
+                                
+                                <apex:param value="{!oi.UnitPrice}" />
+                            </apex:outputText>
+                        </td>
+                        <td style="padding:8px 12px;text-align:right;border-right:1px solid ">$
+                            <apex:outputText value="{0,number,#,##0.00}">
+                                <apex:param value="{!oi.UnitPrice * (oi.Updated_Quantity__c - oi.Return_Quantity__c)}" />
+                            </apex:outputText>
+                        </td>
+                        <td style="padding:8px 12px; border-right:1px solid;border-left:1px solid">{!oi.Product_Model_Marketing_Name__c}</td>
+                    </tr>        
+                </apex:outputPanel>
+            </apex:repeat>
+        </apex:outputPanel>
+    </apex:outputPanel>
+</apex:outputPanel>
+<!-- ended by ashwin for SP3-16542 -->
+
+<!-- Added by ashwin as bug fix 19420 -->
+    <!-- Ready for Pickup-->
+    <apex:outputPanel rendered="{!compRend == 2}"> <!-- condition Added by ashwin for SP3-16542 -->
+        <apex:outputPanel rendered="{! IF(ISBLANK(OrderItemList), false, true) }">
+            <apex:outputPanel rendered="{!isReturn == false}">
+                <apex:repeat var="oi" value="{!OrderItemList}" >               
+                    <tr>
+                        <td style="padding:8px 12px; border-right:1px solid;border-left:1px solid">{!oi.Cart_Item_Product_Name__c}</td>
+                        <td style="padding:8px 12px; border-right:1px solid;">{!oi.Product_SKU__c}</td>   
+                        <td style="padding:8px 12px; border-right:1px solid;text-align:right;">{!FLOOR(oi.Updated_Quantity__c - oi.Return_Quantity__c)}</td>
+                        <td style="padding:8px 12px; border-right:1px solid;text-align:right;">$
+                            <apex:outputText value="{0,number,#,##0.00}">
+                                
+                                <apex:param value="{!oi.UnitPrice}" />
+                            </apex:outputText>
+                        </td>
+                        <td style="padding:8px 12px;text-align:right;border-right:1px solid ">$
+                            <apex:outputText value="{0,number,#,##0.00}">
+                                <apex:param value="{!oi.UnitPrice * (oi.Updated_Quantity__c - oi.Return_Quantity__c)}" />
+                            </apex:outputText>
+                        </td>
+                        <!--commented by ashwin for 19420 -->
+                        <td style="padding:8px 12px; border-right:1px solid;border-left:1px solid">{!oi.Product_Model_Marketing_Name__c}</td>
+                    </tr>                 
+                </apex:repeat>
+            </apex:outputPanel>
+        </apex:outputPanel>
+    </apex:outputPanel>
+    
+    <!-- Order Modification -->
+    <!-- Added by ashwin for bug 19499 -->
+    <apex:outputPanel rendered="{!compRend == 3}"> <!-- condition Added by ashwin for SP3-16542 -->
+    <apex:outputPanel rendered="{! IF(ISBLANK(OrderItemList), false, true) }">
+        <apex:outputPanel rendered="{!isReturn == false}">
+            <apex:repeat var="oi" value="{!OrderItemList}" >               
+                <tr>
+                    <td style="padding:8px 12px; border-right:1px solid;border-left:1px solid">{!oi.Cart_Item_Product_Name__c}</td>
+                    <td style="padding:8px 12px; border-right:1px solid;">{!oi.Product_SKU__c}1</td>
+					<td style="padding:8px 12px; border-right:1px solid;">{!SUBSTITUTE(TEXT(oi.Quantity), '.00', '')}</td> <!-- Added by ashwin for 19412 -->
+                    <td style="padding:8px 12px; border-right:1px solid;text-align:right;">
+                        <!-- Start Added by Aditya to fix HDMP-19425 -->
+                        
+                        <apex:outputText value="{0, number, 0.##}">
+                            <apex:param value="{!oi.Updated_Quantity__c}" />
+                        </apex:outputText>
+                    </td>
+                    <td style="padding:8px 12px; border-right:1px solid;text-align:right;">$
+                        <apex:outputText value="{0,number,#,##0.00}">
+                            <apex:param value="{!oi.UnitPrice}" />
+                        </apex:outputText>
+                    </td>
+                     <td style="padding:8px 12px;text-align:right;border-right:1px solid ">$
+                        <apex:outputText value="{0,number,#,##0.00}">
+                            <apex:param value="{!oi.Extended_Price__c}" />
+                        </apex:outputText>
+                    </td> 
+					<!-- commented by ashwin for 19412
+                    <td style="padding:8px 12px; border-right:1px solid;border-left:1px solid">{!oi.Product_Model_Marketing_Name__c}</td>-->
+                    <!-- End Added by Aditya to fix HDMP-19425 -->
+                </tr>                 
+            </apex:repeat>
+        </apex:outputPanel>
+    </apex:outputPanel>
+</apex:outputPanel>
+    
+    
+</apex:component>

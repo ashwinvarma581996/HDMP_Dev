@@ -1,0 +1,108 @@
+<!-- //============================================================================
+// Title:    Honda Owners Experience - Card
+//
+// Summary:  This is the base card html seen at the home page of the Honda Owner Community
+//
+// Details:  This card creates a custom title by using a title slot that contains a header tag and lightning-icon. The body is empty, footer slot is empty, and the actions slot is empty.
+//
+// History:
+// July 23, 2021 Arunprasad N (Wipro) Original Author 
+//=========================================================================== -->
+<template>
+    <div class="card card-size card-styles-wrapper">
+        <lightning-card class="card-styles">
+            <template if:true={headerClickable}>
+                <div slot="title" onclick={handleClickHeader}>
+                    <lightning-layout>
+                        <template if:true={iconImage}>
+                            <img src={iconImage} class="slds-p-right_small icon-image" alt={icon}>
+                        </template>
+                        <template if:false={iconImage}>
+                            <template if:true={icon}>
+                                <lightning-layout-item class="custom-item">
+                                    <lightning-icon class="slds-p-right_small custom-icon" icon-name={icon}
+                                        size="small"></lightning-icon>
+                                </lightning-layout-item>
+
+                            </template>
+                        </template>
+                        <template if:true={isTitleRed}>
+                            <lightning-layout-item class="custom-item">
+                                <lightning-formatted-rich-text role=”link” value={title}
+                                    class="slds-text-heading_small title heading-link red" tabindex="0">
+                                </lightning-formatted-rich-text>
+                            </lightning-layout-item>
+                        </template>
+                        <template if:false={isTitleRed}>
+                            <lightning-layout-item class="custom-item">
+                                <lightning-formatted-rich-text value={title} role=”link”
+                                    class="slds-text-heading_small title" tabindex="0">
+                                </lightning-formatted-rich-text>
+                            </lightning-layout-item>
+                        </template>
+                        <template if:true={showforwardicon}>
+                            <lightning-layout-item class="custom-item">
+                                <lightning-icon class="slds-p-left_small" icon-name="utility:forward" size="x-small">
+                                </lightning-icon>
+                            </lightning-layout-item>
+                        </template>
+                    </lightning-layout>
+                </div>
+            </template>
+            <template if:false={headerClickable}>
+                <div slot="title" onclick={handleClickHeader}>
+                    <lightning-layout>
+                        <template if:true={iconImage}>
+                            <img src={iconImage} class="slds-p-right_small icon-image" alt={icon}>
+                        </template>
+                        <template if:false={iconImage}>
+                            <template if:true={icon}>
+                                <lightning-layout-item class="custom-item">
+                                    <lightning-icon class="slds-p-right_small custom-icon" icon-name={icon} size="small"></lightning-icon>
+                                </lightning-layout-item>
+                            </template>
+                        </template>
+
+                        <template if:true={isTitleRed}>
+                            <lightning-layout-item class="custom-item">
+                                <lightning-formatted-rich-text value={title} role=”link”
+                                    class="slds-text-heading_small title red">
+                                </lightning-formatted-rich-text>
+                            </lightning-layout-item>
+                        </template>
+                        <template if:false={isTitleRed}>
+                            <lightning-layout-item class="custom-item">
+                                <lightning-formatted-rich-text value={title} role=”link”
+                                    class="slds-text-heading_small title">
+                                </lightning-formatted-rich-text>
+                            </lightning-layout-item>
+                        </template>
+                        <template if:true={showforwardicon}>
+                            <lightning-layout-item class="custom-item">
+                                <lightning-icon class="slds-p-left_small" icon-name="utility:forward" size="x-small"></lightning-icon>
+                            </lightning-layout-item>
+                        </template>
+                    </lightning-layout>
+                </div>
+            </template>
+            <div slot="actions" onclick={handleClickAction}>
+                <slot name="action"></slot>
+            </div>
+            <div class={bodyClass}>
+                <template if:false={hideBodySection}>
+                    <template if:true={isDefault}><slot name="default"></slot></template>
+                    </template>
+                <template if:true={isAcura}><slot name="acura"></slot></template>
+                <template if:true={isHonda}><slot name="honda"></slot></template>
+                <template if:true={isPowersports}><slot name="powersports"></slot></template>
+                <template if:true={isPowerequipment}><slot name="powerequipment"></slot></template>
+                <template if:true={isMarine}><slot name="marine"></slot></template>
+            </div>
+            <template if:true={showfooter}>
+                <div slot="footer">
+                    <slot class="footer" name="footer" onclick={handleClickFooter}></slot>
+                </div>
+            </template>
+        </lightning-card>
+    </div>
+</template>

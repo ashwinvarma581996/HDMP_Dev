@@ -1,0 +1,96 @@
+<template>
+    <div class="page-header-container"><c-own-page-header isproductbadge="true" brand={brand} subtitle="Vehicle Data Privacy Settings"></c-own-page-header></div>
+    <template if:false={isResultYes}>
+        <lightning-layout horizontal-align="space" multiple-rows="true">
+            <lightning-layout-item class="slds-m-top_x-large" size="12" large-device-size="7" padding="around-small">
+                <div class="description">We can’t find data privacy settings for your vehicle based on the information provided. 
+                    If you have questions, please visit our <a class="link" onclick={handleRedirect}>Help Center</a> to contact Customer Support.
+                </div>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" large-device-size="7" padding="around-small">
+                <lightning-formatted-rich-text class="description" value={noOptionContent.body}></lightning-formatted-rich-text>
+            </lightning-layout-item>
+            <lightning-layout-item class="slds-m-vertical_large" size="12" large-device-size="7" padding="around-small">
+                <lightning-formatted-rich-text class="description" value={noOptionContent.section1Content}></lightning-formatted-rich-text>
+            </lightning-layout-item>
+            <lightning-layout-item class="slds-m-vertical_large" size="12" large-device-size="7" padding="around-small">
+                <lightning-formatted-rich-text class="description" value={noOptionContent.section2Content}></lightning-formatted-rich-text>
+            </lightning-layout-item>
+        </lightning-layout>
+    </template>
+    <template if:true={isResultYes}>
+        <lightning-layout horizontal-align="space" multiple-rows="true">
+            <lightning-layout-item class="slds-m-top_x-large" size="12" large-device-size="7" padding="around-small">
+                <lightning-formatted-rich-text class="description" value={yesOptionContent.body}></lightning-formatted-rich-text>
+            </lightning-layout-item>
+            <lightning-layout-item if:true={yesOptionContent.section1Content} size="12" class="slds-m-top_large" large-device-size="7" padding="around-small">
+                <lightning-formatted-rich-text class="description" value={yesOptionContent.section1Content}></lightning-formatted-rich-text>
+            </lightning-layout-item>
+            <lightning-layout-item if:true={yesOptionContent.section2Content} size="12" class="slds-m-top_x-large" large-device-size="7" padding="around-small">
+                <lightning-formatted-rich-text class="description" value={yesOptionContent.section2Content}></lightning-formatted-rich-text>
+            </lightning-layout-item>
+            <lightning-layout-item if:true={yesOptionContent.section3Content} size="12" class="slds-m-top_large" large-device-size="7" padding="around-small">
+                <lightning-formatted-rich-text class="description" value={yesOptionContent.section3Content}></lightning-formatted-rich-text>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" large-device-size="7" padding="around-small" class="steps-container-layout" if:true={isAcuraBrand}>
+                <div class="info-text">
+                    You will also need to reset all the menu and customized setting as the factory defaults from your vehicle's Display Audio System. Please follow steps as described below.
+                </div>
+                <lightning-layout class="steps-container" multiple-rows="true">
+                    <lightning-layout-item class="step-left-container">
+                        <img src={stepsImages.step1} class="step-img"/>
+                    </lightning-layout-item>
+                    <lightning-layout-item class="step-right-container">
+                        <div class="step-text">Step 1:</div>
+                        <div>Go to the home screen on the <br> display and select "Settings".
+                        </div>
+                    </lightning-layout-item>
+                </lightning-layout>
+                <lightning-layout class="steps-container" multiple-rows="true">
+                    <lightning-layout-item class="step-left-container">
+                        <img src={stepsImages.step2} class="step-img"/>
+                    </lightning-layout-item>
+                    <lightning-layout-item  class="step-right-container">
+                        <div class="step-text">Step 2:</div>
+                        <div>Settings: <br> Select "System".</div>
+                    </lightning-layout-item>
+                </lightning-layout>
+                <lightning-layout class="steps-container" multiple-rows="true">
+                    <lightning-layout-item class="step-left-container">
+                        <img src={stepsImages.step3} class="step-img"/>
+                    </lightning-layout-item>
+                    <lightning-layout-item  class="step-right-container">
+                        <div class="step-text">Step 3:</div>
+                        <div>System:</div>
+                        <div>Select "Factory Data Reset". <br> A confirmation message appears on the screen.</div>
+                        
+                    </lightning-layout-item>
+                </lightning-layout>
+                <lightning-layout class="steps-container" multiple-rows="true">
+                    <lightning-layout-item class="step-left-container">
+                        <img src={stepsImages.step4} class="step-img"/>
+                    </lightning-layout-item>
+                    <lightning-layout-item  class="step-right-container">
+                        <div class="step-text">Step 4:</div>
+                        <div>Factory Data Reset:</div>
+                        <div>Select "Continue" to reset the settings.</div>
+                    </lightning-layout-item>
+                </lightning-layout>
+                <lightning-layout class="steps-container" multiple-rows="true">
+                    <lightning-layout-item class="step-left-container">
+                        <img src={stepsImages.step5} class="step-img"/>
+                    </lightning-layout-item>
+                    <lightning-layout-item  class="step-right-container">
+                        <div class="step-text">Step 5:</div>
+                        <div>Factory Data Reset Confirmation:</div>
+                        <div>Select "Reset" to reset the setting.</div>
+                        <div>The system will reboot.</div>
+                    </lightning-layout-item>
+                </lightning-layout>
+                <div class="info-text-2">
+                    If you need assistance with this process, please call the numbers listed above.
+                </div>
+            </lightning-layout-item>
+        </lightning-layout>
+    </template>
+</template>

@@ -1,0 +1,119 @@
+<!-- ======================================================================================================
+// Title: Multi-Hero LWC for Honda Owners Community
+//
+// Summary: This LWC provides a configurable Hero image, and configurable Login Buttons
+//
+// To-Do: as of jun 4 this lwc needs css tweaks for vertcal/horiz positioning
+//
+// Updated:
+// Apr 14, 2021 Jim Kohs (Appirio) Original Author
+// May 20, 2021 Jim Kohs (Appirio) cleanup
+// Jun 4, 2021 Jim Kohs (Appirio) added configurable Search Box
+====================================================================================================== -->
+<template>
+    <div>
+        <c-own-recalls-notification></c-own-recalls-notification>
+    </div>
+    <!-- <div class="alerts-banner">
+        <c-own-message-alerts-banner safety-alerts-topic={safetyAlertsTopic} product-alerts-topic={productAlertsTopic}></c-own-message-alerts-banner>
+    </div> -->
+    <div class="c-container heroBackground">
+        <lightning-layout class="slds-grid slds-wrap slds-grid_vertical-align-center">
+
+            <lightning-layout-item class={layoutItem1Cls}>
+                <div class={breadCrumbsDivClass}>
+                    <template if:false={isHomePage}>
+                        <div class="breadcrumb-one">
+                            <a class="link-get-started" onclick={handleGetStarted}>
+                                Get Started
+                            </a>
+                        </div>
+                        <div class="breadcrumb-middle-icon">></div>
+                        <div class="breadcrumb-two">
+                            {modelName}
+                        </div>
+                    </template>
+                </div>
+                <div class="title-div">
+
+                    <template if:true={isLoggenInHomePage}>
+                        <h1 class="own-title">{greetingText.text} {firstName}{greetingText.sign}</h1>
+                    </template>
+                    <template if:false={isLoggenInHomePage}>
+                        <div class="own-title">
+                            <template if:false={isLogoShown}>
+                                <h1 class="own-hero-title-position">{h1Line1}</h1>
+                            </template>
+                            <template if:true={isLogoShown}>
+                                <lightning-layout class="slds-grid_vertical-align-center own-hero-help-wrapper">
+                                    <lightning-layout-item>
+                                        <div>
+                                            <img src={brandLogo} class="brand-logo-wrapper" />
+                                        </div>
+                                    </lightning-layout-item>
+                                    <lightning-layout-item>
+                                        <div class="logo-break"></div>
+                                    </lightning-layout-item>
+                                    <lightning-layout-item tabindex="0">
+
+                                        <h1 class="own-hero-title-help">{h1Line1}</h1>
+                                        <template if:true={h1Line2}>
+                                            <h1 class="own-hero-title-help">{h1Line2}</h1>
+                                        </template>
+                                    </lightning-layout-item>
+                                </lightning-layout>
+                            </template>
+                        </div>
+                    </template>
+                    <div class={descriptionClass}>{h2Line1}</div>
+                    <template if:true={isGuest}>
+                        <template if:true={isHomePage}>
+                            <div class="slds-m-top_xx-large own-signin">
+                                <lightning-layout>
+                                    <lightning-layout-item>
+                                        <div>
+                                            <button class="slds-button slds-button_brand sign-up-button"
+                                                data-id="Sign_Up" onclick={handleClick}>SIGN UP</button>
+                                        </div>
+                                    </lightning-layout-item>
+                                    <lightning-layout-item>
+                                        <div>
+                                            <button class="slds-button slds-m-left_x-small login-button"
+                                                data-id="Log_In" onclick={handleClick}>LOG IN</button>
+                                        </div>
+                                    </lightning-layout-item>
+                                </lightning-layout>
+                            </div>
+                        </template>
+                    </template>
+
+                    <template if:true={showSearchBox}>
+                        <c-own-help-search-bar brand={brand}></c-own-help-search-bar>
+                    </template>
+                </div>
+            </lightning-layout-item>
+
+            <lightning-layout-item class={layoutItem2Cls}>
+                <div class={hideImageOnMobileViewClass_helpCenter}>
+                    <div class={heroWrapperClass}>
+
+                        <template if:false={showHomePageImage}>
+                            <img src={hero} class="own-hero-image" />
+                        </template>
+                        <div class="slds-grid">
+                            <template if:true={showHomePageImage} for:each={homePageBannerImages} for:item="image">
+
+                                <div key={image.title} class="banner-wrapper">
+                                    <img src={image.url} />
+                                </div>
+
+                            </template>
+                        </div>
+                    </div>
+                </div>
+            </lightning-layout-item>
+
+        </lightning-layout>
+
+    </div>
+</template>

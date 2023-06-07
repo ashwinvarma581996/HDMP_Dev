@@ -1,0 +1,255 @@
+.heroBackground{
+    background-color: #000000;
+}
+
+.banner-wrapper{
+    height: 400px;
+    width: 100%;
+}
+.banner-wrapper img{
+    width: 100%;
+    height: 400px;
+    /* object-fit: cover; */
+    object-position: center;
+}
+
+.own-title {
+    font-weight:300;
+    color : #ffffff;
+    font-size: 1.5rem;
+    max-width: 80%;
+    margin-bottom: 24px;
+}
+.breadcrumbs-one a{
+    color : #E42525 !important;
+    font-size: 0.875rem;
+    font-weight: 700;
+}
+.breadcrumbs-two a{
+    color : #ffffff !important;
+    font-size: 0.875rem;
+    font-weight: 700;
+}
+.own-search {
+    max-width: 50%;
+}
+.own-hero-content{
+    padding:36px 20px;
+}
+
+.own-hero-image{
+    width: 100%;
+    height: auto;
+    
+}
+
+.own-v-top {
+   vertical-align: text-top !important;
+}
+
+.own-description {
+    color : #ffffff;
+    font-weight:300;
+    font-size: 1rem;
+    line-height: 26px;
+    
+}
+.sign-up-button {
+    background: #E42525;
+    border: 1px solid #E42525;
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: 2px;
+    letter-spacing: 2px;
+    padding: 4px 50px;
+    height: 48px;
+    transition: 0.5s all;
+}
+.sign-up-button:hover {
+    color: #ffffff;
+    background: #C42121;
+}
+.login-button {
+    color : #ffffff;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    padding: 8px 32px;
+}
+
+
+
+.logo-break{
+    background: white;
+    width: 1.5px;
+    height: 92px;
+    margin: 0 1.5rem;
+}
+
+.own-hero-title-position{
+    display:inline-block;
+}
+
+.own-hero-title-blocks{
+    width: 70%;
+}
+
+.own-hero-help-wrapper{
+    margin-bottom: 2rem;
+}
+
+@media only screen and (max-width: 600px) {
+    .hide-image-on-mobile-view{
+        display : none;
+    }
+    .bread-crumb-div{
+        margin-bottom: 20px !important;
+    }
+
+    .banner-wrapper{
+        height: 200px;
+    }
+    .banner-wrapper img{
+        width: 100%;
+        height: 100%;
+       
+    }
+    .own-hero-content{
+        padding:24px 20px;
+    }
+
+    .own-hero-content1{
+        order: 2;
+    }
+    .own-hero-image-container1{
+        order: 1;
+    }
+    .own-hero-content2{
+        order: 1;
+    }
+    .own-hero-image-container2{
+        order: 2;
+    }
+    .own-hero-title-help{
+        font-size: 2rem !important;
+        line-height: 115%;
+        width:100%;
+    }
+    .own-hero-help-wrapper{
+        margin-bottom: 1rem;
+    }
+    .logo-break{
+        margin: 0 1rem;
+    }
+}
+@media only screen and (min-width: 601px) and (max-width: 1024px ){
+    
+    .own-hero-content1{
+        order: 2;
+    }
+    .own-hero-image-container1{
+        order: 1;
+    }
+    .own-hero-content2{
+        order: 1;
+    }
+    .own-hero-image-container2{
+        order: 2;
+    }.banner-wrapper{
+        height: 350px;
+    }
+    .bread-crumb-div{
+        margin-bottom: 28px !important ;
+    }
+    .own-hero-content{
+        padding:36px 28px;
+    }
+    
+}
+
+@media only screen and (min-width: 1025px) {
+    .own-hero-content{
+        order: 1;
+        width:50%;
+        padding:0px 32px 0px 80px;
+    }
+    .own-hero-image-container{
+        order: 2;
+        width:50%;
+    }
+   
+
+    .own-hero-image{
+        width: auto;
+        height: 400px;
+        max-width: inherit;
+    }
+    .own-title {
+        max-width: 420px;
+        font-size: 2.5rem;
+        margin-bottom: 24px;
+    }
+    .own-hero-title-help{
+        font-size: 2.5rem !important;
+        line-height: 115%;
+        width:100%;
+        color : #ffffff;
+    }
+    
+}
+@media only screen and (min-width: 601px){
+    .alerts-banner{
+        padding-top: 2px;
+    }
+}
+  
+
+
+.bread-crumb-div{
+    margin-bottom: 100px;
+}
+
+.hidden-bread-crumb{
+    display: none;
+}
+
+.breadcrumb-one {
+    color: #E42525;
+    font-weight: 900;
+    font-size: 14px;
+    display:inline-block;
+}
+.breadcrumb-middle-icon {
+    color: #FFFFFF;
+    display:inline-block;
+    margin-left:4px;
+    font-size: 14px;
+}
+.breadcrumb-two {
+    color: #FFFFFF;
+    font-weight: 900;
+    font-size: 14px;
+    display:inline-block;
+    margin-left:4px;
+}
+.link-get-started{
+    color: #E42525;
+}
+
+.own-hero-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.own-hero-wrapper-align-right {
+    display: flex;
+    align-items: right;
+    justify-content: right;
+    overflow: hidden;
+}
+.brand-logo-wrapper{
+    max-width: initial;
+}

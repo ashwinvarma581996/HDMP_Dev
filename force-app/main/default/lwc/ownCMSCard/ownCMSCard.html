@@ -1,0 +1,74 @@
+<!-- //============================================================================
+// Title:    Honda MyGarage Experience - Promotional Hero
+//
+// Summary:  This is the CMS Card html seen at the page of the Honda MyGarage Community
+//
+// Details:  CMS Card for pages
+//
+// History:
+// October 18, 2021 Arunprasad N (Wipro) Original Author 
+//=========================================================================== -->
+<template>
+    <template if:true={showCard}>
+        <div class={mainCardClass}>
+            <lightning-card class="card-styles cms-card-style">
+                <div slot="title" class="slds-truncate" style="width:300px" onclick={handleClickHeader}>
+                    <lightning-layout>
+                        <lightning-layout-item size="1">
+                            <img src={icon} class="custom-icon">
+                        </lightning-layout-item>
+                        <lightning-layout-item size="11" class="slds-p-left_small  card-titlemain" role="link" tabindex="0">
+                            <template if:false={isCustomTitle}>
+                                <span class={titleClass}>{title}</span>
+                            </template>
+                            <template if:true={isCustomTitle}>
+                                <lightning-formatted-rich-text class={customTitleClass} value={title}>
+                                </lightning-formatted-rich-text>
+                            </template>
+                        </lightning-layout-item>
+                        <template if:true={showforwardicon}>
+                            <lightning-layout-item>
+                                <lightning-icon class={iconClass} icon-name={headerRightIcon} size="x-small">
+                                </lightning-icon>
+                            </lightning-layout-item>
+                        </template>
+                    </lightning-layout>
+                </div>
+                <div slot="actions" onclick={handleClickAction}>
+                    <slot name="action">
+                        <template if:true={actionButton}>
+                            <button class="slds-button slds-button_outline-brand action-button" role="button" tabindex="0">{actionButton}
+                            </button>
+                        </template>
+                    </slot>
+                </div>
+                <div class={bodyClass}>
+                    <lightning-formatted-rich-text value={body}></lightning-formatted-rich-text>
+                    <template for:each={phoneFields} for:item="phoneField">
+                        <div key={phoneField.label}>
+                            <template if:true={phoneField.label}>
+                                <span class="slds-float_left">{phoneField.label} : </span>
+                            </template>
+                            <br />
+                            <lightning-formatted-text class="show-desktop-format" value={phoneField.value}>
+                            </lightning-formatted-text>
+                            <template if:true={phoneField.readonly}>
+                                <lightning-formatted-text class="show-mobile-format" value={phoneField.value}>
+                                </lightning-formatted-text>
+                            </template>
+                            <template if:false={phoneField.readonly}>
+                                <lightning-formatted-phone class="show-mobile-format" value={phoneField.value}>
+                                </lightning-formatted-phone>
+                            </template>
+                        </div>
+                    </template>
+                </div>
+                <template if:true={showfooter}>
+                    <div slot="footer">
+                        <slot class="footer" name="footer" onclick={handleClickFooter}></slot>
+                    </div>
+                </template>
+            </lightning-card>
+        </div>
+    </template>
+</template>

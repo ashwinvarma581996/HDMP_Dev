@@ -1,0 +1,244 @@
+<template>
+    <div class="large-screen">
+        <lightning-layout multiple-rows horizontal-align="space" class="large-screen-container">
+            <lightning-layout-item size="12" small-device-size="12" medium-device-size="10" large-device-size="10" padding="horizontal-large" class="section1">
+                <div class="slds-m-vertical_large title heading text-style slds-align_absolute-center"><span>{section1Content.title}</span></div>
+                    <lightning-layout multiple-rows>
+                        <lightning-layout-item size="1" small-device-size="12" medium-device-size="1" large-device-size="1"></lightning-layout-item>
+                        <lightning-layout-item size="5" small-device-size="12" medium-device-size="5" large-device-size="5" class="slds-p-bottom_large">
+                            <div class="common-text slds-p-left_large">
+                                <lightning-formatted-rich-text value={section1Content.description1}></lightning-formatted-rich-text>
+                            </div>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="6" small-device-size="12" medium-device-size="8" large-device-size="6" padding="horizontal-large" class="slds-p-bottom_medium">
+                            <lightning-formatted-rich-text value={section1Content.description1Image}></lightning-formatted-rich-text>
+                        </lightning-layout-item>
+                    </lightning-layout>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" small-device-size="12" medium-device-size="10" large-device-size="10" padding="horizontal-large" class="slds-p-vertical_xx-large section2-container">
+                <lightning-layout multiple-rows>
+                    <lightning-layout-item size="5" small-device-size="12" medium-device-size="5" large-device-size="5" padding="horizontal-large">
+                        <iframe src={section1Content.description2Image} class="video-player" title="YouTube video player" frameborder="0" allowfullscreen></iframe>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="7" small-device-size="12" medium-device-size="7" large-device-size="7" padding="horizontal-large">
+                        <div class="slds-m-vertical_large text-style section2-text ">
+                            <lightning-formatted-rich-text value={section1Content.description2}></lightning-formatted-rich-text>
+                        </div>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" small-device-size="12" medium-device-size="10" large-device-size="10" padding="horizontal-large" class="slds-p-vertical_large section3 slds-align_absolute-center">
+                <lightning-layout multiple-rows >
+                    <lightning-layout-item size="12" class="slds-align_absolute-center">
+                        <div class="title text-style" >{getAppSectionTitle}</div>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="12" class="slds-align_absolute-center">
+                        <img src={appStoreIcon} class="appstore" data-url={appStoreUrl} onclick={handleNavigations}/>
+                        <img src={playStoreIcon} class="playstore slds-m-left_medium" onclick={handleNavigations} data-url={playStoreUrl}/>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </lightning-layout-item>
+            <template iterator:item={features}>
+                <lightning-layout-item key={item.value.title} size="12" small-device-size="12" medium-device-size="10" large-device-size="10" padding="horizontal-large" class="slds-p-vertical_small slds-align_absolute-center">
+                        <lightning-layout multiple-rows class="mobile-wrapper">
+                            <lightning-layout-item size="4" small-device-size="12" medium-device-size="12" large-device-size="4" padding="horizontal-large" class="slds-p-vertical_large mobile-sections">
+                                <img src={item.value.image}/>
+                            </lightning-layout-item>
+                            <lightning-layout-item size="6" small-device-size="12" medium-device-size="12" large-device-size="8" padding="horizontal-large" class="slds-p-vertical_large">
+                                <template if:true={item.first}>
+                                    <div class="text-style section4-title">{featuresTitle}</div>
+                                    <hr class="hr">
+                                </template>
+                                <div class="slds-p-vertical_large text-style section4-sub-title">
+                                    <lightning-formatted-rich-text value={item.value.title}></lightning-formatted-rich-text>
+                                </div>
+                                <div class="common-text slds-p-bottom_large">
+                                    <lightning-formatted-rich-text value={item.value.body}></lightning-formatted-rich-text>
+                                </div>
+                            </lightning-layout-item>
+                        </lightning-layout>
+                </lightning-layout-item>
+            </template>
+
+
+            
+            <lightning-layout-item size="12" small-device-size="12" medium-device-size="8" large-device-size="8" class="section5 slds-m-top_x-large slds-align_absolute-center">
+                <lightning-layout multiple-rows class="section5-center">
+                    <lightning-layout-item size="6" small-device-size="12" medium-device-size="12" large-device-size="6" padding="horizontal-large" class="slds-p-vertical_large">
+                        <div class="section5-title text-style">{checkInsuranceTitle}</div>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="6" small-device-size="12" medium-device-size="12" large-device-size="6" padding="horizontal-large" class="slds-p-vertical_large ">
+                        <lightning-layout multiple-rows="true">
+                            <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="6" padding="horizontal-small" class="">
+                                <div class="combobox-gutters form-styles">
+                                    <span class="custom-input-label">State</span>
+                                    <lightning-combobox class="find-brand-combobox" label="State"
+                                        variant="label-hidden" placeholder="Select State" options={states}
+                                        onchange={handleStateChange}
+                                        value={state}></lightning-combobox>
+                                </div>
+                            </lightning-layout-item>
+                            <lightning-layout-item size="12" small-device-size="12" medium-device-size="12"
+                            large-device-size="6" class="" padding="horizontal-small">
+                            <div class="slds-m-top_medium form-styles">
+                                <button class={buttonClass} onclick={handleFind} disabled={isFindButtonDisabled}>FIND</button>
+                            </div>
+                            </lightning-layout-item>
+                        </lightning-layout>
+                    </lightning-layout-item>
+                    <lightning-layout-item if:true={showResult} size="12" small-device-size="12" medium-device-size="12" large-device-size="12" padding="around-large" class="custom-result-box slds-align_absolute-center">
+                    <lightning-layout multiple-rows="true">
+                        <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="12" class="slds-align_absolute-center">
+                            <template if:false={eligibility}>
+                                <lightning-icon icon-name="utility:clear" alternative-text="Error!" variant="error" title="error" class="slds-m-right_small">
+                                </lightning-icon> Insurance Discount Alerts are not available in {stateLabel}
+                            </template>
+                            <template if:true={eligibility}>
+                                <lightning-icon icon-name="utility:success" alternative-text="success!" variant="success" title="Success" class="slds-m-right_small">
+                                </lightning-icon> Available in {stateLabel} with the following insurance company
+                            </template>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="12" class="slds-text-align_center">
+                            <div if:true={eligibility} class="slds-text-align_center slds-p-top_medium">
+                                <img class="insaurance-logo" src={section1Content.insuranceLogo}/></div>
+                        </lightning-layout-item>
+                    </lightning-layout>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" small-device-size="12" medium-device-size="10" large-device-size="10" padding="horizontal-large" class="slds-m-bottom_xx-large">
+                <a class="asked-questions-anchor" onclick={handleAskedQuestion}>
+                    <div class="asked-questions">
+                        {askedQuestionTitle}
+                    </div>
+                </a>
+            </lightning-layout-item>
+
+            
+
+            <lightning-layout-item size="12" small-device-size="12" medium-device-size="10" large-device-size="10" padding="horizontal-large" class="slds-p-vertical_large slds-align_absolute-center">
+                <div class="bottom-text text-style">
+                    <lightning-formatted-rich-text value={section1Content.footerText}></lightning-formatted-rich-text>
+                </div>
+            </lightning-layout-item>
+        </lightning-layout>
+    </div>
+    <div class="small-screen driver-feedback">
+        <lightning-layout  multiple-rows >
+            <lightning-layout-item size="12" padding="horizontal-large" class="section1">
+                    <lightning-layout multiple-rows>
+                        <lightning-layout-item size="12">
+                            <lightning-formatted-rich-text value={section1Content.description1Image}></lightning-formatted-rich-text>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="12">
+                            <div class="slds-m-vertical_large title text-style slds-align_absolute-center">{section1Content.title}</div>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="12">
+                            <div class="common-text slds-p-left_large">
+                                <lightning-formatted-rich-text value={section1Content.description1}></lightning-formatted-rich-text>
+                            </div>
+                        </lightning-layout-item>                    
+                    </lightning-layout>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" small-device-size="12" medium-device-size="10" large-device-size="10" padding="horizontal-large" class="slds-p-vertical_large">
+                <lightning-layout multiple-rows>
+                    <lightning-layout-item size="12">
+                        <iframe src={section1Content.description2Image} class="video-player" title="YouTube video player" frameborder="0" allowfullscreen></iframe>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="12">
+                        <div class="slds-m-vertical_medium text-style section2-text"><lightning-formatted-rich-text value={section1Content.description2}></lightning-formatted-rich-text></div>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" small-device-size="12" medium-device-size="10" large-device-size="10" padding="horizontal-large" class="slds-p-vertical_large section3 slds-align_absolute-center">
+                <lightning-layout multiple-rows >
+                    <lightning-layout-item size="12" class="slds-align_absolute-center">
+                        <div class="slds-m-vertical_large title text-style" >{getAppSectionTitle}</div>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="12" class="slds-align_absolute-center">
+                        <img src={appStoreIcon} data-url={appStoreUrl} onclick={handleNavigations} />
+                        <img src={playStoreIcon} onclick={handleNavigations} data-url={playStoreUrl} class="slds-m-left_medium"/>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </lightning-layout-item>
+            <template iterator:item={features}>
+                <lightning-layout-item key={item.value.title} size="12" small-device-size="12" medium-device-size="10" large-device-size="10" padding="horizontal-large" class="slds-p-vertical_small slds-align_absolute-center">
+                    <lightning-layout multiple-rows >
+                        <lightning-layout-item if:true={item.first} size="12" class="slds-align_absolute-center">
+                            <div class="text-style section4-title">{featuresTitle}</div>
+                        </lightning-layout-item>
+                        <lightning-layout-item if:true={item.first} size="12" class="slds-align_absolute-center">
+                            <hr class="hr">
+                        </lightning-layout-item>
+                        <lightning-layout-item size="12" class="slds-align_absolute-center">
+                            <img src={item.value.image}/>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="12" class="slds-align_absolute-center">
+                            <lightning-formatted-rich-text class="slds-p-vertical_large text-style section4-sub-title" value={item.value.title}></lightning-formatted-rich-text>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="12">
+                            <div class="common-text slds-p-bottom_large">
+                                <lightning-formatted-rich-text value={item.value.body}></lightning-formatted-rich-text>
+                            </div>
+                        </lightning-layout-item>
+                    </lightning-layout>
+                </lightning-layout-item>
+            </template>
+            <lightning-layout-item size="8" small-device-size="8" medium-device-size="10" large-device-size="10" padding="horizontal-large" class="slds-p-vertical_large slds-align_absolute-center feedback-insurance">
+                <lightning-layout multiple-rows >
+                    <lightning-layout-item size="12" class="slds-p-around_large">
+                        <div class="section5-title text-style">{checkInsuranceTitle}</div>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="12" class="slds-p-around_large">
+                        <lightning-layout multiple-rows="true">
+                            <lightning-layout-item size="12" class="">
+                                <div class="combobox-gutters form-styles">
+                                    <span class="custom-input-label">State</span>
+                                    <lightning-combobox class="find-brand-combobox" label="State"
+                                        variant="label-hidden" placeholder="Select State" options={states}
+                                        onchange={handleStateChange} value={state}></lightning-combobox>
+                                </div>
+                            </lightning-layout-item>
+                            <lightning-layout-item size="12">
+                                <div class="form-styles">
+                                    <button class={buttonClass} onclick={handleFind} disabled={isFindButtonDisabled}>FIND</button>
+                                </div>
+                            </lightning-layout-item>
+                        </lightning-layout>
+                    </lightning-layout-item>
+                    <lightning-layout-item if:true={showResult} size="12" small-device-size="12" medium-device-size="12" large-device-size="12" padding="around-large" class="custom-result-box slds-align_absolute-center">
+                        
+                        <lightning-layout multiple-rows="true">
+                            <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="12" class="slds-text-align_center">
+                                <template if:false={eligibility}>
+                                    <lightning-icon icon-name="utility:clear" alternative-text="Error!" variant="error" title="error" class="slds-m-right_small">
+                                    </lightning-icon> Insurance Discount Alerts are not available in {stateLabel}
+                                </template>
+                                <template if:true={eligibility}>
+                                    <lightning-icon icon-name="utility:success" alternative-text="success!" variant="success" title="Success" class="slds-m-right_small">
+                                    </lightning-icon> Available in {stateLabel} with the following insurance company
+                                </template>
+                            </lightning-layout-item>
+                            <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="12">
+                                <div if:true={eligibility} class="slds-text-align_center slds-p-top_medium">
+                                    <img class="insaurance-logo" src={section1Content.insuranceLogo}/></div>
+                            </lightning-layout-item>
+                        </lightning-layout>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" small-device-size="12" medium-device-size="10" large-device-size="10" padding="horizontal-large" class="slds-m-bottom_xx-large">
+                <a class="asked-questions-anchor" onclick={handleAskedQuestion}>
+                    <div class="asked-questions">
+                        {askedQuestionTitle}
+                    </div>
+                </a>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class="slds-p-around_medium slds-align_absolute-center" style="margin-bottom: 20px;">
+                <div class="bottom-text text-style slds-p-horizontal_small">
+                    <lightning-formatted-rich-text value={section1Content.footerText}></lightning-formatted-rich-text>
+                </div>
+            </lightning-layout-item>
+        </lightning-layout>
+    </div>
+</template>

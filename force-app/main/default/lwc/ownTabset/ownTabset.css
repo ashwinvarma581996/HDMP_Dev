@@ -1,0 +1,86 @@
+.garage-tab-label {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900 !important;
+    font-size: 14px;
+    line-height: 22px;
+    text-transform: uppercase;
+    color: #080707;
+    align-items: center;
+    display: flex;
+}
+.slds-is-active:after {
+    background-color: #E42525;
+}
+li.slds-tabs_default__item.slds-is-active {
+    border-left: 1px solid #444444;
+    border-top: 1px solid #444444;
+    border-right: 1px solid #444444;
+}
+li.slds-tabs_default__item.slds-is-active:hover a {
+    color: #080707;
+}
+@media only screen and (min-width: 1181px) {
+    li.slds-tabs_default__item {
+        padding: 5px 40px;
+        border-top: 1px solid #ffffff;
+        border-left: 1px solid #ffffff;
+        border-right: 1px solid #ffffff;
+        transition: 0.5s all;
+    }
+}
+@media screen and (max-width: 1180px) and (min-width: 821px) {
+    li.slds-tabs_default__item {
+        padding: 5px 30px;
+        border-top: 1px solid #ffffff;
+        border-left: 1px solid #ffffff;
+        border-right: 1px solid #ffffff;
+        transition: 0.5s all;
+    }
+}
+@media only screen and (min-width: 821px) {
+    .garage-tab-small {
+        display: none;
+    }
+    .garage-tab-large {
+        display: block;
+    }
+}
+@media only screen and (max-width: 820px) {
+    .garage-tab-large {
+        display: none;
+    }
+    .garage-tab-small {
+        display: block;
+        padding: 0 24px;
+        position: relative;
+        margin-bottom: 20px;
+        z-index: 1;
+    }
+    .garage-tab-small:after {
+        content: '';
+        position: absolute;
+        height: 1px;
+        left: 0;
+        right: 0;
+        background: #444444;
+        top: 50%;
+        z-index: -1;
+    }
+}
+
+
+.c-container.garage-tab-large {
+    margin-top: 30px;
+    margin-bottom: 40px;
+}
+ul.slds-tabs_default__nav {border-bottom-color: #444444;}
+
+.slds-tabs_default__item:hover:after {
+        background-color: #E42525;
+    height: 3px;
+    transition: 0.5s all;
+}
+.slds-tabs_default__content {
+    padding: 0px;
+}

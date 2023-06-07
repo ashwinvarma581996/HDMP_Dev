@@ -1,0 +1,51 @@
+<template>
+	<div class="slds-container_center containerWrapper">
+		<template if:false={hasProduct}> 
+			<div class="slds-container_center containerWrapper slds-p-around_medium" style="background: #F0F0F0;">
+				<div class="slds-text-heading_large slds-text-color_error errorTxt">
+					We're experiencing technical difficulties, please try again later.
+				</div>
+			</div>
+		</template>
+		<!-- <lightning-spinner if:false={hasProduct} class="slds-is-relative slds-align_absolute-center slds-m-around_large"
+			alternative-text="Loading product information..." size="medium" variant="brand">
+		</lightning-spinner> -->
+
+
+		<!-- parts PDP page start -->
+		<template if:true={showPartProduct}>
+			<c-product-details-display if:true={hasProduct} cart-locked={_isCartLocked} record-id={recordId}
+				category-path={displayableProduct.categoryPath}
+				price={displayableProduct.price}
+				image={subCategoryImage} required-quantity={requiredQuinty}
+				show-add-to-cart={showAddtoCartBtn} product-number={productNumber}
+				resolved-category-path={breadcrumbsList} effectiveaccountid={effectiveAccountId}
+				pricetype={priceType} onaddtocart={addToCart}
+				selected-part-list={selctedPartsValue} is-pickup-dealer={isPickupDealer} dealer-email-address={dealerEmailAddress} 
+				dealer-phone-number={dealerPhoneNumber} is-dealer-selected={dealerSelect}
+				product={product} shopping-brand={shoppingBrandPart}> 
+			</c-product-details-display>
+		</template>
+		<!-- parts PDP page end -->
+
+		<!-- accessories PDP page end -->
+		<template if:false={showPartProduct}>
+			<c-accessories-detail-page if:true={hasProduct} 
+				cart-locked={_isCartLocked} record-id={recordId}
+				category-path={displayableProduct.categoryPath} 
+				custom-fields={displayableProduct.customFields}
+				price={displayableProduct.price}
+				image={subCategoryImage}
+				required-accessory-list={requiredProductList} show-add-to-cart={showAddtoCartBtn}
+				product-number={productNumber} resolved-category-path={breadcrumbsList}
+				effectiveaccountid={effectiveAccountId} 
+				pricetype={priceType}
+				product={product}
+				onaddtocart={addToCart} is-pickup-dealer={isPickupDealer} 
+				dealer-email-address={dealerEmailAddress} 
+				dealer-phone-number={dealerPhoneNumber} 
+				is-dealer-selected={dealerSelect}  shopping-brand={shoppingBrandAcc}></c-accessories-detail-page>
+		</template>
+		<!-- accessories PDP page end -->
+	</div>
+</template>

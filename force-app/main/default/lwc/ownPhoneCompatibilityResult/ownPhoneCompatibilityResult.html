@@ -1,0 +1,136 @@
+<template>
+    <template if:true={isDataLoading}>
+        <div class="slds-m-top_xx-large slds-p-top_xx-large">
+            <c-own-data-loading-spinner></c-own-data-loading-spinner>
+        </div>
+    </template>
+    <template if:false={isDataLoading}>
+        <template if:true={hasDataExist}>
+            <lightning-layout multiple-rows="true" class="slds-p-around_large">
+                <lightning-layout-item class="main-container" size="12" small-device-size="12" medium-device-size="12"
+                    large-device-size="6">
+                    <template if:true={firstColumnFeatures} for:each={firstColumnFeatures} for:item="col">
+                        <div class="slds-m-bottom_xx-large" key={col.id}>
+                            <div class="slds-border_bottom section-title">
+                                {col.name}
+                            </div>
+                            <template if:true={col.feature} for:each={col.feature} for:item="feature">
+                                <lightning-layout key={feature.id} multiple-rows="true" class="slds-p-top_xx-small">
+                                    <!-- <lightning-layout-item if:true={feature.isDisable} class="contant contant-disable" size="11"
+                                small-device-size="11" medium-device-size="11" large-device-size="11">
+                                {feature.name}
+                            </lightning-layout-item>
+                            <lightning-layout-item if:false={feature.isDisable} class="contant" size="11"
+                                small-device-size="11" medium-device-size="11" large-device-size="11">
+                                {feature.name}
+                            </lightning-layout-item> -->
+                                    <lightning-layout-item class="contant" size="11" small-device-size="11"
+                                        medium-device-size="11" large-device-size="11">
+                                        {feature.name}
+                                    </lightning-layout-item>
+                                    <lightning-layout-item size="1" small-device-size="1" medium-device-size="1"
+                                        large-device-size="1">
+                                        <div class="slds-float_right">
+                                            <!-- <lightning-icon icon-name={feature.iconName} variant={feature.iconColor}
+                                        size="x-small"></lightning-icon> -->
+                                            <lightning-icon icon-name="utility:check" variant="success" size="x-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </lightning-layout-item>
+                                </lightning-layout>
+                            </template>
+                        </div>
+                    </template>
+                </lightning-layout-item>
+                <lightning-layout-item class="main-container" size="12" small-device-size="12" medium-device-size="12"
+                    large-device-size="6">
+                    <template if:true={secondColumnFeatures} for:each={secondColumnFeatures} for:item="col">
+                        <div class="slds-m-bottom_xx-large" key={col.id}>
+                            <div class="slds-border_bottom section-title">
+                                {col.name}
+                            </div>
+                            <template if:true={col.feature} for:each={col.feature} for:item="feature">
+                                <lightning-layout key={feature.id} multiple-rows="true" class="slds-p-top_xx-small">
+                                    <!-- <lightning-layout-item if:true={feature.isDisable} class="contant contant-disable" size="11"
+                                small-device-size="11" medium-device-size="11" large-device-size="11">
+                                {feature.name}
+                            </lightning-layout-item>
+                            <lightning-layout-item if:false={feature.isDisable} class="contant" size="11"
+                                small-device-size="11" medium-device-size="11" large-device-size="11">
+                                {feature.name}
+                            </lightning-layout-item> -->
+                                    <lightning-layout-item class="contant" size="11" small-device-size="11"
+                                        medium-device-size="11" large-device-size="11">
+                                        {feature.name}
+                                    </lightning-layout-item>
+                                    <lightning-layout-item size="1" small-device-size="1" medium-device-size="1"
+                                        large-device-size="1">
+                                        <div class="slds-float_right">
+                                            <!-- <lightning-icon icon-name={feature.iconName} variant={feature.iconColor}
+                                        size="x-small"></lightning-icon> -->
+                                            <lightning-icon icon-name="utility:check" variant="success" size="x-small">
+                                            </lightning-icon>
+                                        </div>
+                                    </lightning-layout-item>
+                                </lightning-layout>
+                            </template>
+                        </div>
+                    </template>
+                </lightning-layout-item>
+                <lightning-layout-item class="slds-p-top_x-large" size="12" small-device-size="12"
+                    medium-device-size="12" large-device-size="12">
+                    <div class="section-body">
+                        <div class="sign-div">
+                            <lightning-icon icon-name="utility:check" variant="success" size="x-small"></lightning-icon>
+                            <span class="slds-p-left_xx-small contant">
+                                Compatible
+                            </span>
+                        </div>
+                        <div class="sign-div">
+                            <lightning-icon icon-name="utility:close" variant="error" size="x-small"></lightning-icon>
+                            <span class="slds-p-left_xx-small contant">
+                                Not Compatible
+                            </span>
+                        </div>
+                        <div class="sign-div">
+                            <lightning-icon icon-name="utility:question" size="x-small">
+                            </lightning-icon>
+                            <span class="slds-p-left_xx-small contant">
+                                Not Tested
+                            </span>
+                        </div>
+                        <div class="sign-div">
+                            <lightning-icon icon-name="utility:warning" variant="warning" size="x-small">
+                            </lightning-icon>
+                            <span class="slds-p-left_xx-small contant">
+                                Compatibility Limited
+                            </span>
+                        </div>
+                        <div class="sign-div">
+                            <lightning-icon icon-name="utility:end_call" variant="success" size="x-small">
+                            </lightning-icon>
+                            <span class="slds-p-left_xx-small contant">
+                                Phone Not Compatible
+                            </span>
+                        </div>
+                    </div>
+                </lightning-layout-item>
+                <lightning-layout-item class="contant slds-p-top_x-large" size="12" small-device-size="12"
+                    medium-device-size="12" large-device-size="12">
+                    <!-- <b>Disclaimer:</b> Phone compatibility with the features listed above can change. Before purchasing a phone or this
+            vehicle, please confirm compatibility. Honda will not be responsible for the compatibility of a phone with
+            this vehicle. Features that are not listed on this page are not available for this vehicle. The compatible
+            phone list is updated regularly. The last update occurred on 1/21/2021. -->
+
+                    <lightning-formatted-rich-text value={disclaimer}></lightning-formatted-rich-text>
+                </lightning-layout-item>
+            </lightning-layout>
+        </template>
+        <template if:false={hasDataExist}>
+            <div if:false={iscompatible} class="error-message">
+                <img src={errorLogo} class="slds-m-right_small" />
+                DATA UNAVAILABLE
+            </div>
+        </template>
+    </template>
+</template>

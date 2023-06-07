@@ -1,0 +1,139 @@
+.quick-actions {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 70px;
+}
+
+.quick-actions_save {
+    /* width: 192px; */
+    background: #000000;
+    text-align: center;
+    color: #fff;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    font-weight: 900;
+    font-size: 18px;
+    line-height: 26px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 40px;
+}
+
+.quick-actions_save img {margin-bottom: 14px;}
+
+.quick-actions_add {
+    background: #F0F0F0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 26px 23px;
+    flex: 1;
+}
+
+.quick-actions_add p {
+    font-size: 20px;
+    line-height: 26px;
+}
+
+.quick-actions-btn {
+    color: #FFFFFF;
+    background: #E42525;
+    border-radius: 2px;
+    box-shadow: none;
+    border: 0px;
+    font-weight: 900;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    padding: 12px 36px;
+    margin-top: 20px;
+    transition: all 0.5s ease;
+}
+.p{
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 26px;
+    color: #080707;
+}
+.add-link{
+    color: #e42525;
+}
+.quick-actions-btn:hover {
+    background: #C42121;
+}
+
+.body-content {
+    font-family: Roboto;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 26px;
+    letter-spacing: 0em;
+    text-align: left;
+}
+
+@media only screen and (max-width: 550px) {
+
+    .quick-actions {
+        flex-direction: column;
+    }
+    .quick-actions_save {
+        width: auto;
+        padding: 20px;
+        flex-direction: row;
+    }
+    .quick-actions_save h4 {
+        margin-left: 10px;
+    }
+    .quick-actions_add {
+        text-align: center;
+        align-items: center;
+    }
+}
+
+@media only screen and (min-width: 601px) {
+    .desktop-title {
+        display: block;
+    }
+    .mobile-title {
+        display: none;
+    }
+    .save-button {
+        text-align: center;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .desktop-title {
+        display: none;
+    }
+    .mobile-title {
+        display: block;
+    }
+    .save-button {
+        text-align: left;
+    }
+    .show-vertical{
+        display: none;
+    }
+}
+.header-body a{
+    font-style: normal;
+    font-weight: 900;
+    font-size: 14px;
+    line-height: 22px;
+    text-align: center;
+    letter-spacing: 0.02em;
+    color: #E42525;
+}
+.save-to-my-products{
+    font-weight: 300;
+    font-size: 32px;
+    line-height: 37px;
+    color: #080707;
+    margin: 0px 0px 24px;
+}

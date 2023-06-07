@@ -1,0 +1,218 @@
+<template>
+    <template if:true={isLoading}>
+        <lightning-spinner alternative-text="Loading"
+            class="slds-align_absolute-center slds-m-around_large" variant="brand"></lightning-spinner>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+
+<div class="bgLighter slds-m-top_xx-small slds-p-vertical_x-small categoryPage">
+    <div class="slds-container_center containerWrapper">
+        <lightning-layout multiple-rows>
+
+            <template if:true={showErrorMessage}>
+                    
+                    <lightning-layout-item size="12" class="slds-p-right_x-large left-container" large-device-size="12">
+                        <nav role="navigation" aria-label="Breadcrumbs" class="slds-p-bottom_medium">
+                            <ol class="slds-breadcrumb slds-list_horizontal slds-wrap">
+                                <template for:each={breadcrumbs} for:item="breadcrumb">
+                                    <li key={breadcrumb.label} class="slds-breadcrumb__item"
+                                        data-label={breadcrumb.label} data-type={breadcrumb.name}
+                                        onclick={handleBreadcrumbClick}>
+                                        <template if:true={breadcrumb.isCurrentPage}>
+                                            <a href="javascript:void(0);"
+                                                class="breadcrumb-not-active">{breadcrumb.label}</a>
+                                        </template>
+            <template if:false={breadcrumb.isCurrentPage}>
+                                            <a href={breadcrumb.href}>{breadcrumb.label}</a>
+                                        </template>
+            </li>
+            </template>
+            </ol>
+            </nav>
+            </lightning-layout-item>
+            <lightning-layout style="width:100%;" class="slds-wrap">
+                        <lightning-layout-item size="12"
+                            class="slds-large-size_3-of-12 slds-p-right_x-large slds-p-bottom_small errorShow">
+                            <lightning-combobox name="Viewing" label="VIEWING" value={selectedPartOrAccessories}
+                                options={partsAndAccessories} onchange={handleSelectOnPartOrAccessories}
+                                class="left-title" disabled={disablepartsAndAccessories}>
+                    </lightning-combobox>
+                </lightning-layout-item>
+                <lightning-layout-item size="12" class="slds-large-size_9-of-12">
+                    <div>
+                        <c-error-template errormessage={errormessageForMaintainenceAPIDown}></c-error-template>
+                    </div>
+                </lightning-layout-item>
+            </lightning-layout>
+            </template>
+            <template if:false={showErrorMessage}>
+                    <lightning-layout-item size="12" class="left-container" large-device-size="12">
+                        
+                        
+                        <!-- Added By Pradeep Singh on 30 Nov 2021 for epic HDMP-5084-->
+                        <!-- starts here -->
+                    <lightning-layout multiple-rows vertical-align="center">
+                        <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="6">
+                                <nav role="navigation" aria-label="Breadcrumbs" class="slds-p-bottom_medium">
+                                    <ol class="slds-breadcrumb slds-list_horizontal slds-wrap">
+                                        <template for:each={breadcrumbs} for:item="breadcrumb">
+                                            <li key={breadcrumb.label} class="slds-breadcrumb__item">
+                                                <template if:true={breadcrumb.isCurrentPage}>
+                                                    <a href="javascript:void(0);"
+                                                        class="breadcrumb-not-active">{breadcrumb.label}</a>
+                                                </template>
+            <template if:false={breadcrumb.isCurrentPage}>
+                                            <a href={breadcrumb.href} data-label={breadcrumb.label}
+                                                data-type={breadcrumb.name}
+                                                onclick={handleBreadcrumbClick}>{breadcrumb.label}</a>
+                                        </template>
+            </li>
+            </template>
+            </ol>
+            </nav>
+                        </lightning-layout-item>
+    <!-- <div class="slds-col slds-size_2-of-3"></div> -->
+    <template if:true={showAccessories}>
+                            <lightning-layout-item class="slds-m-bottom_medium" alignment-bump="left" size="12" small-device-size="12" medium-device-size="6" large-device-size="6">
+                                <lightning-layout multiple-rows pull-to-boundary="small" class="accessories">
+                                    <lightning-layout-item padding="horizontal-small" size="6" small-device-size="6" medium-device-size="6" large-device-size="6">
+                                        <lightning-combobox name="searchOptions" value={filterValue}
+                                            options={searchOptions} onchange={handleChangeOption}>
+            </lightning-combobox>
+                                    </lightning-layout-item>
+                                    <lightning-layout-item padding="horizontal-small" class="" size="6" small-device-size="6" medium-device-size="6" large-device-size="6">
+                                        <div class="searchFilter">
+                                            <span onkeypress={handelOnPressEnterAcc}>
+                                        <lightning-input class="accessorySearch" name="search" label=""
+                                            value={searchBoxValue} onchange={handleEmptySearch} placeholder="Search" type="search"></lightning-input>
+                                            </span>
+                                        <lightning-button-icon icon-name="utility:search" size="large"
+                                            alternative-text="Search" class="slds-m-left_xx-medium searchIcon"
+                                            onclick={handleSearch} variant="destructive"
+                                            style="padding-left:7px; padding-top: 7px;">
+                                        </lightning-button-icon>
+                                        <!--/div-->
+                                    </div>
+                                    </lightning-layout-item>
+                                </lightning-layout>      
+                            </lightning-layout-item>
+                            </template>
+    <!--  Added by Bhawesh 10-01-2022 for R2 story 5084 part search start -->
+    <template if:false={showAccessories}>
+                            <lightning-layout-item class="slds-m-bottom_medium" alignment-bump="left" size="12" small-device-size="12" medium-device-size="6" large-device-size="6">
+                                <lightning-layout multiple-rows pull-to-boundary="small">
+                                    <lightning-layout-item padding="horizontal-small" class="slds-order_1" alignment-bump="left" size="6" small-device-size="6" medium-device-size="6" large-device-size="6">
+                                        <span>
+                                            <lightning-combobox name="partsearch" variant="label-hidden"
+                                                value={selectedPartSearchMethod} options={partSearchOptions}
+                                                onchange={handleOnSelectPartSearchVariant}>
+                                            </lightning-combobox>
+                                        </span>
+                                    </lightning-layout-item>
+                                    <lightning-layout-item padding="horizontal-small" class="slds-order_2" alignment-bump="left" size="6" small-device-size="6" medium-device-size="6" large-device-size="6">                                        
+                                        <div class="slds-grid slds-col slds-size_12-of-12 slds-is-relative">
+                                    <div class="slds-col slds-order_2">
+                                        <span onkeypress={handelOnPressEnter}><!--Added By Bhawesh 19-01-2022 for Enter Key press -->
+                                            <lightning-input name="partsearch" class="partsearch" variant="label-hidden"
+                                                placeholder="Search" type="text" value={partSearchValue}
+                                                onchange={handleOnPartSearchValue}>
+                                            </lightning-input>
+                                        </span>
+            </div>
+                                    <div class="slds-col slds-order_2 searchIcon" style="height: 100%;">
+                                        <lightning-button-icon icon-name="utility:search" size="large"
+                                            alternative-text="Search" class="slds-m-left_xx-medium"
+                                            onclick={handleOnPartSearch} variant="destructive"
+                                            style="padding-left:7px; padding-top: 7px;">
+                                        </lightning-button-icon>
+                                        <span>
+
+                                        </span>
+        </div>
+    </div>
+                                    </lightning-layout-item>
+                                </lightning-layout>
+                            </lightning-layout-item>
+                            </template>
+    <!-- End -->
+                    </lightning-layout>
+<!--ends here-->
+
+
+
+</lightning-layout-item>
+
+            <lightning-layout-item size="12" class="slds-p-right_x-large left-container" large-device-size="3">
+                <p class="left-title">VIEWING</p>
+                <div class="slds-m-bottom_small comboBox">
+
+                            <lightning-combobox name="Viewing" value={selectedPartOrAccessories}
+                                options={partsAndAccessories} onchange={handleSelectOnPartOrAccessories} disabled={disablepartsAndAccessories}>
+                    </lightning-combobox>
+
+                </div>
+
+                <div if:true={showAccordion} class="custom-box categoryPage">
+                    <!-- cp1 -->
+                    <c-parent-category-accordion onselectsubcategory={handleOnSelectSubCategory} onclosecategory={closeSubCategory} onopencategory={handleSubCategories} category-list={catelogs}></c-parent-category-accordion>
+                </div>
+
+                <template if:true={showAccessories}>
+                            <div class="custom-box categoryPage">
+                                <c-accessories-accordion accessories={accessoriesList} division={division}
+                                    onclickcategory={openSubAccessories}></c-accessories-accordion>
+                            </div>
+                        </template>
+            </lightning-layout-item>
+
+            <lightning-layout-item size="12" class="slds-p-vertical_small bgWhite" large-device-size="9">
+    <!--  Added by Bhawesh 10-01-2022 for R2 story 5084 part search start -->
+    <template if:true={displaySearchPage}>
+                            <c-part-search-page part-search-result={partSearchedResult}
+                                onselectsubcategory={handelSelectSubCategory}></c-part-search-page>
+                        </template>
+    <!-- End -->
+    <!--added by Yashika for 5313-->
+    <template if:true={isErrorSearch}>
+        <div class="slds-container_center containerWrapper slds-m-bottom_large" style="padding:0">
+            <div class="slds-text-heading_large slds-text-color_error errorTxt slds-text-align_center slds-m-bottom_large">
+                We’re experiencing technical difficulties, please try again later
+            </div>
+          </div>
+    </template>
+    <!--end-->
+    <template if:false={displaySearchPage}>
+                <template if:false={showAccessories}>
+                            <template if:true={showCategoryCard}>
+                                <div class="custom-box categoryPage">
+                                    <!-- pass categories to child cmp - varname : categories -->
+                                        <c-parent-category-card categories={catelogs}
+                                            subcategoriesdata={subcategoriesdata} onopencategory={handleSubCategories}
+                                        onopensubcategory={handleOnSelectSubCategory}></c-parent-category-card>
+                                </div>
+                            </template>
+
+                                <!--HDMP-12529	starts here-->
+                                <template if:true={showPLP}>
+                                    <!--HDMP-12529	ends here-->
+                                <div class="custom-box productPage">
+                                    <c-product-list-page breadcrumbs-list={myBreadcrumbs} product-list={productList}
+                                            price-type={priceType} shopping-brand={shoppingBrand}>
+                                    </c-product-list-page>
+                                </div>
+                            </template>
+                </template>
+                <template if:true={showAccessories}>
+                            <div class="custom-box productPage productAccessories">
+                                <c-accessories breadcrumbs-list={myBreadcrumbs} accessories-list={accessoriesList}
+                                        price-type={priceType} onopenaccessories={handleOpenAccessories} shopping-brand={shoppingBrand}>
+                                    </c-accessories>
+                            </div>
+                        </template>
+    </template>
+            </lightning-layout-item>
+            </template>
+        </lightning-layout>
+    </div>
+</div>
+</template>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="100px" height="100px" viewBox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 42 (36781) - http://www.bohemiancoding.com/sketch -->
+    <title>ic_link</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="79.5866716%" y1="100%" x2="79.5866728%" y2="0%" id="linearGradient-1">
+            <stop stop-color="#272B2F" offset="0%"></stop>
+            <stop stop-color="#474B50" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-2">
+            <stop stop-color="#505358" offset="0%"></stop>
+            <stop stop-color="#2C2F33" offset="100%"></stop>
+        </linearGradient>
+        <rect id="path-3" x="0" y="0" width="100" height="100" rx="2"></rect>
+        <mask id="mask-4" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="100" height="100" fill="white">
+            <use xlink:href="#path-3"></use>
+        </mask>
+        <circle id="path-5" cx="29" cy="29" r="29"></circle>
+        <mask id="mask-6" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="58" height="58" fill="white">
+            <use xlink:href="#path-5"></use>
+        </mask>
+    </defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="ic_link">
+            <g id="LINK">
+                <use id="Rectangle-3" stroke="url(#linearGradient-2)" mask="url(#mask-4)" stroke-width="2" fill="url(#linearGradient-1)" xlink:href="#path-3"></use>
+                <g id="ic_linkbutton" transform="translate(22.000000, 10.000000)">
+                    <use id="Oval-2" stroke="#FFFFFF" mask="url(#mask-6)" stroke-width="2" fill="#257BFF" xlink:href="#path-5"></use>
+                    <path d="M33.0057286,29.2622429 L33.0057286,27.5263857 C33.0057286,26.8386714 32.4505857,26.2835286 31.7628714,26.2835286 L27.5205857,26.2835286 C26.6588714,26.2835286 26.0581571,25.4301 26.3481571,24.6222429 L33.0927286,10.8099571" id="Stroke-1" stroke="#FFFFFF"></path>
+                    <path d="M40.6012429,44.2349429 L35.4931,44.2349429 C34.1176714,44.2349429 33.0073857,43.1205143 33.0073857,41.7492286 L33.0073857,39.2966571" id="Stroke-3" stroke="#FFFFFF"></path>
+                    <path d="M31.5644286,36.9886714 L22.9265714,36.9886714 C22.3548571,36.9886714 21.895,36.5288143 21.895,35.9571 L21.895,32.3238143 C21.895,31.7521 22.3548571,31.2922429 22.9265714,31.2922429 L31.5644286,31.2922429 C32.132,31.2922429 32.596,31.7521 32.596,32.3238143 L32.596,35.9571 C32.596,36.5288143 32.132,36.9886714 31.5644286,36.9886714" id="Fill-5" fill="#FFFFFF"></path>
+                    <path d="M30.5568857,34.1404571 C30.5568857,34.1404571 43.2796,35.2714571 47.6627429,27.5243143" id="Stroke-7" stroke="#FFFFFF"></path>
+                    <path d="M41.5383571,16.0225 C41.5383571,17.3647857 40.4529286,18.4502143 39.1106429,18.4502143 C37.7683571,18.4502143 36.6829286,17.3647857 36.6829286,16.0225 C36.6829286,14.6802143 37.7683571,13.5947857 39.1106429,13.5947857 C40.4529286,13.5947857 41.5383571,14.6802143 41.5383571,16.0225" id="Fill-9" fill="#FFFFFF"></path>
+                    <path d="M18.1390857,28.5587857 C18.1390857,28.5587857 14.5803714,33.7912143 18.1390857,39.9392143" id="Stroke-11" stroke="#FFFFFF"></path>
+                    <path d="M13.8060714,25.5705429 C13.8060714,25.5705429 8.37478571,33.5496857 13.8060714,42.9291143" id="Stroke-13" stroke="#FFFFFF"></path>
+                </g>
+                <path d="M25,73 L25,91 L36.7750117,91 L36.7750117,88.9831933 L27.3649601,88.9831933 L27.3649601,73 L25,73 Z M38.9408173,73 L38.9408173,91 L41.3057774,91 L41.3057774,73 L38.9408173,73 Z M45.2639737,73 L45.2639737,91 L47.5044622,91 L47.5044622,76.5546218 L47.5542508,76.5546218 L56.8398309,91 L59.4288398,91 L59.4288398,73 L57.1883513,73 L57.1883513,87.5966387 L57.1385627,87.5966387 L47.7782997,73 L45.2639737,73 Z M63.2625646,73 L63.2625646,91 L65.6275247,91 L65.6275247,84.697479 L68.5899483,81.8991597 L75.012682,91 L78,91 L70.2080789,80.2605042 L77.7012682,73 L74.6392673,73 L65.6275247,81.9747899 L65.6275247,73 L63.2625646,73 Z" fill="#FFFFFF"></path>
+            </g>
+        </g>
+    </g>
+</svg>

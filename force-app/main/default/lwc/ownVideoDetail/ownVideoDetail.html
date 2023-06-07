@@ -1,0 +1,58 @@
+<template>
+    <template if:false={fromCollision}>
+        <lightning-layout multiple-rows horizontal-align="space">
+            <lightning-layout-item size="12" small-device-size="10" medium-device-size="10" large-device-size="8" >
+                <div if:true={content} class="slds-p-horizontal_small">
+                    <lightning-formatted-rich-text class="content" value={content}></lightning-formatted-rich-text>
+                </div>
+            <div class="videoContainer custom-column">
+                <iframe 
+                class="frameBox"
+                src={videoLink} 
+                frameborder="0" 
+                width="100%" 
+                height="100%"
+                allowfullscreen
+                ></iframe> 
+            </div>
+            </lightning-layout-item>
+        </lightning-layout>
+    </template>
+    <template if:true={fromCollision}>
+    <lightning-layout multiple-rows horizontal-align="space">
+        <lightning-layout-item size="12" padding="around-small" small-device-size="10" medium-device-size="10" large-device-size="8" >
+            <iframe class="collision-frameBox" src={videoLink} frameborder="0" ></iframe> 
+        </lightning-layout-item>
+            <lightning-layout-item size="12" padding="around-small" small-device-size="10" medium-device-size="10" large-device-size="8">
+                <h1>{subtitle}</h1>
+                <lightning-layout multiple-rows>
+                    <template if:true={videos} for:each={videos} for:item="video" >
+                        <lightning-layout-item key={video} size="12" small-device-size="12" medium-device-size="6" large-device-size="6" class="collisiontv-video">
+                            <c-own-video-card icon={icon1} content-id={video} onvideoclick={handleVideo} iscollisionrepair=true></c-own-video-card>  
+                        </lightning-layout-item> 
+                    </template>
+                </lightning-layout>
+            </lightning-layout-item>
+    </lightning-layout>
+    </template>
+    <template if:true={fromServiceMaintenance}>
+        <lightning-layout multiple-rows horizontal-align="space">
+                <lightning-layout-item size="12" padding="around-small" small-device-size="10" medium-device-size="10" large-device-size="8">
+                    <h1>{subtitle}</h1>
+                </lightning-layout-item>
+                <lightning-layout-item size="12" padding="around-small" small-device-size="10" medium-device-size="10" large-device-size="8">
+                    <c-own-find-dealer brand={brand}></c-own-find-dealer>
+                </lightning-layout-item>
+                <lightning-layout-item size="12" small-device-size="10" medium-device-size="10" large-device-size="8">
+                    <lightning-layout multiple-rows>
+                        <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="6" class="cms-card-section">
+                            <c-own-c-m-s-card icon="chat.svg" content-id={maintenanceContentId} ></c-own-c-m-s-card>  
+                        </lightning-layout-item>
+                        <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="6" class="">
+                            <c-own-video-card brand={brand} icon={icon1} content-id={videoContentId} link="/video-detail-page" from-page="Service & Maintenance"></c-own-video-card>  
+                        </lightning-layout-item> 
+                    </lightning-layout>
+                </lightning-layout-item>
+        </lightning-layout>
+    </template>
+</template>

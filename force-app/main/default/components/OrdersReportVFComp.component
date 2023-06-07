@@ -1,0 +1,62 @@
+<apex:component access="global" controller="OrdersReportController" >
+    <div style="padding:15px;">
+        <div style="margin: 20px 0px;text-align:center">
+            <span style="font-size: 18px;">Order summary of this week</span>
+        </div>
+        <apex:repeat var="dealer" value="{!orderAndOrderItems}">
+            <!--<div style="border-bottom: dashed black; width:100%;"> -->
+                <td style="text-align: left; padding-right: 5%">
+                    <span style="font-weight:bold; font-size: 17px; font-style:italic">Orders for {!dealer}</span>
+                </td>
+                <br/><br/>
+                <apex:repeat var="order" value="{!orderAndOrderItems[dealer]}" >
+                    <table style="width:100%">
+                        <tr>
+                            <td style="text-align: left; padding-left: 5%">
+                                <span style="font-weight:bold">Order Number: </span><span>{!order.OrderReferenceNumber}</span>
+                            </td>
+                            <td style="text-align: left; padding-right: 5%">
+                                <span style="font-weight:bold">Order Date: </span>
+                                <span>
+                                    <apex:outputText value="{0, date, MMMM d','  yyyy}">
+                                        <apex:param value="{!order.CreatedDate}" /> 
+                                    </apex:outputText>                    
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left; padding-left: 5%">
+                                <span style="font-weight:bold">Order Amount: </span><span>{!order.GrandTotalAmount__c}</span>
+                            </td>
+                            
+                        </tr>
+                    </table>
+                    
+                    <table color="blue" border="0" cellspacing="0" cellpadding="0" style="width: 100%;">
+                        <thead>
+                            <tr>
+                                <th style="width:25%;padding:8px 12px; text-transform:capitalize; background:#f2f2f2; border: 1px solid black; border-right: 0px;">PRODUCT</th>
+                                <th style="padding:8px 12px; text-transform:capitalize; background:#f2f2f2; border: 1px solid black; border-right: 0px;">PART NUMBER</th>
+                                <th style="padding:8px 12px; text-transform:capitalize; background:#f2f2f2; border: 1px solid black; border:1px solid black;">QUANTITY</th>
+                            </tr>
+                        </thead>
+                        <tbody >
+                            <apex:repeat var="orderItem" value="{!orderAndOrderItems[dealer][order]}" >
+                                <tr>
+                                    <td style="padding:8px 12px; border: 1px solid black; border-right:0px; border-top:0px;">{!orderItem.Product_Name__c}</td>
+                                    <td style="padding:8px 12px; border: 1px solid black; border-right:0px; border-top:0px;">{!orderItem.Product_SKU__c}</td>                                    
+                                     <td style="padding:8px 12px; text-align:left; border: 1px solid black; border-top:0px;">
+                                         {!orderItem.Quantity}
+                                     </td>
+                                </tr>
+                            </apex:repeat>
+                            <br/><br/>
+                        </tbody>
+                    </table>
+                    <br/><br/>
+                </apex:repeat>
+                <hr style="border-top: 1px dashed;"/>
+           <!-- </div> -->
+        </apex:repeat>        
+    </div>
+</apex:component>

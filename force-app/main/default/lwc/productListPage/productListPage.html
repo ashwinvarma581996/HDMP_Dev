@@ -1,0 +1,176 @@
+<template>
+	<div if:true={imgURL} class="slds-is-relative productImgc img-container grid-wrapper themeBorder">
+		<!-- Added By SaiLaxman for Hotspots HDMP-4867-->
+		<template if:true={productHotspotMap}>
+			<a target="_blank" onclick={handlePopUpImage} class=" slds-m-left_small">View large diagram</a>
+			<div style="display: block; position: relative; padding: 0px;">
+				<canvas class="CanvasDiv" ></canvas><!--height="900px" width="900px"-->
+				<img src={imgURL} height="350px" width="700px" alt="Product Image" onload={canvasLoad}>
+				<img usemap="#workmap" src={imgURL} height="350px" width="700px"
+					style="opacity: 0; position: absolute; left: 0px; top: 0px; padding: 0px; border: 0px;">
+			</div>
+
+			<div id="smallmap">
+				<map name="workmap">
+					<template if:true={productHotspotMap} for:each={productHotspotMap} for:item="mapKey"
+						for:index="index">
+						<area key={mapKey.key} shape="circle" data-partnumber={mapKey.key} coords={mapKey.value}
+							alt="Cup of coffee" onclick={oncanvasclick} style="cursor:pointer;">
+					</template>
+				</map>
+			</div>
+		</template>
+		<!--ends here-->
+	</div>
+	<template if:true={showHotspotLabel}>
+		<div class="customTxt">{label.Hotspot_Label}</div>
+	</template>
+	<!-- Added by Faraz for Fast Moving Items 5492 Start -->
+	<template if:true={isMaintenance}>
+		<div class="slds-is-relative productImgc img-container grid-wrapper themeBorder">
+			<img height="100px" width="900px" class="maintenance-pd-banner" src={maintenanceImagePLP} onerror={handleOnImageLoad} />
+		</div>
+	</template>
+	<!-- Added by Faraz for Fast Moving Items 5492 End -->
+	<div class="slds-large-size_12-of-12 slds-m-top_large">
+		<template if:true={isLoading}>
+			<lightning-spinner alternative-text="Loading"
+				class="slds-is-relative slds-align_absolute-center slds-m-around_large" variant="brand">
+			</lightning-spinner>
+			<div class="slds-backdrop slds-backdrop_open"></div>
+		</template>
+		<ul class="slds-grid slds-wrap">
+			<template if:true={partsList} for:each={partsList} for:item="product" for:index="index">
+		 <!-- Added by Bhawesh 10-01-2022 for part search story Start. -->
+				<li class={product.partHighlight} key={product.index}>
+				 <!-- End -->
+					<article class="slds-tile slds-tile_board">
+						<h3 class="slds-tile__title" data-id={product.PartNumber} title={product.PartDescription}>
+							<a class="slds-text-heading_medium" data-partnumber={product.PartNumber}
+								onclick={navigateToProductDetailPage}> <span if:true={product.productNumber}>
+									{product.productNumber}.</span>
+								{product.PartDescription}
+							</a>
+								<!-- Begin by ashwin for US 16455-->
+							<br>
+							<span style="font-size: 20px; padding-left:12px;" if:true={product.isReman}>
+								{label.RemanText}</span>
+						</h3>
+						<template if:true={product.isReman}>
+
+							<p style="color: #686868; padding-left:12px;">Multiple part numbers required</p>
+
+							<p class="core-charge-txt">
+								<i>
+									See product details.<br>
+									Core charge required.
+								</i>
+							</p>
+
+						</template>
+
+							<!-- ended by ashwin for US 16455-->
+						<template if:false={product.isReman}> <!-- condition added by ashwin for US 16455-->
+							<div>
+								<p title={product.PartNumber} style="max-width: fit-content;">
+								<!-- {product.PartDescriptionMasterFile} -->
+									Part Number: {product.PartNumber}
+								</p>
+					  <!-- <template if:true={product.disableAddToCartWithZeroAmount}>
+								<p class="slds-text-color_destructive">Contact Dealer for Price/Availability</p>
+						 </template> -->
+								<template if:false={product.disableAddToCartWithZeroAmount}>
+									<p if:false={product.disableAddToCart}
+									class="slds-text-heading_medium slds-m-bottom_small slds-m-top_xx-small">{priceType}
+										: ${product.SuggestedRetailPriceAmount}
+									</p>
+								</template>
+								<template if:true={product.disableAddToCart}>
+						 <lightning-button variant="destructive" disabled label="Add To Cart" title="Add to Cart"
+							data-partnumber={product.PartNumber} data-price={product.SuggestedRetailPriceAmount}
+										onclick={handleAddToCart}></lightning-button>
+									<div class="slds-m-top_small">Contact Dealer For Price/Availability</div>
+								</template>
+								<template if:false={product.disableAddToCart}>
+									<template if:true={product.disableAddToCartWithZeroAmount}>
+										<lightning-button label="Add to Cart" disabled variant="destructive"
+											class="productButton" title="Add to Cart"></lightning-button>
+										<p class="slds-m-top_small">Contact Dealer For Price/Availability</p>
+									</template>
+									<template if:false={product.disableAddToCartWithZeroAmount}>
+										<div>
+											<lightning-button variant="brand" label="Add To Cart" title="Add to Cart"
+												data-partnumber={product.PartNumber}
+								  data-price={product.SuggestedRetailPriceAmount} onclick={handleAddToCart}></lightning-button>
+										</div>
+									</template>
+								</template>
+							</div>
+						</template>
+					</article>
+				</li>
+			</template>
+		</ul>
+	</div>
+	<!-- Modal/Popup Box LWC starts here -->
+	<template if:true={isModalOpen}>
+		<section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+			aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+			<div class="slds-modal__container">
+				<!-- Modal/Popup Box LWC header here -->
+				<header class="slds-modal__header">
+					<button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+						title="Close" onclick={closeModal}>
+						<lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse"
+							size="small"></lightning-icon>
+						<span class="slds-assistive-text">Close</span>
+					</button>
+					<h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Sorry, Honda and Acura
+						Items Must Be In Separate Carts</h2>
+				</header>
+				<!-- Modal/Popup Box LWC body starts here -->
+				<div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+					<p><b>We’re working on this, but right now, Honda and Acura items must be in separate shopping
+							carts. Please complete your current order and start a new order for this item.</b></p>
+
+				</div>
+				<!-- Modal/Popup Box LWC footer starts here -->
+				<footer class="slds-modal__footer">
+					<button class="slds-button slds-button_neutral" onclick={closeModal} title="Cancel">Cancel</button>
+					<button class="slds-button slds-button_brand" onclick={closeModal} title="OK">OK</button>
+				</footer>
+			</div>
+		</section>
+		<div class="slds-backdrop slds-backdrop_open"></div>
+	</template>
+	<!-- Modal/Popup Box LWC starts here -->
+	<template if:true={isPorductNotExistModalOpen}>
+		<section role="dialog" tabindex="-1" aria-labelledby="modal-heading-02" aria-modal="true"
+			aria-describedby="modal-content-id-2" class="slds-modal slds-fade-in-open">
+			<div class="slds-modal__container">
+				<!-- Modal/Popup Box LWC header here -->
+				<header class="slds-modal__header">
+					<button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+						title="Close" onclick={productNotExistPopupClose}>
+						<lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse"
+							size="small"></lightning-icon>
+						<span class="slds-assistive-text">Close</span>
+					</button>
+					<h2 id="modal-heading-02" class="slds-text-heading_medium slds-hyphenate">Sorry, Product not
+						available.</h2>
+				</header>
+				<!-- Modal/Popup Box LWC body starts here -->
+				<div class="slds-modal__content slds-p-around_medium" id="modal-content-id-2">
+					<p><b>This part is not available for purchase through the DREAMSHOP. Please contact your dealer for
+							availability and pricing.</b></p>
+				</div>
+				<!-- Modal/Popup Box LWC footer starts here -->
+				<footer class="slds-modal__footer">
+					<button class="slds-button slds-button_brand" onclick={productNotExistPopupClose}
+						title="OK">OK</button>
+				</footer>
+			</div>
+		</section>
+		<div class="slds-backdrop slds-backdrop_open"></div>
+	</template>
+</template>

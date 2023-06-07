@@ -1,0 +1,39 @@
+.result-title {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 32px;
+    line-height: 37px;
+    letter-spacing: 0.02em;
+    color: #080707;
+}
+.result-list li a {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 26px;
+    color: #000000;
+    padding-top: 14px;
+    padding-bottom: 14px;
+}
+@media only screen and (min-width: 601px) {
+    .category-result-small {
+        display: none;
+    }
+    .category-result-large {
+        display: block;
+    }
+}
+@media only screen and (max-width: 600px) {
+    .category-result-large {
+        display: none;
+    }
+    .category-result-small {
+        display: block;
+    }
+}
+
+.block-element {
+    width: 100%;
+}

@@ -1,0 +1,41 @@
+/* .test{--sds-c-icon-color-background: #e42525;} */
+.download-icon{--sds-c-icon-color-foreground-default: red;}
+
+h3{
+    font-weight: 300;
+    font-size: 32px;
+    line-height: 37px;
+    color: #080707;
+    margin: 0px 0px 24px;
+}
+
+@media only screen and (max-width: 600px) {
+    lightning-layout-item {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .title{
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 300;
+        font-size: 22px;
+        line-height: 27px;
+        letter-spacing: 0.02em;
+        color: #000000;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .position-cards {
+        margin: 0 -12px;
+    }
+    .title{
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 300;
+        font-size: 32px;
+        line-height: 37px;
+        letter-spacing: 0.02em;
+        color: #000000;
+    }
+}

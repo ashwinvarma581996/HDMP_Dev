@@ -1,0 +1,61 @@
+    .navBarContainer .navBar {
+        display: none !important;
+    }
+    
+    @media (min-width: 768px) {
+        .mainHeader {
+            position: fixed;
+            width: 100%;
+            z-index: 999;
+            top: 70px;
+            left: 0;
+            background: #F0F0F0;
+            padding: 10px;
+            min-height: 50px;
+            border-bottom: 0 !important;
+            border-radius: 0 !important;
+            nav {
+                margin: 0 auto;
+                max-width: 1170px;
+            }
+            .Trim1.slds-form-element .slds-dropdown.slds-listbox,
+            .Trim2.slds-form-element .slds-dropdown.slds-listbox,
+            .Trim3.slds-form-element .slds-dropdown.slds-listbox,
+            .Trim4.slds-form-element .slds-dropdown.slds-listbox{
+                top: auto;
+                bottom: 45px;
+                max-height: 150px !important;
+            }
+            .Year1.slds-form-element .slds-dropdown.slds-listbox,
+            .Year2.slds-form-element .slds-dropdown.slds-listbox,
+            .Year3.slds-form-element .slds-dropdown.slds-listbox,
+            .Year4.slds-form-element .slds-dropdown.slds-listbox,
+            .Products.slds-form-element .slds-dropdown.slds-listbox {
+                max-height: 200px !important;
+            }
+            .Model1.slds-form-element .slds-dropdown.slds-listbox,
+            .Model2.slds-form-element .slds-dropdown.slds-listbox,
+            .Model3.slds-form-element .slds-dropdown.slds-listbox,
+            .Model4.slds-form-element .slds-dropdown.slds-listbox {
+                max-height: 130px !important;
+            }
+            .slds-combobox {
+                input.slds-input {
+                    padding-right: 25px !important;
+                    display: block;
+                    text-align: left;
+                }
+            }
+        }
+    }
+    @media (max-width: 767px) {
+        .megaMenuDropdown {
+            .slds-form-element {
+                .slds-combobox {
+                    input.slds-input {
+                        padding-right: 25px !important;
+                    }
+                }
+            }
+        }
+    }

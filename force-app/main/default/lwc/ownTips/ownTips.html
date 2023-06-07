@@ -1,0 +1,52 @@
+<!-- //============================================================================
+// Title:    Honda Owners Experience - Help Center
+//
+// Summary:  This is the category list and result html seen at the help center of the Honda Owner Community
+//
+// Details:  Extend the LightningElement with this Base Element to gain access to the Messaging Channel and other logic herein and this is the parent component for category list and result.
+//
+//
+// History:
+// June 16, 2021 Arunprasad N (Wipro) Original Author
+//=========================================================================== -->
+<template>
+    <div class="c-container header-column">
+        <template if:true={categoriesLoaded}>
+            <lightning-layout multiple-rows>
+                <lightning-layout-item class="helpcenter-brand-large" padding="around-small" size="12">
+                    <lightning-layout horizontal-align="spread">
+                        <lightning-layout-item size='3' if:true={hasMultipleCategories}>
+                            <c-own-tips-categories brand={brandLabel} categories={categories} form-factor='desktop'>
+                            </c-own-tips-categories>
+                        </lightning-layout-item>
+                        <template if:true={subcategory}>
+                            <lightning-layout-item size={resultsDesktopSize}>
+                                <c-own-tips-results brand={brandLabel} subcategory={subcategory}
+                                    is-fuel-recommendation={isFuelRecommendation}></c-own-tips-results>
+                            </lightning-layout-item>
+                        </template>
+                    </lightning-layout>
+                </lightning-layout-item>
+                <lightning-layout-item class="helpcenter-brand-small" padding="around-small" size="12">
+                    <lightning-layout horizontal-align="spread">
+                        <template if:false={showResult}>
+                            <lightning-layout-item size="12">
+                                <c-own-tips-categories brand={brandLabel} categories={categories} form-factor='mobile'>
+                                </c-own-tips-categories>
+                            </lightning-layout-item>
+                        </template>
+                        <template if:true={showResult}>
+                            <lightning-layout-item size="12">
+                                <c-own-tips-results brand={brandLabel} subcategory={subcategory}
+                                    is-fuel-recommendation={isFuelRecommendation}></c-own-tips-results>
+                            </lightning-layout-item>
+                        </template>
+                    </lightning-layout>
+                </lightning-layout-item>
+            </lightning-layout>
+        </template>
+        <template if:false={categoriesLoaded}>
+            <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+        </template>
+    </div>
+</template>

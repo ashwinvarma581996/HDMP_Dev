@@ -1,0 +1,46 @@
+@media only screen and (max-width: 600px) {
+    .returnPolicy {
+       padding: 30% 20% 9% !important;
+   }
+}
+
+.returnPolicy{
+    padding: 4% 20% 4% 20%;
+}
+
+li {
+    margin-left: 32px;
+}
+
+/* begin Bug fix by ashwin as HDMP-17771  */
+ul:not(.browser-default) li {
+    list-style-type: disc;
+}
+
+
+.body-border{
+    border: 1px solid #979797;
+    padding: 15px 15px 15px 15px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    width: 720px;
+}
+/* Added by ashwin as fix of 18894 */
+.pad-top{
+    padding-top: 12% !important;
+}
+
+
+@media(max-width: 568px){
+    .body-border{
+        width: 330px;
+    }
+    /* Added by ashwin as fix of 18894*/
+    .pad-top{
+        padding-top: 26% !important;
+    }
+}
+
+
+/* ended Bug fix by ashwin as HDMP-17771  */

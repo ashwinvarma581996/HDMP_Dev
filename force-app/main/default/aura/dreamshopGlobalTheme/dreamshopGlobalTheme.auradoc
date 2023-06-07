@@ -1,0 +1,6 @@
+<aura:documentation>
+	<aura:description>Documentation</aura:description>
+	<aura:example name="Dreamshop Global Theme Layout" ref="dreamshopGlobalTheme" label="Label">
+		A default theme layout for the dreamshop header and footer components.
+	</aura:example>
+</aura:documentation>

@@ -1,0 +1,39 @@
+<template>
+    <div class="slds-container_medium slds-container_center slds-p-around_medium main-wrapper">
+        
+        <div class="slds-form-element form-styles slds-m-top_large">
+            
+            <div class="slds-grid">
+                <label class="label_style">VIN</label>
+                <p class="result_style">{vin}<br><br>
+                    {year} {model} <br> {trim} <template if:true={isColor}> {color}</template>
+                </p>
+            </div>
+            <template if:true={isnavigation}>
+                <div class="horizontal_line"></div>
+                <label class="label_style ">NAVIGATION</label> 
+                <div class="slds-grid slds-m-top_medium">
+                    <label class="label_style">Serial Number:</label> 
+                    <p class="result_style">{navserialnumber}</p>
+                </div>
+                <div class="slds-grid">
+                    <label class="label_style ">Navigation Code:</label> 
+                    <p class="result_style">{navcode}</p>
+                </div>
+            </template>
+            <template if:true={isradio}>
+                <div class="horizontal_line"></div>
+                    <label class="label_style">RADIO</label> 
+                    <div class="slds-grid slds-m-top_medium">
+                    <label class="label_style">Serial Number:</label> 
+                    <p class="result_style">{radserialnumber}</p>
+                </div>
+                <div class="slds-grid">
+                    <label class="label_style">Radio Code:</label> 
+                    <p class="result_style">{radcode}</p>
+                </div>
+            </template>
+        </div>
+    </div>
+
+</template>

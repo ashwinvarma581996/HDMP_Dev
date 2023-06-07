@@ -1,0 +1,279 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 06-06-2023
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+	<div if:true={isLoading}>
+		<lightning-spinner alternative-text="Loading" variant="brand"></lightning-spinner>
+	</div>
+	<template if:false={isLoading} for:each={displayItems} for:item="lineItem">
+
+		<div if:false={lineItem.isRemoveProduct} key={lineItem.cartItem.cartItemId}
+			class="itemsContainer slds-grid_vertical slds-p-vertical_large">
+			<div class="slds-grid slds-gutters slds-wrap">
+				<div class="slds-col  slds-size_12-of-12 slds-medium-size_9-of-12">
+					<!--added on 11/12 start opcode in data attributes by Pradeep for 8035-->
+					<h3 class="slds-m-bottom_small itemName" title={lineItem.cartItem.name}>
+						<a data-producturl={lineItem.productUrl} data-motocompacto={lineItem.isMotocompacto}
+							data-productnumber={lineItem.cartItem.productDetails.sku}
+							data-productid={lineItem.cartItem.productId} data-opcode={lineItem.op_cd}
+							data-vehicle={lineItem.vehicleName} onclick={redirectToPdp}>{lineItem.cartItem.name}</a>
+					</h3>
+					<!--ends here added on 11/12 start-->
+					<!--Added By Bhawesh 22-02-2022 BugNo. 7434  start-->
+					<p title={lineItem.cartItem.productDetails.sku}><span> {lineItem.productTypes}
+						</span> {lineItem.cartItem.productDetails.sku}
+					</p>
+					<!--End-->
+					<p if:true={lineItem.Color__c}>Color: {lineItem.Color__c}</p>
+					<p class="slds-m-bottom_small"><span>{priceLabel}</span>
+						<lightning-formatted-number format-style="currency" currency-code={currencyCode}
+							currency-display-as="symbol" maximum-fraction-digits="2"
+							value={lineItem.cartItem.unitAdjustedPrice}></lightning-formatted-number>
+					</p>
+					<div class="quantity-selector slds-p-bottom_medium slds-grid slds-grid_vertical-align-center">
+						<label>Quantity</label>
+						<!--updated by saikiran as part of HDMP-12360-->
+						<!-- Saravanan LTIM 7813 7815-->
+						<!-- Saravanan LTIM added for HDMP-19511 data-skunumber-->
+						<!-- data-price={lineItem.cartItem.unitAdjustedPrice} -->
+						<lightning-input data-skunumber = {lineItem.cartItem.productDetails.sku} value={lineItem.cartItem.quantity} max="25" min="1" required type="number"
+							onchange={quantityChange} disabled={lineItem.cartItem.isRemanCoreCharge} maxlength="2"
+							data-item-id={lineItem.cartItem.cartItemId}
+							class="qty slds-m-left_x-small slds-p-left_small" message-when-range-underflow={minQuan}
+							message-when-range-overflow={maxQuan} onkeypress={handleEnterKeyUpdate}
+							data-price={lineItem.cartItem.unitAdjustedPrice} >
+						</lightning-input>
+						<!-- Saravanan LTIM 7813 7815-->
+						<!-- Saravanan LTIM added for HDMP-19511 data-skunumber-->
+						<div if:false={lineItem.cartItem.isRemanCoreCharge}>
+							<lightning-button data-item-id={lineItem.cartItem.cartItemId}
+								data-skunumber = {lineItem.cartItem.productDetails.sku}
+								data-price={lineItem.cartItem.unitAdjustedPrice} variant="destructive" label="Update"
+								title="Update" onclick={handleQuantitySelectorBlur} class="slds-m-left_x-small">
+							</lightning-button>
+
+						</div>
+					</div>
+					<!--Saravanan LTIM 7813 , 7815 Changes-->
+					<lightning-layout class="cart-inline-actions slds-m-bottom_medium">
+						<lightning-layout-item class="slds-p-right_x-small ">
+							<div if:false={lineItem.cartItem.isRemanCoreCharge}
+								class="cartRemove  slds-text-align_left">
+								<lightning-button label="Remove from cart" title="Remove from cart"
+									onclick={handleDeleteCartItem} data-cartitemid={lineItem.cartItem.cartItemId}
+									data-productnumber={lineItem.cartItem.productDetails.sku}
+									data-name={lineItem.cartItem.name}></lightning-button><!--for adobe bug-39(added data-name attribute)-->
+
+							</div>
+							<!-- Saravanan LTIM 7813 7815-->
+							<div if:true={lineItem.cartItem.isRemanCoreCharge} style="text-decoration: underline;  text-decoration-color: red;" class="cartRemove  slds-text-align_left">
+								<!-- Saravanan LTIM Added for HDMP-19506 -->
+								<a data-id="Core_Charge_Disclaimer" style="font-size: 14px;color: rgb(234, 0, 30);" onclick={handleDisclamerPopup} data-cartitemid={lineItem.cartItem.cartItemId}
+									data-productnumber={lineItem.cartItem.productDetails.sku} ><span>What is a core charge?</span></a>
+								<!-- Saravanan LTIM Added for HDMP-19506 -->
+								</div>
+
+						</lightning-layout-item>
+						<!-- Saravanan LTIM 7813 7815-->
+						<template if:false={lineItem.cartItem.isRemanCoreCharge}>
+							<lightning-layout-item if:true={showWishlist} class="slds-p-left_x-small slds-border_left">
+								<!--added by Yashika for wishlist: starts-->
+								<div class="cartRemove  slds-text-align_left">
+									<lightning-button label="Move To wishlist" title="Move To wishlist"
+										onclick={handleMoveToWishlist} data-color={lineItem.Color__c}
+										data-price={lineItem.cartItem.unitAdjustedPrice}
+										data-cartitemid={lineItem.cartItem.cartItemId}
+										data-productnumber={lineItem.cartItem.productDetails.sku}
+										data-name={lineItem.cartItem.name}></lightning-button>
+
+								</div>
+								<!--ends-->
+							</lightning-layout-item>
+						</template>
+					</lightning-layout>
+					<!--Added by shalini soni-->
+
+					<!-- Saravanan LTIM 7813 , 7815 Changes-->
+					<div if:false={lineItem.cartItem.isRemanCoreCharge}>
+						<template if:true={lineItem.pickupDelear}>
+							<span class="slds-text-heading_small">Shipping Options: Pick Up At Dealer Only<template
+									if:true={lineItem.dealerInstall}>, Dealer Install</template> <br /></span>
+						</template>
+						<template if:false={lineItem.pickupDelear}>
+							<span class="slds-text-heading_small"> Shipping Options: Pick Up At Dealer<template
+									if:true={lineItem.dealerInstall}>, Dealer Install</template>, Shippable<br />
+							</span>
+						</template>
+					</div>
+
+					<!-- End -->
+					<!-- Saravanan LTIM 7813 , 7815 Changes-->
+					<div if:false={lineItem.cartItem.isRemanCoreCharge} class=" slds-text-color_destructive prop-wd"
+						style="cursor:pointer" onclick={openWarningPopup}>
+						California Proposition 65 Warning</div>
+					<!--added by Yashika : vehicle details for 8708-->
+					<p if:true={lineItem.vehicle}>
+						<img src={carImage}
+							style="width:60px; margin-left:-8px;"><span>{lineItem.vehicle.Product_Subdivision__c}
+							{lineItem.vehicle.Model_Year__c} {lineItem.vehicle.Model_Name__c}
+							{lineItem.vehicle.Trim__c}</span>
+					</p>
+					<template if:false={lineItem.vehicle}>
+						<p if:true={lineItem.motocompactoDetail}>
+							<lightning-icon icon-name="utility:transport_bicycle" alternative-text="Moto Compacto"
+								title="Moto Compacto" class="slds-p-top_x-small" size="small"
+								style="margin-right: 10px;">
+							</lightning-icon><span>{lineItem.motocompactoDetail}</span>
+							<!-- <img src={carImage} style="width:60px; margin-left:-8px;"><span>{lineItem.motocompactoDetail}</span> -->
+						</p>
+					</template>
+					<!--ends: 8708-->
+					<!-- Ashwin LTIM Bug - 18143 Below Section will not show to core charge line item-->
+					<div if:false={lineItem.cartItem.isRemanCoreCharge}>
+						<div if:false={lineItem.isMotocompacto}>
+							<!--added by shalini 19 May 2022 for HDMP-9055-->
+							<template if:true={lineItem.ProductVinInList}>
+								<template if:false={lineItem.vinCheckStatus}>
+									<c-product-fit-check productsku={lineItem.cartItem.productDetails.sku}
+										vin-value={lineItem.vin} cartid={cartid}>
+									</c-product-fit-check>
+								</template>
+								<template if:true={lineItem.vinCheckStatus}>
+									<div
+										class="slds-grid slds-grid_vertical-align-center slds-p-right_x-large slds-p-vertical_large">
+										<lightning-icon class="checkIcon" icon-name="utility:check" variant="border"
+											size="small"></lightning-icon>
+										<!-- End -->
+										<!-- Saravanan LTIM 7813 , 7815 Changes-->
+										<div if:false={lineItem.cartItem.isRemanCoreCharge}
+											class="slds-text-body_medium">&ensp; This part fits your vehicle</div>
+									</div>
+									<!-- Added by 1 April Shalini 8536 -->
+									<template if:true={lineItem.vin}>
+										<div>VIN: {lineItem.vin}</div> <!-- Added by shalini 19/05/2022 for HDMP-9055-->
+									</template>
+									<!-- Ends by 1 April Shalini 8536 -->
+								</template>
+							</template>
+							<template if:false={lineItem.ProductVinInList}>
+								<!--HDMP-16050 starts here-->
+								<c-product-fit-check productsku={lineItem.cartItem.productDetails.sku}
+									vin-value={lineItem.vin} cartid={cartid}
+									is-vin-fitment={lineItem.cartItem.isVinFit}>
+									<!--HDMP-16050 ends here-->
+								</c-product-fit-check>
+							</template>
+						</div>
+						<div if:true={lineItem.isMotocompacto} class="slds-m-top_medium slds-text-color_destructive"
+							style="cursor:pointer" onclick={openDisclaimerPopup}>
+							Product Disclaimer
+						</div>
+					</div>
+				</div>
+				<div class="price slds-col slds-size_12-of-12 slds-medium-size_2-of-12 slds-grid_align-end">
+					<div class=""><span class="subtotalTxt"> Subtotal: &nbsp;</span>
+						<lightning-formatted-number format-style="currency" currency-code={currencyCode}
+							class="negotiatedPrice" currency-display-as="symbol" maximum-fraction-digits="2"
+							value={lineItem.cartItem.totalPrice}>
+						</lightning-formatted-number>
+					</div>
+				</div>
+			</div>
+		</div>
+	</template>
+
+	<!--Warning Modal/Popup Box LWC starts here -->
+	<template if:true={warningPopup}>
+		<section role="dialog" tabindex="-1" aria-labelledby="modal-heading-02" aria-modal="true"
+			aria-describedby="modal-content-id-2" class="slds-modal slds-fade-in-open">
+			<div class="slds-modal__container">
+				<!-- Modal/Popup Box LWC header here -->
+				<header class="slds-modal__header">
+					<button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+						title="Close" onclick={closeWarningPopup}>
+						<lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse"
+							size="small"></lightning-icon>
+						<span class="slds-assistive-text">Close</span>
+					</button>
+					<h3 id="modal-heading-02" class="slds-text-heading_large slds-p-top_x-large lds-hyphenate font-h5">
+						California Prop 65 Information</h3>
+					<br /><br />
+				</header>
+				<!-- Modal/Popup Box LWC body starts here -->
+
+				<div class="slds-modal__content slds-p-horizontal_medium slds-p-bottom_xx-large slds-p-left_xx-large slds-text-align--center"
+					id="modal-content-id-2">
+					<p class="slds-text-heading_small">
+						<lightning-icon icon-name="utility:warning"></lightning-icon> WARNING:Cancer and Reproductive
+						Harm
+					</p>
+					<p><a href="https://automobiles.honda.com/images/downloads/prop-65-consumer-website-statement.pdf"
+							target="_blank" class="slds-text-heading_small">Prop 65 Info</a></p>
+				</div>
+			</div>
+		</section>
+		<div class="slds-backdrop slds-backdrop_open"></div>
+	</template>
+
+	<template if:true={isModalOpen}>
+		<section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+			aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open vinfit">
+			<div class="slds-modal__container">
+				<!-- Modal/Popup Box LWC header here -->
+				<header class="slds-modal__header">
+					<button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+						title="Close" onclick={closeModal}>
+						<lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse"
+							size="small"></lightning-icon>
+						<span class="slds-assistive-text">Close</span>
+					</button>
+					<h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate"></h2>
+				</header>
+				<!-- Modal/Popup Box LWC body starts here -->
+				<div class="slds-modal__content slds-p-horizontal_xx-large slds-p-bottom_large slds-p-top_large font-h5 slds-text-align_center "
+					id="modal-content-id-1">
+					<div class="slds-grid slds-gutters slds-m-around_large slds-text-align_center ">
+						Sorry we can only have maximum of 25 quantity in an order
+					</div>
+					<div class="slds-text-align_center slds-p-top_large">
+						<button class="slds-button slds-button_brand" onclick={closeModal} title="Clear">Ok</button>
+					</div>
+				</div>
+			</div>
+		</section>
+		<div class="slds-backdrop slds-backdrop_open"></div>
+	</template>
+
+	<template if:true={showDisclaimerMarkup}>
+		<section role="dialog" tabindex="-1" aria-labelledby="modal-heading-03" aria-modal="true"
+			aria-describedby="modal-content-id-2" class="slds-modal slds-fade-in-open">
+			<div class="slds-modal__container">
+				<header class="slds-modal__header">
+					<button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+						title="Close" onclick={closeWarningPopup}>
+						<lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse"
+							size="small"></lightning-icon>
+						<span class="slds-assistive-text">Close</span>
+					</button>
+					<h3 id="modal-heading-03" class="slds-text-heading_large slds-p-top_small slds-hyphenate font-h5">
+						Product Disclaimer</h3>
+					<br />
+				</header>
+				<div class="slds-modal__content slds-p-horizontal_medium slds-p-bottom_xx-large"
+					id="modal-content-id-3">
+					<lightning-formatted-rich-text value={disclaimerMarkup}></lightning-formatted-rich-text>
+				</div>
+			</div>
+		</section>
+		<div class="slds-backdrop slds-backdrop_open"></div>
+	</template>
+	<!-- LTIM 7811 & 7812 & 7813 -->
+	<template if:true={showDealerModal}>
+		<c-disclaimer-popup modaltype={disclaimerType} dealer-return-policy-markup={dealerReturnPolicyMarkup}
+			onclose={handleShowHide}></c-disclaimer-popup>
+	</template>
+</template>

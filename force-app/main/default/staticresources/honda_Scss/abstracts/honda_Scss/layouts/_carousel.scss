@@ -1,0 +1,23 @@
+.customCarousel {
+    .controls {
+        position: absolute;
+        left: 0;
+        right: 0;
+        margin: 2px auto;
+        bottom: 0;
+        text-align: center;
+        .dot {
+            background-color: #f7f7f7;
+            margin: 0 3px;
+            &.active {
+                background-color: $redBg;
+            }
+        }
+    }
+    .prev,
+    .next {
+        background: #444;
+        font-size: 30px;
+        text-decoration: none;
+    }
+}

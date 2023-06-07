@@ -1,0 +1,123 @@
+.brand-card-container {
+    background: var(--HondaWhite);
+}
+.brand-card-text-headline {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    /*font-size: 32px;
+    line-height: 37px;*/
+    text-align: center;
+    /*letter-spacing: 0.02px;*/
+    color: #000000;
+}
+.brand-card {
+    width: 221px;
+    height: 196px;
+    background: #FFFFFF;
+    border: 1px solid #D9D9D9;
+    box-sizing: border-box;
+    box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 2px;
+}
+.brand-card-text {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 14px;
+    line-height: 22px;
+    text-align: center;
+    letter-spacing: 0.02em;
+    color: #000000;
+}
+.brand-card-li-small {
+    height: 80px;
+}
+.brand-card-li-small button {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 14px;
+    letter-spacing: 0.02em;
+    color: #080707;
+    justify-content: flex-start;
+}
+.brand-card img {
+    width: 130px;
+    height: 130px;
+}
+.brand-card-li-small img {
+    width: 130px;
+    height: 130px;
+}
+.brand-card-title {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: #000000;
+}
+.brand-card-title-small {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 14px;
+    line-height: 22px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: #000000;
+}
+.brand-card-sub-title {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 32px;
+    line-height: 37px;
+    letter-spacing: 0.02em;
+    color: #000000;
+}
+.brand-card-sub-title-small {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 22px;
+    line-height: 27px;
+    letter-spacing: 0.02em;
+    color: #000000;
+}
+.img-cursor {
+    cursor: pointer;
+}
+@media only screen and (min-width: 601px) {
+    .brand-card-small {
+        display: none;
+    }
+    .brand-card-large {
+        display: block;
+    }
+    .header-column {
+        padding: 0 68px;
+        margin: 40px 0 70px;
+    }
+}
+@media only screen and (max-width: 600px) {
+    .brand-card-large {
+        display: none;
+    }
+    .brand-card-small {
+        display: block;
+    }
+    .header-column {
+        padding: 0;
+    }
+    .brand-card-small img {
+        width: 90px;
+        height: 90px;
+    }
+}
+.find-powersports{
+    padding: 12px;
+}

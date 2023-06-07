@@ -1,0 +1,43 @@
+<template>
+    <div class={mainCardClass}>
+        <lightning-card class="card-styles cms-card-style">
+            <h3 slot="title" class="slds-truncate" style="width:400px" onclick={handleClickHeader}>
+                <lightning-layout>
+                    <lightning-layout-item> 
+                        <img src={icon} class="custom-icon">
+                    </lightning-layout-item>    
+                    <lightning-layout-item size="10" class="slds-p-left_small  card-titlemain">
+                        <span class={titleClass}>
+                            <lightning-formatted-rich-text value={title}></lightning-formatted-rich-text> 
+                        </span>
+                    </lightning-layout-item>
+                    <template if:true={showforwardicon}>
+                        <lightning-layout-item >
+                            <lightning-icon class={iconClass} icon-name={headerRightIcon} size="x-small">
+                            </lightning-icon>
+                        </lightning-layout-item>
+                    </template>
+                </lightning-layout>
+            </h3>
+            <template if:true={isPdf}>
+                <div if:true={content} class={bodyClass}>
+                    <lightning-formatted-rich-text value={content}></lightning-formatted-rich-text>
+                </div>
+            </template>
+           <template if:true={isText}>
+                <div if:true={content} class={bodyClass}>
+                    <lightning-formatted-rich-text value={content}></lightning-formatted-rich-text>
+                </div>
+            </template>
+            <template if:true={isVideo}>
+                <div if:true={content} class={bodyClass}>
+                    <lightning-formatted-rich-text value={content}></lightning-formatted-rich-text>
+                </div>
+            </template>
+            <div if:true={isYoutube} class="video-class">
+                <iframe width="100%" height="264px" src={videoLink} frameborder="0" allowfullscreen></iframe>
+            </div>
+        </lightning-card>
+    </div>
+
+</template>

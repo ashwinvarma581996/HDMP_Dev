@@ -1,0 +1,71 @@
+<!-- //============================================================================
+// Title:    Honda Owners Experience - Service History Card
+//
+// Summary:  This Card links to the Service History
+//
+//
+// History:
+// May 17, 2021 Arunprasad N (Wipro) Original Author
+// July 15, 2021 Jim Kohs (Wipro) refactored to ownBaseCard2
+// Jan  21, 2022 Ravindra Ravindra(Wipro) Modified to implement DOE-2401
+//=========================================================================== -->
+<template>
+    
+    <div class="card card-size card-styles-wrapper">
+        <lightning-card class="card-styles">
+            <div slot="title" class="slds-truncate" role="link" tabindex="0">
+                <img src={icon} class="slds-p-right_small custom-icon">
+                <span class={titleClass} onclick={handleViewAllClick}>{title}</span>
+            </div>
+            <div slot="actions">
+                <slot name="action">
+                    <template if:true={isRecordsAvailable}>
+                        <button class="slds-button slds-button_outline-brand action-button"
+                            onclick={handleViewAllClick}>VIEW ALL</button>
+                    </template>
+                </slot>
+            </div>
+            <div class="slds-card__body_inner card-body ">
+                <template if:false={loadComplete}>
+                    <div class="spinner-box slds-align-center">
+                        <lightning-layout>
+                            <lightning-layout-item size="12">
+                                <lightning-spinner alternative-text="Loading..." variant="base"></lightning-spinner>
+                            </lightning-layout-item>
+                        </lightning-layout>
+                    </div>
+                </template>
+                <div if:false={isRecordsAvailable} class="slds-m-horizontal_medium">
+                    <div if:true={isSearchedProduct}>
+                        Please Add this vehicle to your garage to see Service Records,
+                        or select a vehicle from your garage to see its Service Records.
+                    </div>
+                    <div if:false={isSearchedProduct}>
+                        {noRecordsBody}
+                    </div>
+                </div>
+                <div if:true={isRecordsAvailable} class="slds-m-horizontal_medium">
+                    <b>Most Recent Service</b>
+                    <br/>
+                    Service Facility: {latestSeviceRecord.serviceFacility}{latestSeviceRecord.Location__c}
+                    <br/>
+                    Date of Service: {mServiceDate}
+                    <br/>
+                    <template if:false={showOperatingHours}>
+                        Mileage: <lightning-formatted-number value={latestSeviceRecord.Mileage}>
+                        </lightning-formatted-number><lightning-formatted-number value={latestSeviceRecord.Usage__c}>
+                        </lightning-formatted-number>
+                    </template>
+                    <template if:true={showOperatingHours}>
+                        Hours: <lightning-formatted-number value={latestSeviceRecord.Mileage}>
+                        </lightning-formatted-number><lightning-formatted-number value={latestSeviceRecord.Operating_Hours__c}>
+                        </lightning-formatted-number>
+                    </template>
+                    <br/>
+                    <br/>
+                    <a class="external-link" onclick={handleShowDetailsClick} tabindex="0" role="link">Show Service Details</a>
+                </div>
+            </div>
+        </lightning-card>
+    </div>
+</template>

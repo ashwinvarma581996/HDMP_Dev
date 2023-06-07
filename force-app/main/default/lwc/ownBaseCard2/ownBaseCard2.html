@@ -1,0 +1,75 @@
+<template>
+    <div class="ownCard" onclick={handlClick}>
+        <lightning-card variant="base">
+            <h3 slot="title">
+                <template if:true={isTitleRed}>
+                    <lightning-icon class="ownCard-icon" icon-name={icon} size="small" variant="error"></lightning-icon>                    
+                    <span class="ownCard-title-red">{title}</span>
+                    <template if:true={forwardiconname}>
+                        <lightning-icon class="ownCardIcon" icon-name={forwardiconname} size="small"></lightning-icon>
+                    </template>
+                    <div class="slds-no-flex">
+                        <slot name="actions">
+                            <slot name="action"></slot>
+                        </slot>
+                    </div>
+                </template>
+                <template if:false={isTitleRed}>
+                    <lightning-icon class="ownCard-icon" icon-name={icon} size="small" variant="error"></lightning-icon>                    
+                    <span class="ownCard-title-black">{title}</span>
+                    <template if:true={forwardiconname}>
+                        <lightning-icon class="ownCardIcon" icon-name={forwardiconname} size="small"></lightning-icon>
+                    </template>
+                    <div class="slds-no-flex">
+                        <slot name="actions">
+                            <slot name="action"></slot>
+                        </slot>
+                    </div>
+                </template>
+            </h3>
+            <div class="ownCard-body">
+                <template if:true={isDefault}>
+                    <slot name="default">
+                        <h1>lorum ipsum2</h1>
+                    </slot>
+                </template>
+                <template if:true={isHonda}>
+                    <slot name="honda">
+                        <h1>lorum honda</h1>
+                    </slot>
+                </template>
+                <template if:true={isAcura}>
+                    <slot name="acura">
+                        <h1>lorum acura</h1>
+                    </slot>
+                </template>
+                <template if:true={isPE}>
+                    <slot name="pe">
+                        <h1>lorum pe</h1>
+                    </slot>
+                </template>
+                <template if:true={isPS}>
+                    <slot name="ps">
+                        <h1>lorum ps</h1>
+                    </slot>
+                </template>
+                <template if:true={isMarine}>
+                    <slot name="marine">
+                        <h1>lorum marine</h1>
+                    </slot>
+                </template>
+                <template if:true={isBody}>
+                    <slot name="body">
+                        <h1>lorum body</h1>
+                    </slot>
+                </template>
+                <template if:true={isAcuraHonda}>
+                    <slot name="acurahonda">
+                        <h1>lorum body</h1>
+                    </slot>
+                </template>
+                <div slot="footer"></div>
+            </div>
+        </lightning-card>
+    </div>
+</template>

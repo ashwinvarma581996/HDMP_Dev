@@ -1,0 +1,360 @@
+<template>
+    <template if:true={isLoading}>
+        <div>
+            <lightning-spinner variant="brand" alternative-text="Loading" size="large"></lightning-spinner>
+        </div>
+    </template>
+    <div class="checkoutPage slds-m-top_large">
+        <div class="slds-grid slds-wrap">
+            <div class="slds-col absoluteCenter allBorders tabHeight slds-m-around_medium">Checkout Summary</div>
+            <div class="slds-col absoluteCenter allBorders greyColor tabHeight slds-m-around_medium">Confirmation</div>
+        </div>
+        <div>
+            <template for:each={cartItems} for:item="item">
+                <div class="slds-grid slds-m-around_medium slds-border_bottom slds-p-top_small" key={item.Id}>
+                    <div class="slds-col slds-m-vertical_medium">
+                        <div class="slds-text-heading_medium slds-grid">
+                            <div class="slds-col slds-p-right_medium">
+                                <div class="slds-p-bottom_small">{item.Name}</div>
+                                <div class="slds-text-heading_small">
+                                    <template if:true={item.isMotocompacto}>Product </template>
+                                    <!-- Below template if:false={item.isCoreCharge} added by ashwin for 19505 -->
+                                    <template if:false={item.isCoreCharge}>
+                                        <template if:false={item.isMotocompacto}>{item.Product_Type__c} </template>
+                                    </template>
+                                    <!-- Below template if:true={item.isCoreCharge} added by ashwin for 19505 -->
+                                    <template if:true={item.isCoreCharge}>Part </template>
+                                    Number: {item.Product2.StockKeepingUnit}
+                                </div>
+                                <span class="slds-text-heading_small">Dealer Price: <span
+                                        class="slds-text-heading_small textRed">
+                                        <lightning-formatted-number value={item.ListPrice} format-style="currency"
+                                            currency-code="USD" currency-display-as="symbol"
+                                            minimum-fraction-digits="2"></lightning-formatted-number>
+                                        <br /></span></span>
+                                <div if:true={item.Color__c} class="slds-text-heading_small">
+                                    Color: {item.Color__c}
+                                </div>
+                                <!-- Added below Core charge condition as fix of 18465-->
+                                <template if:false={item.isCoreCharge}>
+                                    <div if:true={pickUpDealer} class="slds-text-heading_small">
+                                        Delivery: Pick up at dealer
+                                    </div>
+                                </template>
+                                <div if:true={isShiptoMe} class="slds-text-heading_small">
+                                    Delivery: Will ship to Customer
+                                </div>
+                                <div if:true={isDealerIntallation} class="slds-text-heading_small">
+                                    Delivery: Install At Dealer
+                                </div>
+                                <div class="slds-text-heading_small">
+                                    Quantity: {item.Quantity}
+                                </div>
+                                <div class="slds-text-heading_small">
+                                    <a href="https://automobiles.honda.com/images/downloads/prop-65-consumer-website-statement.pdf"
+                                        target="_blank"
+                                        class="slds-text-color_destructive slds-m-top_x-large slds-m-bottom_x-large">California
+                                        Proposition 65 Warning</a>
+                                    <!--added by Yashika for 8708-->
+                                    <p if:true={item.Product_Model_Marketing_Name__c}>
+                                        <img if:false={item.isMotocompacto} src={carImage}
+                                            style="width:60px; margin-left:-8px;">
+                                        <lightning-icon if:true={item.isMotocompacto}
+                                            icon-name="utility:transport_bicycle" size="small"
+                                            class="slds-p-top_x-small" alternative-text="Moto Compacto"
+                                            title="Moto Compacto" style="margin-right: 10px;">
+                                        </lightning-icon>
+                                        {item.Product_Model_Marketing_Name__c}
+                                    </p>
+                                    <template if:false={item.isMotocompacto}>
+                                        <div if:true={item.Product_Identifier__c} class="slds-text-heading_small">
+                                            VIN: {item.Product_Identifier__c}
+                                        </div>
+                                    </template>
+                                    <div if:true={item.isMotocompacto}
+                                        class="slds-text-heading_small slds-m-top_medium slds-text-color_destructive"
+                                        style="cursor:pointer" onclick={openDisclaimerPopup}>
+                                        Product Disclaimer
+                                    </div>
+                                    <!--Saravanan LTIM Added if True for 16456 , 17170-->
+                                    <a if:true={item.isCoreCharge} data-id={CoreChargeDisclaimerValue}
+                                        onclick={handleDisclamerPopup}
+                                        style="color: rgb(234, 0, 30);font-size:14px;"><u>What is a core
+                                            charge?</u></a>
+                                </div>
+                            </div>
+                            <div class="slds-col slds-m-top_xx-large" style="text-align:end;">
+                                <div>Subtotal </div>
+                                <lightning-formatted-number value={item.TotalAmount} format-style="currency"
+                                    currency-code="USD" currency-display-as="symbol"
+                                    minimum-fraction-digits="2"></lightning-formatted-number>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </template>
+        </div>
+
+        <!-- Dealer Installation Added by Faraz for HDMP-5428 Start here R2 Story-->
+        <div if:true={isDealerIntallation}
+            class="slds-m-around_medium slds-text-heading_large slds-border_bottom slds-p-bottom_medium slds-p-top_large">
+            Installation</div>
+        <div if:true={isDealerIntallation} class="slds-m-horizontal_medium">
+            <div class="slds-grid slds-wrap">
+                <div class="slds-size_1-of-2 slds-p-right_medium">
+                    <div>
+                        <b>
+                            <div class="slds-text-heading_small slds-p-bottom_small">{installationInfoNoteLabel}</div>
+                        </b>
+                        <div class="slds-text-heading_small">{installationInfoLabel}</div>
+                    </div>
+                    <div class="slds-text-heading_small slds-p-top_medium"><b>{dealerName}</b></div>
+                    <div class="slds-text-heading_small">{showAddress.shippingStreet}</div>
+                    <div class="slds-text-heading_small">{showAddress.shippingCity}, {showAddress.shippingState}
+                        {showAddress.postalCode}</div>
+                    <div if:true={showAddress.Phone} class="slds-text-heading_small"><lightning-formatted-phone
+                            value={showAddress.Phone}></lightning-formatted-phone></div>
+                    <div if:true={showAddress.Email} class="slds-text-heading_small">{showAddress.Email}</div>
+                </div>
+                <div class="slds-size_1-of-2 font-h5" style="text-align:end;">
+                    <lightning-formatted-number value={totalInstallationCharge} format-style="currency"
+                        currency-code="USD" currency-display-as="symbol"
+                        minimum-fraction-digits="2"></lightning-formatted-number>
+                </div>
+            </div>
+        </div>
+        <!-- End here -By Faraz HDMP-5428 R2 Story -->
+
+        <div
+            class="slds-m-around_medium slds-text-heading_large slds-border_bottom slds-p-bottom_medium slds-p-top_large">
+            Shipping</div>
+        <div class="slds-m-horizontal_medium">
+            <div class="slds-grid slds-wrap">
+                <div class="slds-size_10-of-12 slds-p-right_medium">
+                    <div if:true={pickUpDealer}>
+                        <div class="slds-text-heading_medium slds-p-bottom_small">Pickup at Dealer</div>
+                        <div class="slds-text-heading_small">{dealerName}</div>
+                        <div class="slds-text-heading_small">{showAddress.shippingStreet}</div>
+                        <div class="slds-text-heading_small">{showAddress.shippingCity}, {showAddress.shippingState}
+                            {showAddress.postalCode}</div>
+                        <div if:true={showAddress.Phone} class="slds-text-heading_small"><lightning-formatted-phone
+                                value={showAddress.Phone}></lightning-formatted-phone></div>
+                        <div if:true={showAddress.Email} class="slds-text-heading_small">{showAddress.Email}</div>
+                    </div>
+                    <div if:true={isShiptoMe}>
+                        <div class="slds-text-heading_medium slds-p-bottom_small">{customerName}</div>
+                        <div if:true={showAddress.shippingPhone} class="slds-text-heading_small">
+                            <lightning-formatted-phone value={showAddress.shippingPhone}></lightning-formatted-phone>
+                        </div>
+                        <div class="slds-text-heading_small">
+                            {showAddress.shippingStreet}
+                        </div>
+                        <div class="slds-text-heading_small">
+                            {showAddress.shippingCity}, {showAddress.shippingState} {showAddress.postalCode}
+                        </div>
+                    </div>
+
+                    <!-- Added by : Bhawesh Asudani for R2 Story : 4726 - Start -->
+                    <!--Commented for UI changes-->
+                    <div if:true={isShiptoMe}>
+                        <template if:true={ShippingSpeedOptions}>
+                            <!-- if:false={showTaxAndTotalAmout} Added by ashwin for tax 19465  -->
+                            <lightning-radio-group if:false={showTaxAndTotalAmout} name={shippingSpeedTitle}
+                                label={shippingSpeedTitle} options={ShippingSpeedOptions} value={selectedShippingSpeed}
+                                onchange={handleOnChangeShippingSpeed} type="radio">
+                            </lightning-radio-group>
+                        </template>
+                    </div>
+                    <!-- Added by : Bhawesh Asudani for R2 Story : 4726 - End -->
+                </div>
+                <!-- below if:false={showTaxAndTotalAmout} Added by ashwin for tax 19465  -->
+                <div if:false={showTaxAndTotalAmout} class="slds-size_2-of-12 slds-text-heading_small font-h5"
+                    style="text-align:end;">
+                    <lightning-formatted-number value={shippingCharges} format-style="currency" currency-code="USD"
+                        currency-display-as="symbol" minimum-fraction-digits="2"></lightning-formatted-number>
+                </div>
+            </div>
+        </div>
+
+        <div class="slds-m-around_medium slds-text-heading_large slds-border_bottom slds-p-bottom_medium">Dealer Info
+        </div>
+        <div class="slds-grid slds-m-horizontal_medium">
+            <div class="slds-size_12-of-12 slds-p-right_medium ">
+                <div class="slds-text-heading_small">{dealerName}</div>
+                <div class="slds-text-heading_small">{dealerAddress.shippingStreet}</div>
+                <div class="slds-text-heading_small">{dealerAddress.shippingCity}, {dealerAddress.shippingState}
+                    {dealerAddress.postalCode}</div>
+                <lightning-formatted-phone value={dealerContactNumber}></lightning-formatted-phone>
+                <div class="slds-text-heading_small"> {dealerContactEmail}</div>
+                <br />
+                <div class="slds-text-heading_small">Contact: {dealerLabel}</div>
+                <template if:true={dealerOperationHours} for:each={dealerOperationHours} for:item="hour">
+                    <div class="slds-text-heading_small" key={hour}>{hour}</div>
+                </template>
+            </div>
+        </div>
+
+        <!--Abhishek 16460-->
+        <br />
+        <div class="slds-p-left_small">
+            <a class="disc-popup" onclick={handleDisclamerPopup} data-id="Terms_and_Conditions_of_sale"><u>Terms and
+                    Conditions of
+                    Sale</u></a>
+            <br />
+            <a class="disc-popup" onclick={handleDisclamerPopup} data-id="Return_Policy"><u>Dealer Return
+                    Policy</u></a>
+        </div>
+
+        <div
+            class="slds-m-top_xx-large slds-m-left_medium slds-m-right_medium slds-m-bottom_medium slds-text-heading_large slds-border_bottom slds-p-bottom_medium">
+            Taxes</div>
+        <!-- if:false={showTaxAndTotalAmout} Added by ashwin for tax 19465  -->
+        <div if:false={showTaxAndTotalAmout}
+            class="slds-m-around_medium slds-m-horizontal_small slds-text-heading_small">
+            <div class="slds-grid slds-wrap">
+                <div class="slds-col slds-p-right_medium">
+                    <div class="slds-text-heading_small"> Tax</div>
+                </div>
+                <div class="slds-col slds-text-heading_small font-h5" style="text-align:end;">
+                    <lightning-formatted-number value={totalTaxStr} format-style="currency" currency-code="USD"
+                        currency-display-as="symbol" minimum-fraction-digits="2"></lightning-formatted-number>
+                </div>
+            </div>
+            <div style="text-align:end;" class="slds-text-heading_medium  slds-p-top_small font-h5">Total Amount</div>
+            <div style="text-align:end;" class="textRed font-h5">
+                <lightning-formatted-number value={finalAmountStr} format-style="currency" currency-code="USD"
+                    currency-display-as="symbol" minimum-fraction-digits="2"></lightning-formatted-number>
+            </div>
+            <!-- Added by Faraz on 01/08/2022 for HDMP-11659 -->
+            <!-- <div class="slds-m-bottom_large slds-m-top_medium">
+                <b>Return Policy</b><br/><br/>
+                <span>{dealerReturnPolicy}</span>
+            </div>-->
+            <!-- End 11659 -->
+        </div>
+
+        <div class="custom-box">
+            <lightning-layout multiple-rows>
+                <lightning-layout-item padding="around-small" size="6" large-device-size="6">
+                    <div class="custom-box">
+                        <lightning-button variant="neutral" label="Go Back" title="Go Back"
+                            onclick={handleBackClick}></lightning-button>
+                    </div>
+                </lightning-layout-item>
+                <lightning-layout-item padding="around-small" size="6" large-device-size="6">
+                    <div class="custom-box" style="float: right;">
+                        <!-- Saravanan LTIM Added disabled properties for 18902 , 18901 -->
+                        <lightning-button disabled={diabledButton} variant="brand" label="Process Payment"
+                            title="Process Payment" onclick={handleProcessPaymentClick}></lightning-button>
+                    </div>
+                </lightning-layout-item>
+            </lightning-layout>
+        </div>
+    </div>
+
+
+
+    <!-- error popup start -->
+    <template if:true={showErrorPopup}>
+        <!-- Modal/Popup Box LWC starts here -->
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+            aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container bar-modal">
+                <!-- Modal/Popup Box LWC header here -->
+                <header class="slds-modal__header">
+                    <div class="slds-grid slds-gutters">
+                        <div class="slds-text-heading_medium slds-col slds-size_12-of-12">
+                            <span class="slds-align_absolute-center"><b>Payment Issue</b> </span>
+                        </div>
+                    </div>
+                </header>
+
+                <!-- model body -->
+                <div class="slds-modal__content slds-p-around_medium">
+                    <div class="custom-box">
+                        <div class="custom-box slds-align_absolute-center">We're sorry there was a problem processing
+                            your payment.</div>
+                        <div class="custom-box slds-align_absolute-center">Please select a different payment method and
+                            try again.</div>
+                    </div>
+                </div>
+
+                <footer class="slds-modal__footer">
+                    <div class="custom-box" style="float: right;"><lightning-button variant="brand" label="Continue"
+                            title="Continue" onclick={handleBackClick}></lightning-button></div>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+    <!-- error popup end -->
+
+    <template if:true={openErrorModal}>
+        <!-- Modal/Popup Box LWC starts here -->
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+            aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container bar-modal">
+                <!-- Modal/Popup Box LWC header here -->
+                <header class="slds-modal__header">
+                    <div class="slds-grid slds-gutters">
+                        <div class="slds-text-heading_medium slds-col slds-size_12-of-12">
+                            <span class="slds-align_absolute-center"><b>Payment Issue</b> </span>
+                        </div>
+                    </div>
+                </header>
+
+                <!-- model body -->
+                <div class="slds-modal__content slds-p-around_medium">
+                    <div class="custom-box">
+                        <div class="custom-box slds-align_absolute-center">We're sorry there was a problem processing
+                            your payment.</div>
+                        <div class="custom-box slds-align_absolute-center">Please select a different payment method and
+                            try again.</div>
+                    </div>
+                </div>
+
+                <footer class="slds-modal__footer">
+                    <div class="custom-box" style="float: right;"><lightning-button variant="brand" label="Continue"
+                            title="Continue" onclick={handleBackClick}></lightning-button></div>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+
+    <!-- Abhishek 16460 -->
+    <!--<template if:true={showTermsModal}>
+        <c-disclaimer-popup mdt-record-id={metadatarecid} onclose={handleShowHide}></c-disclaimer-popup>
+    </template>
+    <template if:true={showDealerModal}>
+        <c-disclaimer-popup mdt-record-id={metadatarecid} onclose={handleShowHide}></c-disclaimer-popup>
+    </template>-->
+
+    <template if:true={showDealerModal}>
+        <c-disclaimer-popup modaltype={disclaimerType} dealer-return-policy-markup={dealerReturnPolicyMarkup}
+            onclose={handleShowHide}></c-disclaimer-popup>
+    </template>
+
+    <template if:true={showDisclaimerMarkup}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-03" aria-modal="true"
+            aria-describedby="modal-content-id-2" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header disclaimer-model-header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                        title="Close" onclick={closeDisclaimerPopup}>
+                        <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse"
+                            size="small"></lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h3 id="modal-heading-03" class="slds-p-top_small slds-hyphenate font-h5">Product Disclaimer</h3>
+                    <br />
+                </header>
+                <div class="slds-modal__content slds-p-horizontal_medium slds-p-bottom_xx-large"
+                    id="modal-content-id-3">
+                    <lightning-formatted-rich-text value={disclaimerMarkup}></lightning-formatted-rich-text>
+                </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>

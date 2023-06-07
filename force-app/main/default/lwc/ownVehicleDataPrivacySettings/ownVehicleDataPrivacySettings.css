@@ -1,0 +1,138 @@
+.container{
+    padding-top: 5px;
+    padding-bottom: 50px;
+}
+.heading-1,.heading-2{
+    font-weight: 900;
+    font-size: 16px;
+    line-height: 24px;
+    text-transform: uppercase;
+    color: #000000;
+}
+.heading-1{
+    margin-top: 4%;
+}
+.text-content{
+    font-style: normal;
+    letter-spacing: 0.02em;
+    color: #000000;
+    margin-top: 15px;
+}
+.link-1,.link-2 {
+    font-style: normal;
+    font-weight: 900;
+    color: #E42525;
+}
+.learn-more-div-1{
+    padding-top: 20px;
+}
+.learn-more-div-2{
+    padding-top: 30px;
+}
+.heading-2{
+    padding-top: 30px;
+}
+@media only screen and (min-width: 905px) {
+    .section-1,.section-2,.section-3{
+        width: 33%;
+    }
+    .btn-div-space{
+        width: 4%;
+    }
+    .btn-div-1, .btn-div-2{
+        width: 48%;
+    }
+    .phone-mobile{
+        display: none;
+    }
+    .phone-desktop{
+        display: block;
+    }
+    .page-header-container{
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+}
+@media only screen and (max-width: 904px) {
+    .section-1,.section-3{
+        width: 1%;
+    }
+    .section-2{
+        width: 98%;
+    }
+    .btn-div-1, .btn-div-2{
+        width: 100%;
+    }
+    .btn-div-2{
+        padding-top: 16px   
+    }
+    .phone-mobile{
+        display: block;
+    }
+    .phone-desktop{
+        display: none;
+    }
+    .page-header-container{
+        padding-left: 1%;
+        padding-right: 1%;
+    }
+}
+.head-1{
+    font-style: normal;
+    font-weight: bold;
+    font-size: 13px;
+    line-height: 20px;
+    color: #000000;
+    margin-top: 4%;
+}
+.text-1{
+    padding-top: 25px;
+}
+.img-div{
+    padding-top: 25px;
+}
+.image{
+    height: auto;
+    width: 100%;
+}
+.buttons-div{
+    padding-top: 30px;
+}
+.btn-1{
+    background: #E42525;
+    border-radius: 2px;
+    height: 38px;
+    width: 100%;
+    border: none;
+    color: #FFFFFF;
+    font-weight: 900;
+    font-size: 13px;
+    line-height: 24px;
+}
+.btn-2{
+    border: 2px solid #E42525;
+    color: #E42525;
+    background: #FFFFFF;
+    border-radius: 2px;
+    font-weight: 900;
+    font-size: 13px;
+    line-height: 24px;
+    height: 38px;
+    width: 100%;
+}
+.phone-mobile {
+    font-style: normal;
+    font-weight: 900;
+    color: #E42525;
+}
+.phone{
+    padding-top: 15px;
+}
+.learn-more-link{
+    border: none;
+    outline: none;
+    background-color: white;
+}
+.learn-more-link:hover{
+    text-decoration: underline;
+}

@@ -1,0 +1,13 @@
+.THIS .content_class {
+    padding : 0px 80px;
+
+}
+.THIS .cb-section_column:first-child {
+    padding: 16px 16px 8px 16px !important;
+}
+@media only screen and (max-width: 600px){
+    .THIS .content_class {
+        padding : 0px 8px;
+    
+    }
+}

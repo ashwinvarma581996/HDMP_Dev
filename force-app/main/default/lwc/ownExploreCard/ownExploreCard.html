@@ -1,0 +1,15 @@
+<template>
+    <lightning-layout multiple-rows>
+        <lightning-layout-item class="card-sizes" size="12" small-device-size="12" medium-device-size="12"
+        large-device-size="12">
+            <div class="explore-card-large">
+                <div><img class="image-resize" src={desktopImage}  /></div>
+                <div class="image-label-desktop" onclick={handleClick}>Explore {imageLabel}</div>
+            </div>
+            <div class="explore-card-small">
+                <div><img class="image-resize" src={mobileImage}  /></div>
+                <div class="image-label-mobile" onclick={handleClick}>Explore<br/>{imageLabel}</div>
+            </div>
+        </lightning-layout-item>
+    </lightning-layout>
+</template>

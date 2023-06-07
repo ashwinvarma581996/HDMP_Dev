@@ -1,0 +1,192 @@
+<template>
+  <footer class="footer">
+    <div class="containerWrapper slds-container_center">
+
+
+      <div class="footer__addr">
+        <!-- <h1 class="footer__logo">DREAM SHOP</h1> -->
+      </div>
+
+      <div class="slds-grid slds-wrap">
+        <div
+          class="slds-col slds-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 slds-order_1 slds-m-bottom_x-large">
+          <ul class="slds-has-inline-block-links_space">
+            <li><strong>Dreamshop </strong></li>
+            <li>&nbsp;</li>
+            <li>&nbsp;</li>
+            <li>
+              <!--<a href="https://qa-hondamarketplace.cs34.force.com/s/faq" >FAQ</a>-->
+              <a onclick={handleAdobeClick} data-click-type="other click" data-label="FAQ" data-url="/s/faq"
+                data-action-category="global footer link">FAQ</a>
+            </li>
+            <li>
+              <a href="https://www.honda.com/contact" target="_blank" onclick={handleAdobeClick} data-label="Contact Us"
+                data-url="https://www.honda.com/contact" data-click-type="exit link"
+                data-action-category="exit link">Contact Us</a>
+            </li>
+
+            <li>
+              <a href="https://automobiles.honda.com/" target="_blank" onclick={handleAdobeClick}
+                data-label="Honda Autos" data-click-type="exit link" data-action-category="exit link"
+                data-url="https://automobiles.honda.com/">Honda Autos</a>
+            </li>
+            <li>
+              <a href="https://www.acura.com/" target="_blank" onclick={handleAdobeClick} data-label="Acura Autos"
+                data-url="https://www.acura.com/" data-click-type="exit link" data-action-category="exit link">Acura
+                Autos</a>
+            </li>
+            <li>
+              <a onclick={handleAdobeClick} data-click-type="other click" data-label="Find My Order"
+                data-url={sfdcBaseURL} data-action-category="global footer link">Find My
+                Order</a>
+            </li>
+            <li>
+              <!-- HDMP-16547, 16479-Ashwin-Start added data Id for bug 17421-->
+              <a onclick={openPdf} data-id="part_and_accessory_warranty">Parts and Accessory Warranty</a>
+            </li>
+            <li>
+              <a onclick={openPdf} target="_blank" data-id="return_policy">Return Policy</a>
+              <!-- HDMP-16547, 16479-Ashwin-End -->
+            </li>
+
+            <!-- <a href="https://dev-hondamarketplace.cs17.force.com/s/findorder"><button title="Find My Order" type="button" class="slds-button slds-button_brand">Find My Order</button></a> -->
+
+          </ul>
+        </div>
+        <div
+          class="slds-col slds-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 slds-order_3 slds-m-bottom_x-large">
+          <ul class="slds-has-inline-block-links_space">
+            <li><strong>Owners </strong></li>
+            <li>&nbsp;</li>
+            <li>&nbsp;</li>
+            <li>
+              <a href="http://owners.honda.com/" target="_blank" onclick={handleAdobeClick}
+                data-label="Honda Owners Site" data-click-type="exit link" data-action-category="exit link"
+                data-url="http://owners.honda.com/">Honda Owners
+                Site </a>
+            </li>
+            <li>
+              <a href="http://owners.acura.com/" target="_blank" onclick={handleAdobeClick}
+                data-url="http://owners.acura.com/" data-action-category="exit link" data-label="Acura Owners Site"
+                data-click-type="exit link">Acura Owners
+                Site</a>
+            </li>
+            <li>
+              <a href="https://radio-navicode.honda.com/" target="_blank" data-action-category="exit link"
+                data-url="https://radio-navicode.honda.com/" onclick={handleAdobeClick} data-label="Radio &amp; Navi
+                Codes" data-click-type="exit link">Radio &amp; Navi
+                Codes</a>
+            </li>
+            <li>
+              <a href="https://mygarage.honda.com/s/hondalink-marketing" data-action-category="exit link"
+                data-url="https://mygarage.honda.com/s/hondalink-marketing" target="_blank" data-click-type="exit link"
+                data-label="HondaLink" onclick={handleAdobeClick}>HondaLink®</a>
+            </li>
+            <li>
+              <a href="https://mygarage.honda.com/s/acuralink-marketing" data-action-category="exit link"
+                data-url="https://mygarage.honda.com/s/acuralink-marketing" target="_blank" data-click-type="exit link"
+                data-label="AcuraLink" onclick={handleAdobeClick}>AcuraLink</a>
+            </li>
+            <!-- <li>
+        <a href="http://owners.honda.com/service-maintenance/scheduler" target="_blank">Schedule Service</a>
+      </li>
+      <li>
+        <a href="http://owners.honda.com/parts-service/" target="_blank">Parts and Service</a>
+      </li>
+      <li>
+        <a href="http://collision.honda.com/locator" target="_blank">Certified Body Shop Locator</a>
+      </li> -->
+          </ul>
+        </div>
+        <!--div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-large-size_3-of-12">
+    <ul class="slds-has-inline-block-links_space">
+      <li><strong>General</strong></li>
+      <li>
+        
+        <a  href={eStoreDealer} target="_blank">eStore Dealer Participation</a>
+      </li>
+      <li>
+        
+        <a  href={eStoreFaq} target="_blank">eStore Faq</a>
+      </li>
+      <li>
+        < <a href="#">Power Equipment</a> >
+        <a  href={eStoreTC} target="_blank">eStore Terms & Condition</a>
+      </li>
+      
+  </ul>
+  </div-->
+        <div
+          class="slds-col slds-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 slds-order_2 slds-m-bottom_x-large">
+          <ul class="slds-has-inline-block-links_space">
+            <li><strong>General</strong></li>
+            <li>&nbsp;</li>
+            <li>&nbsp;</li>
+            <!-- <li>
+        <a href="https://dev-hondamarketplace.cs17.force.com/s/privacy-policy">Cookie Policy</a>
+      </li> -->
+            <li>
+              <a href="https://www.honda.com/privacy/privacy-notice" target="_blank" onclick={handleAdobeClick}
+                data-url="https://www.honda.com/privacy/privacy-notice" data-label="Privacy notice"
+                data-click-type="other click" data-action-category="global footer privacy">Privacy Notice </a>
+            </li>
+            <li>
+              <a href="https://www.honda.com/-/media/Honda-Homepage/PDF/Proposition-65-Consumer-Website-Statement-072518.pdf"
+                data-url="https://www.honda.com/-/media/Honda-Homepage/PDF/Proposition-65-Consumer-Website-Statement-072518.pdf"
+                data-label="Prop 65 Info" target="_blank" onclick={handleAdobeClick} data-click-type="prop 65"
+                data-action-category="global footer privacy">Prop
+                65
+                Info</a>
+            </li>
+            <li>
+              <a href="https://www.honda.com/privacy/connected-product-privacy-notice" target="_blank"
+                data-url="https://www.honda.com/privacy/connected-product-privacy-notice"
+                data-label="Vehicle Data Privacy" onclick={handleAdobeClick}
+                data-action-category="global footer privacy" data-click-type="other click">Vehicle Data
+                Privacy</a>
+            </li>
+            <li>
+              <a href="https://www.honda.com/privacy/sms-terms" data-url="https://www.honda.com/privacy/sms-terms"
+                data-action-category="global footer privacy" data-label="SMS Terms" target="_blank"
+                onclick={handleAdobeClick} data-click-type="other click">SMS
+                Terms</a>
+            </li>
+            <li>
+              <a href="https://www.honda.com/privacy/terms-and-conditions" target="_blank" onclick={handleAdobeClick}
+                data-url="https://www.honda.com/privacy/terms-and-conditions"
+                data-action-category="global footer privacy" data-label="Terms &amp; Conditions"
+                data-click-type="other click">Terms
+                &amp; Conditions</a>
+            </li>
+            <li>
+              <a href="https://www.honda.com/privacy/your-privacy-choices" target="_blank"
+                data-url="https://www.honda.com/privacy/your-privacy-choices"
+                data-action-category="global footer privacy" data-label="Your Privacy Choices"
+                data-click-type="other click" onclick={handleAdobeClick}>Your Privacy Choices
+                &nbsp;<img src={privacyOptionIcon}/>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="slds-grid slds-grid_align-center copyright">
+      <p>
+        We use cookies to improve your experience on this site and show you personalized advertising. To find out more,
+        read our &nbsp;
+        <a href="https://www.honda.com/privacy/privacy-notice#cookies" target="_blank" onclick={handleAdobeClick}
+          data-click-type="other click" data-url="https://www.honda.com/privacy/privacy-notice#cookies"
+          data-action-category="global footer privacy" data-label="cookie policy">cookie policy</a>.
+      </p>
+    </div>
+    <div class="slds-grid slds-grid_align-center copyright">
+      <p>©{currentYear} <a href="https://www.honda.com/" target="_blank" onclick={handleAdobeClick} data-click-type="exit link"
+          data-url="https://www.honda.com/" data-action-category="exit link"
+          data-label="American Honda Motor Co., Inc."> American Honda Motor Co., Inc.</a> All information
+        contained herein applies to U.S. vehicles only. For non-U.S.-distributor information go to <a
+          href="https://global.honda/" target="_blank" onclick={handleAdobeClick} data-click-type="exit link"
+          data-url="https://global.honda/" data-action-category="exit link" data-label="world.honda.com">
+          world.honda.com</a>.</p>
+    </div>
+  </footer>
+</template>

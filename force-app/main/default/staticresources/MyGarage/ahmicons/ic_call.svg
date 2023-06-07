@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="100px" height="100px" viewBox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 42 (36781) - http://www.bohemiancoding.com/sketch -->
+    <title>ic_call</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="79.5866716%" y1="100%" x2="79.5866728%" y2="0%" id="linearGradient-1">
+            <stop stop-color="#272B2F" offset="0%"></stop>
+            <stop stop-color="#474B50" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-2">
+            <stop stop-color="#505358" offset="0%"></stop>
+            <stop stop-color="#2C2F33" offset="100%"></stop>
+        </linearGradient>
+        <rect id="path-3" x="0" y="0" width="100" height="100" rx="2"></rect>
+        <mask id="mask-4" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="100" height="100" fill="white">
+            <use xlink:href="#path-3"></use>
+        </mask>
+    </defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="ic_call">
+            <g id="LINK-Copy">
+                <use id="Rectangle-3" stroke="url(#linearGradient-2)" mask="url(#mask-4)" stroke-width="2" fill="url(#linearGradient-1)" xlink:href="#path-3"></use>
+                <g id="ic_call" transform="translate(25.252525, 25.252525)">
+                    <rect id="bounds" fill="#FF0000" opacity="0" x="0" y="0" width="50.5050505" height="50.5050505"></rect>
+                    <path d="M31.9586332,26.4181291 C31.9586332,28.5770156 30.2100328,30.325616 28.0511462,30.325616 L17.3954293,30.325616 C15.2384965,30.325616 13.4879423,28.5770156 13.4879423,26.4181291 L13.4879423,22.4793822 C13.4879423,21.2289864 12.5833591,20.1622425 11.350547,19.9590531 L4.65116056,18.8512806 C3.09598075,18.5933864 1.67951673,19.7929849 1.67951673,21.3716097 C1.67951673,28.924782 7.8025488,35.047814 15.3557211,35.047814 L30.0908544,35.047814 C37.6440267,35.047814 43.7670588,28.924782 43.7670588,21.3716097 C43.7670588,19.7929849 42.3525485,18.5933864 40.795415,18.8512806 L34.0960286,19.9590531 C32.8632164,20.1622425 31.9586332,21.2289864 31.9586332,22.4793822 L31.9586332,26.4181291 Z" id="Fill-1" fill-opacity="0.869876585" fill="#FFFFFF" transform="translate(22.723288, 26.932042) rotate(-315.000000) translate(-22.723288, -26.932042) "></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

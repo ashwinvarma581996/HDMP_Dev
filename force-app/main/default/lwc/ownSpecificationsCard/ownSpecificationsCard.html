@@ -1,0 +1,25 @@
+<!-- //============================================================================
+// Title:    Honda MyGarage Experience - Promotional Hero
+//
+// Summary:  This is the CMS Card html seen at the page of the Honda MyGarage Community
+//
+// Details:  CMS Card for pages
+//
+// History:
+// October 18, 2021 Arunprasad N (Wipro) Original Author 
+//=========================================================================== -->
+<template>
+    <div  class={cardDivClass}>
+        <div class="card card-size card-styles-wrapper">
+            <lightning-card class="card-styles">
+                <div slot="title" class="slds-truncate" onclick={handleHeader} role="link" tabindex="0">
+                    <img src={icon} class="slds-p-right_small custom-icon">
+                    <span class={titleClass}>{title}</span>
+                </div>
+                <div class={bodyClass}>
+                    {body}
+                </div>
+            </lightning-card>
+        </div>
+    </div>
+</template>

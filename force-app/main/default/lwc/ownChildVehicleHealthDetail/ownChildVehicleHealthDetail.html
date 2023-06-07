@@ -1,0 +1,16 @@
+<template>
+
+    <template for:each={vehiclestautsubscategory} for:item="vsc">
+        <div key={vsc.Id}>
+        <div class="slds-grid slds-grid_align-spread status-detail">
+            <label>{vsc.SubCategory_Name__c}</label>
+            <template if:true={vsc.hasIcon}>
+                <i class={vsc.iconClass} aria-hidden="true"></i>
+            </template>
+            <!-- <i class="fa fa-lg fa-check check_icon" aria-hidden="true"></i> -->
+            <!-- <i class="fa fa-lg fa-wrench wrench_icon" aria-hidden="true"></i> -->
+        </div>
+        </div>
+    </template>
+    
+</template>

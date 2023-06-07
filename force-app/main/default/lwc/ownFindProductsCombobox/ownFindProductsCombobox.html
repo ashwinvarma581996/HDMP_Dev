@@ -1,0 +1,8 @@
+<template>
+    <div>
+        <span class=own-combobox-label>{dropdown.controlData.Tier_Name__c}</span>
+        <lightning-combobox class="find-brand-combobox slds-m-top_xx-small" name={dropdown.controlData.Tier_Name__c}
+            label={dropdown.controlData.Tier_Name__c} variant="label-hidden" value={value} placeholder={placeholderText}
+            options={dropdownOptions} onchange={handleSelect} disabled={comboboxDisabled}></lightning-combobox>
+    </div>
+</template>

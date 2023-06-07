@@ -1,0 +1,25 @@
+<apex:page sidebar="false" showHeader="false" controller="DisplayCartItemsCtrl">
+    <style>
+    	.m-disclaimer{
+        	font-size: 15px;
+        	border: 1px solid;
+        	padding: 10px;
+        	margin: 30px 100px;
+        }
+        .mh-disclaimer{
+        	margin-top: 50px;
+        }
+        @media only screen and (max-width: 768px) {
+			.m-disclaimer{
+        		margin: 30px;
+       		}
+            .mh-disclaimer{
+            	margin-top: 110px;
+        	}
+		}
+    </style>
+    <center class="mh-disclaimer"><h3 class="slds-p-top_small slds-hyphenate" style="text-align: center;font-size: 20px;text-decoration: underline;">Product Disclaimer</h3></center>
+    <div class="m-disclaimer">
+        <apex:outputText escape="false" value="{!MotocompactoMarkupMdt}" ></apex:outputText>
+    </div>
+</apex:page>

@@ -1,0 +1,80 @@
+.main-container {
+    padding : 0px 84px 0px 0px;
+}
+
+.section-title {
+    font-family: Roboto;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 900;
+    line-height: 26px;
+    letter-spacing: 0.02em;
+    text-align: left;
+}
+
+.section-body {
+    display: flex;
+}
+
+.sign-div {
+    width: 20%;
+}
+
+.contant {
+    font-family: Roboto;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 26px;
+    letter-spacing: 0em;
+    text-align: left;
+}
+
+.contant-disable {
+    color: #ACACAC;
+}
+.error-message {
+    font-family: Roboto;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 900;
+    line-height: 20px;
+    letter-spacing: 1px;
+    text-align: center;
+    color: #767676;
+}
+/* small */
+@media only screen and (max-width: 600px) {
+    .main-container {
+        padding : 0px 0px 0px 0px;
+    }
+
+    .section-title {
+        font-family: Roboto;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 900;
+        line-height: 24px;
+        letter-spacing: 0.04em;
+        text-align: left;
+    }
+
+    .contant {
+        font-family: Roboto;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 300;
+        line-height: 24px;
+        letter-spacing: 0em;
+        text-align: left;
+    }
+
+    .section-body {
+        display: block;
+    }
+
+    .sign-div {
+        width: 100%;
+        padding-bottom: 10px;
+    }
+}

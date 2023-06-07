@@ -1,0 +1,56 @@
+.hondabutton {
+    float: right;
+    margin-top: 40px;
+}
+
+.customIcon {
+    width: 35px;
+    margin-left: -6px;
+    margin-top: 4px;
+    cursor: pointer;
+}
+
+.mapInline {
+    display: flex;
+    align-items: center;
+}
+
+.mapTitle {
+    margin-top: 5px;
+    cursor: pointer;
+    margin-left: -5px;
+}
+
+.textRed {
+    color: #e42525;
+}
+
+.modal-content__overflow {
+    padding: 10px;
+    border: 1px solid #696969;
+    max-height: 350px;
+    overflow-y: auto;
+}
+
+.mapModal .slds-modal__container {
+    width: 60%;
+    max-width: 50rem;
+    min-height: 600px;
+}
+
+.mapModal iframe {
+    height: 400px;
+}
+
+.mapModal header.slds-modal__header {
+    border: 0;
+    padding: 0;
+}
+
+@media (max-width: 768px) {
+    .mapModal .slds-modal__container {
+        width: 85%;
+        max-width: 100%;
+        min-height: 600px;
+    }
+}

@@ -1,0 +1,69 @@
+.aboutCar span {
+    letter-spacing: 2px;
+}
+
+.aboutCar h2 {
+    line-height: 35px;
+}
+
+.aboutCarImg img {
+    object-fit: cover;
+    /* width: 400px;
+    height: 300px; */
+}
+
+.content1 {
+    padding-left: 100px !important;
+}
+
+.content2 {
+    padding-right: 100px !important;
+}
+
+.productName {
+    font-size: xx-large;
+}
+
+@media (min-width: 1200px) {
+    .aboutCarImg img {
+        width: 552px;
+        height: 414px;
+    }
+    .aboutCarImg {
+        padding: 0;
+    }
+}
+
+@media (max-width: 1170px) {
+    .content2.slds-medium-size_5-of-12.slds-order_2 {
+        padding: 0 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    .aboutCar .slds-text-align_right {
+        text-align: left;
+    }
+    .aboutCar .aboutCarImg {
+        order: 2;
+    }
+    .content1 {
+        padding-left: 12px !important;
+    }
+    .content2 {
+        padding-right: 12px !important;
+    }
+}
+
+@media (max-width: 420px) {
+    .aboutCarImg img {
+        width: 100%;
+        height: 210px;
+    }
+}
+@media (min-width: 767px) and (max-width: 1097px){
+    .motoBtn{
+    margin-bottom: 10px!important;
+    display: flex;
+    }
+}

@@ -1,0 +1,237 @@
+<!-- //============================================================================
+// Title:    Honda Owners Experience - Help Center
+//
+// Summary:  This is the category list html seen at the help center of the Honda Owner Community
+//
+// Details:  Extend the LightningElement with this Base Element to gain access to the Messaging Channel and other logic herein and this is the component for category list.
+//
+//
+// History:
+// June 16, 2021 Arunprasad N (Wipro) Original Author
+//=========================================================================== -->
+<template>
+    <div class="header-column">
+        <lightning-layout multiple-rows>
+            <template if:true={results}>
+                <lightning-layout-item padding="around-small" size="12">
+                    <c-own-help-center-breadcrumb brand={brand}></c-own-help-center-breadcrumb>
+                </lightning-layout-item>
+            </template>
+        </lightning-layout>
+        <div class="article-large article-questions">
+            <lightning-layout multiple-rows horizontal-align="center">
+                <lightning-layout-item size="8" padding="around-small">
+                    <lightning-layout multiple-rows>
+                        <template if:true={results}>
+                            <lightning-layout-item padding="around-small" size="12">
+                                <div class="category-label">
+                                    <span>{categoryLabel}</span>
+                                </div>
+                            </lightning-layout-item>
+                            <lightning-layout-item padding="around-small" size="12">
+                                <div class="article-title">
+                                    <span>{results.title}</span>
+                                </div>
+                            </lightning-layout-item>
+                            <lightning-layout-item padding="around-small" size="12">
+                                <div class="article-date">
+                                    <span>{results.lastPublishedDate} • {brandLabel} Answers</span>
+                                </div>
+                            </lightning-layout-item>
+                        </template>
+                        <template if:true={recordId}>
+                            <lightning-layout-item padding="around-small" size="12">
+                                <lightning-record-view-form object-api-name="Knowledge__kav" record-id={recordId}>
+                                    <lightning-output-field field-name="Article_Content__c" variant="label-hidden">
+                                    </lightning-output-field>
+                                </lightning-record-view-form>
+                            </lightning-layout-item>
+                        </template>
+                        <template if:false={isVoted}>
+                            <fieldset>
+                                <lightning-layout-item padding="around-small" size="12">
+                                    <div class="feedback-request-label">
+                                        <legend> <span>Was this article helpful?</span></legend>
+                                    </div>
+                                </lightning-layout-item>
+                                <lightning-layout-item class="slds-p-around_xx-small" size="12">
+                                    <lightning-layout>
+                                        <lightning-layout-item padding="around-small">
+                                            <button class="slds-button slds-button_outline-brand vote-button"
+                                                data-vote="true" onclick={handleVoteClick} aria-label="1 of 2 Yes">Yes</button>
+                                        </lightning-layout-item>
+                                        <lightning-layout-item padding="around-small">
+                                            <button class="slds-button slds-button_outline-brand vote-button"
+                                                data-vote="false" onclick={handleVoteClick}  aria-label="2 of 2 No">No</button>
+                                        </lightning-layout-item>
+                                    </lightning-layout>
+                                </lightning-layout-item>
+                            </fieldset>
+                        </template>
+                        <template if:true={isVoted}>
+                            <lightning-layout-item padding="around-small" size="12">
+                                <div class="feedback-request-text" aria-live="polite" role="alert">
+                                    <span>Thanks for your feedback</span>
+                                </div>
+                            </lightning-layout-item>
+                        </template>
+                        <template if:true={hasResults}>
+                            <lightning-layout-item padding="around-small" size="12">
+                                <div class="related-article-label">
+                                    <span>Related Articles</span>
+                                </div>
+                            </lightning-layout-item>
+                            <lightning-layout-item class="slds-p-around_xx-small" size="12">
+                                <ul class="slds-has-inline-block-links_space related-article-list">
+                                    <template for:each={relatedResults} for:item="relatedResult">
+                                        <li key={relatedResult.id} data-id={relatedResult.id}
+                                            data-urlname={relatedResult.urlName} onclick={handleClick}>
+                                            <a>{relatedResult.title}</a>
+                                        </li>
+                                    </template>
+                                </ul>
+                            </lightning-layout-item>
+                        </template>
+                    </lightning-layout>
+                </lightning-layout-item>
+            </lightning-layout>
+        </div>
+        <div class="article-small article-questions">
+            <lightning-layout multiple-rows>
+                <lightning-layout-item padding="around-small" class="block-element">
+                    <lightning-layout multiple-rows>
+                        <template if:true={results}>
+                            <lightning-layout-item padding="around-small" size="12">
+                                <div class="category-label">
+                                    <span>{categoryLabel}</span>
+                                </div>
+                            </lightning-layout-item>
+                            <lightning-layout-item padding="around-small" size="12">
+                                <div class="article-title">
+                                    <span>{results.title}</span>
+                                </div>
+                            </lightning-layout-item>
+                            <lightning-layout-item padding="around-small" size="12">
+                                <div class="article-date">
+                                    <span>{results.lastPublishedDate} • {brandLabel} Answers</span>
+                                </div>
+                            </lightning-layout-item>
+                        </template>
+                        <template if:true={recordId}>
+                            <lightning-layout-item padding="around-small" size="12">
+                                <lightning-record-view-form object-api-name="Knowledge__kav" record-id={recordId}>
+                                    <lightning-output-field field-name="Article_Content__c" variant="label-hidden">
+                                    </lightning-output-field>
+                                </lightning-record-view-form>
+                            </lightning-layout-item>
+                        </template>
+                        <template if:false={isVoted}>
+                            <fieldset>
+                                <lightning-layout-item padding="around-small" size="12">
+                                    <div class="feedback-request-label">
+                                        <legend><span>Was this article helpful?</span></legend>
+                                    </div>
+                                </lightning-layout-item>
+                                <lightning-layout-item class="slds-p-around_xx-small" size="12">
+                                    <lightning-layout>
+                                        <lightning-layout-item padding="around-small">
+                                            <button class="slds-button slds-button_outline-brand vote-button"
+                                                data-vote="true" onclick={handleVoteClick}>Yes</button>
+                                        </lightning-layout-item>
+                                        <lightning-layout-item padding="around-small">
+                                            <button class="slds-button slds-button_outline-brand vote-button"
+                                                data-vote="false" onclick={handleVoteClick}>No</button>
+                                        </lightning-layout-item>
+                                    </lightning-layout>
+                                </lightning-layout-item>
+                            </fieldset>
+                        </template>
+                        <template if:true={isVoted}>
+                            <lightning-layout-item padding="around-small" size="12">
+                                <div class="feedback-request-text" role="status" aria-live="polite">
+                                    <legend> <span>Thanks for your feedback</span></legend>
+                                </div>
+                            </lightning-layout-item>
+                        </template>
+                        <template if:true={hasResults}>
+                            <lightning-layout-item padding="around-small" size="12">
+                                <div class="related-article-label">
+                                    <span>Related Articles</span>
+                                </div>
+                            </lightning-layout-item>
+                            <lightning-layout-item size="12">
+                                <ul class="slds-has-inline-block-links_space related-article-list">
+                                    <template for:each={relatedResults} for:item="relatedResult">
+                                        <li key={relatedResult.id} data-id={relatedResult.id}
+                                            data-urlname={relatedResult.urlName} onclick={handleClick}>
+                                            <a>{relatedResult.title}</a>
+                                        </li>
+                                    </template>
+                                </ul>
+                            </lightning-layout-item>
+                        </template>
+                    </lightning-layout>
+                </lightning-layout-item>
+            </lightning-layout>
+        </div>
+    </div>
+    <template if:true={isShowModal}>
+
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+            aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <!-- modal header start -->
+                <template if:false={isSubmitFeedBack}>
+                    <header class="slds-modal__header">
+                        <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                            title="Close" onclick={hideModalBox}>
+                            <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse"
+                                size="small"></lightning-icon>
+                            <span class="slds-assistive-text">Close</span>
+                        </button>
+                        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Feedback</h2>
+                    </header>
+
+                    <!-- modal body start -->
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                        <lightning-textarea name="input1"
+                            label="Please tell us how we can make this article more useful." maxlength="255"
+                            onkeyup={handleFeedback} required="true"></lightning-textarea>
+                        Characters Remaining:{feedbackCharCount}
+                        <lightning-layout>
+                            <lightning-layout-item padding="around-small">
+                                <button class="slds-button slds-button_outline-brand vote-button" data-vote="true"
+                                    onclick={handleSubmit}>SUBMIT</button>
+                            </lightning-layout-item>
+                            <lightning-layout-item padding="around-small">
+                                <button class="slds-button slds-button_outline-brand vote-button" data-vote="false"
+                                    onclick={hideModalBox}>CANCEL</button>
+                            </lightning-layout-item>
+                        </lightning-layout>
+                    </div>
+                </template>
+                <template if:true={isSubmitFeedBack}>
+                    <div class="slds-modal__content slds-p-around_medium custom-modal-height slds-align_absolute-center"
+                        id="modal-content-id-2">
+                        <lightning-layout multiple-rows="true">
+                            <lightning-layout-item padding="around-small" size="12">
+                                <legend>
+                                    <div class="slds-align_absolute-center" aria-live="polite" role="status">Thanks for your feedback!</div>
+                                </legend>
+                            </lightning-layout-item>
+                            <lightning-layout-item padding="around-small" size="12">
+                                <lightning-layout-item padding="around-small">
+                                    <button
+                                        class="slds-button slds-button_outline-brand vote-button slds-align_absolute-center vote-button"
+                                        data-vote="false" onclick={handleCloseWindow}>CLOSE WINDOW</button>
+                                </lightning-layout-item>
+                            </lightning-layout-item>
+                        </lightning-layout>
+                    </div>
+                </template>
+
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>

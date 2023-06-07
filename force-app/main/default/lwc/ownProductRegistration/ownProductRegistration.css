@@ -1,0 +1,280 @@
+.find-brand-body-heading {
+    color: #000000;
+    letter-spacing: 0.02em;
+    font-weight: 100;
+    font-size: 32px;
+    line-height: 37px;
+    font-style: normal;
+    margin-bottom: 40px;
+    margin-top: 25px;
+}
+
+.submit-button-bottom-margin {
+    margin-bottom: 30px;
+}
+
+/* lightning-input {
+    height: 48px;
+    border-radius: 0px;
+    padding: 0px 12px;
+    border: 1px solid #D2D2D2;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+} */
+
+.slds-form__row {
+    margin-bottom: 20px;
+}
+
+.link-cursor {
+    cursor: pointer;
+}
+
+label.slds-form-element__label {
+    color: #000000;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 15px;
+    letter-spacing: 0.02em;
+}
+
+.slds-form-element_compound .slds-form-element {
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
+.slds-form-element_compound lightning-input.slds-form-element span.slds-assistive-text {
+    display: none;
+}
+
+.slds-form-element_compound lightning-input.slds-form-element span.slds-assistive-text label.slds-form-element__label {
+    display: none;
+}
+
+.slds-form__row+p {
+    font-size: 14px;
+    line-height: 18px;
+    
+}
+
+.form-buttons {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.form-buttons button {
+    border-radius: 2px;
+    width: 192px;
+    height: 48px;
+    font-weight: 900;
+    font-size: 16px;
+    line-height: 24px;
+    text-transform: uppercase;
+    background: #ffffff;
+    border: 2px solid #E42525;
+    color: #E42525;
+    margin-right: 20px;
+}
+
+.form-buttons button:hover {
+    color: #ffffff;
+    background: #E42525;
+}
+
+.form-buttons button.disabled {
+    background: #ACACAC;
+    color: #ffffff;
+    border-color: #acacac;
+    cursor: not-allowed;
+}
+
+.slds-form-element__row {
+    flex-wrap: wrap;
+}
+
+.slds-form-element_compound .slds-form-element__row .slds-form-element__label {
+    padding-left: 2px;
+}
+
+.find-brand-combobox {
+    background: #FFFFFF;
+    box-sizing: border-box;
+    border-radius: 2px;
+}
+
+.custom-error {
+    margin-left: 3px;
+    margin-top: 3px;
+    color: #E42525;
+}
+
+/*CSS FOR PE-REGISTRATION*/
+
+.find-brand-body-second-title {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 32px;
+    line-height: 37px;
+    letter-spacing: 0.02em;
+    color: #000000;
+}
+
+
+.find-brand-body-content {
+    font-family: Roboto;
+    font-style: normal;
+    font-size: 16px;
+    letter-spacing: 1px;
+   /* line-height: 20px;*/
+}
+
+.find-serial-number {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 14px;
+    line-height: 22px;
+    letter-spacing: 0.02em;
+    color: #E42525;
+}
+
+.form-buttons-pe {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.form-buttons-pe button {
+    border-radius: 2px;
+    width: 132px;
+    height: 36px; 
+    font-weight: 900;
+    font-size: 12px;
+    line-height: 24px;
+    text-transform: uppercase;
+    background: #ffffff;
+    border: 2px solid #E42525;
+    color: #E42525;
+    margin-right: 20px;
+}
+
+.form-buttons-pe button:hover {
+    color: #ffffff;
+    background: #E42525;
+}
+
+.form-buttons-pe button.disabled {
+    background: #ACACAC;
+    color: #ffffff;
+    border-color: #acacac;
+    cursor: not-allowed;
+}
+
+.find-brand-visit-garage {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 14px;
+    color: #E42525;
+}
+.garage-background {
+    background: #000000;
+}
+
+.garage-text-white {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 18px;
+    text-align: center;
+    letter-spacing: 0.02em;
+    color: #FFFFFF;
+}
+
+.garage-text-black {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 18px;
+    text-align: left;
+    letter-spacing: 0.02em;
+    margin-left: 25px;
+    color: #000000;
+}
+
+.garage-background-grey{
+    background: #F0F0F0;
+}
+
+.slds-quick-actions {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 200px;
+}
+
+.slds-quick-actions_save {
+    width: 192px;
+    background: #000000;
+    text-align: center;
+    color: #fff;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    font-weight: 900;
+    font-size: 18px;
+    line-height: 26px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 20px;
+}
+
+.slds-quick-actions_add {
+    background: #F0F0F0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 26px 34px;
+    flex: 1;
+}
+
+.quick-actions-btn {
+    color: #FFFFFF;
+    background: #E42525;
+    border-radius: 2px;
+    box-shadow: none;
+    border: 0px;
+    font-weight: 900;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    padding: 12px 36px;
+    margin-top: 20px;
+    transition: all 0.5s ease;
+}
+
+@media only screen and (max-width: 768px) {
+    .custom-margin {
+        margin-bottom: 20px;
+    }
+
+    .form-buttons button {
+        margin-right: 0px;
+        width: 100%;
+    }
+
+    .form-buttons>div {
+        flex: 1 1 100%;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .slds_content_wrapper {
+        padding: 20px;
+    }
+}

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>51.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>Navigation Buttons</masterLabel>
+    <description>This is to show Navigation buttons</description>
+    <targets>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+             <property name="nextButtonLabel" type="String"/>
+             <property name="nextButtonTitle" type="String"/>
+             <property name="backButtonLabel" type="String"/>
+             <property name="backButtonTitle" type="String"/>
+             <property name="previousState" type="String"/>
+             <property name="nextState" type="String"/>
+             <property name="cartStateId" type="String"/>
+             <property name="orderId" type="String"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

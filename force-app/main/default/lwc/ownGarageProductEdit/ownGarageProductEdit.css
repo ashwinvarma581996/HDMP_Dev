@@ -1,0 +1,232 @@
+.garage-product-edit-image-circle {
+    border: 1px solid #D9D9D9;
+    width: 272px;
+    height: 272px;
+}
+.garage-product-edit-label {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 32px;
+    line-height: 37px;
+    letter-spacing: 0.02em;
+    color: #000000;
+}
+.garage-product-edit-label-border {
+    border-bottom: 1px solid #d9d9d9;
+    padding-bottom: 8px;
+}
+.garage-product-edit-label-center {
+    text-align: center;
+}
+.garage-product-edit-field-label {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 26px;
+    align-items: center;
+    color: #000000;
+    width: 27%;
+}
+.garage-product-edit-field-cta {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 14px;
+    line-height: 26px;
+    letter-spacing: 2.8px;
+    text-transform: uppercase;
+    color: #E42525;
+    width: 73%;
+}
+.garage-product-edit-field-value {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 26px;
+    align-items: center;
+    color: #000000;
+}
+.add-garage-button {
+    background: var(--HondaRed);
+    border: 2px solid var(--HondaRed);
+    box-sizing: border-box;
+    border-radius: 2px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 16px;
+    line-height: 24px;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: var(--HondaWhite);
+    height:48px;
+}
+.add-garage-button-width {
+    width: 257px;
+}
+.garage-product-edit-image {
+    content: url(/resource/Owners/images/product_image.png);
+    position: relative;
+    top: 50%;
+    transform: translate(7%, -50%);
+}
+.garage-product-camera-icon {
+    content: var(--garageCamera);
+}
+.ownProductImage{
+    width: 272px;
+    height: 272px;
+    border-radius: 50%;
+    background: #F0F0F0;
+    border: 1px solid #D9D9D9;
+}
+.ownAddPhoto{
+    width:56px;
+    height:56px;
+    border-radius: 50%;
+    background: #FFFFFF;
+    border: 1px dashed #E42525;
+}
+.ownAddPhotoHead{
+    font-size: 14px;
+    line-height: 18px;
+    text-align: center;
+    color: #E42525;
+}
+.ownAddPhotoContainer{
+    margin-top: -28px;
+}
+.garage-question-mark {
+    content: var(--garageQuestionMark);
+    vertical-align: sub;
+}
+.garage-product-edit-element-label {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 15px;
+    letter-spacing: 0.02em;
+    color: #000000;
+}
+.garage-product-edit-element-cta {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 14px;
+    line-height: 22px;
+    letter-spacing: 0.02em;
+    color: var(--HondaRed);
+}
+.garage-product-edit-element-field-label {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 16px;
+    line-height: 26px;
+    display: flex;
+    align-items: center;
+    letter-spacing: 1px;
+    color: #000000;
+}
+.garage-product-edit-element-field-value {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 26px;
+    display: flex;
+    align-items: center;
+    color: #5E6162;
+}
+.garage-product-edit-element-control {
+    width: 478px;
+}
+.garage-product-edit-button {
+    background: var(--HondaRed);
+    border: 2px solid var(--HondaRed);
+    box-sizing: border-box;
+    border-radius: 2px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 16px;
+    line-height: 24px;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: var(--HondaWhite);
+    height:48px;
+}
+.garage-product-edit-button-width {
+    width: 300px;
+}
+.garage-product-exist-button {
+    border: 2px solid var(--HondaRed);
+    box-sizing: border-box;
+    border-radius: 2px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: var(--HondaRed);
+    height:48px;
+}
+.garage-product-remove-button {
+    border: 0 solid var(--HondaWhite);
+    box-sizing: border-box;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: var(--HondaRed);
+    height:48px;
+}
+.garage-product-remove-button:hover {
+    background: var(--HondaWhite);
+    color: var(--HondaRed);
+}
+.save-brand-button-disabled .slds-button {
+    border-color: #ACACAC;
+    border-radius: 2px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    background: #ACACAC;
+}
+.save-brand-button-active .slds-button {
+    border-color: var(--HondaRed);
+    border-radius: 2px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    background: #E42525;
+}
+@media only screen and (min-width: 601px) {
+    .garage-product-edit-small {
+        display: none;
+    }
+    .garage-product-edit-large {
+        display: block;
+    }
+}
+@media only screen and (max-width: 600px) {
+    .garage-product-edit-large {
+        display: none;
+    }
+    .garage-product-edit-small {
+        display: block;
+    }
+}

@@ -1,0 +1,22 @@
+@media only screen and (min-width: 601px) {
+    .helpcenter-brand-small {
+        display: none;
+    }
+    .helpcenter-brand-large {
+        display: block;
+    }
+    .header-column {
+        padding: 0 72px;
+    }
+}
+@media only screen and (max-width: 600px) {
+    .helpcenter-brand-large {
+        display: none;
+    }
+    .helpcenter-brand-small {
+        display: block;
+    }
+    .header-column {
+        padding: 0;
+    }
+}

@@ -1,0 +1,55 @@
+<template>
+    <div>
+        <div class="slds-grid">
+            <div class="slds-col absoluteCenter allBorders greyColor tabHeight slds-m-around_medium">Shipping</div>
+            <div class="slds-col absoluteCenter allBorders greyColor tabHeight slds-m-around_medium">Checkout Summary</div>
+            <div class="slds-col absoluteCenter allBorders tabHeight slds-m-around_medium">Payment &amp; Billing</div>
+            <div class="slds-col absoluteCenter allBorders greyColor tabHeight slds-m-around_medium">Confirmation</div>
+        </div>
+        
+        <div class="slds-grid slds-m-around_medium slds-text-heading_large slds-border_bottom">
+            <div>Guest Checkout</div>
+            <div style="text-align:end;">*All fields required</div>
+        </div>
+        <div class="slds-grid slds-m-around_medium ">
+            <div class="slds-col slds-size_1-of-2 slds-p-around--small">
+                <lightning-input required  data-id="name" type="text" label="Name*" value={name}></lightning-input>
+            </div>
+            <div class="slds-col slds-size_1-of-2 slds-p-around--small">
+                <lightning-input required  data-id="phone" type="text" label="Phone*" value={phone}></lightning-input>
+            </div>
+        </div>
+        <div class="slds-grid slds-m-left_medium slds-m-right_medium slds-border_bottom">
+            <div class="slds-col slds-size_1-of-2 slds-p-around--small">
+                
+            </div>
+            <div class="slds-col slds-size_1-of-2 slds-p-around--small">
+                <lightning-input required  data-id="email" type="text" label="Email*" value={email}></lightning-input>
+            </div>
+        </div>
+
+        <div>
+            <div>
+                <lightning-combobox
+                        name="PaymentType"
+                        label="Select Payment Type"
+                        value={paymentValue}
+                        placeholder="Select Payment Type"
+                        options={paymentTypeOptions}
+                        onchange={handlePaymentTypeChange} >
+                </lightning-combobox>
+            </div>
+            <div class="slds-grid">
+                <div class="slds-col">
+                    <lightning-input  data-id="cardNum" type="text" label="Card Number" value={cardNum}></lightning-input>
+                </div>
+                <div class="slds-col">
+                    <lightning-input  data-id="cardCvv" type="text" label="CVV" value={cardCvv}></lightning-input>
+                </div>
+            </div>
+            <div class="slds-col slds-size_1-of-2 slds-p-around--small">
+                <lightning-input  data-id="cardExp" type="text" label="Exp" value={cardExpValue}></lightning-input>
+            </div>
+        </div>
+    </div>
+</template>

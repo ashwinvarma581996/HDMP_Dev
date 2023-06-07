@@ -1,0 +1,54 @@
+<apex:component controller="EmailTemplateController" access="global">
+    <apex:attribute name="orderSummaryId" type="Id" description="orderSummaryId " assignTo="{!recordId}" />
+    <html>
+
+    <body>
+        <hr size="1px" color="black" />
+        <table border="5px" color="blue">
+            <tr>
+                <th>Product</th>
+                <th>SKU</th>
+                <th>Quantity</th>
+                <th>Unit Price</th>
+                <th>Line Total</th>
+            </tr>
+            <apex:repeat var="ord" value="{!Items}">
+                <tr>
+                    <td>{!ord.Product2.Name}</td>
+                    <td>{!ord.Product2.StockKeepingUnit}</td>
+                    <td>{!ord.AvailableQuantity}</td>
+                    <td>{!ord.UnitPrice}</td>
+                    <td>{!ord.Order.GrandTotalAmount}</td>
+                </tr>
+            </apex:repeat>
+        </table>
+
+
+
+        <br/>
+
+        <b>
+            You have selected to pick up your order at the your dealer. Our team will work on fulfilling your order.You will receive
+            an email when the item(s) is/are ready for pickup.
+        </b>
+
+        <p>
+
+            For any question or request please reference your order . You can contact us
+        </p>
+
+
+        <b>
+            * Your order will be shipped to you. Our team will work on fulfilling your order. You will receive an email when the items
+            are ready for shipping.
+        </b>
+        <p>Thank you for being a loyal customer.</p>
+        <br/>
+        <p>American Honda Motor Co., Inc.</p>
+        <br/> ------------------------------------------------------------------------------------
+        <br/>
+
+    </body>
+
+    </html>
+</apex:component>

@@ -1,0 +1,100 @@
+<!-- //============================================================================
+// Title:    Honda Owners Experience - Footer
+//
+// Summary:  This is the html seen at the Owners Garage Find - Honda Auto Body of the Honda Owner Community
+//
+// Details:  Extend the LightningElement with this Base Element to gain access to the Messaging Channel and other logic herein and this is the own garage find honda body component for all community pages.
+//
+//
+// History:
+// May 17, 2021 Arunprasad N (Wipro) Original Author
+// Jul 13, 2021 Jim Kohs (Wipro) changed c-own-garage-overview-locate-dealer-card to c-own-garage-overview-locate-dealer-card1
+// July 15, 2021 Jim Kohs (Wipro) refactored to ownBaseCard2
+//=========================================================================== -->
+<template>
+    <div class="c-container garage-overview-tab-large">
+        <lightning-layout multiple-rows class="slds-p-top_large">
+            <lightning-layout-item size="12" small-device-size="12" medium-device-size="4" large-device-size="4">
+                <h3 title="Find Service Information">
+                    <span class="garage-overview-tab-title">Find Service Information</span>
+                </h3>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" small-device-size="12" medium-device-size="8" large-device-size="8">
+                <lightning-layout multiple-rows>
+                    <lightning-layout-item size="12" padding="around-small">
+                        <c-own-find-dealers-card brand="acura"></c-own-find-dealers-card>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="6" padding="around-small">
+                        <c-own-my-service-history-card brand="acura"></c-own-my-service-history-card>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="6" padding="around-small">
+                        <c-own-maintenance-minder-card brand="acura"></c-own-maintenance-minder-card>
+                    </lightning-layout-item>
+                    <lightning-layout-item if:true={roadsideAssistanceCardContent.showCard} size="6" padding="around-small">
+                        <c-own-roadside-assistance-card content-data={roadsideAssistanceCardContent} page-detail={pageDetails}>
+                        </c-own-roadside-assistance-card>
+                        <!-- <c-own-roadside-assistance-information-card brand="Acura Auto"></c-own-roadside-assistance-information-card> -->
+                    </lightning-layout-item>
+                    <lightning-layout-item size="6" padding="around-small">
+                        <c-own-honda-care-card brand="acura"></c-own-honda-care-card>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </lightning-layout-item>
+        </lightning-layout>
+        <lightning-layout multiple-rows class="slds-p-top_large">
+            <lightning-layout-item size="12" small-device-size="12" medium-device-size="4" large-device-size="4">
+                <h3 title="Parts & Accessories">
+                    <span class="garage-overview-tab-title">Parts & Accessories</span>
+                </h3>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" small-device-size="12" medium-device-size="8" large-device-size="8">
+                <lightning-layout multiple-rows>
+                    <lightning-layout-item size="6" padding="around-small">
+                        <c-own-parts-card brand="acura"></c-own-parts-card>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="6" padding="around-small">
+                        <c-own-accessories-card brand="acura"></c-own-accessories-card>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </lightning-layout-item>
+        </lightning-layout>
+    </div>
+    <div class="c-container garage-overview-tab-small">
+        <lightning-layout multiple-rows>
+            <lightning-layout-item size="12" class="slds-p-top_large">
+                <h3 title="Find Service Information">
+                    <span class="garage-overview-tab-title-small">Find Service Information</span>
+                </h3>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class="slds-p-vertical_small">
+                <c-own-find-dealers-card brand="acura"></c-own-find-dealers-card>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class="slds-p-vertical_small">
+                <c-own-my-service-history-card brand="acura"></c-own-my-service-history-card>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class="slds-p-vertical_small">
+                <c-own-maintenance-minder-card brand="acura"></c-own-maintenance-minder-card>
+            </lightning-layout-item>
+            <lightning-layout-item if:true={roadsideAssistanceCardContent.showCard} size="12" class="slds-p-vertical_small">
+                <c-own-roadside-assistance-card content-data={roadsideAssistanceCardContent} page-detail={pageDetails}>
+                </c-own-roadside-assistance-card>
+                <!-- <c-own-roadside-assistance-information-card brand="Acura Auto">
+                </c-own-roadside-assistance-information-card> -->
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class="slds-p-vertical_small">
+                <c-own-honda-care-card brand="acura"></c-own-honda-care-card>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class="slds-p-top_large">
+                <h3 title="Parts & Accessories">
+                    <span class="garage-overview-tab-title-small">Parts & Accessories</span>
+                </h3>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class="slds-p-vertical_small">
+                <c-own-parts-card brand="acura"></c-own-parts-card>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" class="slds-p-vertical_small">
+                <c-own-accessories-card brand="acura"></c-own-accessories-card>
+            </lightning-layout-item>
+        </lightning-layout>
+    </div>
+</template>

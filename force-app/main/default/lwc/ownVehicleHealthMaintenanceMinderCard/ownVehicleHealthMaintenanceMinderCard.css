@@ -1,0 +1,80 @@
+.label{
+/* font-family: Roboto;
+font-style: normal;
+font-weight: bold;
+font-size: 16px;
+line-height: 19px;
+letter-spacing: 0.03em;
+color: #000000; */
+
+    width: 270px;
+    height: 26px;
+    left: 0px;
+    top: 31px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 26px;
+    color: #000000;
+}
+.content{
+    width: 270px;
+    /* height: 52px; */
+    left: 0px;
+    top: 35px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 26px;
+    color: #000000;
+}
+.action-button {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 16px;
+    line-height: 24px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: #E42525;
+    background: #FFFFFF;
+    border: 2px solid #E42525;
+    box-sizing: border-box;
+    border-radius: 2px;
+    /* width: 151px; */
+    height: 48px;
+}
+.footer{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 14px;
+    line-height: 18px;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 2.8px;
+    text-transform: uppercase;
+    color: #E42525;
+}
+.footer-icon{
+    margin-left: 5px;
+    bottom: 2px;
+    position: relative;
+}
+.guest-container{
+    padding: 0px 16px;
+}
+.guest-container-2{
+    padding: 0px 0px;
+}
+.date-label{
+    font-size: 15.5px;
+}
+.hasMM{
+    margin-top: 10px;
+}

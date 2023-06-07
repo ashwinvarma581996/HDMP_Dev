@@ -1,0 +1,212 @@
+.mainHeader .slds-modal__content {
+    overflow: visible !important;
+}
+
+.mainHeader nav ul li:first-child a {
+    padding-left: 0 !important;
+}
+
+.vinError {
+    color: #1d89dc;
+    text-align: center;
+    display: block;
+    text-decoration: underline;
+}
+
+.vehicle-selection {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.vehicle-selection label.custom-label {
+    padding: 0 10px 12px 0;
+    font-size: 14px;
+}
+
+.vehicleModal .centerElement {
+    border: 1px solid #666;
+    margin: 0 10px;
+    max-width: 200px;
+    padding: 8px 20px!important;
+    width: 100%;
+}
+
+.my-products-buttons .primaryRedBtn {
+    float: right;
+}
+
+.orText {
+    font-size: 18px;
+}
+
+.orText:before,
+.orText:after {
+    content: '';
+    position: absolute;
+    background: #666;
+}
+
+.megaMenuDropdown .slds-form-element:not(:last-child) {
+    margin-bottom: 2px;
+}
+
+input[type='radio'] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    top: 12px;
+    left: 18px;
+    z-index: 9;
+}
+
+.checkmark {
+    position: absolute;
+    top: 12px;
+    left: 18px;
+    height: 15px;
+    width: 15px;
+    background-color: #fff;
+    border: 1px solid #666;
+    border-radius: 50%;
+}
+
+input[type='radio']:checked~.checkmark {
+    background-color: #fff;
+    border: 1px solid #666;
+}
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+input[type='radio']:checked~.checkmark:after {
+    display: block;
+}
+
+.checkmark:after {
+    top: 2px;
+    left: 2px;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #E42525;
+}
+
+.mainHeader .slds-context-bar__item:not(.slds-no-hover):hover,
+.mainHeader .slds-context-bar__item.slds-is-active {
+    background-color: transparent !important;
+}
+
+.vehicleModal .slds-modal__content {
+    overflow: visible;
+    overflow-y: visible;
+}
+
+.vehicleModal .slds-spinner_container {
+    background-color: transparent !important;
+}
+
+.hideLabel .slds-form-element__label {
+    display: none;
+}
+
+@media (min-width: 768px) {
+    .orText:before,
+    .orText:after {
+        width: 1px;
+        height: 40%;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+    }
+    .orText:before {
+        top: 10px;
+    }
+    .orText:after {
+        bottom: 10px;
+    }
+}
+
+@media (min-width:768px) and (max-width: 991px) {
+    .vehicleModal .slds-modal__container {
+        min-width: 70%;
+    }
+}
+
+@media (max-width: 767px) {
+    .vehicleModal .slds-medium-size_2-of-12 {
+        margin: 10px 0;
+    }
+    input[type="email"],
+    input[type="number"],
+    input[type="password"],
+    input[type="search"],
+    input[type="text"],
+    select:focus,
+    textarea {
+        font-size: 16px;
+    }
+    .vehicleModal .slds-modal__content {
+        overflow-y: auto !important;
+    }
+}
+
+@media (max-width:480px) {
+    .vehicleModal .slds-modal__container {
+        margin: 0 10px;
+    }
+    .mainHeader a span {
+        font-size: 14px;
+    }
+    .vehicleModal .centerElement {
+        padding: 8px 15px!important;
+    }
+    .vehicleModal .themeBtn {
+        font-size: 13px;
+        padding: 6px 5px !important;
+    }
+}
+
+.Trim1 {
+    float: left!important;
+    width: 100%!important;
+}
+
+.Model1 {
+    float: left!important;
+    width: 100%!important;
+}
+
+.vehicleModal .slds-modal__container {
+    background: #fff;
+    padding: 0 !important;
+    max-height: 520px;
+    margin: auto;
+    vertical-align: middle;
+    top: 50%;
+    transform: translateY(-50%);
+    padding-bottom: 20px !important;
+}
+
+.vehicleModal .slds-modal__content.slds-p-around_small {
+    box-shadow: none;
+}
+
+.primaryGrayBtn {
+    background: gray !important;
+    background-color: gray !important;
+}
+
+.slds-modal__header .slds-modal__close {
+    top: 10px;
+    right: 10px;
+}
+
+.required-field::before {
+    content: "*";
+    color: red;
+}

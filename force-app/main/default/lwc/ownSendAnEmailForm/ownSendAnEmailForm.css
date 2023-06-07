@@ -1,0 +1,234 @@
+@media only screen and (min-width: 905px) {
+    .c{
+        padding: 25px 300px;
+    }
+    .b-c-large{
+        display: block;
+        padding: 6px 7%;
+    }
+    .b-c-small{
+        display: none;
+    }
+    .case-detail{
+        max-width: 40%;
+    }
+}
+@media only screen and (max-width: 904px) {
+    .c{
+        padding: 25px 10px;
+    }
+    .b-c-large{
+        display: none;
+    }
+    .b-c-small{
+        display: block;
+    }
+    .case-detail{
+        max-width: 80%;
+    }
+}
+.ci{
+    display: grid;
+    grid-template-rows: auto;
+}
+.h1{
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 42px;
+    letter-spacing: 1.2px;
+}
+.p1{
+    font-size: 16px;
+    line-height: 26px;
+    font-weight: 400;
+    margin-top: 20px
+}
+.cii{
+    padding-top: 20px;
+}
+.submit{
+    font-size: 16px!important;
+    line-height: 24px!important;
+    text-decoration: none!important;
+    background: #E42525 !important;
+    border-radius: 2px !important;
+    border: none !important;
+    color: #fff!important;
+    padding: 12px 60px!important;
+    align-items: center !important;
+    text-align: center !important;
+    letter-spacing: 0.5px !important;
+    text-transform: uppercase !important;
+    font-weight: bold!important;
+    transition: fill .3s,color .3s,background-color .3s;
+    margin-top: 24px!important;
+    margin-bottom: 10px!important;
+}
+.find-brand-combobox {
+    background: #FFFFFF;
+    box-sizing: border-box;
+    border-radius: 2px;
+}
+.financial-div{
+    text-align: center;
+    margin:0px 20px;
+    border:1px solid #39f;
+    border-radius:0.25rem;
+    background-color:#ffc;
+    margin-bottom: 10px;
+}
+.rad-lab{
+    font-weight: bold;
+    color: black;
+    margin-bottom: 10px;
+    font-size: 13px;
+}
+.rad-container{
+    display: grid;
+    grid-template-columns: auto auto;
+}
+.radio{
+    margin-right: 10px;
+}
+.rad-text{
+    color: #000;
+    font-size: 13px;
+}
+.radio{
+    width: 20px;
+    height: 20px;
+    border: 1px solid #DDDBDA;
+}
+.flex-rad{
+    display: flex;
+    align-items: center;
+}
+input[type="radio"] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+    background-color: white;
+    display: inline-block;  
+    position: relative;
+}
+
+input[type="radio"]:checked::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #E42525;
+}
+.PowerWasherLabel{
+    -webkit-text-size-adjust: 100%;
+    line-height: 1.5;
+    -webkit-tap-highlight-color: transparent;
+    font-family: Arial, Helvetica, sans-serif;
+    box-sizing: border-box;
+    position: relative;
+    font-style: inherit;
+    font-size: 14px!important;
+    color: #222!important;
+    width: 83%!important;
+    margin: 0 0 0 7%;
+    text-align: justify!important;
+    background-color: #f1f1f1;
+    padding: 15px!important;
+    margin-top: 0.5rem;
+}
+.error-div{
+    width: 100%;
+    height: 40px;
+    text-align: center;
+    background-color: #E42525;
+    color: white;
+    font-size: 15px;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 17px;
+    font-family: unset;
+    margin-top: 15px;
+}
+.err-text{
+    margin-left: 8px;
+}
+.custom-icon {
+    --sds-c-icon-color-foreground-default: white;
+}
+.files-warning{
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+.slds-spinner_container {
+    position: fixed;
+    background-color: rgba(255, 255, 255, 0.45);
+}
+.case-detail-container{
+    margin-top: 30px;
+}
+.cd-h1{
+    font-style: normal;
+    font-weight: 300;
+    font-size: 40px;
+    line-height: 42px;
+    letter-spacing: 1.2px;
+    color: #000000;
+}
+.cd-h2{
+    margin-top: 30px;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 17px;
+    line-height: 42px;
+    letter-spacing: 1.2px;
+    color: #000000;
+    text-transform: uppercase;
+}
+.cd{
+    /* border: 1px solid black; */
+    color: black;
+}
+.case-detail-td-field{
+    font-weight: 900;
+    font-size: 16px;
+    text-transform: capitalize;
+    color: #000000;
+}
+.case-detail-td-value{
+    font-size: 16px;
+    text-transform: capitalize;
+    color: #000000;
+}
+.case-detail-td{
+    padding: 15px 0px;
+}
+.email-confirmation-text{
+    padding-top: 10px;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 42px;
+    letter-spacing: 1.2px;
+    color: #000000;
+    padding-left: 5px;
+}
+.desc-inp{
+    --slds-c-textarea-sizing-min-height: 100px !important;
+}
+.case-number-link{
+    color: #E42525;
+}
+.text-area-5-rows{
+    --slds-c-textarea-sizing-min-height: 100px !important;
+}

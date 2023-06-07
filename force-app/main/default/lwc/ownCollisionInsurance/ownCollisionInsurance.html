@@ -1,0 +1,46 @@
+<!-- This Is Created For Tab 3, i.e., Inusarance Collision
+    In this component we are fetching data, added link for video, images, accordion and Cards.
+    
+    Done By : pawan kumar 03-01-2022
+-->
+
+<template>
+    <div class="slds-container_large" >
+        <lightning-layout horizontal-align="space" multiple-rows if:true={collisionInsuranceContent}>
+            <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="10">
+                <div class="title slds-p-bottom_large">{collisionInsuranceContent.title}</div>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="10" class="slds-p-bottom_large">
+                <lightning-formatted-rich-text class="body text-style" value={collisionInsuranceContent.body}></lightning-formatted-rich-text> 
+            </lightning-layout-item>
+            <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="10" class="slds-p-vertical_large video-content">
+               
+                <iframe frameborder="0" allowfullscreen src={collisionInsuranceContent.video1}>
+                </iframe>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="10" class="slds-p-top_large">
+                <lightning-formatted-rich-text class="description text-style" value={collisionInsuranceContent.description}></lightning-formatted-rich-text> 
+            </lightning-layout-item>
+            <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="10" >
+                <c-own-accordion  content-for-large-screen={accordionData} content-for-small-screen={accordionData}></c-own-accordion>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="10" class="slds-p-vertical_large">
+                <lightning-formatted-rich-text class="description2 text-style" value={collisionInsuranceContent.description2}></lightning-formatted-rich-text> 
+            </lightning-layout-item>
+            <lightning-layout-item size="12" small-device-size="12" medium-device-size="12" large-device-size="10" >
+            <lightning-layout multiple-rows="true" >
+                <lightning-layout-item padding="around-small" size="12" small-device-size="12" medium-device-size="6" large-device-size="6">
+                <c-own-c-m-s-card icon="dealer.svg" content-id={findDealer} titlecolor="Honda Red" headerlink={findDealerLink} brand={brand}> </c-own-c-m-s-card>
+                </lightning-layout-item>
+                <lightning-layout-item padding="around-small" size="12" small-device-size="12" medium-device-size="6" large-device-size="6">
+                <c-own-c-m-s-card icon="wheel.svg" content-id={genuineAccessories} showforwardicon="true" forwardiconright="true" titlecolor="Honda Red" headerlink={accessoriesLink}> </c-own-c-m-s-card>
+                </lightning-layout-item>
+                <lightning-layout-item padding="around-small" size="12" small-device-size="12" medium-device-size="6" large-device-size="6">
+                <c-own-c-m-s-card icon="engine-system.svg" content-id={genuineParts} showforwardicon="true" forwardiconright="true" titlecolor="Honda Red" headerlink={partsLink}> </c-own-c-m-s-card>
+                </lightning-layout-item>
+            </lightning-layout>
+        </lightning-layout-item>
+    </lightning-layout>
+          
+    </div>   
+</template>

@@ -1,0 +1,50 @@
+h1 {
+    font-weight: 300;
+    font-size: 32px;
+    line-height: 37px;
+    letter-spacing: 0.02em;
+    margin-bottom: 20px;
+    margin-top : 32px;
+}
+
+@media only screen and (max-width: 768px){
+    h1{
+        font-size: 22px;
+    }
+}.videoContainer {
+    height: 508px; width: 100%; margin-top:25px;margin-bottom:50px;
+}
+@media only screen and (max-width: 600px){
+    .collision-frameBox{
+        width: 343px;
+        height: 210px;
+    }
+    .content{
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 300;
+        font-size: 16px;
+        line-height: 24px;
+        color: #080707;
+        margin-top: 10px;
+    }
+}
+@media only screen and (min-width: 601px){
+    .collision-frameBox{
+        width: 840px;
+        height:478px;
+    }
+    .content{
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 300;
+        font-size: 16px;
+        line-height: 26px;
+        color: #080707;
+        margin-top: 15px;
+    }
+}
+.cms-card-section{
+    padding-left: 13px;
+    padding-top: 16px;
+}

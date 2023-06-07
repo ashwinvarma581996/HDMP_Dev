@@ -1,0 +1,46 @@
+h1 {
+    font-weight: 300;
+    font-size: 32px;
+    line-height: 37px;
+    letter-spacing: 0.02em;
+    margin-bottom: 20px;
+}
+.resource-cards_wrapper {
+    display: flex;
+}
+
+
+.resource-cms {
+    margin-bottom: 24px;
+}
+
+@media only screen and (max-width: 768px) {
+    .resource-cards_wrapper {
+        flex-wrap: wrap;
+    }
+}
+
+@media only screen and (min-width: 600px) {
+    .collisiontv-video {
+        padding: 12px;
+    }
+    h1 {
+        padding: 0 12px;
+    }
+    .resource-cards {
+        padding: 12px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .collisiontv-video {
+        margin-bottom: 20px;
+    }
+    .resource-cards {
+        width: 100%;
+    }
+}
+
+.video-cards_wrapper {
+    margin-bottom: 15px;
+}

@@ -1,0 +1,135 @@
+<!-- //============================================================================
+// Title:    Honda Owners Experience - Logo
+//
+// Summary:  This is the level 1 menu html seen at the top of the Honda Owner Community
+//
+// Details:  Extend the LightningElement with this Base Element to gain access to the Messaging Channel and other logic herein and this is the level 1 menu component for all community pages.
+//
+//
+// History:
+// June 18, 2021 Arunprasad N (Wipro) Original Author
+//=========================================================================== -->
+<template>
+        <div class="level1-menu-large">
+                <lightning-layout>
+                        <template for:each={menus} for:item="menu">
+                                <lightning-layout-item key={menu.id} if:true={menu.large}
+                                        class="main-menu-p-left slds-p-left_xx-large">
+                                        <ul class="main-menu">
+                                                <li class="slds-dropdown-trigger">
+                                                        <a role="link" tabindex="0"><span>{menu.label}</span></a>
+                                                        <div class="sub-menu slds-dropdown slds-dropdown_left">
+                                                                <ul class="slds-dropdown__list" role="menu">
+                                                                        <template if:true={menu.header}>
+                                                                                <li class="slds-dropdown__header slds-truncate"
+                                                                                        title={menu.header}
+                                                                                        role="separator">
+                                                                                        <img
+                                                                                                class="slds-m-right_x-small"></img>
+                                                                                        <span>{menu.header}</span>
+                                                                                </li>
+                                                                        </template>
+                                                                        <template for:each={menu.items}
+                                                                                for:item="subMenu">
+                                                                                <li key={subMenu.id}
+                                                                                        class="slds-dropdown__item"
+                                                                                        data-id={subMenu.id}
+                                                                                        data-url={subMenu.url}
+                                                                                        data-name={subMenu.name}
+                                                                                        data-menuid={menu.id}
+                                                                                        onclick={handleSubMenuClick}>
+                                                                                        <a role="link" tabindex="0">
+                                                                                                <span class="slds-truncate"
+                                                                                                        title="Menu Item One">
+                                                                                                        <img src={subMenu.icon}
+                                                                                                                class="slds-m-right_x-small"></img>
+                                                                                                        {subMenu.label}
+                                                                                                </span>
+                                                                                        </a>
+                                                                                </li>
+                                                                        </template>
+                                                                </ul>
+                                                        </div>
+                                                </li>
+                                        </ul>
+                                </lightning-layout-item>
+
+                        </template>
+                        <!-- Imtiyaz - RECALLS Start -->
+                        <lightning-layout-item class="main-menu-p-left slds-p-left_xx-large" if:true={isPspOrPE}>
+                                <ul class="main-menu">
+                                        <li class="slds-dropdown-trigger">
+                                                <a class="recall-notification" onclick={navigateToRecallSearch}><span class="recall-notification">Recall Notification</span></a>
+                                                <!-- <button class="recall-notification">Recall Notification</button> -->
+                                        </li>
+                                </ul>
+                        </lightning-layout-item>
+                        <!-- Imtiyaz - RECALLS End -->
+                </lightning-layout>
+        </div>
+        <div class="level1-menu-small">
+                <div class="slds-tabs-mobile__container menu-small-padding-top slds-modal slds-fade-in-open">
+                        <template if:true={menu.showMainMenu}>
+                                <div>
+                                        <ul class="slds-tabs-mobile">
+                                                <template for:each={menus} for:item="menu">
+                                                        <li key={menu.id} class="slds-tabs-mobile__item">
+                                                                <!-- Imtiyaz - RECALLS Start -->
+                                                                <button class="slds-button slds-button_full-width menu-small main-menu-small"
+                                                                        data-id={menu.id}
+                                                                        onclick={handleMainMenuSelect} data-label={menu.label}>
+                                                                        <span class={menu.class}
+                                                                                title={menu.label}>{menu.label}</span>
+                                                                        <template if:true={menu.items}>
+                                                                                <img src={rightArrow}>
+                                                                        </template>
+                                                                </button>
+                                                                <!-- Imtiyaz - RECALLS End -->
+                                                        </li>
+                                                </template>
+                                                <!-- Imtiyaz - RECALLS Start -->
+                                                <!-- <li class="slds-tabs-mobile__item">
+                                                        <button class="slds-button slds-button_full-width menu-small main-menu-small">
+                                                                <span class="slds-truncate recall-notification" title="Recall Notification">Recall Notification</span>
+                                                        </button>
+                                                </li> -->
+                                                <!-- Imtiyaz - RECALLS End -->
+                                        </ul>
+                                </div>
+                        </template>
+                        <template if:true={menu.showSubMenu}>
+                                <div>
+                                        <ul class="slds-tabs-mobile">
+                                                <template if:true={menu.header}>
+                                                        <li class="slds-tabs-mobile__item menu-small-header">
+                                                                <button class="slds-button slds-button_full-width">
+                                                                        <span class="slds-truncate">
+                                                                                <img class="slds-m-right_x-small"></img>
+                                                                                {menu.header}
+                                                                        </span>
+                                                                </button>
+                                                        </li>
+                                                </template>
+                                                <template for:each={subMenus} for:item="subMenu">
+                                                        <li key={subMenu.id} class="slds-tabs-mobile__item"
+                                                                data-id={subMenu.id} data-url={subMenu.url}
+                                                                data-name={subMenu.name} data-menuid={menuId}
+                                                                onclick={handleSubMenuClick}>
+                                                                <button
+                                                                        class="slds-button slds-button_full-width menu-small">
+                                                                        <span class="slds-truncate"
+                                                                                title={subMenu.label}>
+                                                                                <img src={subMenu.icon}
+                                                                                        class="slds-m-right_x-small"></img>
+                                                                                {subMenu.label}
+                                                                        </span>
+                                                                </button>
+                                                        </li>
+                                                </template>
+                                        </ul>
+                                </div>
+                        </template>
+                </div>
+                <div class="slds-backdrop slds-backdrop_open"></div>
+        </div>
+</template>

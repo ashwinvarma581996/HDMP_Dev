@@ -1,0 +1,115 @@
+<template>
+    <lightning-layout class={styleClass} multiple-rows>
+        <lightning-layout-item size="12" class="slds-p-top_large slds-p-left_xx-large"  small-device-size="12" medium-device-size="12" large-device-size="12">
+            <a  class="breadcrum-style" onclick={navigateBack}>{productName}</a>
+        </lightning-layout-item>
+        <lightning-layout-item size="12" class={iconStyle} small-device-size="12" medium-device-size="12"
+            large-device-size="12">
+            <lightning-icon icon-name="utility:close" size="x-small"></lightning-icon>
+        </lightning-layout-item>
+        <lightning-layout-item size="12" padding="around-small" small-device-size="12"
+            medium-device-size="12" large-device-size="12" class="slds-m-top_large">
+            <div class="page-header">
+                <h1 class="page-title">Quick Start Guide</h1>
+                <p class="page-subtitle slds-m-top_small">Essential How-To’s for your first drive</p>
+            </div>
+        </lightning-layout-item>
+        <lightning-layout-item size="12" class="progress-large slds-m-bottom_xx-large" padding="around-small" small-device-size="12"
+            medium-device-size="12" large-device-size="12">
+            <div class="slds-progress">
+                <ol class="slds-progress__list">
+                    <template if:true={progressList} for:each={progressList} for:item="progress">
+                        <li key={progress.value} if:true={progress.isActive} class="slds-progress__item slds-is-active">
+                            <div class="progress-indicater">
+                                <div>
+                                    <button data-value={progress.value}
+                                        class="slds-button slds-progress__marker progress-item-active">
+                                        <!-- <span class="slds-assistive-text">Step 1 - Active</span> -->
+                                    </button>
+                                </div>
+                                <div class="progress-label">
+                                    {progress.label}
+                                </div>
+                            </div>
+                        </li>
+                        <li key={progress.value} if:false={progress.isActive} class="slds-progress__item">
+                            <div class="progress-indicater">
+                                <div>
+                                    <button data-value={progress.value}
+                                        class="slds-button slds-progress__marker progress-item-active"
+                                        onclick={handleActive}>
+                                        <!-- <span class="slds-assistive-text">Step 1 - Active</span> -->
+                                    </button>
+                                </div>
+                                <div class="progress-label">
+                                    {progress.label}
+                                </div>
+                            </div>
+                        </li>
+                    </template>
+                </ol>
+                <div class="slds-progress-bar slds-progress-bar_x-small">
+                    <span class="slds-progress-bar__value" style="width:0%">
+                        <span class="slds-assistive-text">Progress: 0%</span>
+                    </span>
+                </div>
+            </div>
+        </lightning-layout-item>
+
+        <lightning-layout-item size="12" class="progress-small" padding="horizontal-small" small-device-size="12"
+            medium-device-size="12" large-device-size="12">
+            <!-- <c-own-accordion content-for-large-screen={planDetailsAccordion} ></c-own-accordion> -->
+            <!-- <lightning-accordion>
+                <template if:true={progressList} for:each={progressList} for:item="progress">
+                    <lightning-accordion-section key={progress.value} name={progress.value} label={progress.label}
+                        data-value={progress.value} onclick={handleAccourdion}>
+                        <c-own-quick-start-guide-steps data-value={progress.value} content-id={contentId}>
+                        </c-own-quick-start-guide-steps>
+                    </lightning-accordion-section>
+                </template>
+            </lightning-accordion> -->
+
+            <ul class="slds-accordion">
+                <template if:true={progressList} for:each={progressList} for:item="progress">
+                <li key={progress.value} class="slds-accordion__list-item">
+                  <section if:true={progress.isActive} class="slds-accordion__section slds-is-open">
+                    <div class="slds-accordion__summary progress-small-background">
+                      <h2 class="slds-accordion__summary-heading">
+                        <button class="slds-button slds-button_reset slds-accordion__summary-action" data-value={progress.value} onclick={handleAccourdion}>
+                            <lightning-icon size="xx-small" icon-name="utility:down" variant="error" alternative-text="down" title="down" class="custom-icon"></lightning-icon>
+                          <span class="slds-accordion__summary-content">{progress.label}</span>
+                        </button>
+                      </h2>
+                    </div>
+                    <div class="slds-accordion__content">
+                        <c-own-quick-start-guide-steps brand-name={brandName} data-value={progress.value} content-id={contentId}>
+                        </c-own-quick-start-guide-steps>
+                    </div>
+                  </section>
+                  <section if:false={progress.isActive} class="slds-accordion__section">
+                    <div class="slds-accordion__summary progress-small-background">
+                      <h2 class="slds-accordion__summary-heading">
+                        <button class="slds-button slds-button_reset slds-accordion__summary-action" data-value={progress.value} onclick={handleAccourdion}>
+                            <lightning-icon size="xx-small" icon-name="utility:right" variant="error" alternative-text="down" title="down" class="custom-icon"></lightning-icon>
+                          <span class="slds-accordion__summary-content">{progress.label}</span>
+                        </button>
+                      </h2>
+                    </div>
+                    <div class="slds-accordion__content">
+                        <c-own-quick-start-guide-steps  brand-name={brandName} data-value={progress.value} content-id={contentId}>
+                        </c-own-quick-start-guide-steps>
+                    </div>
+                  </section>
+                </li>
+            </template>
+                </ul>
+        </lightning-layout-item>
+
+        <!-- Get to know your Autos -->
+        <lightning-layout-item size="12" class="slds-m-top_xx-large progress-large" small-device-size="12"
+            medium-device-size="12" large-device-size="12">
+            <c-own-quick-start-guide-steps brand-name={brandName} source-type={sourceType} content-id={contentId} container-body-name={containerBodyName}>
+            </c-own-quick-start-guide-steps>
+        </lightning-layout-item>
+    </lightning-layout>
+</template>

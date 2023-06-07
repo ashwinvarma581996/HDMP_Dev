@@ -1,0 +1,9 @@
+<design:component label="Dreamshop Global Layout">
+    
+    <design:attribute name="showHeader" label="Show Header"/>
+    <design:attribute name="showHero" label="Show Hero"/>
+    <design:attribute name="showFooter" label="Show Footer"/>
+    <design:attribute name="showSelector" label="Show Vehicle Selector"/>
+    <design:attribute name="width" default="1170" label="Set max page width (640px - 1920px)" min="640" max="1920"/>
+
+</design:component>

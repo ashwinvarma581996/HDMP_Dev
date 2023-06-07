@@ -1,0 +1,60 @@
+.connect-phone-link {
+    color: var(--HondaRed);
+    text-decoration: none;
+}
+
+.custom-card {
+    border: 1px solid #DDDBDA;
+    box-shadow: 0px 2px 2px 0px #0000001a;
+    border-radius: 2px;
+}
+
+.step-padding {
+    padding: 6px 243px;
+}
+
+.custom-icon {
+    --sds-c-icon-color-foreground-default: var(--HondaBlack);
+    --sds-c-icon-color-background: white;
+    border: 2px solid var(--HondaBlack);
+    border-radius: 50%;
+}
+
+.step-container {
+    padding-left: 3rem;
+    padding-right: 3rem;
+}
+
+.content-text{
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 26px;
+    color: #444444;
+}
+.content-text-link{
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 26px;
+    
+}
+
+/* Footer_desktop */
+@media only screen and (min-width: 601px) {
+    
+}
+
+/* Footer_phone */
+@media only screen and (max-width: 600px) {
+    .step-padding {
+        padding: 6px 0px;
+    }
+
+    .step-container {
+        padding-left: 0rem;
+        padding-right: 0rem;
+    }
+}

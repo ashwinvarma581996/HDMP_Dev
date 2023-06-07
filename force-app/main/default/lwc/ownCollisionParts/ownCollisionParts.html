@@ -1,0 +1,44 @@
+<template>
+    <div class="slds-container_large">
+        <lightning-layout multiple-rows horizontal-align="space" class="" if:true={collisionPartsContent}> 
+            <lightning-layout-item  size="12" small-device-size="12" medium-device-size="12" large-device-size="10" >
+                <div class="title slds-p-bottom_large">{collisionPartsContent.title}</div>
+                <lightning-formatted-rich-text class="description text-style collision-repair-content" value={collisionPartsContent.body}></lightning-formatted-rich-text>
+            </lightning-layout-item>
+            <lightning-layout-item  size="12" small-device-size="12" medium-device-size="12" large-device-size="10" class="popular-help-video-large slds-m-vertical_xx-large">
+                <div class="video-content">
+                    <iframe frameborder="0" allowfullscreen src={collisionPartsContent.video1}>
+                    </iframe>
+                </div>
+                
+            </lightning-layout-item>
+            <lightning-layout-item  size="12" small-device-size="12" medium-device-size="12" large-device-size="10">
+                <lightning-formatted-rich-text class="description text-style collision-repair-content" value={collisionPartsContent.description}></lightning-formatted-rich-text>
+            </lightning-layout-item>
+            <lightning-layout-item  size="12" small-device-size="12" medium-device-size="12" large-device-size="10" class="popular-help-video-large slds-p-vertical_large">
+               
+                <div class="video-container"> 
+                    <div class="video-content">
+                        <iframe   frameborder="0" allowfullscreen  src={collisionPartsContent.video2}>
+                        </iframe>
+                    </div>
+                    <div class="video-text">
+                        <div class="video-font">A slight change in the design, materials, or precision of a part can deliver different data to your {brand}'s operating and safety systems information that can change how a system interprets and responds to impact.</div>
+                        <div class="slds-p-top_small">
+                            <button class="watch-video" data-url={collisionPartsContent.video2} onclick={onWatchVideo}>WATCH VIDEO</button>
+                        </div>
+                    </div>
+                </div>
+            </lightning-layout-item>
+            <lightning-layout-item  size="12" small-device-size="12" medium-device-size="12" large-device-size="10" class="slds-p-vertical_large">
+                <lightning-formatted-rich-text class="description2 text-style collision-repair-content" value={collisionPartsContent.description2}></lightning-formatted-rich-text>
+            </lightning-layout-item>
+        </lightning-layout>
+       <lightning-layout multiple-rows horizontal-align="space">
+           <lightning-layout-item  size="12" small-device-size="12" medium-device-size="12" large-device-size="10">
+                <c-own-accordion content-for-large-screen={accordionData} content-for-small-screen={accordionData}>
+                </c-own-accordion>
+           </lightning-layout-item>
+       </lightning-layout>
+    </div>
+</template>

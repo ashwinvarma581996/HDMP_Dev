@@ -1,0 +1,15 @@
+<template>
+   
+    <div class ="display:none">
+        <lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
+        <template if:true={recordId}>
+            <div if:false={isLoaded} class="slds-is-relative">
+            <lightning-spinner
+                alternative-text="Loading..." variant="brand">
+            Show
+            </lightning-spinner>
+        </div>
+        </template>
+       
+    </div>
+</template>

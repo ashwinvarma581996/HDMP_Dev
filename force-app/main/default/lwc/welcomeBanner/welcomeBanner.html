@@ -1,0 +1,11 @@
+<template>
+    <lightning-layout class="slds-align_absolute-center slds-text-align_center slds-p-vertical_medium slds-p-horizontal_xx-small welcomeBanner">
+        <lightning-layout-item>
+            <!-- <div class="honda_logo"><a href="https://www.honda.com/" target="_blank"><img src={hondaLogo} /></a></div> -->
+            <h1 class="font-h4">Welcome to the Dreamshop!</h1>
+            <p class="slds-p-top_small ">Your official source for {selectedBrand} parts and accessories.</p>
+            <p if:true={selectedBrand}>Select your vehicle to start shopping! </p>
+            <p if:false={selectedBrand}>Select a product line and start shopping!</p> 
+        </lightning-layout-item>
+    </lightning-layout>
+</template>

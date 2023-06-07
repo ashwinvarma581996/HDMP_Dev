@@ -1,0 +1,140 @@
+<template>
+    <!-- OPEN MODAL -->
+
+
+    <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+        aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open vehicleModal">
+        <div class="slds-modal__container">
+            <div class="modal-header" style="padding-bottom:0">
+                <header class="slds-modal__header" style='border: none;padding-bottom:0'>
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                        title="Close" onclick={closeChangeVehiclePopUp}>
+                        <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse"
+                            size="small"></lightning-icon>
+                        <!-- <span class="slds-assistive-text">Close</span> -->
+                    </button>
+                    <h1 class="slds-text-align_center slds-p-bottom_small font-h5">I Am Looking For {makeValue}</h1>
+                </header>
+            </div>
+            <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1" style="padding-top:0;">
+                <!-- Modal/Popup Box LWC body starts here -->
+                <div class="slds-grid slds-m-vertical_medium slds-grid_align-center megaMenuDropdown">
+                    <div class="centerElement slds-p-around_small slds-is-relative">
+                        <input class="partradio" type="radio" id="Parts" name="1" value="Parts"
+                            onclick={handleSelectOnPartsOrAccessories} checked={defaultSelectParts}>
+                        <span class="checkmark"></span>
+                        <label for="Parts" class="font-h6 slds-p-left_large">Parts</label>
+                    </div>
+                    <div class="centerElement slds-p-around_small slds-is-relative">
+                        <input class="accessoriesradio" type="radio" id="Accessories" name="1" value="Accessories"
+                            onclick={handleSelectOnPartsOrAccessories}>
+                        <span class="checkmark"></span>
+                        <label for="Accessories" class="font-h6 slds-p-left_large">Accessories</label>
+                    </div>
+                </div>
+                <h2 class="slds-text-align_center slds-hyphenate slds-p-bottom_xx-small font-h6">Select Your Vehicle
+                </h2>
+                <div class="slds-modal__content slds-p-around_small">
+                    <div if:true={isLoaded} class="slds-spinner_container">
+                        <lightning-spinner alternative-text="Loading..." variant="brand">
+                        </lightning-spinner>
+                    </div>
+                    <div class="slds-grid slds-gutters slds-wrap" style="align-items: stretch;">
+
+                        <!--START-->
+                        <div class="slds-col slds-medium-size_3-of-12">
+                            <h3 class="slds-text-align_center font-h6"><strong>My Products</strong></h3>
+                            <template if:true={isGuest}>
+                                <span class="slds-m-top_large" style="display: block;">
+                                    Want to save vehicles for future searches? <strong
+                                        class="textRed" onclick={redirectToLoginPage}>
+                                        Login</strong> or <strong class="textRed"
+                                        onclick={redirectToRegisterPage}>
+                                        Register
+                                    </strong> to
+                                    enable My Products
+                                </span>
+                            </template>
+
+<template if:false={isGuest}>
+                                <template if:true={myProductOptions}>
+                                    <lightning-combobox name="Products" class="Products" data-index=5
+                                        placeholder="Select Vehicle" options={myProductOptions}
+                                        onchange={handleProductChange}>
+                                    </lightning-combobox>
+                                    <div class="">
+                                        <lightning-icon icon-name='utility:edit' alternative-text='edit' size='x-small'
+                                            title='edit' class="slds-m-top--small" data-index=5
+                                            onclick={handleToEditMyProduct}></lightning-icon>
+                                        <strong class="textRed slds-m-around--small" data-index=5
+                                            onclick={handleToEditMyProduct}> Edit My Products </strong>
+                                    </div>
+                                </template>
+
+<template if:false={myProductOptions}>
+                                    <strong class="slds-p-around_small slds-text-heading_small textRed"
+                                        style="display:block;"> No vehicles saved
+                                    </strong>
+                                </template>
+</template>
+</div>
+<!--Ends-->
+<div class="slds-col slds-medium-size_1-of-12 slds-grid slds-grid_align-center slds-grid_vertical-align-center slds-is-relative slds-m-top_small slds-m-vertical_medium">
+    <span class="orText">OR</span>
+</div>
+<div class="slds-col slds-medium-size_4-of-12">
+    <h3 class="slds-text-align_center font-h6"><strong>By Year/Model</strong></h3>
+
+    <lightning-combobox name="Year" class="Year" label="Year" data-index=1 options={yearOptions} onchange={handleYearChange} required=true> </lightning-combobox>
+
+    <lightning-combobox name="Model" class="Model" label="Model" data-index=1 options={modelOptions} onchange={handleModelChange} disabled required=true>
+    </lightning-combobox>
+
+    <lightning-combobox name="Trim" class="Trim" label="Trim" data-index=1 options={trimOption} onchange={handleTrimChange} disabled required=true>
+    </lightning-combobox>
+    <template if:false={isGuest}>
+                                <div class="slds-p-top--small" style="display: table;">
+                                    <lightning-input type="checkBox" class="saveVehicle" data-name="saveVehicleYMT"
+                                        label="Save Vehicle to My Products" data-index=1
+                                        onchange={handleToCreateAddress}>
+                                    </lightning-input>
+                                </div>
+                            </template>
+</div>
+<div class="slds-col slds-medium-size_1-of-12 slds-grid slds-grid_align-center slds-grid_vertical-align-center slds-is-relative slds-m-top_small slds-m-vertical_medium">
+    <span class="orText">OR</span>
+</div>
+<div class="slds-col slds-medium-size_3-of-12">
+    <h3 class="slds-text-align_center font-h6"><strong>By VIN</strong></h3>
+    <!-- lightning-input Attribute :- message-when-too-short="VIN number is very short"-->
+    <lightning-input type="text" data-index="1" class="Vin" name="Vin" label="VIN#" max-length="17" placeholder="Enter Vehicle VIN" onchange={handleVinChange} onkeypress={handleKeyPress} autocomplete="off"></lightning-input>
+    <template if:false={isGuest}>
+                                <div class="slds-p-top--small">
+                                    <lightning-input type="checkBox" class="saveVehicle"
+                                        label="Save Vehicle to My Products" data-index=1 disabled
+                                        onchange={handleToCreateAddress}>
+                                    </lightning-input>
+                                </div>
+                            </template>
+    <p><a href="https://crrs.secure.force.com/hondaknowledge/articles/Public_Knowledge/What-is-the-VIN/?q=vin&l=en_US&c=Division_Subdivision%3AHonda&fs=Search&pn=1" target="_blank" class="vinError">Where Can I Find My VIN?</a> </p>
+</div>
+</div>
+</div>
+</div>
+<div class="auraDes slds-text-align_center">
+    <lightning-button class="slds-m-left_x-small slds-text-align_center" style="cursor: pointer;" variant="brand" data-mobile=false data-value={hondaSubmitValue} label="Search" onclick={handleOnSearchVehicle} disabled={showOrHideSearchButton} title="Search"></lightning-button>
+    <button class="slds-button slds-button_neutral slds-m-left_small" data-value="Acura" onclick={handleClearAll} title="Clear All">Clear
+                    All</button>
+</div>
+</div>
+
+</section>
+<div class="slds-backdrop slds-backdrop_open"></div>
+<!--START Added by Deepak Mali-->
+<template if:true={showMyProductEditModalBox}>
+        <c-my-product-modal-box onclosemodalbox={closeModalBoxPopup} vehicle-data={vehicleData}>
+        </c-my-product-modal-box>
+    </template>
+<!-- END by Deepak Mali-->
+
+</template>

@@ -1,0 +1,526 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes,lightning:availableForFlowScreens,lightning:availableForFlowActions,flexipage:availableForAllPageTypes" access="global" controller="B2B_MyPaymentsController">
+    <!-- Holds the Braintree Hosted Fields instance -->
+    <aura:attribute name="hostedFieldsInstance" type="List" />
+
+    <aura:attribute name="paymentsList" type="List" />
+    <aura:attribute name="tempPaymentsList" type="List" />
+    <aura:attribute name="objPayment" type="Object" />
+    <aura:attribute name="replacedAddress" type="Object" />
+    <aura:attribute name="addressList" type="List" />
+    <aura:attribute name="clientToken" type="String" />
+    <aura:attribute name="showRemoveModal" type="boolean" default="false" />
+    <aura:attribute name="showEditModal" type="boolean" default="false" />
+    <aura:attribute name="stateOptionList" type="List" />
+    <aura:attribute name="showSpinner" type="Boolean" default="false" />
+    <aura:attribute name="isNoPayments" type="Boolean" default="false" />
+
+    <aura:attribute name="openAddPaymentModal" type="boolean" default="false" />
+    <aura:attribute name="name" type="String" />
+    <aura:attribute name="cardholderName" type="String" />
+    <aura:attribute name="address1" type="String" />
+    <aura:attribute name="address2" type="String" />
+    <aura:attribute name="city" type="String" />
+    <aura:attribute name="state" type="String" />
+    <aura:attribute name="country" type="String" default="United States" />
+    <aura:attribute name="zipCode" type="String" />
+    <aura:attribute name="phoneNumber" type="String" />
+    <aura:attribute name="newClientToken" type="String" />
+    <aura:attribute name="isShowNewAddress" type="boolean" default="false" />
+    <aura:attribute name="isAddNewAddress" type="boolean" default="false" />
+    <aura:attribute name="isPreferredPayment" type="boolean" default="false" />
+    <aura:attribute name="isSaveToAddressBook" type="boolean" default="false" />
+    <aura:attribute name="isNewAddress" type="boolean" default="true" />
+    <aura:attribute name="isSelectedAddress" type="boolean" default="true" />
+    <aura:attribute name="isAnyAddressSelected" type="boolean" default="false" />
+    <aura:attribute name="selectedAddress" type="Object" />
+
+
+
+
+    <ltng:require styles="/resource/braintree/braintree/css/bootstrap.min.css" scripts="https://js.braintreegateway.com/web/3.81.0/js/client.min.js,
+             https://js.braintreegateway.com/web/3.81.0/js/hosted-fields.min.js,             
+             http://code.jquery.com/jquery-3.2.1.min.js" afterScriptsLoaded="{!c.doInit}" />
+
+    <aura:if isTrue="{!v.showSpinner}">
+        <lightning:spinner alternativeText="Loading" size="medium" variant="brand" />
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </aura:if>
+
+    <lightning:layout multipleRows="true" class="user-section-header slds-m-top_large">
+        <lightning:layoutItem size="12" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="12" class="slds-grid slds-grid_vertical-align-center slds-grid_align-spread slds-m-top_medium">
+            <div class="slds-text-heading_medium default-color">My Payments</div>
+            <button class="slds-button themeBtn primaryRedBtn hondabutton" title="Add Payment" onclick="{!c.openAddPaymentModal}">ADD New PAYMENT</button>
+        </lightning:layoutItem>
+        <lightning:layoutItem size="12" smallDeviceSize="12" mediumDeviceSize="6" largeDeviceSize="6">
+            <div class="custom-box"></div>
+        </lightning:layoutItem>
+    </lightning:layout>
+
+
+    <aura:if isTrue="{!v.isNoPayments}">
+        <div class="slds-text-heading_large slds-text-color_error errorTxt slds-text-align_center slds-m-bottom_large">Currently, there are no payments type found for your user!</div>
+    </aura:if>
+    <aura:iteration items="{!v.paymentsList}" var="item">
+        <lightning:layout multipleRows="true" class="address-book-wrapper default-color">
+            <lightning:layoutItem size="12" smallDeviceSize="12" mediumDeviceSize="6" largeDeviceSize="6">
+                <lightning:layout multipleRows="true">
+                    <lightning:layoutItem size="12" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="12">
+                        <div class="custom-box slds-text-heading_medium slds-m-bottom_medium slds-hyphenate font-h4">
+                            <span>Card Ending in {!item.Credit_Card_Number__c}</span> &nbsp;&nbsp;&nbsp;
+                            <aura:if isTrue="{!item.Default_Payment_Method__c}">
+                                <lightning:icon iconName='utility:favorite' alternativeText='preferred' variant="error" size='small' title='Preferred'></lightning:icon>
+                            </aura:if>
+                            <aura:if isTrue="{!item.Default_Payment_Method__c != true }">
+                                <aura:if isTrue="{!item.dateNotExpired}">
+                                    <span class="custom-box textRed cursor-pointer" id="{!item.Id}" onclick="{!c.handleMarkPreferred}">Make preferred</span>
+                                </aura:if>
+                            </aura:if>
+                        </div>
+                    </lightning:layoutItem>
+
+                    <lightning:layoutItem size="12" smallDeviceSize="12" mediumDeviceSize="4" largeDeviceSize="4">
+                        <div class="custom-box"><b>Type</b></div>
+                    </lightning:layoutItem>
+
+                    <lightning:layoutItem size="12" smallDeviceSize="12" mediumDeviceSize="8" largeDeviceSize="8">
+                        <div class="custom-box">{!item.Type__c}</div>
+                    </lightning:layoutItem>
+
+                    <lightning:layoutItem size="12" smallDeviceSize="12" mediumDeviceSize="4" largeDeviceSize="4">
+                        <div class="custom-box"><b>Name</b></div>
+                    </lightning:layoutItem>
+
+                    <lightning:layoutItem size="12" smallDeviceSize="12" mediumDeviceSize="8" largeDeviceSize="8">
+                        <div class="custom-box">{!item.Cardholder_Name__c}</div>
+                    </lightning:layoutItem>
+
+                    <lightning:layoutItem size="12" smallDeviceSize="12" mediumDeviceSize="4" largeDeviceSize="4">
+                        <div class="custom-box"><b>Expiration</b></div>
+                    </lightning:layoutItem>
+
+                    <lightning:layoutItem size="12" smallDeviceSize="12" mediumDeviceSize="8" largeDeviceSize="8">
+                        <div class="custom-box">
+                            <!--<lightning:formattedDateTime value="{!item.CC_Expiration_Date__c}" month="2-digit" year="numeric"></lightning:formattedDateTime>-->
+                            <aura:if isTrue="{!item.dateNotExpired != true}">
+                                <span class="textBlue">Expired</span>
+                                <aura:set attribute="else">
+                                    <lightning:layoutItem size="12" smallDeviceSize="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                        <aura:if isTrue="{!item.CC_Expiration_Month__c lt 10}">
+                                            <div class="custom-box">0{!item.CC_Expiration_Month__c}/{!item.CC_Expiration_Year__c}</div>
+                                            <aura:set attribute="else">
+                                                <div class="custom-box">{!item.CC_Expiration_Month__c}/{!item.CC_Expiration_Year__c}</div>
+                                            </aura:set>
+                                        </aura:if>
+
+                                    </lightning:layoutItem>
+                                </aura:set>
+                            </aura:if>
+
+                        </div>
+                    </lightning:layoutItem>
+
+                    <lightning:layoutItem size="12" smallDeviceSize="12" mediumDeviceSize="4" largeDeviceSize="4">
+                        <div class="custom-box"><b>Billing Address</b></div>
+                    </lightning:layoutItem>
+
+                    <lightning:layoutItem size="12" smallDeviceSize="12" mediumDeviceSize="8" largeDeviceSize="8">
+                        <div class="custom-box">{!item.Billing_Street__c}</div>
+                    </lightning:layoutItem>
+
+                    <lightning:layoutItem size="12" smallDeviceSize="12" mediumDeviceSize="4" largeDeviceSize="4">
+                        <div class="custom-box"><b></b></div>
+                    </lightning:layoutItem>
+
+                    <lightning:layoutItem size="12" smallDeviceSize="12" mediumDeviceSize="8" largeDeviceSize="8">
+                        <div class="custom-box">{!item.Billing_City__c}, {!item.Billing_State__c}&nbsp;{!item.Billing_Country__c}&nbsp;{!item.Billing_PostalCode__c}</div>
+                    </lightning:layoutItem>
+
+                    <lightning:layoutItem size="12" smallDeviceSize="6" mediumDeviceSize="6" largeDeviceSize="3">
+                        <div class="custom-box textRed cursor-pointer" id="{!item.Id}" onclick="{!c.openRemoveModel}">Remove payment</div>
+                        <!-- onclick={removePaymentModelShow} data-cardnumber={!item.Credit_Card_Number__c} data-id={!item.Id} -->
+                    </lightning:layoutItem>
+                </lightning:layout>
+            </lightning:layoutItem>
+
+            <lightning:layoutItem size="12" smallDeviceSize="12" mediumDeviceSize="6" largeDeviceSize="6">
+                <div class="slds-text-align_center addressBookActions">
+                    <button class="slds-button themeBtn primaryGrayBtn hondabutton" title="Edit" value="{!item.Id}" onclick="{!c.openEditModal}">EDIT</button>
+                    <!--  data-id={!item.Id} data-addressid={!item.My_Address_Book__c} -->
+                </div>
+            </lightning:layoutItem>
+            <lightning:layoutItem size="12" smallDeviceSize="12" padding="horizontal-small"></lightning:layoutItem>
+            <br />
+        </lightning:layout>
+        <hr/>
+    </aura:iteration>
+
+    <!-- Remove Functionality starts here-->
+    <aura:if isTrue="{!v.showRemoveModal}">
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header" style="border-bottom: 0;">
+                    <lightning:buttonIcon iconName="utility:close" onclick="{!c.closeRemoveModel}" alternativeText="close" variant="bare-inverse" class="slds-modal__close" />
+                    <aura:if isTrue="{!v.objPayment.Default_Payment_Method__c != true}">
+                        <!--<aura:if isTrue="{objPayment.Default_Payment_Method__c}">-->
+                        <p id="modal-heading-01" class="slds-text-heading_medium slds-p-top_medium warning-text">
+                            <!--Are you sure you want to remove<br/>this payment method completely<br/>for the card ending in {!v.objPayment.Credit_Card_Number__c}?-->
+                            Removing this payment method from My Payments will not affect any of your orders already placed.
+                        </p>
+                        <aura:set attribute="else">
+                            <p id="modal-heading-01" class="slds-text-heading_medium slds-p-top_medium warning-text">
+                                <!--Are you sure you want to remove<br/>this payment method completely<br/>for the card ending in {!v.objPayment.Credit_Card_Number__c}?-->
+
+                                Removing your preferred payment method from My Payments will not affect any of your orders already placed.Please make sure to set a new preferred payment method for future Dreamshop orders.
+                            </p>
+                        </aura:set>
+                    </aura:if>
+                </header>
+                <div class="slds-modal__content slds-p-horizontal_medium slds-p-bottom_small slds-p-left_xx-large" id="modal-content-id-1">
+                </div>
+                <footer class="slds-modal__footer slds-text-align_center slds-p-top_medium slds-p-bottom_medium" style="border-top: 0;">
+                    <lightning:button variant="brand" label="Yes, remove it" title="Yes, Remove it" class="slds-m-left_small" onclick="{!c.handleRemovePayment}" />
+                    <lightning:button variant="brand" label="Cancel" title="Cancel" class="slds-m-left_small primaryGrayBtn" onclick="{! c.closeRemoveModel}" />
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </aura:if>
+
+    <!--Edit Address Book-->
+    <aura:if isTrue="{!v.showEditModal}">
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-02" aria-modal="true" aria-describedby="modal-content-id-2" class="slds-modal slds-fade-in-open payment-edit-model">
+            <div class="slds-modal__container edit-payment-modal">
+                <header class="slds-modal__header" style="border-bottom: 0;">
+                    <span class="slds-modal__close">
+                        <lightning:icon icon-name="utility:close" variant="inverse" alternative-text="close" onclick="{!c.closeEditModal}"></lightning:icon>
+                    </span>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium warning-text">Edit Payment</h2>
+                </header>
+                <div class="slds-modal__content slds-p-horizontal_medium slds-p-bottom_small slds-p-left_xx-large" id="modal-content-id-3">
+                    <lightning:layout multipleRows="true" class="billing-body">
+                        <lightning:layoutItem padding="around-small" size="12" smallDeviceSize="4" mediumDeviceSize="3" largeDeviceSize="3">
+                            <div class="slds-text-align_left heading-title">Cardholder Name</div>
+                        </lightning:layoutItem>
+                        <lightning:layoutItem padding="around-small" size="12" smallDeviceSize="8" mediumDeviceSize="5" largeDeviceSize="5">
+                            <span onkeypress="{!c.handleToAllowName}">
+                                <lightning:input aura:id="inputField" type="text" variant="label-hidden" name="Cardholder Name" value="{!v.objPayment.Cardholder_Name__c}" required="true" onchange="{!c.removeCustomMessage}" 
+                                class="card-holdername" />
+                            </span>
+                        </lightning:layoutItem>
+                        <lightning:layoutItem class="cards-we-accept" padding="around-small" size="12" smallDeviceSize="12" mediumDeviceSize="4" largeDeviceSize="4">
+                            <div class="cards-we-accept__inner">
+                                <div class="custom-box slds-text-heading_small" style="text-align: right; color:black;">We accept</div>
+                                <div class="custom-box">
+                                    <img style="margin-right: 0.2rem;" src="/resource/CardImages/CardImages/visa.png" width="30" />
+                                    <img style="margin-right: 0.2rem;" src="/resource/CardImages/CardImages/master.png" width="30" />
+                                    <img style="margin-right: 0.2rem;" src="/resource/CardImages/CardImages/amex.jpg" width="30" />
+                                    <img src="/resource/CardImages/CardImages/discover.jpg" width="30" />
+                                </div>
+                            </div>
+                        </lightning:layoutItem>
+                        <lightning:layoutItem padding="around-small" size="12" smallDeviceSize="4" mediumDeviceSize="3" largeDeviceSize="3">
+                            <div class="slds-text-align_left heading-title">Card Number</div>
+                        </lightning:layoutItem>
+                        <lightning:layoutItem padding="around-small" size="12" smallDeviceSize="8" mediumDeviceSize="9" largeDeviceSize="9">
+                            <div class="card-number">************{!v.objPayment.Credit_Card_Number__c}</div>
+                        </lightning:layoutItem>
+                        <lightning:layoutItem padding="around-small" size="12" smallDeviceSize="4" mediumDeviceSize="3" largeDeviceSize="3">
+                            <div class="slds-text-align_left heading-title">Expiration</div>
+                        </lightning:layoutItem>
+                        <lightning:layoutItem padding="around-small" size="12" smallDeviceSize="8" mediumDeviceSize="4" largeDeviceSize="4">
+                            <div id="cc-expiration" class="form-control slds-input" style="height: 44px;"></div>
+                            <!-- <lightning:input onkeyup="{!c.formatString}" onchange="{!c.handleUpdateFields}" type="text" variant="label-hidden" name="expiration" value="12/23" required="true" placeholder="MM/YY" maxlength='5'/> -->
+                        </lightning:layoutItem>
+                        <lightning:layoutItem padding="around-small" size="12" smallDeviceSize="4" mediumDeviceSize="1" largeDeviceSize="1">
+                            <div class="heading-title">CVV</div>
+                        </lightning:layoutItem>
+                        <lightning:layoutItem padding="around-small" size="12" smallDeviceSize="8" mediumDeviceSize="2" largeDeviceSize="2">
+                            <div id="cc-cvv" class="form-control slds-input" style="height: 44px;"></div>
+                        </lightning:layoutItem>
+                        <lightning:layoutItem padding="around-small" size="12" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="12">
+                            <aura:if isTrue="{!v.objPayment.dateNotExpired != true}">
+                                <div class="custom-box textRed">Card Expired</div>
+                            </aura:if>
+                        </lightning:layoutItem>
+                        <br/><br/>
+                    </lightning:layout>
+                    <lightning:layout multipleRows="true" class="billing-body">
+                        <lightning:layoutItem padding="around-small" size="12" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="12" class="billing-title slds-grid slds-m-top_small">
+                            <div class="slds-text-align_left">Billing Address</div>
+                            <div class="textRed slds-text-heading_small">* Required Fields</div>
+                        </lightning:layoutItem>
+                        <lightning:layoutItem padding="around-small" size="12" smallDeviceSize="4" mediumDeviceSize="2" largeDeviceSize="2">
+                            <div class="slds-text-align_left heading-title">Name <span class="textRed">*</span></div>
+                        </lightning:layoutItem>
+                        <lightning:layoutItem padding="around-small" size="12" smallDeviceSize="8" mediumDeviceSize="10" largeDeviceSize="10">
+                            <span onkeypress="{!c.handleToAllowName}">  
+                        <lightning:input aura:id="inputField" type="text" variant="label-hidden" name="Name" value="{!v.objPayment.Billing_Customer_Name__c}" required="true" placeholder="" onchange="{!c.removeCustomMessage}" class="add-name" />
+                        </span>
+                        </lightning:layoutItem>
+                        <lightning:layoutItem padding="around-small" size="12" smallDeviceSize="4" mediumDeviceSize="2" largeDeviceSize="2">
+                            <div class="slds-text-align_left heading-title">Address <span class="textRed">*</span></div>
+                        </lightning:layoutItem>
+                        <lightning:layoutItem padding="around-small" size="12" smallDeviceSize="8" mediumDeviceSize="10" largeDeviceSize="10">
+                            <span onkeypress="{!c.handleToAllowName}">
+                            <lightning:input aura:id="inputField" type="text" variant="label-hidden" name="Address" value="{!v.objPayment.Billing_Street__c}" required="true" onchange="{!c.removeCustomMessage}" />
+                            </span>
+                        </lightning:layoutItem>
+                        
+                        <lightning:layoutItem padding="around-small" size="12" smallDeviceSize="4" mediumDeviceSize="2" largeDeviceSize="2">
+                            <div class="slds-text-align_left heading-title">City <span class="textRed">*</span></div>
+                        </lightning:layoutItem>
+                        <lightning:layoutItem padding="around-small" size="12" smallDeviceSize="8" mediumDeviceSize="10" largeDeviceSize="10">
+                            <span onkeypress="{!c.handleToAllowName}">
+                            <lightning:input aura:id="inputField" type="text" variant="label-hidden" name="City" value="{!v.objPayment.Billing_City__c}" required="true" onchange="{!c.removeCustomMessage}" class="add-city" />
+                        	</span>
+                        </lightning:layoutItem>
+                        <lightning:layoutItem padding="around-small" size="12" smallDeviceSize="4" mediumDeviceSize="2" largeDeviceSize="2">
+                            <div class="slds-text-align_left heading-title">State <span class="textRed">*</span></div>
+                        </lightning:layoutItem>
+                        <lightning:layoutItem padding="around-small" size="12" smallDeviceSize="8" mediumDeviceSize="10" largeDeviceSize="10">
+                            <!-- <lightning:input type="text" variant="standard" name="name" placeholder="type here..."></lightning:input> -->
+                            <lightning:combobox aura:id="inputField" name="State" value="{!v.objPayment.Billing_State__c}" required="true" placeholder="Select State" options="{!v.stateOptionList}" variant="label-hidden"></lightning:combobox>
+                        </lightning:layoutItem>
+                        
+                        <lightning:layoutItem padding="around-small" size="12" smallDeviceSize="4" mediumDeviceSize="2" largeDeviceSize="2">
+                            <div class="slds-text-align_left heading-title">Country <span class="textRed">*</span></div>
+                        </lightning:layoutItem>
+                        <lightning:layoutItem padding="around-small" size="12" smallDeviceSize="8" mediumDeviceSize="10" largeDeviceSize="10">
+                            <span>
+                                <lightning:input  aura:id="inputField" type="text" variant="label-hidden" name="Country" value="{!v.objPayment.Billing_Country__c}" disabled="true" class="add-country" />
+                            </span>
+                        </lightning:layoutItem>
+
+                        <lightning:layoutItem padding="around-small" size="12" smallDeviceSize="4" mediumDeviceSize="2" largeDeviceSize="2">
+                            <div class="slds-text-align_left heading-title">Zip <span class="textRed">*</span></div>
+                        </lightning:layoutItem>
+                        <lightning:layoutItem padding="around-small" size="12" smallDeviceSize="8" mediumDeviceSize="10" largeDeviceSize="10">
+                            <span onkeypress="{!c.handleToAllowZipcode}">
+                            <lightning:input  aura:id="inputField" type="text" variant="label-hidden" name="Zipcode" maxlength="10" value="{!v.objPayment.Billing_PostalCode__c}" required="true" onchange="{!c.removeCustomMessage}" />
+                            </span>
+                        </lightning:layoutItem>
+                        <lightning:layoutItem padding="around-small" size="12" smallDeviceSize="4" mediumDeviceSize="2" largeDeviceSize="2">
+                            <div class="slds-text-align_left heading-title">Phone <span class="textRed">*</span></div>
+                        </lightning:layoutItem>
+                        <lightning:layoutItem padding="around-small" size="12" smallDeviceSize="8" mediumDeviceSize="10" largeDeviceSize="10">
+                            <span onkeypress="{!c.handleToAllowPhone}">
+                            <lightning:input  aura:id="inputField" type="text" variant="label-hidden" name="Phone" maxlength="10" value="{!v.objPayment.Billing_Phone__c}" required="true" onchange="{!c.removeCustomMessage}" />
+                            </span>
+                        </lightning:layoutItem>
+                        <lightning:layoutItem padding="around-small" size="12" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="12" class="replace-title">
+                            <aura:if isTrue="{!v.addressList}">
+                                <div class="slds-text-align_left">Replace with Saved Address</div>
+                            </aura:if>
+                        </lightning:layoutItem>
+                    </lightning:layout>
+
+                    <lightning:layout multipleRows="true" class="billing-body addresses-box">
+                        <aura:iteration items="{!v.addressList}" var="item">
+                            <lightning:layoutItem size="12" padding="around-small" smallDeviceSize="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                <div class="custom-box slds-align_absolute-center slds-form-element__control" style="border: 1px solid rgb(187, 179, 179);min-height: 5rem; padding: 5px 10px; justify-content: left; height: 100%;">
+                                    <div class="custom-box">
+                                        <lightning:input id="{!item.Id}" type="radio" name="addresses" label="" value="{!item.Id}" checked="false" onchange="{!c.handleChangeAddressEdit}"></lightning:input>
+                                    </div>
+                                    <div class="custom-box address-body">{!item.Name}<br/>{!item.Address__c},{!item.Address_Line_2__c}<br/> {!item.City__c}, {!item.State__c}&nbsp;{!item.Country__c} &nbsp;{!item.Zip__c}&nbsp;{!item.Phone__c}
+                                    </div>
+                                </div>
+                            </lightning:layoutItem>
+                        </aura:iteration>
+                    </lightning:layout>
+                    <lightning:layout multipleRows="true" class="billing-body">
+                        <lightning:layoutItem size="12" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="12" class="preferred">
+                            <div class="slds-text-align_center">
+                                <lightning:input name="MarkPreferredAddress" type="checkbox" class="mark-pref-checkbox" label="Make preferred payment method?" checked="{!v.objPayment.Default_Payment_Method__c}" />
+                            </div>
+                        </lightning:layoutItem>
+                    </lightning:layout>
+                </div>
+                <footer class="slds-modal__footer slds-text-align_center slds-p-top_medium slds-p-bottom_medium" style="border-top: 0;">
+                    <lightning:button variant="brand" label="SAVE CHANGES" title="SAVE CHANGES" class="slds-m-left_small" name="SAVECHANGES" onclick="{!c.handleEditSaveAction}"></lightning:button>
+                    <lightning:button variant="brand" label="CANCEL" title="CANCEL" class="slds-m-left_small primaryGrayBtn" name="CANCEL" onclick="{!c.closeEditModal}"></lightning:button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </aura:if>
+
+    <aura:if isTrue="{!v.openAddPaymentModal}">
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-02" aria-modal="true" aria-describedby="modal-content-id-2" class="slds-modal slds-fade-in-open payment-edit-model">
+            <div class="slds-modal__container edit-payment-modal">
+                <header class="slds-modal__header" style="border-bottom: 0;">
+                    <span class="slds-modal__close">
+                        <lightning:icon icon-name="utility:close" variant="inverse" alternative-text="close" onclick="{!c.closeEditModal}"></lightning:icon>
+                    </span>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium warning-text">Add New Payment</h2>
+                </header>
+                <div class="slds-modal__content slds-p-horizontal_medium slds-p-bottom_small slds-p-left_xx-large" id="modal-content-id-3">
+                    <lightning:layout multipleRows="true" class="billing-body">
+                        <lightning:layoutItem padding="around-small" size="12" smallDeviceSize="4" mediumDeviceSize="3" largeDeviceSize="3">
+                            <div class="slds-text-align_left heading-title">Cardholder Name <span class="textRed">*</span></div>
+                        </lightning:layoutItem>
+                        <lightning:layoutItem padding="around-small" size="12" smallDeviceSize="8" mediumDeviceSize="5" largeDeviceSize="5">
+                            <span onkeypress="{!c.handleToAllowName}">
+                            <lightning:input aura:id="inputField" type="text" variant="label-hidden" name="Cardholder Name" value="{!v.cardholderName}" required="true" placeholder="" onchange="{!c.removeCustomMessage}" class="card-holdername" />
+                           </span>
+                        </lightning:layoutItem>
+                        <lightning:layoutItem class="cards-we-accept" padding="around-small" size="12" smallDeviceSize="12" mediumDeviceSize="4" largeDeviceSize="4">
+                            <div class="cards-we-accept__inner">
+                                <div class="custom-box slds-text-heading_small" style="text-align: right; color:black;">We accept</div>
+                                <div class="custom-box">
+                                    <img style="margin-right: 0.2rem;" src="/resource/CardImages/CardImages/visa.png" width="30" />
+                                    <img style="margin-right: 0.2rem;" src="/resource/CardImages/CardImages/master.png" width="30" />
+                                    <img style="margin-right: 0.2rem;" src="/resource/CardImages/CardImages/amex.jpg" width="30" />
+                                    <img src="/resource/CardImages/CardImages/discover.jpg" width="30" />
+                                </div>
+                            </div>
+                        </lightning:layoutItem>
+                        <lightning:layoutItem padding="around-small" size="12" smallDeviceSize="4" mediumDeviceSize="3" largeDeviceSize="3">
+                            <div class="slds-text-align_left heading-title">Card Number</div>
+                        </lightning:layoutItem>
+                        <lightning:layoutItem padding="around-small" size="12" smallDeviceSize="8" mediumDeviceSize="9" largeDeviceSize="9">
+                            <!-- <div class="card-number">************{!v.objPayment.Credit_Card_Number__c}</div> -->
+                            <div id="cc-number" class="form-control slds-input" style="height: 44px;"></div>
+                        </lightning:layoutItem>
+
+                        <!-- <lightning:layoutItem padding="around-small" size="12" smallDeviceSize="4" mediumDeviceSize="3" largeDeviceSize="3">
+                            <div class="slds-text-align_left heading-title">Credit Card Number</div>
+                        </lightning:layoutItem> -->
+                        <!-- <lightning:layoutItem padding="around-small" size="12" smallDeviceSize="8" mediumDeviceSize="4" largeDeviceSize="4">
+                            <div id="cc-number" class="form-control slds-input" style="height: 44px;"></div> 
+                        </lightning:layoutItem> -->
+                        <lightning:layoutItem padding="around-small" size="12" smallDeviceSize="4" mediumDeviceSize="3" largeDeviceSize="3">
+                            <div class="slds-text-align_left heading-title">Expiration</div>
+                        </lightning:layoutItem>
+                        <lightning:layoutItem padding="around-small" size="12" smallDeviceSize="8" mediumDeviceSize="4" largeDeviceSize="4">
+                            <div id="cc-expiration" class="form-control slds-input" style="height: 44px;"></div>
+                            <!-- <lightning:input onkeyup="{!c.formatString}" onchange="{!c.handleUpdateFields}" type="text" variant="label-hidden" name="expiration" value="12/23" required="true" placeholder="MM/YY" maxlength='5'/> -->
+                        </lightning:layoutItem>
+                        <lightning:layoutItem padding="around-small" size="12" smallDeviceSize="4" mediumDeviceSize="1" largeDeviceSize="1">
+                            <div class="heading-title">CVV</div>
+                        </lightning:layoutItem>
+                        <lightning:layoutItem padding="around-small" size="12" smallDeviceSize="8" mediumDeviceSize="2" largeDeviceSize="2">
+                            <div id="cc-cvv" class="form-control slds-input" style="height: 44px;"></div>
+                        </lightning:layoutItem>
+                        <!-- <lightning:layoutItem padding="around-small" size="12" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="12" >
+                        <aura:if isTrue="{!v.objPayment.dateNotExpired != true}">
+                                <div class="custom-box textRed">Card Expired</div>
+                            </aura:if>
+                        </lightning:layoutItem> -->
+                        <br/><br/>
+                    </lightning:layout>
+
+                    <lightning:layout multipleRows="true" class="billing-body">
+
+                        <lightning:layoutItem padding="around-small" size="12" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="12" class="billing-title slds-grid">
+                            <div class="slds-text-align_left">Billing Address</div>
+                            <div class="textRed slds-text-heading_small">* Required Fields</div>
+                        </lightning:layoutItem>
+                        <aura:if isTrue="{!v.isShowNewAddress}">
+                            <aura:iteration items="{!v.addressList}" var="item">
+                                <lightning:layoutItem size="12" padding="around-small" smallDeviceSize="12" mediumDeviceSize="4" largeDeviceSize="4">
+                                    <div class="custom-box slds-align_absolute-center slds-form-element__control" style="border: 1px solid rgb(187, 179, 179);min-height: 5rem; padding: 5px 10px; justify-content: left; height: 100%;">
+                                        <div class="custom-box">
+                                            <lightning:input id="{!item.Id}" type="radio" name="addresses" label="" value="{!item.Id}" checked="{!item.isPreferred__c}" onchange="{!c.handleChangeAddress}"></lightning:input>
+                                        </div>
+                                        <div class="custom-box address-body">{!item.Name}<br/>{!item.Address__c},{!item.Address_Line_2__c}<br/> {!item.City__c}, {!item.State__c}&nbsp; {!item.Country__c}&nbsp;{!item.Zip__c}&nbsp;{!item.Phone__c}
+                                        </div>
+                                    </div>
+                                </lightning:layoutItem>
+                            </aura:iteration>
+                            <br/><br/>
+                            <lightning:layoutItem class="slds-p-around_small slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_4-of-12 slds-large-size_4-of-12 pointer">
+                                <div class="custom-box slds-align_absolute-center" style="border: 1px solid rgb(187, 179, 179);min-height: 5rem;" onclick="{!c.addNewAddress}"> + Add New Address </div>
+                            </lightning:layoutItem>
+
+                        </aura:if>
+
+                        <aura:if isTrue="{!v.isAddNewAddress}">
+                            <lightning:layoutItem padding="around-small" size="12" smallDeviceSize="4" mediumDeviceSize="2" largeDeviceSize="2">
+                                <div class="slds-text-align_left heading-title">Name <span class="textRed">*</span></div>
+                            </lightning:layoutItem>
+                            <lightning:layoutItem padding="around-small" size="12" smallDeviceSize="8" mediumDeviceSize="10" largeDeviceSize="10">
+                                <!--<lightning:input onchange="{!c.handleUpdateFields}" aura:id="inputField" type="text" variant="label-hidden" name="Name" value="{!v.name}" required="true" placeholder="" onkeypress="{!c.handleToAllowName}" class="add-name" />-->
+                                <span onkeypress="{!c.handleToAllowName}">
+									<lightning:input  aura:id="inputField" type="text" variant="label-hidden" name="Name" value="{!v.name}" required="true" onchange="{!c.removeCustomMessage}" class="add-name" />
+                                    
+                                </span>
+                            </lightning:layoutItem>
+                            <lightning:layoutItem padding="around-small" size="12" smallDeviceSize="4" mediumDeviceSize="2" largeDeviceSize="2">
+                                <div class="slds-text-align_left heading-title">Address <span class="textRed">*</span></div>
+                            </lightning:layoutItem>
+                            <lightning:layoutItem padding="around-small" size="12" smallDeviceSize="8" mediumDeviceSize="10" largeDeviceSize="10">
+                                <span onkeypress="{!c.handleToAllowName}">
+                                <lightning:input aura:id="inputField" type="text" variant="label-hidden" name="Address" value="{!v.address1}" required="true" onchange="{!c.removeCustomMessage}" />
+                            </span>
+                            </lightning:layoutItem>
+                            
+                            <lightning:layoutItem padding="around-small" size="12" smallDeviceSize="4" mediumDeviceSize="2" largeDeviceSize="2">
+                                <div class="slds-text-align_left heading-title">City <span class="textRed">*</span></div>
+                            </lightning:layoutItem>
+                            <lightning:layoutItem padding="around-small" size="12" smallDeviceSize="8" mediumDeviceSize="10" largeDeviceSize="10">
+                                <!--<lightning:input onchange="{!c.handleUpdateFields}" aura:id="inputField" type="text" variant="label-hidden" name="City" value="{!v.city}" required="true" placeholder="" onkeypress="{!c.handleToAllowName}" class="add-city" />-->
+                                <span onkeypress="{!c.handleToAllowName}">
+								<lightning:input  aura:id="inputField" type="text" variant="label-hidden" name="City" value="{!v.city}" required="true" onchange="{!c.removeCustomMessage}" class="add-city" />
+                                </span>
+                            </lightning:layoutItem>
+                            <lightning:layoutItem padding="around-small" size="12" smallDeviceSize="4" mediumDeviceSize="2" largeDeviceSize="2">
+                                <div class="slds-text-align_left heading-title">State <span class="textRed">*</span></div>
+                            </lightning:layoutItem>
+                            <lightning:layoutItem padding="around-small" size="12" smallDeviceSize="8" mediumDeviceSize="10" largeDeviceSize="10">
+                                <!-- <lightning:input type="text" variant="standard" name="name" placeholder="type here..."></lightning:input> -->
+                                <lightning:combobox aura:id="inputField" name="State" value="{!v.state}" required="true" placeholder="Select State" options="{!v.stateOptionList}" variant="label-hidden"></lightning:combobox>
+                            </lightning:layoutItem>
+                            
+                            <lightning:layoutItem padding="around-small" size="12" smallDeviceSize="4" mediumDeviceSize="2" largeDeviceSize="2">
+                                <div class="slds-text-align_left heading-title">Country <span class="textRed">*</span></div>
+                            </lightning:layoutItem>
+                            <lightning:layoutItem padding="around-small" size="12" smallDeviceSize="8" mediumDeviceSize="10" largeDeviceSize="10">
+                                <span>
+                                    <lightning:input  aura:id="inputField" type="text" variant="label-hidden" name="Country" value="{!v.country}" disabled="true" class="add-country" />
+                                </span>
+                            </lightning:layoutItem>
+
+                            <lightning:layoutItem padding="around-small" size="12" smallDeviceSize="4" mediumDeviceSize="2" largeDeviceSize="2">
+                                <div class="slds-text-align_left heading-title">Zip <span class="textRed">*</span></div>
+                            </lightning:layoutItem>
+                            <lightning:layoutItem padding="around-small" size="12" smallDeviceSize="8" mediumDeviceSize="10" largeDeviceSize="10">
+                                <!--<lightning:input onchange="{!c.handleUpdateFields}" aura:id="inputField" type="text" variant="label-hidden" name="Zipcode" value="{!v.zipCode}" required="true" placeholder="" />-->
+                                <span onkeypress="{!c.handleToAllowZipcode}">										
+								<lightning:input aura:id="inputField" type="text" variant="label-hidden" name="Zipcode" maxlength="10" value="{!v.zipCode}" required="true" onchange="{!c.removeCustomMessage}"/>
+								</span>
+                            </lightning:layoutItem>
+                            <lightning:layoutItem padding="around-small" size="12" smallDeviceSize="4" mediumDeviceSize="2" largeDeviceSize="2">
+                                <div class="slds-text-align_left heading-title">Phone <span class="textRed">*</span></div>
+                            </lightning:layoutItem>
+                            <lightning:layoutItem padding="around-small" size="12" smallDeviceSize="8" mediumDeviceSize="10" largeDeviceSize="10">
+                                <!--<lightning:input onchange="{!c.handleUpdateFields}" aura:id="inputField" type="text" variant="label-hidden" name="Phone" maxlength='10' value="{!v.phoneNumber}" required="true" placeholder="" />-->
+                                <span onkeypress="{!c.handleToAllowPhone}">
+								<lightning:input aura:id="inputField" type="text" variant="label-hidden" name="Phone" maxlength="10" value="{!v.phoneNumber}" required="true" onchange="{!c.removeCustomMessage}" />
+								</span>
+                            </lightning:layoutItem>
+                            <lightning:layoutItem size="12" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="12" class="preferred">
+                                <div class="slds-text-align_center">
+                                    <lightning:input name="MarkPreferredAddress" type="checkbox" class="mark-pref-checkbox" label="Save this Address to Address Book?" checked="{!v.isSaveToAddressBook}" />
+                                </div>
+                            </lightning:layoutItem>
+                        </aura:if>
+                    </lightning:layout>
+
+                    <lightning:layout multipleRows="true" class="billing-body">
+                        <lightning:layoutItem size="12" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="12" class="preferred">
+                            <div class="slds-text-align_center">
+                                <lightning:input name="MarkPreferredAddress" type="checkbox" class="mark-pref-checkbox" label="Make preferred payment method?" checked="{!v.isPreferredPayment}" />
+                            </div>
+                        </lightning:layoutItem>
+                    </lightning:layout>
+                </div>
+                <footer class="slds-modal__footer slds-text-align_center slds-p-top_medium slds-p-bottom_medium" style="border-top: 0;">
+                    <lightning:button variant="brand" label="ADD PAYMENT METHOD" title="ADD PAYMENT METHOD" class="slds-m-left_small" name="ADDPAYMENTMETHOD" onclick="{!c.handleAddPaymentSaveAction}"></lightning:button>
+                    <lightning:button variant="brand" label="CANCEL" title="CANCEL" class="slds-m-left_small primaryGrayBtn" name="CANCEL" onclick="{!c.closeAddPaymentModal}"></lightning:button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </aura:if>
+
+</aura:component>

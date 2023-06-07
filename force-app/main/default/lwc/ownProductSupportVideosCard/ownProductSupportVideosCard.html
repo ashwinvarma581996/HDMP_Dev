@@ -1,0 +1,45 @@
+<!-- ======================================================================================================
+// Title: 01 - "How To Videos" Card for Honda Owners Community
+//
+// Summary: This Lightning Card enables the following Designer Properties:
+//          a) Brand:  {Default | Honda Auto | Acura Auto | Powersports | Power Equipment | Marine}
+//          b) Text Color: {Black | Honda Red}
+//          c) Icon: 
+//          d) Title: Any String
+//          e) CMS content Id 
+//  Use:  1) drag this card (e.g.: "own How To Videos") onto a Community Page
+//        2) set the Designer Properties as appropriate
+//
+//Modification Log :
+// Dec 8, 2021 Ravindra Ravindra coding / doc
+// Jun 30, 2022 Yusuf
+====================================================================================================== -->
+<template>
+    <div class="card card-size">
+        <lightning-card>
+            <h3 slot="title" class="slds-truncate" onclick={handleClickHeader}>
+                <img src={icon} class="slds-p-right_small custom-icon">
+                <span class={titleClass}>{title}</span>
+            </h3>
+            <div slot="actions">
+                <slot name="action">
+                    <template if:true={actionbuttonlabel}>
+                        <button class="slds-button slds-button_outline-brand action-button" onclick={handleBrowseClick}>{actionbuttonlabel}</button>
+                    </template>
+                </slot>
+            </div>
+            <div class="slds-card__body_inner card-body">
+                <div><lightning-formatted-rich-text value={body}></lightning-formatted-rich-text></div>
+                <template if:true={videos}>
+                    <div class="external-link slds-p-top_small">
+                        <template for:each={videos} for:item="video">
+                            <div class="video-title" key={video.id} data-key={video.id}
+                             onclick={handleVideoClick}>
+                                {video.title}</div>
+                        </template>
+                    </div>
+                </template>
+            </div>
+        </lightning-card>
+    </div>
+</template>

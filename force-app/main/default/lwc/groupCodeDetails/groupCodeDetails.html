@@ -1,0 +1,15 @@
+<template>
+    <lightning-card  title="Edit Special Region">
+
+        <div class="slds-m-left_small">
+        <lightning-record-form object-api-name={objectApiName} 
+        columns="1"
+        record-id={recordId}
+        fields={fieldsName}
+        mode="readonly"
+        onsubmit={onSave}>
+        </lightning-record-form>
+    </div>
+        <c-display-group-code record-id={recordId}></c-display-group-code>
+    </lightning-card>
+</template>

@@ -1,0 +1,25 @@
+<template>
+    <div class="card card-size card-styles-wrapper">
+        <lightning-card class="card-styles">
+            <div slot="title" class="slds-truncate" onclick={handleClickHeader}>
+                <img src={icon} class="slds-p-right_small custom-icon">
+                <span class={titleClass}>{title}</span>
+            </div>
+            <div class="slds-card__body_inner card-body">
+                
+                <template if:true={isLiveChatAvailable}>
+                    <lightning-formatted-rich-text value={body}></lightning-formatted-rich-text>
+                    <p>
+                        <a class="red" onclick={handleLiveChatClick}>
+                            <br/>
+                            {liveChatLabel}
+                        </a>
+                    </p>
+                </template>
+                <template if:false={isLiveChatAvailable}>
+                    <lightning-formatted-rich-text value="Our dedicated team of representatives is able to talk online during our business hours Monday through Friday 6:00 AM to 5:00 PM Pacific.  If Live Chat is unavailable, please feel free to tweet us or send us an email."></lightning-formatted-rich-text>
+                </template>
+            </div>
+        </lightning-card>
+    </div>
+</template>

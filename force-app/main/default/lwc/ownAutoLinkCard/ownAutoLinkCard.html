@@ -1,0 +1,46 @@
+<template>
+    <c-own-card title={title} brand="default" icon-image={icon} header-clickable="false" hide-body-section="">
+        <div slot="default" class="font">
+            <template if:true={Link1Name}>
+                <div><a data-link={Link1} style="color: #E42525;" onclick={handleLink}
+                        data-title={Link1Name}>{Link1Name}</a></div>
+            </template>
+            <template if:true={Link2Name}>
+                <div>
+                    <a data-link={Link2} style="color: #E42525;" onclick={handleLink}
+                        data-title={Link2Name}>{Link2Name}</a>
+                </div>
+            </template>
+            <template if:true={Link6Name}>
+                <div>
+                    <a data-link={Link6} style="color: #E42525;" onclick={handleLink}
+                        data-title={Link6Name}>{Link6Name}</a>
+                </div>
+            </template>
+            <template if:true={Link3Name}>
+                <div>
+                    <a data-link={Link3} style="color: #E42525;" onclick={handleLink}
+                        data-title={Link3Name}>{Link3Name}</a>
+                </div>
+            </template>
+            <template if:true={Link4Name}>
+                <div>
+                    <a data-link={Link4} style="color: #E42525;" onclick={handleLink}
+                        data-title={Link4Name}>{Link4Name}</a>
+                </div>
+            </template>
+            <template if:true={Link5Name}>
+                <div>
+                    <a data-link={Link5} style="color: #E42525;" onclick={handleLink}
+                        data-title={Link5Name}>{Link5Name}</a>
+                </div>
+            </template>
+            <template if:false={Link5}>
+                <div style="height: 99px;"></div>
+            </template>
+            <template if:true={Link5}>
+                <div style="height: 75px;"></div>
+            </template>
+        </div>
+    </c-own-card>
+</template>

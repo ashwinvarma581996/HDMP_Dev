@@ -1,0 +1,9 @@
+.find-brand-horizontal-line {
+    border: .5pt solid #DDDBDA;
+}
+
+.accordion-section{
+    
+    /* 02 - Container/Border Bottom */
+    box-shadow: 0px 1px 0px #DDDBDA;
+}

@@ -1,0 +1,77 @@
+<template>
+  <!-- Row 1 -->
+  
+    <div class="slds-p-vertical_large bgLighter slds-m-bottom_large">
+    <div class="slds-container_center containerWrapper">
+      <div class="slds-grid slds-grid_vertical">
+        <h3 class="slds-p-right_xx-large slds-p-bottom_medium slds-m-bottom_medium productDetailHead">Product Details</h3>
+          <!-- <p class="slds-m-bottom_x-large productDetailSubHead"> Additional Products Tags and
+            Categories </p> -->
+           
+              <lightning-layout multiple-rows>
+                <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="3" padding="horizontal-small">
+                <b><div class="custom-box ">Height:</div></b>
+                </lightning-layout-item>
+                <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="3" padding="horizontal-small">
+                <div class="custom-box "> {allProductValues.Height} in</div>
+                </lightning-layout-item>
+                </lightning-layout>
+            
+                 <lightning-layout multiple-rows>
+                  <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="3" padding="horizontal-small">
+                 <b> <div class="custom-box ">Width:</div></b>
+                  </lightning-layout-item>
+                  <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="3" padding="horizontal-small">
+                  <div class="custom-box "> {allProductValues.Width} in</div>
+                  </lightning-layout-item>
+                 </lightning-layout>
+              
+                <lightning-layout multiple-rows>
+                  <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="3" padding="horizontal-small">
+                <b>  <div class="custom-box ">Length:</div></b>
+                  </lightning-layout-item>
+                  <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="3" padding="horizontal-small">
+                  <div class="custom-box "> {allProductValues.Length} in</div>
+                  </lightning-layout-item>
+                  </lightning-layout>
+            
+                  <lightning-layout multiple-rows>
+                  <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="3" padding="horizontal-small">
+                <b>  <div class="custom-box ">Weight:</div></b>
+                  </lightning-layout-item>
+                  <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="3" padding="horizontal-small">
+                  <div class="custom-box "> {allProductValues.Weight} lbs</div>
+                  </lightning-layout-item>
+                  </lightning-layout>
+                
+                <lightning-layout multiple-rows>
+                  <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="3" padding="horizontal-small">
+                  <b> <div class="custom-box "> Package Quantity:</div></b>
+                  </lightning-layout-item>
+                  <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="3" padding="horizontal-small">
+                  <div class="custom-box "> {allProductValues.PackageQuantity}</div>
+                  </lightning-layout-item>
+                  </lightning-layout>
+          
+                
+                <lightning-layout multiple-rows>
+                  <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="3" padding="horizontal-small">
+                <b>  <div class="custom-box ">Shipping Options:</div></b>
+                  </lightning-layout-item>
+                  <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="3" padding="horizontal-small">
+                  <div class="custom-box "> {allProductValues.ShippingOptions}</div>
+                  </lightning-layout-item>
+                  </lightning-layout>
+              
+                 <!-- Abhishek -->
+                 <div class="slds-p-around_small" >
+                  <lightning-formatted-rich-text value={disclaimerMarkup}>
+                  </lightning-formatted-rich-text>
+                </div>      
+                     
+              </div>
+            <!-- end -->
+      </div>
+    </div>
+  
+  </template>

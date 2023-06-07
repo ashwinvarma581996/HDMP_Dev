@@ -1,0 +1,45 @@
+.image-resize{
+    border-radius: 4px;
+    border: 1px solid #DDDBDA;
+    width:100%;
+    /* cursor: pointer; */
+}
+.explore-card-large{
+    position: relative;
+}
+.image-label-desktop, .image-label-mobile{
+    position: absolute;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 900;
+    font-size: 14px;
+    line-height: 22px;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    cursor: pointer;
+}
+.image-label-mobile{
+    bottom: 3%;
+    left: 6%;
+}
+.image-label-desktop{
+    bottom: 6%;
+    left: 3%;
+}
+@media only screen and (max-width: 7200px) {
+    .explore-card-small {
+        display: none;
+    }
+    .explore-card-large {
+        display: block;       
+    }
+}
+@media only screen and (max-width: 600px) {
+    .explore-card-large {
+        display: none;
+    }
+    .explore-card-small {
+        display: block;
+        padding-top: 50px;
+    }
+}

@@ -1,0 +1,131 @@
+<template>
+    <template if:true={displayAcura}>
+
+            <template if:true={bookletUrl}>
+                <div class="slds-container_medium slds-container_center slds-p-around_large">
+                    <c-own-warranty-booklet-card contentid={contentAutos} booklet-url={bookletUrl}></c-own-warranty-booklet-card>
+                </div>
+            </template>
+
+        <template if:true={hideWarranty}>
+            <template if:true={showWarrentyMsg}>
+                <div class="slds-container_medium slds-container_center slds-p-around_large">
+                    <p>Based on our records, your product is covered under warranty until {warrentyEndDate}</p>
+                </div>
+            </template>
+        </template>
+        <template if:true={states}>
+            <div>
+                <c-own-parts-emission-warranty class="emission-warranty-section" guest={isGuest} contentid={contentEmissionWarrantyAll}
+                    contentid2={contentEmissionWarrantyCA} bannercontentid={saveToMyGarageContentId} states-data={states}></c-own-parts-emission-warranty>
+            </div>
+        </template>
+        <div>
+            <c-own-tire-warranty-info class="tire-warranty-section" accordian-topic-acura={accordianTopicAcura} accordian-topic-honda={accordianTopicHonda} brand={division}></c-own-tire-warranty-info>
+        </div>
+
+        <div class="slds-container_medium slds-container_center">
+            <c-own-save-to-my-garage content-id={saveToMyGarageContentId}></c-own-save-to-my-garage>
+        </div>
+    </template>
+
+    <template if:true={displayHonda}>
+       
+            <template if:true={bookletUrl}>
+                <div class="slds-container_medium slds-container_center slds-p-around_large">
+                    <c-own-warranty-booklet-card contentid={contentAutos} booklet-url={bookletUrl}></c-own-warranty-booklet-card>
+                </div>
+            </template>
+      
+        <template if:true={hideWarranty}>
+            <template if:true={showWarrentyMsg}>
+                <div class="slds-container_medium slds-container_center slds-p-around_large">
+                    <p>Based on our records, your product is covered under warranty until {warrentyEndDate}</p>
+                </div>
+            </template>
+        </template>
+        <template if:true={states}>
+            <div >
+                <c-own-parts-emission-warranty class="emission-warranty-section" guest={isGuest} contentid={contentEmissionWarrantyAll}
+                    contentid2={contentEmissionWarrantyCA} bannercontentid={saveToMyGarageContentId} states-data={states}></c-own-parts-emission-warranty>
+            </div>
+        </template>
+        <div >
+            <c-own-tire-warranty-info class="tire-warranty-section" accordian-topic-acura={accordianTopicAcura} accordian-topic-honda={accordianTopicHonda} brand={division}></c-own-tire-warranty-info>
+        </div>
+
+        <div class="slds-container_medium slds-container_center">
+            <c-own-save-to-my-garage content-id={saveToMyGarageContentId}></c-own-save-to-my-garage>
+        </div>
+    </template>
+
+    <template if:true={displayPowersports}>
+        <c-own-warranty-booklet content-ps={contentPS} warranties-topic-powersports={warrantiesTopicPowersports} context={context}></c-own-warranty-booklet>
+        <div class="slds-container_medium slds-container_center">
+            <c-own-save-to-my-garage content-id={saveToMyGarageContentId}></c-own-save-to-my-garage>
+        </div>
+
+    </template>
+
+    <template if:true={displayPowerequipment}>
+        <c-own-warranties-powerequipment content-id-powerequipment-page={contentIdPowerequipmentPage} date-wise-pdf-topic-powerequipment={dateWisePdfTopicPowerequipment}
+        emmission-wise-pdf-topic-powerequipment={emmissionWisePdfTopicPowerequipment}
+        ></c-own-warranties-powerequipment>
+        <div class="slds-container_medium slds-container_center">
+            <c-own-save-to-my-garage content-id={saveToMyGarageContentId}></c-own-save-to-my-garage>
+        </div>
+    </template>
+
+    <template if:true={displayMarine}>
+        <template if:true={context}>
+            <c-own-warranty-info-marine content-id-marine-page={contentIdMarinePage} context={context}></c-own-warranty-info-marine>
+        </template>
+        <div class="slds-container_medium slds-container_center slds-p-around_large">
+            <div class="system-warranty">
+            <h3>Outboard Motors Warranty Documents</h3>
+            </div>
+        <lightning-layout class="slds-grid_vertical-align-end" multiple-rows>
+            
+            <lightning-layout-item size="12" small-device-size="12" medium-device-size="4" large-device-size="6"
+                class="slds-m-right_large">
+                <div>
+                    <lightning-combobox class="find-brand-combobox slds-m-top_xx-small" label=""
+        variant="label-hidden" value={} placeholder="Please select" options={manufacturedOptions}
+        onchange={handleManufactureDateChange}></lightning-combobox>
+                </div>
+
+            </lightning-layout-item>
+            <lightning-layout-item size="12" small-device-size="12" medium-device-size="2"
+                large-device-size="2">
+                <button class="slds-button slds-brand-button-inactive find-button"
+                    onclick={handleFindPdfs}>Find</button>
+            </lightning-layout-item>
+        </lightning-layout>
+        <template if:true={showOutboardWarranty}>
+            <lightning-layout class="slds-grid_vertical-align-end slds-m-bottom_xx-large slds-m-top_x-small"
+            multiple-rows>
+            <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="6">
+            <c-own-card title="OUTBOARD MOTORS DISTRIBUTOR’S LIMITED WARRANTY (U.S.)" brand="default" icon-image={icon} titlecolor={titlecolor}
+                hide-body-section="true" header-clickable="true" onheader={handleHeaderClick}
+                data-link='' data-title="OUTBOARD MOTORS DISTRIBUTOR’S LIMITED WARRANTY (U.S.)">
+                <div slot="action">
+                    <lightning-icon class={iconClass} icon-name="utility:download" size="x-small"
+                        slot="actions" data-link='' onclick={handleHeaderClick}
+                        data-title="OUTBOARD MOTORS DISTRIBUTOR’S LIMITED WARRANTY (U.S.)">
+                    </lightning-icon>
+                </div>
+            </c-own-card>
+            </lightning-layout-item>
+            </lightning-layout>
+        </template>
+        </div>
+        <!--c-own-warranty-document-marine content-id-marine-doc={contentIdMarineDoc}></c-own-warranty-document-marine-->
+        <div class="emission-warranty-section-pe">
+            <c-own-emission-control-system-warranty  emmission-wise-pdf-topic-marine={emmissionWisePdfTopicMarine}></c-own-emission-control-system-warranty>
+        </div>
+        <div class="slds-container_medium slds-container_center">
+            <c-own-save-to-my-garage content-id={saveToMyGarageContentId}></c-own-save-to-my-garage>
+        </div>
+
+    </template>
+</template>

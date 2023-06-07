@@ -1,0 +1,49 @@
+.find-dealers-button {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 16px;
+    line-height: 24px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: #E42525;
+    background: #FFFFFF;
+    border: 2px solid #E42525;
+    box-sizing: border-box;
+    border-radius: 2px;
+    /* width: 151px; */
+    height: 48px;
+}
+.external-link{
+    color :#E42525;
+}
+.body-title {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 16px;
+    line-height: 22px;
+    color: #000000;
+}
+
+.img-map{
+    position: static;
+    width: 384px;
+    height: 202px;
+    left: 432px;
+    top: 8px;
+
+    /* Inside Auto Layout */
+
+    flex: none;
+    order: 1;
+    align-self: stretch;
+    flex-grow: 1;
+}
+.custom-icon {
+    --sds-c-icon-color-foreground-default: #e42525;
+    --sds-c-icon-color-background: white;
+}

@@ -1,0 +1,311 @@
+h3{
+    font-weight: 300;
+    font-size: 32px;
+    line-height: 37px;
+    color: #080707;
+    margin: 0px 0px 24px;
+}
+
+/* .headline-3{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 32px;
+    line-height: 37px;
+    letter-spacing: 0.02em;
+    color: #000000;
+} */
+
+p{
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 26px;
+    color: #080707;
+}
+p span{
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 26px;
+    color: var(--HondaRed);
+}
+
+.accordian-content {
+    line-height: 46px;
+    font-size: 16px;
+}
+.accordian-content label{
+    font-weight: bold;
+     
+}
+
+.accordian-content label::after{
+   content:' : ';
+}
+
+.accordian-content span.fullWidth{
+    display:block;
+}
+
+/* .custom-icon{
+    --sds-c-icon-color-foreground-default: red;
+}
+
+.section-open{
+    padding-bottom: 0px;
+}
+
+@media only screen and (min-width: 601px) {
+    .accordion-small{
+        display: none;
+    }
+    .accordion-large{
+        display: block;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .accordion-small{
+        display: block;
+    }
+    .accordion-large{
+        display: none;
+   } 
+}
+
+ .custom-li{
+        height: 66px;
+        left: 0%;
+        right: 0%;
+        top: 163px;
+        background: #FFFFFF;
+        box-shadow: 0px 1px 0px #DDDBDA;
+   } */
+
+   .headline-3{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 32px;
+    line-height: 37px;
+    letter-spacing: 0.02em;
+    color: #000000;
+}
+.custom-icon{
+    --sds-c-icon-color-foreground-default: red;
+}
+.custom-li{
+    height: 66px;
+    left: 0%;
+    right: 0%;
+    top: 163px;
+    background: #FFFFFF;
+    box-shadow: 0px 1px 0px #DDDBDA;
+}
+.custom-li_single {
+    background: #F5F5F5;
+    padding: 24px 32px 4px 32px;
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: bold;
+    margin: 0 -12px;
+}
+.single-sub{
+    background: #F5F5F5;
+    padding: 0px 0px 25px 10px;
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: bold;
+    margin: 0 -12px;
+}
+.sign-up-login{
+    color: #E42525;
+}
+.custom-content{
+    margin: 0px -12px; 
+    padding: 24px 32px;
+    height: auto;
+    background: #F5F5F5;
+}
+.section-open{
+    padding-bottom: 0px;
+}
+.vin-text{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: 1px;
+    color: #000000;
+}
+.vin-link{
+    margin-left: 15px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 14px;
+    line-height: 18px;
+    letter-spacing: 2.8px;
+    color: #E42525;
+}
+.click-here{
+    color: #E42525;
+}
+
+@media only screen and (min-width: 601px) {
+    .accordion-small{
+        display: none;
+    }
+    .accordion-large{
+        display: block;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .accordion-small{
+        display: block;
+    }
+    .accordion-large{
+        display: none;
+    }    
+}
+.section-content{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 26px;
+}
+.accordion-section-title{
+    color: black;
+}
+.accordion-section-title:focus{
+    text-decoration: none;
+}
+.accordion-section-title:hover{
+    color: black;
+}
+
+lightning-formatted-rich-text {
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 26px;
+    color: #080707;
+    margin-bottom: 20px !important;
+    display: flex;
+}
+.slds-accordion__section h2 button .custom-span {
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 26px;
+}
+.accordian-content span {
+    font-weight: 300;
+}
+.dealer-card-container{
+    margin-top: 50px;
+}
+.save-to-my-garage{
+    margin-top: 50px;
+}
+.dealer-title{
+    /* font-size: 10px; */
+    color: black;
+}
+.vin-num{
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: 1px;
+    text-transform: capitalize;
+    color: #000000;
+    margin-right: 20px;
+}
+/* Imtiyaz - RECALLS Start */
+.content-text{
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 26px;
+    color: #080707;
+    margin-bottom: 10px !important;
+}
+
+.c-rcl{
+    display: grid;
+}
+.more-info-head-text{
+    margin-top: 30px;
+}
+.more-info-head{
+    font-style: normal;
+    font-weight: 900;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: 1px;
+    color: #000000;
+}
+.more-info-text{
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 26px;
+    color: #080707;
+    padding: 10px 0px;
+}
+.c-i-1-rcl-head{
+    font-style: normal;
+    font-weight: 900;
+    font-size: 16px;
+    line-height: 20px;
+    color: #000000;
+    margin: 4px 0px;
+}
+.c-i-1-rcl-text{
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 26px;
+    color: #080707;
+}
+.c-i-2-rcl-head{
+    font-style: normal;
+    font-weight: 900;
+    font-size: 16px;
+    line-height: 20px;
+    color: #000000;
+    margin: 4px 0px;
+}
+.c-i-2-rcl-text{
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 26px;
+    color: #080707;
+}
+.c-i-2-rcl-link, .more-info-link, .c-i-1-rcl-text-phone{
+    color: red;
+}
+@media only screen and (min-width: 601px) {
+    .c-i-1-rcl-phone-large{
+        display: block;
+    }
+    .c-i-1-rcl-phone-small{
+        display: none;
+    }
+    .c-rcl{
+        grid-template-columns: auto auto;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .c-i-1-rcl-phone-large{
+        display: none;
+    }
+    .c-i-1-rcl-phone-small{
+        display: block;
+    }
+    .c-rcl{
+        grid-template-columns: auto;
+    }
+    .c-i-2-rcl-head{
+        margin-top: 10px;
+    }
+}
+/* Imtiyaz - RECALLS End */

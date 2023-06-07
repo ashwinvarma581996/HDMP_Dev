@@ -1,0 +1,10 @@
+<template>
+    <template if:true={body}>
+        <c-own-card title={title} brand="default" icon-image={icon} titlecolor={titlecolor} onheader={handleHeader}
+            onaction={handleAction} hide-body-section="" header-clickable="true">
+            <div slot="default" class="font">
+                <lightning-formatted-rich-text value={body}></lightning-formatted-rich-text>
+            </div>
+        </c-own-card>
+    </template>
+</template>

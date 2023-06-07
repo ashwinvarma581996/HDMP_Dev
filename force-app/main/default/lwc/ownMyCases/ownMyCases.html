@@ -1,0 +1,193 @@
+<template>
+    <!--<div class="b-c-large">
+        <c-own-breadcrumb label={breadCrumbLabel} url={breadCrumbUrl}></c-own-breadcrumb>
+    </div>-->
+    <template if:false={hideSpinner} >
+        <div class="slds-spinner_container">
+            <lightning-spinner alternative-text="Loading" size="large" variant="base"></lightning-spinner>
+        </div>
+    </template>
+    <div if:false={showCaseDetail}>
+        <!--<div class="b-c-small">
+            <c-own-breadcrumb label={breadCrumbLabel} url={breadCrumbUrl}></c-own-breadcrumb>
+        </div>-->
+        <template if:true={hideSpinner} >
+            <div class="case-section-title">
+                My Support Cases
+            </div>
+            <div class="disclaimer-div">
+                <div class="d-title" if:true={title}>
+                    {title}
+                </div>
+                <div class="d-body">
+                    {body}
+                </div>
+            </div>
+            <div class="c-large">
+                <div class="container">
+                    <!-- pagination top start -->
+                    <div class="table-utility-top">
+                        <div class="table-utility-top-div table-utility-top-div-left page-size-div">
+                            <div class="page-size-box-title">Show Entries</div>
+                            <select class="page-size-selectbox" onchange={handlePageSelect} value={selectedPageSize}>
+                                <template if:true={pageSizeList} for:each={pageSizeList} for:item="page">
+                                    <option value={page.value} key={page.value} selected={page.defaultSelected}>{page.value}</option>
+                                </template>
+                            </select>
+                        </div>
+                        <div class="table-utility-top-div table-utility-top-div-right filter-div">
+                            <div class="page-size-box-title">Filter by Column</div>
+                            <select class="page-filter-selectbox" onchange={handleFilterByColumn} value={filterBycolumValue}>
+                                <template if:true={filterBycolums} for:each={filterBycolums} for:item="colum">
+                                    <option value={colum.label} key={colum.label} selected={colum.defaultSelected}>{colum.label}</option>
+                                </template>
+                            </select>
+                        </div>
+                        <div class="table-utility-top-div table-utility-top-div-right search-div">
+                            <div class="page-size-box-title">Search</div>
+                            <input class="inp-search" oninput={handleSearch}/>
+                        </div>
+                    </div>
+                    <!-- pagination top End -->
+                    <table class="t">
+                        <thead class="thead">
+                            <template if:true={colums} for:each={colums} for:item="colum">
+                                <th class={colum.class} key={colum.label}>
+                                    {colum.label}
+                                </th>
+                            </template>
+                        </thead>
+                        <tbody class="tbody">
+                            <template if:true={cases} for:each={cases} for:item="cs">
+                                <tr class="tr" key={cs.CaseNumber}>
+                                    <td class="td">
+                                        {cs.CaseNumber__c}
+                                    </td>
+                                    <td class="td td-subject">
+                                        {cs.Subject__c}
+                                    </td>
+                                    <td class="td">
+                                        {cs.Status__c}
+                                    </td>
+                                    <td class="td">
+                                        {cs.WebtoCase_Make_c__c}
+                                    </td>
+                                    <td class="td">
+                                        {cs.VIN_Text_c__c}
+                                    </td>
+                                    <!-- <td class="td">
+                                        {cs.Description__c}
+                                    </td> -->
+                                    <td class="td">
+                                        {cs.CreatedDate__c}
+                                    </td>
+                                    <td class="td">
+                                        <button class="view-btn noselect" data-number={cs.CaseNumber__c} onclick={handleViewCase}>View</button>
+                                    </td>
+                                </tr>
+                            </template>
+                        </tbody>
+                    </table>
+                    <!-- pagination bottom start -->
+                    <div class="table-utility-bottom">
+                        <div class="table-utility-bottom-div table-utility-bottom-div-left showing-div">
+                            {showingLabel}
+                        </div>
+                        <div class="table-utility-bottom-div table-utility-bottom-div-right buttons-div">
+                            <!-- Showing 1 to 12 of 12 entries -->
+                            <button class="t-u-b-r-b t-u-b-r-b-l"  data-btn="first" onclick={onNavigationButtonClick}>
+                                &laquo;
+                            </button>
+                            <button class="t-u-b-r-b t-u-b-r-b-l" data-btn="previous" onclick={onNavigationButtonClick}>
+                                &lsaquo;
+                            </button>
+                            <div class="t-u-b-r-b t-u-b-r-b t-u-b-r-b-pn">
+                                {currentPage}
+                            </div>
+                            <button class="t-u-b-r-b t-u-b-r-b-r" data-btn="next" onclick={onNavigationButtonClick}>
+                                &rsaquo;
+                            </button>
+                            <button class="t-u-b-r-b t-u-b-r-b-r" data-btn="last" onclick={onNavigationButtonClick}>
+                                &raquo;
+                            </button>
+                        </div>
+                    </div>
+                    <!-- pagination bottom End -->
+                </div>
+            </div>
+            <div class="c-small">
+                <div class="container">
+                    <template if:true={allCases_clone} for:each={allCases_clone} for:item="cs">
+                        <table class="t-m" key={cs.CaseNumber}>
+                            <tr class="tr-m">
+                                <td class="td-m td-mh">
+                                    Case Number:
+                                </td>
+                                <td class="td-m td-mv">
+                                    {cs.CaseNumber__c}
+                                </td>
+                            </tr>
+                            <tr class="tr-m">
+                                <td class="td-m td-mh">
+                                    Subject:
+                                </td>
+                                <td class="td-m td-mv">
+                                    {cs.Subject__c}
+                                </td>
+                            </tr>
+                            <tr class="tr-m">
+                                <td class="td-m td-mh">
+                                    Status:
+                                </td>
+                                <td class="td-m td-mv">
+                                    {cs.Status__c}
+                                </td>
+                            </tr>
+                            <tr class="tr-m">
+                                <td class="td-m td-mh">
+                                    Make:
+                                </td>
+                                <td class="td-m td-mv">
+                                    {cs.WebtoCase_Make_c__c}
+                                </td>
+                            </tr>
+                            <tr class="tr-m">
+                                <td class="td-m td-mh">
+                                    VIN / Serial Number:
+                                </td>
+                                <td class="td-m td-mv">
+                                    {cs.VIN_Text_c__c}
+                                </td>
+                            </tr>
+                            <!-- <tr class="tr-m">
+                                <td class="td-m td-mh">
+                                    Description:
+                                </td>
+                                <td class="td-m td-mv">
+                                    {cs.Description__c}
+                                </td>
+                            </tr> -->
+                            <tr class="tr-m">
+                                <td class="td-m td-mh">
+                                    Created Date:
+                                </td>
+                                <td class="td-m td-mv">
+                                    {cs.CreatedDate__c}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-m td-mb" colspan="2">
+                                    <button class="view-btnm noselect" data-number={cs.CaseNumber__c} onclick={handleViewCase}>View</button>
+                                </td>
+                            </tr>
+                        </table>
+                        <br key={cs.CaseNumber}/>
+                    </template>
+                </div>
+            </div>
+        </template>
+    </div>
+    <div if:true={showCaseDetail}>
+        <c-own-case-detail onnavigate={handleOnNavigate} onupdatestatus={updateStatus}></c-own-case-detail>
+    </div>
+</template>

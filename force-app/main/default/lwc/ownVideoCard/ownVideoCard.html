@@ -1,0 +1,14 @@
+<template>
+    <div class="custom-column">
+        <lightning-card class="card-styles video-card-styles">
+            <h3 slot="title" class="slds-truncate card-title" title={title} onclick={handleClickHeader}>
+                <!-- <lightning-icon class="slds-p-around_xx-small custom-icon" icon-name={headerIcon} size="x-small"></lightning-icon> -->
+                <img src={headerIcon} />
+                <span class={titleClass}>{title}</span>
+            </h3>
+            <div class="slds-card__body_inner card_body">
+                <iframe width="100%" height="264px" src={videoLink} frameborder="0" allowfullscreen></iframe>
+            </div>
+        </lightning-card>
+    </div>
+</template>

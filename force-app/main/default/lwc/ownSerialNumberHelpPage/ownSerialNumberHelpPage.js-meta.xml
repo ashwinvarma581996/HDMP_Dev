@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>52.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightningCommunity__Default</target>
+        <target>lightningCommunity__Page</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property label="Honda Serial Number Retrieval Help" name="SerialNumberRetrievalHelp" type="ContentReference"/>
+            <property label="Honda Audio Unit Serial Number Retrieval" name="AudioUnitSerialNumberRetrieval" type="ContentReference"/>
+            <property label="Honda Retrieve Serial Number from Device Display" name="RetrieveSerialNumberFromDeviceDisplay" type="ContentReference"/>
+            <property label="Honda Retrieval Serial Number from Navigation Unit" name="RetrievalSerialNumberFromNavigationUnit" type="ContentReference"/>
+
+            <property label="Acura Serial Number Retrieval Help" name="acuraSerialNumberRetrievalHelp" type="ContentReference"/>
+            <property label="Acura Audio Unit Serial Number Retrieval" name="acuraAudioUnitSerialNumberRetrieval" type="ContentReference"/>
+            <property label="Acura Retrieve Serial Number from Device Display" name="acuraRetrieveSerialNumberFromDeviceDisplay" type="ContentReference"/>
+            <property label="Acura Retrieval Serial Number from Navigation Unit" name="acuraRetrievalSerialNumberFromNavigationUnit" type="ContentReference"/>
+            
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

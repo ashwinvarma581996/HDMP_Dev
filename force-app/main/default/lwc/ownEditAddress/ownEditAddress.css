@@ -1,0 +1,66 @@
+.table-title{
+    font-weight: 300;
+    font-size: 32px;
+    line-height: 37px;
+    color: #000000;
+}
+
+.text-style {
+    font-family: Roboto;
+    font-style: normal;
+}
+
+.product-button-1 .slds-button{
+    border-color: var(--HondaRed);
+    border-radius: 2px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    background: #E42525;
+}
+.product-button-1-text{
+    color: white;
+    size: 14px;
+}
+.product-button-2 .slds-button{
+    border-color: var(--HondaRed);
+    border-radius: 2px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+.product-button-2-text{
+    color: var(--HondaRed);
+    size: 14px;
+}
+
+.product-form-body{
+    padding-top: 0.7rem;
+    padding-bottom: 0.7rem;
+    padding-right: 0.75rem;
+}
+
+.own-combobox-label{
+    font-style: normal;
+    font-weight: 500;
+    font-size: 13px !important;
+    line-height: 15px;
+    letter-spacing: 0.02em;
+    color: #000000 !important;
+}
+
+.own-label{
+    font-style: normal;
+    font-size: 13px !important;
+    line-height: 15px;
+    letter-spacing: 0.02em;
+    color: #000000 !important;
+}
+
+.product-button-large{
+    width: 100%;
+}

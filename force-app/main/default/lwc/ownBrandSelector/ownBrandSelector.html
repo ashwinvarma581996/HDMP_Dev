@@ -1,0 +1,74 @@
+<!-- //============================================================================
+// Title:    Honda Owners Experience - Brand Selection Links
+//
+// Summary:  This is the brand card html seen at the home page of the Honda Owner Community
+//
+// Details:  Displays a list of brand 'boxes' on desktop, or brand links on mobile for navigation to Garage pages
+//
+// History:
+// July 07, 2021 Arunprasad N (Wipro) Original Author 
+// July 07, 2021 Jim Kohs (Wipro) added img-cursor
+//=========================================================================== -->
+<template>
+    <div class="c-container brand-card-container header-column">
+        <div class="brand-card-large">
+            <lightning-layout multiple-rows="true">
+                <lightning-layout-item class="slds-p-left_small slds-p-vertical_large" size="12">
+                    <div class="brand-card-title">
+                        <h3>GET STARTED</h3>
+                    </div>
+                    <div class="brand-card-sub-title">
+                        <h3>What type of product do you have?</h3>
+                    </div>
+                </lightning-layout-item>
+            </lightning-layout>
+            <lightning-layout multiple-rows="true" horizontal-align="center">
+                <template for:each={brands} for:item="brand">
+                    <lightning-layout-item key={brand.value} padding="around-small">
+                        <div data-name={brand.value} data-url={brand.url} data-label={brand.label}
+                            onclick={handleClick}>
+                            <article class="slds-card brand-card img-cursor">
+                                <div class="slds-card__body slds-card__body_inner">
+                                  <div class="slds-illustration slds-illustration_small" role="img" >
+                                    <img src={brand.img} class={brand.url} alt={brand.label}>
+                                  </div>
+                                </div>
+                                <div slot="footer" class="slds-text-longform">
+                                    <div class="slds-text-heading_medium brand-card-text" role="link" tabindex="0">{brand.label}</div>
+                                </div>
+                            </article>
+                        </div>
+                    </lightning-layout-item>
+                </template>
+            </lightning-layout>
+        </div>
+        <div class="brand-card-small">
+            <lightning-layout multiple-rows="true">
+                <lightning-layout-item class="slds-p-left_small slds-p-vertical_large" size="12">
+                    <div class="brand-card-title-small">
+                        <h3>GET STARTED</h3>
+                    </div>
+                    <div class="brand-card-sub-title-small">
+                        <h3>What type of product do you have?</h3>
+                    </div>
+                </lightning-layout-item>
+            </lightning-layout>
+            <lightning-layout multiple-rows="true" horizontal-align="spread">
+                <lightning-layout-item size="12">
+                    <div class="slds-tabs-mobile__container ">
+                        <ul class="slds-tabs-mobile">
+                            <template for:each={brands} for:item="brand">
+                                <li key={brand.value} class="slds-tabs-mobile__item brand-card-li-small img-cursor slds-p-vertical_large">
+                                    <button data-value={brand.value} data-name={brand.value} data-url={brand.url} onclick={handleClick} class="slds-button slds-button_full-width">
+                                        <img src={brand.img} class={brand.url} alt={brand.label} role="img"/>
+                                        <span class="slds-m-left_x-large slds-truncate" title={brand.label} role="link" tabindex="0">{brand.label}</span>
+                                    </button>
+                                </li> 
+                            </template>
+                        </ul>
+                    </div>
+                </lightning-layout-item>
+            </lightning-layout>
+        </div>
+    </div>
+</template>

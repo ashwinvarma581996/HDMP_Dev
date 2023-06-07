@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>52.0</apiVersion>
+    <isExposed>true</isExposed> 
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default"> 
+            <property label="Recall1" name="contentId98" type="ContentReference" />
+            <property label="Recall2" name="contentId97" type="ContentReference" />
+            <!-- Imtiyaz - RECALLS Start -->
+            <property label="More Information" name="contentMoreInfo" type="ContentReference" />
+            <property label="More Information Acura" name="contentMoreInfoA" type="ContentReference" />
+            <property label="More Information Honda" name="contentMoreInfoH" type="ContentReference" />
+            <property label="More Information Powersports" name="contentMoreInfoP" type="ContentReference" />
+            <!-- Imtiyaz - RECALLS End -->
+            <property label="RecallAutos" name="RecallBodyline1ID" type="ContentReference" />
+            <property label="RecallAutos1" name="RecallBodyline2ID" type="ContentReference" /> 
+            <property label="NoRecall" name="NoRecallNoGuestID" type="ContentReference" />
+            <property label="NoRecallloggedIn" name="NoRecallloggedInID" type="ContentReference" />
+            <property label="Save To My Garage Banner" name="saveToMyGarageContentId" type="ContentReference" /> 
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

@@ -1,0 +1,49 @@
+<template>
+    <lightning-layout class="user-section-header slds-m-top_large">
+        <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="6">
+            <div class="custom-box slds-text-heading_large slds-hyphenate ">My Dealers</div>
+        </lightning-layout-item>
+    </lightning-layout>
+    <template if:true={isFetchData}>
+        <template if:false={dealersList}>
+            <div class="slds-container_center containerWrapper slds-m-bottom_large" style="padding:0">
+                <div
+                    class="slds-text-heading_large slds-text-color_error errorTxt slds-text-align_center slds-m-bottom_large">
+                    You have no saved dealers
+                </div>
+            </div>
+        </template>
+
+<template if:true={dealersList}>
+            <template if:true={hondaDealersList}>
+                <lightning-layout multiple-rows>
+                    <lightning-layout-item size="12" small-device-size="12" medium-device-size="12"
+                        large-device-size="12">
+                        <div class="user-section-header user-section-sub-header">
+                            <h2 class="slds-m-top_large font-h5">Honda Auto Dealers</h2>
+                        </div>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="12" small-device-size="12" medium-device-size="12"
+                        large-device-size="12">
+                        <c-my-dealers-display dealers-list={hondaDealersList} brand-name='Honda Auto'></c-my-dealers-display>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </template>
+<template if:true={acuraDealersList}>
+                <lightning-layout multiple-rows
+                    class="user-section-header user-section-sub-header">
+                    <lightning-layout-item size="12" small-device-size="12" medium-device-size="12"
+                        large-device-size="12">
+                        <div class="user-section-header user-section-sub-header">
+                            <h2 class="slds-text-heading_large slds-m-top_large">Acura Dealers</h2>
+                        </div>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="12" small-device-size="12" medium-device-size="12"
+                        large-device-size="12">
+                        <c-my-dealers-display dealers-list={acuraDealersList}  brand-name='Acura'></c-my-dealers-display>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </template>
+</template>
+</template>
+</template>

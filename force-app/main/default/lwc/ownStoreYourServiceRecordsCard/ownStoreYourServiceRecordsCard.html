@@ -1,0 +1,40 @@
+<template>
+    <div if:true={show} class="card card-size card-styles-wrapper">
+        <lightning-card class="card-styles">
+            <h3 slot="title" class="slds-truncate" onclick={handleClickHeader}>
+                <img src={icon} class="slds-p-right_small custom-icon">
+                <span class={titleClass}>{title}</span>
+                <template if:true={showforwardicon}>
+                    <lightning-icon class={iconClass} icon-name="utility:forward" size="x-small"></lightning-icon>
+                </template>
+            </h3>
+            <!-- <div slot="actions" onclick={handleClickAction}>
+                <slot name="action">
+                    <button class="slds-button slds-button_outline-brand slds-m-left_x-small detail-button"
+                    onclick={handleLoginClick}>MORE DETAILS</button>
+                    </slot>
+            </div> -->
+            <template if:true={overview}>
+            <div class={bodyClass}>
+                <div><a target="_self" data-id="Sign_Up" class="external-link browse-title" onclick={handleClick}>Create an account</a> to keep a record of maintenance performed on your {brand}. 
+                    <br/>
+                    <br/>
+                    Already have an account? <a target="_self" data-id="Log_In" class="external-link browse-title" onclick={handleClick}>Log in</a> to view your records.</div>
+            </div>
+            </template>
+            <template if:false={overview}>
+            <div class={bodyClass}>
+                <div><a target="_self" data-id="Sign_Up" class="external-link browse-title" onclick={handleClick}>Create an account</a>{serviceMaintenanceBody}
+                    <br/>
+                    <br/>
+                    Already have an account? <a target="_self" data-id="Log_In" class="external-link browse-title" onclick={handleClick}>Log in</a> to view your records.</div>
+            </div>
+            </template>
+            <template if:true={showfooter}>
+                <div slot="footer">
+                    <slot class="footer" name="footer" onclick={handleClickFooter}></slot>
+                </div>
+            </template>
+        </lightning-card>
+    </div>
+</template>

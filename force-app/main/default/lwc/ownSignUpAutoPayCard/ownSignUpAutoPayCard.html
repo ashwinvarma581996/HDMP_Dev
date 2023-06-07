@@ -1,0 +1,19 @@
+<template>
+
+    <div  class={cardDivClass}>
+        <div class="card card-size card-styles-wrapper">
+            <lightning-card class="card-styles">
+                <h3 slot="title" class="slds-truncate" onclick={handleClickHeader}>
+                    <img src={icon} class="slds-p-right_small custom-icon">
+                    <span class={titleClass}>{title}</span>
+                    <lightning-icon class={iconClass} icon-name="utility:forward" size="x-small"></lightning-icon>
+                </h3>
+                <!-- <lightning-icon class={iconClass} icon-name="utility:forward" size="x-small"></lightning-icon> -->
+                <div class="slds-card__body_inner card-body">
+                    <lightning-formatted-rich-text value={body}></lightning-formatted-rich-text>
+                </div>
+            </lightning-card>
+
+        </div>
+    </div>
+</template>

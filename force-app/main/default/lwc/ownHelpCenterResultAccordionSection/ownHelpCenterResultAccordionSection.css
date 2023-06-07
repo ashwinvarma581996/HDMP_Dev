@@ -1,0 +1,33 @@
+.custom-icon{
+    --sds-c-icon-color-foreground-default: red;
+    margin-top: 3px;
+}
+
+.selected-background{
+    background-color: #F5F5F5;
+}
+
+.selected-title{
+    font-weight:bold;
+}
+
+.section{
+    padding-top: 22px;
+    padding-bottom: 22px;
+}
+
+.section-closed{
+    min-height: 66px;
+}
+
+.section-content{
+    padding-left: 22px;
+}
+
+button.slds-button.slds-accordion__summary-action {
+    align-items: flex-start;
+}
+
+.white-space-unset {
+    white-space: unset;
+}

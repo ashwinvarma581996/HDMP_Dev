@@ -1,0 +1,34 @@
+<template>
+    <template if:true={isLoading}>
+        <div style="position: sticky;">
+            <c-own-data-loading-spinner></c-own-data-loading-spinner>
+        </div>
+    </template>
+    <template if:false={isLoading}>
+        <lightning-layout multiple-rows="true" horizontal-align="spread">
+            <lightning-layout-item size="12" large-device-size="6" medium-device-size="12" small-device-size="12"
+                if:true={showWarrantyBooklet}>
+                <div class={firstCardClass} if:true={showWarrantyBooklet}>
+                    <c-own-warranty-booklet-card-autos header-link={warrantyBookletURL}>
+                    </c-own-warranty-booklet-card-autos>
+                </div>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" large-device-size="6" medium-device-size="12" small-device-size="12"
+                if:true={showEmissionWarranty}>
+                <div class={secondCardClass}>
+                    <c-own-emission-card-autos content-id={emissionWarrantyContentId}
+                        download-link={emissionWarrantyURL}>
+                    </c-own-emission-card-autos>
+                </div>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" large-device-size="6" medium-device-size="12" small-device-size="12"
+                if:true={showTireWarranty}>
+                <div class={thirdCardClass}>
+                    <c-own-warranty-card contentid={tireWarrantyContentId} icon={tireWarrantyIcon}
+                        header-link={tireWarrantyHeaderLink}>
+                    </c-own-warranty-card>
+                </div>
+            </lightning-layout-item>
+        </lightning-layout>
+    </template>
+</template>

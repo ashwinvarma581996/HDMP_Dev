@@ -1,0 +1,146 @@
+<template>
+
+<template if:true={isModalOpen}>
+    <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <!-- Modal/Popup Box LWC header here -->
+                <template if:true={isNew}>
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeModal}>
+                        <lightning-icon icon-name="utility:close"
+                            alternative-text="close"
+                            variant="inverse"
+                            size="small" ></lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">New Boiler Plate</h2>
+                </header>
+                <!-- Modal/Popup Box LWC body starts here -->
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <lightning-record-edit-form object-api-name="Boilerplate__c" onsuccess={handleSuccess}>
+                                <div class="slds-grid slds-wrap slds-gutters">
+                      
+                                <div class="slds-col slds-size_1-of-2"><lightning-input-field  field-name="Name" required >
+                                </lightning-input-field>
+                                <lightning-input-field field-name="Brand__c" onchange={setbrand} required >
+                                </lightning-input-field>
+                                <lightning-input-field  field-name="Offer_Title__c" required >
+                                </lightning-input-field>
+                                    <template if:false={hidePowerSportsFields}>
+                                      
+                                        <lightning-input-field field-name="Terms_Conditions__c"  >
+                                      </lightning-input-field>
+                                     </template>
+                            </div> 
+                                <div class="slds-col slds-size_1-of-2"><lightning-input-field field-name="Status__c" required >
+                                </lightning-input-field>
+                                <lightning-input-field  label={offerRectype} field-name="Offer_Type__c" onchange={setofftyp} required >
+                                </lightning-input-field>
+                                <template if:true={hidePowerSportsFields}>
+                                    <lightning-input-field field-name="Terms_Conditions__c">
+                                    </lightning-input-field>
+                                </template>
+                                <template if:false={hidePowerSportsFields}>
+                                <lightning-input-field  field-name="Legal_Disclaimer__c" required>
+                                </lightning-input-field>
+                                <lightning-input-field  field-name="Detailed_Description__c">
+                                </lightning-input-field>
+                                <lightning-input-field  field-name="Short_Description__c" >
+                                </lightning-input-field></br>
+                            </template>
+                                <lightning-output-field  field-name="OwnerId" >
+                                </lightning-output-field>
+                                
+                            </div>
+                            <div class="slds-align_absolute-center" style="height:5rem">
+                                    <lightning-button label="List of Variables" onclick={handlelistofvariable} variant="brand"></lightning-button>
+                                    &nbsp;
+                                    <lightning-button label="Save" type="submit" variant="brand"></lightning-button>
+                                    &nbsp;
+                                    <lightning-button label="Cancel" onclick={handleCancel} variant="neutral"></lightning-button>
+                                </div>
+                            </div>
+                        </lightning-record-edit-form>
+                </div>
+                
+            </template>
+
+            <template if:false={isNew}>
+                    <header class="slds-modal__header">
+                            <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeModal}>
+                                <lightning-icon icon-name="utility:close"
+                                    alternative-text="close"
+                                    variant="inverse"
+                                    size="small" ></lightning-icon>
+                                <span class="slds-assistive-text">Close</span>
+                            </button>
+                            
+                            <h2 id="modal-heading-02" class="slds-text-heading_medium slds-hyphenate">Edit Boiler Plate</h2>
+                        </header>
+                        <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-2">
+                                <lightning-record-edit-form object-api-name="Boilerplate__c" record-id={recid} onload={handleLoad} onsuccess={handleSuccess1} >
+                                            <div class="slds-grid slds-wrap slds-gutters">
+                                    
+                                        <div class="slds-col slds-size_1-of-2">
+                                            <lightning-input-field   field-name="Name" required ></lightning-input-field>
+                                            <lightning-input-field field-name="Brand__c" data-key="field1"  required >
+                                            </lightning-input-field>
+                                            <lightning-input-field field-name="Offer_Title__c" required >
+                                            </lightning-input-field>
+                                            <template if:false={hidePowerSportsFields}>
+                                            
+                                            <lightning-input-field  field-name="Terms_Conditions__c" >
+                                            </lightning-input-field>
+                                        </template>
+                                            <lightning-output-field  field-name="CreatedById" >
+                                            </lightning-output-field>
+                                            <lightning-output-field  field-name="LastModifiedById" >
+                                            </lightning-output-field>
+                                        </div> 
+                                        <div class="slds-col slds-size_1-of-2">
+                                            <lightning-output-field field-name="Status__c" required >
+                                            </lightning-output-field>
+                                            <lightning-input-field label={offerRectype} field-name="Offer_Type__c" onchange={handleChangeOnEditOfferType} data-key="field2"  required >
+                                            </lightning-input-field>
+                                            <template if:true={hidePowerSportsFields}>
+                                            <lightning-input-field  field-name="Terms_Conditions__c" >
+                                            </lightning-input-field>
+                                        </template>
+                                        <template if:false={hidePowerSportsFields}>
+                                            <lightning-input-field  field-name="Legal_Disclaimer__c" required>
+                                            </lightning-input-field>
+                                            <lightning-input-field  field-name="Detailed_Description__c">
+                                            </lightning-input-field>
+                                            <lightning-input-field field-name="Short_Description__c">
+                                            </lightning-input-field>
+                                        </template>
+                                            <lightning-output-field  field-name="OwnerId" >
+                                            </lightning-output-field>
+                                        </div> 
+                                        <div class="slds-align_absolute-center" style="height:5rem">
+                                                <lightning-button label="List of Variables" onclick={handlelistofvariable} variant="brand"></lightning-button>
+                                                &nbsp;
+                                                <lightning-button label="Save" type="submit" variant="brand" ></lightning-button>
+                                                &nbsp;
+                                                <lightning-button label="Cancel" onclick={handleCancel} variant="neutral"></lightning-button>
+                                            </div>
+                                        </div>
+                                    </lightning-record-edit-form>
+                            </div>
+                        
+            </template>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>             
+            
+</template>
+
+
+<template if:true={showvariables}>
+    <c-show-variable-name offertype={offtypevalue} brand={brandvalue}>
+
+        </c-show-variable-name>
+</template>
+
+</template>

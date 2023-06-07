@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>56.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>B2B Browse By Product Line</masterLabel>
+    <description>Displays and links to product lines</description>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightningCommunity__Default">
+            <property
+                    name="displayLabels"
+                    type="Boolean"
+                    label="Display labels"
+                    description="Display labels below product line tiles"
+                    default="true"
+            />
+            <property 
+                name="subTitle" 
+                label="Small Card Title"
+                type="String" 
+                description="Small Bold title"
+                default="Get Started" 
+            />
+            <property 
+                name="title" 
+                label="Large Card Title"
+                type="String" 
+                description="Larger title for product line widget"
+                default="What type of product are you searching for?" 
+            />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

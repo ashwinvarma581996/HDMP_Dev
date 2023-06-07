@@ -1,0 +1,10 @@
+<template>
+    <div class="slds-grid slds-wrap navButtons">
+        <div if:false={hideBackButton} class="slds-col slds-m-around_medium text_md-center">
+            <lightning-button variant="neutral" label={backButtonLabel} title={backButtonTitle} onclick={handleBack} class="slds-p-top_medium"></lightning-button>
+        </div>
+        <div if:false={hideButton} class="slds-col slds-m-around_medium text_md-center" style="text-align: end;">
+            <lightning-button variant="brand"  disabled={makeDisabled} label={nextButtonLabel} title={nextButtonTitle} onclick={handleNext} class="slds-p-top_medium"></lightning-button>
+        </div>
+    </div>
+</template>

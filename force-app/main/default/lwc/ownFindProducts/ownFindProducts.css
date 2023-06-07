@@ -1,0 +1,227 @@
+.find-brand-heading {
+    
+    font-style: normal;
+    font-weight: 900;
+    font-size: 14px;
+    line-height: 22px;
+    letter-spacing: 0.02em;
+    color: #000000;
+}
+.find-brand-body-heading {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: #000000;
+}
+.find-brand-body-title {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 32px;
+    line-height: 37px;
+    letter-spacing: 0.02em;
+    color: #000000;
+    padding-top: 7px;
+}
+.find-brand-body-desc {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 26px;
+    color: #000000;
+    padding-top: 16px;
+}
+.own-combobox-label{
+    font-style: normal;
+    font-weight: 500;
+    font-size: 13px !important;
+    line-height: 15px;
+    letter-spacing: 0.02em;
+    color: #000000 !important;
+}
+.find-brand-large .find-brand-button-active .slds-button, .find-brand-large .find-brand-button-disabled .slds-button {
+    width: 192px;
+}
+.find-brand-small .find-brand-button-active .slds-button, .find-brand-small .find-brand-button-disabled .slds-button {
+    justify-content: center;
+    width: 100%;
+}
+.find-brand-button-disabled .slds-button {
+    border-color: #ACACAC;
+    border-radius: 2px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    background: #ACACAC;
+}
+.find-brand-button-active .slds-button {
+    border-color: var(--HondaRed);
+    border-radius: 2px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    background: #E42525;
+}
+.find-brand-combobox {
+    background: #FFFFFF;
+    box-sizing: border-box;
+    border-radius: 2px;
+}
+.find-brand-input {
+    background: #FFFFFF;
+    box-sizing: border-box;
+    border-radius: 2px;
+}
+.find-brand-horizontal-line {
+    border: 1px solid #ACACAC;
+    background: black;
+}
+.find-brand-error {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 12px;
+    color: var(--HondaRed);
+    padding-top: 15px;
+}
+.horizontal-line-width {
+    width: 180px;
+}
+.find-brand-or-span {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 16px;
+    letter-spacing: 0.96px;
+    color: #000000;
+}
+.find-brand-section-button-disabled .slds-button {
+    background: #FFFFFF;
+    border: 2px solid #767676;
+    box-sizing: border-box;
+    border-radius: 2px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: #767676;
+}
+.slds-button {
+    height: 48px;
+}
+.find-brand-section-button-active .slds-button {
+    background: #FFFFFF;
+    border: 2px solid #E42525;
+    box-sizing: border-box;
+    border-radius: 2px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: #E42525;
+}
+.slds-form-element__label{
+    font-weight: 500 !important;
+    font-size: 13px !important;
+    line-height: 15px !important;
+    letter-spacing: 0.02em !important;
+    color: #000000 !important;
+}
+
+.slds-dropdown-trigger_click.slds-is-open.slds-dropdown, .slds-dropdown-trigger--click.slds-is-open.slds-dropdown {
+    min-width: fit-content !important;
+}
+
+@media only screen and (max-width: 600px) {
+    .find-brand-large {
+        display: none;
+    }
+    .find-brand-small {
+        display: block;
+    }
+    .find-brand-body-desc {
+        margin-bottom: -20px;
+    }
+}
+
+@media only screen and (min-width: 601px) and (max-width: 999px ) {
+    .find-brand-small {
+        display: none;
+    }
+    .find-brand-large {
+        display: block;
+    }
+    .section-row {
+        padding: 0 28px;
+    }
+    
+
+}
+
+@media only screen and (min-width: 1000px) {
+    .find-brand-small {
+        display: none;
+    }
+    .find-brand-large {
+        display: block;
+    }
+    .section-row {
+        padding: 0 62px;
+    }
+    
+
+}
+
+
+
+
+
+.icon-green{
+    --sds-c-icon-color-foreground-default: green;
+}
+
+.icon-red{
+    --sds-c-icon-color-foreground-default: var(--HondaRed);
+}
+
+.icon-white{
+    --sds-c-icon-color-foreground: white;
+}
+
+.icon-bg-red{
+    --sds-c-icon-color-background: var(--HondaRed);
+}
+.line {
+    height: 100%;
+    background: #959595;
+    width: 1px;
+    flex: 1 1 auto;
+    margin: 20px 0 10px;
+}
+
+@media only screen and (min-width: 601px) {
+    .vin-sections {
+        padding: 0 72px;
+    }
+}
+@media only screen and (max-width: 600px) {
+    .vin-sections {
+        padding: 0;
+    }
+}

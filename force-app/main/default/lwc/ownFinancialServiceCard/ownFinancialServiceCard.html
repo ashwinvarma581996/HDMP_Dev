@@ -1,0 +1,38 @@
+<template>
+    <div class="card card-size wrap-text-test ">
+        <lightning-card>
+            <div slot="title" class="slds-grid slds-grid_vertical-align-center slds-truncate title-wrapper">
+                <img src={icon} class="slds-p-right_small custom-icon">
+                <span class="slds-text-heading_small title">
+                        {title}
+                </span>
+            </div>
+            <div slot="actions">
+                <slot name="action">
+                    <button class="slds-button slds-button_outline-brand action-button" onclick={handleClickHeader} role="button" tabindex="0">
+                        LEARN MORE
+                        <lightning-icon class="slds-p-left_x-small custom-icon" icon-name={actionicon} size="x-small">
+                                             </lightning-icon>
+                    </button>
+                </slot>
+            </div>
+            <div class="slds-card__body_inner card-body">
+                <lightning-layout multiple-rows>
+                    <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="6" class="slds-order_2 slds-large-order_1" >
+                        <lightning-formatted-rich-text value={body}></lightning-formatted-rich-text>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="12" small-device-size="12" medium-device-size="6" large-device-size="6" class="slds-order_1 slds-large-order_2" >
+                        <div class="desktop-image slds-text-align_center">
+                            <lightning-formatted-rich-text value={desktopImage} class="card-image-wrapper"></lightning-formatted-rich-text>
+                        </div>
+                        <div class="mobile-image slds-text-align_center">
+                            <lightning-formatted-rich-text value={mobileImage}></lightning-formatted-rich-text>
+                        </div>
+                    </lightning-layout-item>
+                </lightning-layout>
+                <!-- Honda Financial Services, helps to satisfy the financing needs of consumers of Honda products including automobiles, sport utility vehicles, minivans, motorcycles, powersport products, marine engines and power equipment. -->
+                <!-- <lightning-formatted-rich-text value={body}></lightning-formatted-rich-text> -->
+            </div>
+        </lightning-card>
+    </div>
+</template>

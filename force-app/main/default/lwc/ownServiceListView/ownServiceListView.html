@@ -1,0 +1,154 @@
+<template>
+	<div class="slds-container_x-large slds-container_center slds-p-around_small">
+		<lightning-layout multiple-rows>
+			<lightning-layout-item>
+				<div class="breadcrumb-large  slds-m-left_medium slds-m-bottom_medium">
+					<div class="breadcrumb" aria-label="Breadcrumbs" role="navigation">
+						<div role="list" class="slds-breadcrumb slds-list_horizontal slds-wrap">
+							<slot>
+								<div class="slds-breadcrumb__item breadcrumb-item-back" role="listitem">
+									<a class="breadcrumb-text-color" onclick={handleBreadcrumbClick}>
+										{breadCrumbText}
+									</a>
+								</div>
+							</slot>
+						</div>
+					</div>
+				</div>
+			</lightning-layout-item>
+			<lightning-layout-item padding="around-small" size="12">
+				<c-own-product-header-2 product-title="My Service Records" year={subTitle} product-image={imgUrl}
+					division={division}>
+				</c-own-product-header-2>
+			</lightning-layout-item>
+			<lightning-layout-item padding="around-small" size="12">
+				<div class="page-description">
+					<p>
+						{pageDescription}
+					</p>
+					<button class="primary-button" onclick={handleAddNewRecord}>ADD A NEW RECORD</button>
+					<template if:true={displayScheduleService}>
+						<button class="primary-outline-button" onclick={handleScheduleNewService}>SCHEDULE NEW SERVICE
+						→</button>
+					</template>
+					
+				</div>
+			</lightning-layout-item>
+		</lightning-layout>
+		<div class="table-wrapper">
+			<div class="header-div slds-p-vertical_small">
+				<lightning-layout horizontal-align="spread" class="slds-p-vertical_x-small">
+					<lightning-layout-item size="1">
+					</lightning-layout-item>
+					<lightning-layout-item size="1">
+						<div class="slds-var-p-horizontal_xx-small">
+							Date of Service
+						</div>
+					</lightning-layout-item>
+
+					<template if:false={hideRepairOrder}>
+					
+						<template if:true={displayAutos}>
+							<lightning-layout-item size="1">
+								<div class="slds-var-p-horizontal_small">
+									Mileage
+								</div>
+							</lightning-layout-item>
+						</template>
+						<template if:true={displayPowerEquipmentOrMarine}>
+							<lightning-layout-item size="1">
+								<div class="slds-var-p-horizontal_small">
+									Operating Hours
+								</div>
+							</lightning-layout-item>
+						</template>
+					
+						<lightning-layout-item size="2">
+							<div class="slds-var-p-horizontal_small">
+								Service Facility
+							</div>
+						</lightning-layout-item>
+						<lightning-layout-item size="3">
+							<div class="slds-var-p-horizontal_small">
+								Services
+							</div>
+						</lightning-layout-item>
+						<lightning-layout-item size="1">
+							<div class="slds-var-p-horizontal_xx-small">
+								Repair Order #:
+							</div>
+						</lightning-layout-item>
+					
+					</template>
+
+					<template if:true={hideRepairOrder}>
+					
+						<template if:true={displayAutos}>
+							<lightning-layout-item size="1">
+								<div class="slds-var-p-horizontal_small">
+									Mileage
+								</div>
+							</lightning-layout-item>
+						</template>
+						<template if:true={displayPowerEquipmentOrMarine}>
+							<lightning-layout-item size="1">
+								<div class="slds-var-p-horizontal_small">
+									Operating Hours
+								</div>
+							</lightning-layout-item>
+						</template>
+					
+						<lightning-layout-item size="2">
+							<div class="slds-var-p-horizontal_small">
+								Service Facility
+							</div>
+						</lightning-layout-item>
+						<lightning-layout-item size="3">
+							<div class="slds-var-p-horizontal_small">
+								Services
+							</div>
+						</lightning-layout-item>
+					
+					</template>
+
+					<lightning-layout-item size="1">
+					</lightning-layout-item>
+				</lightning-layout>
+			</div>
+			<template if:false={isSpinnerLoading}>
+				<div class="spinner-1 slds-align-center">
+					<lightning-layout>
+						<lightning-layout-item size="12">
+							<lightning-spinner alternative-text="Loading..." variant="base"></lightning-spinner>
+						</lightning-layout-item>
+					</lightning-layout>
+				</div>
+			</template>
+			<template if:true={isSpinnerLoading}>
+				<template if:true={displayList}>
+					<template if:true={loadComplete}>
+						<lightning-layout multiple-rows="true" pull-to-boundary="small" class="table-rows">
+
+							<template for:each={concServiceRecordsList} for:item="record">
+								<lightning-layout-item key={concServiceRecordsList.Id} size="12"
+									class="slds-var-p-around_x-small">
+									<c-own-service-record-row record={record} context={context}
+										onevent={handleRecordView} usericon={mediumPhotoUrl}>
+									</c-own-service-record-row>
+								</lightning-layout-item>
+							</template>
+
+						</lightning-layout>
+					</template>
+				</template>
+				<template if:false={displayList}>
+					<!-- <template if:true={loadComplete}> -->
+						<div><br></div>
+						<lightning-formatted-rich-text class="no-row" value={noRecordsBody}>
+						</lightning-formatted-rich-text>
+					<!-- </template> -->
+				</template>
+			</template>
+		</div>
+	</div>
+</template>

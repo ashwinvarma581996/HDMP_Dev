@@ -1,0 +1,40 @@
+<template>
+
+    <template if:false={noCategoryKey}>
+        <div class="categoryLayout slds-grid slds-wrap slds-p-vertical_x-small" style="background: rgb(240, 240, 240);">
+
+            <!-- Category Tree Accordion -->
+            <div class="slds-col slds-large-size_3-of-12 slds-size_1-of-1">
+                <div class="slds-col">
+                    <c-b2b-category-accordion></c-b2b-category-accordion>
+                </div>
+            </div>
+            <!-- B2B SEO Friendly Category Tiles -->
+            <div class="slds-col slds-large-size_9-of-12 slds-size_1-of-1">
+                <div class="slds-col">
+                    <c-b2b-category-grid 
+                        record={recordId} 
+                        grid-max-columns-displayed={gridMaxColumnsDisplayed} 
+                        font-color={fontColor} 
+                        font-size={fontSize} 
+                        no-result-message={noResultMessage} 
+                        cta-no-vehicle-msg={ctaNoVehicle} 
+                        cta-vehicle-selected-msg={ctaVehicleSelected}
+                        cta-font-size={ctaFontSize}
+                    >
+                    </c-b2b-category-grid>
+                </div>
+            </div>            
+        </div>
+    </template>
+
+    <!-- Existing Honda Parent Category LWC -->
+    <template if:true={noCategoryKey}>
+        <div class="slds-grid slds-wrap">
+            <div class="slds-col slds-size_12-of-12">
+                <c-parent-category></c-parent-category>
+            </div>
+        </div>
+    </template>
+
+</template>

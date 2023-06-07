@@ -1,0 +1,48 @@
+<template>
+    <div class={cardDivClass}>
+        <div if:true={show} class="card card-size card-styles-wrapper">
+            <lightning-card class="card-styles">
+                <div slot="title" class="slds-truncate" onclick={handleClickHeader} role="link" tabindex="0">
+                    <lightning-layout>
+                        <lightning-layout-item class="slds-align_absolute-center slds-p-left_medium">
+                        <img src={icon} class="custom-icon">
+                        </lightning-layout-item>
+                        <lightning-layout-item class="slds-align_absolute-center slds-p-right_large slds-p-left_large" >
+                            <span class={titleClass}>{title}</span>
+                        </lightning-layout-item>
+                        <template if:true={showforwardicon} >    
+                            <lightning-layout-item class="slds-align_absolute-center">    
+                                <lightning-icon class={iconClass} icon-name="utility:forward" size="x-small" ></lightning-icon>              
+                            </lightning-layout-item>
+                        </template>
+                        <template if:true={showdownlaodicon}>  
+                            <lightning-layout-item class="slds-align_absolute-center">          
+                                <!--lightning-icon class={iconClass} icon-name="utility:download" size="x-small" onclick={handleClickHeader}></lightning-icon-->
+                                <img src={actionIcon}  class="icon-image slds-p-left_small custom-icon forward-icon-right" ></img>
+                            </lightning-layout-item>
+                        </template>
+                    </lightning-layout>
+                </div>
+                <!-- <div slot="actions" onclick={handleClickAction}>
+                    <slot name="action">
+                        <button class="slds-button slds-button_outline-brand slds-m-left_x-small detail-button"
+                        onclick={handleLoginClick}>MORE DETAILS</button>
+                        </slot>
+                </div> -->
+                <template if:true={showBody}>
+                <div class={bodyClass}>
+                    <lightning-formatted-rich-text value={body}></lightning-formatted-rich-text>
+                </div>
+                </template>
+                <template if:true={showfooter}>
+                    <div slot="footer">
+                        <slot class="footer" name="footer" onclick={handleClickFooter}></slot>
+                    </div>
+                </template>
+            </lightning-card>
+        </div>
+        <template if:false={show}>
+                <c-own-data-loading-spinner></c-own-data-loading-spinner>
+        </template>
+    </div>
+</template>

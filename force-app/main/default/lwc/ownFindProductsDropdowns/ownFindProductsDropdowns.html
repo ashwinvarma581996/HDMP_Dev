@@ -1,0 +1,75 @@
+<template>
+    <lightning-layout multiple-rows class="slds-grid_vertical-align-end form-styles">
+        <template if:true={showChooserError}>
+            <div class="error-msg slds-m-vertical_medium">
+                <img src={warningicon} class="warning-icon"/>Unfortunately, this feature is not available at this time.
+            </div>
+        </template>
+        <template if:true={isDropdownLoaded}>
+            <template if:true={showModelSection}>
+                <lightning-layout-item size="12" small-device-size="12" medium-device-size="10" large-device-size="8">
+                    <lightning-layout multiple-rows >
+                        <template for:each={dropdownArray} for:item="dropdown">
+                            <lightning-layout-item size="12" small-device-size="12" medium-device-size="4" large-device-size="4" key={dropdown.controlData.Id} class="slds-p-bottom_medium">
+                                <div  class="slds-p-right_small no-padding-right">
+                                    <c-own-find-products-combobox dropdown={dropdown} dropdown-data={dropdownData} selected-values={selectedValues} highest-filled-tier={highestFilledTier} onoptionselect={handleOptionSelect} tiers={tiers} tier-name-map={tierNameMap}></c-own-find-products-combobox>
+                                </div>
+                            </lightning-layout-item>
+                       <!--<lightning-layout-item size="12" small-device-size="12" medium-device-size="4" large-device-size="4">
+                            <div>
+                                <span class=own-combobox-label>Year</span>
+                                <lightning-combobox class="find-brand-combobox slds-m-top_xx-small" name="year"
+                                    label="Year" variant="label-hidden" value={year} placeholder="Select Year"
+                                    options={years} onchange={handleYearChange}></lightning-combobox>
+                            </div>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="12" small-device-size="12" medium-device-size="4"
+                            large-device-size="4" class="slds-p-left_small slds-p-right_small slds-p-bottom_small">
+                            <span class=own-combobox-label>Model</span>
+                            <lightning-combobox class="find-brand-combobox slds-m-top_xx-small " name="model"
+                                label="Model" variant="label-hidden" value={model} placeholder="Select Model"
+                                options={models} onchange={handleModelChange} disabled={modelSelectionDisabled}></lightning-combobox>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="12" small-device-size="12" medium-device-size="4"
+                            large-device-size="4" class="slds-p-left_small slds-p-right_small slds-p-bottom_small">
+                            <span class=own-combobox-label>Trim</span>
+                            <lightning-combobox class="find-brand-combobox slds-m-top_xx-small trimBox" name="trim"
+                            label="Trim" variant="label-hidden" value={modelId} placeholder="Select Trim"
+                            options={trims} onchange={handleTrimChange} disabled={trimSelectionDisabled}>
+                            </lightning-combobox>
+                        </lightning-layout-item>--> 
+                        </template>
+                        <!-- <template for:each={extraSpaces} for:item="space">
+                            <lightning-layout-item size="12" small-device-size="12" medium-device-size="3" large-device-size="3" key={space} flexibility="no-flex"></lightning-layout-item>
+                        </template>
+                        <lightning-layout-item size="3"
+                            class="slds-p-left_small slds-p-right_small slds-p-bottom_small">
+                            <div class={modelFindButtonClass}>
+                                <label class="slds-form-element__label">&nbsp;</label>
+                                <button class="slds-button slds-button_brand slds-combobox_container"
+                                    onclick={handleFindByYearModel}>Find</button>
+                            </div>
+                        </lightning-layout-item> -->
+                    </lightning-layout>
+                </lightning-layout-item>
+                <lightning-layout-item if:true={dropdownArray} size="12" small-device-size="12" medium-device-size="2" large-device-size="4">
+                    <lightning-layout multiple-rows >
+                        <template if:true={dropdownListMultipleRows}>
+                            <lightning-layout-item size="12" class="slds-p-left_small slds-p-right_small slds-p-bottom_large zero-padding" flexibility="no-flex">
+                                <div></div>
+                            </lightning-layout-item>
+                        </template>
+                        <lightning-layout-item size="12"
+                            class="slds-p-left_small slds-p-right_small slds-p-bottom_medium zero-padding">
+                            <div class={findByYMTButtonClass}>
+                                <label class="slds-form-element__label">&nbsp;</label>
+                                <button class="slds-button slds-button_brand slds-combobox_container find-button"
+                                    onclick={handleFindByProductChooser} aria-disabled="true">{buttonLabel}</button>
+                            </div>
+                        </lightning-layout-item>
+                    </lightning-layout>
+                </lightning-layout-item>
+            </template>
+        </template>
+    </lightning-layout>
+</template>

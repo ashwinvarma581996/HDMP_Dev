@@ -1,0 +1,30 @@
+<!-- //============================================================================
+// Title:    Honda Owners Experience - Help Center
+//
+// Summary:  This is the popular help video html seen at the help center of the Honda Owner Community
+//
+// Details:  Extend the LightningElement with this Base Element to gain access to the Messaging Channel and other logic herein and this is the search bar component for all help center pages.
+//
+//
+// History:
+// May 17, 2021 Arunprasad N (Wipro) Original Author
+//=========================================================================== -->
+<template>
+    <div class="c-container slds-p-around_small">
+        <lightning-layout multiple-rows="true" horizontal-align="center">
+            <lightning-layout-item padding="around-small" size="12">
+                <div class="popular-help-video-text-headline slds-text-heading_large">
+                    <h2>{title}</h2>
+                </div>
+            </lightning-layout-item>
+            <lightning-layout-item class="popular-help-video-large" padding="around-small">
+                <iframe width="840" height="379" src="https://www.youtube.com/embed/NBPihgdk6KA">
+                </iframe>
+            </lightning-layout-item>
+            <lightning-layout-item class="popular-help-video-small" padding="around-small">
+                <iframe width="343" height="152" src="https://www.youtube.com/embed/NBPihgdk6KA">
+                </iframe>
+            </lightning-layout-item>
+        </lightning-layout>
+    </div>
+</template>

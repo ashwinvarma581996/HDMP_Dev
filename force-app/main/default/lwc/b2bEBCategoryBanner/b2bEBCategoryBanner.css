@@ -1,0 +1,9 @@
+.category-banner {
+    margin-top: 12em;
+    padding: 0 15px; 
+}
+@media (max-width:768px){
+    .category-banner {
+        margin-top: 8em;
+    }
+}
